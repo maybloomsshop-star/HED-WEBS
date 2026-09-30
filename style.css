@@ -1,0 +1,4248 @@
+/* =========================
+   MAY BLOOMS WEBSITE
+   ========================= */
+
+/* Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Main Website */
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f4ec;
+    color: #3f4a3c;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 25px 8%;
+
+    background: #f8f4ec;
+}
+
+
+/* May Blooms Text Logo */
+
+.logo-text {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+.logo-text .pink {
+    color: #e45796;
+}
+
+.logo-text .green {
+    color: #377a35;
+}
+
+
+/* Navigation */
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    text-decoration: none;
+
+    color: #3f4a3c;
+
+    font-size: 15px;
+}
+
+nav a:hover {
+    color: #e45796;
+}
+
+
+/* =========================
+   HERO
+   ========================= */
+
+.hero {
+    background: #377a35;
+
+    padding: 100px 8%;
+}
+
+.hero div {
+    max-width: 600px;
+}
+
+
+/* READ · CREATE · GROW */
+
+.small-text {
+    font-size: 13px;
+    letter-spacing: 3px;
+
+    color: #e45796;
+
+    margin-bottom: 15px;
+}
+
+
+/* Main Hero Heading */
+
+.hero h1 {
+    font-size: 64px;
+    line-height: 1.05;
+
+    margin-bottom: 25px;
+
+    color: #f8f4ec;
+}
+
+
+/* Hero Description */
+
+.hero p {
+    font-size: 17px;
+
+    max-width: 500px;
+
+    margin-bottom: 30px;
+
+    color: #f8f4ec;
+}
+/* Hero Email */
+
+.hero-email,
+.hero-email:visited {
+    display: block;
+    width: fit-content;
+
+    color: #e45796;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    margin-bottom: 25px;
+}
+
+.hero-email:hover {
+    color: #f8f4ec;
+}
+
+
+/* Hero Button */
+
+button {
+    border: none;
+
+    background: #e45796;
+    color: #f8f4ec;
+
+    padding: 14px 24px;
+
+    border-radius: 30px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+button:hover {
+    background: #cf3f80;
+}
+
+
+/* =========================
+   EXPLORE SECTION
+   ========================= */
+
+.categories {
+    padding: 70px 8%;
+
+    background: #f8f4ec;
+}
+
+.categories h2 {
+    font-size: 36px;
+
+    margin-bottom: 30px;
+
+    color: #3f4a3c;
+}
+.category-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.category-link .category {
+    height: 100%;
+    cursor: pointer;
+}
+
+
+/* Three Category Cards */
+
+.category-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+/* Normal Card */
+
+.category {
+    background: #fffdf8;
+
+    padding: 45px 30px;
+
+    border-radius: 20px;
+
+    min-height: 180px;
+}
+
+.category h3 {
+    font-size: 25px;
+
+    margin-bottom: 10px;
+
+    color: #377a35;
+}
+
+.category p {
+    color: #777;
+}
+
+
+/* May Blooms Category Colors */
+
+.plants-card {
+    background: #377a35;
+}
+
+.bracelets-card {
+    background: #e45796;
+}
+
+.books-card {
+    background: #377a35;
+}
+
+.other-card {
+    background: #e45796;
+}
+.hed-card {
+    background: #68584a;
+}
+
+.hed-card h3,
+.hed-card p {
+    color: #f8f4ec;
+}
+
+.plants-card h3,
+.plants-card p,
+.bracelets-card h3,
+.bracelets-card p,
+.books-card h3,
+.books-card p,
+.other-card h3,
+.other-card p {
+    color: #f8f4ec;
+}
+
+
+/* =========================
+   ABOUT
+   ========================= */
+
+.about {
+    padding: 80px 8%;
+
+    background: #eee5d8;
+}
+
+.about h2 {
+    font-size: 36px;
+
+    margin-bottom: 30px;
+
+    color: #3f4a3c;
+}
+
+.about p {
+    max-width: 650px;
+
+    font-size: 17px;
+}
+/* =========================
+   SOCIAL MEDIA
+   ========================= */
+
+.socials {
+    text-align: center;
+    padding: 55px 8%;
+    background: #f8f4ec;
+}
+
+.social-title {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #377a35;
+    margin-bottom: 20px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #e45796;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.social-links a:hover {
+    color: #377a35;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+footer {
+    text-align: center;
+
+    padding: 30px;
+
+    background: #3f4a3c;
+
+    color: #f8f4ec;
+}
+/* =========================
+   SHOP PAGES
+   ========================= */
+
+.shop-page {
+    min-height: 70vh;
+    padding: 80px 8%;
+    background: #f8f4ec;
+}
+
+.shop-page .small-text {
+    color: #e45796;
+    margin-bottom: 10px;
+}
+
+.shop-page h1 {
+    font-size: 55px;
+    color: #377a35;
+    margin-bottom: 10px;
+}
+
+.shop-page > p:last-child {
+    font-size: 17px;
+    color: #3f4a3c;
+}
+/* Product Grid */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 260px);
+    gap: 25px;
+
+    margin-top: 45px;
+    width: 100%;
+}
+
+
+/* Product Card */
+
+.product-card {
+    background: #fffdf8;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 260px;
+}
+
+
+/* Product Photo Area */
+
+.product-image {
+    height: 220px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eee5d8;
+    color: #377a35;
+
+    font-size: 14px;
+}
+
+
+/* Product Information */
+
+.product-info {
+    padding: 22px;
+}
+
+.product-info h2 {
+    font-size: 21px;
+    color: #377a35;
+    margin-bottom: 8px;
+}
+
+.product-info .price {
+    color: #e45796;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product-info .stock {
+    color: #3f4a3c;
+    font-size: 13px;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+   /* -------------------------
+   HED — HER EXISTENTIAL DRAMA
+------------------------- */
+
+.hed-page {
+    background: #f8f4ec;
+}
+
+
+/* HED INTRO */
+
+.hed-intro {
+    background: #68584a;
+    padding: 90px 8%;
+    color: #f8f4ec;
+}
+
+.hed-intro .small-text {
+    color: #e8b5c9;
+}
+
+.hed-intro h1 {
+    font-size: 75px;
+    line-height: 1;
+    margin-bottom: 5px;
+    color: #f8f4ec;
+}
+
+.hed-intro h2 {
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 25px;
+    color: #f8f4ec;
+}
+
+.hed-description {
+    max-width: 520px;
+    font-size: 17px;
+    color: #eee5d8;
+}
+
+
+/* HED SECTIONS */
+
+.hed-section {
+    padding: 70px 8%;
+    border-bottom: 1px solid #ded5c8;
+}
+
+.hed-heading {
+    margin-bottom: 30px;
+}
+
+.hed-heading > p {
+    color: #e45796;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.hed-heading h2 {
+    color: #68584a;
+    font-size: 36px;
+}
+
+
+/* STORIES */
+
+.writing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    max-width: 850px;
+}
+
+.writing-card {
+    background: #fffdf8;
+    padding: 35px;
+    border-radius: 18px;
+}
+
+.writing-type {
+    color: #377a35;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.writing-card h3 {
+    color: #68584a;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.writing-card > p:not(.writing-type) {
+    color: #666057;
+    margin-bottom: 25px;
+}
+
+.writing-card span {
+    color: #e45796;
+    font-size: 13px;
+    font-weight: bold;
+}
+/* BOOK COVER CARDS */
+
+.book-card {
+    width: 210px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.book-cover {
+    width: 210px;
+    height: 315px;
+    background: #68584a;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 16px;
+}
+
+.book-cover span {
+    color: #f8f4ec;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.book-card-info {
+    padding: 0 3px;
+}
+
+.book-card-info .writing-type {
+    margin-bottom: 5px;
+}
+
+.book-card-info h3 {
+    color: #68584a;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.book-card-info > p:last-child {
+    color: #777;
+    font-size: 13px;
+}
+
+.writing-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+/* ADD STORY + BOOK SHELF */
+
+.stories-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.stories-heading .hed-heading {
+    margin-bottom: 0;
+}
+
+.add-story-button {
+    background: #68584a;
+    color: #f8f4ec;
+    padding: 11px 19px;
+    font-size: 13px;
+}
+
+.add-story-button:hover {
+    background: #e45796;
+}
+
+
+/* EMPTY SHELF */
+
+.empty-stories {
+    background: #fffdf8;
+    max-width: 650px;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.empty-stories p {
+    color: #68584a;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.empty-stories span {
+    color: #777;
+    font-size: 14px;
+}
+
+
+/* =========================
+   HED STORY LIBRARY
+========================= */
+
+.story-library-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+
+    max-width: 950px;
+
+    margin-bottom: 28px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #ded5c8;
+}
+
+.story-library-label {
+    color: #e45796;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 5px;
+}
+
+.story-library-header h3 {
+    color: #68584a;
+
+    font-size: 28px;
+
+    margin: 0;
+}
+
+.story-library-header > span {
+    color: #888078;
+
+    font-size: 12px;
+}
+
+
+/* BOOKSHELF */
+
+.story-shelf {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(190px, 1fr));
+
+    gap: 45px 28px;
+
+    max-width: 950px;
+}
+
+
+/* BOOK CARD */
+
+.hed-book-card {
+    display: block;
+
+    width: 100%;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.hed-book-card:hover {
+    transform: translateY(-6px);
+}
+
+
+/* COVER */
+
+.hed-book-cover {
+    width: 100%;
+
+    aspect-ratio: 2 / 3;
+
+    overflow: hidden;
+
+    background: #68584a;
+
+    border-radius: 7px;
+
+    margin-bottom: 16px;
+
+    box-shadow:
+        0 7px 18px rgba(63, 74, 60, 0.12);
+}
+
+.hed-book-cover img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.hed-book-card:hover .hed-book-cover img {
+    transform: scale(1.025);
+}
+
+
+/* PLACEHOLDER COVER */
+
+.hed-cover-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 25px;
+
+    background: #68584a;
+}
+
+.hed-cover-placeholder span {
+    color: #f8f4ec;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+}
+
+
+/* BOOK INFORMATION */
+
+.hed-book-info {
+    padding: 0 3px;
+}
+
+.hed-book-info .writing-type {
+    margin-bottom: 6px;
+}
+
+.hed-book-info h3 {
+    color: #68584a;
+
+    font-size: 20px;
+
+    line-height: 1.3;
+
+    margin-bottom: 4px;
+}
+
+.hed-book-author {
+    color: #3f4a3c;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.hed-book-info > span {
+    display: block;
+
+    color: #888078;
+
+    font-size: 12px;
+
+    margin-bottom: 10px;
+}
+
+
+/* READ LINK */
+
+.hed-book-card::after {
+    content: "READ →";
+
+    display: inline-block;
+
+    color: #e45796;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    margin-left: 3px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .story-library-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .story-shelf {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 35px 18px;
+    }
+
+    .hed-book-info h3 {
+        font-size: 17px;
+    }
+
+}
+
+
+/* ADD STORY WINDOW */
+
+.story-editor {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+
+    background: rgba(63, 74, 60, 0.55);
+
+    padding: 40px 20px;
+    overflow-y: auto;
+}
+
+.story-editor.story-editor-open {
+    display: block;
+}
+
+.story-editor-box {
+    position: relative;
+
+    max-width: 650px;
+    margin: 0 auto;
+
+    padding: 45px;
+
+    background: #f8f4ec;
+    border-radius: 20px;
+}
+
+.story-editor-box h2 {
+    color: #68584a;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.story-editor-box label {
+    display: block;
+
+    color: #68584a;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    margin: 18px 0 7px;
+}
+
+.story-editor-box input[type="text"],
+.story-editor-box textarea {
+    width: 100%;
+
+    border: 1px solid #d8cfc3;
+    border-radius: 10px;
+
+    background: #fffdf8;
+    color: #3f4a3c;
+
+    padding: 13px;
+
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+
+    outline: none;
+}
+
+.story-editor-box textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.story-editor-box input:focus,
+.story-editor-box textarea:focus {
+    border-color: #68584a;
+}
+
+.story-editor-box input[type="file"] {
+    width: 100%;
+    color: #3f4a3c;
+}
+
+.cover-note {
+    color: #888078;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.close-story-editor {
+    position: absolute;
+    right: 18px;
+    top: 15px;
+
+    padding: 5px 10px;
+
+    background: transparent;
+    color: #68584a;
+
+    font-size: 25px;
+}
+
+.save-story {
+    background: #68584a;
+    color: #f8f4ec;
+}
+
+.save-story:hover {
+    background: #e45796;
+}
+
+/* =====================================================
+   JOURNAL — QUIET EDITORIAL STYLE
+===================================================== */
+
+.hed-journal-intro {
+    max-width: 650px !important;
+    margin-bottom: 38px !important;
+}
+
+.journal-entry {
+    padding: 0 !important;
+    margin: 0 0 34px !important;
+    border: none !important;
+}
+
+.journal-entry h3 {
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 21px !important;
+    line-height: 1.3 !important;
+    font-weight: 400 !important;
+    margin: 6px 0 8px !important;
+    color: #33251f !important;
+}
+
+.journal-entry .journal-date {
+    font-family: Arial, sans-serif !important;
+    font-size: 8px !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
+    color: #8b7b70 !important;
+    margin: 0 0 7px !important;
+}
+
+.journal-entry p,
+.journal-entry .journal-content {
+    max-width: 680px !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    color: #4d4039 !important;
+    margin: 0 !important;
+}
+
+.journal-entry .continue-reading {
+    font-size: 10px !important;
+    margin-top: 10px !important;
+}
+
+.hed-see-more {
+    margin-top: 4px !important;
+}
+
+
+/* OTHER WRITINGS */
+
+.other-writing-text {
+    max-width: 650px;
+    font-size: 17px;
+    color: #666057;
+}
+
+/* -------------------------
+   HED — BOOK PAGE
+------------------------- */
+
+.book-page {
+    min-height: 80vh;
+    padding: 60px 8% 90px;
+    background: #f8f4ec;
+}
+
+.back-to-hed {
+    display: inline-block;
+    text-decoration: none;
+    color: #68584a;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 55px;
+}
+
+.back-to-hed:hover {
+    color: #e45796;
+}
+
+
+/* BOOK INTRO */
+
+.book-intro {
+    max-width: 750px;
+    margin-bottom: 75px;
+}
+
+.book-label {
+    color: #e45796;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.book-intro h1 {
+    color: #68584a;
+    font-size: 55px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+
+.book-author {
+    color: #377a35;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.book-description {
+    max-width: 620px;
+    color: #666057;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+
+/* CHAPTERS */
+
+.chapter-section {
+    max-width: 750px;
+}
+
+.chapter-label {
+    color: #e45796;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.chapter-section h2 {
+    color: #68584a;
+    font-size: 34px;
+    margin-bottom: 25px;
+}
+
+.chapter-list {
+    border-top: 1px solid #d8cfc3;
+}
+
+.chapter-list a {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    padding: 20px 5px;
+
+    text-decoration: none;
+    border-bottom: 1px solid #d8cfc3;
+
+    transition: 0.2s;
+}
+
+.chapter-list a span {
+    color: #e45796;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.chapter-list a p {
+    color: #3f4a3c;
+    font-size: 17px;
+}
+
+.chapter-list a:hover {
+    padding-left: 15px;
+    background: #fffdf8;
+}
+
+.chapter-list a:hover p {
+    color: #68584a;
+}
+/* -------------------------
+   HED CHAPTER SYSTEM
+------------------------- */
+
+.chapter-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.chapter-heading h2 {
+    margin-bottom: 0;
+}
+
+.add-chapter-button {
+    background: #68584a;
+    color: #f8f4ec;
+    padding: 11px 18px;
+    font-size: 13px;
+}
+
+.add-chapter-button:hover {
+    background: #e45796;
+}
+
+
+/* EMPTY CHAPTERS */
+
+.empty-chapters {
+    padding: 35px;
+    background: #fffdf8;
+    border-radius: 14px;
+}
+
+.empty-chapters p {
+    color: #68584a;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.empty-chapters span {
+    color: #777;
+    font-size: 14px;
+}
+
+
+/* CHAPTER BUTTONS */
+
+.chapter-list {
+    border-top: 1px solid #d8cfc3;
+}
+
+.chapter-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    padding: 20px 5px;
+
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #d8cfc3;
+    border-radius: 0;
+
+    text-align: left;
+}
+
+.chapter-item > span {
+    color: #e45796;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.chapter-item p {
+    color: #3f4a3c;
+    font-size: 17px;
+}
+
+.chapter-item small {
+    color: #8a8178;
+}
+
+.chapter-item:hover {
+    background: #fffdf8;
+    padding-left: 15px;
+}
+
+
+/* WRITING WINDOW */
+
+.chapter-editor {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    background: rgba(63, 74, 60, 0.55);
+
+    padding: 40px 20px;
+    overflow-y: auto;
+}
+
+.chapter-editor.editor-open {
+    display: block;
+}
+
+.editor-box {
+    position: relative;
+
+    max-width: 800px;
+    margin: 0 auto;
+
+    background: #f8f4ec;
+    border-radius: 20px;
+
+    padding: 45px;
+}
+
+.close-editor {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+
+    background: transparent;
+    color: #68584a;
+
+    padding: 5px 10px;
+    font-size: 25px;
+}
+
+.editor-label {
+    color: #e45796;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    margin-bottom: 18px;
+}
+
+.chapter-title-input {
+    width: 100%;
+
+    border: none;
+    border-bottom: 1px solid #cfc4b6;
+
+    background: transparent;
+
+    color: #68584a;
+    font-size: 30px;
+    font-weight: bold;
+
+    padding: 10px 0;
+    margin-bottom: 25px;
+
+    outline: none;
+}
+
+.chapter-content-input {
+    width: 100%;
+    min-height: 420px;
+
+    resize: vertical;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #fffdf8;
+    color: #3f4a3c;
+
+    padding: 25px;
+
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+
+    outline: none;
+}
+
+.editor-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.cancel-chapter {
+    background: #eee5d8;
+    color: #68584a;
+}
+
+.save-chapter {
+    background: #68584a;
+}
+
+
+/* -------------------------
+   HED READING MODE
+------------------------- */
+
+.chapter-reader {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+
+    overflow-y: auto;
+
+    background: #f8f4ec;
+    color: #353832;
+}
+
+.chapter-reader.reader-open {
+    display: block;
+}
+/* -------------------------
+   HED CHAPTER COMMENTS
+------------------------- */
+
+
+/* END OF CHAPTER */
+
+.chapter-end {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 9px;
+
+    margin: 85px 0;
+}
+
+.chapter-end span {
+    width: 5px;
+    height: 5px;
+
+    background: #b8aa9a;
+
+    border-radius: 50%;
+}
+
+
+/* COMMENTS AREA */
+
+.chapter-comments {
+    padding-top: 45px;
+
+    border-top: 1px solid rgba(104, 88, 74, 0.18);
+}
+
+
+/* COMMENTS TITLE */
+
+.comments-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+.comments-label {
+    color: #e45796;
+
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 5px;
+}
+
+.comments-heading h2 {
+    color: inherit;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 25px;
+
+    margin: 0;
+}
+
+.comment-count {
+    color: #8a8178;
+
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+
+/* COMMENT FORM */
+
+.comment-form {
+    padding: 22px;
+
+    background: rgba(255, 253, 248, 0.55);
+
+    border: 1px solid rgba(104, 88, 74, 0.14);
+
+    border-radius: 14px;
+
+    margin-bottom: 40px;
+}
+
+.comment-name {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    margin-bottom: 10px;
+
+    background: transparent;
+
+    color: inherit;
+
+    border: none;
+    border-bottom: 1px solid rgba(104, 88, 74, 0.20);
+
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+
+    outline: none;
+}
+
+.comment-text {
+    width: 100%;
+    min-height: 100px;
+
+    padding: 14px 12px;
+
+    resize: vertical;
+
+    background: transparent;
+
+    color: inherit;
+
+    border: none;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    outline: none;
+}
+
+.comment-name::placeholder,
+.comment-text::placeholder {
+    color: #9a9188;
+}
+
+.comment-form-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-top: 10px;
+}
+
+.comment-form-bottom > span {
+    color: #938a81;
+
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+}
+
+.post-comment {
+    background: #68584a;
+    color: #f8f4ec;
+
+    padding: 9px 18px;
+
+    font-size: 12px;
+
+    flex-shrink: 0;
+}
+
+.post-comment:hover {
+    background: #e45796;
+}
+
+
+/* COMMENT LIST */
+
+.comments-list {
+    font-family: Arial, sans-serif;
+}
+
+.no-comments {
+    padding: 25px 0;
+}
+
+.no-comments p {
+    color: inherit;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    margin-bottom: 4px;
+}
+
+.no-comments span {
+    color: #8a8178;
+
+    font-size: 12px;
+}
+
+
+/* INDIVIDUAL COMMENT — READY FOR NEXT STEP */
+
+.comment {
+    padding: 22px 0;
+
+    border-bottom: 1px solid rgba(104, 88, 74, 0.13);
+}
+
+.comment-top {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 9px;
+}
+
+.comment-author {
+    color: inherit;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.comment-time {
+    color: #999087;
+
+    font-size: 11px;
+}
+
+.comment-body {
+    color: inherit;
+
+    font-size: 14px;
+    line-height: 1.7;
+
+    white-space: pre-wrap;
+}
+
+
+/* DARK READING MODE */
+
+.chapter-reader.theme-dark .chapter-comments {
+    border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.chapter-reader.theme-dark .comment-form {
+    background: rgba(255, 255, 255, 0.035);
+
+    border-color: rgba(255, 255, 255, 0.10);
+}
+
+.chapter-reader.theme-dark .comment-name {
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.chapter-reader.theme-dark .comment-count,
+.chapter-reader.theme-dark .comment-form-bottom > span,
+.chapter-reader.theme-dark .no-comments span,
+.chapter-reader.theme-dark .comment-time {
+    color: #aaa49a;
+}
+
+.chapter-reader.theme-dark .comment-name::placeholder,
+.chapter-reader.theme-dark .comment-text::placeholder {
+    color: #8f8e88;
+}
+/* READER HIGHLIGHTS */
+
+.highlight-popup {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+
+    background: #68584a;
+    color: #f8f4ec;
+
+    padding: 8px 13px;
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.highlight-popup:hover {
+    background: #e45796;
+}
+
+.reader-highlight {
+    background: #f2dca7;
+    color: inherit;
+
+    padding: 1px 0;
+    border-radius: 2px;
+}
+
+
+/* TOP TOOLBAR */
+
+.reader-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 16px 5%;
+
+    background: rgba(248, 244, 236, 0.96);
+    border-bottom: 1px solid rgba(104, 88, 74, 0.12);
+}
+
+.reader-back,
+.reader-settings-button {
+    background: transparent;
+    color: #68584a;
+
+    padding: 7px 10px;
+
+    font-weight: bold;
+}
+
+.reader-back:hover,
+.reader-settings-button:hover {
+    background: #eee5d8;
+    color: #68584a;
+}
+
+.reader-settings-button {
+    font-family: Georgia, serif;
+    font-size: 18px;
+}
+
+
+/* SETTINGS PANEL */
+
+.reader-settings {
+    display: none;
+
+    position: sticky;
+    top: 61px;
+    z-index: 19;
+
+    background: #fffdf8;
+
+    border-bottom: 1px solid #ded5c8;
+}
+
+.reader-settings.settings-open {
+    display: block;
+}
+
+.reader-settings-inner {
+    max-width: 700px;
+    margin: 0 auto;
+
+    padding: 22px 30px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px 35px;
+}
+
+.setting-group > p {
+    color: #68584a;
+
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    margin-bottom: 9px;
+}
+
+.setting-options {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.setting-options button {
+    background: #eee5d8;
+    color: #3f4a3c;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+}
+
+.setting-options button:hover,
+.setting-options button.setting-active {
+    background: #68584a;
+    color: #f8f4ec;
+}
+
+
+/* Different A sizes */
+
+.setting-options button[data-size="small"] {
+    font-size: 10px;
+}
+
+.setting-options button[data-size="normal"] {
+    font-size: 13px;
+}
+
+.setting-options button[data-size="large"] {
+    font-size: 16px;
+}
+
+.setting-options button[data-size="xlarge"] {
+    font-size: 19px;
+}
+
+
+/* THEME CIRCLES */
+
+.theme-options {
+    display: flex;
+    gap: 10px;
+}
+
+.theme-circle {
+    width: 30px;
+    height: 30px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    border: 2px solid transparent;
+}
+
+.theme-circle:hover,
+.theme-circle.setting-active {
+    border-color: #e45796;
+}
+
+.theme-cream {
+    background: #f8f4ec;
+    border: 1px solid #d8cfc3;
+}
+
+.theme-white {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+}
+
+.theme-sepia {
+    background: #e9dcc5;
+}
+
+.theme-dark {
+    background: #252622;
+}
+
+
+/* READING PAGE */
+
+.reader-page {
+    max-width: 680px;
+
+    margin: 0 auto;
+
+    padding: 75px 30px 140px;
+}
+
+.reader-label {
+    color: #a56d82;
+
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 18px;
+}
+
+.reader-page h1 {
+    color: inherit;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 38px;
+    line-height: 1.2;
+
+    margin-bottom: 55px;
+}
+
+
+/* ACTUAL STORY TEXT */
+
+.reader-content {
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 18px;
+    line-height: 1.9;
+
+    white-space: pre-wrap;
+
+    color: inherit;
+}
+
+
+/* FONT OPTIONS */
+
+.chapter-reader.font-serif .reader-content {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.chapter-reader.font-sans .reader-content {
+    font-family: Arial, sans-serif;
+}
+
+
+/* TEXT SIZES */
+
+.chapter-reader.size-small .reader-content {
+    font-size: 16px;
+}
+
+.chapter-reader.size-normal .reader-content {
+    font-size: 18px;
+}
+
+.chapter-reader.size-large .reader-content {
+    font-size: 21px;
+}
+
+.chapter-reader.size-xlarge .reader-content {
+    font-size: 24px;
+}
+
+
+/* LINE SPACING */
+
+.chapter-reader.spacing-compact .reader-content {
+    line-height: 1.55;
+}
+
+.chapter-reader.spacing-comfortable .reader-content {
+    line-height: 1.9;
+}
+
+.chapter-reader.spacing-spacious .reader-content {
+    line-height: 2.25;
+}
+
+
+/* CREAM THEME */
+
+.chapter-reader.theme-cream {
+    background: #f8f4ec;
+    color: #353832;
+}
+
+.chapter-reader.theme-cream .reader-toolbar {
+    background: rgba(248, 244, 236, 0.96);
+}
+
+
+/* WHITE THEME */
+
+.chapter-reader.theme-white {
+    background: #ffffff;
+    color: #292929;
+}
+
+.chapter-reader.theme-white .reader-toolbar {
+    background: rgba(255, 255, 255, 0.96);
+}
+
+
+/* SEPIA THEME */
+
+.chapter-reader.theme-sepia {
+    background: #e9dcc5;
+    color: #463d32;
+}
+
+.chapter-reader.theme-sepia .reader-toolbar {
+    background: rgba(233, 220, 197, 0.96);
+}
+
+
+/* DARK THEME */
+
+.chapter-reader.theme-dark {
+    background: #252622;
+    color: #e7e2d8;
+}
+
+.chapter-reader.theme-dark .reader-toolbar {
+    background: rgba(37, 38, 34, 0.97);
+
+    border-bottom-color: #3c3d38;
+}
+
+.chapter-reader.theme-dark .reader-back,
+.chapter-reader.theme-dark .reader-settings-button {
+    color: #e7e2d8;
+}
+
+.chapter-reader.theme-dark .reader-settings {
+    background: #30312c;
+    border-bottom-color: #45463f;
+}
+
+.chapter-reader.theme-dark .setting-group > p {
+    color: #d8d0c2;
+}
+
+.chapter-reader.theme-dark .setting-options button {
+    background: #41423c;
+    color: #e7e2d8;
+}
+
+.chapter-reader.theme-dark .setting-options button.setting-active {
+    background: #68584a;
+}
+
+.chapter-reader.theme-dark .reader-label {
+    color: #d68ca9;
+}
+
+@media (max-width: 700px) {
+
+    header {
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+    nav {
+        gap: 15px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* -------------------------
+   HED AUTHOR DASHBOARD
+------------------------- */
+
+.author-page {
+    min-height: 80vh;
+    background: #f8f4ec;
+}
+
+.author-intro {
+    padding: 75px 8% 60px;
+    background: #68584a;
+    color: #f8f4ec;
+}
+
+.author-label {
+    color: #e8b5c9;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.author-intro h1 {
+    font-size: 52px;
+    margin-bottom: 12px;
+}
+
+.author-intro > p:last-child {
+    color: #eee5d8;
+    font-size: 16px;
+}
+
+
+/* STORY AREA */
+
+.author-stories {
+    padding: 65px 8% 100px;
+}
+
+.author-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 25px;
+
+    margin-bottom: 35px;
+}
+
+.author-section-heading .author-label {
+    color: #e45796;
+}
+
+.author-section-heading h2 {
+    color: #68584a;
+    font-size: 36px;
+}
+
+.author-add-button {
+    background: #68584a;
+    color: #f8f4ec;
+
+    padding: 11px 18px;
+}
+
+.author-add-button:hover {
+    background: #e45796;
+}
+
+
+/* EMPTY */
+
+.author-empty {
+    max-width: 600px;
+
+    padding: 30px;
+
+    background: #fffdf8;
+
+    border-radius: 15px;
+}
+
+.author-empty p {
+    color: #68584a;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.author-empty span {
+    color: #777;
+    font-size: 13px;
+}
+
+
+/* STORY GRID */
+
+.author-story-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(210px, 230px));
+
+    gap: 40px 30px;
+}
+
+.author-story-card {
+    width: 100%;
+}
+
+.author-story-cover {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+
+    overflow: hidden;
+
+    background: #68584a;
+
+    border-radius: 8px;
+
+    margin-bottom: 16px;
+}
+
+.author-story-cover img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.author-cover-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #f8f4ec;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    letter-spacing: 4px;
+}
+
+
+/* STORY INFORMATION */
+
+.author-card-label {
+    color: #e45796;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 5px;
+}
+
+.author-story-info h3 {
+    color: #68584a;
+
+    font-size: 20px;
+    line-height: 1.3;
+
+    margin-bottom: 4px;
+}
+
+.author-story-author {
+    color: #3f4a3c;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.author-chapter-count {
+    display: block;
+
+    color: #888078;
+
+    font-size: 12px;
+
+    margin-bottom: 15px;
+}
+
+.author-manage-button {
+    display: inline-block;
+
+    text-decoration: none;
+
+    color: #377a35;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.author-manage-button:hover {
+    color: #e45796;
+}
+/* -------------------------
+   HED AUTHOR STORY MANAGER
+------------------------- */
+
+.author-story-manager {
+    display: none;
+    margin: 0 8% 90px;
+    padding: 45px;
+    background: #fffdf8;
+    border-radius: 20px;
+}
+
+.author-story-manager.manager-open {
+    display: block;
+}
+
+
+/* BACK BUTTON */
+
+.author-manager-back {
+    background: transparent;
+    color: #377a35;
+    padding: 0;
+    margin-bottom: 35px;
+    font-size: 13px;
+}
+
+.author-manager-back:hover {
+    color: #e45796;
+    background: transparent;
+}
+
+
+/* STORY INFORMATION */
+
+.author-manager-intro {
+    max-width: 700px;
+    margin-bottom: 55px;
+}
+
+.author-manager-intro .author-label {
+    color: #e45796;
+}
+
+.author-manager-intro h2 {
+    color: #68584a;
+    font-size: 40px;
+    line-height: 1.15;
+    margin-bottom: 8px;
+}
+
+.author-manager-author {
+    color: #377a35;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.author-manager-description {
+    color: #666057;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* CHAPTER HEADING */
+
+.author-chapter-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+
+    padding-top: 35px;
+    border-top: 1px solid #ded5c8;
+
+    margin-bottom: 25px;
+}
+
+.author-chapter-heading .author-label {
+    color: #e45796;
+}
+
+.author-chapter-heading h3 {
+    color: #68584a;
+    font-size: 28px;
+}
+
+
+/* CHAPTER LIST */
+
+.author-chapter-list {
+    border-top: 1px solid #ded5c8;
+}
+
+.author-chapter-row {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    padding: 20px 5px;
+
+    border-bottom: 1px solid #ded5c8;
+}
+
+.author-chapter-number {
+    color: #e45796;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.author-chapter-info p {
+    color: #3f4a3c;
+    font-size: 17px;
+    margin-bottom: 3px;
+}
+
+.author-chapter-info small {
+    color: #91877d;
+    font-size: 11px;
+}
+
+
+/* MANAGE STORY BUTTON */
+
+.author-manage-button {
+    border: none;
+    background: transparent;
+
+    color: #377a35;
+
+    padding: 0;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.author-manage-button:hover {
+    color: #e45796;
+    background: transparent;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .author-story-manager {
+        margin: 0 5% 60px;
+        padding: 28px 22px;
+    }
+
+    .author-manager-intro h2 {
+        font-size: 32px;
+    }
+
+    .author-chapter-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+/* =========================================================
+   HED — DISTINCT SECTION DESIGN
+   ========================================================= */
+
+/* General HED sections */
+.hed-section {
+    padding: 100px 6vw;
+    position: relative;
+}
+
+
+/* =========================================================
+   JOURNAL
+   ========================================================= */
+
+.hed-section:nth-of-type(1) {
+    background: #f8f4ec;
+}
+
+.hed-section:nth-of-type(1)::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: #d8d0c3;
+    margin-top: 100px;
+}
+
+.hed-section:nth-of-type(1) .hed-heading {
+    margin-bottom: 18px;
+}
+
+.hed-section:nth-of-type(1) .hed-journal-intro {
+    margin-bottom: 55px;
+}
+
+.hed-section:nth-of-type(1) .hed-journal-intro p {
+    max-width: 520px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #66594d;
+}
+
+
+/* Journal posts */
+.hed-journal-feed {
+    max-width: 900px;
+}
+
+.journal-entry {
+    padding: 34px 0;
+    border-top: 1px solid #ddd5c8;
+}
+
+.journal-entry:last-child {
+    border-bottom: 1px solid #ddd5c8;
+}
+
+.journal-entry .journal-date {
+    margin-bottom: 12px;
+}
+
+.journal-entry h3 {
+    margin-bottom: 12px;
+}
+
+.hed-journal-text,
+.hed-journal-full {
+    max-width: 700px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   STORIES
+   ========================================================= */
+
+.hed-section:nth-of-type(2) {
+    background: #eee7dc;
+    padding-top: 110px;
+    padding-bottom: 115px;
+}
+
+
+/* Make Stories feel like its own library */
+.hed-section:nth-of-type(2) .hed-heading {
+    margin-bottom: 15px;
+}
+
+.hed-section:nth-of-type(2)::before {
+    content: "READING LIBRARY";
+    display: block;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #e34f86;
+    margin-bottom: 12px;
+}
+
+
+/* Story shelf */
+.story-library-header {
+    margin-top: 55px;
+    padding: 22px 0;
+    border-top: 1px solid #cfc5b7;
+    border-bottom: 1px solid #cfc5b7;
+}
+
+.story-shelf {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 55px;
+    padding-top: 40px;
+}
+
+
+/* Individual book */
+.hed-book-card {
+    width: 210px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.hed-book-cover {
+    width: 180px;
+    height: 270px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 20px rgba(70, 55, 43, 0.12);
+}
+
+.hed-book-info {
+    padding-left: 3px;
+}
+
+.hed-book-info h3 {
+    margin: 8px 0;
+}
+
+.hed-book-author {
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   OTHER WRITINGS
+   ========================================================= */
+
+.hed-section:nth-of-type(3) {
+    background: #f8f4ec;
+    padding-top: 110px;
+    padding-bottom: 130px;
+}
+
+
+/* Make this section feel like a notebook */
+.hed-section:nth-of-type(3)::before {
+    content: "SMALLER PIECES";
+    display: block;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #6c8b50;
+    margin-bottom: 12px;
+}
+
+.hed-section:nth-of-type(3) .hed-heading {
+    margin-bottom: 18px;
+}
+
+.hed-section:nth-of-type(3) .other-writing-text {
+    max-width: 520px;
+    margin-bottom: 55px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #66594d;
+}
+
+
+/* Other writing cards */
+.hed-other-feed {
+    max-width: 850px;
+}
+
+.other-writing-card {
+    position: relative;
+    padding: 30px 0;
+    border-top: 1px solid #ddd5c8;
+}
+
+.other-writing-card:last-child {
+    border-bottom: 1px solid #ddd5c8;
+}
+
+.other-writing-content {
+    max-width: 700px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .hed-section {
+        padding: 70px 25px;
+    }
+
+    .story-shelf {
+        gap: 35px;
+    }
+
+    .hed-book-card {
+        width: 160px;
+    }
+
+    .hed-book-cover {
+        width: 150px;
+        height: 225px;
+    }
+
+}
+.stories-description {
+    max-width: 520px;
+    margin-bottom: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #66594d;
+}
+/* =========================================================
+   HED — COMPLETE VISUAL REDESIGN
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   GENERAL HED SECTIONS
+   --------------------------------------------------------- */
+
+.hed-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 110px 7vw;
+    margin: 0;
+}
+
+
+/* Make the content use the page better */
+.hed-section > * {
+    max-width: 1180px;
+}
+
+
+/* ---------------------------------------------------------
+   SECTION 01 — JOURNAL
+   --------------------------------------------------------- */
+
+.hed-section:nth-of-type(1) {
+    background: #f8f4ec;
+    border-bottom: 1px solid #d9d0c3;
+}
+
+
+/* Heading */
+
+.hed-section:nth-of-type(1) .hed-heading {
+    max-width: 900px;
+    margin-bottom: 18px;
+}
+
+.hed-section:nth-of-type(1) .hed-heading p {
+    margin-bottom: 10px;
+}
+
+.hed-section:nth-of-type(1) .hed-heading h2 {
+    font-size: 42px;
+    margin: 0;
+}
+
+
+/* Description */
+
+.hed-section:nth-of-type(1) .hed-journal-intro {
+    margin-bottom: 60px;
+}
+
+.hed-section:nth-of-type(1) .hed-journal-intro p {
+    max-width: 600px;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #66594d;
+}
+
+
+/* Journal feed */
+
+.hed-journal-feed {
+    width: 100%;
+    max-width: 1000px;
+}
+
+
+/* Individual journal entry */
+
+.journal-entry {
+    position: relative;
+    width: 100%;
+    padding: 38px 0;
+    border-top: 1px solid #d8d0c4;
+}
+
+
+/* Last entry */
+
+.journal-entry:last-child {
+    border-bottom: 1px solid #d8d0c4;
+}
+
+
+/* Date */
+
+.journal-entry .journal-date {
+    margin: 0 0 14px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #64844c;
+}
+
+
+/* Title */
+
+.journal-entry h3 {
+    margin: 0 0 12px;
+    font-size: 25px;
+    color: #4f4339;
+}
+
+
+/* Text */
+
+.journal-entry .hed-journal-text,
+.journal-entry .hed-journal-full {
+    max-width: 760px;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #66594d;
+}
+
+
+/* Continue button */
+
+.hed-read-more {
+    margin-top: 18px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #e05a8b;
+    cursor: pointer;
+}
+
+
+/* ---------------------------------------------------------
+   SECTION 02 — STORIES
+   --------------------------------------------------------- */
+
+.hed-section:nth-of-type(2) {
+    background: #eee7dc;
+    padding-top: 120px;
+    padding-bottom: 125px;
+    border-bottom: 1px solid #d2c7b8;
+}
+
+
+/* Heading */
+
+.hed-section:nth-of-type(2) .hed-heading {
+    margin-bottom: 18px;
+}
+
+.hed-section:nth-of-type(2) .hed-heading h2 {
+    font-size: 42px;
+    margin: 0;
+}
+
+
+/* Description */
+
+.stories-description {
+    max-width: 600px;
+    margin: 0 0 60px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #66594d;
+}
+
+
+/* Reading shelf header */
+
+.story-library-header {
+    width: 100%;
+    max-width: 1180px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 25px 0 18px;
+    border-top: 1px solid #cfc5b7;
+    border-bottom: 1px solid #cfc5b7;
+}
+
+
+/* Shelf title */
+
+.story-library-label {
+    margin: 0 0 7px;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: #e05a8b;
+}
+
+.story-library-header h3 {
+    margin: 0;
+    font-size: 25px;
+    color: #4f4339;
+}
+
+
+/* Story count */
+
+#storyLibraryCount {
+    font-size: 12px;
+    color: #6d6257;
+}
+
+
+/* Bookshelf */
+
+.story-shelf {
+    width: 100%;
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(150px, 210px));
+    justify-content: start;
+    gap: 55px;
+    padding-top: 55px;
+}
+
+
+/* Book card */
+
+.hed-book-card {
+    width: 100%;
+    max-width: 210px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* Book cover */
+
+.hed-book-cover {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 22px;
+    overflow: hidden;
+    background: #6d5c4e;
+    box-shadow: 0 10px 24px rgba(65, 52, 41, 0.14);
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+
+/* Book hover */
+
+.hed-book-card:hover .hed-book-cover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(65, 52, 41, 0.18);
+}
+
+
+/* Cover image */
+
+.hed-book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* Placeholder */
+
+.hed-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #6d5c4e;
+}
+
+.hed-cover-placeholder span {
+    font-size: 24px;
+    letter-spacing: 4px;
+    color: #f8f4ec;
+}
+
+
+/* Book information */
+
+.hed-book-info {
+    padding-left: 2px;
+}
+
+
+/* STORY label */
+
+.hed-book-info .writing-type {
+    margin: 0 0 8px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #64844c;
+}
+
+
+/* Book title */
+
+.hed-book-info h3 {
+    margin: 0 0 7px;
+    font-size: 19px;
+    line-height: 1.3;
+    color: #4f4339;
+}
+
+
+/* Author */
+
+.hed-book-author {
+    margin: 0 0 8px;
+    font-size: 13px;
+    color: #66594d;
+}
+
+
+/* Chapter count */
+
+.hed-book-info > span {
+    font-size: 11px;
+    color: #81766a;
+}
+
+
+/* ---------------------------------------------------------
+   SECTION 03 — OTHER WRITINGS
+   --------------------------------------------------------- */
+
+.hed-section:nth-of-type(3) {
+    background: #f8f4ec;
+    padding-top: 120px;
+    padding-bottom: 140px;
+}
+
+
+/* Heading */
+
+.hed-section:nth-of-type(3) .hed-heading {
+    margin-bottom: 18px;
+}
+
+.hed-section:nth-of-type(3) .hed-heading h2 {
+    font-size: 42px;
+    margin: 0;
+}
+
+
+/* Description */
+
+.hed-section:nth-of-type(3) .other-writing-text {
+    max-width: 600px;
+    margin: 0 0 60px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #66594d;
+}
+
+
+/* Writing feed */
+
+.hed-other-feed {
+    width: 100%;
+    max-width: 1000px;
+}
+
+
+/* Individual writing */
+
+.other-writing-card {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 34px 40px 34px 0;
+    border-top: 1px solid #d8d0c4;
+}
+
+
+/* Last writing */
+
+.other-writing-card:last-child {
+    border-bottom: 1px solid #d8d0c4;
+}
+
+
+/* Type */
+
+.other-writing-card .writing-type {
+    margin: 0 0 12px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #64844c;
+}
+
+
+/* Title */
+
+.other-writing-card h3 {
+    margin: 0 0 12px;
+    font-size: 23px;
+    color: #4f4339;
+}
+
+
+/* Content */
+
+.other-writing-content {
+    max-width: 760px;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #66594d;
+}
+
+
+/* Flower */
+
+.other-writing-flower {
+    position: absolute;
+    right: 15px;
+    top: 38px;
+    font-size: 18px;
+    color: #e05a8b;
+}
+
+
+/* ---------------------------------------------------------
+   EMPTY STATES
+   --------------------------------------------------------- */
+
+.empty-stories {
+    max-width: 700px;
+    padding: 35px 0;
+}
+
+.empty-stories p {
+    margin-bottom: 8px;
+}
+
+.empty-stories span {
+    color: #81766a;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+
+    .story-shelf {
+        grid-template-columns: repeat(3, minmax(150px, 210px));
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .hed-section {
+        padding: 80px 25px;
+    }
+
+    .hed-section:nth-of-type(1) .hed-heading h2,
+    .hed-section:nth-of-type(2) .hed-heading h2,
+    .hed-section:nth-of-type(3) .hed-heading h2 {
+        font-size: 34px;
+    }
+
+    .story-shelf {
+        grid-template-columns: repeat(2, minmax(130px, 1fr));
+        gap: 35px 25px;
+    }
+
+    .hed-book-cover {
+        height: 240px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .story-library-header {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .story-shelf {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hed-book-cover {
+        height: 220px;
+    }
+
+}
+/* =========================================================
+   HED SECTION FIX
+   ========================================================= */
+
+/* JOURNAL = actual section #2 */
+.hed-section:nth-of-type(2) {
+    background: #f8f4ec;
+    padding: 110px 7vw;
+    border-bottom: 1px solid #d9d0c3;
+}
+
+.hed-section:nth-of-type(2)::before {
+    content: none;
+}
+
+
+/* STORIES = actual section #3 */
+.hed-section:nth-of-type(3) {
+    background: #eee7dc;
+    padding: 120px 7vw 125px;
+    border-bottom: 1px solid #d2c7b8;
+}
+
+.hed-section:nth-of-type(3)::before {
+    content: none;
+}
+
+
+/* OTHER WRITINGS = actual section #4 */
+.hed-section:nth-of-type(4) {
+    background: #f8f4ec;
+    padding: 120px 7vw 140px;
+    border-bottom: none;
+}
+
+.hed-section:nth-of-type(4)::before {
+    content: none;
+}
+
+
+/* =========================================================
+   JOURNAL
+   ========================================================= */
+
+.hed-section:nth-of-type(2) .hed-heading {
+    margin-bottom: 18px;
+}
+
+.hed-section:nth-of-type(2) .hed-journal-intro {
+    margin-bottom: 55px;
+}
+
+.hed-section:nth-of-type(2) .hed-journal-intro p {
+    max-width: 600px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #66594d;
+}
+
+.hed-section:nth-of-type(2) .hed-journal-feed {
+    width: 100%;
+    max-width: 1050px;
+}
+
+.hed-section:nth-of-type(2) .journal-entry {
+    width: 100%;
+    padding: 38px 0;
+    border-top: 1px solid #d8d0c4;
+}
+
+.hed-section:nth-of-type(2) .journal-entry:last-child {
+    border-bottom: 1px solid #d8d0c4;
+}
+
+
+/* =========================================================
+   STORIES
+   ========================================================= */
+
+.hed-section:nth-of-type(3) .hed-heading {
+    margin-bottom: 18px;
+}
+
+.hed-section:nth-of-type(3) .stories-description {
+    max-width: 600px;
+    margin: 0 0 60px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #66594d;
+}
+
+.hed-section:nth-of-type(3) .story-library-header {
+    width: 100%;
+    max-width: 1180px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 25px 0 18px;
+    border-top: 1px solid #cfc5b7;
+    border-bottom: 1px solid #cfc5b7;
+}
+
+.hed-section:nth-of-type(3) .story-shelf {
+    width: 100%;
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: repeat(4, 210px);
+    gap: 55px;
+    padding-top: 55px;
+}
+
+.hed-section:nth-of-type(3) .hed-book-card {
+    width: 210px;
+}
+
+.hed-section:nth-of-type(3) .hed-book-cover {
+    width: 210px;
+    height: 300px;
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   OTHER WRITINGS
+   ========================================================= */
+
+.hed-section:nth-of-type(4) .hed-heading {
+    margin-bottom: 18px;
+}
+
+.hed-section:nth-of-type(4) .other-writing-text {
+    max-width: 600px;
+    margin: 0 0 55px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #66594d;
+}
+
+.hed-section:nth-of-type(4) .hed-other-feed {
+    width: 100%;
+    max-width: 1050px;
+}
+
+.hed-section:nth-of-type(4) .other-writing-card {
+    width: 100%;
+    padding: 34px 40px 34px 0;
+    border-top: 1px solid #d8d0c4;
+}
+
+.hed-section:nth-of-type(4) .other-writing-card:last-child {
+    border-bottom: 1px solid #d8d0c4;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .hed-section:nth-of-type(2),
+    .hed-section:nth-of-type(3),
+    .hed-section:nth-of-type(4) {
+        padding: 80px 25px;
+    }
+
+    .hed-section:nth-of-type(3) .story-shelf {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 35px 25px;
+    }
+
+    .hed-section:nth-of-type(3) .hed-book-card {
+        width: 100%;
+    }
+
+    .hed-section:nth-of-type(3) .hed-book-cover {
+        width: 100%;
+        height: 240px;
+    }
+
+}
+/* =========================================================
+   HED INTRO NAVIGATION
+   ========================================================= */
+
+.hed-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 35px;
+}
+
+.hed-explore-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 10px;
+    color: inherit;
+    transition: all 0.2s ease;
+}
+
+.hed-explore-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+/* =====================================================
+   STORY SHELF — FINAL LAYOUT
+===================================================== */
+
+.story-shelf {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 42px;
+
+    align-items: start;
+}
+
+
+/* Each story */
+
+.hed-book-card {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 0 0 30px;
+
+    border-top: 1px solid rgba(255,255,255,0.18);
+
+    color: white;
+
+    text-decoration: none;
+}
+
+
+/* Story cover */
+
+.hed-book-cover {
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 3 / 4;
+
+    overflow: hidden;
+
+    background: #3b2b24;
+
+    flex-shrink: 0;
+}
+
+
+.hed-book-cover img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* Story details UNDER the cover */
+
+.hed-book-info {
+    width: 100%;
+    min-width: 0;
+
+    padding-top: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+.hed-book-info .writing-type {
+    margin: 0 0 7px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.16em;
+
+    color: #c8b5a7;
+}
+
+
+.hed-book-info h3 {
+    width: 100%;
+
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 27px;
+
+    line-height: 1.15;
+
+    font-weight: 400;
+
+    color: white;
+
+    overflow-wrap: anywhere;
+}
+
+
+.hed-book-author {
+    margin: 9px 0 0;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    color: #c9b9ae;
+}
+
+
+.hed-book-info > span {
+    margin-top: 9px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    color: #bca99c;
+}
+
+
+/* See more button spans the shelf */
+
+.story-shelf > .hed-see-more {
+    grid-column: 1 / -1;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .story-shelf {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+    }
+
+    .hed-book-info h3 {
+        font-size: 25px;
+    }
+
+}
+/* =====================================================
+   STORIES — REAL BOOKSHELF / READING LIBRARY
+===================================================== */
+
+.story-shelf {
+    display: grid !important;
+
+    /* actual book-cover columns */
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+
+    /* close together like a reading library */
+    column-gap: 18px !important;
+    row-gap: 42px !important;
+
+    width: 100% !important;
+    align-items: start !important;
+}
+
+
+/* =====================================================
+   EACH BOOK
+===================================================== */
+
+.hed-book-card {
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    align-items: stretch !important;
+
+    width: 100% !important;
+
+    min-width: 0 !important;
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+    border: none !important;
+
+    border-top: none !important;
+
+    background: transparent !important;
+
+    box-shadow: none !important;
+
+    text-decoration: none !important;
+
+    color: white !important;
+}
+
+
+/* =====================================================
+   BOOK COVER
+===================================================== */
+
+.hed-book-cover {
+    width: 100% !important;
+
+    /*
+       REAL BOOK PROPORTION
+       Taller than it is wide
+    */
+    aspect-ratio: 2 / 3 !important;
+
+    height: auto !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    overflow: hidden !important;
+
+    background: #33251f !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+}
+
+
+.hed-book-cover img {
+    display: block !important;
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    object-fit: cover !important;
+
+    object-position: center !important;
+
+    margin: 0 !important;
+}
+
+
+/* =====================================================
+   DETAILS UNDER BOOK
+===================================================== */
+
+.hed-book-info {
+    display: block !important;
+
+    width: 100% !important;
+
+    min-width: 0 !important;
+
+    padding: 11px 0 0 !important;
+
+    margin: 0 !important;
+}
+
+
+/* SMALL TYPE */
+
+.hed-book-info .writing-type {
+    display: block !important;
+
+    margin: 0 0 5px !important;
+
+    font-family: Arial, sans-serif !important;
+
+    font-size: 8px !important;
+
+    line-height: 1.2 !important;
+
+    letter-spacing: 0.13em !important;
+
+    text-transform: uppercase !important;
+
+    color: #bda99b !important;
+}
+
+
+/* BOOK TITLE */
+
+.hed-book-info h3 {
+    display: block !important;
+
+    width: 100% !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    font-family: Georgia, "Times New Roman", serif !important;
+
+    font-size: 17px !important;
+
+    line-height: 1.2 !important;
+
+    font-weight: 400 !important;
+
+    color: white !important;
+
+    overflow-wrap: break-word !important;
+
+    word-break: normal !important;
+}
+
+
+/* AUTHOR */
+
+.hed-book-author {
+    display: block !important;
+
+    margin: 5px 0 0 !important;
+
+    font-family: Arial, sans-serif !important;
+
+    font-size: 9px !important;
+
+    line-height: 1.3 !important;
+
+    color: #aa9990 !important;
+}
+
+
+/* CHAPTER COUNT */
+
+.hed-book-info > span {
+    display: block !important;
+
+    margin: 4px 0 0 !important;
+
+    font-family: Arial, sans-serif !important;
+
+    font-size: 8px !important;
+
+    color: #8f8179 !important;
+}
+
+
+/* =====================================================
+   SEE MORE
+===================================================== */
+
+.story-shelf > .hed-see-more {
+    grid-column: 1 / -1 !important;
+
+    margin-top: 5px !important;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .story-shelf {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+
+        column-gap: 14px !important;
+
+        row-gap: 35px !important;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL TABLET / PHONE
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .story-shelf {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+        column-gap: 12px !important;
+
+        row-gap: 32px !important;
+    }
+
+    .hed-book-info h3 {
+        font-size: 15px !important;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL PHONE
+===================================================== */
+
+@media (max-width: 430px) {
+
+    .story-shelf {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+        column-gap: 14px !important;
+
+        row-gap: 30px !important;
+    }
+
+}
+.hed-heading h2 {
+    font-family: Georgia, "Times New Roman", serif !important;
+}
+
+.hed-subtitle {
+    display: block;
+    margin-top: 6px;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 14px;
+    font-style: normal;
+    letter-spacing: 0;
+    color: #9d8d84;
+}
+/* Slightly smaller Journal + Other Writings headings */
+
+#journal .hed-heading h2,
+#other-writings .hed-heading h2 {
+    font-size: 30px !important;
+}
+#journal .hed-heading h2 {
+    font-size: 34px !important;
+}
+.journal-entry h3 {
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 25px !important;
+    line-height: 1.3 !important;
+    font-weight: 400 !important;
+    margin: 6px 0 8px !important;
+}
+/* ==========================================================
+   MAY BLOOMS — JOURNAL
+   Clean Editorial Style
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   JOURNAL SECTION
+   ---------------------------------------------------------- */
+
+#journal {
+    width: 100%;
+}
+
+
+/* Main Journal heading */
+
+#journal .hed-heading h2 {
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif !important;
+
+    font-size: 34px !important;
+
+    line-height: 1.2 !important;
+
+    font-weight: 400 !important;
+
+    letter-spacing: 0 !important;
+
+    margin-bottom: 35px !important;
+}
+
+
+/* ----------------------------------------------------------
+   JOURNAL ENTRY
+   ---------------------------------------------------------- */
+
+#journal .journal-entry {
+
+    width: 100%;
+
+    max-width: 760px;
+
+    padding: 25px 0 !important;
+
+    margin: 0 !important;
+
+    border: none !important;
+
+    border-top: none !important;
+
+    border-bottom: none !important;
+}
+
+
+/* ----------------------------------------------------------
+   DATE
+   ---------------------------------------------------------- */
+
+#journal .journal-date {
+
+    margin: 0 0 10px 0 !important;
+
+    font-size: 10px !important;
+
+    line-height: 1.4 !important;
+
+    letter-spacing: 2px !important;
+
+    font-weight: 600 !important;
+}
+
+
+/* ----------------------------------------------------------
+   JOURNAL ENTRY TITLE
+   ---------------------------------------------------------- */
+
+#journal .journal-entry h3 {
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif !important;
+
+    font-size: 25px !important;
+
+    line-height: 1.3 !important;
+
+    font-weight: 400 !important;
+
+    letter-spacing: 0 !important;
+
+    margin: 0 0 10px 0 !important;
+
+    color: #4f4339 !important;
+}
+
+
+/* ----------------------------------------------------------
+   JOURNAL TEXT
+   ---------------------------------------------------------- */
+
+#journal .journal-entry .hed-journal-text {
+
+    max-width: 760px !important;
+
+    margin: 0 !important;
+
+    font-size: 15px !important;
+
+    line-height: 1.8 !important;
+
+    font-weight: 400 !important;
+
+    color: #66594d !important;
+}
+
+
+/* ----------------------------------------------------------
+   REMOVE OLD "CONTINUE READING"
+   ---------------------------------------------------------- */
+
+#journal .hed-read-more {
+
+    display: none !important;
+}
+
+
+/* ----------------------------------------------------------
+   REMOVE OLD FULL CONTENT
+   ---------------------------------------------------------- */
+
+#journal .hed-journal-full {
+
+    display: none !important;
+}
+
+
+/* ----------------------------------------------------------
+   JOURNAL IMAGES
+   ---------------------------------------------------------- */
+
+#journal .hed-journal-image {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 760px;
+
+    height: auto;
+
+    margin: 15px 0 15px 0;
+}
+
+
+/* ----------------------------------------------------------
+   MOBILE
+   ---------------------------------------------------------- */
+
+@media (max-width: 700px) {
+
+    #journal .hed-heading h2 {
+
+        font-size: 31px !important;
+
+    }
+
+
+    #journal .journal-entry h3 {
+
+        font-size: 23px !important;
+
+    }
+
+
+    #journal .journal-entry .hed-journal-text {
+
+        font-size: 15px !important;
+
+        line-height: 1.75 !important;
+
+    }
+
+
+    #journal .journal-entry {
+
+        padding: 22px 0 !important;
+
+    }
+
+}
+/* JOURNAL — DARK BROWN TEXT */
+
+#journal {
+    color: #29231f !important;
+}
+
+#journal .hed-heading h2 {
+    color: #1f1915 !important;
+}
+
+#journal .journal-date {
+    color: #51463e !important;
+}
+
+#journal .journal-entry h3 {
+    color: #211b17 !important;
+}
+
+#journal .journal-entry .hed-journal-text {
+    color: #29231f !important;
+}
+/* JOURNAL HEADING + SUBTITLE */
+
+#journal .hed-heading h2 {
+    font-size: 34px !important;
+    line-height: 1.15 !important;
+    margin: 0 !important;
+    color: #1f1915 !important;
+}
+
+#journal .hed-subtitle {
+    display: block !important;
+    margin-top: 3px !important;
+    margin-bottom: 28px !important;
+
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+
+    color: #51463e !important;
+}
+/* OTHER WRITINGS — DARK BROWN / ALMOST BLACK */
+
+#other-writings {
+    color: #29231f !important;
+}
+
+#other-writings .hed-heading h2 {
+    color: #1f1915 !important;
+}
+
+#other-writings .hed-subtitle {
+    color: #51463e !important;
+}
+
+#other-writings h3,
+#other-writings .other-writing-title {
+    color: #211b17 !important;
+}
+
+#other-writings p,
+#other-writings .other-writing-text {
+    color: #29231f !important;
+}
+
+#other-writings .other-writing-category {
+    color: #51463e !important;
+}
+/* =====================================================
+   COMMENTS
+===================================================== */
+
+.comments-section {
+    width: 100%;
+    max-width: 700px;
+    margin: 120px auto 0;
+    padding-top: 45px;
+    border-top: 1px solid rgba(73, 59, 51, 0.17);
+}
+
+.comments-heading {
+    margin: 0 0 35px;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.16em;
+
+    color: #907d71;
+
+    text-transform: uppercase;
+}
+
+.comment-form {
+    margin-bottom: 55px;
+}
+
+.comment-input,
+.comment-textarea {
+    display: block;
+
+    width: 100%;
+
+    padding: 14px 0;
+
+    border: none;
+    border-bottom: 1px solid rgba(73, 59, 51, 0.22);
+
+    outline: none;
+
+    background: transparent;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+
+    color: #403731;
+}
+
+.comment-input {
+    margin-bottom: 25px;
+}
+
+.comment-textarea {
+    min-height: 120px;
+
+    resize: vertical;
+
+    line-height: 1.7;
+}
+
+.comment-input::placeholder,
+.comment-textarea::placeholder {
+    color: #a6968b;
+}
+
+.comment-input:focus,
+.comment-textarea:focus {
+    border-bottom-color: #6f5b50;
+}
+
+.comment-submit {
+    margin-top: 25px;
+
+    padding: 0;
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 0.15em;
+
+    color: #78665b;
+
+    text-transform: uppercase;
+}
+
+.comment-submit:hover {
+    color: #29221e;
+}
+
+.comment-status {
+    margin-top: 15px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 9px;
+
+    color: #8c7d74;
+}
+
+.comment-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 38px;
+}
+
+.comment {
+    padding-top: 28px;
+
+    border-top:
+        1px solid
+        rgba(73, 59, 51, 0.12);
+}
+
+.comment-meta {
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 14px;
+
+    margin-bottom: 10px;
+}
+
+.comment-name {
+    margin: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 17px;
+
+    color: #29221e;
+}
+
+.comment-date {
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    color: #a6968b;
+
+    text-transform: uppercase;
+}
+
+.comment-body {
+    margin: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 15px;
+
+    line-height: 1.75;
+
+    color: #756961;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: break-word;
+}
+
+@media (max-width: 700px) {
+
+    .comments-section {
+        margin-top: 80px;
+    }
+
+    .comment-meta {
+        flex-direction: column;
+
+        gap: 4px;
+    }
+
+}
+.hed-heading h2 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.hed-heading h2 a:hover {
+    color: inherit;
+    text-decoration: none;
+}

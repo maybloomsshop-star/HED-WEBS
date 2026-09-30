@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>HED | May Blooms</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+    
+
+    <style>
+        /* =====================================================
+           HED PAGE
+        ===================================================== */
+
+        :root {
+            --hed-brown: #4a352b;
+            --hed-brown-dark: #382920;
+            --hed-cream: #f5efe6;
+            --hed-paper: #fbf8f3;
+            --hed-green: #68745d;
+            --hed-pink: #c58f91;
+            --hed-text: #342b26;
+            --hed-muted: #85786e;
+            --hed-line: #d8cec2;
+        }
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .hed-page {
+            background: var(--hed-cream);
+            color: var(--hed-text);
+        }
+
+        /* =====================================================
+           HED INTRO
+        ===================================================== */
+
+        .hed-intro {
+            width: 100%;
+            box-sizing: border-box;
+            background: var(--hed-brown);
+            color: white;
+            padding: 58px 8vw 55px;
+            min-height: 330px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hed-intro::after {
+            content: "HED";
+            position: absolute;
+            right: 4vw;
+            bottom: -42px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(145px, 17vw, 245px);
+            font-weight: 700;
+            color: rgba(255,255,255,0.035);
+            pointer-events: none;
+        }
+
+        .hed-intro .small-text {
+            margin: 0 0 12px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            color: #d8c8ba;
+        }
+
+        .hed-intro h1 {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(68px, 8vw, 110px);
+            line-height: 0.88;
+            font-weight: 400;
+            letter-spacing: -0.05em;
+            color: white;
+        }
+
+        .hed-intro h2 {
+            margin: 16px 0 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(18px, 2vw, 25px);
+            font-weight: 400;
+            color: #eee3d8;
+        }
+
+        .hed-description {
+            max-width: 500px;
+            margin: 23px 0 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 14px;
+            line-height: 1.7;
+            font-style: italic;
+            color: #d9cec4;
+        }
+
+        /* =====================================================
+           LOCAL NAV
+        ===================================================== */
+
+        .hed-local-nav {
+            width: 100%;
+            box-sizing: border-box;
+            background: var(--hed-brown-dark);
+            display: flex;
+            align-items: center;
+            padding: 0 8vw;
+            min-height: 56px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .hed-local-nav a {
+            color: #eee5dd;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-right: 34px;
+            transition: color 0.2s ease;
+        }
+
+        .hed-local-nav a:hover {
+            color: white;
+        }
+
+        /* =====================================================
+           GENERAL SECTION
+        ===================================================== */
+
+        .hed-section {
+            padding: 70px 8vw;
+            box-sizing: border-box;
+        }
+
+        /* =====================================================
+           SECTION HEADINGS
+        ===================================================== */
+
+        .hed-heading {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            margin-bottom: 27px;
+        }
+
+        .hed-heading p {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--hed-green);
+        }
+
+        .journal-title-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+       .journal-entry:hover {
+    background: #eee8df;
+    transform: translateY(-2px);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.journal-entry:hover h3 {
+    color: var(--hed-text);
+}
+
+.journal-entry:hover .journal-date {
+    color: var(--hed-green);
+}
+
+.journal-entry:hover .hed-journal-text,
+.journal-entry:hover .hed-journal-full,
+.journal-entry:hover .hed-journal-reflection {
+    color: var(--hed-text);
+}
+
+        .hed-heading h2 {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(25px, 2.7vw, 34px);
+            line-height: 1.08;
+            font-weight: 400;
+            color: var(--hed-text);
+        }
+
+        #stories .hed-heading h2 {
+            color: white;
+        }
+
+        .hed-subtitle {
+            display: block;
+            margin-top: 7px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 16px;
+            line-height: 1.35;
+            font-weight: 400;
+            color: #d7c7bb;
+        }
+
+        /* =====================================================
+           JOURNAL
+        ===================================================== */
+
+        #journal {
+            background: var(--hed-paper);
+        }
+
+        .hed-journal-intro {
+            max-width: 650px;
+            margin-bottom: 30px;
+        }
+
+        .hed-journal-intro p {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 16px;
+            line-height: 1.55;
+            color: #665a51;
+        }
+
+        .hed-journal-feed {
+            max-width: 900px;
+        }
+
+        .journal-entry {
+            padding: 0 0 34px;
+            margin: 0 0 34px;
+            border-bottom: 1px solid var(--hed-line);
+        }
+
+        .journal-entry:last-child {
+            margin-bottom: 0;
+        }
+
+        .journal-date {
+            margin: 0 0 9px;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            color: var(--hed-green);
+        }
+
+        .journal-entry h3 {
+            margin: 0 0 15px;
+            max-width: 700px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(21px, 2.3vw, 29px);
+            line-height: 1.2;
+            font-weight: 400;
+            color: var(--hed-text);
+        }
+
+        .hed-journal-image {
+            display: block;
+            width: 100%;
+            max-width: 650px;
+            max-height: 430px;
+            object-fit: cover;
+            margin: 20px 0 22px;
+        }
+
+        .hed-journal-text,
+        .hed-journal-full {
+            max-width: 720px;
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #514740;
+        }
+
+        .hed-journal-reflection {
+            max-width: 720px;
+            margin: 24px 0 0;
+            padding-top: 18px;
+            border-top: 1px solid var(--hed-line);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 15px;
+            line-height: 1.8;
+            font-style: italic;
+            color: #665a51;
+        }
+
+        .hed-journal-reflection-label {
+            display: block;
+            margin-bottom: 8px;
+            font-family: Arial, sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            font-style: normal;
+            color: var(--hed-green);
+        }
+
+        .hed-read-more {
+            margin-top: 18px;
+            padding: 0;
+            border: none;
+            background: none;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--hed-green);
+            cursor: pointer;
+        }
+
+        .hed-read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           SEE MORE BUTTON
+        ===================================================== */
+
+        .hed-see-more {
+            display: inline-block;
+            margin-top: 23px;
+            padding: 0;
+            border: none;
+            background: none;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--hed-green);
+            cursor: pointer;
+        }
+
+        .hed-see-more:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           STORIES
+        ===================================================== */
+
+        #stories {
+            background: var(--hed-brown);
+            color: white;
+        }
+
+        #stories .hed-heading {
+            margin-bottom: 34px;
+        }
+
+        #stories .hed-heading p {
+            color: #c9b4a5;
+        }
+
+        #stories .hed-heading h2 {
+            color: white;
+        }
+
+        .story-shelf {
+            width: 100%;
+        }
+
+        /* =====================================================
+           STORY CARD
+        ===================================================== */
+
+        .hed-book-card {
+            width: 100%;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: 135px minmax(0, 1fr);
+            align-items: start;
+            column-gap: 32px;
+            padding: 27px 0;
+            border-top: 1px solid rgba(255,255,255,0.18);
+            color: white;
+            text-decoration: none;
+            transition:
+                background 0.2s ease,
+                padding 0.2s ease;
+        }
+
+        .hed-book-card:last-child {
+            border-bottom: 1px solid rgba(255,255,255,0.18);
+        }
+
+        .hed-book-card:hover {
+            background: rgba(255,255,255,0.035);
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        /* =====================================================
+           STORY COVER
+        ===================================================== */
+
+        .hed-book-cover {
+            width: 125px;
+            height: 170px;
+            overflow: hidden;
+            background: #3b2b24;
+            flex-shrink: 0;
+        }
+
+        .hed-book-cover img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hed-cover-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #3f2e26;
+        }
+
+        .hed-cover-placeholder span {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 21px;
+            letter-spacing: 0.08em;
+            color: #d6c6ba;
+        }
+
+        /* =====================================================
+           STORY INFORMATION
+        ===================================================== */
+
+        .hed-book-info {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .hed-book-info .writing-type {
+            margin: 0 0 7px;
+            font-family: Arial, sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            color: #c8b5a7;
+        }
+
+        .hed-book-info h3 {
+            width: 100%;
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(21px, 2.5vw, 30px);
+            line-height: 1.15;
+            font-weight: 400;
+            color: white;
+            overflow-wrap: break-word;
+        }
+
+        .hed-book-author {
+            margin: 9px 0 0;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            color: #c9b9ae;
+        }
+
+        .hed-book-info > span {
+            margin-top: 11px;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            color: #bca99c;
+            white-space: nowrap;
+        }
+
+        /* =====================================================
+           STORY SEE MORE
+        ===================================================== */
+
+        #stories .hed-see-more {
+            color: #d5c2b5;
+        }
+
+        #stories .hed-see-more:hover {
+            color: white;
+        }
+
+        /* =====================================================
+           EMPTY STATES
+        ===================================================== */
+
+        .empty-stories {
+            padding: 25px 0;
+            border-top: 1px solid var(--hed-line);
+        }
+
+        .empty-stories p {
+            margin: 0 0 6px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 16px;
+        }
+
+        .empty-stories span {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            color: var(--hed-muted);
+        }
+
+        #stories .empty-stories {
+            border-color: rgba(255,255,255,0.18);
+        }
+
+        #stories .empty-stories p {
+            color: white;
+        }
+
+        #stories .empty-stories span {
+            color: #c2b2a7;
+        }
+
+        /* =====================================================
+           OTHER WRITINGS
+        ===================================================== */
+
+        #other-writings {
+            background: var(--hed-cream);
+        }
+
+        .other-writing-text {
+            max-width: 680px;
+            margin: 0 0 32px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 16px;
+            line-height: 1.55;
+            color: #665a51;
+        }
+
+        .hed-other-feed {
+            max-width: 850px;
+            border-top: 1px solid var(--hed-line);
+        }
+
+        .other-writing-card {
+            position: relative;
+            padding: 24px 70px 26px 0;
+            border-bottom: 1px solid var(--hed-line);
+            background: transparent;
+            transition: background 0.2s ease;
+        }
+
+        .other-writing-card:hover {
+            background: rgba(255,255,255,0.32);
+        }
+
+        .other-writing-card .writing-type {
+            margin: 0 0 7px;
+            font-family: Arial, sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--hed-green);
+        }
+
+        .other-writing-card h3 {
+            margin: 0 0 10px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+            line-height: 1.3;
+            font-weight: 400;
+            color: var(--hed-text);
+        }
+
+        .other-writing-content {
+            max-width: 720px;
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: #514740;
+        }
+
+        .other-writing-flower {
+            position: absolute;
+            right: 20px;
+            top: 27px;
+            font-size: 14px;
+            color: var(--hed-pink);
+            opacity: 0.65;
+        }
+
+        /* =====================================================
+           OTHER WRITINGS SEE MORE
+        ===================================================== */
+
+        #other-writings .hed-see-more {
+            margin-top: 22px;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        body > footer {
+            background: var(--hed-brown-dark);
+            padding: 28px 8vw;
+        }
+
+        body > footer p {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            color: #bcaea5;
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            body > header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                padding: 17px 6vw;
+            }
+
+            body > header nav {
+                flex-wrap: wrap;
+                gap: 12px 18px;
+            }
+
+            .hed-intro {
+                min-height: 290px;
+                padding: 48px 7vw 45px;
+            }
+
+            .hed-intro h1 {
+                font-size: 72px;
+            }
+
+            .hed-intro::after {
+                right: -20px;
+                bottom: -25px;
+                font-size: 145px;
+            }
+
+            .hed-local-nav {
+                padding: 0 7vw;
+                overflow-x: auto;
+            }
+
+            .hed-local-nav a {
+                margin-right: 25px;
+                white-space: nowrap;
+            }
+
+            .hed-section {
+                padding: 58px 7vw;
+            }
+
+            .hed-heading {
+                gap: 13px;
+                margin-bottom: 25px;
+            }
+
+            .hed-heading h2 {
+                font-size: 28px;
+            }
+
+            .hed-subtitle {
+                font-size: 15px;
+                margin-top: 6px;
+            }
+
+            .hed-book-card {
+                grid-template-columns: 95px minmax(0, 1fr);
+                column-gap: 20px;
+                padding: 25px 0;
+            }
+
+            .hed-book-cover {
+                width: 95px;
+                height: 135px;
+            }
+
+            .hed-book-info h3 {
+                font-size: 24px;
+            }
+
+            .other-writing-card {
+                padding-right: 45px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .hed-heading {
+                gap: 11px;
+                margin-bottom: 23px;
+            }
+
+            .hed-heading h2 {
+                font-size: 26px;
+            }
+
+            .hed-heading p {
+                font-size: 9px;
+            }
+
+            .hed-subtitle {
+                font-size: 14px;
+            }
+
+            .hed-journal-intro p,
+            .other-writing-text {
+                font-size: 15px;
+            }
+
+            .hed-journal-text,
+            .hed-journal-full,
+            .hed-journal-reflection,
+            .other-writing-content {
+                font-size: 15px;
+            }
+
+            .hed-book-card {
+                grid-template-columns: 82px minmax(0, 1fr);
+                column-gap: 17px;
+            }
+
+            .hed-book-cover {
+                width: 82px;
+                height: 118px;
+            }
+
+            .hed-book-info h3 {
+                font-size: 21px;
+            }
+
+            .other-writing-card h3 {
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         HED PAGE
+    ===================================================== -->
+
+    <main class="hed-page">
+
+
+        <!-- =================================================
+             HED INTRO
+        ================================================== -->
+
+        <section class="hed-intro">
+
+            <p class="small-text">
+                PERSONAL
+            </p>
+
+            <h1>
+                HED
+            </h1>
+
+            <h2>
+                Her Existential Drama
+            </h2>
+
+            <p class="hed-description">
+                “Kill the idea of the lone, suffering artist.”
+                — Natalie Goldberg
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             LOCAL NAV
+        ================================================== -->
+
+        <nav class="hed-local-nav">
+
+            <a href="journal.html">
+                Journal
+            </a>
+
+            <a href="stories.html">
+    Stories
+</a>
+
+            <a href="other-writings.html">
+    Other Writings
+</a>
+
+        </nav>
+
+
+        <!-- =================================================
+             JOURNAL
+        ================================================== -->
+
+        <section
+            id="journal"
+            class="hed-section"
+        >
+
+            <div class="hed-heading">
+
+                <p>
+                    01
+                </p>
+
+                <div>
+
+                    <h2>
+                        <a
+                            href="journal.html"
+                            class="journal-title-link"
+                        >
+                            Journal
+                        </a>
+                    </h2>
+
+                    <span class="hed-subtitle">
+                        Her Existential Thoughts
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="hed-journal-intro">
+
+                <p>
+                    Her Existential Thoughts
+                </p>
+
+            </div>
+
+
+            <div
+                id="emptyJournal"
+                class="empty-stories"
+            >
+
+                <p>
+                    Nothing here yet.
+                </p>
+
+                <span>
+                    Eventually there will be
+                    something worth overthinking.
+                </span>
+
+            </div>
+
+
+            <div
+                id="journalFeed"
+                class="hed-journal-feed"
+            ></div>
+
+        </section>
+
+
+        <!-- =================================================
+             STORIES
+        ================================================== -->
+
+        <section
+            id="stories"
+            class="hed-section"
+        >
+
+            <div class="hed-heading">
+
+                <p>
+                    02
+                </p>
+
+                <div>
+
+                    <h2>
+    <a href="stories.html">
+        Stories
+    </a>
+</h2>
+
+                    <span class="hed-subtitle">
+                        Her Existential Escapes
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="emptyStories"
+                class="empty-stories"
+            >
+
+                <p>
+                    No stories here yet.
+                </p>
+
+                <span>
+                    Something will eventually
+                    find its way onto the shelf.
+                </span>
+
+            </div>
+
+
+            <div
+                id="storyShelf"
+                class="story-shelf"
+            ></div>
+
+        </section>
+
+
+        <!-- =================================================
+             OTHER WRITINGS
+        ================================================== -->
+
+        <section
+            id="other-writings"
+            class="hed-section"
+        >
+
+            <div class="hed-heading">
+
+                <p>
+                    03
+                </p>
+
+                <div>
+
+                    <h2>
+    <a
+        href="other-writings.html"
+        class="journal-title-link"
+    >
+        Other Writings
+    </a>
+</h2>
+
+                    <span class="hed-subtitle">
+                        Her Existential Nonsense
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="emptyOtherWritings"
+                class="empty-stories"
+            >
+
+                <p>
+                    Nothing has escaped the notebook yet.
+                </p>
+
+                <span>
+                    Give it time.
+                </span>
+
+            </div>
+
+
+            <div
+                id="otherWritingsFeed"
+                class="hed-other-feed"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 May Blooms · HED
+        </p>
+
+    </footer>
+
+
+    <!-- =====================================================
+         SUPABASE
+    ===================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase-config.js"></script>
+
+
+    <!-- =====================================================
+         HED JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        /* =====================================================
+           JOURNAL
+        ===================================================== */
+
+        const journalFeed =
+            document.getElementById("journalFeed");
+
+        const emptyJournal =
+            document.getElementById("emptyJournal");
+
+
+        function formatJournalDate(dateString) {
+
+            if (!dateString) {
+                return "";
+            }
+
+            const date =
+                new Date(dateString);
+
+            return date
+                .toLocaleDateString(
+                    "en-US",
+                    {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric"
+                    }
+                )
+                .toUpperCase();
+        }
+
+
+        function createJournalEntry(entry) {
+
+            const article =
+                document.createElement("article");
+
+            article.className =
+                "journal-entry";
+article.style.cursor = "pointer";
+
+article.addEventListener(
+    "click",
+    function() {
+        window.location.href =
+            "journal.html?id=" +
+            encodeURIComponent(entry.id);
+    }
+);
+
+            /* DATE */
+
+            if (entry.published_at) {
+
+                const date =
+                    document.createElement("p");
+
+                date.className =
+                    "journal-date";
+
+                date.textContent =
+                    formatJournalDate(
+                        entry.published_at
+                    );
+
+                article.appendChild(date);
+            }
+
+
+            /* TITLE */
+
+            if (entry.title) {
+
+                const title =
+                    document.createElement("h3");
+
+                title.textContent =
+                    entry.title;
+
+                article.appendChild(title);
+            }
+
+
+            /* IMAGE */
+
+            if (entry.image_url) {
+
+                const image =
+                    document.createElement("img");
+
+                image.src =
+                    entry.image_url;
+
+                image.alt =
+                    entry.title ||
+                    "Journal image";
+
+                image.className =
+                    "hed-journal-image";
+
+                article.appendChild(image);
+            }
+
+
+            /* JOURNAL CONTENT */
+
+            const rawContent =
+                entry.author_reflection ||
+                entry.reflection ||
+                entry.content ||
+                "";
+
+
+            /* Clean Author HTML into readable text */
+
+            const parser =
+                new DOMParser();
+
+            const parsed =
+                parser.parseFromString(
+                    rawContent,
+                    "text/html"
+                );
+
+            const content =
+                (parsed.body.textContent || "")
+                    .replace(/\u00a0/g, " ")
+                    .replace(/\s+/g, " ")
+                    .trim();
+
+
+            const text =
+                document.createElement("p");
+
+            text.className =
+                "hed-journal-text";
+
+
+            /* PREVIEW — ONLY 1–2 SENTENCES */
+
+            const sentences =
+                content.match(
+                    /[^.!?]+[.!?]+/g
+                ) || [content];
+
+
+            const preview =
+                sentences
+                    .slice(0, 2)
+                    .join(" ")
+                    .trim();
+
+
+            const hasMore =
+                content.length > preview.length;
+
+
+            /* SHORT ENTRY */
+
+            if (!hasMore) {
+
+                text.textContent =
+                    content;
+
+                article.appendChild(text);
+
+            }
+
+
+            /* LONG ENTRY */
+
+            else {
+
+                text.textContent =
+                    preview + "…";
+
+                article.appendChild(text);
+
+
+                const fullText =
+                    document.createElement("p");
+
+                fullText.className =
+                    "hed-journal-full";
+
+                fullText.textContent =
+                    content;
+
+                fullText.style.display =
+                    "none";
+
+                article.appendChild(fullText);
+
+
+                const readMore =
+                    document.createElement("button");
+
+                readMore.className =
+                    "hed-read-more";
+
+                readMore.textContent =
+                    "Continue reading →";
+
+
+                readMore.addEventListener(
+                    "click",
+                    function() {
+
+                        const isOpen =
+                            fullText.style.display ===
+                            "block";
+
+
+                        if (isOpen) {
+
+                            fullText.style.display =
+                                "none";
+
+                            text.style.display =
+                                "block";
+
+                            readMore.textContent =
+                                "Continue reading →";
+
+                        } else {
+
+                            text.style.display =
+                                "none";
+
+                            fullText.style.display =
+                                "block";
+
+                            readMore.textContent =
+                                "Show less ↑";
+
+                        }
+
+                    }
+                );
+
+
+                article.appendChild(readMore);
+
+            }
+
+
+            /*
+             * =================================================
+             * AUTHOR MODE REFLECTION
+             *
+             * Only displays separately if the database has
+             * a reflection field different from the main
+             * journal content.
+             * =================================================
+             */
+
+            const reflection =
+                entry.author_reflection ||
+                entry.reflection ||
+                null;
+
+
+            if (
+                reflection &&
+                reflection !== content
+            ) {
+
+                const reflectionBox =
+                    document.createElement("div");
+
+                reflectionBox.className =
+                    "hed-journal-reflection";
+
+
+                const reflectionLabel =
+                    document.createElement("span");
+
+                reflectionLabel.className =
+                    "hed-journal-reflection-label";
+
+                reflectionLabel.textContent =
+                    "REFLECTION";
+
+
+                const reflectionText =
+                    document.createElement("span");
+
+                reflectionText.innerHTML =
+                    reflection;
+
+
+                reflectionBox.appendChild(
+                    reflectionLabel
+                );
+
+
+                reflectionBox.appendChild(
+                    reflectionText
+                );
+
+
+                article.appendChild(
+                    reflectionBox
+                );
+            }
+
+
+            return article;
+        }
+
+
+        async function loadJournal() {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("journal_entries")
+                    .select("*")
+                    .order(
+                        "published_at",
+                        {
+                            ascending: false
+                        }
+                    );
+
+
+            if (error) {
+
+                console.error(
+                    "Error loading journal:",
+                    error
+                );
+
+                journalFeed.innerHTML =
+                    "<p>Unable to load journal entries.</p>";
+
+                return;
+            }
+
+
+            journalFeed.innerHTML =
+                "";
+
+
+            if (
+                !data ||
+                data.length === 0
+            ) {
+
+                emptyJournal.style.display =
+                    "block";
+
+                return;
+            }
+
+
+            emptyJournal.style.display =
+                "none";
+
+
+            let showingAll =
+                false;
+
+
+            function renderJournal() {
+
+                journalFeed.innerHTML =
+                    "";
+
+
+                const entriesToShow =
+                    showingAll
+                        ? data
+                        : data.slice(0, 3);
+
+
+                entriesToShow.forEach(
+                    function(entry) {
+
+                        journalFeed.appendChild(
+                            createJournalEntry(entry)
+                        );
+
+                    }
+                );
+
+
+                if (
+                    data.length > 3 &&
+                    !showingAll
+                ) {
+
+                    const seeMore =
+                        document.createElement("button");
+
+                    seeMore.className =
+                        "hed-see-more";
+
+                    seeMore.textContent =
+                        "See more entries →";
+
+
+                    seeMore.addEventListener(
+                        "click",
+                        function() {
+
+                            showingAll =
+                                true;
+
+                            renderJournal();
+
+                        }
+                    );
+
+
+                    journalFeed.appendChild(
+                        seeMore
+                    );
+                }
+            }
+
+
+            renderJournal();
+        }
+
+
+        /* =====================================================
+           STORIES
+        ===================================================== */
+
+        const storyShelf =
+            document.getElementById("storyShelf");
+
+        const emptyStories =
+            document.getElementById("emptyStories");
+
+
+        async function loadStories() {
+
+            const {
+                data: stories,
+                error
+            } =
+                await supabaseClient
+                    .from("stories")
+                    .select(
+                        "id,title,author,description,cover_url,created_at"
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
+                    );
+
+
+            if (error) {
+
+                console.error(
+                    "Error loading stories:",
+                    error
+                );
+
+                storyShelf.innerHTML =
+                    "<p>Unable to load stories.</p>";
+
+                return;
+            }
+
+
+            storyShelf.innerHTML =
+                "";
+
+
+            if (
+                !stories ||
+                stories.length === 0
+            ) {
+
+                emptyStories.style.display =
+                    "block";
+
+                return;
+            }
+
+
+            emptyStories.style.display =
+                "none";
+
+
+            const storyData =
+                [];
+
+
+            for (const story of stories) {
+
+                const {
+                    data: chapters,
+                    error: chapterError
+                } =
+                    await supabaseClient
+                        .from("chapters")
+                        .select("id")
+                        .eq(
+                            "story_id",
+                            story.id
+                        );
+
+
+                if (chapterError) {
+
+                    console.error(
+                        "Error loading chapter count:",
+                        chapterError
+                    );
+
+                    storyData.push({
+                        ...story,
+                        chapterCount: 0
+                    });
+
+                    continue;
+                }
+
+
+                storyData.push({
+                    ...story,
+                    chapterCount:
+                        chapters
+                            ? chapters.length
+                            : 0
+                });
+            }
+
+
+            let showingAllStories =
+                false;
+
+
+            function renderStories() {
+
+                storyShelf.innerHTML =
+                    "";
+
+
+                const storiesToShow =
+                    showingAllStories
+                        ? storyData
+                        : storyData.slice(0, 4);
+
+
+                storiesToShow.forEach(
+                    function(story) {
+
+                        const card =
+                            document.createElement("a");
+
+                        card.className =
+                            "hed-book-card";
+
+                        card.href =
+    `book-one.html?id=${encodeURIComponent(story.id)}`;
+
+
+                        const cover =
+                            document.createElement("div");
+
+                        cover.className =
+                            "hed-book-cover";
+
+
+                        if (story.cover_url) {
+
+                            const image =
+                                document.createElement("img");
+
+                            image.src =
+                                story.cover_url;
+
+                            image.alt =
+                                story.title ||
+                                "Book cover";
+
+                            cover.appendChild(
+                                image
+                            );
+
+                        } else {
+
+                            const placeholder =
+                                document.createElement("div");
+
+                            placeholder.className =
+                                "hed-cover-placeholder";
+
+
+                            const placeholderText =
+                                document.createElement("span");
+
+                            placeholderText.textContent =
+                                "MAY BLOOMS";
+
+
+                            placeholder.appendChild(
+                                placeholderText
+                            );
+
+                            cover.appendChild(
+                                placeholder
+                            );
+                        }
+
+
+                        const info =
+                            document.createElement("div");
+
+                        info.className =
+                            "hed-book-info";
+
+
+                        const type =
+                            document.createElement("p");
+
+                        type.className =
+                            "writing-type";
+
+                        type.textContent =
+                            "STORY";
+
+
+                        const title =
+                            document.createElement("h3");
+
+                        title.textContent =
+                            story.title ||
+                            "Untitled";
+
+
+                        const author =
+                            document.createElement("p");
+
+                        author.className =
+                            "hed-book-author";
+
+                        author.textContent =
+                            story.author ||
+                            "";
+
+
+                        const chapterCount =
+                            document.createElement("span");
+
+                        chapterCount.textContent =
+                            story.chapterCount === 1
+                                ? "1 CHAPTER"
+                                : `${story.chapterCount} CHAPTERS`;
+
+
+                        info.appendChild(
+                            type
+                        );
+
+                        info.appendChild(
+                            title
+                        );
+
+                        if (story.author) {
+
+                            info.appendChild(
+                                author
+                            );
+                        }
+
+                        info.appendChild(
+                            chapterCount
+                        );
+
+
+                        card.appendChild(
+                            cover
+                        );
+
+                        card.appendChild(
+                            info
+                        );
+
+
+                        storyShelf.appendChild(
+                            card
+                        );
+
+                    }
+                );
+
+
+                if (
+    storyData.length > 3
+) {
+
+                    const seeMore =
+                        document.createElement("button");
+
+                    seeMore.className =
+                        "hed-see-more";
+
+                    seeMore.textContent =
+    showingAllStories
+        ? "See less ↑"
+        : "See more stories →";
+
+
+                    seeMore.addEventListener(
+                        "click",
+                        function() {
+
+                           showingAllStories =
+    !showingAllStories;
+
+                            renderStories();
+
+                        }
+                    );
+
+
+                    storyShelf.appendChild(
+                        seeMore
+                    );
+                }
+            }
+
+
+            renderStories();
+        }
+
+
+        /* =====================================================
+           OTHER WRITINGS
+        ===================================================== */
+
+        const otherWritingsFeed =
+            document.getElementById(
+                "otherWritingsFeed"
+            );
+
+        const emptyOtherWritings =
+            document.getElementById(
+                "emptyOtherWritings"
+            );
+
+
+        async function loadOtherWritings() {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("other_writings")
+                    .select("*")
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
+                    );
+
+
+            if (error) {
+
+                console.error(
+                    "Error loading other writings:",
+                    error
+                );
+
+                otherWritingsFeed.innerHTML =
+                    "<p>Unable to load writings.</p>";
+
+                return;
+            }
+
+
+            otherWritingsFeed.innerHTML =
+                "";
+
+
+            if (
+                !data ||
+                data.length === 0
+            ) {
+
+                emptyOtherWritings.style.display =
+                    "block";
+
+                return;
+            }
+
+
+            emptyOtherWritings.style.display =
+                "none";
+
+
+            let showingAllOther =
+                false;
+
+
+            function renderOtherWritings() {
+
+                otherWritingsFeed.innerHTML =
+                    "";
+
+
+                const writingsToShow =
+                    showingAllOther
+                        ? data
+                        : data.slice(0, 3);
+
+
+                writingsToShow.forEach(
+    function(entry) {
+
+        const card =
+            document.createElement("article");
+
+        card.className =
+            "other-writing-card";
+
+
+        /* =========================================
+           CLICK ONLY FOR OTHER WRITINGS POSTS
+           Opens the exact post in other-writings.html
+        ========================================== */
+
+        card.style.cursor =
+            "pointer";
+
+        card.addEventListener(
+            "click",
+            function() {
+
+                window.location.href =
+                    "other-writings.html?id=" +
+                    encodeURIComponent(
+                        entry.id
+                    );
+
+            }
+        );
+
+
+        const type =
+            document.createElement("p");
+
+        type.className =
+            "writing-type";
+
+        type.textContent =
+            entry.type ||
+            "OTHER";
+
+
+        const title =
+            document.createElement("h3");
+
+        title.textContent =
+            entry.title ||
+            "Untitled";
+
+
+        const content =
+            document.createElement("div");
+
+        content.className =
+            "other-writing-content";
+
+        content.innerHTML =
+            entry.content ||
+            "";
+
+
+        const flower =
+            document.createElement("span");
+
+        flower.className =
+            "other-writing-flower";
+
+        flower.textContent =
+            "✿";
+
+
+        card.appendChild(
+            type
+        );
+
+        card.appendChild(
+            title
+        );
+
+        card.appendChild(
+            content
+        );
+
+        card.appendChild(
+            flower
+        );
+
+
+        otherWritingsFeed.appendChild(
+            card
+        );
+
+    }
+);
+
+
+                if (
+                    data.length > 3 &&
+                    !showingAllOther
+                ) {
+
+                    const seeMore =
+                        document.createElement("button");
+
+                    seeMore.className =
+                        "hed-see-more";
+
+                    seeMore.textContent =
+                        "See more writings →";
+
+
+                    seeMore.addEventListener(
+                        "click",
+                        function() {
+
+                            showingAllOther =
+                                true;
+
+                            renderOtherWritings();
+
+                        }
+                    );
+
+
+                    otherWritingsFeed.appendChild(
+                        seeMore
+                    );
+                }
+            }
+
+
+            renderOtherWritings();
+        }
+
+
+        /* =====================================================
+           START
+        ===================================================== */
+
+        loadJournal();
+        loadStories();
+        loadOtherWritings();
+
+    </script>
+
+</body>
+
+</html>y

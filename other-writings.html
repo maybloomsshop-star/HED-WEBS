@@ -1,0 +1,3659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Other Writings · HED
+    </title>
+
+
+    <style>
+
+        :root {
+            --hed-brown: #4a352b;
+            --hed-brown-dark: #382920;
+            --hed-cream: #f5efe6;
+            --hed-paper: #fbf8f3;
+            --hed-green: #68745d;
+            --hed-pink: #c58f91;
+            --hed-text: #342b26;
+            --hed-muted: #85786e;
+            --hed-line: #d8cec2;
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            margin: 0;
+
+            background:
+                var(--hed-cream);
+
+            color:
+                var(--hed-text);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+        }
+
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+
+        a {
+            color: inherit;
+        }
+
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page-shell {
+            width:
+                min(100%, 760px);
+
+            margin:
+                0 auto;
+
+            padding:
+                30px 22px 80px;
+        }
+
+
+        /* =========================
+           HED LINK
+        ========================= */
+
+        .hed-back {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            margin-bottom:
+                36px;
+
+            color:
+                var(--hed-muted);
+
+            text-decoration:
+                none;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+        }
+
+
+        .hed-back:hover {
+            color:
+                var(--hed-brown);
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .archive-header {
+            padding-bottom:
+                34px;
+
+            border-bottom:
+                1px solid
+                var(--hed-line);
+        }
+
+
+        .section-marker {
+            margin-bottom:
+                8px;
+
+            color:
+                var(--hed-pink);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .15em;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .page-title {
+            margin:
+                0 0 7px;
+
+            color:
+                var(--hed-brown-dark);
+
+            font-size:
+                clamp(38px, 8vw, 56px);
+
+            line-height:
+                1;
+
+            font-weight:
+                700;
+        }
+
+
+        .page-subtitle {
+            margin:
+                0;
+
+            color:
+                var(--hed-green);
+
+            font-size:
+                19px;
+
+            font-style:
+                italic;
+        }
+
+
+        .archive-note {
+            max-width:
+                560px;
+
+            margin:
+                20px 0 0;
+
+            color:
+                var(--hed-muted);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                14px;
+
+            line-height:
+                1.7;
+        }
+
+
+        /* =========================
+           FEED HEADER
+        ========================= */
+
+        .feed-heading-row {
+            display:
+                flex;
+
+            align-items:
+                baseline;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+            margin:
+                30px 0 4px;
+        }
+
+
+        .feed-heading {
+            margin:
+                0;
+
+            color:
+                var(--hed-brown);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .12em;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .feed-count {
+            color:
+                var(--hed-muted);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                11px;
+        }
+
+
+        /* =========================
+           FEED
+        ========================= */
+
+        .feed {
+            position:
+                relative;
+        }
+
+
+        .feed::before {
+            content:
+                "";
+
+            position:
+                absolute;
+
+            left:
+                19px;
+
+            top:
+                24px;
+
+            bottom:
+                24px;
+
+            width:
+                1px;
+
+            background:
+                var(--hed-line);
+        }
+
+
+        .post {
+            position:
+                relative;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                40px minmax(0, 1fr);
+
+            gap:
+                14px;
+
+            padding:
+                28px 0;
+
+            border-bottom:
+                1px solid
+                var(--hed-line);
+        }
+
+
+        .post:first-child {
+            padding-top:
+                24px;
+        }
+
+
+        /* =========================
+           PROFILE
+        ========================= */
+
+        .post-avatar {
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                var(--hed-brown-dark);
+
+            border-radius:
+                50%;
+
+            background:
+                var(--hed-brown-dark);
+
+            color:
+                var(--hed-cream);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                15px;
+
+            font-weight:
+                800;
+        }
+
+
+        .post-main {
+            min-width:
+                0;
+
+            cursor:
+                pointer;
+        }
+
+
+        /* =========================
+           POST META
+        ========================= */
+
+        .post-meta {
+            display:
+                flex;
+
+            align-items:
+                baseline;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                5px;
+
+            margin-bottom:
+                12px;
+
+            font-family:
+                Arial,
+                sans-serif;
+        }
+
+
+        .post-author {
+            color:
+                var(--hed-brown-dark);
+
+            font-size:
+                14px;
+
+            font-weight:
+                800;
+        }
+
+
+        .post-handle {
+            color:
+                var(--hed-muted);
+
+            font-size:
+                12px;
+        }
+
+
+        .meta-dot {
+            color:
+                var(--hed-line);
+        }
+
+
+        .post-time {
+            color:
+                var(--hed-muted);
+
+            font-size:
+                12px;
+        }
+
+
+        /* =========================
+           POST CONTENT
+        ========================= */
+
+        .post-title {
+            margin:
+                0 0 10px;
+
+            color:
+                var(--hed-brown-dark);
+
+            font-size:
+                21px;
+
+            line-height:
+                1.35;
+        }
+
+
+        .post-content {
+            color:
+                var(--hed-text);
+
+            font-size:
+                18px;
+
+            line-height:
+                1.75;
+
+            overflow-wrap:
+                anywhere;
+        }
+
+
+        .post-content p {
+            margin:
+                0 0 16px;
+        }
+
+
+        .post-content p:last-child {
+            margin-bottom:
+                0;
+        }
+
+
+        .post-content blockquote {
+            margin:
+                18px 0;
+
+            padding-left:
+                15px;
+
+            border-left:
+                2px solid
+                var(--hed-pink);
+
+            color:
+                var(--hed-muted);
+
+            font-style:
+                italic;
+        }
+
+
+        .post-content ul,
+        .post-content ol {
+            padding-left:
+                24px;
+        }
+
+
+        .post-content img {
+            margin:
+                20px 0;
+
+            border-radius:
+                3px;
+        }
+
+
+        /* =========================
+           CLICK HINT
+        ========================= */
+
+        .post-main:hover .post-content,
+        .post-main:hover .post-title {
+            color:
+                var(--hed-brown);
+        }
+
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .post-actions {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                4px;
+
+            margin-top:
+                17px;
+
+            cursor:
+                default;
+        }
+
+
+        .post-action {
+            min-height:
+                36px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                7px 9px;
+
+            border:
+                0;
+
+            border-radius:
+                5px;
+
+            background:
+                transparent;
+
+            color:
+                var(--hed-muted);
+
+            cursor:
+                pointer;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+            text-decoration:
+                none;
+        }
+
+
+        .post-action:hover {
+            background:
+                rgba(74, 53, 43, .055);
+
+            color:
+                var(--hed-brown);
+        }
+
+
+        .post-action.liked {
+            color:
+                var(--hed-pink);
+        }
+
+
+        /* =========================
+           DATE DIVIDERS
+        ========================= */
+
+        .date-divider {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            padding:
+                26px 0 7px;
+
+            color:
+                var(--hed-muted);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .14em;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .date-divider::after {
+            content:
+                "";
+
+            flex:
+                1;
+
+            height:
+                1px;
+
+            background:
+                var(--hed-line);
+        }
+
+
+        /* =========================
+           EMPTY / ERROR
+        ========================= */
+
+        .state-message {
+            padding:
+                40px 0;
+
+            color:
+                var(--hed-muted);
+
+            font-size:
+                17px;
+
+            line-height:
+                1.7;
+        }
+
+
+        /* =========================
+           SINGLE POST
+        ========================= */
+
+        #singleView {
+            display:
+                none;
+        }
+
+
+        .single-back-row {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                18px;
+
+            margin-bottom:
+                32px;
+        }
+
+
+        .single-back {
+            color:
+                var(--hed-brown);
+
+            text-decoration:
+                none;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                14px;
+
+            font-weight:
+                800;
+        }
+
+
+        .single-back.secondary {
+            color:
+                var(--hed-muted);
+
+            font-weight:
+                700;
+        }
+
+
+        .single-back:hover {
+            text-decoration:
+                underline;
+        }
+
+
+        .single-post {
+            padding-bottom:
+                30px;
+
+            border-bottom:
+                1px solid
+                var(--hed-line);
+        }
+
+
+        .single-author-row {
+            display:
+                grid;
+
+            grid-template-columns:
+                46px minmax(0, 1fr);
+
+            gap:
+                13px;
+
+            align-items:
+                center;
+
+            margin-bottom:
+                25px;
+        }
+
+
+        .single-avatar {
+            width:
+                46px;
+
+            height:
+                46px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                var(--hed-brown-dark);
+
+            border-radius:
+                50%;
+
+            background:
+                var(--hed-brown-dark);
+
+            color:
+                var(--hed-cream);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                16px;
+
+            font-weight:
+                800;
+        }
+
+
+        .single-author {
+            color:
+                var(--hed-brown-dark);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                15px;
+
+            font-weight:
+                800;
+        }
+
+
+        .single-handle {
+            margin-top:
+                3px;
+
+            color:
+                var(--hed-muted);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                12px;
+        }
+
+
+        .single-title {
+            margin:
+                0 0 17px;
+
+            color:
+                var(--hed-brown-dark);
+
+            font-size:
+                clamp(30px, 6vw, 42px);
+
+            line-height:
+                1.12;
+        }
+
+
+        .single-content {
+            color:
+                var(--hed-text);
+
+            font-size:
+                20px;
+
+            line-height:
+                1.9;
+
+            overflow-wrap:
+                anywhere;
+        }
+
+
+        .single-content p {
+            margin:
+                0 0 20px;
+        }
+
+
+        .single-content p:last-child {
+            margin-bottom:
+                0;
+        }
+
+
+        .single-content blockquote {
+            margin:
+                24px 0;
+
+            padding-left:
+                18px;
+
+            border-left:
+                2px solid
+                var(--hed-pink);
+
+            color:
+                var(--hed-muted);
+
+            font-style:
+                italic;
+        }
+
+
+        .single-date {
+            margin-top:
+                24px;
+
+            color:
+                var(--hed-muted);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                12px;
+        }
+
+
+        /* =========================
+           REPLIES
+        ========================= */
+
+        .replies-section {
+            margin-top:
+                36px;
+        }
+
+
+        .section-small-title {
+            margin:
+                0 0 20px;
+
+            color:
+                var(--hed-brown);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .1em;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .reply-form {
+            margin-bottom:
+                28px;
+
+            padding-bottom:
+                28px;
+
+            border-bottom:
+                1px solid
+                var(--hed-line);
+        }
+
+
+        .reply-input {
+            width:
+                100%;
+
+            margin-bottom:
+                10px;
+
+            padding:
+                11px 12px;
+
+            border:
+                1px solid
+                var(--hed-line);
+
+            border-radius:
+                5px;
+
+            background:
+                var(--hed-paper);
+
+            color:
+                var(--hed-text);
+
+            outline:
+                none;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                16px;
+        }
+
+
+        .reply-textarea {
+            min-height:
+                105px;
+
+            resize:
+                vertical;
+        }
+
+
+        .reply-input:focus {
+            border-color:
+                var(--hed-green);
+        }
+
+
+        .reply-submit {
+            min-height:
+                42px;
+
+            padding:
+                9px 17px;
+
+            border:
+                0;
+
+            border-radius:
+                5px;
+
+            background:
+                var(--hed-brown);
+
+            color:
+                var(--hed-paper);
+
+            cursor:
+                pointer;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+        }
+
+
+        .reply-submit:hover {
+            background:
+                var(--hed-brown-dark);
+        }
+
+
+        .reply-submit:disabled {
+            opacity:
+                .6;
+
+            cursor:
+                default;
+        }
+
+
+        .reply-status {
+            min-height:
+                18px;
+
+            margin-top:
+                8px;
+
+            color:
+                var(--hed-muted);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                12px;
+        }
+
+
+        .reply-item {
+            display:
+                grid;
+
+            grid-template-columns:
+                34px minmax(0, 1fr);
+
+            gap:
+                12px;
+
+            padding:
+                20px 0;
+
+            border-bottom:
+                1px solid
+                var(--hed-line);
+        }
+
+
+        .reply-avatar {
+            width:
+                34px;
+
+            height:
+                34px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                var(--hed-line);
+
+            border-radius:
+                50%;
+
+            background:
+                var(--hed-paper);
+
+            color:
+                var(--hed-green);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+        }
+
+
+        .reply-meta {
+            display:
+                flex;
+
+            align-items:
+                baseline;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                6px;
+
+            margin-bottom:
+                7px;
+
+            font-family:
+                Arial,
+                sans-serif;
+        }
+
+
+        .reply-name {
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+        }
+
+
+        .reply-date {
+            color:
+                var(--hed-muted);
+
+            font-size:
+                11px;
+        }
+
+
+        .reply-content {
+            white-space:
+                pre-wrap;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                14px;
+
+            line-height:
+                1.65;
+        }
+
+
+        /* =========================
+           MORE WRITINGS
+        ========================= */
+
+        .more-section {
+            margin-top:
+                46px;
+        }
+
+
+        .more-heading {
+            margin:
+                0 0 18px;
+
+            color:
+                var(--hed-brown-dark);
+
+            font-size:
+                27px;
+        }
+
+
+        .more-post {
+            display:
+                block;
+
+            padding:
+                18px 0;
+
+            border-top:
+                1px solid
+                var(--hed-line);
+
+            text-decoration:
+                none;
+        }
+
+
+        .more-post:hover
+        .more-title {
+            color:
+                var(--hed-green);
+        }
+
+
+        .more-title {
+            color:
+                var(--hed-brown-dark);
+
+            font-size:
+                18px;
+
+            line-height:
+                1.4;
+        }
+
+
+        .more-date {
+            margin-top:
+                5px;
+
+            color:
+                var(--hed-muted);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                11px;
+        }
+
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
+            position:
+                fixed;
+
+            left:
+                50%;
+
+            bottom:
+                24px;
+
+            z-index:
+                1000;
+
+            max-width:
+                calc(100% - 36px);
+
+            padding:
+                11px 15px;
+
+            transform:
+                translateX(-50%);
+
+            border:
+                1px solid
+                var(--hed-line);
+
+            border-radius:
+                5px;
+
+            background:
+                var(--hed-brown-dark);
+
+            color:
+                var(--hed-paper);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                12px;
+
+            opacity:
+                0;
+
+            pointer-events:
+                none;
+
+            transition:
+                opacity .18s ease;
+        }
+
+
+        .toast.show {
+            opacity:
+                1;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .page-shell {
+                padding:
+                    22px 17px 64px;
+            }
+
+
+            .hed-back {
+                margin-bottom:
+                    30px;
+            }
+
+
+            .archive-header {
+                padding-bottom:
+                    28px;
+            }
+
+
+            .archive-note {
+                font-size:
+                    13px;
+            }
+
+
+            .feed::before {
+                left:
+                    17px;
+            }
+
+
+            .post {
+                grid-template-columns:
+                    36px minmax(0, 1fr);
+
+                gap:
+                    11px;
+
+                padding:
+                    25px 0;
+            }
+
+
+            .post-avatar {
+                width:
+                    36px;
+
+                height:
+                    36px;
+
+                font-size:
+                    14px;
+            }
+
+
+            .post-content {
+                font-size:
+                    17px;
+
+                line-height:
+                    1.72;
+            }
+
+
+            .post-title {
+                font-size:
+                    19px;
+            }
+
+
+            .post-action {
+                font-size:
+                    11px;
+
+                padding:
+                    7px 8px;
+            }
+
+
+            .single-content {
+                font-size:
+                    18px;
+
+                line-height:
+                    1.82;
+            }
+
+
+            .single-author-row {
+                grid-template-columns:
+                    42px minmax(0, 1fr);
+            }
+
+
+            .single-avatar {
+                width:
+                    42px;
+
+                height:
+                    42px;
+
+                font-size:
+                    15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="page-shell">
+
+
+        <!-- =================================
+             FEED / HOME
+        ================================== -->
+
+        <section id="feedView">
+
+
+            <a
+                href="hed.html"
+                class="hed-back"
+            >
+                ← HED
+            </a>
+
+
+            <header class="archive-header">
+
+
+                <div class="section-marker">
+                    HED / OTHER WRITINGS
+                </div>
+
+
+                <h1 class="page-title">
+                    Other Writings
+                </h1>
+
+
+                <p class="page-subtitle">
+                    Her Existential Nonsense
+                </p>
+
+
+                <p class="archive-note">
+                    Whatever’s been on my mind lately.
+                </p>
+
+
+            </header>
+
+
+            <div class="feed-heading-row">
+
+
+                <h2 class="feed-heading">
+                    The nonsense archive
+                </h2>
+
+
+                <span
+                    id="feedCount"
+                    class="feed-count"
+                ></span>
+
+
+            </div>
+
+
+            <div
+                id="feed"
+                class="feed"
+            >
+
+                <div class="state-message">
+                    Loading writings...
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================
+             SINGLE POST
+        ================================== -->
+
+        <section id="singleView">
+
+
+            <div class="single-back-row">
+
+
+                <a
+                    href="other-writings.html"
+                    class="single-back"
+                    id="backToWritings"
+                >
+                    ← Other Writings
+                </a>
+
+
+                <a
+                    href="hed.html"
+                    class="single-back secondary"
+                >
+                    HED
+                </a>
+
+
+            </div>
+
+
+            <article
+                id="singlePost"
+                class="single-post"
+            ></article>
+
+
+            <section
+                id="repliesSection"
+                class="replies-section"
+            >
+
+
+                <h2
+                    id="repliesHeading"
+                    class="section-small-title"
+                >
+                    Replies
+                </h2>
+
+
+                <form
+                    id="replyForm"
+                    class="reply-form"
+                >
+
+
+                    <input
+                        id="replyName"
+                        class="reply-input"
+                        type="text"
+                        maxlength="60"
+                        placeholder="Your name"
+                        required
+                    >
+
+
+                    <textarea
+                        id="replyContent"
+                        class="reply-input reply-textarea"
+                        maxlength="1200"
+                        placeholder="Write a reply..."
+                        required
+                    ></textarea>
+
+
+                    <button
+                        type="submit"
+                        id="replySubmit"
+                        class="reply-submit"
+                    >
+                        Reply
+                    </button>
+
+
+                    <div
+                        id="replyStatus"
+                        class="reply-status"
+                    ></div>
+
+
+                </form>
+
+
+                <div
+                    id="replyList"
+                ></div>
+
+
+            </section>
+
+
+            <section
+                id="moreSection"
+                class="more-section"
+            >
+
+
+                <h2 class="more-heading">
+                    More from Other Writings
+                </h2>
+
+
+                <div
+                    id="moreList"
+                ></div>
+
+
+            </section>
+
+
+        </section>
+
+
+    </main>
+
+
+    <div
+        id="toast"
+        class="toast"
+        aria-live="polite"
+    ></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase-config.js"></script>
+
+
+    <script>
+
+
+        /* =================================
+           ELEMENTS
+        ================================== */
+
+        const feedView =
+            document.getElementById(
+                "feedView"
+            );
+
+
+        const singleView =
+            document.getElementById(
+                "singleView"
+            );
+
+
+        const feed =
+            document.getElementById(
+                "feed"
+            );
+
+
+        const feedCount =
+            document.getElementById(
+                "feedCount"
+            );
+
+
+        const singlePost =
+            document.getElementById(
+                "singlePost"
+            );
+
+
+        const repliesSection =
+            document.getElementById(
+                "repliesSection"
+            );
+
+
+        const repliesHeading =
+            document.getElementById(
+                "repliesHeading"
+            );
+
+
+        const replyForm =
+            document.getElementById(
+                "replyForm"
+            );
+
+
+        const replyName =
+            document.getElementById(
+                "replyName"
+            );
+
+
+        const replyContent =
+            document.getElementById(
+                "replyContent"
+            );
+
+
+        const replySubmit =
+            document.getElementById(
+                "replySubmit"
+            );
+
+
+        const replyStatus =
+            document.getElementById(
+                "replyStatus"
+            );
+
+
+        const replyList =
+            document.getElementById(
+                "replyList"
+            );
+
+
+        const moreSection =
+            document.getElementById(
+                "moreSection"
+            );
+
+
+        const moreList =
+            document.getElementById(
+                "moreList"
+            );
+
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+
+        let writings = [];
+
+        let selectedWriting = null;
+
+        let toastTimer = null;
+
+
+
+        /* =================================
+           HELPERS
+        ================================== */
+
+        function escapeHtml(value) {
+
+            return String(
+                value || ""
+            )
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+
+        function stripHtml(html) {
+
+            const temp =
+                document.createElement(
+                    "div"
+                );
+
+
+            temp.innerHTML =
+                html || "";
+
+
+            return (
+                temp.textContent ||
+                temp.innerText ||
+                ""
+            );
+
+        }
+
+
+
+        function getRequestedId() {
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+
+            return params.get(
+                "id"
+            );
+
+        }
+
+
+
+        function formatDate(value) {
+
+            if (!value) {
+                return "";
+            }
+
+
+            const date =
+                new Date(value);
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+                return "";
+            }
+
+
+            return date.toLocaleDateString(
+                undefined,
+                {
+                    month:
+                        "short",
+
+                    day:
+                        "numeric",
+
+                    year:
+                        "numeric"
+                }
+            );
+
+        }
+
+
+
+        function getDateKey(value) {
+
+            const date =
+                new Date(value);
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+                return "";
+            }
+
+
+            return [
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate()
+            ].join("-");
+
+        }
+
+
+
+        function formatDateDivider(value) {
+
+            const date =
+                new Date(value);
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+                return "";
+            }
+
+
+            return date.toLocaleDateString(
+                undefined,
+                {
+                    month:
+                        "long",
+
+                    year:
+                        "numeric"
+                }
+            );
+
+        }
+
+
+
+        function formatFeedTime(value) {
+
+            if (!value) {
+                return "";
+            }
+
+
+            const date =
+                new Date(value);
+
+
+            const now =
+                new Date();
+
+
+            const difference =
+                now.getTime() -
+                date.getTime();
+
+
+            const minute =
+                60 * 1000;
+
+
+            const hour =
+                60 * minute;
+
+
+            const day =
+                24 * hour;
+
+
+            if (
+                difference >= 0 &&
+                difference < minute
+            ) {
+                return "now";
+            }
+
+
+            if (
+                difference >= minute &&
+                difference < hour
+            ) {
+                return (
+                    Math.floor(
+                        difference /
+                        minute
+                    ) +
+                    "m"
+                );
+            }
+
+
+            if (
+                difference >= hour &&
+                difference < day
+            ) {
+                return (
+                    Math.floor(
+                        difference /
+                        hour
+                    ) +
+                    "h"
+                );
+            }
+
+
+            if (
+                difference >= day &&
+                difference < 7 * day
+            ) {
+                return (
+                    Math.floor(
+                        difference /
+                        day
+                    ) +
+                    "d"
+                );
+            }
+
+
+            return date.toLocaleDateString(
+                undefined,
+                {
+                    month:
+                        "short",
+
+                    day:
+                        "numeric"
+                }
+            );
+
+        }
+
+
+
+        function showToast(message) {
+
+            toast.textContent =
+                message;
+
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            if (toastTimer) {
+                clearTimeout(
+                    toastTimer
+                );
+            }
+
+
+            toastTimer =
+                setTimeout(
+                    function() {
+
+                        toast.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    2200
+                );
+
+        }
+
+
+
+        /* =================================
+           EXACT POST URL
+        ================================== */
+
+        function getPostUrl(id) {
+
+            const url =
+                new URL(
+                    "other-writings.html",
+                    window.location.href
+                );
+
+
+            url.searchParams.set(
+                "id",
+                id
+            );
+
+
+            return url.href;
+
+        }
+
+
+
+        /* =================================
+           SHARE
+           
+           ONLY COPIES THE LINK.
+           DOES NOT OPEN ANYTHING.
+        ================================== */
+
+        async function shareWriting(
+            writing
+        ) {
+
+            const postUrl =
+                getPostUrl(
+                    writing.id
+                );
+
+
+            const textarea =
+                document.createElement(
+                    "textarea"
+                );
+
+
+            textarea.value =
+                postUrl;
+
+
+            textarea.setAttribute(
+                "readonly",
+                ""
+            );
+
+
+            textarea.style.position =
+                "fixed";
+
+
+            textarea.style.left =
+                "-9999px";
+
+
+            textarea.style.top =
+                "0";
+
+
+            textarea.style.opacity =
+                "0";
+
+
+            document.body.appendChild(
+                textarea
+            );
+
+
+            textarea.focus();
+
+            textarea.select();
+
+
+            let copied =
+                false;
+
+
+            try {
+
+                copied =
+                    document.execCommand(
+                        "copy"
+                    );
+
+            }
+            catch (error) {
+
+                copied =
+                    false;
+
+            }
+
+
+            textarea.remove();
+
+
+            if (copied) {
+
+                showToast(
+                    "Post link copied!"
+                );
+
+                return;
+
+            }
+
+
+            /*
+                Modern clipboard fallback.
+                This is only used if the
+                basic copy command fails.
+            */
+
+            if (
+                navigator.clipboard &&
+                window.isSecureContext
+            ) {
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        postUrl
+                    );
+
+
+                    showToast(
+                        "Post link copied!"
+                    );
+
+
+                    return;
+
+                }
+                catch (error) {
+
+                    // Continue to manual fallback.
+
+                }
+
+            }
+
+
+            /*
+                Last fallback:
+                show the URL so the user
+                can manually copy it.
+            */
+
+            window.prompt(
+                "Copy this post link:",
+                postUrl
+            );
+
+        }
+
+
+
+        /* =================================
+           ACTIONS
+        ================================== */
+
+        function createActions(
+            writing
+        ) {
+
+            const actions =
+                document.createElement(
+                    "div"
+                );
+
+
+            actions.className =
+                "post-actions";
+
+
+            /*
+                REPLY
+            */
+
+            const reply =
+                document.createElement(
+                    "button"
+                );
+
+
+            reply.type =
+                "button";
+
+
+            reply.className =
+                "post-action";
+
+
+            reply.textContent =
+                "↩ Reply";
+
+
+            reply.addEventListener(
+                "click",
+                function(event) {
+
+                    event.stopPropagation();
+
+
+                    openSinglePost(
+                        writing.id,
+                        true
+                    )
+                    .then(
+                        function() {
+
+                            setTimeout(
+                                function() {
+
+                                    replyContent.focus();
+
+                                    repliesSection.scrollIntoView(
+                                        {
+                                            behavior:
+                                                "smooth"
+                                        }
+                                    );
+
+                                },
+                                100
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+            /*
+                LIKE
+            */
+
+            const like =
+                document.createElement(
+                    "button"
+                );
+
+
+            like.type =
+                "button";
+
+
+            like.className =
+                "post-action";
+
+
+            like.textContent =
+                "♡ Like";
+
+
+            like.addEventListener(
+                "click",
+                function(event) {
+
+                    event.stopPropagation();
+
+
+                    const liked =
+                        like.classList.toggle(
+                            "liked"
+                        );
+
+
+                    like.textContent =
+                        liked
+                            ? "♥ Liked"
+                            : "♡ Like";
+
+                }
+            );
+
+
+            /*
+                SHARE
+            */
+
+            const share =
+                document.createElement(
+                    "button"
+                );
+
+
+            share.type =
+                "button";
+
+
+            share.className =
+                "post-action";
+
+
+            share.textContent =
+                "↗ Share";
+
+
+            share.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+
+                    shareWriting(
+                        writing
+                    );
+
+                }
+            );
+
+
+            actions.appendChild(
+                reply
+            );
+
+
+            actions.appendChild(
+                like
+            );
+
+
+            actions.appendChild(
+                share
+            );
+
+
+            return actions;
+
+        }
+
+
+
+        /* =================================
+           OPEN POST
+           
+           Clicking the actual post opens it.
+        ================================== */
+
+        function attachPostClick(
+            article,
+            writing
+        ) {
+
+            article.addEventListener(
+                "click",
+                function() {
+
+                    history.pushState(
+                        {
+                            writingId:
+                                writing.id
+                        },
+
+                        "",
+
+                        "other-writings.html?id=" +
+                            encodeURIComponent(
+                                writing.id
+                            )
+                    );
+
+
+                    openSinglePost(
+                        writing.id
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =================================
+           FEED
+        ================================== */
+
+        function renderFeed() {
+
+            feed.innerHTML =
+                "";
+
+
+            if (
+                writings.length === 0
+            ) {
+
+                feedCount.textContent =
+                    "";
+
+
+                feed.innerHTML =
+                    `
+                    <div class="state-message">
+                        Nothing has been posted here yet.
+                    </div>
+                    `;
+
+
+                return;
+
+            }
+
+
+            feedCount.textContent =
+                writings.length +
+                (
+                    writings.length === 1
+                        ? " post"
+                        : " posts"
+                );
+
+
+            let previousDate =
+                "";
+
+
+            writings.forEach(
+                function(writing) {
+
+                    const currentDate =
+                        getDateKey(
+                            writing.created_at
+                        );
+
+
+                    /*
+                        Date divider.
+                        Only appears when
+                        the calendar date
+                        changes.
+                    */
+
+                    if (
+                        currentDate !==
+                        previousDate
+                    ) {
+
+                        const divider =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        divider.className =
+                            "date-divider";
+
+
+                        divider.textContent =
+                            formatDateDivider(
+                                writing.created_at
+                            );
+
+
+                        feed.appendChild(
+                            divider
+                        );
+
+
+                        previousDate =
+                            currentDate;
+
+                    }
+
+
+                    const article =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    article.className =
+                        "post";
+
+
+                    const avatar =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    avatar.className =
+                        "post-avatar";
+
+
+                    avatar.textContent =
+                        "H";
+
+
+                    const main =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    main.className =
+                        "post-main";
+
+
+                    const meta =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    meta.className =
+                        "post-meta";
+
+
+                    meta.innerHTML =
+                        `
+                        <span class="post-author">
+                            HED
+                        </span>
+
+                        <span class="post-handle">
+                            @herexistentialdrama
+                        </span>
+
+                        <span class="meta-dot">
+                            ·
+                        </span>
+
+                        <span class="post-time">
+                            ${escapeHtml(
+                                formatFeedTime(
+                                    writing.created_at
+                                )
+                            )}
+                        </span>
+                        `;
+
+
+                    main.appendChild(
+                        meta
+                    );
+
+
+                    if (
+                        writing.title
+                    ) {
+
+                        const title =
+                            document.createElement(
+                                "h3"
+                            );
+
+
+                        title.className =
+                            "post-title";
+
+
+                        title.textContent =
+                            writing.title;
+
+
+                        main.appendChild(
+                            title
+                        );
+
+                    }
+
+
+                    const content =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    content.className =
+                        "post-content";
+
+
+                    content.innerHTML =
+                        writing.content ||
+                        "";
+
+
+                    main.appendChild(
+                        content
+                    );
+
+
+                    main.appendChild(
+                        createActions(
+                            writing
+                        )
+                    );
+
+
+                    article.appendChild(
+                        avatar
+                    );
+
+
+                    article.appendChild(
+                        main
+                    );
+
+
+                    attachPostClick(
+                        article,
+                        writing
+                    );
+
+
+                    feed.appendChild(
+                        article
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =================================
+           SINGLE POST
+        ================================== */
+
+        async function openSinglePost(
+            id,
+            shouldScrollToReplies = false
+        ) {
+
+            selectedWriting =
+                writings.find(
+                    function(item) {
+
+                        return (
+                            item.id === id
+                        );
+
+                    }
+                );
+
+
+            if (
+                !selectedWriting
+            ) {
+
+                feedView.style.display =
+                    "none";
+
+
+                singleView.style.display =
+                    "block";
+
+
+                singlePost.innerHTML =
+                    `
+                    <div class="state-message">
+                        This post could not be found.
+                    </div>
+                    `;
+
+
+                repliesSection.style.display =
+                    "none";
+
+
+                moreSection.style.display =
+                    "none";
+
+
+                window.scrollTo(
+                    0,
+                    0
+                );
+
+
+                return;
+
+            }
+
+
+            feedView.style.display =
+                "none";
+
+
+            singleView.style.display =
+                "block";
+
+
+            repliesSection.style.display =
+                "block";
+
+
+            moreSection.style.display =
+                "block";
+
+
+            singlePost.innerHTML =
+                "";
+
+
+            /*
+                AUTHOR
+            */
+
+            const authorRow =
+                document.createElement(
+                    "div"
+                );
+
+
+            authorRow.className =
+                "single-author-row";
+
+
+            authorRow.innerHTML =
+                `
+                <div class="single-avatar">
+                    H
+                </div>
+
+                <div>
+
+                    <div class="single-author">
+                        HED
+                    </div>
+
+                    <div class="single-handle">
+                        @herexistentialdrama ·
+                        ${escapeHtml(
+                            formatDate(
+                                selectedWriting.created_at
+                            )
+                        )}
+                    </div>
+
+                </div>
+                `;
+
+
+            singlePost.appendChild(
+                authorRow
+            );
+
+
+            /*
+                TITLE
+            */
+
+            if (
+                selectedWriting.title
+            ) {
+
+                const title =
+                    document.createElement(
+                        "h1"
+                    );
+
+
+                title.className =
+                    "single-title";
+
+
+                title.textContent =
+                    selectedWriting.title;
+
+
+                singlePost.appendChild(
+                    title
+                );
+
+            }
+
+
+            /*
+                CONTENT
+            */
+
+            const content =
+                document.createElement(
+                    "div"
+                );
+
+
+            content.className =
+                "single-content";
+
+
+            content.innerHTML =
+                selectedWriting.content ||
+                "";
+
+
+            singlePost.appendChild(
+                content
+            );
+
+
+            /*
+                DATE
+            */
+
+            const date =
+                document.createElement(
+                    "div"
+                );
+
+
+            date.className =
+                "single-date";
+
+
+            date.textContent =
+                formatDate(
+                    selectedWriting.created_at
+                );
+
+
+            singlePost.appendChild(
+                date
+            );
+
+
+            /*
+                ACTIONS
+            */
+
+            singlePost.appendChild(
+                createActions(
+                    selectedWriting
+                )
+            );
+
+
+            /*
+                REPLIES
+            */
+
+            await loadReplies(
+                selectedWriting.id
+            );
+
+
+            /*
+                MORE
+            */
+
+            renderMore(
+                selectedWriting.id
+            );
+
+
+            if (
+                shouldScrollToReplies
+            ) {
+
+                setTimeout(
+                    function() {
+
+                        replyContent.focus();
+
+                        repliesSection.scrollIntoView(
+                            {
+                                behavior:
+                                    "smooth"
+                            }
+                        );
+
+                    },
+                    100
+                );
+
+            }
+            else {
+
+                window.scrollTo(
+                    0,
+                    0
+                );
+
+            }
+
+        }
+
+
+
+        /* =================================
+           BACK TO FEED
+        ================================== */
+
+        document
+            .getElementById(
+                "backToWritings"
+            )
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    selectedWriting =
+                        null;
+
+
+                    singleView.style.display =
+                        "none";
+
+
+                    feedView.style.display =
+                        "block";
+
+
+                    history.pushState(
+                        {},
+                        "",
+                        "other-writings.html"
+                    );
+
+
+                    window.scrollTo(
+                        0,
+                        0
+                    );
+
+                }
+            );
+
+
+
+        /* =================================
+           REPLIES
+        ================================== */
+
+        async function loadReplies(
+            writingId
+        ) {
+
+            replyList.innerHTML =
+                `
+                <div class="state-message">
+                    Loading replies...
+                </div>
+                `;
+
+
+            const result =
+                await supabaseClient
+                    .from(
+                        "comments"
+                    )
+                    .select(
+                        "id,name,content,created_at"
+                    )
+                    .eq(
+                        "target_type",
+                        "writing"
+                    )
+                    .eq(
+                        "target_id",
+                        writingId
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending:
+                                true
+                        }
+                    );
+
+
+            if (
+                result.error
+            ) {
+
+                replyList.innerHTML =
+                    `
+                    <div class="state-message">
+                        Replies could not be loaded.
+                    </div>
+                    `;
+
+
+                repliesHeading.textContent =
+                    "Replies";
+
+
+                return;
+
+            }
+
+
+            const replies =
+                result.data || [];
+
+
+            repliesHeading.textContent =
+                replies.length === 1
+                    ? "1 Reply"
+                    : replies.length +
+                      " Replies";
+
+
+            replyList.innerHTML =
+                "";
+
+
+            if (
+                replies.length === 0
+            ) {
+
+                replyList.innerHTML =
+                    `
+                    <div class="state-message">
+                        No replies yet.
+                    </div>
+                    `;
+
+
+                return;
+
+            }
+
+
+            replies.forEach(
+                function(reply) {
+
+                    const item =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    item.className =
+                        "reply-item";
+
+
+                    const avatar =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    avatar.className =
+                        "reply-avatar";
+
+
+                    avatar.textContent =
+                        (
+                            reply.name ||
+                            "?"
+                        )
+                            .trim()
+                            .charAt(0)
+                            .toUpperCase() ||
+                        "?";
+
+
+                    const body =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    const meta =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    meta.className =
+                        "reply-meta";
+
+
+                    meta.innerHTML =
+                        `
+                        <span class="reply-name">
+                            ${escapeHtml(
+                                reply.name ||
+                                "Anonymous"
+                            )}
+                        </span>
+
+                        <span class="reply-date">
+                            ${escapeHtml(
+                                formatDate(
+                                    reply.created_at
+                                )
+                            )}
+                        </span>
+                        `;
+
+
+                    const text =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    text.className =
+                        "reply-content";
+
+
+                    text.textContent =
+                        reply.content ||
+                        "";
+
+
+                    body.appendChild(
+                        meta
+                    );
+
+
+                    body.appendChild(
+                        text
+                    );
+
+
+                    item.appendChild(
+                        avatar
+                    );
+
+
+                    item.appendChild(
+                        body
+                    );
+
+
+                    replyList.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        replyForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                if (
+                    !selectedWriting
+                ) {
+                    return;
+                }
+
+
+                const name =
+                    replyName.value
+                        .trim();
+
+
+                const content =
+                    replyContent.value
+                        .trim();
+
+
+                if (
+                    !name ||
+                    !content
+                ) {
+
+                    replyStatus.textContent =
+                        "Please add your name and reply.";
+
+
+                    return;
+
+                }
+
+
+                replySubmit.disabled =
+                    true;
+
+
+                replyStatus.textContent =
+                    "Posting reply...";
+
+
+                const result =
+                    await supabaseClient
+                        .from(
+                            "comments"
+                        )
+                        .insert({
+
+                            target_type:
+                                "writing",
+
+                            target_id:
+                                selectedWriting.id,
+
+                            name,
+
+                            content
+
+                        });
+
+
+                replySubmit.disabled =
+                    false;
+
+
+                if (
+                    result.error
+                ) {
+
+                    replyStatus.textContent =
+                        "Reply could not be posted.";
+
+
+                    return;
+
+                }
+
+
+                replyContent.value =
+                    "";
+
+
+                replyStatus.textContent =
+                    "Reply posted.";
+
+
+                await loadReplies(
+                    selectedWriting.id
+                );
+
+            }
+        );
+
+
+
+        /* =================================
+           MORE FROM OTHER WRITINGS
+        ================================== */
+
+        function renderMore(
+            currentId
+        ) {
+
+            const others =
+                writings
+                    .filter(
+                        function(item) {
+
+                            return (
+                                item.id !==
+                                currentId
+                            );
+
+                        }
+                    )
+                    .slice(
+                        0,
+                        3
+                    );
+
+
+            moreList.innerHTML =
+                "";
+
+
+            if (
+                others.length === 0
+            ) {
+
+                moreSection.style.display =
+                    "none";
+
+
+                return;
+
+            }
+
+
+            moreSection.style.display =
+                "block";
+
+
+            others.forEach(
+                function(item) {
+
+                    const link =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    link.className =
+                        "more-post";
+
+
+                    link.href =
+                        "other-writings.html?id=" +
+                        encodeURIComponent(
+                            item.id
+                        );
+
+
+                    const title =
+                        item.title ||
+                        stripHtml(
+                            item.content
+                        )
+                            .trim()
+                            .slice(
+                                0,
+                                100
+                            ) ||
+                        "Untitled writing";
+
+
+                    link.innerHTML =
+                        `
+                        <div class="more-title">
+                            ${escapeHtml(
+                                title
+                            )}
+                        </div>
+
+                        <div class="more-date">
+                            ${escapeHtml(
+                                formatDate(
+                                    item.created_at
+                                )
+                            )}
+                        </div>
+                        `;
+
+
+                    link.addEventListener(
+                        "click",
+                        function(event) {
+
+                            if (
+                                event.ctrlKey ||
+                                event.metaKey ||
+                                event.shiftKey ||
+                                event.altKey ||
+                                event.button !== 0
+                            ) {
+                                return;
+                            }
+
+
+                            event.preventDefault();
+
+
+                            history.pushState(
+                                {
+                                    writingId:
+                                        item.id
+                                },
+
+                                "",
+
+                                "other-writings.html?id=" +
+                                    encodeURIComponent(
+                                        item.id
+                                    )
+                            );
+
+
+                            openSinglePost(
+                                item.id
+                            );
+
+                        }
+                    );
+
+
+                    moreList.appendChild(
+                        link
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =================================
+           LOAD WRITINGS
+        ================================== */
+
+        async function loadWritings() {
+
+            const result =
+                await supabaseClient
+                    .from(
+                        "other_writings"
+                    )
+                    .select(
+                        "id,title,writing_type,content,created_at"
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending:
+                                false
+                        }
+                    );
+
+
+            if (
+                result.error
+            ) {
+
+                console.error(
+                    result.error
+                );
+
+
+                feed.innerHTML =
+                    `
+                    <div class="state-message">
+                        Other Writings could not be loaded.
+                    </div>
+                    `;
+
+
+                return;
+
+            }
+
+
+            writings =
+                result.data || [];
+
+
+            renderFeed();
+
+
+            const requestedId =
+                getRequestedId();
+
+
+            if (
+                requestedId
+            ) {
+
+                await openSinglePost(
+                    requestedId
+                );
+
+            }
+            else {
+
+                singleView.style.display =
+                    "none";
+
+
+                feedView.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+
+        /* =================================
+           BROWSER BACK / FORWARD
+        ================================== */
+
+        window.addEventListener(
+            "popstate",
+            async function() {
+
+                const id =
+                    getRequestedId();
+
+
+                if (id) {
+
+                    await openSinglePost(
+                        id
+                    );
+
+                }
+                else {
+
+                    selectedWriting =
+                        null;
+
+
+                    singleView.style.display =
+                        "none";
+
+
+                    feedView.style.display =
+                        "block";
+
+
+                    window.scrollTo(
+                        0,
+                        0
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        /* =================================
+           START
+        ================================== */
+
+        loadWritings();
+
+    </script>
+
+</body>
+
+</html>
