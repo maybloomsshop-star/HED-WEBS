@@ -814,7 +814,44 @@
         .reader-nav-link:hover {
             color: #29221e;
         }
+async function prefillCommentName() {
+    if (!commentName) {
+        return;
+    }
 
+    try {
+        const { data } =
+            await supabaseClient.auth.getUser();
+
+        const user =
+            data?.user;
+
+        const metadata =
+            user?.user_metadata || {};
+
+        const nickname =
+            String(
+                metadata.nickname ||
+                metadata.display_name ||
+                metadata.name ||
+                ""
+            ).trim();
+
+        if (nickname) {
+            commentName.value =
+                nickname;
+
+            commentName.dataset.profileName =
+                nickname;
+        }
+
+    } catch (error) {
+        console.warn(
+            "Could not load the signed-in profile name:",
+            error
+        );
+    }
+}
 
         /* =====================================================
            COMMENTS
@@ -2646,11 +2683,18 @@
             }
 
 
-            const name =
-                commentName.value.trim();
+const profileName =
+    String(
+        commentName.dataset.profileName ||
+        ""
+    ).trim();
 
-            const content =
-                commentContent.value.trim();
+const name =
+    profileName ||
+    commentName.value.trim();
+
+const content =
+    commentContent.value.trim();
 
 
             if (!name || !content) {
