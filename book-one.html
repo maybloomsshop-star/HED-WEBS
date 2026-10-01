@@ -3454,21 +3454,13 @@ $("commentForm").addEventListener(
 
         event.preventDefault();
 
-
-        if(
-            selectedChapterIndex < 0
-        ){
-
-            return;
-
-        }
-
+        const status =
+            $("commentStatus");
 
         const name =
             $("commentName")
                 .value
                 .trim();
-
 
         const content =
             $("commentContent")
@@ -3476,10 +3468,30 @@ $("commentForm").addEventListener(
                 .trim();
 
 
-        if(
-            !name ||
-            !content
-        ){
+        if(!name){
+
+            status.textContent =
+                "Your nickname is missing.";
+
+            return;
+
+        }
+
+
+        if(!content){
+
+            status.textContent =
+                "Please write a comment.";
+
+            return;
+
+        }
+
+
+        if(selectedChapterIndex < 0){
+
+            status.textContent =
+                "No chapter is selected.";
 
             return;
 
@@ -3492,60 +3504,95 @@ $("commentForm").addEventListener(
             ];
 
 
-        const status =
-            $("commentStatus");
-
-
-        status.textContent =
-            "Posting…";
-
-
-        const result =
-            await supabaseClient
-                .from("comments")
-                .insert({
-
-                    target_type:"chapter",
-
-                    target_id:
-                        chapter.id,
-
-                    name:name,
-
-                    content:content
-
-                });
-
-
-        if(result.error){
-
-            console.error(
-                result.error
-            );
-
+        if(!chapter || !chapter.id){
 
             status.textContent =
-                "The comment could not be posted.";
+                "The chapter could not be found.";
 
             return;
 
         }
 
 
-        $("commentContent")
-            .value =
-                "";
-
-
         status.textContent =
-            "Comment posted.";
+            "Posting…";
 
 
-        await loadComments();
+        try{
+
+            const result =
+                await supabaseClient
+                    .from("comments")
+                    .insert({
+
+                        target_type:
+                            "chapter",
+
+                        target_id:
+                            chapter.id,
+
+                        name:
+                            name,
+
+                        content:
+                            content
+
+                    });
+
+
+            if(result.error){
+
+                console.error(
+                    "COMMENT ERROR:",
+                    result.error
+                );
+
+                status.textContent =
+                    "Could not post: " +
+                    result.error.message;
+
+                return;
+
+            }
+
+
+            $("commentContent")
+                .value =
+                    "";
+
+
+            $("commentName")
+                .value =
+                    window.readerNickname ||
+                    name;
+
+
+            status.textContent =
+                "Comment posted.";
+
+
+            await loadComments();
+
+
+        }catch(error){
+
+            console.error(
+                "COMMENT ERROR:",
+                error
+            );
+
+
+            status.textContent =
+                "Could not post: " +
+                (
+                    error.message ||
+                    "Unknown error"
+                );
+
+        }
 
     }
 );
-
 
 /* =========================================================
    TEXT SELECTION / HIGHLIGHTING
