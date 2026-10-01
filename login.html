@@ -259,6 +259,123 @@
 
             }
         );
+        <script>
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const message =
+        document.getElementById("message");
+
+    const signupLink =
+        document.getElementById("signupLink");
+
+
+    loginForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            message.textContent =
+                "Logging in...";
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+            if (error) {
+
+                message.textContent =
+                    error.message;
+
+                return;
+            }
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+            const returnTo =
+                params.get("return");
+
+            if (
+                returnTo &&
+                !returnTo.startsWith("http") &&
+                !returnTo.startsWith("//")
+            ) {
+
+                window.location.href =
+                    returnTo;
+
+            } else {
+
+                window.location.href =
+                    "hed.html";
+
+            }
+
+        }
+    );
+
+
+    signupLink.addEventListener(
+        "click",
+        async function() {
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            if (!email || !password) {
+
+                message.textContent =
+                    "Enter your email and password first.";
+
+                return;
+            }
+
+            message.textContent =
+                "Creating account...";
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth.signUp({
+                    email: email,
+                    password: password
+                });
+
+            if (error) {
+
+                message.textContent =
+                    error.message;
+
+                return;
+            }
+
+            message.textContent =
+                "Account created. Check your email if confirmation is required.";
+
+        }
+    );
+
+</script>
 
     </script>
 
