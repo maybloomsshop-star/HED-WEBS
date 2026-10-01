@@ -1,140 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Reader Login | HED</title>
 
+
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
         body {
             margin: 0;
             min-height: 100vh;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            padding: 20px;
+
             background: #f5efe6;
             color: #342b26;
-            font-family: Arial, sans-serif;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
         }
 
+
         .login-box {
-            width: min(90%, 400px);
+            width: 100%;
+            max-width: 420px;
+
             padding: 40px;
-            box-sizing: border-box;
+
             background: #fbf8f3;
-            border: 1px solid #d8cec2;
+
+            border:
+                1px solid
+                #d8cec2;
+
+            box-shadow:
+                0 12px 35px
+                rgba(60, 45, 35, 0.08);
         }
+
 
         h1 {
             margin: 0 0 8px;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 38px;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 42px;
             font-weight: 400;
         }
 
+
         .subtitle {
             margin: 0 0 30px;
+
             color: #85786e;
+
+            line-height: 1.6;
         }
+
+
+        .field-label {
+            display: block;
+
+            margin:
+                0 0 7px;
+
+            font-size: 12px;
+
+            color: #756960;
+
+            letter-spacing: 0.05em;
+
+            text-transform: uppercase;
+        }
+
 
         input {
             width: 100%;
-            box-sizing: border-box;
+
             padding: 13px;
-            margin-bottom: 12px;
-            border: 1px solid #d8cec2;
+
+            margin-bottom: 16px;
+
+            border:
+                1px solid
+                #d8cec2;
+
             background: white;
+
+            color: #342b26;
+
             font-size: 14px;
+
+            outline: none;
         }
+
+
+        input:focus {
+            border-color: #9b897d;
+        }
+
 
         button {
             width: 100%;
-            padding: 13px;
+
+            padding: 14px;
+
             border: none;
+
             background: #4a352b;
             color: white;
+
             cursor: pointer;
+
             font-size: 14px;
         }
+
 
         button:hover {
             background: #382920;
         }
 
+
         .message {
-            margin-top: 15px;
+            min-height: 20px;
+
+            margin-top: 16px;
+
             font-size: 13px;
+
+            line-height: 1.5;
+
             text-align: center;
         }
 
+
         .switch {
-            margin-top: 20px;
+            margin-top: 22px;
+
             text-align: center;
+
             font-size: 13px;
+
+            color: #756960;
         }
+
 
         .switch a {
             color: #68745d;
+
             cursor: pointer;
+
+            text-decoration: underline;
         }
+
+
+        .back {
+            display: block;
+
+            margin-top: 22px;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            color: #85786e;
+
+            text-decoration: none;
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
+
     <div class="login-box">
+
 
         <h1>HED</h1>
 
-        <p class="subtitle">Reader Login</p>
+
+        <p class="subtitle">
+            Reader Login
+        </p>
+
 
         <form id="loginForm">
+
+
+            <label
+                class="field-label"
+                for="email"
+            >
+                Email
+            </label>
+
 
             <input
                 type="email"
                 id="email"
-                placeholder="Email"
+                placeholder="Your email"
+                autocomplete="email"
                 required
             >
+
+
+            <label
+                class="field-label"
+                for="password"
+            >
+                Password
+            </label>
+
 
             <input
                 type="password"
                 id="password"
-                placeholder="Password"
+                placeholder="Your password"
+                autocomplete="current-password"
                 required
             >
+
 
             <button type="submit">
                 Log in
             </button>
 
+
         </form>
 
-        <div id="message" class="message"></div>
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
 
         <div class="switch">
+
             Don't have an account?
-            <a id="signupLink">Create one</a>
+
+            <a
+                href="#"
+                id="signupLink"
+            >
+                Create one
+            </a>
+
         </div>
+
+
+        <a
+            href="hed.html"
+            class="back"
+        >
+            ← Back to HED
+        </a>
+
 
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script src="supabase-config.js"></script>
 
+
     <script>
+
 
         const loginForm =
             document.getElementById("loginForm");
 
+
         const message =
             document.getElementById("message");
+
 
         const signupLink =
             document.getElementById("signupLink");
 
+
+        const emailInput =
+            document.getElementById("email");
+
+
+        const passwordInput =
+            document.getElementById("password");
+
+
+        /*
+         * LOGIN
+         */
 
         loginForm.addEventListener(
             "submit",
@@ -142,45 +323,49 @@
 
                 event.preventDefault();
 
+
                 const email =
-                    document.getElementById("email").value.trim();
+                    emailInput.value.trim();
+
 
                 const password =
-                    document.getElementById("password").value;
-                <input
-    type="text"
-    id="nickname"
-    placeholder="Name or nickname"
-    required
->
+                    passwordInput.value;
+
+
+                if (!email || !password) {
+
+                    message.textContent =
+                        "Please enter your email and password.";
+
+                    return;
+                }
 
 
                 message.textContent =
                     "Logging in...";
 
 
-                const {
-                    data,
-                    error
-                } =
-                    const { data, error } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password,
-    options: {
-        data: {
-            nickname: nickname
-        }
-    }
-});
+                const result =
+                    await supabaseClient.auth.signInWithPassword({
+
+                        email: email,
+
+                        password: password
+
+                    });
 
 
-                if (error) {
+                if (result.error) {
 
                     message.textContent =
-                        error.message;
+                        result.error.message;
 
                     return;
                 }
+
+
+                message.textContent =
+                    "Login successful. Opening HED...";
 
 
                 const params =
@@ -188,38 +373,55 @@
                         window.location.search
                     );
 
+
                 const returnTo =
                     params.get("return");
 
 
-                if (
-                    returnTo &&
-                    !returnTo.startsWith("http") &&
-                    !returnTo.startsWith("//")
-                ) {
+                setTimeout(
+                    function() {
 
-                    window.location.href =
-                        returnTo;
+                        if (
+                            returnTo &&
+                            !returnTo.startsWith("http") &&
+                            !returnTo.startsWith("//")
+                        ) {
 
-                } else {
+                            window.location.href =
+                                returnTo;
 
-                    window.location.href = "index.html.html";
+                        } else {
 
-                }
+                            window.location.href =
+                                "hed.html";
+
+                        }
+
+                    },
+                    500
+                );
 
             }
         );
 
 
+        /*
+         * CREATE ACCOUNT
+         */
+
         signupLink.addEventListener(
             "click",
-            async function() {
+            async function(event) {
+
+                event.preventDefault();
+
 
                 const email =
-                    document.getElementById("email").value.trim();
+                    emailInput.value.trim();
+
 
                 const password =
-                    document.getElementById("password").value;
+                    passwordInput.value;
 
 
                 if (!email || !password) {
@@ -231,153 +433,74 @@
                 }
 
 
-                message.textContent =
-                    "Creating account...";
-
-
-                const {
-                    data,
-                    error
-                } =
-                    await supabaseClient.auth.signUp({
-                        email: email,
-                        password: password
-                    });
-
-
-                if (error) {
+                if (password.length < 6) {
 
                     message.textContent =
-                        error.message;
+                        "Your password must be at least 6 characters.";
+
+                    return;
+                }
+
+
+                const nickname =
+                    prompt(
+                        "What name or nickname would you like readers to see?"
+                    );
+
+
+                if (!nickname || !nickname.trim()) {
+
+                    message.textContent =
+                        "Account creation cancelled.";
 
                     return;
                 }
 
 
                 message.textContent =
-                    "Account created. Check your email if confirmation is required.";
+                    "Creating your account...";
+
+
+                const result =
+                    await supabaseClient.auth.signUp({
+
+                        email: email,
+
+                        password: password,
+
+                        options: {
+
+                            data: {
+
+                                nickname:
+                                    nickname.trim()
+
+                            }
+
+                        }
+
+                    });
+
+
+                if (result.error) {
+
+                    message.textContent =
+                        result.error.message;
+
+                    return;
+                }
+
+
+                message.textContent =
+                    "Account created! Check your email if confirmation is required.";
 
             }
         );
-        <script>
 
-    const loginForm =
-        document.getElementById("loginForm");
-
-    const message =
-        document.getElementById("message");
-
-    const signupLink =
-        document.getElementById("signupLink");
-
-
-    loginForm.addEventListener(
-        "submit",
-        async function(event) {
-
-            event.preventDefault();
-
-            const email =
-                document.getElementById("email").value.trim();
-
-            const password =
-                document.getElementById("password").value;
-
-            message.textContent =
-                "Logging in...";
-
-            const {
-                data,
-                error
-            } =
-                await supabaseClient.auth.signInWithPassword({
-                    email: email,
-                    password: password
-                });
-
-            if (error) {
-
-                message.textContent =
-                    error.message;
-
-                return;
-            }
-
-            const params =
-                new URLSearchParams(
-                    window.location.search
-                );
-
-            const returnTo =
-                params.get("return");
-
-            if (
-                returnTo &&
-                !returnTo.startsWith("http") &&
-                !returnTo.startsWith("//")
-            ) {
-
-                window.location.href =
-                    returnTo;
-
-            } else {
-
-                window.location.href =
-                    "hed.html";
-
-            }
-
-        }
-    );
-
-
-    signupLink.addEventListener(
-        "click",
-        async function() {
-
-            const email =
-                document.getElementById("email").value.trim();
-
-            const password =
-                document.getElementById("password").value;
-
-            if (!email || !password) {
-
-                message.textContent =
-                    "Enter your email and password first.";
-
-                return;
-            }
-
-            message.textContent =
-                "Creating account...";
-
-            const {
-                data,
-                error
-            } =
-                await supabaseClient.auth.signUp({
-                    email: email,
-                    password: password
-                });
-
-            if (error) {
-
-                message.textContent =
-                    error.message;
-
-                return;
-            }
-
-            message.textContent =
-                "Account created. Check your email if confirmation is required.";
-
-        }
-    );
-
-</script>
 
     </script>
 
+
 </body>
+
 </html>
