@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -30,7 +31,14 @@
     --soft:#eee6dc;
     --white:#ffffff;
     --shadow:0 12px 35px rgba(74,53,43,.08);
+
+    --reader-width:780px;
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
     box-sizing:border-box;
@@ -253,6 +261,32 @@ button{
     line-height:1.65;
 }
 
+.book-description-wrap{
+    margin-top:10px;
+}
+
+.book-description-more{
+    display:inline;
+
+    margin-left:4px;
+    padding:0;
+
+    border:0;
+    background:none;
+
+    color:var(--pink-dark);
+
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:600;
+
+    cursor:pointer;
+}
+
+.book-description-more:hover{
+    text-decoration:underline;
+}
+
 .book-meta{
     display:flex;
     flex-wrap:wrap;
@@ -290,41 +324,58 @@ button{
 
 
 /* =========================================================
-   READER BUTTONS
+   MINIMAL READER BAR
 ========================================================= */
 
-.reader-controls{
-    max-width:1120px;
+.reader-topbar{
+    max-width:var(--reader-width);
 
-    margin:0 auto 13px;
+    margin:0 auto 12px;
 
     display:flex;
+    justify-content:flex-end;
     align-items:center;
-    flex-wrap:wrap;
 
-    gap:7px;
+    gap:6px;
 }
 
-.reader-control-button{
-    padding:8px 12px;
+.reader-mini-button{
+    width:34px;
+    height:34px;
+
+    padding:0;
 
     border:1px solid var(--line);
-    background:var(--paper);
+    border-radius:50%;
+
+    background:rgba(251,248,243,.9);
 
     color:var(--brown);
 
-    font-size:11px;
+    font-size:12px;
+    font-weight:700;
 
     transition:.15s ease;
 }
 
-.reader-control-button:hover{
+.reader-mini-button:hover{
     border-color:var(--pink);
     color:var(--pink-dark);
 }
 
-.reader-position{
-    margin-left:auto;
+.reader-mini-button.bookmarked{
+    background:var(--pink);
+    border-color:var(--pink);
+    color:white;
+}
+
+
+/* =========================================================
+   OLD CONTROLS
+========================================================= */
+
+.reader-controls{
+    display:none;
 }
 
 
@@ -351,7 +402,6 @@ button{
 
 /* =========================================================
    CHAPTER DRAWER
-   CLOSED BY DEFAULT
 ========================================================= */
 
 .chapter-drawer{
@@ -367,6 +417,8 @@ button{
     border:1px solid var(--line);
 
     background:rgba(251,248,243,.97);
+
+    box-shadow:var(--shadow);
 }
 
 .chapter-drawer:not(.open){
@@ -473,17 +525,23 @@ button{
 
 /* =========================================================
    READING PREFERENCES
-   CLOSED BY DEFAULT
 ========================================================= */
 
 .preferences{
     display:none;
 
-    margin-bottom:11px;
-    padding:12px 13px;
+    position:relative;
+
+    margin:0 auto 12px;
+
+    max-width:var(--reader-width);
+
+    padding:15px;
 
     border:1px solid var(--line);
-    background:rgba(251,248,243,.97);
+    background:rgba(251,248,243,.98);
+
+    box-shadow:0 8px 25px rgba(74,53,43,.08);
 }
 
 .preferences.open{
@@ -497,21 +555,21 @@ button{
 
     gap:10px;
 
-    margin-bottom:9px;
+    margin-bottom:12px;
 }
 
 .preferences-title{
     color:var(--brown);
 
     font-family:Georgia,"Times New Roman",serif;
-    font-size:15px;
+    font-size:16px;
 }
 
 .preferences-grid{
     display:flex;
     flex-wrap:wrap;
     align-items:center;
-    gap:8px 13px;
+    gap:10px 15px;
 }
 
 .preference-group{
@@ -575,20 +633,44 @@ button{
 
 .pref-button{
     min-width:30px;
-    height:30px;
+    min-height:30px;
 
-    padding:0 7px;
+    padding:0 8px;
 
     border:1px solid var(--line);
     background:var(--paper);
 
     color:var(--text);
 
-    font-size:11px;
+    font-size:10px;
 }
 
 .pref-button.active,
 .pref-button:hover{
+    border-color:var(--pink);
+    color:var(--pink-dark);
+}
+
+.width-buttons{
+    display:flex;
+    gap:5px;
+}
+
+.width-button{
+    min-height:30px;
+
+    padding:0 9px;
+
+    border:1px solid var(--line);
+    background:var(--paper);
+
+    color:var(--text);
+
+    font-size:10px;
+}
+
+.width-button.active,
+.width-button:hover{
     border-color:var(--pink);
     color:var(--pink-dark);
 }
@@ -598,8 +680,7 @@ button{
    THEMES
 ========================================================= */
 
-.theme-buttons,
-.highlight-buttons{
+.theme-buttons{
     display:flex;
     flex-wrap:wrap;
     gap:5px;
@@ -652,104 +733,15 @@ button{
 
 
 /* =========================================================
-   HIGHLIGHT COLORS
-========================================================= */
-
-.highlight-button{
-    width:25px;
-    height:25px;
-
-    flex:0 0 auto;
-
-    padding:0;
-
-    border:1px solid #bcb4aa;
-    border-radius:50%;
-}
-
-.highlight-button:hover{
-    transform:scale(1.08);
-}
-
-.highlight-button.active{
-    outline:2px solid var(--pink);
-    outline-offset:1px;
-}
-
-.highlight-yellow{
-    background:#fff0a6;
-}
-
-.highlight-pink{
-    background:#f7b4cf;
-}
-
-.highlight-green{
-    background:#b8dfb5;
-}
-
-.highlight-blue{
-    background:#b7d5ee;
-}
-
-.highlight-orange{
-    background:#f6c58b;
-}
-
-.highlight-purple{
-    background:#d7b9e8;
-}
-
-.highlight-coral{
-    background:#f5aaa0;
-}
-
-.highlight-lavender{
-    background:#c8c7f2;
-}
-
-.highlight-mint{
-    background:#aee1d2;
-}
-
-.highlight-gray{
-    background:#d6d6d1;
-}
-
-
-/* =========================================================
-   FLOATING HIGHLIGHT MENU
-========================================================= */
-
-.selection-highlight-menu{
-    position:fixed;
-    z-index:100;
-
-    display:none;
-    align-items:center;
-    gap:5px;
-
-    max-width:calc(100vw - 16px);
-
-    padding:6px;
-
-    border:1px solid var(--line);
-    background:#fbf8f3;
-
-    box-shadow:0 8px 25px rgba(74,53,43,.18);
-}
-
-.selection-highlight-menu.open{
-    display:flex;
-}
-
-
-/* =========================================================
    READER PAPER
 ========================================================= */
 
 .reader-paper{
-    padding:28px 36px 30px;
+    max-width:var(--reader-width);
+
+    margin:0 auto;
+
+    padding:34px 36px 35px;
 
     border:1px solid var(--line);
 
@@ -759,14 +751,17 @@ button{
 
     transition:
         background .15s ease,
-        color .15s ease;
+        color .15s ease,
+        max-width .15s ease;
 }
 
 
-/* SMALL CHAPTER LABEL */
+/* =========================================================
+   CHAPTER TITLE
+========================================================= */
 
 .reader-chapter-label{
-    margin:0 0 3px;
+    margin:0 0 5px;
 
     color:var(--pink-dark);
 
@@ -778,17 +773,15 @@ button{
     text-transform:uppercase;
 }
 
-
-/* STORY TITLE */
-
 .reader-paper h1{
-    margin:0 0 10px;
+    margin:0 0 25px;
+
     color:var(--brown);
+
     font-family:Georgia,"Times New Roman",serif;
-    font-size:20px;
+    font-size:28px;
     line-height:1.25;
     font-weight:600;
-    font-style:normal;
 }
 
 
@@ -799,14 +792,19 @@ button{
 .reader-story{
     --reader-font:Georgia,"Times New Roman",serif;
 
-    max-width:780px;
+    max-width:100%;
 
     margin:0 auto;
 
     color:var(--text);
 
-    font-size:15px;
-    line-height:1.65;
+    font-size:16px;
+    line-height:1.7;
+
+    transition:
+        color .15s ease,
+        font-size .15s ease,
+        line-height .15s ease;
 }
 
 .reader-story,
@@ -815,14 +813,14 @@ button{
 }
 
 .reader-story p{
-    margin:0 0 .8em;
+    margin:0 0 .95em;
 }
 
 .reader-story h1,
 .reader-story h2,
 .reader-story h3,
 .reader-story h4{
-    margin:1.1em 0 .4em;
+    margin:1.2em 0 .5em;
 
     color:var(--brown);
 
@@ -835,12 +833,12 @@ button{
     max-width:100%;
     height:auto;
 
-    margin:20px auto;
+    margin:25px auto;
 }
 
 .reader-story blockquote{
-    margin:1em 0;
-    padding:8px 17px;
+    margin:1.2em 0;
+    padding:10px 18px;
 
     border-left:3px solid var(--pink);
 
@@ -849,12 +847,12 @@ button{
 
 
 /* =========================================================
-   SAVED HIGHLIGHTS
+   HIGHLIGHTS
 ========================================================= */
 
-.highlight{
+.reader-highlight{
     border-radius:2px;
-    padding:0 .05em;
+    padding:0 .04em;
 }
 
 .highlight-yellow-mark{
@@ -899,14 +897,234 @@ button{
 
 
 /* =========================================================
+   UNDERLINE
+========================================================= */
+
+.reader-underline{
+    text-decoration-line:underline;
+    text-decoration-thickness:2px;
+    text-decoration-color:var(--pink-dark);
+    text-underline-offset:3px;
+}
+
+
+/* =========================================================
+   SELECTION MENU
+========================================================= */
+
+.selection-highlight-menu{
+    position:fixed;
+    z-index:1000;
+
+    display:none;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:5px;
+
+    max-width:calc(100vw - 16px);
+
+    padding:7px;
+
+    border:1px solid var(--line);
+    border-radius:10px;
+
+    background:#fbf8f3;
+
+    box-shadow:0 8px 25px rgba(74,53,43,.18);
+}
+
+.selection-highlight-menu.open{
+    display:flex;
+}
+
+.selection-action{
+    min-height:28px;
+
+    padding:0 9px;
+
+    border:1px solid var(--line);
+    border-radius:7px;
+
+    background:var(--paper);
+
+    color:var(--brown);
+
+    font-size:10px;
+}
+
+.selection-action:hover{
+    border-color:var(--pink);
+    color:var(--pink-dark);
+}
+
+.highlight-button{
+    width:24px;
+    height:24px;
+
+    flex:0 0 auto;
+
+    padding:0;
+
+    border:1px solid #bcb4aa;
+    border-radius:50%;
+}
+
+.highlight-button:hover{
+    transform:scale(1.08);
+}
+
+.highlight-yellow{
+    background:#fff0a6;
+}
+
+.highlight-pink{
+    background:#f7b4cf;
+}
+
+.highlight-green{
+    background:#b8dfb5;
+}
+
+.highlight-blue{
+    background:#b7d5ee;
+}
+
+.highlight-orange{
+    background:#f6c58b;
+}
+
+.highlight-purple{
+    background:#d7b9e8;
+}
+
+.highlight-coral{
+    background:#f5aaa0;
+}
+
+.highlight-lavender{
+    background:#c8c7f2;
+}
+
+.highlight-mint{
+    background:#aee1d2;
+}
+
+.highlight-gray{
+    background:#d6d6d1;
+}
+
+
+/* =========================================================
+   NOTES PANEL
+========================================================= */
+
+.notes-panel{
+    display:none;
+
+    max-width:var(--reader-width);
+
+    margin:12px auto 0;
+
+    padding:15px;
+
+    border:1px solid var(--line);
+
+    background:var(--paper);
+
+    box-shadow:var(--shadow);
+}
+
+.notes-panel.open{
+    display:block;
+}
+
+.notes-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:12px;
+}
+
+.notes-title{
+    margin:0;
+
+    color:var(--brown);
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:18px;
+}
+
+.note-list{
+    display:grid;
+    gap:9px;
+}
+
+.note-card{
+    padding:11px 12px;
+
+    border:1px solid var(--line);
+
+    background:#fffdfa;
+}
+
+.note-card-quote{
+    margin:0 0 7px;
+
+    color:var(--muted);
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:11px;
+    line-height:1.45;
+}
+
+.note-card-text{
+    margin:0;
+
+    color:var(--text);
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:13px;
+    line-height:1.5;
+
+    white-space:pre-wrap;
+}
+
+.note-card-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+
+    margin-top:8px;
+}
+
+.note-card-actions button{
+    padding:3px 0;
+
+    border:0;
+    background:none;
+
+    color:var(--pink-dark);
+
+    font-size:9px;
+}
+
+.note-card-actions button:hover{
+    text-decoration:underline;
+}
+
+
+/* =========================================================
    CHAPTER NAVIGATION
 ========================================================= */
 
 .chapter-navigation{
-    max-width:780px;
+    max-width:100%;
 
-    margin:21px auto 0;
-    padding-top:13px;
+    margin:35px auto 0;
+    padding-top:16px;
 
     display:flex;
     justify-content:space-between;
@@ -939,10 +1157,10 @@ button{
 ========================================================= */
 
 .comments-section{
-    max-width:780px;
+    max-width:100%;
 
-    margin:20px auto 0;
-    padding-top:14px;
+    margin:30px auto 0;
+    padding-top:20px;
 
     border-top:1px solid var(--line);
 }
@@ -1124,6 +1342,19 @@ button{
 
 
 /* =========================================================
+   EMPTY MESSAGE
+========================================================= */
+
+.empty-message{
+    padding:15px;
+
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+
+/* =========================================================
    RESPONSIVE
 ========================================================= */
 
@@ -1138,10 +1369,6 @@ button{
         top:auto;
 
         max-height:280px;
-    }
-
-    .reader-position{
-        margin-left:0;
     }
 }
 
@@ -1173,19 +1400,23 @@ button{
     }
 
     .reader-paper{
-        padding:23px 18px 25px;
+        padding:26px 18px 28px;
+    }
+
+    .reader-paper h1{
+        font-size:25px;
     }
 
     .reader-story{
-        font-size:15px;
+        font-size:16px;
+    }
+
+    .preferences{
+        padding:12px;
     }
 
     .pref-range{
         width:105px;
-    }
-
-    .preferences{
-        padding:11px;
     }
 
     .comment-form-grid{
@@ -1197,30 +1428,10 @@ button{
         flex-direction:column;
         gap:3px;
     }
-}
-.book-description-wrap {
-    margin-top: 10px;
-}
 
-.book-description-more {
-    display: none;
-    margin-left: 4px;
-    padding: 0;
-    border: 0;
-    background: none;
-    color: var(--pink-dark);
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.book-description-more:hover {
-    text-decoration: underline;
-}
-
-.book-description.expanded .book-description-more {
-    display: inline;
+    .selection-highlight-menu{
+        max-width:calc(100vw - 20px);
+    }
 }
 
 </style>
@@ -1245,9 +1456,12 @@ button{
             HED
         </a>
 
-        <a href="stories.html" class="back-link">
-    ← Back to Stories
-</a>
+        <a
+            href="stories.html"
+            class="back-link"
+        >
+            ← Back to Stories
+        </a>
 
     </div>
 
@@ -1306,7 +1520,6 @@ button{
 
         <section class="book-intro">
 
-
             <div
                 class="cover-wrap"
                 id="coverWrap"
@@ -1320,7 +1533,6 @@ button{
                 </div>
 
             </div>
-
 
 
             <div class="book-info">
@@ -1369,36 +1581,50 @@ button{
 
 
             <!-- =================================================
-                 THESE ARE ONLY BUTTONS WHEN PAGE OPENS
+                 MINIMAL READER CONTROLS
             ================================================== -->
 
-            <div class="reader-controls">
-
+            <div class="reader-topbar">
 
                 <button
                     id="chapterToggleButton"
-                    class="reader-control-button"
+                    class="reader-mini-button"
                     type="button"
-                    aria-expanded="false"
+                    aria-label="Open chapters"
+                    title="Chapters"
                 >
-                    ☰ Chapters
+                    ☰
                 </button>
 
+                <button
+                    id="notesToggleButton"
+                    class="reader-mini-button"
+                    type="button"
+                    aria-label="Open notes"
+                    title="Notes"
+                >
+                    ♡
+                </button>
+
+                <button
+                    id="bookmarkButton"
+                    class="reader-mini-button"
+                    type="button"
+                    aria-label="Bookmark chapter"
+                    title="Bookmark chapter"
+                >
+                    ♧
+                </button>
 
                 <button
                     id="preferencesToggleButton"
-                    class="reader-control-button"
+                    class="reader-mini-button"
                     type="button"
-                    aria-expanded="false"
+                    aria-label="Reading preferences"
+                    title="Reading preferences"
                 >
-                    ⚙ Reading Preferences
+                    Aa
                 </button>
-
-
-                <span
-                    id="readerChapterPosition"
-                    class="eyebrow reader-position"
-                ></span>
 
             </div>
 
@@ -1412,7 +1638,6 @@ button{
 
                 <!-- =================================================
                      CHAPTER DRAWER
-                     CLOSED BY DEFAULT
                 ================================================== -->
 
                 <aside
@@ -1435,7 +1660,6 @@ button{
 
                         </div>
 
-
                         <button
                             id="closeChapterDrawer"
                             class="drawer-close"
@@ -1446,7 +1670,6 @@ button{
                         </button>
 
                     </div>
-
 
                     <div
                         id="chapterList"
@@ -1466,7 +1689,6 @@ button{
 
                     <!-- =================================================
                          READING PREFERENCES
-                         CLOSED BY DEFAULT
                     ================================================== -->
 
                     <section
@@ -1530,7 +1752,7 @@ button{
 
 
 
-                            <!-- FONT SIZE -->
+                            <!-- SIZE -->
 
                             <div class="preference-group">
 
@@ -1544,17 +1766,17 @@ button{
                                         id="fontSize"
                                         class="pref-range"
                                         type="range"
-                                        min="10"
+                                        min="12"
                                         max="26"
                                         step="1"
-                                        value="15"
+                                        value="16"
                                     >
 
                                     <span
                                         id="fontSizeValue"
                                         class="pref-size-value"
                                     >
-                                        15px
+                                        16px
                                     </span>
 
                                 </div>
@@ -1563,7 +1785,7 @@ button{
 
 
 
-                            <!-- LINE SPACING -->
+                            <!-- SPACING -->
 
                             <div class="preference-group">
 
@@ -1581,7 +1803,7 @@ button{
 
                                 <button
                                     class="pref-button active"
-                                    data-spacing="1.65"
+                                    data-spacing="1.7"
                                     type="button"
                                 >
                                     Normal
@@ -1589,7 +1811,7 @@ button{
 
                                 <button
                                     class="pref-button"
-                                    data-spacing="1.9"
+                                    data-spacing="1.95"
                                     type="button"
                                 >
                                     Wide
@@ -1599,43 +1821,47 @@ button{
 
 
 
-                            <!-- TEXT COLOR -->
+                            <!-- WIDTH -->
 
                             <div class="preference-group">
 
                                 <span class="preference-label">
-                                    Text
+                                    Width
                                 </span>
 
-                                <button
-                                    class="pref-button active"
-                                    data-text-color="#342b26"
-                                    type="button"
-                                >
-                                    Brown
-                                </button>
+                                <div class="width-buttons">
 
-                                <button
-                                    class="pref-button"
-                                    data-text-color="#222222"
-                                    type="button"
-                                >
-                                    Black
-                                </button>
+                                    <button
+                                        class="width-button"
+                                        data-width="680px"
+                                        type="button"
+                                    >
+                                        Narrow
+                                    </button>
 
-                                <button
-                                    class="pref-button"
-                                    data-text-color="#625b54"
-                                    type="button"
-                                >
-                                    Soft
-                                </button>
+                                    <button
+                                        class="width-button active"
+                                        data-width="780px"
+                                        type="button"
+                                    >
+                                        Normal
+                                    </button>
+
+                                    <button
+                                        class="width-button"
+                                        data-width="900px"
+                                        type="button"
+                                    >
+                                        Wide
+                                    </button>
+
+                                </div>
 
                             </div>
 
 
 
-                            <!-- PAGE THEME -->
+                            <!-- PAGE -->
 
                             <div class="preference-group">
 
@@ -1662,11 +1888,11 @@ button{
                                     </button>
 
                                     <button
-                                        class="theme-button theme-black"
-                                        data-theme="black"
+                                        class="theme-button theme-sepia"
+                                        data-theme="sepia"
                                         type="button"
                                     >
-                                        Black
+                                        Sepia
                                     </button>
 
                                     <button
@@ -1678,11 +1904,11 @@ button{
                                     </button>
 
                                     <button
-                                        class="theme-button theme-sepia"
-                                        data-theme="sepia"
+                                        class="theme-button theme-black"
+                                        data-theme="black"
                                         type="button"
                                     >
-                                        Sepia
+                                        Black
                                     </button>
 
                                     <button
@@ -1699,93 +1925,40 @@ button{
 
                         </div>
 
+                    </section>
 
-                        <!-- HIGHLIGHT COLORS -->
 
-                        <div
-                            class="preference-group"
-                            style="margin-top:9px;"
-                        >
 
-                            <span class="preference-label">
-                                Highlight
-                            </span>
+                    <!-- =================================================
+                         NOTES
+                    ================================================== -->
 
-                            <div class="highlight-buttons">
+                    <section
+                        id="notesPanel"
+                        class="notes-panel"
+                    >
 
-                                <button
-                                    class="highlight-button highlight-yellow"
-                                    data-highlight="yellow"
-                                    type="button"
-                                    title="Yellow"
-                                ></button>
+                        <div class="notes-head">
 
-                                <button
-                                    class="highlight-button highlight-pink"
-                                    data-highlight="pink"
-                                    type="button"
-                                    title="Pink"
-                                ></button>
+                            <h2 class="notes-title">
+                                Notes
+                            </h2>
 
-                                <button
-                                    class="highlight-button highlight-green"
-                                    data-highlight="green"
-                                    type="button"
-                                    title="Green"
-                                ></button>
-
-                                <button
-                                    class="highlight-button highlight-blue"
-                                    data-highlight="blue"
-                                    type="button"
-                                    title="Blue"
-                                ></button>
-
-                                <button
-                                    class="highlight-button highlight-orange"
-                                    data-highlight="orange"
-                                    type="button"
-                                    title="Orange"
-                                ></button>
-
-                                <button
-                                    class="highlight-button highlight-purple"
-                                    data-highlight="purple"
-                                    type="button"
-                                    title="Purple"
-                                ></button>
-
-                                <button
-                                    class="highlight-button highlight-coral"
-                                    data-highlight="coral"
-                                    type="button"
-                                    title="Coral"
-                                ></button>
-
-                                <button
-                                    class="highlight-button highlight-lavender"
-                                    data-highlight="lavender"
-                                    type="button"
-                                    title="Lavender"
-                                ></button>
-
-                                <button
-                                    class="highlight-button highlight-mint"
-                                    data-highlight="mint"
-                                    type="button"
-                                    title="Mint"
-                                ></button>
-
-                                <button
-                                    class="highlight-button highlight-gray"
-                                    data-highlight="gray"
-                                    type="button"
-                                    title="Gray"
-                                ></button>
-
-                            </div>
+                            <button
+                                id="closeNotes"
+                                class="drawer-close"
+                                type="button"
+                                aria-label="Close notes"
+                            >
+                                ×
+                            </button>
 
                         </div>
+
+                        <div
+                            id="noteList"
+                            class="note-list"
+                        ></div>
 
                     </section>
 
@@ -1800,7 +1973,6 @@ button{
                         id="readerPaper"
                     >
 
-
                         <div
                             id="readerChapterLabel"
                             class="reader-chapter-label"
@@ -1808,11 +1980,9 @@ button{
                             CHAPTER 01
                         </div>
 
-
                         <h1 id="readerChapterTitle">
                             Chapter
                         </h1>
-
 
                         <div
                             id="readerStory"
@@ -1835,7 +2005,6 @@ button{
                                 ← Previous Chapter
                             </button>
 
-
                             <button
                                 id="nextChapterButton"
                                 class="nav-button"
@@ -1854,7 +2023,6 @@ button{
 
                         <section class="comments-section">
 
-
                             <div class="comments-title-row">
 
                                 <h2 class="comments-title">
@@ -1867,12 +2035,10 @@ button{
 
                             </div>
 
-
                             <div
                                 id="commentsList"
                                 class="comments-list"
                             ></div>
-
 
                             <form
                                 id="commentForm"
@@ -1882,14 +2048,14 @@ button{
                                 <div class="comment-form-grid">
 
                                     <input
-    id="commentName"
-    class="comment-input"
-    type="text"
-    maxlength="80"
-    placeholder="Your name"
-    required
-    readonly
->
+                                        id="commentName"
+                                        class="comment-input"
+                                        type="text"
+                                        maxlength="80"
+                                        placeholder="Your name"
+                                        required
+                                        readonly
+                                    >
 
                                     <textarea
                                         id="commentContent"
@@ -1901,7 +2067,6 @@ button{
 
                                 </div>
 
-
                                 <div class="comment-form-bottom">
 
                                     <button
@@ -1912,7 +2077,6 @@ button{
                                     </button>
 
                                 </div>
-
 
                                 <div
                                     id="commentStatus"
@@ -1938,13 +2102,37 @@ button{
 
 
 <!-- =========================================================
-     FLOATING HIGHLIGHT MENU
+     TEXT SELECTION MENU
 ========================================================= -->
 
 <div
     id="selectionHighlightMenu"
     class="selection-highlight-menu"
 >
+
+    <button
+        id="selectionHighlight"
+        class="selection-action"
+        type="button"
+    >
+        Highlight
+    </button>
+
+    <button
+        id="selectionUnderline"
+        class="selection-action"
+        type="button"
+    >
+        Underline
+    </button>
+
+    <button
+        id="selectionNote"
+        class="selection-action"
+        type="button"
+    >
+        Add Note
+    </button>
 
     <button
         class="highlight-button highlight-yellow"
@@ -1981,41 +2169,6 @@ button{
         title="Orange"
     ></button>
 
-    <button
-        class="highlight-button highlight-purple"
-        data-highlight="purple"
-        type="button"
-        title="Purple"
-    ></button>
-
-    <button
-        class="highlight-button highlight-coral"
-        data-highlight="coral"
-        type="button"
-        title="Coral"
-    ></button>
-
-    <button
-        class="highlight-button highlight-lavender"
-        data-highlight="lavender"
-        type="button"
-        title="Lavender"
-    ></button>
-
-    <button
-        class="highlight-button highlight-mint"
-        data-highlight="mint"
-        type="button"
-        title="Mint"
-    ></button>
-
-    <button
-        class="highlight-button highlight-gray"
-        data-highlight="gray"
-        type="button"
-        title="Gray"
-    ></button>
-
 </div>
 
 
@@ -2023,7 +2176,7 @@ button{
 <script>
 
 /* =========================================================
-   BASIC HELPERS
+   BASIC HELPER
 ========================================================= */
 
 function $(id){
@@ -2062,15 +2215,216 @@ const defaultReaderPreferences = {
 
     fontFamily:"serif",
 
-    fontSize:15,
+    fontSize:16,
 
-    lineHeight:1.65,
+    lineHeight:1.7,
 
-    textColor:"#342b26",
+    width:"780px",
 
     theme:"cream"
 
 };
+
+
+/* =========================================================
+   STORAGE HELPERS
+========================================================= */
+
+function getStorageKey(type,chapterId){
+
+    return (
+        "hed_" +
+        type +
+        "_" +
+        chapterId
+    );
+
+}
+
+
+function getChapterAnnotations(){
+
+    if(selectedChapterIndex < 0){
+
+        return [];
+
+    }
+
+    const chapter =
+        chapters[selectedChapterIndex];
+
+    if(!chapter){
+
+        return [];
+
+    }
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                getStorageKey(
+                    "annotations",
+                    chapter.id
+                )
+            )
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function saveChapterAnnotations(annotations){
+
+    if(selectedChapterIndex < 0){
+
+        return;
+
+    }
+
+    const chapter =
+        chapters[selectedChapterIndex];
+
+    if(!chapter){
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        getStorageKey(
+            "annotations",
+            chapter.id
+        ),
+        JSON.stringify(
+            annotations
+        )
+    );
+
+}
+
+
+/* =========================================================
+   BOOKMARKS
+========================================================= */
+
+function getBookmarks(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                "hed_bookmarks"
+            )
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function saveBookmarks(bookmarks){
+
+    localStorage.setItem(
+        "hed_bookmarks",
+        JSON.stringify(bookmarks)
+    );
+
+}
+
+
+function isCurrentChapterBookmarked(){
+
+    if(selectedChapterIndex < 0){
+
+        return false;
+
+    }
+
+    const chapter =
+        chapters[selectedChapterIndex];
+
+    return getBookmarks().includes(
+        chapter.id
+    );
+
+}
+
+
+function updateBookmarkButton(){
+
+    const button =
+        $("bookmarkButton");
+
+    const bookmarked =
+        isCurrentChapterBookmarked();
+
+    button.classList.toggle(
+        "bookmarked",
+        bookmarked
+    );
+
+    button.textContent =
+        bookmarked
+            ? "♥"
+            : "♡";
+
+    button.title =
+        bookmarked
+            ? "Remove bookmark"
+            : "Bookmark chapter";
+
+}
+
+
+$("bookmarkButton").onclick =
+    function(){
+
+        if(selectedChapterIndex < 0){
+
+            return;
+
+        }
+
+        const chapter =
+            chapters[selectedChapterIndex];
+
+        let bookmarks =
+            getBookmarks();
+
+        if(bookmarks.includes(chapter.id)){
+
+            bookmarks =
+                bookmarks.filter(
+                    function(id){
+                        return id !== chapter.id;
+                    }
+                );
+
+        }else{
+
+            bookmarks.push(
+                chapter.id
+            );
+
+        }
+
+        saveBookmarks(
+            bookmarks
+        );
+
+        updateBookmarkButton();
+
+    };
 
 
 /* =========================================================
@@ -2086,6 +2440,7 @@ async function loadStory(){
         );
 
         return;
+
     }
 
 
@@ -2095,7 +2450,10 @@ async function loadStory(){
             .select(
                 "id,title,author,description,cover_url,created_at"
             )
-            .eq("id",storyId)
+            .eq(
+                "id",
+                storyId
+            )
             .single();
 
 
@@ -2110,6 +2468,7 @@ async function loadStory(){
         );
 
         return;
+
     }
 
 
@@ -2155,6 +2514,7 @@ async function loadStory(){
         );
 
         return;
+
     }
 
 
@@ -2232,103 +2592,124 @@ function renderStoryInfo(){
 
 
     const description =
-    story.description ||
-    "No description yet.";
+        story.description ||
+        "No description yet.";
 
-const descriptionElement =
-    $("storyDescription");
+    const descriptionElement =
+        $("storyDescription");
 
-const words =
-    description.trim().split(/\s+/);
+    const words =
+        description.trim().split(/\s+/);
 
-const DESCRIPTION_LIMIT = 118;
+    const DESCRIPTION_LIMIT =
+        118;
 
-if (words.length > DESCRIPTION_LIMIT) {
 
-    const shortDescription =
-        words
-            .slice(0, DESCRIPTION_LIMIT)
-            .join(" ");
+    if(words.length > DESCRIPTION_LIMIT){
 
-    descriptionElement.innerHTML =
-        escapeHTML(shortDescription) +
-        "... " +
-        '<button type="button" class="book-description-more">See more</button>';
+        const shortDescription =
+            words
+                .slice(
+                    0,
+                    DESCRIPTION_LIMIT
+                )
+                .join(" ");
 
-    descriptionElement.classList.add(
-        "expanded"
-    );
 
-    const seeMoreButton =
-        descriptionElement.querySelector(
-            ".book-description-more"
-        );
+        descriptionElement.innerHTML =
+            escapeHTML(
+                shortDescription
+            ) +
+            "... " +
+            '<button type="button" class="book-description-more">See more</button>';
 
-    seeMoreButton.onclick =
-        function () {
 
-            descriptionElement.textContent =
-                description;
-
-            const seeLessButton =
-                document.createElement("button");
-
-            seeLessButton.type =
-                "button";
-
-            seeLessButton.className =
-                "book-description-more";
-
-            seeLessButton.textContent =
-                "See less";
-
-            descriptionElement.appendChild(
-                document.createTextNode(" ")
+        const seeMore =
+            descriptionElement.querySelector(
+                ".book-description-more"
             );
 
-            descriptionElement.appendChild(
-                seeLessButton
-            );
 
-            seeLessButton.onclick =
-                function () {
+        seeMore.onclick =
+            function(){
 
-                    descriptionElement.innerHTML =
-                        escapeHTML(shortDescription) +
-                        "... ";
+                descriptionElement.textContent =
+                    description;
 
-                    const newSeeMore =
-                        document.createElement("button");
-
-                    newSeeMore.type =
-                        "button";
-
-                    newSeeMore.className =
-                        "book-description-more";
-
-                    newSeeMore.textContent =
-                        "See more";
-
-                    descriptionElement.appendChild(
-                        newSeeMore
+                const seeLess =
+                    document.createElement(
+                        "button"
                     );
 
-                    newSeeMore.onclick =
-                        seeMoreButton.onclick;
-                };
-        };
+                seeLess.type =
+                    "button";
 
-} else {
+                seeLess.className =
+                    "book-description-more";
 
-    descriptionElement.textContent =
-        description;
-}
+                seeLess.textContent =
+                    "See less";
+
+                descriptionElement.appendChild(
+                    document.createTextNode(" ")
+                );
+
+                descriptionElement.appendChild(
+                    seeLess
+                );
+
+
+                seeLess.onclick =
+                    function(){
+
+                        descriptionElement.innerHTML =
+                            escapeHTML(
+                                shortDescription
+                            ) +
+                            "... ";
+
+
+                        const newSeeMore =
+                            document.createElement(
+                                "button"
+                            );
+
+                        newSeeMore.type =
+                            "button";
+
+                        newSeeMore.className =
+                            "book-description-more";
+
+                        newSeeMore.textContent =
+                            "See more";
+
+
+                        descriptionElement.appendChild(
+                            newSeeMore
+                        );
+
+
+                        newSeeMore.onclick =
+                            seeMore.onclick;
+
+                    };
+
+            };
+
+    }else{
+
+        descriptionElement.textContent =
+            description;
+
+    }
 
 
     if(story.cover_url){
 
         const image =
-            document.createElement("img");
+            document.createElement(
+                "img"
+            );
 
         image.src =
             story.cover_url;
@@ -2336,6 +2717,7 @@ if (words.length > DESCRIPTION_LIMIT) {
         image.alt =
             story.title ||
             "Story cover";
+
 
         image.onload =
             function(){
@@ -2345,9 +2727,12 @@ if (words.length > DESCRIPTION_LIMIT) {
                     .add("hidden");
 
                 $("coverWrap")
-                    .appendChild(image);
+                    .appendChild(
+                        image
+                    );
 
             };
+
 
         image.onerror =
             function(){
@@ -2370,7 +2755,6 @@ function renderChapterList(){
     const list =
         $("chapterList");
 
-
     list.innerHTML =
         "";
 
@@ -2383,6 +2767,7 @@ function renderChapterList(){
             "</div>";
 
         return;
+
     }
 
 
@@ -2390,7 +2775,9 @@ function renderChapterList(){
         function(chapter,index){
 
             const button =
-                document.createElement("button");
+                document.createElement(
+                    "button"
+                );
 
 
             button.type =
@@ -2403,8 +2790,12 @@ function renderChapterList(){
 
             button.innerHTML =
                 '<span class="chapter-number">' +
-                    String(index + 1)
-                        .padStart(2,"0") +
+                    String(
+                        index + 1
+                    ).padStart(
+                        2,
+                        "0"
+                    ) +
                 "</span>" +
 
                 '<span class="chapter-title-small">' +
@@ -2418,12 +2809,20 @@ function renderChapterList(){
             button.onclick =
                 function(){
 
-                    openChapter(index);
+                    openChapter(
+                        index
+                    );
+
+                    setChapterDrawer(
+                        false
+                    );
 
                 };
 
 
-            list.appendChild(button);
+            list.appendChild(
+                button
+            );
 
         }
     );
@@ -2486,8 +2885,12 @@ function openChapter(index){
     $("readerChapterLabel")
         .textContent =
             "CHAPTER " +
-            String(index + 1)
-                .padStart(2,"0");
+            String(
+                index + 1
+            ).padStart(
+                2,
+                "0"
+            );
 
 
     $("readerChapterTitle")
@@ -2522,21 +2925,15 @@ function openChapter(index){
 
     applySavedReaderPreferences();
 
-
-    loadHighlights();
-
+    loadAnnotations();
 
     updateChapterNavigation();
 
-
     updateActiveChapterButton();
 
+    updateBookmarkButton();
 
-    $("readerChapterPosition")
-        .textContent =
-            (index + 1) +
-            " / " +
-            chapters.length;
+    renderNotes();
 
 
     $("readerShell")
@@ -2555,24 +2952,21 @@ function openChapter(index){
 
 function updateChapterNavigation(){
 
-    const previous =
-        $("previousChapterButton");
-
-    const next =
-        $("nextChapterButton");
-
-
-    previous.classList.toggle(
-        "hidden",
-        selectedChapterIndex <= 0
-    );
+    $("previousChapterButton")
+        .classList
+        .toggle(
+            "hidden",
+            selectedChapterIndex <= 0
+        );
 
 
-    next.classList.toggle(
-        "hidden",
-        selectedChapterIndex >=
-        chapters.length - 1
-    );
+    $("nextChapterButton")
+        .classList
+        .toggle(
+            "hidden",
+            selectedChapterIndex >=
+            chapters.length - 1
+        );
 
 }
 
@@ -2626,29 +3020,19 @@ $("nextChapterButton").onclick =
 
 function setChapterDrawer(open){
 
-    const drawer =
-        $("chapterDrawer");
-
-    const layout =
-        $("readerLayout");
-
-
-    drawer.classList.toggle(
-        "open",
-        open
-    );
+    $("chapterDrawer")
+        .classList
+        .toggle(
+            "open",
+            open
+        );
 
 
-    layout.classList.toggle(
-        "chapter-closed",
-        !open
-    );
-
-
-    $("chapterToggleButton")
-        .setAttribute(
-            "aria-expanded",
-            String(open)
+    $("readerLayout")
+        .classList
+        .toggle(
+            "chapter-closed",
+            !open
         );
 
 }
@@ -2660,10 +3044,13 @@ $("chapterToggleButton").onclick =
         const open =
             !$("chapterDrawer")
                 .classList
-                .contains("open");
+                .contains(
+                    "open"
+                );
 
-
-        setChapterDrawer(open);
+        setChapterDrawer(
+            open
+        );
 
     };
 
@@ -2671,13 +3058,15 @@ $("chapterToggleButton").onclick =
 $("closeChapterDrawer").onclick =
     function(){
 
-        setChapterDrawer(false);
+        setChapterDrawer(
+            false
+        );
 
     };
 
 
 /* =========================================================
-   READING PREFERENCES
+   PREFERENCES
 ========================================================= */
 
 function setPreferencesOpen(open){
@@ -2689,13 +3078,6 @@ function setPreferencesOpen(open){
             open
         );
 
-
-    $("preferencesToggleButton")
-        .setAttribute(
-            "aria-expanded",
-            String(open)
-        );
-
 }
 
 
@@ -2705,10 +3087,13 @@ $("preferencesToggleButton").onclick =
         const open =
             !$("preferencesPanel")
                 .classList
-                .contains("open");
+                .contains(
+                    "open"
+                );
 
-
-        setPreferencesOpen(open);
+        setPreferencesOpen(
+            open
+        );
 
     };
 
@@ -2716,7 +3101,52 @@ $("preferencesToggleButton").onclick =
 $("closePreferences").onclick =
     function(){
 
-        setPreferencesOpen(false);
+        setPreferencesOpen(
+            false
+        );
+
+    };
+
+
+/* =========================================================
+   NOTES PANEL
+========================================================= */
+
+function setNotesOpen(open){
+
+    $("notesPanel")
+        .classList
+        .toggle(
+            "open",
+            open
+        );
+
+}
+
+
+$("notesToggleButton").onclick =
+    function(){
+
+        const open =
+            !$("notesPanel")
+                .classList
+                .contains(
+                    "open"
+                );
+
+        setNotesOpen(
+            open
+        );
+
+    };
+
+
+$("closeNotes").onclick =
+    function(){
+
+        setNotesOpen(
+            false
+        );
 
     };
 
@@ -2753,11 +3183,9 @@ function getReaderPreferences(){
 }
 
 
-function saveReaderPreferences(){
-
-    const preferences =
-        getReaderPreferences();
-
+function saveReaderPreferences(
+    preferences
+){
 
     localStorage.setItem(
         "hed_reader_preferences",
@@ -2790,8 +3218,8 @@ function applySavedReaderPreferences(){
     );
 
 
-    applyTextColor(
-        preferences.textColor
+    applyReaderWidth(
+        preferences.width
     );
 
 
@@ -2855,32 +3283,30 @@ function applyFont(font){
 }
 
 
-$("fontFamily").addEventListener(
-    "change",
-    function(){
+$("fontFamily")
+    .addEventListener(
+        "change",
+        function(){
 
-        const preferences =
-            getReaderPreferences();
-
-
-        preferences.fontFamily =
-            this.value;
+            const preferences =
+                getReaderPreferences();
 
 
-        localStorage.setItem(
-            "hed_reader_preferences",
-            JSON.stringify(
+            preferences.fontFamily =
+                this.value;
+
+
+            saveReaderPreferences(
                 preferences
-            )
-        );
+            );
 
 
-        applyFont(
-            this.value
-        );
+            applyFont(
+                this.value
+            );
 
-    }
-);
+        }
+    );
 
 
 /* =========================================================
@@ -2902,34 +3328,36 @@ function applyFontSize(size){
 }
 
 
-$("fontSize").addEventListener(
-    "input",
-    function(){
+$("fontSize")
+    .addEventListener(
+        "input",
+        function(){
 
-        const size =
-            Number(this.value);
-
-
-        const preferences =
-            getReaderPreferences();
-
-
-        preferences.fontSize =
-            size;
+            const size =
+                Number(
+                    this.value
+                );
 
 
-        localStorage.setItem(
-            "hed_reader_preferences",
-            JSON.stringify(
+            const preferences =
+                getReaderPreferences();
+
+
+            preferences.fontSize =
+                size;
+
+
+            saveReaderPreferences(
                 preferences
-            )
-        );
+            );
 
 
-        applyFontSize(size);
+            applyFontSize(
+                size
+            );
 
-    }
-);
+        }
+    );
 
 
 /* =========================================================
@@ -2971,11 +3399,8 @@ document
                         value;
 
 
-                    localStorage.setItem(
-                        "hed_reader_preferences",
-                        JSON.stringify(
-                            preferences
-                        )
+                    saveReaderPreferences(
+                        preferences
                     );
 
 
@@ -2994,22 +3419,24 @@ document
 
 
 /* =========================================================
-   TEXT COLOR
+   READING WIDTH
 ========================================================= */
 
-function applyTextColor(color){
+function applyReaderWidth(width){
 
-    $("readerStory")
+    document.documentElement
         .style
-        .color =
-            color;
+        .setProperty(
+            "--reader-width",
+            width
+        );
 
 }
 
 
 document
     .querySelectorAll(
-        "[data-text-color]"
+        "[data-width]"
     )
     .forEach(
         function(button){
@@ -3018,28 +3445,25 @@ document
                 "click",
                 function(){
 
-                    const color =
-                        this.dataset.textColor;
+                    const width =
+                        this.dataset.width;
 
 
                     const preferences =
                         getReaderPreferences();
 
 
-                    preferences.textColor =
-                        color;
+                    preferences.width =
+                        width;
 
 
-                    localStorage.setItem(
-                        "hed_reader_preferences",
-                        JSON.stringify(
-                            preferences
-                        )
+                    saveReaderPreferences(
+                        preferences
                     );
 
 
-                    applyTextColor(
-                        color
+                    applyReaderWidth(
+                        width
                     );
 
 
@@ -3053,7 +3477,7 @@ document
 
 
 /* =========================================================
-   PAGE THEMES
+   PAGE THEME
 ========================================================= */
 
 function applyTheme(theme){
@@ -3061,8 +3485,7 @@ function applyTheme(theme){
     const paper =
         $("readerPaper");
 
-
-    const story =
+    const storyElement =
         $("readerStory");
 
 
@@ -3080,10 +3503,10 @@ function applyTheme(theme){
             border:"#dddddd"
         },
 
-        black:{
-            background:"#000000",
-            color:"#f5f5f5",
-            border:"#333333"
+        sepia:{
+            background:"#f1e4c9",
+            color:"#574936",
+            border:"#d7c7a8"
         },
 
         dark:{
@@ -3092,10 +3515,10 @@ function applyTheme(theme){
             border:"#3b3c39"
         },
 
-        sepia:{
-            background:"#f1e4c9",
-            color:"#574936",
-            border:"#d7c7a8"
+        black:{
+            background:"#000000",
+            color:"#f5f5f5",
+            border:"#333333"
         },
 
         night:{
@@ -3118,7 +3541,7 @@ function applyTheme(theme){
     paper.style.borderColor =
         selected.border;
 
-    story.style.color =
+    storyElement.style.color =
         selected.color;
 
 }
@@ -3147,15 +3570,14 @@ document
                         theme;
 
 
-                    localStorage.setItem(
-                        "hed_reader_preferences",
-                        JSON.stringify(
-                            preferences
-                        )
+                    saveReaderPreferences(
+                        preferences
                     );
 
 
-                    applyTheme(theme);
+                    applyTheme(
+                        theme
+                    );
 
 
                     updatePreferenceButtons();
@@ -3200,19 +3622,1287 @@ function updatePreferenceButtons(){
 
     document
         .querySelectorAll(
-            "[data-text-color]"
+            "[data-width]"
         )
         .forEach(
             function(button){
 
                 button.classList.toggle(
                     "active",
-                    button.dataset.textColor ===
-                    preferences.textColor
+                    button.dataset.width ===
+                    preferences.width
                 );
 
             }
         );
+
+}
+
+
+/* =========================================================
+   TEXT POSITION HELPERS
+========================================================= */
+
+function getTextOffset(
+    root,
+    targetNode,
+    targetOffset
+){
+
+    let offset = 0;
+
+    const walker =
+        document.createTreeWalker(
+            root,
+            NodeFilter.SHOW_TEXT
+        );
+
+
+    let node;
+
+
+    while(
+        node =
+        walker.nextNode()
+    ){
+
+        if(node === targetNode){
+
+            return (
+                offset +
+                targetOffset
+            );
+
+        }
+
+
+        offset +=
+            node.nodeValue.length;
+
+    }
+
+
+    return offset;
+
+}
+
+
+function getRangeOffsets(range){
+
+    const root =
+        $("readerStory");
+
+
+    return {
+
+        start:
+            getTextOffset(
+                root,
+                range.startContainer,
+                range.startOffset
+            ),
+
+        end:
+            getTextOffset(
+                root,
+                range.endContainer,
+                range.endOffset
+            )
+
+    };
+
+}
+
+
+/* =========================================================
+   RANGE FROM TEXT OFFSETS
+========================================================= */
+
+function createRangeFromOffsets(
+    start,
+    end
+){
+
+    const root =
+        $("readerStory");
+
+
+    const walker =
+        document.createTreeWalker(
+            root,
+            NodeFilter.SHOW_TEXT
+        );
+
+
+    let node;
+
+    let position = 0;
+
+    let startNode = null;
+    let endNode = null;
+
+    let startOffset = 0;
+    let endOffset = 0;
+
+
+    while(
+        node =
+        walker.nextNode()
+    ){
+
+        const nextPosition =
+            position +
+            node.nodeValue.length;
+
+
+        if(
+            startNode === null &&
+            start >= position &&
+            start <= nextPosition
+        ){
+
+            startNode =
+                node;
+
+            startOffset =
+                start - position;
+
+        }
+
+
+        if(
+            endNode === null &&
+            end >= position &&
+            end <= nextPosition
+        ){
+
+            endNode =
+                node;
+
+            endOffset =
+                end - position;
+
+            break;
+
+        }
+
+
+        position =
+            nextPosition;
+
+    }
+
+
+    if(
+        !startNode ||
+        !endNode
+    ){
+
+        return null;
+
+    }
+
+
+    const range =
+        document.createRange();
+
+
+    try{
+
+        range.setStart(
+            startNode,
+            startOffset
+        );
+
+        range.setEnd(
+            endNode,
+            endOffset
+        );
+
+        return range;
+
+    }catch(error){
+
+        return null;
+
+    }
+
+}
+
+
+/* =========================================================
+   WRAP RANGE
+========================================================= */
+
+function wrapRange(
+    range,
+    className
+){
+
+    if(
+        !range ||
+        range.collapsed
+    ){
+
+        return false;
+
+    }
+
+
+    const element =
+        document.createElement(
+            "span"
+        );
+
+
+    element.className =
+        className;
+
+
+    try{
+
+        range.surroundContents(
+            element
+        );
+
+        return true;
+
+    }catch(error){
+
+        try{
+
+            const fragment =
+                range.extractContents();
+
+
+            if(
+                !fragment.textContent.trim()
+            ){
+
+                return false;
+
+            }
+
+
+            element.appendChild(
+                fragment
+            );
+
+
+            range.insertNode(
+                element
+            );
+
+
+            return true;
+
+        }catch(innerError){
+
+            console.error(
+                innerError
+            );
+
+            return false;
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD ANNOTATIONS
+========================================================= */
+
+function loadAnnotations(){
+
+    const annotations =
+        getChapterAnnotations();
+
+
+    if(!annotations.length){
+
+        return;
+
+    }
+
+
+    /*
+       Work from the end of the text toward
+       the beginning so earlier offsets
+       remain stable while spans are added.
+    */
+
+    const sorted =
+        [...annotations].sort(
+            function(a,b){
+
+                return (
+                    b.start -
+                    a.start
+                );
+
+            }
+        );
+
+
+    sorted.forEach(
+        function(annotation){
+
+            const range =
+                createRangeFromOffsets(
+                    annotation.start,
+                    annotation.end
+                );
+
+
+            if(!range){
+
+                return;
+
+            }
+
+
+            let className =
+                "";
+
+
+            if(
+                annotation.type ===
+                "highlight"
+            ){
+
+                className =
+                    "reader-highlight highlight-" +
+                    annotation.color +
+                    "-mark";
+
+            }
+
+
+            if(
+                annotation.type ===
+                "underline"
+            ){
+
+                className =
+                    "reader-underline";
+
+            }
+
+
+            if(!className){
+
+                return;
+
+            }
+
+
+            wrapRange(
+                range,
+                className
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SAVE ANNOTATION
+========================================================= */
+
+function saveAnnotation(
+    type,
+    color,
+    note
+){
+
+    if(
+        !savedSelectionRange ||
+        savedSelectionRange.collapsed
+    ){
+
+        return;
+
+    }
+
+
+    const range =
+        savedSelectionRange;
+
+
+    if(
+        !selectionIsInsideReader(
+            range
+        )
+    ){
+
+        savedSelectionRange =
+            null;
+
+        return;
+
+    }
+
+
+    const offsets =
+        getRangeOffsets(
+            range
+        );
+
+
+    const selectedText =
+        range.toString();
+
+
+    if(
+        !selectedText.trim()
+    ){
+
+        savedSelectionRange =
+            null;
+
+        return;
+
+    }
+
+
+    const annotation = {
+
+        id:
+            "annotation_" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .slice(2),
+
+        type:
+            type,
+
+        color:
+            color || null,
+
+        note:
+            note || "",
+
+        text:
+            selectedText,
+
+        start:
+            offsets.start,
+
+        end:
+            offsets.end,
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    const annotations =
+        getChapterAnnotations();
+
+
+    annotations.push(
+        annotation
+    );
+
+
+    saveChapterAnnotations(
+        annotations
+    );
+
+
+    return annotation;
+
+}
+
+
+/* =========================================================
+   HIGHLIGHT
+========================================================= */
+
+function applyHighlight(
+    color
+){
+
+    if(!savedSelectionRange){
+
+        return;
+
+    }
+
+
+    const annotation =
+        saveAnnotation(
+            "highlight",
+            color,
+            ""
+        );
+
+
+    if(!annotation){
+
+        return;
+
+    }
+
+
+    const range =
+        createRangeFromOffsets(
+            annotation.start,
+            annotation.end
+        );
+
+
+    if(range){
+
+        wrapRange(
+            range,
+            "reader-highlight highlight-" +
+            color +
+            "-mark"
+        );
+
+    }
+
+
+    clearSelection();
+
+    renderNotes();
+
+}
+
+
+/* =========================================================
+   UNDERLINE
+========================================================= */
+
+function applyUnderline(){
+
+    if(!savedSelectionRange){
+
+        return;
+
+    }
+
+
+    const annotation =
+        saveAnnotation(
+            "underline",
+            null,
+            ""
+        );
+
+
+    if(!annotation){
+
+        return;
+
+    }
+
+
+    const range =
+        createRangeFromOffsets(
+            annotation.start,
+            annotation.end
+        );
+
+
+    if(range){
+
+        wrapRange(
+            range,
+            "reader-underline"
+        );
+
+    }
+
+
+    clearSelection();
+
+    renderNotes();
+
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+function applyNote(){
+
+    if(!savedSelectionRange){
+
+        return;
+
+    }
+
+
+    const text =
+        savedSelectionRange
+            .toString()
+            .trim();
+
+
+    if(!text){
+
+        return;
+
+    }
+
+
+    const note =
+        prompt(
+            "Write a note for this passage:"
+        );
+
+
+    if(
+        note === null
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        !note.trim()
+    ){
+
+        return;
+
+    }
+
+
+    const annotation =
+        saveAnnotation(
+            "note",
+            null,
+            note.trim()
+        );
+
+
+    if(!annotation){
+
+        return;
+
+    }
+
+
+    clearSelection();
+
+    renderNotes();
+
+    setNotesOpen(
+        true
+    );
+
+}
+
+
+/* =========================================================
+   SELECTION MENU
+========================================================= */
+
+function selectionIsInsideReader(
+    range
+){
+
+    if(!range){
+
+        return false;
+
+    }
+
+
+    return $("readerStory")
+        .contains(
+            range.commonAncestorContainer
+        );
+
+}
+
+
+function clearSelection(){
+
+    const selection =
+        window.getSelection();
+
+
+    if(selection){
+
+        selection.removeAllRanges();
+
+    }
+
+
+    savedSelectionRange =
+        null;
+
+
+    $("selectionHighlightMenu")
+        .classList
+        .remove(
+            "open"
+        );
+
+}
+
+
+function hideSelectionMenu(){
+
+    $("selectionHighlightMenu")
+        .classList
+        .remove(
+            "open"
+        );
+
+}
+
+
+function showSelectionHighlightMenu(){
+
+    const selection =
+        window.getSelection();
+
+
+    if(
+        !selection ||
+        selection.rangeCount === 0 ||
+        selection.isCollapsed
+    ){
+
+        hideSelectionMenu();
+
+        return;
+
+    }
+
+
+    const range =
+        selection.getRangeAt(0);
+
+
+    if(
+        !selectionIsInsideReader(
+            range
+        )
+    ){
+
+        hideSelectionMenu();
+
+        return;
+
+    }
+
+
+    const text =
+        selection
+            .toString()
+            .trim();
+
+
+    if(!text){
+
+        hideSelectionMenu();
+
+        return;
+
+    }
+
+
+    savedSelectionRange =
+        range.cloneRange();
+
+
+    const menu =
+        $("selectionHighlightMenu");
+
+
+    menu.classList.add(
+        "open"
+    );
+
+
+    const rect =
+        range.getBoundingClientRect();
+
+
+    const menuWidth =
+        menu.offsetWidth || 330;
+
+
+    const menuHeight =
+        menu.offsetHeight || 45;
+
+
+    let left =
+        rect.left +
+        rect.width / 2 -
+        menuWidth / 2;
+
+
+    let top =
+        rect.top -
+        menuHeight -
+        8;
+
+
+    left =
+        Math.max(
+            8,
+            Math.min(
+                left,
+                window.innerWidth -
+                menuWidth -
+                8
+            )
+        );
+
+
+    if(top < 8){
+
+        top =
+            Math.min(
+                window.innerHeight -
+                menuHeight -
+                8,
+
+                rect.bottom +
+                8
+            );
+
+    }
+
+
+    menu.style.left =
+        left + "px";
+
+    menu.style.top =
+        top + "px";
+
+}
+
+
+document.addEventListener(
+    "selectionchange",
+    function(){
+
+        clearTimeout(
+            window.hedSelectionTimer
+        );
+
+
+        window.hedSelectionTimer =
+            setTimeout(
+                showSelectionHighlightMenu,
+                80
+            );
+
+    }
+);
+
+
+document.addEventListener(
+    "mousedown",
+    function(event){
+
+        const menu =
+            $("selectionHighlightMenu");
+
+
+        if(
+            menu.contains(
+                event.target
+            )
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            !event.target.closest(
+                "#readerStory"
+            )
+        ){
+
+            hideSelectionMenu();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "scroll",
+    function(){
+
+        const menu =
+            $("selectionHighlightMenu");
+
+
+        if(
+            menu.classList.contains(
+                "open"
+            )
+        ){
+
+            showSelectionHighlightMenu();
+
+        }
+
+    },
+    true
+);
+
+
+/* =========================================================
+   SELECTION BUTTONS
+========================================================= */
+
+$("selectionHighlight")
+    .onclick =
+    function(){
+
+        applyHighlight(
+            "yellow"
+        );
+
+    };
+
+
+$("selectionUnderline")
+    .onclick =
+    function(){
+
+        applyUnderline();
+
+    };
+
+
+$("selectionNote")
+    .onclick =
+    function(){
+
+        applyNote();
+
+    };
+
+
+document
+    .querySelectorAll(
+        "#selectionHighlightMenu [data-highlight]"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "mousedown",
+                function(event){
+
+                    event.preventDefault();
+
+                }
+            );
+
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    applyHighlight(
+                        this.dataset.highlight
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   NOTES
+========================================================= */
+
+function renderNotes(){
+
+    const list =
+        $("noteList");
+
+
+    list.innerHTML =
+        "";
+
+
+    const annotations =
+        getChapterAnnotations()
+            .filter(
+                function(annotation){
+
+                    return (
+                        annotation.type ===
+                        "note"
+                    );
+
+                }
+            );
+
+
+    if(!annotations.length){
+
+        list.innerHTML =
+            '<div class="empty-message">' +
+            "No notes in this chapter yet." +
+            "</div>";
+
+        return;
+
+    }
+
+
+    annotations.forEach(
+        function(annotation){
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "note-card";
+
+
+            card.innerHTML =
+
+                '<p class="note-card-quote">' +
+                    "“" +
+                    escapeHTML(
+                        annotation.text
+                    ) +
+                    "”" +
+                "</p>" +
+
+                '<p class="note-card-text">' +
+                    escapeHTML(
+                        annotation.note
+                    ) +
+                "</p>" +
+
+                '<div class="note-card-actions">' +
+
+                    '<button type="button" data-note-edit="' +
+                        escapeAttribute(
+                            annotation.id
+                        ) +
+                    '">' +
+                        "Edit" +
+                    "</button>" +
+
+                    '<button type="button" data-note-delete="' +
+                        escapeAttribute(
+                            annotation.id
+                        ) +
+                    '">' +
+                        "Delete" +
+                    "</button>" +
+
+                "</div>";
+
+
+            list.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    list
+        .querySelectorAll(
+            "[data-note-edit]"
+        )
+        .forEach(
+            function(button){
+
+                button.onclick =
+                    function(){
+
+                        editNote(
+                            this.dataset.noteEdit
+                        );
+
+                    };
+
+            }
+        );
+
+
+    list
+        .querySelectorAll(
+            "[data-note-delete]"
+        )
+        .forEach(
+            function(button){
+
+                button.onclick =
+                    function(){
+
+                        deleteNote(
+                            this.dataset.noteDelete
+                        );
+
+                    };
+
+            }
+        );
+
+}
+
+
+function editNote(id){
+
+    const annotations =
+        getChapterAnnotations();
+
+
+    const annotation =
+        annotations.find(
+            function(item){
+
+                return item.id === id;
+
+            }
+        );
+
+
+    if(!annotation){
+
+        return;
+
+    }
+
+
+    const newNote =
+        prompt(
+            "Edit your note:",
+            annotation.note
+        );
+
+
+    if(
+        newNote === null
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        !newNote.trim()
+    ){
+
+        return;
+
+    }
+
+
+    annotation.note =
+        newNote.trim();
+
+
+    saveChapterAnnotations(
+        annotations
+    );
+
+
+    renderNotes();
+
+}
+
+
+function deleteNote(id){
+
+    if(
+        !confirm(
+            "Delete this note?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    let annotations =
+        getChapterAnnotations();
+
+
+    annotations =
+        annotations.filter(
+            function(annotation){
+
+                return annotation.id !== id;
+
+            }
+        );
+
+
+    saveChapterAnnotations(
+        annotations
+    );
+
+
+    /*
+       Rebuild the chapter so the
+       saved annotation state is clean.
+    */
+
+    const chapter =
+        chapters[
+            selectedChapterIndex
+        ];
+
+
+    const content =
+        chapter.content ||
+        "";
+
+
+    if(
+        /<\/?[a-z][\s\S]*>/i.test(
+            content
+        )
+    ){
+
+        $("readerStory")
+            .innerHTML =
+                content;
+
+    }else{
+
+        $("readerStory")
+            .textContent =
+                content;
+
+    }
+
+
+    loadAnnotations();
+
+    renderNotes();
 
 }
 
@@ -3274,6 +4964,7 @@ async function loadComments(){
                 "</div>";
 
         return;
+
     }
 
 
@@ -3284,7 +4975,9 @@ async function loadComments(){
 }
 
 
-function renderComments(comments){
+function renderComments(
+    comments
+){
 
     const list =
         $("commentsList");
@@ -3302,6 +4995,7 @@ function renderComments(comments){
             "</div>";
 
         return;
+
     }
 
 
@@ -3448,576 +5142,160 @@ function renderComments(comments){
    COMMENT FORM
 ========================================================= */
 
-$("commentForm").addEventListener(
-    "submit",
-    async function(event){
+$("commentForm")
+    .addEventListener(
+        "submit",
+        async function(event){
 
-        event.preventDefault();
-
-        const status =
-            $("commentStatus");
-
-        const name =
-            $("commentName")
-                .value
-                .trim();
-
-        const content =
-            $("commentContent")
-                .value
-                .trim();
+            event.preventDefault();
 
 
-        if(!name){
-
-            status.textContent =
-                "Your nickname is missing.";
-
-            return;
-
-        }
+            const status =
+                $("commentStatus");
 
 
-        if(!content){
-
-            status.textContent =
-                "Please write a comment.";
-
-            return;
-
-        }
+            const name =
+                $("commentName")
+                    .value
+                    .trim();
 
 
-        if(selectedChapterIndex < 0){
-
-            status.textContent =
-                "No chapter is selected.";
-
-            return;
-
-        }
+            const content =
+                $("commentContent")
+                    .value
+                    .trim();
 
 
-        const chapter =
-            chapters[
-                selectedChapterIndex
-            ];
-
-
-        if(!chapter || !chapter.id){
-
-            status.textContent =
-                "The chapter could not be found.";
-
-            return;
-
-        }
-
-
-        status.textContent =
-            "Posting…";
-
-
-        try{
-
-            const result =
-                await supabaseClient
-                    .from("comments")
-                    .insert({
-
-                        target_type:
-                            "chapter",
-
-                        target_id:
-                            chapter.id,
-
-                        name:
-                            name,
-
-                        content:
-                            content
-
-                    });
-
-
-            if(result.error){
-
-                console.error(
-                    "COMMENT ERROR:",
-                    result.error
-                );
+            if(!name){
 
                 status.textContent =
-                    "Could not post: " +
-                    result.error.message;
+                    "Your nickname is missing.";
 
                 return;
 
             }
 
 
-            $("commentContent")
-                .value =
-                    "";
+            if(!content){
+
+                status.textContent =
+                    "Please write a comment.";
+
+                return;
+
+            }
 
 
-            $("commentName")
-                .value =
-                    window.readerNickname ||
-                    name;
+            if(
+                selectedChapterIndex < 0
+            ){
+
+                status.textContent =
+                    "No chapter is selected.";
+
+                return;
+
+            }
+
+
+            const chapter =
+                chapters[
+                    selectedChapterIndex
+                ];
+
+
+            if(
+                !chapter ||
+                !chapter.id
+            ){
+
+                status.textContent =
+                    "The chapter could not be found.";
+
+                return;
+
+            }
 
 
             status.textContent =
-                "Comment posted.";
+                "Posting…";
 
 
-            await loadComments();
+            try{
 
+                const result =
+                    await supabaseClient
+                        .from("comments")
+                        .insert({
 
-        }catch(error){
+                            target_type:
+                                "chapter",
 
-            console.error(
-                "COMMENT ERROR:",
-                error
-            );
+                            target_id:
+                                chapter.id,
 
+                            name:
+                                name,
 
-            status.textContent =
-                "Could not post: " +
-                (
-                    error.message ||
-                    "Unknown error"
-                );
+                            content:
+                                content
 
-        }
+                        });
 
-    }
-);
 
-/* =========================================================
-   TEXT SELECTION / HIGHLIGHTING
-========================================================= */
+                if(result.error){
 
-function selectionIsInsideReader(range){
-
-    if(!range){
-
-        return false;
-
-    }
-
-
-    return $("readerStory")
-        .contains(
-            range.commonAncestorContainer
-        );
-
-}
-
-
-function hideSelectionHighlightMenu(){
-
-    $("selectionHighlightMenu")
-        .classList
-        .remove("open");
-
-}
-
-
-function showSelectionHighlightMenu(){
-
-    const selection =
-        window.getSelection();
-
-
-    if(
-        !selection ||
-        selection.rangeCount === 0 ||
-        selection.isCollapsed
-    ){
-
-        hideSelectionHighlightMenu();
-
-        return;
-
-    }
-
-
-    const range =
-        selection.getRangeAt(0);
-
-
-    if(
-        !selectionIsInsideReader(range)
-    ){
-
-        hideSelectionHighlightMenu();
-
-        return;
-
-    }
-
-
-    savedSelectionRange =
-        range.cloneRange();
-
-
-    const rect =
-        range.getBoundingClientRect();
-
-
-    const menu =
-        $("selectionHighlightMenu");
-
-
-    menu.classList.add("open");
-
-
-    const menuWidth =
-        menu.offsetWidth || 250;
-
-
-    const menuHeight =
-        menu.offsetHeight || 40;
-
-
-    const gap = 8;
-
-
-    let left =
-        rect.left +
-        rect.width / 2 -
-        menuWidth / 2;
-
-
-    let top =
-        rect.top -
-        menuHeight -
-        gap;
-
-
-    left =
-        Math.max(
-            8,
-            Math.min(
-                left,
-                window.innerWidth -
-                menuWidth -
-                8
-            )
-        );
-
-
-    if(top < 8){
-
-        top =
-            Math.min(
-                window.innerHeight -
-                menuHeight -
-                8,
-
-                rect.bottom +
-                gap
-            );
-
-    }
-
-
-    menu.style.left =
-        left + "px";
-
-
-    menu.style.top =
-        top + "px";
-
-}
-
-
-document.addEventListener(
-    "selectionchange",
-    function(){
-
-        clearTimeout(
-            window.hedSelectionTimer
-        );
-
-
-        window.hedSelectionTimer =
-            setTimeout(
-                showSelectionHighlightMenu,
-                60
-            );
-
-    }
-);
-
-
-document.addEventListener(
-    "scroll",
-    function(){
-
-        const menu =
-            $("selectionHighlightMenu");
-
-
-        if(
-            menu.classList.contains(
-                "open"
-            )
-        ){
-
-            showSelectionHighlightMenu();
-
-        }
-
-    },
-    true
-);
-
-
-document.addEventListener(
-    "mousedown",
-    function(event){
-
-        const menu =
-            $("selectionHighlightMenu");
-
-
-        if(
-            menu.contains(
-                event.target
-            )
-        ){
-
-            return;
-
-        }
-
-
-        if(
-            !event.target.closest(
-                "#readerStory"
-            )
-        ){
-
-            hideSelectionHighlightMenu();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   HIGHLIGHT BUTTONS
-========================================================= */
-
-document
-    .querySelectorAll(
-        "[data-highlight]"
-    )
-    .forEach(
-        function(button){
-
-            button.addEventListener(
-                "mousedown",
-                function(event){
-
-                    event.preventDefault();
-
-                }
-            );
-
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    applyHighlight(
-                        button.dataset.highlight
+                    console.error(
+                        "COMMENT ERROR:",
+                        result.error
                     );
 
+                    status.textContent =
+                        "Could not post: " +
+                        result.error.message;
 
-                    hideSelectionHighlightMenu();
+                    return;
 
                 }
-            );
+
+
+                $("commentContent")
+                    .value =
+                        "";
+
+
+                $("commentName")
+                    .value =
+                        window.readerNickname ||
+                        name;
+
+
+                status.textContent =
+                    "Comment posted.";
+
+
+                await loadComments();
+
+
+            }catch(error){
+
+                console.error(
+                    "COMMENT ERROR:",
+                    error
+                );
+
+
+                status.textContent =
+                    "Could not post: " +
+                    (
+                        error.message ||
+                        "Unknown error"
+                    );
+
+            }
 
         }
     );
-
-
-function applyHighlight(color){
-
-    if(!savedSelectionRange){
-
-        const selection =
-            window.getSelection();
-
-
-        if(
-            !selection ||
-            selection.rangeCount === 0 ||
-            selection.isCollapsed
-        ){
-
-            return;
-
-        }
-
-
-        savedSelectionRange =
-            selection
-                .getRangeAt(0)
-                .cloneRange();
-
-    }
-
-
-    const range =
-        savedSelectionRange;
-
-
-    if(
-        range.collapsed ||
-        !selectionIsInsideReader(
-            range
-        )
-    ){
-
-        savedSelectionRange =
-            null;
-
-        return;
-
-    }
-
-
-    const span =
-        document.createElement(
-            "span"
-        );
-
-
-    span.className =
-        "highlight highlight-" +
-        color +
-        "-mark";
-
-
-    try{
-
-        range.surroundContents(
-            span
-        );
-
-    }catch(error){
-
-        const fragment =
-            range.extractContents();
-
-
-        span.appendChild(
-            fragment
-        );
-
-
-        range.insertNode(
-            span
-        );
-
-    }
-
-
-    savedSelectionRange =
-        null;
-
-
-    const selection =
-        window.getSelection();
-
-
-    if(selection){
-
-        selection.removeAllRanges();
-
-    }
-
-
-    saveHighlights();
-
-}
-
-
-/* =========================================================
-   SAVE HIGHLIGHTS
-========================================================= */
-
-function saveHighlights(){
-
-    if(
-        selectedChapterIndex < 0
-    ){
-
-        return;
-
-    }
-
-
-    const chapter =
-        chapters[
-            selectedChapterIndex
-        ];
-
-
-    localStorage.setItem(
-        "hed_highlights_" +
-        chapter.id,
-
-        $("readerStory")
-            .innerHTML
-    );
-
-}
-
-
-/* =========================================================
-   LOAD HIGHLIGHTS
-========================================================= */
-
-function loadHighlights(){
-
-    if(
-        selectedChapterIndex < 0
-    ){
-
-        return;
-
-    }
-
-
-    const chapter =
-        chapters[
-            selectedChapterIndex
-        ];
-
-
-    const saved =
-        localStorage.getItem(
-            "hed_highlights_" +
-            chapter.id
-        );
-
-
-    if(saved){
-
-        $("readerStory")
-            .innerHTML =
-                saved;
-
-    }
-
-}
 
 
 /* =========================================================
@@ -4045,11 +5323,12 @@ function escapeHTML(value){
 
 function escapeAttribute(value){
 
-    return escapeHTML(value)
-        .replace(
-            /"/g,
-            "&quot;"
-        );
+    return escapeHTML(
+        value
+    ).replace(
+        /"/g,
+        "&quot;"
+    );
 
 }
 
@@ -4086,32 +5365,45 @@ function showError(message){
    START
 ========================================================= */
 
-window.readerAuthReady.then(function () {
+window.readerAuthReady
+    .then(
+        function(){
 
-    const commentNameElement =
-        document.getElementById("commentName");
+            const commentNameElement =
+                document.getElementById(
+                    "commentName"
+                );
 
-    if (
-        commentNameElement &&
-        window.readerNickname
-    ) {
 
-        commentNameElement.value =
-            window.readerNickname;
+            if(
+                commentNameElement &&
+                window.readerNickname
+            ){
 
-    }
+                commentNameElement.value =
+                    window.readerNickname;
 
-    loadStory();
+            }
 
-}).catch(function (error) {
 
-    console.error(error);
+            loadStory();
 
-    showError(
-        "Something went wrong while opening this story."
+        }
+    )
+    .catch(
+        function(error){
+
+            console.error(
+                error
+            );
+
+
+            showError(
+                "Something went wrong while opening this story."
+            );
+
+        }
     );
-
-});
 
 </script>
 
