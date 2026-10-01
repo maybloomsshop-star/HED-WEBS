@@ -1,5 +1,3463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-event.preventDefault();
+<title>HED · Story Reader</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+<style>
+
+/* =========================================================
+   HED READER
+========================================================= */
+
+:root{
+    --brown:#4a352b;
+    --brown-dark:#382920;
+    --cream:#f5efe6;
+    --paper:#fbf8f3;
+    --green:#68745d;
+    --pink:#c58f91;
+    --pink-dark:#a87578;
+    --text:#342b26;
+    --muted:#8b8178;
+    --line:#ddd2c5;
+    --soft:#eee6dc;
+    --white:#ffffff;
+    --shadow:0 12px 35px rgba(74,53,43,.08);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    background:var(--cream);
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none !important;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header{
+    position:sticky;
+    top:0;
+    z-index:50;
+
+    background:rgba(251,248,243,.96);
+    border-bottom:1px solid var(--line);
+
+    backdrop-filter:blur(8px);
+}
+
+.header-inner{
+    max-width:1120px;
+    min-height:64px;
+
+    margin:0 auto;
+    padding:11px 28px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.brand{
+    color:var(--brown);
+    text-decoration:none;
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:21px;
+    font-weight:700;
+    letter-spacing:.02em;
+}
+
+.brand span{
+    color:var(--pink);
+}
+
+.back-link{
+    color:var(--green);
+    text-decoration:none;
+    font-size:12px;
+}
+
+.back-link:hover{
+    color:var(--pink-dark);
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.book-page{
+    max-width:1120px;
+
+    margin:0 auto;
+    padding:42px 28px 70px;
+}
+
+
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+.page-message{
+    max-width:700px;
+
+    margin:100px auto;
+
+    text-align:center;
+    color:var(--muted);
+}
+
+.page-message h2{
+    margin:0 0 8px;
+
+    color:var(--brown);
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:28px;
+}
+
+.page-message p{
+    margin:0;
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   STORY INTRO
+========================================================= */
+
+.book-intro{
+    display:grid;
+    grid-template-columns:210px minmax(0,1fr);
+    gap:34px;
+    align-items:start;
+
+    margin-bottom:34px;
+}
+
+.cover-wrap{
+    width:210px;
+    aspect-ratio:2 / 3;
+
+    overflow:hidden;
+
+    border:1px solid var(--line);
+    background:var(--soft);
+
+    box-shadow:var(--shadow);
+}
+
+.cover-wrap img{
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+.cover-placeholder{
+    width:100%;
+    height:100%;
+
+    display:grid;
+    place-items:center;
+
+    padding:25px;
+
+    color:var(--brown);
+
+    text-align:center;
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:18px;
+    line-height:1.35;
+}
+
+.book-info{
+    min-width:0;
+    padding-top:4px;
+}
+
+.eyebrow{
+    color:var(--pink-dark);
+
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+}
+
+.book-info h1{
+    margin:7px 0 7px;
+
+    color:var(--brown);
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(34px,5vw,56px);
+    line-height:1.04;
+}
+
+.book-author{
+    margin-bottom:17px;
+
+    color:var(--muted);
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:15px;
+}
+
+.book-description{
+    max-width:720px;
+
+    margin:0;
+
+    color:#665c54;
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:16px;
+    line-height:1.65;
+}
+
+.book-meta{
+    display:flex;
+    flex-wrap:wrap;
+    margin-top:16px;
+}
+
+.meta-pill{
+    padding:6px 9px;
+
+    border:1px solid var(--line);
+    background:var(--paper);
+
+    color:var(--muted);
+
+    font-size:9px;
+    letter-spacing:.06em;
+}
+
+
+/* =========================================================
+   READER
+========================================================= */
+
+.reader-shell{
+    display:none;
+
+    padding-top:18px;
+
+    border-top:1px solid var(--line);
+}
+
+.reader-shell.open{
+    display:block;
+}
+
+
+/* =========================================================
+   READER BUTTONS
+========================================================= */
+
+.reader-controls{
+    max-width:1120px;
+
+    margin:0 auto 13px;
+
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+
+    gap:7px;
+}
+
+.reader-control-button{
+    padding:8px 12px;
+
+    border:1px solid var(--line);
+    background:var(--paper);
+
+    color:var(--brown);
+
+    font-size:11px;
+
+    transition:.15s ease;
+}
+
+.reader-control-button:hover{
+    border-color:var(--pink);
+    color:var(--pink-dark);
+}
+
+.reader-position{
+    margin-left:auto;
+}
+
+
+/* =========================================================
+   READER LAYOUT
+========================================================= */
+
+.reader-layout{
+    max-width:1120px;
+
+    margin:0 auto;
+
+    display:grid;
+    grid-template-columns:235px minmax(0,1fr);
+
+    gap:15px;
+    align-items:start;
+}
+
+.reader-layout.chapter-closed{
+    grid-template-columns:minmax(0,1fr);
+}
+
+
+/* =========================================================
+   CHAPTER DRAWER
+   CLOSED BY DEFAULT
+========================================================= */
+
+.chapter-drawer{
+    position:sticky;
+    top:82px;
+
+    max-height:calc(100vh - 105px);
+
+    overflow-y:auto;
+
+    padding:13px;
+
+    border:1px solid var(--line);
+
+    background:rgba(251,248,243,.97);
+}
+
+.chapter-drawer:not(.open){
+    display:none;
+}
+
+.chapter-drawer-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding-bottom:9px;
+    margin-bottom:7px;
+
+    border-bottom:1px solid var(--line);
+}
+
+.chapter-drawer h2{
+    margin:3px 0 0;
+
+    color:var(--brown);
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:19px;
+}
+
+.drawer-close{
+    width:28px;
+    height:28px;
+
+    padding:0;
+
+    border:0;
+    background:transparent;
+
+    color:var(--muted);
+
+    font-size:20px;
+    line-height:1;
+}
+
+.drawer-close:hover{
+    color:var(--pink);
+}
+
+.chapter-list{
+    display:grid;
+    gap:4px;
+}
+
+.chapter-button{
+    width:100%;
+
+    padding:10px 9px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    border:1px solid transparent;
+    background:transparent;
+
+    color:var(--text);
+
+    text-align:left;
+}
+
+.chapter-button:hover{
+    background:var(--soft);
+    border-color:var(--line);
+}
+
+.chapter-button.active{
+    background:#eee5dc;
+    border-color:var(--line);
+}
+
+.chapter-number{
+    min-width:28px;
+
+    color:var(--pink-dark);
+
+    font-size:9px;
+    letter-spacing:.1em;
+}
+
+.chapter-title-small{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:13px;
+    line-height:1.35;
+}
+
+
+/* =========================================================
+   READER COLUMN
+========================================================= */
+
+.reader-column{
+    min-width:0;
+}
+
+
+/* =========================================================
+   READING PREFERENCES
+   CLOSED BY DEFAULT
+========================================================= */
+
+.preferences{
+    display:none;
+
+    margin-bottom:11px;
+    padding:12px 13px;
+
+    border:1px solid var(--line);
+    background:rgba(251,248,243,.97);
+}
+
+.preferences.open{
+    display:block;
+}
+
+.preferences-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:9px;
+}
+
+.preferences-title{
+    color:var(--brown);
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:15px;
+}
+
+.preferences-grid{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px 13px;
+}
+
+.preference-group{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+
+    gap:6px;
+
+    min-height:30px;
+}
+
+.preference-label{
+    color:var(--muted);
+
+    font-size:9px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+
+    white-space:nowrap;
+}
+
+.pref-select{
+    padding:6px 8px;
+
+    border:1px solid var(--line);
+    background:var(--paper);
+
+    color:var(--text);
+
+    font-size:11px;
+}
+
+.pref-select:focus{
+    outline:none;
+    border-color:var(--pink);
+}
+
+.pref-size-wrap{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.pref-range{
+    width:120px;
+
+    accent-color:var(--pink);
+
+    cursor:pointer;
+}
+
+.pref-size-value{
+    min-width:38px;
+
+    color:var(--brown);
+
+    font-size:10px;
+    text-align:right;
+}
+
+.pref-button{
+    min-width:30px;
+    height:30px;
+
+    padding:0 7px;
+
+    border:1px solid var(--line);
+    background:var(--paper);
+
+    color:var(--text);
+
+    font-size:11px;
+}
+
+.pref-button.active,
+.pref-button:hover{
+    border-color:var(--pink);
+    color:var(--pink-dark);
+}
+
+
+/* =========================================================
+   THEMES
+========================================================= */
+
+.theme-buttons,
+.highlight-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+}
+
+.theme-button{
+    min-width:30px;
+    height:30px;
+
+    padding:0 8px;
+
+    border:1px solid var(--line);
+
+    font-size:10px;
+    font-weight:700;
+}
+
+.theme-cream{
+    background:#fbf8f3;
+    color:#342b26;
+}
+
+.theme-white{
+    background:#fff;
+    color:#111;
+}
+
+.theme-black{
+    background:#000;
+    color:#fff;
+    border-color:#000;
+}
+
+.theme-dark{
+    background:#20211f;
+    color:#fff;
+    border-color:#20211f;
+}
+
+.theme-sepia{
+    background:#f1e4c9;
+    color:#574936;
+}
+
+.theme-blue{
+    background:#111827;
+    color:#f8fafc;
+    border-color:#111827;
+}
+
+
+/* =========================================================
+   HIGHLIGHT COLORS
+========================================================= */
+
+.highlight-button{
+    width:25px;
+    height:25px;
+
+    flex:0 0 auto;
+
+    padding:0;
+
+    border:1px solid #bcb4aa;
+    border-radius:50%;
+}
+
+.highlight-button:hover{
+    transform:scale(1.08);
+}
+
+.highlight-button.active{
+    outline:2px solid var(--pink);
+    outline-offset:1px;
+}
+
+.highlight-yellow{
+    background:#fff0a6;
+}
+
+.highlight-pink{
+    background:#f7b4cf;
+}
+
+.highlight-green{
+    background:#b8dfb5;
+}
+
+.highlight-blue{
+    background:#b7d5ee;
+}
+
+.highlight-orange{
+    background:#f6c58b;
+}
+
+.highlight-purple{
+    background:#d7b9e8;
+}
+
+.highlight-coral{
+    background:#f5aaa0;
+}
+
+.highlight-lavender{
+    background:#c8c7f2;
+}
+
+.highlight-mint{
+    background:#aee1d2;
+}
+
+.highlight-gray{
+    background:#d6d6d1;
+}
+
+
+/* =========================================================
+   FLOATING HIGHLIGHT MENU
+========================================================= */
+
+.selection-highlight-menu{
+    position:fixed;
+    z-index:100;
+
+    display:none;
+    align-items:center;
+    gap:5px;
+
+    max-width:calc(100vw - 16px);
+
+    padding:6px;
+
+    border:1px solid var(--line);
+    background:#fbf8f3;
+
+    box-shadow:0 8px 25px rgba(74,53,43,.18);
+}
+
+.selection-highlight-menu.open{
+    display:flex;
+}
+
+
+/* =========================================================
+   READER PAPER
+========================================================= */
+
+.reader-paper{
+    padding:28px 36px 30px;
+
+    border:1px solid var(--line);
+
+    background:var(--paper);
+
+    box-shadow:var(--shadow);
+
+    transition:
+        background .15s ease,
+        color .15s ease;
+}
+
+
+/* SMALL CHAPTER LABEL */
+
+.reader-chapter-label{
+    margin:0 0 3px;
+
+    color:var(--pink-dark);
+
+    font-size:10px;
+    font-weight:700;
+    line-height:1.2;
+
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+
+/* STORY TITLE */
+
+.reader-paper h1{
+    margin:0 0 10px;
+    color:var(--brown);
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:20px;
+    line-height:1.25;
+    font-weight:600;
+    font-style:normal;
+}
+
+
+/* =========================================================
+   STORY TEXT
+========================================================= */
+
+.reader-story{
+    --reader-font:Georgia,"Times New Roman",serif;
+
+    max-width:780px;
+
+    margin:0 auto;
+
+    color:var(--text);
+
+    font-size:15px;
+    line-height:1.65;
+}
+
+.reader-story,
+.reader-story *{
+    font-family:var(--reader-font) !important;
+}
+
+.reader-story p{
+    margin:0 0 .8em;
+}
+
+.reader-story h1,
+.reader-story h2,
+.reader-story h3,
+.reader-story h4{
+    margin:1.1em 0 .4em;
+
+    color:var(--brown);
+
+    line-height:1.2;
+}
+
+.reader-story img{
+    display:block;
+
+    max-width:100%;
+    height:auto;
+
+    margin:20px auto;
+}
+
+.reader-story blockquote{
+    margin:1em 0;
+    padding:8px 17px;
+
+    border-left:3px solid var(--pink);
+
+    color:var(--brown);
+}
+
+
+/* =========================================================
+   SAVED HIGHLIGHTS
+========================================================= */
+
+.highlight{
+    border-radius:2px;
+    padding:0 .05em;
+}
+
+.highlight-yellow-mark{
+    background:#fff0a6;
+}
+
+.highlight-pink-mark{
+    background:#f7b4cf;
+}
+
+.highlight-green-mark{
+    background:#b8dfb5;
+}
+
+.highlight-blue-mark{
+    background:#b7d5ee;
+}
+
+.highlight-orange-mark{
+    background:#f6c58b;
+}
+
+.highlight-purple-mark{
+    background:#d7b9e8;
+}
+
+.highlight-coral-mark{
+    background:#f5aaa0;
+}
+
+.highlight-lavender-mark{
+    background:#c8c7f2;
+}
+
+.highlight-mint-mark{
+    background:#aee1d2;
+}
+
+.highlight-gray-mark{
+    background:#d6d6d1;
+}
+
+
+/* =========================================================
+   CHAPTER NAVIGATION
+========================================================= */
+
+.chapter-navigation{
+    max-width:780px;
+
+    margin:21px auto 0;
+    padding-top:13px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    border-top:1px solid var(--line);
+}
+
+.nav-button{
+    padding:9px 12px;
+
+    border:1px solid var(--line);
+    background:var(--paper);
+
+    color:var(--brown);
+
+    font-size:11px;
+}
+
+.nav-button:hover{
+    border-color:var(--pink);
+    color:var(--pink-dark);
+}
+
+
+/* =========================================================
+   COMMENTS
+========================================================= */
+
+.comments-section{
+    max-width:780px;
+
+    margin:20px auto 0;
+    padding-top:14px;
+
+    border-top:1px solid var(--line);
+}
+
+.comments-title-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:11px;
+}
+
+.comments-title{
+    margin:0;
+
+    color:var(--brown);
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:20px;
+}
+
+.comments-subtitle{
+    color:var(--muted);
+
+    font-size:9px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.comments-list{
+    display:grid;
+    gap:8px;
+
+    margin-bottom:15px;
+}
+
+.comment-card{
+    padding:10px 12px;
+
+    border:1px solid var(--line);
+    background:#fffdfa;
+}
+
+.comment-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:4px;
+}
+
+.comment-author{
+    color:var(--brown);
+
+    font-size:12px;
+    font-weight:700;
+}
+
+.comment-date{
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+.comment-text{
+    margin:0;
+
+    color:#5b544e;
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:14px;
+    line-height:1.48;
+
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+}
+
+.comment-actions{
+    display:flex;
+    justify-content:flex-end;
+
+    margin-top:5px;
+}
+
+.comment-delete{
+    padding:3px 0;
+
+    border:0;
+    background:transparent;
+
+    color:#aa817f;
+
+    font-size:9px;
+}
+
+.comment-delete:hover{
+    color:var(--pink);
+}
+
+.comment-form{
+    padding:13px;
+
+    border:1px solid var(--line);
+    background:rgba(251,248,243,.8);
+}
+
+.comment-form-grid{
+    display:grid;
+    grid-template-columns:170px minmax(0,1fr);
+
+    gap:8px;
+}
+
+.comment-input,
+.comment-textarea{
+    width:100%;
+
+    padding:9px 10px;
+
+    border:1px solid var(--line);
+    background:var(--paper);
+
+    color:var(--text);
+
+    outline:none;
+
+    font-size:12px;
+}
+
+.comment-input:focus,
+.comment-textarea:focus{
+    border-color:var(--pink);
+}
+
+.comment-textarea{
+    min-height:72px;
+
+    resize:vertical;
+
+    font-family:Georgia,"Times New Roman",serif;
+    line-height:1.5;
+}
+
+.comment-form-bottom{
+    display:flex;
+    justify-content:flex-end;
+
+    margin-top:8px;
+}
+
+.comment-submit{
+    padding:9px 14px;
+
+    border:0;
+    background:var(--pink);
+
+    color:white;
+
+    font-size:11px;
+}
+
+.comment-submit:hover{
+    background:var(--pink-dark);
+}
+
+.comment-status{
+    min-height:13px;
+
+    margin-top:6px;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:850px){
+
+    .reader-layout{
+        grid-template-columns:1fr;
+    }
+
+    .chapter-drawer{
+        position:relative;
+        top:auto;
+
+        max-height:280px;
+    }
+
+    .reader-position{
+        margin-left:0;
+    }
+}
+
+@media(max-width:760px){
+
+    .header-inner{
+        padding:10px 17px;
+    }
+
+    .book-page{
+        padding:28px 17px 50px;
+    }
+
+    .book-intro{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .cover-wrap{
+        width:165px;
+    }
+
+    .book-info h1{
+        font-size:38px;
+    }
+
+    .book-description{
+        font-size:16px;
+    }
+
+    .reader-paper{
+        padding:23px 18px 25px;
+    }
+
+    .reader-story{
+        font-size:15px;
+    }
+
+    .pref-range{
+        width:105px;
+    }
+
+    .preferences{
+        padding:11px;
+    }
+
+    .comment-form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .comments-title-row{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:3px;
+    }
+}
+.book-description-wrap {
+    margin-top: 10px;
+}
+
+.book-description-more {
+    display: none;
+    margin-left: 4px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--pink-dark);
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.book-description-more:hover {
+    text-decoration: underline;
+}
+
+.book-description.expanded .book-description-more {
+    display: inline;
+}
+/* Prevent visitors from selecting/copying text */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="site-header">
+
+    <div class="header-inner">
+
+        <a
+            class="brand"
+            href="hed.html"
+        >
+            HED
+        </a>
+
+        <a href="stories.html" class="back-link">
+    ← Back to Stories
+</a>
+
+    </div>
+
+</header>
+
+
+
+<main class="book-page">
+
+
+    <!-- =====================================================
+         LOADING
+    ====================================================== -->
+
+    <div
+        id="loadingMessage"
+        class="page-message"
+    >
+        Loading story…
+    </div>
+
+
+
+    <!-- =====================================================
+         ERROR
+    ====================================================== -->
+
+    <div
+        id="errorMessage"
+        class="page-message hidden"
+    >
+
+        <h2>Story unavailable</h2>
+
+        <p id="errorText">
+            Something went wrong while opening this story.
+        </p>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         STORY CONTENT
+    ====================================================== -->
+
+    <section
+        id="bookContent"
+        class="hidden"
+    >
+
+
+        <!-- =================================================
+             STORY INTRO
+        ================================================== -->
+
+        <section class="book-intro">
+
+
+            <div
+                class="cover-wrap"
+                id="coverWrap"
+            >
+
+                <div
+                    id="coverPlaceholder"
+                    class="cover-placeholder"
+                >
+                    Your story cover
+                </div>
+
+            </div>
+
+
+
+            <div class="book-info">
+
+                <div class="eyebrow">
+                    HED STORY
+                </div>
+
+                <h1 id="storyTitle"></h1>
+
+                <div
+                    id="storyAuthor"
+                    class="book-author"
+                ></div>
+
+                <p
+                    id="storyDescription"
+                    class="book-description"
+                ></p>
+
+                <div class="book-meta">
+
+                    <span
+                        id="chapterCountPill"
+                        class="meta-pill"
+                    >
+                        0 chapters
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             READER
+        ================================================== -->
+
+        <section
+            id="readerShell"
+            class="reader-shell"
+        >
+
+
+            <!-- =================================================
+                 THESE ARE ONLY BUTTONS WHEN PAGE OPENS
+            ================================================== -->
+
+            <div class="reader-controls">
+
+
+                <button
+                    id="chapterToggleButton"
+                    class="reader-control-button"
+                    type="button"
+                    aria-expanded="false"
+                >
+                    ☰ Chapters
+                </button>
+
+
+                <button
+                    id="preferencesToggleButton"
+                    class="reader-control-button"
+                    type="button"
+                    aria-expanded="false"
+                >
+                    ⚙ Reading Preferences
+                </button>
+
+
+                <span
+                    id="readerChapterPosition"
+                    class="eyebrow reader-position"
+                ></span>
+
+            </div>
+
+
+
+            <div
+                class="reader-layout chapter-closed"
+                id="readerLayout"
+            >
+
+
+                <!-- =================================================
+                     CHAPTER DRAWER
+                     CLOSED BY DEFAULT
+                ================================================== -->
+
+                <aside
+                    id="chapterDrawer"
+                    class="chapter-drawer"
+                    aria-label="Chapter list"
+                >
+
+                    <div class="chapter-drawer-head">
+
+                        <div>
+
+                            <div class="eyebrow">
+                                READ
+                            </div>
+
+                            <h2>
+                                Chapters
+                            </h2>
+
+                        </div>
+
+
+                        <button
+                            id="closeChapterDrawer"
+                            class="drawer-close"
+                            type="button"
+                            aria-label="Close chapters"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="chapterList"
+                        class="chapter-list"
+                    ></div>
+
+                </aside>
+
+
+
+                <!-- =================================================
+                     READER COLUMN
+                ================================================== -->
+
+                <main class="reader-column">
+
+
+                    <!-- =================================================
+                         READING PREFERENCES
+                         CLOSED BY DEFAULT
+                    ================================================== -->
+
+                    <section
+                        id="preferencesPanel"
+                        class="preferences"
+                    >
+
+                        <div class="preferences-head">
+
+                            <div class="preferences-title">
+                                Reading Preferences
+                            </div>
+
+                            <button
+                                id="closePreferences"
+                                class="drawer-close"
+                                type="button"
+                                aria-label="Close reading preferences"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+
+                        <div class="preferences-grid">
+
+
+                            <!-- FONT -->
+
+                            <div class="preference-group">
+
+                                <span class="preference-label">
+                                    Font
+                                </span>
+
+                                <select
+                                    id="fontFamily"
+                                    class="pref-select"
+                                >
+
+                                    <option value="serif">
+                                        Serif
+                                    </option>
+
+                                    <option value="sans">
+                                        Sans
+                                    </option>
+
+                                    <option value="clean">
+                                        Clean
+                                    </option>
+
+                                    <option value="mono">
+                                        Mono
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
+                            <!-- FONT SIZE -->
+
+                            <div class="preference-group">
+
+                                <span class="preference-label">
+                                    Size
+                                </span>
+
+                                <div class="pref-size-wrap">
+
+                                    <input
+                                        id="fontSize"
+                                        class="pref-range"
+                                        type="range"
+                                        min="10"
+                                        max="26"
+                                        step="1"
+                                        value="15"
+                                    >
+
+                                    <span
+                                        id="fontSizeValue"
+                                        class="pref-size-value"
+                                    >
+                                        15px
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- LINE SPACING -->
+
+                            <div class="preference-group">
+
+                                <span class="preference-label">
+                                    Spacing
+                                </span>
+
+                                <button
+                                    class="pref-button"
+                                    data-spacing="1.45"
+                                    type="button"
+                                >
+                                    Tight
+                                </button>
+
+                                <button
+                                    class="pref-button active"
+                                    data-spacing="1.65"
+                                    type="button"
+                                >
+                                    Normal
+                                </button>
+
+                                <button
+                                    class="pref-button"
+                                    data-spacing="1.9"
+                                    type="button"
+                                >
+                                    Wide
+                                </button>
+
+                            </div>
+
+
+
+                            <!-- TEXT COLOR -->
+
+                            <div class="preference-group">
+
+                                <span class="preference-label">
+                                    Text
+                                </span>
+
+                                <button
+                                    class="pref-button active"
+                                    data-text-color="#342b26"
+                                    type="button"
+                                >
+                                    Brown
+                                </button>
+
+                                <button
+                                    class="pref-button"
+                                    data-text-color="#222222"
+                                    type="button"
+                                >
+                                    Black
+                                </button>
+
+                                <button
+                                    class="pref-button"
+                                    data-text-color="#625b54"
+                                    type="button"
+                                >
+                                    Soft
+                                </button>
+
+                            </div>
+
+
+
+                            <!-- PAGE THEME -->
+
+                            <div class="preference-group">
+
+                                <span class="preference-label">
+                                    Page
+                                </span>
+
+                                <div class="theme-buttons">
+
+                                    <button
+                                        class="theme-button theme-cream"
+                                        data-theme="cream"
+                                        type="button"
+                                    >
+                                        Cream
+                                    </button>
+
+                                    <button
+                                        class="theme-button theme-white"
+                                        data-theme="white"
+                                        type="button"
+                                    >
+                                        White
+                                    </button>
+
+                                    <button
+                                        class="theme-button theme-black"
+                                        data-theme="black"
+                                        type="button"
+                                    >
+                                        Black
+                                    </button>
+
+                                    <button
+                                        class="theme-button theme-dark"
+                                        data-theme="dark"
+                                        type="button"
+                                    >
+                                        Dark
+                                    </button>
+
+                                    <button
+                                        class="theme-button theme-sepia"
+                                        data-theme="sepia"
+                                        type="button"
+                                    >
+                                        Sepia
+                                    </button>
+
+                                    <button
+                                        class="theme-button theme-blue"
+                                        data-theme="night"
+                                        type="button"
+                                    >
+                                        Night
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- HIGHLIGHT COLORS -->
+
+                        <div
+                            class="preference-group"
+                            style="margin-top:9px;"
+                        >
+
+                            <span class="preference-label">
+                                Highlight
+                            </span>
+
+                            <div class="highlight-buttons">
+
+                                <button
+                                    class="highlight-button highlight-yellow"
+                                    data-highlight="yellow"
+                                    type="button"
+                                    title="Yellow"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-pink"
+                                    data-highlight="pink"
+                                    type="button"
+                                    title="Pink"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-green"
+                                    data-highlight="green"
+                                    type="button"
+                                    title="Green"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-blue"
+                                    data-highlight="blue"
+                                    type="button"
+                                    title="Blue"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-orange"
+                                    data-highlight="orange"
+                                    type="button"
+                                    title="Orange"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-purple"
+                                    data-highlight="purple"
+                                    type="button"
+                                    title="Purple"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-coral"
+                                    data-highlight="coral"
+                                    type="button"
+                                    title="Coral"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-lavender"
+                                    data-highlight="lavender"
+                                    type="button"
+                                    title="Lavender"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-mint"
+                                    data-highlight="mint"
+                                    type="button"
+                                    title="Mint"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-gray"
+                                    data-highlight="gray"
+                                    type="button"
+                                    title="Gray"
+                                ></button>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                         READER PAPER
+                    ================================================== -->
+
+                    <article
+                        class="reader-paper"
+                        id="readerPaper"
+                    >
+
+
+                        <div
+                            id="readerChapterLabel"
+                            class="reader-chapter-label"
+                        >
+                            CHAPTER 01
+                        </div>
+
+
+                        <h1 id="readerChapterTitle">
+                            Chapter
+                        </h1>
+
+
+                        <div
+                            id="readerStory"
+                            class="reader-story"
+                        ></div>
+
+
+
+                        <!-- =================================================
+                             CHAPTER NAVIGATION
+                        ================================================== -->
+
+                        <div class="chapter-navigation">
+
+                            <button
+                                id="previousChapterButton"
+                                class="nav-button"
+                                type="button"
+                            >
+                                ← Previous Chapter
+                            </button>
+
+
+                            <button
+                                id="nextChapterButton"
+                                class="nav-button"
+                                type="button"
+                            >
+                                Next Chapter →
+                            </button>
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             COMMENTS
+                        ================================================== -->
+
+                        <section class="comments-section">
+
+
+                            <div class="comments-title-row">
+
+                                <h2 class="comments-title">
+                                    Comments
+                                </h2>
+
+                                <div class="comments-subtitle">
+                                    Leave a thought
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                id="commentsList"
+                                class="comments-list"
+                            ></div>
+
+
+                            <form
+                                id="commentForm"
+                                class="comment-form"
+                            >
+
+                                <div class="comment-form-grid">
+
+                                    <input
+                                        id="commentName"
+                                        class="comment-input"
+                                        type="text"
+                                        maxlength="80"
+                                        placeholder="Your name"
+                                        required
+                                    >
+
+                                    <textarea
+                                        id="commentContent"
+                                        class="comment-textarea"
+                                        maxlength="2000"
+                                        placeholder="Write a comment..."
+                                        required
+                                    ></textarea>
+
+                                </div>
+
+
+                                <div class="comment-form-bottom">
+
+                                    <button
+                                        class="comment-submit"
+                                        type="submit"
+                                    >
+                                        Post Comment
+                                    </button>
+
+                                </div>
+
+
+                                <div
+                                    id="commentStatus"
+                                    class="comment-status"
+                                ></div>
+
+                            </form>
+
+                        </section>
+
+                    </article>
+
+                </main>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================================================
+     FLOATING HIGHLIGHT MENU
+========================================================= -->
+
+<div
+    id="selectionHighlightMenu"
+    class="selection-highlight-menu"
+>
+
+    <button
+        class="highlight-button highlight-yellow"
+        data-highlight="yellow"
+        type="button"
+        title="Yellow"
+    ></button>
+
+    <button
+        class="highlight-button highlight-pink"
+        data-highlight="pink"
+        type="button"
+        title="Pink"
+    ></button>
+
+    <button
+        class="highlight-button highlight-green"
+        data-highlight="green"
+        type="button"
+        title="Green"
+    ></button>
+
+    <button
+        class="highlight-button highlight-blue"
+        data-highlight="blue"
+        type="button"
+        title="Blue"
+    ></button>
+
+    <button
+        class="highlight-button highlight-orange"
+        data-highlight="orange"
+        type="button"
+        title="Orange"
+    ></button>
+
+    <button
+        class="highlight-button highlight-purple"
+        data-highlight="purple"
+        type="button"
+        title="Purple"
+    ></button>
+
+    <button
+        class="highlight-button highlight-coral"
+        data-highlight="coral"
+        type="button"
+        title="Coral"
+    ></button>
+
+    <button
+        class="highlight-button highlight-lavender"
+        data-highlight="lavender"
+        type="button"
+        title="Lavender"
+    ></button>
+
+    <button
+        class="highlight-button highlight-mint"
+        data-highlight="mint"
+        type="button"
+        title="Mint"
+    ></button>
+
+    <button
+        class="highlight-button highlight-gray"
+        data-highlight="gray"
+        type="button"
+        title="Gray"
+    ></button>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   BASIC HELPERS
+========================================================= */
+
+function $(id){
+    return document.getElementById(id);
+}
+
+
+/* =========================================================
+   STORY ID
+========================================================= */
+
+const storyId =
+    new URLSearchParams(
+        window.location.search
+    ).get("id");
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let story = null;
+
+let chapters = [];
+
+let selectedChapterIndex = -1;
+
+let savedSelectionRange = null;
+
+
+/* =========================================================
+   READER DEFAULTS
+========================================================= */
+
+const defaultReaderPreferences = {
+
+    fontFamily:"serif",
+
+    fontSize:15,
+
+    lineHeight:1.65,
+
+    textColor:"#342b26",
+
+    theme:"cream"
+
+};
+
+
+/* =========================================================
+   LOAD STORY
+========================================================= */
+
+async function loadStory(){
+
+    if(!storyId){
+
+        showError(
+            "No story was selected. Please return to HED and choose a story."
+        );
+
+        return;
+    }
+
+
+    const storyResult =
+        await supabaseClient
+            .from("stories")
+            .select(
+                "id,title,author,description,cover_url,created_at"
+            )
+            .eq("id",storyId)
+            .single();
+
+
+    if(storyResult.error){
+
+        console.error(
+            storyResult.error
+        );
+
+        showError(
+            "We couldn't find this story."
+        );
+
+        return;
+    }
+
+
+    story =
+        storyResult.data;
+
+
+    renderStoryInfo();
+
+
+    const chapterResult =
+        await supabaseClient
+            .from("chapters")
+            .select(
+                "id,story_id,title,content,chapter_order,created_at"
+            )
+            .eq(
+                "story_id",
+                storyId
+            )
+            .order(
+                "chapter_order",
+                {
+                    ascending:true
+                }
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:true
+                }
+            );
+
+
+    if(chapterResult.error){
+
+        console.error(
+            chapterResult.error
+        );
+
+        showError(
+            "The story opened, but its chapters could not be loaded."
+        );
+
+        return;
+    }
+
+
+    chapters =
+        chapterResult.data || [];
+
+
+    renderChapterList();
+
+
+    $("chapterCountPill")
+        .textContent =
+            chapters.length +
+            (
+                chapters.length === 1
+                    ? " chapter"
+                    : " chapters"
+            );
+
+
+    $("loadingMessage")
+        .classList
+        .add("hidden");
+
+
+    $("bookContent")
+        .classList
+        .remove("hidden");
+
+
+    if(chapters.length){
+
+        openChapter(0);
+
+    }else{
+
+        $("readerShell")
+            .classList
+            .add("open");
+
+        $("readerChapterLabel")
+            .textContent =
+                "NO CHAPTERS";
+
+        $("readerChapterTitle")
+            .textContent =
+                "This story has no chapters yet.";
+
+        $("readerStory")
+            .innerHTML =
+                "<p>There is nothing to read here yet.</p>";
+
+    }
+
+}
+
+
+/* =========================================================
+   STORY INFO
+========================================================= */
+
+function renderStoryInfo(){
+
+    $("storyTitle")
+        .textContent =
+            story.title ||
+            "Untitled Story";
+
+
+    $("storyAuthor")
+        .textContent =
+            story.author
+                ? "by " + story.author
+                : "";
+
+
+    const description =
+    story.description ||
+    "No description yet.";
+
+const descriptionElement =
+    $("storyDescription");
+
+const words =
+    description.trim().split(/\s+/);
+
+const DESCRIPTION_LIMIT = 118;
+
+if (words.length > DESCRIPTION_LIMIT) {
+
+    const shortDescription =
+        words
+            .slice(0, DESCRIPTION_LIMIT)
+            .join(" ");
+
+    descriptionElement.innerHTML =
+        escapeHTML(shortDescription) +
+        "... " +
+        '<button type="button" class="book-description-more">See more</button>';
+
+    descriptionElement.classList.add(
+        "expanded"
+    );
+
+    const seeMoreButton =
+        descriptionElement.querySelector(
+            ".book-description-more"
+        );
+
+    seeMoreButton.onclick =
+        function () {
+
+            descriptionElement.textContent =
+                description;
+
+            const seeLessButton =
+                document.createElement("button");
+
+            seeLessButton.type =
+                "button";
+
+            seeLessButton.className =
+                "book-description-more";
+
+            seeLessButton.textContent =
+                "See less";
+
+            descriptionElement.appendChild(
+                document.createTextNode(" ")
+            );
+
+            descriptionElement.appendChild(
+                seeLessButton
+            );
+
+            seeLessButton.onclick =
+                function () {
+
+                    descriptionElement.innerHTML =
+                        escapeHTML(shortDescription) +
+                        "... ";
+
+                    const newSeeMore =
+                        document.createElement("button");
+
+                    newSeeMore.type =
+                        "button";
+
+                    newSeeMore.className =
+                        "book-description-more";
+
+                    newSeeMore.textContent =
+                        "See more";
+
+                    descriptionElement.appendChild(
+                        newSeeMore
+                    );
+
+                    newSeeMore.onclick =
+                        seeMoreButton.onclick;
+                };
+        };
+
+} else {
+
+    descriptionElement.textContent =
+        description;
+}
+
+
+    if(story.cover_url){
+
+        const image =
+            document.createElement("img");
+
+        image.src =
+            story.cover_url;
+
+        image.alt =
+            story.title ||
+            "Story cover";
+
+        image.onload =
+            function(){
+
+                $("coverPlaceholder")
+                    .classList
+                    .add("hidden");
+
+                $("coverWrap")
+                    .appendChild(image);
+
+            };
+
+        image.onerror =
+            function(){
+
+                image.remove();
+
+            };
+
+    }
+
+}
+
+
+/* =========================================================
+   CHAPTER LIST
+========================================================= */
+
+function renderChapterList(){
+
+    const list =
+        $("chapterList");
+
+
+    list.innerHTML =
+        "";
+
+
+    if(!chapters.length){
+
+        list.innerHTML =
+            '<div class="empty-message">' +
+            "This story doesn't have any chapters yet." +
+            "</div>";
+
+        return;
+    }
+
+
+    chapters.forEach(
+        function(chapter,index){
+
+            const button =
+                document.createElement("button");
+
+
+            button.type =
+                "button";
+
+
+            button.className =
+                "chapter-button";
+
+
+            button.innerHTML =
+                '<span class="chapter-number">' +
+                    String(index + 1)
+                        .padStart(2,"0") +
+                "</span>" +
+
+                '<span class="chapter-title-small">' +
+                    escapeHTML(
+                        chapter.title ||
+                        "Untitled Chapter"
+                    ) +
+                "</span>";
+
+
+            button.onclick =
+                function(){
+
+                    openChapter(index);
+
+                };
+
+
+            list.appendChild(button);
+
+        }
+    );
+
+
+    updateActiveChapterButton();
+
+}
+
+
+/* =========================================================
+   ACTIVE CHAPTER
+========================================================= */
+
+function updateActiveChapterButton(){
+
+    document
+        .querySelectorAll(
+            ".chapter-button"
+        )
+        .forEach(
+            function(button,index){
+
+                button.classList.toggle(
+                    "active",
+                    index ===
+                    selectedChapterIndex
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   OPEN CHAPTER
+========================================================= */
+
+function openChapter(index){
+
+    if(
+        index < 0 ||
+        index >= chapters.length
+    ){
+
+        return;
+
+    }
+
+
+    selectedChapterIndex =
+        index;
+
+
+    const chapter =
+        chapters[index];
+
+
+    $("readerChapterLabel")
+        .textContent =
+            "CHAPTER " +
+            String(index + 1)
+                .padStart(2,"0");
+
+
+    $("readerChapterTitle")
+        .textContent =
+            chapter.title ||
+            "Untitled Chapter";
+
+
+    const content =
+        chapter.content ||
+        "";
+
+
+    if(
+        /<\/?[a-z][\s\S]*>/i.test(
+            content
+        )
+    ){
+
+        $("readerStory")
+            .innerHTML =
+                content;
+
+    }else{
+
+        $("readerStory")
+            .textContent =
+                content;
+
+    }
+
+
+    applySavedReaderPreferences();
+
+
+    loadHighlights();
+
+
+    updateChapterNavigation();
+
+
+    updateActiveChapterButton();
+
+
+    $("readerChapterPosition")
+        .textContent =
+            (index + 1) +
+            " / " +
+            chapters.length;
+
+
+    $("readerShell")
+        .classList
+        .add("open");
+
+
+    loadComments();
+
+}
+
+
+/* =========================================================
+   CHAPTER NAVIGATION
+========================================================= */
+
+function updateChapterNavigation(){
+
+    const previous =
+        $("previousChapterButton");
+
+    const next =
+        $("nextChapterButton");
+
+
+    previous.classList.toggle(
+        "hidden",
+        selectedChapterIndex <= 0
+    );
+
+
+    next.classList.toggle(
+        "hidden",
+        selectedChapterIndex >=
+        chapters.length - 1
+    );
+
+}
+
+
+$("previousChapterButton").onclick =
+    function(){
+
+        if(
+            selectedChapterIndex > 0
+        ){
+
+            openChapter(
+                selectedChapterIndex - 1
+            );
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        }
+
+    };
+
+
+$("nextChapterButton").onclick =
+    function(){
+
+        if(
+            selectedChapterIndex <
+            chapters.length - 1
+        ){
+
+            openChapter(
+                selectedChapterIndex + 1
+            );
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        }
+
+    };
+
+
+/* =========================================================
+   CHAPTER DRAWER
+========================================================= */
+
+function setChapterDrawer(open){
+
+    const drawer =
+        $("chapterDrawer");
+
+    const layout =
+        $("readerLayout");
+
+
+    drawer.classList.toggle(
+        "open",
+        open
+    );
+
+
+    layout.classList.toggle(
+        "chapter-closed",
+        !open
+    );
+
+
+    $("chapterToggleButton")
+        .setAttribute(
+            "aria-expanded",
+            String(open)
+        );
+
+}
+
+
+$("chapterToggleButton").onclick =
+    function(){
+
+        const open =
+            !$("chapterDrawer")
+                .classList
+                .contains("open");
+
+
+        setChapterDrawer(open);
+
+    };
+
+
+$("closeChapterDrawer").onclick =
+    function(){
+
+        setChapterDrawer(false);
+
+    };
+
+
+/* =========================================================
+   READING PREFERENCES
+========================================================= */
+
+function setPreferencesOpen(open){
+
+    $("preferencesPanel")
+        .classList
+        .toggle(
+            "open",
+            open
+        );
+
+
+    $("preferencesToggleButton")
+        .setAttribute(
+            "aria-expanded",
+            String(open)
+        );
+
+}
+
+
+$("preferencesToggleButton").onclick =
+    function(){
+
+        const open =
+            !$("preferencesPanel")
+                .classList
+                .contains("open");
+
+
+        setPreferencesOpen(open);
+
+    };
+
+
+$("closePreferences").onclick =
+    function(){
+
+        setPreferencesOpen(false);
+
+    };
+
+
+/* =========================================================
+   READER PREFERENCES
+========================================================= */
+
+function getReaderPreferences(){
+
+    try{
+
+        const saved =
+            JSON.parse(
+                localStorage.getItem(
+                    "hed_reader_preferences"
+                )
+            );
+
+
+        return {
+            ...defaultReaderPreferences,
+            ...(saved || {})
+        };
+
+    }catch(error){
+
+        return {
+            ...defaultReaderPreferences
+        };
+
+    }
+
+}
+
+
+function saveReaderPreferences(){
+
+    const preferences =
+        getReaderPreferences();
+
+
+    localStorage.setItem(
+        "hed_reader_preferences",
+        JSON.stringify(
+            preferences
+        )
+    );
+
+}
+
+
+function applySavedReaderPreferences(){
+
+    const preferences =
+        getReaderPreferences();
+
+
+    applyFont(
+        preferences.fontFamily
+    );
+
+
+    applyFontSize(
+        preferences.fontSize
+    );
+
+
+    applyLineHeight(
+        preferences.lineHeight
+    );
+
+
+    applyTextColor(
+        preferences.textColor
+    );
+
+
+    applyTheme(
+        preferences.theme
+    );
+
+
+    $("fontFamily")
+        .value =
+            preferences.fontFamily;
+
+
+    $("fontSize")
+        .value =
+            preferences.fontSize;
+
+
+    $("fontSizeValue")
+        .textContent =
+            preferences.fontSize +
+            "px";
+
+
+    updatePreferenceButtons();
+
+}
+
+
+/* =========================================================
+   FONT
+========================================================= */
+
+function applyFont(font){
+
+    const fonts = {
+
+        serif:
+            'Georgia,"Times New Roman",serif',
+
+        sans:
+            'Arial,Helvetica,sans-serif',
+
+        clean:
+            '"Trebuchet MS",Arial,sans-serif',
+
+        mono:
+            '"Courier New",monospace'
+
+    };
+
+
+    $("readerStory")
+        .style
+        .setProperty(
+            "--reader-font",
+            fonts[font] ||
+            fonts.serif
+        );
+
+}
+
+
+$("fontFamily").addEventListener(
+    "change",
+    function(){
+
+        const preferences =
+            getReaderPreferences();
+
+
+        preferences.fontFamily =
+            this.value;
+
+
+        localStorage.setItem(
+            "hed_reader_preferences",
+            JSON.stringify(
+                preferences
+            )
+        );
+
+
+        applyFont(
+            this.value
+        );
+
+    }
+);
+
+
+/* =========================================================
+   FONT SIZE
+========================================================= */
+
+function applyFontSize(size){
+
+    $("readerStory")
+        .style
+        .fontSize =
+            size + "px";
+
+
+    $("fontSizeValue")
+        .textContent =
+            size + "px";
+
+}
+
+
+$("fontSize").addEventListener(
+    "input",
+    function(){
+
+        const size =
+            Number(this.value);
+
+
+        const preferences =
+            getReaderPreferences();
+
+
+        preferences.fontSize =
+            size;
+
+
+        localStorage.setItem(
+            "hed_reader_preferences",
+            JSON.stringify(
+                preferences
+            )
+        );
+
+
+        applyFontSize(size);
+
+    }
+);
+
+
+/* =========================================================
+   LINE HEIGHT
+========================================================= */
+
+function applyLineHeight(value){
+
+    $("readerStory")
+        .style
+        .lineHeight =
+            value;
+
+}
+
+
+document
+    .querySelectorAll(
+        "[data-spacing]"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    const value =
+                        Number(
+                            this.dataset.spacing
+                        );
+
+
+                    const preferences =
+                        getReaderPreferences();
+
+
+                    preferences.lineHeight =
+                        value;
+
+
+                    localStorage.setItem(
+                        "hed_reader_preferences",
+                        JSON.stringify(
+                            preferences
+                        )
+                    );
+
+
+                    applyLineHeight(
+                        value
+                    );
+
+
+                    updatePreferenceButtons();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   TEXT COLOR
+========================================================= */
+
+function applyTextColor(color){
+
+    $("readerStory")
+        .style
+        .color =
+            color;
+
+}
+
+
+document
+    .querySelectorAll(
+        "[data-text-color]"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    const color =
+                        this.dataset.textColor;
+
+
+                    const preferences =
+                        getReaderPreferences();
+
+
+                    preferences.textColor =
+                        color;
+
+
+                    localStorage.setItem(
+                        "hed_reader_preferences",
+                        JSON.stringify(
+                            preferences
+                        )
+                    );
+
+
+                    applyTextColor(
+                        color
+                    );
+
+
+                    updatePreferenceButtons();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   PAGE THEMES
+========================================================= */
+
+function applyTheme(theme){
+
+    const paper =
+        $("readerPaper");
+
+
+    const story =
+        $("readerStory");
+
+
+    const themes = {
+
+        cream:{
+            background:"#fbf8f3",
+            color:"#342b26",
+            border:"#ddd2c5"
+        },
+
+        white:{
+            background:"#ffffff",
+            color:"#222222",
+            border:"#dddddd"
+        },
+
+        black:{
+            background:"#000000",
+            color:"#f5f5f5",
+            border:"#333333"
+        },
+
+        dark:{
+            background:"#20211f",
+            color:"#f5f5f5",
+            border:"#3b3c39"
+        },
+
+        sepia:{
+            background:"#f1e4c9",
+            color:"#574936",
+            border:"#d7c7a8"
+        },
+
+        night:{
+            background:"#111827",
+            color:"#f8fafc",
+            border:"#293449"
+        }
+
+    };
+
+
+    const selected =
+        themes[theme] ||
+        themes.cream;
+
+
+    paper.style.background =
+        selected.background;
+
+    paper.style.borderColor =
+        selected.border;
+
+    story.style.color =
+        selected.color;
+
+}
+
+
+document
+    .querySelectorAll(
+        "[data-theme]"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    const theme =
+                        this.dataset.theme;
+
+
+                    const preferences =
+                        getReaderPreferences();
+
+
+                    preferences.theme =
+                        theme;
+
+
+                    localStorage.setItem(
+                        "hed_reader_preferences",
+                        JSON.stringify(
+                            preferences
+                        )
+                    );
+
+
+                    applyTheme(theme);
+
+
+                    updatePreferenceButtons();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   PREFERENCE BUTTON STATES
+========================================================= */
+
+function updatePreferenceButtons(){
+
+    const preferences =
+        getReaderPreferences();
+
+
+    document
+        .querySelectorAll(
+            "[data-spacing]"
+        )
+        .forEach(
+            function(button){
+
+                button.classList.toggle(
+                    "active",
+                    Number(
+                        button.dataset.spacing
+                    ) ===
+                    Number(
+                        preferences.lineHeight
+                    )
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(
+            "[data-text-color]"
+        )
+        .forEach(
+            function(button){
+
+                button.classList.toggle(
+                    "active",
+                    button.dataset.textColor ===
+                    preferences.textColor
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   COMMENTS
+========================================================= */
+
+async function loadComments(){
+
+    if(
+        selectedChapterIndex < 0
+    ){
+
+        return;
+
+    }
+
+
+    const chapter =
+        chapters[
+            selectedChapterIndex
+        ];
+
+
+    const result =
+        await supabaseClient
+            .from("comments")
+            .select(
+                "id,name,content,created_at"
+            )
+            .eq(
+                "target_type",
+                "chapter"
+            )
+            .eq(
+                "target_id",
+                chapter.id
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:true
+                }
+            );
+
+
+    if(result.error){
+
+        console.error(
+            result.error
+        );
+
+
+        $("commentsList")
+            .innerHTML =
+                '<div class="empty-message">' +
+                "Comments could not be loaded." +
+                "</div>";
+
+        return;
+    }
+
+
+    renderComments(
+        result.data || []
+    );
+
+}
+
+
+function renderComments(comments){
+
+    const list =
+        $("commentsList");
+
+
+    list.innerHTML =
+        "";
+
+
+    if(!comments.length){
+
+        list.innerHTML =
+            '<div class="empty-message">' +
+            "No comments yet. Be the first." +
+            "</div>";
+
+        return;
+    }
+
+
+    comments.forEach(
+        function(comment){
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "comment-card";
+
+
+            const date =
+                comment.created_at
+                    ? new Date(
+                        comment.created_at
+                    ).toLocaleDateString(
+                        undefined,
+                        {
+                            year:"numeric",
+                            month:"short",
+                            day:"numeric"
+                        }
+                    )
+                    : "";
+
+
+            card.innerHTML =
+
+                '<div class="comment-head">' +
+
+                    '<div class="comment-author">' +
+                        escapeHTML(
+                            comment.name ||
+                            "Reader"
+                        ) +
+                    "</div>" +
+
+                    '<div class="comment-date">' +
+                        escapeHTML(
+                            date
+                        ) +
+                    "</div>" +
+
+                "</div>" +
+
+                '<p class="comment-text">' +
+                    escapeHTML(
+                        comment.content ||
+                        ""
+                    ) +
+                "</p>" +
+
+                '<div class="comment-actions">' +
+
+                    '<button ' +
+                        'class="comment-delete" ' +
+                        'type="button" ' +
+                        'data-comment-id="' +
+                            escapeAttribute(
+                                comment.id
+                            ) +
+                        '"' +
+                    '>' +
+                        "Delete" +
+                    "</button>" +
+
+                "</div>";
+
+
+            list.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    document
+        .querySelectorAll(
+            ".comment-delete"
+        )
+        .forEach(
+            function(button){
+
+                button.onclick =
+                    async function(){
+
+                        const id =
+                            this.dataset.commentId;
+
+
+                        if(
+                            !confirm(
+                                "Delete this comment?"
+                            )
+                        ){
+
+                            return;
+
+                        }
+
+
+                        const result =
+                            await supabaseClient
+                                .from("comments")
+                                .delete()
+                                .eq(
+                                    "id",
+                                    id
+                                );
+
+
+                        if(result.error){
+
+                            console.error(
+                                result.error
+                            );
+
+                            alert(
+                                "The comment could not be deleted."
+                            );
+
+                            return;
+
+                        }
+
+
+                        loadComments();
+
+                    };
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   COMMENT FORM
+========================================================= */
+
+$("commentForm").addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
 
 
         if(
@@ -10,172 +3468,610 @@ event.preventDefault();
 
         }
 
-        const status =
-            $("commentStatus");
 
-const name =
-$("commentName")
-.value
-.trim();
+        const name =
+            $("commentName")
+                .value
+                .trim();
 
 
-const content =
-$("commentContent")
-.value
-.trim();
+        const content =
+            $("commentContent")
+                .value
+                .trim();
 
 
         if(
             !name ||
             !content
         ){
-        if(!name){
-
-            status.textContent =
-                "Your nickname is missing.";
 
             return;
 
         }
 
 
-        if(!content){
-
-            status.textContent =
-                "Please write a comment.";
-
-            return;
-
-        }
-
-
-        if(selectedChapterIndex < 0){
-
-            status.textContent =
-                "No chapter is selected.";
-
-return;
-
-@@ -3492,61 +3504,96 @@ <h2 class="comments-title">
-];
+        const chapter =
+            chapters[
+                selectedChapterIndex
+            ];
 
 
         const status =
             $("commentStatus");
-        if(!chapter || !chapter.id){
-
-            status.textContent =
-                "The chapter could not be found.";
-
-            return;
-
-        }
 
 
-status.textContent =
-"Posting…";
+        status.textContent =
+            "Posting…";
 
 
         const result =
             await supabaseClient
                 .from("comments")
                 .insert({
-        try{
 
                     target_type:"chapter",
-            const result =
-                await supabaseClient
-                    .from("comments")
-                    .insert({
 
                     target_id:
                         chapter.id,
-                        target_type:
-                            "chapter",
 
                     name:name,
-                        target_id:
-                            chapter.id,
 
                     content:content
-                        name:
-                            name,
 
                 });
-                        content:
-                            content
 
-                    });
 
         if(result.error){
 
             console.error(
                 result.error
             );
-            if(result.error){
-
-                console.error(
-                    "COMMENT ERROR:",
-                    result.error
-                );
-
-                status.textContent =
-                    "Could not post: " +
-                    result.error.message;
-
-                return;
-
-            }
 
 
-            $("commentContent")
-                .value =
-                    "";
-
-
-            $("commentName")
-                .value =
-                    window.readerNickname ||
-                    name;
-
-
-status.textContent =
+            status.textContent =
                 "The comment could not be posted.";
-                "Comment posted.";
 
             return;
 
         }
-            await loadComments();
 
 
         $("commentContent")
             .value =
                 "";
-        }catch(error){
 
-            console.error(
-                "COMMENT ERROR:",
-                error
-            );
 
         status.textContent =
             "Comment posted.";
 
-            status.textContent =
-                "Could not post: " +
-                (
-                    error.message ||
-                    "Unknown error"
-                );
 
         await loadComments();
-        }
 
-}
+    }
 );
 
 
 /* =========================================================
-  TEXT SELECTION / HIGHLIGHTING
+   TEXT SELECTION / HIGHLIGHTING
 ========================================================= */
+
+function selectionIsInsideReader(range){
+
+    if(!range){
+
+        return false;
+
+    }
+
+
+    return $("readerStory")
+        .contains(
+            range.commonAncestorContainer
+        );
+
+}
+
+
+function hideSelectionHighlightMenu(){
+
+    $("selectionHighlightMenu")
+        .classList
+        .remove("open");
+
+}
+
+
+function showSelectionHighlightMenu(){
+
+    const selection =
+        window.getSelection();
+
+
+    if(
+        !selection ||
+        selection.rangeCount === 0 ||
+        selection.isCollapsed
+    ){
+
+        hideSelectionHighlightMenu();
+
+        return;
+
+    }
+
+
+    const range =
+        selection.getRangeAt(0);
+
+
+    if(
+        !selectionIsInsideReader(range)
+    ){
+
+        hideSelectionHighlightMenu();
+
+        return;
+
+    }
+
+
+    savedSelectionRange =
+        range.cloneRange();
+
+
+    const rect =
+        range.getBoundingClientRect();
+
+
+    const menu =
+        $("selectionHighlightMenu");
+
+
+    menu.classList.add("open");
+
+
+    const menuWidth =
+        menu.offsetWidth || 250;
+
+
+    const menuHeight =
+        menu.offsetHeight || 40;
+
+
+    const gap = 8;
+
+
+    let left =
+        rect.left +
+        rect.width / 2 -
+        menuWidth / 2;
+
+
+    let top =
+        rect.top -
+        menuHeight -
+        gap;
+
+
+    left =
+        Math.max(
+            8,
+            Math.min(
+                left,
+                window.innerWidth -
+                menuWidth -
+                8
+            )
+        );
+
+
+    if(top < 8){
+
+        top =
+            Math.min(
+                window.innerHeight -
+                menuHeight -
+                8,
+
+                rect.bottom +
+                gap
+            );
+
+    }
+
+
+    menu.style.left =
+        left + "px";
+
+
+    menu.style.top =
+        top + "px";
+
+}
+
+
+document.addEventListener(
+    "selectionchange",
+    function(){
+
+        clearTimeout(
+            window.hedSelectionTimer
+        );
+
+
+        window.hedSelectionTimer =
+            setTimeout(
+                showSelectionHighlightMenu,
+                60
+            );
+
+    }
+);
+
+
+document.addEventListener(
+    "scroll",
+    function(){
+
+        const menu =
+            $("selectionHighlightMenu");
+
+
+        if(
+            menu.classList.contains(
+                "open"
+            )
+        ){
+
+            showSelectionHighlightMenu();
+
+        }
+
+    },
+    true
+);
+
+
+document.addEventListener(
+    "mousedown",
+    function(event){
+
+        const menu =
+            $("selectionHighlightMenu");
+
+
+        if(
+            menu.contains(
+                event.target
+            )
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            !event.target.closest(
+                "#readerStory"
+            )
+        ){
+
+            hideSelectionHighlightMenu();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   HIGHLIGHT BUTTONS
+========================================================= */
+
+document
+    .querySelectorAll(
+        "[data-highlight]"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "mousedown",
+                function(event){
+
+                    event.preventDefault();
+
+                }
+            );
+
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    applyHighlight(
+                        button.dataset.highlight
+                    );
+
+
+                    hideSelectionHighlightMenu();
+
+                }
+            );
+
+        }
+    );
+
+
+function applyHighlight(color){
+
+    if(!savedSelectionRange){
+
+        const selection =
+            window.getSelection();
+
+
+        if(
+            !selection ||
+            selection.rangeCount === 0 ||
+            selection.isCollapsed
+        ){
+
+            return;
+
+        }
+
+
+        savedSelectionRange =
+            selection
+                .getRangeAt(0)
+                .cloneRange();
+
+    }
+
+
+    const range =
+        savedSelectionRange;
+
+
+    if(
+        range.collapsed ||
+        !selectionIsInsideReader(
+            range
+        )
+    ){
+
+        savedSelectionRange =
+            null;
+
+        return;
+
+    }
+
+
+    const span =
+        document.createElement(
+            "span"
+        );
+
+
+    span.className =
+        "highlight highlight-" +
+        color +
+        "-mark";
+
+
+    try{
+
+        range.surroundContents(
+            span
+        );
+
+    }catch(error){
+
+        const fragment =
+            range.extractContents();
+
+
+        span.appendChild(
+            fragment
+        );
+
+
+        range.insertNode(
+            span
+        );
+
+    }
+
+
+    savedSelectionRange =
+        null;
+
+
+    const selection =
+        window.getSelection();
+
+
+    if(selection){
+
+        selection.removeAllRanges();
+
+    }
+
+
+    saveHighlights();
+
+}
+
+
+/* =========================================================
+   SAVE HIGHLIGHTS
+========================================================= */
+
+function saveHighlights(){
+
+    if(
+        selectedChapterIndex < 0
+    ){
+
+        return;
+
+    }
+
+
+    const chapter =
+        chapters[
+            selectedChapterIndex
+        ];
+
+
+    localStorage.setItem(
+        "hed_highlights_" +
+        chapter.id,
+
+        $("readerStory")
+            .innerHTML
+    );
+
+}
+
+
+/* =========================================================
+   LOAD HIGHLIGHTS
+========================================================= */
+
+function loadHighlights(){
+
+    if(
+        selectedChapterIndex < 0
+    ){
+
+        return;
+
+    }
+
+
+    const chapter =
+        chapters[
+            selectedChapterIndex
+        ];
+
+
+    const saved =
+        localStorage.getItem(
+            "hed_highlights_" +
+            chapter.id
+        );
+
+
+    if(saved){
+
+        $("readerStory")
+            .innerHTML =
+                saved;
+
+    }
+
+}
+
+
+/* =========================================================
+   SAFE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value == null
+            ? ""
+            : String(value);
+
+
+    return div.innerHTML;
+
+}
+
+
+function escapeAttribute(value){
+
+    return escapeHTML(value)
+        .replace(
+            /"/g,
+            "&quot;"
+        );
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showError(message){
+
+    $("loadingMessage")
+        .classList
+        .add("hidden");
+
+
+    $("bookContent")
+        .classList
+        .add("hidden");
+
+
+    $("errorMessage")
+        .classList
+        .remove("hidden");
+
+
+    $("errorText")
+        .textContent =
+            message;
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+(async function(){
+
+    try{
+
+        /*
+         * IMPORTANT:
+         * There is NO LOGIN CHECK here.
+         * book-one.html is a public reader.
+         */
+
+        await loadStory();
+
+    }catch(error){
+
+        console.error(
+            error
+        );
+
+
+        showError(
+            "Something went wrong while opening this story."
+        );
+
+    }
+
+})();
+
+</script>
+
+</body>
+</html>
