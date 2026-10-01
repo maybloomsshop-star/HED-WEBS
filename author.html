@@ -2903,6 +2903,12 @@ function renderStories() {
           () =>
             editStory(s.id);
 
+      card
+  .querySelector(".delete-story")
+  .onclick =
+    () =>
+      deleteStory(s.id);
+
 
       grid.appendChild(card);
 
