@@ -71,17 +71,13 @@
             cursor: pointer;
         }
 
-        button:hover {
-            opacity: 0.9;
-        }
-
-        .signup {
+        .switch {
             margin-top: 18px;
             text-align: center;
             font-size: 14px;
         }
 
-        .signup a {
+        .switch a {
             color: #4b4038;
             text-decoration: underline;
             cursor: pointer;
@@ -101,98 +97,281 @@
             text-decoration: none;
             font-size: 14px;
         }
+
+        #nicknameField {
+            display: none;
+        }
+
+        #signupTitle {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="login-box">
+<div class="login-box">
 
-        <h1>Welcome to HED</h1>
+    <h1 id="loginTitle">Welcome to HED</h1>
 
-        <div class="subtitle">
-            Log in to read.
-        </div>
-
-        <form id="loginForm">
-
-            <label for="email">Email</label>
-
-            <input
-                type="email"
-                id="email"
-                required
-            >
-
-            <label for="password">Password</label>
-
-            <input
-                type="password"
-                id="password"
-                required
-            >
-
-            <button type="submit">
-                Log in
-            </button>
-
-        </form>
-
-        <div class="signup">
-            Don't have an account?
-            <a id="signupLink">Create one</a>
-        </div>
-
-        <div id="message"></div>
-
-        <a href="hed.html" class="back">
-            ← Back to HED
-        </a>
-
+    <div class="subtitle" id="loginSubtitle">
+        Log in to read.
     </div>
 
-    <script>
+    <form id="loginForm">
 
-        const loginForm = document.getElementById("loginForm");
-        const signupLink = document.getElementById("signupLink");
-        const message = document.getElementById("message");
+        <div id="nicknameField">
+            <label for="nickname">Name or nickname</label>
 
-        function getReturnPage() {
+            <input
+                type="text"
+                id="nickname"
+                placeholder="What should we call you?"
+            >
+        </div>
 
-            const params =
-                new URLSearchParams(window.location.search);
+        <label for="email">Email</label>
 
-            const returnTo =
-                params.get("return");
+        <input
+            type="email"
+            id="email"
+            required
+        >
 
-            if (
-                returnTo &&
-                !returnTo.startsWith("http") &&
-                !returnTo.startsWith("//")
-            ) {
-                return returnTo;
-            }
+        <label for="password">Password</label>
 
-            return "hed.html";
+        <input
+            type="password"
+            id="password"
+            required
+        >
+
+        <button type="submit" id="submitButton">
+            Log in
+        </button>
+
+    </form>
+
+    <div class="switch">
+        <span id="switchText">Don't have an account?</span>
+
+        <a id="switchLink">
+            Create one
+        </a>
+    </div>
+
+    <div id="message"></div>
+
+    <a href="hed.html" class="back">
+        ← Back to HED
+    </a>
+
+</div>
+
+<script>
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const nicknameField =
+        document.getElementById("nicknameField");
+
+    const nickname =
+        document.getElementById("nickname");
+
+    const email =
+        document.getElementById("email");
+
+    const password =
+        document.getElementById("password");
+
+    const submitButton =
+        document.getElementById("submitButton");
+
+    const switchLink =
+        document.getElementById("switchLink");
+
+    const switchText =
+        document.getElementById("switchText");
+
+    const message =
+        document.getElementById("message");
+
+    const loginTitle =
+        document.getElementById("loginTitle");
+
+    const loginSubtitle =
+        document.getElementById("loginSubtitle");
+
+    let signupMode = false;
+
+
+    function getReturnPage() {
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const returnTo =
+            params.get("return");
+
+        if (
+            returnTo &&
+            !returnTo.startsWith("http") &&
+            !returnTo.startsWith("//")
+        ) {
+            return returnTo;
         }
 
-        loginForm.addEventListener("submit", async function(event) {
+        return "hed.html";
+    }
+
+
+    switchLink.addEventListener("click", function() {
+
+        signupMode = !signupMode;
+
+        message.textContent = "";
+
+        if (signupMode) {
+
+            loginTitle.textContent =
+                "Create your HED account";
+
+            loginSubtitle.textContent =
+                "Choose a name and create your account.";
+
+            nicknameField.style.display =
+                "block";
+
+            nickname.required = true;
+
+            submitButton.textContent =
+                "Create account";
+
+            switchText.textContent =
+                "Already have an account?";
+
+            switchLink.textContent =
+                "Log in";
+
+        } else {
+
+            loginTitle.textContent =
+                "Welcome to HED";
+
+            loginSubtitle.textContent =
+                "Log in to read.";
+
+            nicknameField.style.display =
+                "none";
+
+            nickname.required = false;
+
+            submitButton.textContent =
+                "Log in";
+
+            switchText.textContent =
+                "Don't have an account?";
+
+            switchLink.textContent =
+                "Create one";
+        }
+
+    });
+
+
+    loginForm.addEventListener(
+        "submit",
+        async function(event) {
 
             event.preventDefault();
 
-            const email =
-                document.getElementById("email").value.trim();
+            message.textContent =
+                signupMode
+                    ? "Creating your account..."
+                    : "Logging in...";
 
-            const password =
-                document.getElementById("password").value;
 
-            message.textContent = "Logging in...";
+            if (signupMode) {
 
-            const { error } =
-                await supabaseClient.auth.signInWithPassword({
-                    email: email,
-                    password: password
+                const name =
+                    nickname.value.trim();
+
+                if (!name) {
+
+                    message.textContent =
+                        "Please enter a name or nickname.";
+
+                    return;
+                }
+
+
+                const {
+                    data,
+                    error
+                } =
+                await supabaseClient.auth.signUp({
+
+                    email:
+                        email.value.trim(),
+
+                    password:
+                        password.value,
+
+                    options: {
+
+                        data: {
+                            nickname: name
+                        }
+
+                    }
+
                 });
+
+
+                if (error) {
+
+                    message.textContent =
+                        error.message;
+
+                    return;
+                }
+
+
+                if (
+                    data.user &&
+                    !data.session
+                ) {
+
+                    message.textContent =
+                        "Account created! Check your email to confirm your account.";
+
+                    return;
+                }
+
+
+                window.location.href =
+                    getReturnPage();
+
+                return;
+            }
+
+
+            const {
+                error
+            } =
+            await supabaseClient.auth.signInWithPassword({
+
+                email:
+                    email.value.trim(),
+
+                password:
+                    password.value
+
+            });
+
 
             if (error) {
 
@@ -201,51 +380,16 @@
 
                 return;
             }
+
 
             window.location.href =
                 getReturnPage();
 
-        });
+        }
 
-        signupLink.addEventListener("click", async function() {
+    );
 
-            const email =
-                document.getElementById("email").value.trim();
-
-            const password =
-                document.getElementById("password").value;
-
-            if (!email || !password) {
-
-                message.textContent =
-                    "Enter your email and password first.";
-
-                return;
-            }
-
-            message.textContent =
-                "Creating your account...";
-
-            const { error } =
-                await supabaseClient.auth.signUp({
-                    email: email,
-                    password: password
-                });
-
-            if (error) {
-
-                message.textContent =
-                    error.message;
-
-                return;
-            }
-
-            message.textContent =
-                "Account created! Check your email to confirm your account.";
-
-        });
-
-    </script>
+</script>
 
 </body>
 </html>
