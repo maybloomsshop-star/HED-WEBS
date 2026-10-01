@@ -847,6 +847,7 @@
        LOAD JOURNAL ENTRIES
     ========================================================= */
 
+    const db = supabaseClient;
     async function loadJournal() {
 
       const latestSection = document.getElementById("latestSection");
