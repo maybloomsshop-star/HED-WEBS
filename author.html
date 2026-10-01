@@ -2800,10 +2800,6 @@ function storyMatches(story) {
   );
 }
 
-
-function renderStories() {
-
-
 function renderStories() {
 
   const grid =
@@ -2873,7 +2869,7 @@ function renderStories() {
                 </div>
               `
           }
-          async function deleteStory(id) {
+      async function deleteStory(id) {
 
   if (
     !confirm(
@@ -2883,35 +2879,26 @@ function renderStories() {
     return;
   }
 
-
   const {
     error
   } =
     await supabaseClient
       .from("stories")
       .delete()
-      .eq(
-        "id",
-        id
-      )
-      .eq(
-        "owner_id",
-        currentUser.id
-      );
-
+      .eq("id", id)
+      .eq("owner_id", currentUser.id);
 
   if (error) {
 
     console.error(error);
 
     toast(
+      error.message ||
       "Could not delete story."
     );
 
     return;
-
   }
-
 
   stories =
     stories.filter(
@@ -2919,18 +2906,82 @@ function renderStories() {
         story.id !== id
     );
 
-
   renderStories();
-
+  renderStats();
+  renderRecent();
 
   toast(
     "Story deleted."
   );
-
 }
 
-        </div>
 
+function renderStories() {
+
+  const grid =
+    $("storyGrid");
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  const visible =
+    stories.filter(
+      storyMatches
+    );
+
+  if (!visible.length) {
+
+    grid.innerHTML = `
+      <div
+        class="empty"
+        style="grid-column:1/-1"
+      >
+        No stories here yet.<br>
+        <span class="small">
+          Start a story or create
+          the first story in a series.
+        </span>
+      </div>
+    `;
+
+    return;
+  }
+
+  visible.forEach(
+    story => {
+
+      const s =
+        normalizeStory(story);
+
+      const card =
+        document.createElement("article");
+
+      card.className =
+        "story-card";
+
+      card.innerHTML = `
+
+        <div class="cover">
+
+          ${
+            s.cover_url
+
+              ? `
+                <img
+                  src="${esc(s.cover_url)}"
+                  alt=""
+                >
+              `
+
+              : `
+                <div class="cover-placeholder">
+                  Your cover
+                </div>
+              `
+          }
+
+        </div>
 
         <div class="story-card-body">
 
@@ -2942,16 +2993,15 @@ function renderStories() {
             }
           </span>
 
-
           <h3>
-            ${esc(s.title || "Untitled")}
+            ${esc(
+              s.title || "Untitled"
+            )}
           </h3>
-
 
           <div class="author">
             ${esc(s.author || "")}
           </div>
-
 
           ${
             s.series_name
@@ -2965,7 +3015,6 @@ function renderStories() {
               : ""
           }
 
-
           <div class="desc">
             ${esc(
               s.description ||
@@ -2973,40 +3022,39 @@ function renderStories() {
             )}
           </div>
 
+          <div class="card-actions">
 
-         <div class="card-actions">
+            <button
+              class="secondary open-story"
+              type="button"
+            >
+              Open
+            </button>
 
-  <button
-    class="secondary open-story"
-  >
-    Open
-  </button>
+            <button
+              class="secondary edit-story"
+              type="button"
+            >
+              Edit
+            </button>
 
-  <button
-    class="secondary edit-story"
-  >
-    Edit
-  </button>
+            <button
+              class="danger delete-story"
+              type="button"
+            >
+              Delete
+            </button>
 
-  <button
-    class="danger delete-story"
-  >
-    Delete
-  </button>
-
-</div>
+          </div>
 
         </div>
-
       `;
-
 
       card
         .querySelector(".open-story")
         .onclick =
           () =>
             openStoryStudio(s.id);
-
 
       card
         .querySelector(".edit-story")
@@ -3015,58 +3063,16 @@ function renderStories() {
             editStory(s.id);
 
       card
-  .querySelector(".delete-story")
-  .onclick =
-    () =>
-      deleteStory(s.id);
-
+        .querySelector(".delete-story")
+        .onclick =
+          () =>
+            deleteStory(s.id);
 
       grid.appendChild(card);
 
     }
   );
-
 }
-
-
-$("storySearch").oninput =
-  renderStories;
-
-
-document
-  .querySelectorAll(
-    "[data-story-filter]"
-  )
-  .forEach(
-    button => {
-
-      button.onclick =
-        () => {
-
-          storyFilter =
-            button.dataset.storyFilter;
-
-
-          document
-            .querySelectorAll(
-              "[data-story-filter]"
-            )
-            .forEach(
-              b =>
-                b.classList.toggle(
-                  "active",
-                  b === button
-                )
-            );
-
-
-          renderStories();
-
-        };
-
-    }
-  );
-
 
 /* ========================================================
    STORY MODAL
