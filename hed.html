@@ -760,6 +760,50 @@
                 font-size: 19px;
             }
         }
+        /* =========================================
+   HED TEXT PROTECTION
+   Prevent visitors from selecting/copying text
+   ========================================= */
+
+.hed-page,
+.hed-page * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Keep buttons and links clickable */
+.hed-page button,
+.hed-page a {
+    -webkit-user-select: none;
+    user-select: none;
+}/* =========================================
+   HED TEXT PROTECTION
+   Prevent visitors from selecting/copying text
+   ========================================= */
+
+.hed-page,
+.hed-page * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Keep buttons and links clickable */
+.hed-page button,
+.hed-page a {
+    -webkit-user-select: none;
+    user-select: none;
+}
+/* Prevent visitors from selecting/copying text */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
     </style>
 </head>
 
@@ -853,7 +897,6 @@
                 </div>
 
             </div>
-            
 
 
             <div
