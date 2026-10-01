@@ -8,8 +8,6 @@
 <title>HED · Story Reader</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js"></script>
-<script src="reader-auth.js"></script>
 
 <style>
 
@@ -1915,10 +1913,9 @@ button{
 ========================================================= */
 
 const supabaseClient =
-    window.supabaseClient ||
     supabase.createClient(
-        window.SUPABASE_URL,
-        window.SUPABASE_ANON_KEY
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
     );
 
 
@@ -2196,9 +2193,7 @@ async function loadStory(){
     const storyResult =
         await supabaseClient
             .from("stories")
-            .select(
-                "id,title,author,description,cover_url,created_at"
-            )
+            .select("*")
             .eq(
                 "id",
                 storyId
@@ -2231,21 +2226,13 @@ async function loadStory(){
     const chapterResult =
         await supabaseClient
             .from("chapters")
-            .select(
-                "id,story_id,title,content,chapter_order,created_at"
-            )
+            .select("*")
             .eq(
                 "story_id",
                 storyId
             )
             .order(
                 "chapter_order",
-                {
-                    ascending:true
-                }
-            )
-            .order(
-                "created_at",
                 {
                     ascending:true
                 }
@@ -3867,15 +3854,9 @@ async function loadComments(){
     const result =
         await supabaseClient
             .from("comments")
-            .select(
-                "id,name,content,created_at,target_id,target_type"
-            )
+            .select("*")
             .eq(
-                "target_type",
-                "chapter"
-            )
-            .eq(
-                "target_id",
+                "chapter_id",
                 chapter.id
             )
             .order(
@@ -4164,10 +4145,7 @@ $("commentForm")
                         .from("comments")
                         .insert({
 
-                            target_type:
-                                "chapter",
-
-                            target_id:
+                            chapter_id:
                                 chapter.id,
 
                             name:
@@ -4198,12 +4176,6 @@ $("commentForm")
                 $("commentContent")
                     .value =
                         "";
-
-
-                $("commentName")
-                    .value =
-                        window.readerNickname ||
-                        name;
 
 
                 status.textContent =
@@ -4301,45 +4273,7 @@ function showError(message){
    START
 ========================================================= */
 
-window.readerAuthReady
-    .then(
-        function(){
-
-            const commentNameElement =
-                document.getElementById(
-                    "commentName"
-                );
-
-
-            if(
-                commentNameElement &&
-                window.readerNickname
-            ){
-
-                commentNameElement.value =
-                    window.readerNickname;
-
-            }
-
-
-            loadStory();
-
-        }
-    )
-    .catch(
-        function(error){
-
-            console.error(
-                error
-            );
-
-
-            showError(
-                "Something went wrong while opening this story."
-            );
-
-        }
-    );
+loadStory();
 
 
 /* =========================================================
@@ -4402,28 +4336,22 @@ const favoriteButton =
 
 if(favoriteButton){
 
-    favoriteButton.onclick =
-        function(){
+    favoriteButton.onclick = function(){
 
-            const saved =
-                localStorage.getItem(
-                    getFavoriteKey()
-                ) === "true";
+        const saved =
+            localStorage.getItem(
+                getFavoriteKey()
+            ) === "true";
 
+        localStorage.setItem(
+            getFavoriteKey(),
+            String(!saved)
+        );
 
-            localStorage.setItem(
-                getFavoriteKey(),
-                String(!saved)
-            );
-
-
-            applyFavoriteState();
-
-        };
-
+        applyFavoriteState();
+    };
 
     applyFavoriteState();
-
 }
 
 </script>
