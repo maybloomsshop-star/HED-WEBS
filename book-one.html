@@ -4039,32 +4039,32 @@ function showError(message){
    START
 ========================================================= */
 
-(async function(){
+window.readerAuthReady.then(function () {
 
-    try{
+    const commentNameElement =
+        document.getElementById("commentName");
 
-        /*
-         * IMPORTANT:
-         * There is NO LOGIN CHECK here.
-         * book-one.html is a public reader.
-         */
+    if (
+        commentNameElement &&
+        window.readerNickname
+    ) {
 
-        await loadStory();
-
-    }catch(error){
-
-        console.error(
-            error
-        );
-
-
-        showError(
-            "Something went wrong while opening this story."
-        );
+        commentNameElement.value =
+            window.readerNickname;
 
     }
 
-})();
+    loadStory();
+
+}).catch(function (error) {
+
+    console.error(error);
+
+    showError(
+        "Something went wrong while opening this story."
+    );
+
+});
 
 </script>
 
