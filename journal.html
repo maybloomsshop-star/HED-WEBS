@@ -1,1566 +1,1325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Journal — HED</title>
+
+    <meta
+        name="description"
+        content="The HED Journal — essays, reflections, ideas, and stories."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================================================
+           HED JOURNAL
+           Editorial / Medium / Substack inspired
+           ========================================================= */
+
+        :root {
+            --paper: #f6f4ef;
+            --paper-soft: #efede7;
+            --ink: #171717;
+            --muted: #77746d;
+            --line: #d8d5cd;
+            --accent: #b23a2f;
+            --accent-soft: #ead8d3;
+            --white: #ffffff;
+
+            --sans:
+                "DM Sans",
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            --serif:
+                "Playfair Display",
+                Georgia,
+                serif;
+
+            --mono:
+                "DM Mono",
+                monospace;
+
+            --reading-width: 720px;
+            --wide-width: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--paper);
+        }
+
+        body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--sans);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body.reader-open {
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* =========================================================
+           READING PROGRESS
+           ========================================================= */
+
+        .reading-progress {
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>HED · Story Reader</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js"></script>
-<script src="reader-auth.js"></script>
-
-<style>
-
-/* =========================================================
-   HED READER
-========================================================= */
-
-:root{
-    --brown:#4a352b;
-    --brown-dark:#382920;
-    --cream:#f5efe6;
-    --paper:#fbf8f3;
-    --green:#68745d;
-    --pink:#c58f91;
-    --pink-dark:#a87578;
-    --text:#342b26;
-    --muted:#8b8178;
-    --line:#ddd2c5;
-    --soft:#eee6dc;
-    --white:#ffffff;
-    --shadow:0 12px 35px rgba(74,53,43,.08);
-
-    --reader-width:780px;
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-    box-sizing:border-box;
-}
+            width: 0%;
+            height: 3px;
 
-html{
-    scroll-behavior:smooth;
-}
+            background: var(--accent);
 
-body{
-    margin:0;
-    background:var(--cream);
-    color:var(--text);
-    font-family:Arial,Helvetica,sans-serif;
-}
+            transition: width 0.05s linear;
+        }
 
-button,
-input,
-textarea,
-select{
-    font:inherit;
-}
+        /* =========================================================
+           HEADER
+           ========================================================= */
 
-button{
-    cursor:pointer;
-}
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
 
-.hidden{
-    display:none !important;
-}
+            height: 76px;
 
+            background: rgba(246, 244, 239, 0.94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
 
-/* =========================================================
-   HEADER
-========================================================= */
+            border-bottom: 1px solid rgba(23, 23, 23, 0.1);
+        }
 
-.site-header{
-    position:sticky;
-    top:0;
-    z-index:50;
+        .header-inner {
+            width: min(var(--wide-width), calc(100% - 48px));
+            height: 100%;
+            margin: 0 auto;
 
-    background:rgba(251,248,243,.96);
-    border-bottom:1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    backdrop-filter:blur(8px);
-}
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
 
-.header-inner{
-    max-width:1120px;
-    min-height:64px;
+            font-family: var(--mono);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
 
-    margin:0 auto;
-    padding:11px 28px;
+        .brand-mark {
+            display: grid;
+            place-items: center;
 
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-}
+            width: 34px;
+            height: 34px;
 
-.brand{
-    color:var(--brown);
-    text-decoration:none;
+            border: 1px solid var(--ink);
 
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:21px;
-    font-weight:700;
-    letter-spacing:.02em;
-}
+            font-family: var(--serif);
+            font-size: 17px;
+            font-style: italic;
+        }
 
-.brand span{
-    color:var(--pink);
-}
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
 
-.back-link{
-    color:var(--green);
-    text-decoration:none;
-    font-size:12px;
-}
+            font-size: 13px;
+            color: var(--muted);
+        }
 
-.back-link:hover{
-    color:var(--pink-dark);
-}
+        .header-nav a {
+            transition: color 0.2s ease;
+        }
 
+        .header-nav a:hover {
+            color: var(--ink);
+        }
 
-/* =========================================================
-   PAGE
-========================================================= */
+        .header-nav .active {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        /* =========================================================
+           INDEX
+           ========================================================= */
 
-.book-page{
-    max-width:1120px;
+        #journalIndex {
+            display: block;
+        }
+
+        .journal-hero {
+            width: min(var(--wide-width), calc(100% - 48px));
+            margin: 0 auto;
 
-    margin:0 auto;
-    padding:42px 28px 70px;
-}
+            padding: 110px 0 90px;
 
+            border-bottom: 1px solid var(--line);
+        }
 
-/* =========================================================
-   LOADING / ERROR
-========================================================= */
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: 28px;
+
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+
+            color: var(--muted);
+        }
+
+        .eyebrow::before {
+            content: "";
+
+            width: 32px;
+            height: 1px;
+
+            background: var(--accent);
+        }
+
+        .journal-hero h1 {
+            max-width: 900px;
+
+            font-family: var(--serif);
+            font-size: clamp(64px, 10vw, 132px);
+            font-weight: 400;
+            line-height: 0.88;
+            letter-spacing: -0.055em;
+        }
 
-.page-message{
-    max-width:700px;
+        .journal-hero h1 em {
+            color: var(--accent);
+            font-weight: 400;
+        }
 
-    margin:100px auto;
+        .hero-description {
+            max-width: 580px;
+            margin-top: 42px;
 
-    text-align:center;
-    color:var(--muted);
-}
+            font-family: var(--serif);
+            font-size: 20px;
+            line-height: 1.65;
+            color: #55524d;
+        }
 
-.page-message h2{
-    margin:0 0 8px;
+        .journal-meta-line {
+            display: flex;
+            align-items: center;
+            gap: 20px;
 
-    color:var(--brown);
+            margin-top: 44px;
 
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:28px;
-}
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
 
-.page-message p{
-    margin:0;
-    line-height:1.6;
-}
+            color: var(--muted);
+        }
 
+        .journal-meta-line span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-/* =========================================================
-   STORY INTRO
-========================================================= */
+        .journal-meta-line span:not(:last-child)::after {
+            content: "·";
+            margin-left: 12px;
+        }
 
-.book-intro{
-    display:grid;
-    grid-template-columns:210px minmax(0,1fr);
-    gap:34px;
-    align-items:start;
+        /* =========================================================
+           INDEX CONTENT
+           ========================================================= */
 
-    margin-bottom:34px;
-}
+        .journal-list-section {
+            width: min(var(--wide-width), calc(100% - 48px));
+            margin: 0 auto;
 
-.cover-wrap{
-    width:210px;
-    aspect-ratio:2 / 3;
+            padding: 62px 0 120px;
+        }
 
-    overflow:hidden;
+        .section-heading {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
 
-    border:1px solid var(--line);
-    background:var(--soft);
+            padding-bottom: 18px;
+            margin-bottom: 0;
 
-    box-shadow:var(--shadow);
-}
+            border-bottom: 1px solid var(--ink);
+        }
 
-.cover-wrap img{
-    display:block;
+        .section-heading h2 {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
 
-    width:100%;
-    height:100%;
+        .entry-count {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--muted);
+        }
 
-    object-fit:cover;
-}
+        .journal-list {
+            display: flex;
+            flex-direction: column;
+        }
 
-.cover-placeholder{
-    width:100%;
-    height:100%;
+        /* =========================================================
+           JOURNAL CARD
+           ========================================================= */
 
-    display:grid;
-    place-items:center;
+        .journal-card {
+            position: relative;
 
-    padding:25px;
+            display: grid;
+            grid-template-columns: 100px minmax(0, 1fr) 280px;
+            gap: 40px;
 
-    color:var(--brown);
+            padding: 42px 0;
 
-    text-align:center;
+            border-bottom: 1px solid var(--line);
 
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:18px;
-    line-height:1.35;
-}
+            cursor: pointer;
 
-.book-info{
-    min-width:0;
-    padding-top:4px;
-}
+            transition:
+                padding 0.25s ease,
+                background 0.25s ease;
+        }
 
-.eyebrow{
-    color:var(--pink-dark);
+        .journal-card:hover {
+            padding-left: 18px;
+            padding-right: 18px;
 
-    font-size:9px;
-    font-weight:700;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-}
+            background: var(--paper-soft);
+        }
 
-.book-info h1{
-    margin:7px 0 7px;
+        .card-number {
+            padding-top: 5px;
 
-    color:var(--brown);
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--muted);
+        }
 
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:clamp(34px,5vw,56px);
-    line-height:1.04;
-}
+        .card-content {
+            min-width: 0;
+        }
 
-.book-author{
-    margin-bottom:17px;
+        .card-category {
+            margin-bottom: 13px;
 
-    color:var(--muted);
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
 
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:15px;
-}
+            color: var(--accent);
+        }
 
-.book-description{
-    max-width:720px;
+        .journal-card h3 {
+            max-width: 680px;
 
-    margin:0;
+            font-family: var(--serif);
+            font-size: clamp(27px, 3vw, 42px);
+            font-weight: 400;
+            line-height: 1.08;
+            letter-spacing: -0.025em;
+        }
 
-    color:#665c54;
+        .card-excerpt {
+            max-width: 650px;
+            margin-top: 17px;
 
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:16px;
-    line-height:1.65;
-}
+            color: #64615c;
 
-.book-description-wrap{
-    margin-top:10px;
-}
+            font-family: var(--serif);
+            font-size: 16px;
+            line-height: 1.65;
+        }
 
-.book-description-more{
-    display:inline;
+        .card-date {
+            margin-top: 25px;
 
-    margin-left:4px;
-    padding:0;
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
 
-    border:0;
-    background:none;
+            color: var(--muted);
+        }
 
-    color:var(--pink-dark);
+        .card-image {
+            width: 100%;
+            aspect-ratio: 1.5 / 1;
 
-    font-family:inherit;
-    font-size:inherit;
-    font-weight:600;
+            overflow: hidden;
 
-    cursor:pointer;
-}
+            background: #dfdcd5;
+        }
 
-.book-description-more:hover{
-    text-decoration:underline;
-}
+        .card-image img {
+            width: 100%;
+            height: 100%;
 
-.book-meta{
-    display:flex;
-    flex-wrap:wrap;
-    margin-top:16px;
-}
+            object-fit: cover;
 
-.meta-pill{
-    padding:6px 9px;
+            transition: transform 0.5s ease;
+        }
 
-    border:1px solid var(--line);
-    background:var(--paper);
+        .journal-card:hover .card-image img {
+            transform: scale(1.035);
+        }
 
-    color:var(--muted);
+        .card-image-placeholder {
+            width: 100%;
+            height: 100%;
 
-    font-size:9px;
-    letter-spacing:.06em;
-}
+            display: grid;
+            place-items: center;
 
+            font-family: var(--serif);
+            font-size: 28px;
+            font-style: italic;
 
-/* =========================================================
-   READER
-========================================================= */
+            color: #aaa59c;
+        }
 
-.reader-shell{
-    display:none;
+        /* =========================================================
+           EMPTY / ERROR
+           ========================================================= */
 
-    padding-top:18px;
+        .state-box {
+            padding: 100px 20px;
 
-    border-top:1px solid var(--line);
-}
+            text-align: center;
 
-.reader-shell.open{
-    display:block;
-}
+            border-bottom: 1px solid var(--line);
+        }
 
+        .state-box h2 {
+            font-family: var(--serif);
+            font-size: 38px;
+            font-weight: 400;
+        }
 
-/* =========================================================
-   MINIMAL READER BAR
-========================================================= */
+        .state-box p {
+            max-width: 450px;
+            margin: 15px auto 0;
 
-.reader-topbar{
-    max-width:var(--reader-width);
+            font-family: var(--serif);
+            line-height: 1.7;
+            color: var(--muted);
+        }
 
-    margin:0 auto 12px;
+        /* =========================================================
+           READER
+           ========================================================= */
 
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
+        #journalReader {
+            display: none;
+        }
 
-    gap:6px;
-}
+        .reader-shell {
+            width: 100%;
+        }
 
-.reader-mini-button{
-    width:34px;
-    height:34px;
+        .reader-top {
+            width: min(var(--wide-width), calc(100% - 48px));
+            margin: 0 auto;
 
-    padding:0;
+            padding: 34px 0;
 
-    border:1px solid var(--line);
-    border-radius:50%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-    background:rgba(251,248,243,.9);
+            border-bottom: 1px solid var(--line);
+        }
 
-    color:var(--brown);
+        .reader-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
 
-    font-size:12px;
-    font-weight:700;
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
 
-    transition:.15s ease;
-}
+            color: var(--muted);
 
-.reader-mini-button:hover{
-    border-color:var(--pink);
-    color:var(--pink-dark);
-}
+            cursor: pointer;
 
-.reader-mini-button.bookmarked{
-    background:var(--pink);
-    border-color:var(--pink);
-    color:white;
-}
+            transition: color 0.2s ease;
+        }
 
+        .reader-back:hover {
+            color: var(--ink);
+        }
 
-/* =========================================================
-   OLD CONTROLS
-========================================================= */
+        .reader-back-arrow {
+            font-size: 16px;
+            line-height: 1;
+        }
 
-.reader-controls{
-    display:none;
-}
+        .reader-share {
+            display: flex;
+            align-items: center;
+            gap: 10px;
 
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
 
-/* =========================================================
-   READER LAYOUT
-========================================================= */
+            color: var(--muted);
 
-.reader-layout{
-    max-width:1120px;
+            border: 0;
+            background: transparent;
 
-    margin:0 auto;
+            cursor: pointer;
+        }
 
-    display:grid;
-    grid-template-columns:235px minmax(0,1fr);
+        .reader-share:hover {
+            color: var(--ink);
+        }
 
-    gap:15px;
-    align-items:start;
-}
+        /* =========================================================
+           ARTICLE HEADER
+           ========================================================= */
 
-.reader-layout.chapter-closed{
-    grid-template-columns:minmax(0,1fr);
-}
+        .article-header {
+            width: min(var(--reading-width), calc(100% - 48px));
+            margin: 0 auto;
 
+            padding: 105px 0 70px;
+        }
 
-/* =========================================================
-   CHAPTER DRAWER
-========================================================= */
+        .article-category {
+            margin-bottom: 28px;
 
-.chapter-drawer{
-    position:sticky;
-    top:82px;
+            font-family: var(--mono);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
 
-    max-height:calc(100vh - 105px);
+            color: var(--accent);
+        }
 
-    overflow-y:auto;
+        .article-title {
+            font-family: var(--serif);
+            font-size: clamp(48px, 7vw, 88px);
+            font-weight: 400;
+            line-height: 0.98;
+            letter-spacing: -0.045em;
+        }
 
-    padding:13px;
+        .article-dek {
+            margin-top: 30px;
 
-    border:1px solid var(--line);
+            font-family: var(--serif);
+            font-size: 22px;
+            line-height: 1.55;
 
-    background:rgba(251,248,243,.97);
+            color: #5e5a54;
+        }
 
-    box-shadow:var(--shadow);
-}
+        .article-byline {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
 
-.chapter-drawer:not(.open){
-    display:none;
-}
+            margin-top: 42px;
 
-.chapter-drawer-head{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.08em;
+            line-height: 1.7;
+            text-transform: uppercase;
 
-    gap:10px;
+            color: var(--muted);
+        }
 
-    padding-bottom:9px;
-    margin-bottom:7px;
+        .article-byline .dot {
+            color: var(--accent);
+        }
 
-    border-bottom:1px solid var(--line);
-}
+        /* =========================================================
+           FEATURE IMAGE
+           ========================================================= */
 
-.chapter-drawer h2{
-    margin:3px 0 0;
+        .article-feature {
+            width: min(1080px, calc(100% - 48px));
+            margin: 0 auto 85px;
 
-    color:var(--brown);
+            background: #e3e0d9;
+        }
 
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:19px;
-}
+        .article-feature img {
+            width: 100%;
+            max-height: 700px;
 
-.drawer-close{
-    width:28px;
-    height:28px;
+            object-fit: cover;
+        }
 
-    padding:0;
+        .feature-placeholder {
+            min-height: 300px;
 
-    border:0;
-    background:transparent;
+            display: grid;
+            place-items: center;
 
-    color:var(--muted);
+            font-family: var(--serif);
+            font-size: 32px;
+            font-style: italic;
 
-    font-size:20px;
-    line-height:1;
-}
+            color: #aaa59c;
+        }
 
-.drawer-close:hover{
-    color:var(--pink);
-}
+        /* =========================================================
+           ARTICLE BODY
+           ========================================================= */
 
-.chapter-list{
-    display:grid;
-    gap:4px;
-}
+        .article-body {
+            width: min(var(--reading-width), calc(100% - 48px));
+            margin: 0 auto;
 
-.chapter-button{
-    width:100%;
+            padding-bottom: 100px;
+        }
 
-    padding:10px 9px;
+        .article-content {
+            font-family: var(--serif);
+            font-size: 19px;
+            line-height: 1.9;
 
-    display:flex;
-    align-items:center;
-    gap:10px;
+            color: #292826;
+        }
 
-    border:1px solid transparent;
-    background:transparent;
+        .article-content p {
+            margin: 0 0 28px;
+        }
 
-    color:var(--text);
+        .article-content p:first-child::first-letter {
+            float: left;
 
-    text-align:left;
-}
+            margin: 7px 10px 0 0;
 
-.chapter-button:hover{
-    background:var(--soft);
-    border-color:var(--line);
-}
+            font-family: var(--serif);
+            font-size: 74px;
+            line-height: 0.78;
 
-.chapter-button.active{
-    background:#eee5dc;
-    border-color:var(--line);
-}
+            color: var(--accent);
+        }
 
-.chapter-number{
-    min-width:28px;
+        .article-content h2,
+        .article-content h3 {
+            margin: 65px 0 24px;
 
-    color:var(--pink-dark);
+            font-family: var(--serif);
+            font-weight: 500;
+            line-height: 1.2;
+        }
 
-    font-size:9px;
-    letter-spacing:.1em;
-}
+        .article-content h2 {
+            font-size: 34px;
+        }
 
-.chapter-title-small{
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:13px;
-    line-height:1.35;
-}
+        .article-content h3 {
+            font-size: 27px;
+        }
 
+        .article-content blockquote {
+            margin: 55px -80px;
 
-/* =========================================================
-   READER COLUMN
-========================================================= */
+            padding: 5px 0 5px 35px;
 
-.reader-column{
-    min-width:0;
-}
+            border-left: 2px solid var(--accent);
 
+            font-family: var(--serif);
+            font-size: 28px;
+            font-style: italic;
+            line-height: 1.45;
 
-/* =========================================================
-   READING PREFERENCES
-========================================================= */
+            color: #45413b;
+        }
 
-.preferences{
-    display:none;
+        .article-content ul,
+        .article-content ol {
+            margin: 30px 0 35px;
+            padding-left: 28px;
+        }
 
-    position:relative;
+        .article-content li {
+            margin-bottom: 12px;
+            padding-left: 5px;
+        }
 
-    margin:0 auto 12px;
+        .article-content a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
 
-    max-width:var(--reader-width);
+        .article-content strong {
+            font-weight: 600;
+        }
 
-    padding:15px;
+        .article-content em {
+            font-style: italic;
+        }
 
-    border:1px solid var(--line);
-    background:rgba(251,248,243,.98);
+        .article-content hr {
+            width: 50px;
+            height: 1px;
 
-    box-shadow:0 8px 25px rgba(74,53,43,.08);
-}
+            margin: 60px auto;
 
-.preferences.open{
-    display:block;
-}
+            border: 0;
 
-.preferences-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+            background: var(--ink);
+        }
 
-    gap:10px;
+        .article-content img {
+            width: 100%;
 
-    margin-bottom:12px;
-}
+            margin: 50px 0;
+        }
 
-.preferences-title{
-    color:var(--brown);
+        /* =========================================================
+           ARTICLE FOOTER
+           ========================================================= */
 
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:16px;
-}
+        .article-footer {
+            width: min(var(--reading-width), calc(100% - 48px));
+            margin: 0 auto;
 
-.preferences-grid{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    gap:10px 15px;
-}
+            padding: 50px 0 110px;
 
-.preference-group{
-    display:flex;
-    align-items:center;
-    flex-wrap:wrap;
+            border-top: 1px solid var(--line);
+        }
 
-    gap:6px;
+        .article-footer-label {
+            margin-bottom: 20px;
 
-    min-height:30px;
-}
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
 
-.preference-label{
-    color:var(--muted);
+            color: var(--muted);
+        }
 
-    font-size:9px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
+        .article-footer-note {
+            max-width: 580px;
 
-    white-space:nowrap;
-}
+            font-family: var(--serif);
+            font-size: 24px;
+            line-height: 1.45;
+        }
 
-.pref-select{
-    padding:6px 8px;
+        /* =========================================================
+           RELATED
+           ========================================================= */
 
-    border:1px solid var(--line);
-    background:var(--paper);
+        .related-section {
+            padding: 90px 0 120px;
 
-    color:var(--text);
+            border-top: 1px solid var(--line);
 
-    font-size:11px;
-}
+            background: var(--paper-soft);
+        }
 
-.pref-select:focus{
-    outline:none;
-    border-color:var(--pink);
-}
+        .related-inner {
+            width: min(var(--wide-width), calc(100% - 48px));
+            margin: 0 auto;
+        }
 
-.pref-size-wrap{
-    display:flex;
-    align-items:center;
-    gap:6px;
-}
+        .related-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-.pref-range{
-    width:120px;
+            padding-bottom: 20px;
+            margin-bottom: 35px;
 
-    accent-color:var(--pink);
+            border-bottom: 1px solid var(--ink);
+        }
 
-    cursor:pointer;
-}
+        .related-heading h2 {
+            font-family: var(--mono);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
 
-.pref-size-value{
-    min-width:38px;
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+        }
 
-    color:var(--brown);
+        .related-card {
+            cursor: pointer;
+        }
 
-    font-size:10px;
-    text-align:right;
-}
+        .related-image {
+            width: 100%;
+            aspect-ratio: 1.45 / 1;
 
-.pref-button{
-    min-width:30px;
-    min-height:30px;
+            overflow: hidden;
 
-    padding:0 8px;
+            background: #ddd9d1;
 
-    border:1px solid var(--line);
-    background:var(--paper);
+            margin-bottom: 20px;
+        }
 
-    color:var(--text);
+        .related-image img {
+            width: 100%;
+            height: 100%;
 
-    font-size:10px;
-}
+            object-fit: cover;
 
-.pref-button.active,
-.pref-button:hover{
-    border-color:var(--pink);
-    color:var(--pink-dark);
-}
+            transition: transform 0.4s ease;
+        }
 
-.width-buttons{
-    display:flex;
-    gap:5px;
-}
+        .related-card:hover .related-image img {
+            transform: scale(1.04);
+        }
 
-.width-button{
-    min-height:30px;
+        .related-category {
+            margin-bottom: 9px;
 
-    padding:0 9px;
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
 
-    border:1px solid var(--line);
-    background:var(--paper);
+            color: var(--accent);
+        }
 
-    color:var(--text);
+        .related-card h3 {
+            font-family: var(--serif);
+            font-size: 25px;
+            font-weight: 400;
+            line-height: 1.2;
+        }
 
-    font-size:10px;
-}
+        /* =========================================================
+           FOOTER
+           ========================================================= */
 
-.width-button.active,
-.width-button:hover{
-    border-color:var(--pink);
-    color:var(--pink-dark);
-}
+        .site-footer {
+            padding: 70px 0;
 
+            border-top: 1px solid var(--ink);
+        }
 
-/* =========================================================
-   THEMES
-========================================================= */
+        .footer-inner {
+            width: min(var(--wide-width), calc(100% - 48px));
+            margin: 0 auto;
 
-.theme-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:5px;
-}
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
 
-.theme-button{
-    min-width:30px;
-    height:30px;
+        .footer-logo {
+            font-family: var(--serif);
+            font-size: 30px;
+            font-style: italic;
+        }
 
-    padding:0 8px;
+        .footer-copy {
+            max-width: 300px;
 
-    border:1px solid var(--line);
+            font-family: var(--mono);
+            font-size: 9px;
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
 
-    font-size:10px;
-    font-weight:700;
-}
+            color: var(--muted);
+            text-align: right;
+        }
 
-.theme-cream{
-    background:#fbf8f3;
-    color:#342b26;
-}
+        /* =========================================================
+           LOADING
+           ========================================================= */
 
-.theme-white{
-    background:#fff;
-    color:#111;
-}
+        .loading-state {
+            padding: 100px 0;
 
-.theme-black{
-    background:#000;
-    color:#fff;
-    border-color:#000;
-}
+            text-align: center;
 
-.theme-dark{
-    background:#20211f;
-    color:#fff;
-    border-color:#20211f;
-}
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
 
-.theme-sepia{
-    background:#f1e4c9;
-    color:#574936;
-}
+            color: var(--muted);
+        }
 
-.theme-blue{
-    background:#111827;
-    color:#f8fafc;
-    border-color:#111827;
-}
+        .loading-line {
+            width: 80px;
+            height: 1px;
 
+            margin: 20px auto 0;
 
-/* =========================================================
-   READER PAPER
-========================================================= */
+            background: var(--line);
 
-.reader-paper{
-    max-width:var(--reader-width);
+            overflow: hidden;
+        }
 
-    margin:0 auto;
+        .loading-line::after {
+            content: "";
 
-    padding:34px 36px 35px;
+            display: block;
 
-    border:1px solid var(--line);
+            width: 40%;
 
-    background:var(--paper);
+            height: 100%;
 
-    box-shadow:var(--shadow);
+            background: var(--accent);
 
-    transition:
-        background .15s ease,
-        color .15s ease,
-        max-width .15s ease;
-}
+            animation: loading 1.2s infinite ease-in-out;
+        }
 
+        @keyframes loading {
+            0% {
+                transform: translateX(-100%);
+            }
 
-/* =========================================================
-   CHAPTER TITLE
-========================================================= */
+            100% {
+                transform: translateX(300%);
+            }
+        }
 
-.reader-chapter-label{
-    margin:0 0 5px;
+        /* =========================================================
+           TOAST
+           ========================================================= */
 
-    color:var(--pink-dark);
+        .toast {
+            position: fixed;
+            z-index: 2000;
 
-    font-size:10px;
-    font-weight:700;
-    line-height:1.2;
+            left: 50%;
+            bottom: 30px;
 
-    letter-spacing:.08em;
-    text-transform:uppercase;
-}
+            transform: translate(-50%, 20px);
 
-.reader-paper h1{
-    margin:0 0 25px;
+            padding: 12px 18px;
 
-    color:var(--brown);
+            background: var(--ink);
+            color: var(--paper);
 
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:28px;
-    line-height:1.25;
-    font-weight:600;
-}
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
 
+            opacity: 0;
+            pointer-events: none;
 
-/* =========================================================
-   STORY TEXT
-========================================================= */
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease;
+        }
 
-.reader-story{
-    --reader-font:Georgia,"Times New Roman",serif;
+        .toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
 
-    max-width:100%;
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
 
-    margin:0 auto;
+        @media (max-width: 900px) {
 
-    color:var(--text);
+            .journal-card {
+                grid-template-columns: 65px minmax(0, 1fr);
+                gap: 25px;
+            }
 
-    font-size:16px;
-    line-height:1.7;
+            .card-image {
+                grid-column: 2;
+                width: min(320px, 100%);
+                margin-top: 10px;
+            }
 
-    transition:
-        color .15s ease,
-        font-size .15s ease,
-        line-height .15s ease;
-}
+            .related-grid {
+                grid-template-columns: 1fr 1fr;
+            }
 
-.reader-story,
-.reader-story *{
-    font-family:var(--reader-font) !important;
-}
+            .article-content blockquote {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
 
-.reader-story p{
-    margin:0 0 .95em;
-}
+        @media (max-width: 640px) {
 
-.reader-story h1,
-.reader-story h2,
-.reader-story h3,
-.reader-story h4{
-    margin:1.2em 0 .5em;
+            .site-header {
+                height: 64px;
+            }
 
-    color:var(--brown);
+            .header-inner,
+            .journal-hero,
+            .journal-list-section,
+            .reader-top,
+            .footer-inner,
+            .related-inner {
+                width: min(100% - 32px, var(--wide-width));
+            }
 
-    line-height:1.2;
-}
+            .header-nav {
+                gap: 14px;
+                font-size: 11px;
+            }
 
-.reader-story img{
-    display:block;
+            .brand {
+                font-size: 12px;
+            }
 
-    max-width:100%;
-    height:auto;
+            .brand-mark {
+                width: 29px;
+                height: 29px;
+                font-size: 14px;
+            }
 
-    margin:25px auto;
-}
+            .journal-hero {
+                padding: 75px 0 65px;
+            }
 
-.reader-story blockquote{
-    margin:1.2em 0;
-    padding:10px 18px;
+            .journal-hero h1 {
+                font-size: clamp(58px, 19vw, 100px);
+            }
 
-    border-left:3px solid var(--pink);
+            .hero-description {
+                margin-top: 30px;
+                font-size: 18px;
+            }
 
-    color:var(--brown);
-}
+            .journal-meta-line {
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: 30px;
+            }
 
+            .journal-meta-line span:not(:last-child)::after {
+                display: none;
+            }
 
-/* =========================================================
-   HIGHLIGHTS
-========================================================= */
+            .journal-card {
+                grid-template-columns: 1fr;
+                gap: 0;
 
-.reader-highlight{
-    border-radius:2px;
-    padding:0 .04em;
-}
+                padding: 34px 0;
+            }
 
-.highlight-yellow-mark{
-    background:#fff0a6;
-}
+            .journal-card:hover {
+                padding-left: 0;
+                padding-right: 0;
+            }
 
-.highlight-pink-mark{
-    background:#f7b4cf;
-}
+            .card-number {
+                margin-bottom: 20px;
+            }
 
-.highlight-green-mark{
-    background:#b8dfb5;
-}
+            .card-image {
+                grid-column: auto;
 
-.highlight-blue-mark{
-    background:#b7d5ee;
-}
+                width: 100%;
+                margin-top: 25px;
+            }
 
-.highlight-orange-mark{
-    background:#f6c58b;
-}
+            .journal-card h3 {
+                font-size: 31px;
+            }
 
-.highlight-purple-mark{
-    background:#d7b9e8;
-}
+            .card-excerpt {
+                font-size: 15px;
+            }
 
-.highlight-coral-mark{
-    background:#f5aaa0;
-}
+            .article-header {
+                width: calc(100% - 32px);
 
-.highlight-lavender-mark{
-    background:#c8c7f2;
-}
+                padding: 70px 0 50px;
+            }
 
-.highlight-mint-mark{
-    background:#aee1d2;
-}
+            .article-title {
+                font-size: clamp(45px, 13vw, 70px);
+            }
 
-.highlight-gray-mark{
-    background:#d6d6d1;
-}
+            .article-dek {
+                font-size: 19px;
+            }
 
+            .article-feature {
+                width: 100%;
+                margin-bottom: 55px;
+            }
 
-/* =========================================================
-   UNDERLINE
-========================================================= */
+            .article-body {
+                width: calc(100% - 32px);
+            }
 
-.reader-underline{
-    text-decoration-line:underline;
-    text-decoration-thickness:2px;
-    text-decoration-color:var(--pink-dark);
-    text-underline-offset:3px;
-}
+            .article-content {
+                font-size: 18px;
+                line-height: 1.82;
+            }
 
+            .article-content p:first-child::first-letter {
+                font-size: 63px;
+            }
 
-/* =========================================================
-   SELECTION MENU
-========================================================= */
+            .article-content blockquote {
+                margin: 42px 0;
+                padding-left: 20px;
+                font-size: 23px;
+            }
 
-.selection-highlight-menu{
-    position:fixed;
-    z-index:1000;
+            .article-content h2 {
+                font-size: 29px;
+            }
 
-    display:none;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:5px;
+            .article-content h3 {
+                font-size: 24px;
+            }
 
-    max-width:calc(100vw - 16px);
+            .article-footer {
+                width: calc(100% - 32px);
+            }
 
-    padding:7px;
+            .article-footer-note {
+                font-size: 21px;
+            }
 
-    border:1px solid var(--line);
-    border-radius:10px;
+            .related-section {
+                padding: 65px 0 80px;
+            }
 
-    background:#fbf8f3;
+            .related-grid {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
 
-    box-shadow:0 8px 25px rgba(74,53,43,.18);
-}
+            .footer-inner {
+                flex-direction: column;
+                gap: 35px;
+            }
 
-.selection-highlight-menu.open{
-    display:flex;
-}
+            .footer-copy {
+                text-align: left;
+            }
+        }
 
-.selection-action{
-    min-height:28px;
+        /* =========================================================
+           REDUCED MOTION
+           ========================================================= */
 
-    padding:0 9px;
+        @media (prefers-reduced-motion: reduce) {
 
-    border:1px solid var(--line);
-    border-radius:7px;
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
 
-    background:var(--paper);
-
-    color:var(--brown);
-
-    font-size:10px;
-}
-
-.selection-action:hover{
-    border-color:var(--pink);
-    color:var(--pink-dark);
-}
-
-.highlight-button{
-    width:24px;
-    height:24px;
-
-    flex:0 0 auto;
-
-    padding:0;
-
-    border:1px solid #bcb4aa;
-    border-radius:50%;
-}
-
-.highlight-button:hover{
-    transform:scale(1.08);
-}
-
-.highlight-yellow{
-    background:#fff0a6;
-}
-
-.highlight-pink{
-    background:#f7b4cf;
-}
-
-.highlight-green{
-    background:#b8dfb5;
-}
-
-.highlight-blue{
-    background:#b7d5ee;
-}
-
-.highlight-orange{
-    background:#f6c58b;
-}
-
-.highlight-purple{
-    background:#d7b9e8;
-}
-
-.highlight-coral{
-    background:#f5aaa0;
-}
-
-.highlight-lavender{
-    background:#c8c7f2;
-}
-
-.highlight-mint{
-    background:#aee1d2;
-}
-
-.highlight-gray{
-    background:#d6d6d1;
-}
-
-
-/* =========================================================
-   NOTES PANEL
-========================================================= */
-
-.notes-panel{
-    display:none;
-
-    max-width:var(--reader-width);
-
-    margin:12px auto 0;
-
-    padding:15px;
-
-    border:1px solid var(--line);
-
-    background:var(--paper);
-
-    box-shadow:var(--shadow);
-}
-
-.notes-panel.open{
-    display:block;
-}
-
-.notes-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    gap:10px;
-
-    margin-bottom:12px;
-}
-
-.notes-title{
-    margin:0;
-
-    color:var(--brown);
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:18px;
-}
-
-.note-list{
-    display:grid;
-    gap:9px;
-}
-
-.note-card{
-    padding:11px 12px;
-
-    border:1px solid var(--line);
-
-    background:#fffdfa;
-}
-
-.note-card-quote{
-    margin:0 0 7px;
-
-    color:var(--muted);
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:11px;
-    line-height:1.45;
-}
-
-.note-card-text{
-    margin:0;
-
-    color:var(--text);
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:13px;
-    line-height:1.5;
-
-    white-space:pre-wrap;
-}
-
-.note-card-actions{
-    display:flex;
-    justify-content:flex-end;
-    gap:10px;
-
-    margin-top:8px;
-}
-
-.note-card-actions button{
-    padding:3px 0;
-
-    border:0;
-    background:none;
-
-    color:var(--pink-dark);
-
-    font-size:9px;
-}
-
-.note-card-actions button:hover{
-    text-decoration:underline;
-}
-
-
-/* =========================================================
-   CHAPTER NAVIGATION
-========================================================= */
-
-.chapter-navigation{
-    max-width:100%;
-
-    margin:35px auto 0;
-    padding-top:16px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    gap:10px;
-
-    border-top:1px solid var(--line);
-}
-
-.nav-button{
-    padding:9px 12px;
-
-    border:1px solid var(--line);
-    background:var(--paper);
-
-    color:var(--brown);
-
-    font-size:11px;
-}
-
-.nav-button:hover{
-    border-color:var(--pink);
-    color:var(--pink-dark);
-}
-
-
-/* =========================================================
-   COMMENTS
-========================================================= */
-
-.comments-section{
-    max-width:100%;
-
-    margin:30px auto 0;
-    padding-top:20px;
-
-    border-top:1px solid var(--line);
-}
-
-.comments-title-row{
-    display:flex;
-    align-items:baseline;
-    justify-content:space-between;
-
-    gap:10px;
-
-    margin-bottom:11px;
-}
-
-.comments-title{
-    margin:0;
-
-    color:var(--brown);
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:20px;
-}
-
-.comments-subtitle{
-    color:var(--muted);
-
-    font-size:9px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-}
-
-.comments-list{
-    display:grid;
-    gap:8px;
-
-    margin-bottom:15px;
-}
-
-.comment-card{
-    padding:10px 12px;
-
-    border:1px solid var(--line);
-    background:#fffdfa;
-}
-
-.comment-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    gap:10px;
-
-    margin-bottom:4px;
-}
-
-.comment-author{
-    color:var(--brown);
-
-    font-size:12px;
-    font-weight:700;
-}
-
-.comment-date{
-    color:var(--muted);
-
-    font-size:9px;
-}
-
-.comment-text{
-    margin:0;
-
-    color:#5b544e;
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:14px;
-    line-height:1.48;
-
-    white-space:pre-wrap;
-    overflow-wrap:anywhere;
-}
-
-.comment-actions{
-    display:flex;
-    justify-content:flex-end;
-
-    margin-top:5px;
-}
-
-.comment-delete{
-    padding:3px 0;
-
-    border:0;
-    background:transparent;
-
-    color:#aa817f;
-
-    font-size:9px;
-}
-
-.comment-delete:hover{
-    color:var(--pink);
-}
-
-.comment-form{
-    padding:13px;
-
-    border:1px solid var(--line);
-    background:rgba(251,248,243,.8);
-}
-
-.comment-form-grid{
-    display:grid;
-    grid-template-columns:170px minmax(0,1fr);
-
-    gap:8px;
-}
-
-.comment-input,
-.comment-textarea{
-    width:100%;
-
-    padding:9px 10px;
-
-    border:1px solid var(--line);
-    background:var(--paper);
-
-    color:var(--text);
-
-    outline:none;
-
-    font-size:12px;
-}
-
-.comment-input:focus,
-.comment-textarea:focus{
-    border-color:var(--pink);
-}
-
-.comment-textarea{
-    min-height:72px;
-
-    resize:vertical;
-
-    font-family:Georgia,"Times New Roman",serif;
-    line-height:1.5;
-}
-
-.comment-form-bottom{
-    display:flex;
-    justify-content:flex-end;
-
-    margin-top:8px;
-}
-
-.comment-submit{
-    padding:9px 14px;
-
-    border:0;
-    background:var(--pink);
-
-    color:white;
-
-    font-size:11px;
-}
-
-.comment-submit:hover{
-    background:var(--pink-dark);
-}
-
-.comment-status{
-    min-height:13px;
-
-    margin-top:6px;
-
-    color:var(--muted);
-
-    font-size:10px;
-}
-
-
-/* =========================================================
-   EMPTY MESSAGE
-========================================================= */
-
-.empty-message{
-    padding:15px;
-
-    color:var(--muted);
-
-    font-size:11px;
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:850px){
-
-    .reader-layout{
-        grid-template-columns:1fr;
-    }
-
-    .chapter-drawer{
-        position:relative;
-        top:auto;
-
-        max-height:280px;
-    }
-}
-
-@media(max-width:760px){
-
-    .header-inner{
-        padding:10px 17px;
-    }
-
-    .book-page{
-        padding:28px 17px 50px;
-    }
-
-    .book-intro{
-        grid-template-columns:1fr;
-        gap:20px;
-    }
-
-    .cover-wrap{
-        width:165px;
-    }
-
-    .book-info h1{
-        font-size:38px;
-    }
-
-    .book-description{
-        font-size:16px;
-    }
-
-    .reader-paper{
-        padding:26px 18px 28px;
-    }
-
-    .reader-paper h1{
-        font-size:25px;
-    }
-
-    .reader-story{
-        font-size:16px;
-    }
-
-    .preferences{
-        padding:12px;
-    }
-
-    .pref-range{
-        width:105px;
-    }
-
-    .comment-form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .comments-title-row{
-        align-items:flex-start;
-        flex-direction:column;
-        gap:3px;
-    }
-
-    .selection-highlight-menu{
-        max-width:calc(100vw - 20px);
-    }
-}
-
-</style>
+    </style>
 </head>
-
 
 <body>
 
-
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
-<header class="site-header">
-
-    <div class="header-inner">
-
-        <a
-            class="brand"
-            href="hed.html"
-        >
-            HED
-        </a>
-
-        <a
-            href="stories.html"
-            class="back-link"
-        >
-            ← Back to Stories
-        </a>
-
-    </div>
-
-</header>
-
-
-
-<main class="book-page">
-
-
-    <!-- =====================================================
-         LOADING
-    ====================================================== -->
+    <!-- =========================================================
+         READING PROGRESS
+         ========================================================= -->
 
     <div
-        id="loadingMessage"
-        class="page-message"
-    >
-        Loading story…
-    </div>
+        class="reading-progress"
+        id="readingProgress"
+        aria-hidden="true"
+    ></div>
 
 
+    <!-- =========================================================
+         HEADER
+         ========================================================= -->
 
-    <!-- =====================================================
-         ERROR
-    ====================================================== -->
+    <header class="site-header">
 
-    <div
-        id="errorMessage"
-        class="page-message hidden"
-    >
+        <div class="header-inner">
 
-        <h2>Story unavailable</h2>
+            <a href="hed.html" class="brand">
 
-        <p id="errorText">
-            Something went wrong while opening this story.
-        </p>
+                <span class="brand-mark">
+                    H
+                </span>
 
-    </div>
+                <span>
+                    HED
+                </span>
 
-
-
-    <!-- =====================================================
-         STORY CONTENT
-    ====================================================== -->
-
-    <section
-        id="bookContent"
-        class="hidden"
-    >
+            </a>
 
 
-        <!-- =================================================
-             STORY INTRO
-        ================================================== -->
+            <nav class="header-nav">
 
-        <section class="book-intro">
+                <a href="hed.html">
+                    Home
+                </a>
 
-            <div
-                class="cover-wrap"
-                id="coverWrap"
-            >
-
-                <div
-                    id="coverPlaceholder"
-                    class="cover-placeholder"
+                <a
+                    href="journal.html"
+                    class="active"
                 >
-                    Your story cover
-                </div>
+                    Journal
+                </a>
+
+                <a href="stories.html">
+                    Stories
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         JOURNAL INDEX
+         ========================================================= -->
+
+    <main id="journalIndex">
+
+        <section class="journal-hero">
+
+            <div class="eyebrow">
+                HED / Journal
+            </div>
+
+            <h1>
+                Things<br>
+                <em>worth</em><br>
+                reading.
+            </h1>
+
+            <p class="hero-description">
+                Essays, observations, fragments, and ideas —
+                written slowly, read deliberately.
+            </p>
+
+            <div class="journal-meta-line">
+
+                <span>
+                    HED Editorial
+                </span>
+
+                <span>
+                    Independent writing
+                </span>
+
+                <span id="heroEntryCount">
+                    —
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <section class="journal-list-section">
+
+            <div class="section-heading">
+
+                <h2>
+                    Latest
+                </h2>
+
+                <span
+                    class="entry-count"
+                    id="entryCount"
+                >
+                    —
+                </span>
 
             </div>
 
 
-            <div class="book-info">
+            <div
+                class="journal-list"
+                id="journalList"
+            >
 
-                <div class="eyebrow">
-                    HED STORY
-                </div>
+                <div class="loading-state">
 
-                <h1 id="storyTitle"></h1>
+                    Loading journal
 
-                <div
-                    id="storyAuthor"
-                    class="book-author"
-                ></div>
-
-                <p
-                    id="storyDescription"
-                    class="book-description"
-                ></p>
-
-                <div class="book-meta">
-
-                    <span
-                        id="chapterCountPill"
-                        class="meta-pill"
-                    >
-                        0 chapters
-                    </span>
+                    <div class="loading-line"></div>
 
                 </div>
 
@@ -1569,3843 +1328,1673 @@ button{
         </section>
 
 
+        <footer class="site-footer">
 
-        <!-- =================================================
-             READER
-        ================================================== -->
+            <div class="footer-inner">
 
-        <section
-            id="readerShell"
-            class="reader-shell"
-        >
+                <div class="footer-logo">
+                    HED.
+                </div>
+
+                <div class="footer-copy">
+                    Essays, stories, fragments,<br>
+                    and everything in between.
+                </div>
+
+            </div>
+
+        </footer>
+
+    </main>
 
 
-            <!-- =================================================
-                 MINIMAL READER CONTROLS
-            ================================================== -->
+    <!-- =========================================================
+         ARTICLE READER
+         ========================================================= -->
 
-            <div class="reader-topbar">
+    <main id="journalReader">
+
+        <div class="reader-shell">
+
+            <div class="reader-top">
+
+                <a
+                    href="journal.html"
+                    class="reader-back"
+                    id="readerBack"
+                >
+
+                    <span class="reader-back-arrow">
+                        ←
+                    </span>
+
+                    <span>
+                        Journal
+                    </span>
+
+                </a>
+
 
                 <button
-                    id="chapterToggleButton"
-                    class="reader-mini-button"
                     type="button"
-                    aria-label="Open chapters"
-                    title="Chapters"
+                    class="reader-share"
+                    id="shareButton"
                 >
-                    ☰
-                </button>
 
-                <button
-                    id="notesToggleButton"
-                    class="reader-mini-button"
-                    type="button"
-                    aria-label="Open notes"
-                    title="Notes"
-                >
-                    ♡
-                </button>
+                    Share
 
-                <button
-                    id="bookmarkButton"
-                    class="reader-mini-button"
-                    type="button"
-                    aria-label="Bookmark chapter"
-                    title="Bookmark chapter"
-                >
-                    ♧
-                </button>
-
-                <button
-                    id="preferencesToggleButton"
-                    class="reader-mini-button"
-                    type="button"
-                    aria-label="Reading preferences"
-                    title="Reading preferences"
-                >
-                    Aa
                 </button>
 
             </div>
 
 
+            <!-- ARTICLE HEADER -->
+
+            <header class="article-header">
+
+                <div
+                    class="article-category"
+                    id="articleCategory"
+                >
+                    Journal
+                </div>
+
+                <h1
+                    class="article-title"
+                    id="articleTitle"
+                >
+                    —
+                </h1>
+
+                <p
+                    class="article-dek"
+                    id="articleDek"
+                ></p>
+
+                <div
+                    class="article-byline"
+                    id="articleByline"
+                ></div>
+
+            </header>
+
+
+            <!-- FEATURE IMAGE -->
 
             <div
-                class="reader-layout chapter-closed"
-                id="readerLayout"
-            >
+                class="article-feature"
+                id="articleFeature"
+            ></div>
 
 
-                <!-- =================================================
-                     CHAPTER DRAWER
-                ================================================== -->
+            <!-- BODY -->
 
-                <aside
-                    id="chapterDrawer"
-                    class="chapter-drawer"
-                    aria-label="Chapter list"
-                >
+            <article class="article-body">
 
-                    <div class="chapter-drawer-head">
+                <div
+                    class="article-content"
+                    id="articleContent"
+                ></div>
 
-                        <div>
+            </article>
 
-                            <div class="eyebrow">
-                                READ
-                            </div>
 
-                            <h2>
-                                Chapters
-                            </h2>
+            <!-- ARTICLE FOOTER -->
 
-                        </div>
+            <section class="article-footer">
 
-                        <button
-                            id="closeChapterDrawer"
-                            class="drawer-close"
-                            type="button"
-                            aria-label="Close chapters"
-                        >
-                            ×
-                        </button>
+                <div class="article-footer-label">
+                    End of entry
+                </div>
+
+                <p class="article-footer-note">
+                    Thank you for spending a little time here.
+                </p>
+
+            </section>
+
+
+            <!-- RELATED -->
+
+            <section class="related-section">
+
+                <div class="related-inner">
+
+                    <div class="related-heading">
+
+                        <h2>
+                            Continue reading
+                        </h2>
 
                     </div>
 
                     <div
-                        id="chapterList"
-                        class="chapter-list"
+                        class="related-grid"
+                        id="relatedGrid"
                     ></div>
 
-                </aside>
+                </div>
 
+            </section>
 
 
-                <!-- =================================================
-                     READER COLUMN
-                ================================================== -->
+            <footer class="site-footer">
 
-                <main class="reader-column">
+                <div class="footer-inner">
 
+                    <div class="footer-logo">
+                        HED.
+                    </div>
 
-                    <!-- =================================================
-                         READING PREFERENCES
-                    ================================================== -->
+                    <div class="footer-copy">
+                        Essays, stories, fragments,<br>
+                        and everything in between.
+                    </div>
 
-                    <section
-                        id="preferencesPanel"
-                        class="preferences"
-                    >
+                </div>
 
-                        <div class="preferences-head">
+            </footer>
 
-                            <div class="preferences-title">
-                                Reading Preferences
-                            </div>
+        </div>
 
-                            <button
-                                id="closePreferences"
-                                class="drawer-close"
-                                type="button"
-                                aria-label="Close reading preferences"
-                            >
-                                ×
-                            </button>
+    </main>
 
-                        </div>
 
+    <!-- =========================================================
+         TOAST
+         ========================================================= -->
 
-                        <div class="preferences-grid">
-
-
-                            <!-- FONT -->
-
-                            <div class="preference-group">
-
-                                <span class="preference-label">
-                                    Font
-                                </span>
-
-                                <select
-                                    id="fontFamily"
-                                    class="pref-select"
-                                >
-
-                                    <option value="serif">
-                                        Serif
-                                    </option>
-
-                                    <option value="sans">
-                                        Sans
-                                    </option>
-
-                                    <option value="clean">
-                                        Clean
-                                    </option>
-
-                                    <option value="mono">
-                                        Mono
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-
-                            <!-- SIZE -->
-
-                            <div class="preference-group">
-
-                                <span class="preference-label">
-                                    Size
-                                </span>
-
-                                <div class="pref-size-wrap">
-
-                                    <input
-                                        id="fontSize"
-                                        class="pref-range"
-                                        type="range"
-                                        min="12"
-                                        max="26"
-                                        step="1"
-                                        value="16"
-                                    >
-
-                                    <span
-                                        id="fontSizeValue"
-                                        class="pref-size-value"
-                                    >
-                                        16px
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-
-                            <!-- SPACING -->
-
-                            <div class="preference-group">
-
-                                <span class="preference-label">
-                                    Spacing
-                                </span>
-
-                                <button
-                                    class="pref-button"
-                                    data-spacing="1.45"
-                                    type="button"
-                                >
-                                    Tight
-                                </button>
-
-                                <button
-                                    class="pref-button active"
-                                    data-spacing="1.7"
-                                    type="button"
-                                >
-                                    Normal
-                                </button>
-
-                                <button
-                                    class="pref-button"
-                                    data-spacing="1.95"
-                                    type="button"
-                                >
-                                    Wide
-                                </button>
-
-                            </div>
-
-
-
-                            <!-- WIDTH -->
-
-                            <div class="preference-group">
-
-                                <span class="preference-label">
-                                    Width
-                                </span>
-
-                                <div class="width-buttons">
-
-                                    <button
-                                        class="width-button"
-                                        data-width="680px"
-                                        type="button"
-                                    >
-                                        Narrow
-                                    </button>
-
-                                    <button
-                                        class="width-button active"
-                                        data-width="780px"
-                                        type="button"
-                                    >
-                                        Normal
-                                    </button>
-
-                                    <button
-                                        class="width-button"
-                                        data-width="900px"
-                                        type="button"
-                                    >
-                                        Wide
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-
-
-                            <!-- PAGE -->
-
-                            <div class="preference-group">
-
-                                <span class="preference-label">
-                                    Page
-                                </span>
-
-                                <div class="theme-buttons">
-
-                                    <button
-                                        class="theme-button theme-cream"
-                                        data-theme="cream"
-                                        type="button"
-                                    >
-                                        Cream
-                                    </button>
-
-                                    <button
-                                        class="theme-button theme-white"
-                                        data-theme="white"
-                                        type="button"
-                                    >
-                                        White
-                                    </button>
-
-                                    <button
-                                        class="theme-button theme-sepia"
-                                        data-theme="sepia"
-                                        type="button"
-                                    >
-                                        Sepia
-                                    </button>
-
-                                    <button
-                                        class="theme-button theme-dark"
-                                        data-theme="dark"
-                                        type="button"
-                                    >
-                                        Dark
-                                    </button>
-
-                                    <button
-                                        class="theme-button theme-black"
-                                        data-theme="black"
-                                        type="button"
-                                    >
-                                        Black
-                                    </button>
-
-                                    <button
-                                        class="theme-button theme-blue"
-                                        data-theme="night"
-                                        type="button"
-                                    >
-                                        Night
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </section>
-
-
-
-                    <!-- =================================================
-                         NOTES
-                    ================================================== -->
-
-                    <section
-                        id="notesPanel"
-                        class="notes-panel"
-                    >
-
-                        <div class="notes-head">
-
-                            <h2 class="notes-title">
-                                Notes
-                            </h2>
-
-                            <button
-                                id="closeNotes"
-                                class="drawer-close"
-                                type="button"
-                                aria-label="Close notes"
-                            >
-                                ×
-                            </button>
-
-                        </div>
-
-                        <div
-                            id="noteList"
-                            class="note-list"
-                        ></div>
-
-                    </section>
-
-
-
-                    <!-- =================================================
-                         READER PAPER
-                    ================================================== -->
-
-                    <article
-                        class="reader-paper"
-                        id="readerPaper"
-                    >
-
-                        <div
-                            id="readerChapterLabel"
-                            class="reader-chapter-label"
-                        >
-                            CHAPTER 01
-                        </div>
-
-                        <h1 id="readerChapterTitle">
-                            Chapter
-                        </h1>
-
-                        <div
-                            id="readerStory"
-                            class="reader-story"
-                        ></div>
-
-
-
-                        <!-- =================================================
-                             CHAPTER NAVIGATION
-                        ================================================== -->
-
-                        <div class="chapter-navigation">
-
-                            <button
-                                id="previousChapterButton"
-                                class="nav-button"
-                                type="button"
-                            >
-                                ← Previous Chapter
-                            </button>
-
-                            <button
-                                id="nextChapterButton"
-                                class="nav-button"
-                                type="button"
-                            >
-                                Next Chapter →
-                            </button>
-
-                        </div>
-
-
-
-                        <!-- =================================================
-                             COMMENTS
-                        ================================================== -->
-
-                        <section class="comments-section">
-
-                            <div class="comments-title-row">
-
-                                <h2 class="comments-title">
-                                    Comments
-                                </h2>
-
-                                <div class="comments-subtitle">
-                                    Leave a thought
-                                </div>
-
-                            </div>
-
-                            <div
-                                id="commentsList"
-                                class="comments-list"
-                            ></div>
-
-                            <form
-                                id="commentForm"
-                                class="comment-form"
-                            >
-
-                                <div class="comment-form-grid">
-
-                                    <input
-                                        id="commentName"
-                                        class="comment-input"
-                                        type="text"
-                                        maxlength="80"
-                                        placeholder="Your name"
-                                        required
-                                        readonly
-                                    >
-
-                                    <textarea
-                                        id="commentContent"
-                                        class="comment-textarea"
-                                        maxlength="2000"
-                                        placeholder="Write a comment..."
-                                        required
-                                    ></textarea>
-
-                                </div>
-
-                                <div class="comment-form-bottom">
-
-                                    <button
-                                        class="comment-submit"
-                                        type="submit"
-                                    >
-                                        Post Comment
-                                    </button>
-
-                                </div>
-
-                                <div
-                                    id="commentStatus"
-                                    class="comment-status"
-                                ></div>
-
-                            </form>
-
-                        </section>
-
-                    </article>
-
-                </main>
-
-            </div>
-
-        </section>
-
-    </section>
-
-</main>
-
-
-
-<!-- =========================================================
-     TEXT SELECTION MENU
-========================================================= -->
-
-<div
-    id="selectionHighlightMenu"
-    class="selection-highlight-menu"
->
-
-    <button
-        id="selectionHighlight"
-        class="selection-action"
-        type="button"
+    <div
+        class="toast"
+        id="toast"
+        role="status"
+        aria-live="polite"
     >
-        Highlight
-    </button>
+        Link copied
+    </div>
 
-    <button
-        id="selectionUnderline"
-        class="selection-action"
-        type="button"
-    >
-        Underline
-    </button>
 
-    <button
-        id="selectionNote"
-        class="selection-action"
-        type="button"
-    >
-        Add Note
-    </button>
+    <!-- =========================================================
+         SUPABASE
+         ========================================================= -->
 
-    <button
-        class="highlight-button highlight-yellow"
-        data-highlight="yellow"
-        type="button"
-        title="Yellow"
-    ></button>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <button
-        class="highlight-button highlight-pink"
-        data-highlight="pink"
-        type="button"
-        title="Pink"
-    ></button>
 
-    <button
-        class="highlight-button highlight-green"
-        data-highlight="green"
-        type="button"
-        title="Green"
-    ></button>
+    <script>
 
-    <button
-        class="highlight-button highlight-blue"
-        data-highlight="blue"
-        type="button"
-        title="Blue"
-    ></button>
+        /* =========================================================
+           SUPABASE
+           ========================================================= */
 
-    <button
-        class="highlight-button highlight-orange"
-        data-highlight="orange"
-        type="button"
-        title="Orange"
-    ></button>
+        const SUPABASE_URL =
+            "https://YOUR-PROJECT.supabase.co";
 
-</div>
+        const SUPABASE_ANON_KEY =
+            "YOUR-ANON-KEY";
 
 
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_ANON_KEY
+            );
 
-<script>
 
-/* =========================================================
-   BASIC HELPER
-========================================================= */
+        /* =========================================================
+           ELEMENTS
+           ========================================================= */
 
-function $(id){
-    return document.getElementById(id);
-}
+        const journalIndex =
+            document.getElementById("journalIndex");
 
+        const journalReader =
+            document.getElementById("journalReader");
 
-/* =========================================================
-   STORY ID
-========================================================= */
+        const journalList =
+            document.getElementById("journalList");
 
-const storyId =
-    new URLSearchParams(
-        window.location.search
-    ).get("id");
+        const entryCount =
+            document.getElementById("entryCount");
 
+        const heroEntryCount =
+            document.getElementById("heroEntryCount");
 
-/* =========================================================
-   STATE
-========================================================= */
+        const readingProgress =
+            document.getElementById("readingProgress");
 
-let story = null;
+        const articleCategory =
+            document.getElementById("articleCategory");
 
-let chapters = [];
+        const articleTitle =
+            document.getElementById("articleTitle");
 
-let selectedChapterIndex = -1;
+        const articleDek =
+            document.getElementById("articleDek");
 
-let savedSelectionRange = null;
+        const articleByline =
+            document.getElementById("articleByline");
 
+        const articleFeature =
+            document.getElementById("articleFeature");
 
-/* =========================================================
-   READER DEFAULTS
-========================================================= */
+        const articleContent =
+            document.getElementById("articleContent");
 
-const defaultReaderPreferences = {
+        const relatedGrid =
+            document.getElementById("relatedGrid");
 
-    fontFamily:"serif",
+        const readerBack =
+            document.getElementById("readerBack");
 
-    fontSize:16,
+        const shareButton =
+            document.getElementById("shareButton");
 
-    lineHeight:1.7,
+        const toast =
+            document.getElementById("toast");
 
-    width:"780px",
 
-    theme:"cream"
+        /* =========================================================
+           STATE
+           ========================================================= */
 
-};
+        let journalEntries = [];
 
+        let currentEntry = null;
 
-/* =========================================================
-   STORAGE HELPERS
-========================================================= */
 
-function getStorageKey(type,chapterId){
+        /* =========================================================
+           URL
+           ========================================================= */
 
-    return (
-        "hed_" +
-        type +
-        "_" +
-        chapterId
-    );
+        function getRequestedId() {
 
-}
-
-
-function getChapterAnnotations(){
-
-    if(selectedChapterIndex < 0){
-
-        return [];
-
-    }
-
-    const chapter =
-        chapters[selectedChapterIndex];
-
-    if(!chapter){
-
-        return [];
-
-    }
-
-    try{
-
-        return JSON.parse(
-            localStorage.getItem(
-                getStorageKey(
-                    "annotations",
-                    chapter.id
-                )
-            )
-        ) || [];
-
-    }catch(error){
-
-        return [];
-
-    }
-
-}
-
-
-function saveChapterAnnotations(annotations){
-
-    if(selectedChapterIndex < 0){
-
-        return;
-
-    }
-
-    const chapter =
-        chapters[selectedChapterIndex];
-
-    if(!chapter){
-
-        return;
-
-    }
-
-    localStorage.setItem(
-        getStorageKey(
-            "annotations",
-            chapter.id
-        ),
-        JSON.stringify(
-            annotations
-        )
-    );
-
-}
-
-
-/* =========================================================
-   BOOKMARKS
-========================================================= */
-
-function getBookmarks(){
-
-    try{
-
-        return JSON.parse(
-            localStorage.getItem(
-                "hed_bookmarks"
-            )
-        ) || [];
-
-    }catch(error){
-
-        return [];
-
-    }
-
-}
-
-
-function saveBookmarks(bookmarks){
-
-    localStorage.setItem(
-        "hed_bookmarks",
-        JSON.stringify(bookmarks)
-    );
-
-}
-
-
-function isCurrentChapterBookmarked(){
-
-    if(selectedChapterIndex < 0){
-
-        return false;
-
-    }
-
-    const chapter =
-        chapters[selectedChapterIndex];
-
-    return getBookmarks().includes(
-        chapter.id
-    );
-
-}
-
-
-function updateBookmarkButton(){
-
-    const button =
-        $("bookmarkButton");
-
-    const bookmarked =
-        isCurrentChapterBookmarked();
-
-    button.classList.toggle(
-        "bookmarked",
-        bookmarked
-    );
-
-    button.textContent =
-        bookmarked
-            ? "♥"
-            : "♡";
-
-    button.title =
-        bookmarked
-            ? "Remove bookmark"
-            : "Bookmark chapter";
-
-}
-
-
-$("bookmarkButton").onclick =
-    function(){
-
-        if(selectedChapterIndex < 0){
-
-            return;
-
-        }
-
-        const chapter =
-            chapters[selectedChapterIndex];
-
-        let bookmarks =
-            getBookmarks();
-
-        if(bookmarks.includes(chapter.id)){
-
-            bookmarks =
-                bookmarks.filter(
-                    function(id){
-                        return id !== chapter.id;
-                    }
+            const params =
+                new URLSearchParams(
+                    window.location.search
                 );
 
-        }else{
-
-            bookmarks.push(
-                chapter.id
-            );
-
+            return params.get("id");
         }
 
-        saveBookmarks(
-            bookmarks
-        );
 
-        updateBookmarkButton();
+        function getRequestedSource() {
 
-    };
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
 
-
-/* =========================================================
-   LOAD STORY
-========================================================= */
-
-async function loadStory(){
-
-    if(!storyId){
-
-        showError(
-            "No story was selected. Please return to HED and choose a story."
-        );
-
-        return;
-
-    }
+            return params.get("from");
+        }
 
 
-    const storyResult =
-        await supabaseClient
-            .from("stories")
-            .select(
-                "id,title,author,description,cover_url,created_at"
-            )
-            .eq(
-                "id",
-                storyId
-            )
-            .single();
+        /* =========================================================
+           TEXT HELPERS
+           ========================================================= */
+
+        function escapeHTML(value) {
+
+            if (value === null || value === undefined) {
+                return "";
+            }
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
 
 
-    if(storyResult.error){
+        function stripHTML(value) {
 
-        console.error(
-            storyResult.error
-        );
+            if (!value) {
+                return "";
+            }
 
-        showError(
-            "We couldn't find this story."
-        );
+            const temporary =
+                document.createElement("div");
 
-        return;
+            temporary.innerHTML = value;
 
-    }
-
-
-    story =
-        storyResult.data;
+            return temporary.textContent ||
+                temporary.innerText ||
+                "";
+        }
 
 
-    renderStoryInfo();
+        function getExcerpt(value, length = 190) {
+
+            const clean =
+                stripHTML(value)
+                    .replace(/\s+/g, " ")
+                    .trim();
+
+            if (clean.length <= length) {
+                return clean;
+            }
+
+            return clean.substring(0, length).trim() + "…";
+        }
 
 
-    const chapterResult =
-        await supabaseClient
-            .from("chapters")
-            .select(
-                "id,story_id,title,content,chapter_order,created_at"
-            )
-            .eq(
-                "story_id",
-                storyId
-            )
-            .order(
-                "chapter_order",
+        /* =========================================================
+           DATE
+           ========================================================= */
+
+        function formatDate(dateValue) {
+
+            if (!dateValue) {
+                return "";
+            }
+
+            const date =
+                new Date(dateValue);
+
+            if (Number.isNaN(date.getTime())) {
+                return "";
+            }
+
+            return date.toLocaleDateString(
+                "en-US",
                 {
-                    ascending:true
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric"
                 }
-            )
-            .order(
-                "created_at",
+            );
+        }
+
+
+        function formatShortDate(dateValue) {
+
+            if (!dateValue) {
+                return "";
+            }
+
+            const date =
+                new Date(dateValue);
+
+            if (Number.isNaN(date.getTime())) {
+                return "";
+            }
+
+            return date.toLocaleDateString(
+                "en-US",
                 {
-                    ascending:true
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric"
+                }
+            );
+        }
+
+
+        /* =========================================================
+           READING TIME
+           ========================================================= */
+
+        function getReadingTime(content) {
+
+            const text =
+                stripHTML(content);
+
+            const words =
+                text
+                    .trim()
+                    .split(/\s+/)
+                    .filter(Boolean)
+                    .length;
+
+            const minutes =
+                Math.max(
+                    1,
+                    Math.ceil(words / 220)
+                );
+
+            return minutes + " min read";
+        }
+
+
+        /* =========================================================
+           ENTRY FIELDS
+           ---------------------------------------------------------
+           The helpers below allow the page to work with the
+           common field names used in your journal table.
+           ========================================================= */
+
+        function getTitle(entry) {
+
+            return (
+                entry.title ||
+                entry.name ||
+                "Untitled"
+            );
+        }
+
+
+        function getCategory(entry) {
+
+            return (
+                entry.category ||
+                entry.type ||
+                entry.tag ||
+                "Journal"
+            );
+        }
+
+
+        function getContent(entry) {
+
+            return (
+                entry.content ||
+                entry.body ||
+                entry.text ||
+                entry.description ||
+                ""
+            );
+        }
+
+
+        function getExcerptSource(entry) {
+
+            return (
+                entry.excerpt ||
+                entry.summary ||
+                entry.description ||
+                getContent(entry)
+            );
+        }
+
+
+        function getImage(entry) {
+
+            return (
+                entry.image_url ||
+                entry.image ||
+                entry.cover_image ||
+                entry.cover ||
+                entry.thumbnail ||
+                ""
+            );
+        }
+
+
+        function getAuthor(entry) {
+
+            return (
+                entry.author ||
+                entry.author_name ||
+                entry.byline ||
+                ""
+            );
+        }
+
+
+        function getDate(entry) {
+
+            return (
+                entry.published_at ||
+                entry.created_at ||
+                entry.date ||
+                ""
+            );
+        }
+
+
+        /* =========================================================
+           IMAGE HTML
+           ========================================================= */
+
+        function createImageHTML(
+            entry,
+            className = ""
+        ) {
+
+            const image =
+                getImage(entry);
+
+            if (!image) {
+
+                return `
+                    <div class="${className} card-image-placeholder">
+                        HED
+                    </div>
+                `;
+            }
+
+            return `
+                <img
+                    src="${escapeHTML(image)}"
+                    alt="${escapeHTML(getTitle(entry))}"
+                    loading="lazy"
+                >
+            `;
+        }
+
+
+        /* =========================================================
+           JOURNAL CARD
+           ========================================================= */
+
+        function createJournalCard(
+            entry,
+            index
+        ) {
+
+            const article =
+                document.createElement("article");
+
+            article.className =
+                "journal-card";
+
+            article.tabIndex = 0;
+
+            article.setAttribute(
+                "role",
+                "link"
+            );
+
+
+            const number =
+                String(index + 1)
+                    .padStart(2, "0");
+
+
+            const title =
+                getTitle(entry);
+
+            const category =
+                getCategory(entry);
+
+            const excerpt =
+                getExcerpt(
+                    getExcerptSource(entry)
+                );
+
+            const date =
+                formatShortDate(
+                    getDate(entry)
+                );
+
+            const image =
+                getImage(entry);
+
+
+            article.innerHTML = `
+
+                <div class="card-number">
+                    ${number}
+                </div>
+
+                <div class="card-content">
+
+                    <div class="card-category">
+                        ${escapeHTML(category)}
+                    </div>
+
+                    <h3>
+                        ${escapeHTML(title)}
+                    </h3>
+
+                    ${
+                        excerpt
+                            ? `
+                                <p class="card-excerpt">
+                                    ${escapeHTML(excerpt)}
+                                </p>
+                            `
+                            : ""
+                    }
+
+                    ${
+                        date
+                            ? `
+                                <div class="card-date">
+                                    ${escapeHTML(date)}
+                                </div>
+                            `
+                            : ""
+                    }
+
+                </div>
+
+                <div class="card-image">
+
+                    ${
+                        image
+                            ? `
+                                <img
+                                    src="${escapeHTML(image)}"
+                                    alt="${escapeHTML(title)}"
+                                    loading="lazy"
+                                >
+                            `
+                            : `
+                                <div class="card-image-placeholder">
+                                    HED
+                                </div>
+                            `
+                    }
+
+                </div>
+
+            `;
+
+
+            function openThisEntry() {
+
+                openReader(
+                    entry,
+                    "journal"
+                );
+
+            }
+
+
+            article.addEventListener(
+                "click",
+                openThisEntry
+            );
+
+
+            article.addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        openThisEntry();
+
+                    }
+
                 }
             );
 
 
-    if(chapterResult.error){
-
-        console.error(
-            chapterResult.error
-        );
-
-        showError(
-            "The story opened, but its chapters could not be loaded."
-        );
-
-        return;
-
-    }
+            return article;
+        }
 
 
-    chapters =
-        chapterResult.data || [];
+        /* =========================================================
+           RENDER INDEX
+           ========================================================= */
 
+        function renderJournalIndex() {
 
-    renderChapterList();
+            journalIndex.style.display =
+                "block";
 
+            journalReader.style.display =
+                "none";
 
-    $("chapterCountPill")
-        .textContent =
-            chapters.length +
-            (
-                chapters.length === 1
-                    ? " chapter"
-                    : " chapters"
+            document.body.classList.remove(
+                "reader-open"
+            );
+
+            window.scrollTo(
+                0,
+                0
             );
 
 
-    $("loadingMessage")
-        .classList
-        .add("hidden");
+            journalList.innerHTML = "";
 
 
-    $("bookContent")
-        .classList
-        .remove("hidden");
+            if (
+                !journalEntries ||
+                journalEntries.length === 0
+            ) {
+
+                journalList.innerHTML = `
+
+                    <div class="state-box">
+
+                        <h2>
+                            Nothing here yet.
+                        </h2>
+
+                        <p>
+                            The journal is still being written.
+                            Check back soon.
+                        </p>
+
+                    </div>
+
+                `;
+
+                entryCount.textContent =
+                    "0 entries";
+
+                heroEntryCount.textContent =
+                    "0 entries";
+
+                return;
+            }
 
 
-    if(chapters.length){
+            journalEntries.forEach(
+                function(entry, index) {
 
-        openChapter(0);
-
-    }else{
-
-        $("readerShell")
-            .classList
-            .add("open");
-
-        $("readerChapterLabel")
-            .textContent =
-                "NO CHAPTERS";
-
-        $("readerChapterTitle")
-            .textContent =
-                "This story has no chapters yet.";
-
-        $("readerStory")
-            .innerHTML =
-                "<p>There is nothing to read here yet.</p>";
-
-    }
-
-}
-
-
-/* =========================================================
-   STORY INFO
-========================================================= */
-
-function renderStoryInfo(){
-
-    $("storyTitle")
-        .textContent =
-            story.title ||
-            "Untitled Story";
-
-
-    $("storyAuthor")
-        .textContent =
-            story.author
-                ? "by " + story.author
-                : "";
-
-
-    const description =
-        story.description ||
-        "No description yet.";
-
-    const descriptionElement =
-        $("storyDescription");
-
-    const words =
-        description.trim().split(/\s+/);
-
-    const DESCRIPTION_LIMIT =
-        118;
-
-
-    if(words.length > DESCRIPTION_LIMIT){
-
-        const shortDescription =
-            words
-                .slice(
-                    0,
-                    DESCRIPTION_LIMIT
-                )
-                .join(" ");
-
-
-        descriptionElement.innerHTML =
-            escapeHTML(
-                shortDescription
-            ) +
-            "... " +
-            '<button type="button" class="book-description-more">See more</button>';
-
-
-        const seeMore =
-            descriptionElement.querySelector(
-                ".book-description-more"
-            );
-
-
-        seeMore.onclick =
-            function(){
-
-                descriptionElement.textContent =
-                    description;
-
-                const seeLess =
-                    document.createElement(
-                        "button"
+                    journalList.appendChild(
+                        createJournalCard(
+                            entry,
+                            index
+                        )
                     );
 
-                seeLess.type =
-                    "button";
+                }
+            );
 
-                seeLess.className =
-                    "book-description-more";
 
-                seeLess.textContent =
-                    "See less";
+            const count =
+                journalEntries.length;
 
-                descriptionElement.appendChild(
-                    document.createTextNode(" ")
+            entryCount.textContent =
+                count === 1
+                    ? "1 entry"
+                    : count + " entries";
+
+            heroEntryCount.textContent =
+                count === 1
+                    ? "1 entry"
+                    : count + " entries";
+        }
+
+
+        /* =========================================================
+           READER
+           ========================================================= */
+
+        function openReader(
+            entry,
+            source = "journal"
+        ) {
+
+            currentEntry =
+                entry;
+
+
+            journalIndex.style.display =
+                "none";
+
+            journalReader.style.display =
+                "block";
+
+            document.body.classList.add(
+                "reader-open"
+            );
+
+
+            const title =
+                getTitle(entry);
+
+            const category =
+                getCategory(entry);
+
+            const content =
+                getContent(entry);
+
+            const author =
+                getAuthor(entry);
+
+            const date =
+                getDate(entry);
+
+            const image =
+                getImage(entry);
+
+
+            document.title =
+                title + " — HED Journal";
+
+
+            articleCategory.textContent =
+                category;
+
+
+            articleTitle.textContent =
+                title;
+
+
+            const excerpt =
+                entry.excerpt ||
+                entry.summary ||
+                "";
+
+            if (excerpt) {
+
+                articleDek.textContent =
+                    excerpt;
+
+                articleDek.style.display =
+                    "block";
+
+            } else {
+
+                articleDek.textContent =
+                    "";
+
+                articleDek.style.display =
+                    "none";
+
+            }
+
+
+            renderByline(
+                entry,
+                author,
+                date,
+                content
+            );
+
+
+            renderFeatureImage(
+                entry,
+                image,
+                title
+            );
+
+
+            renderArticleContent(
+                content
+            );
+
+
+            renderRelatedEntries(
+                entry
+            );
+
+
+            updateBackButton(
+                source
+            );
+
+
+            const newUrl =
+                "journal.html?id=" +
+                encodeURIComponent(entry.id) +
+                "&from=" +
+                encodeURIComponent(source);
+
+
+            window.history.pushState(
+                {
+                    journalEntry: entry.id
+                },
+                "",
+                newUrl
+            );
+
+
+            window.scrollTo(
+                {
+                    top: 0,
+                    behavior: "instant"
+                }
+            );
+
+
+            updateReadingProgress();
+        }
+
+
+        /* =========================================================
+           BYLINE
+           ========================================================= */
+
+        function renderByline(
+            entry,
+            author,
+            date,
+            content
+        ) {
+
+            const parts = [];
+
+
+            if (author) {
+
+                parts.push(
+                    `<span>${escapeHTML(author)}</span>`
                 );
 
-                descriptionElement.appendChild(
-                    seeLess
+            } else {
+
+                parts.push(
+                    `<span>HED Editorial</span>`
+                );
+
+            }
+
+
+            if (date) {
+
+                parts.push(
+                    `<span>${escapeHTML(formatDate(date))}</span>`
+                );
+
+            }
+
+
+            parts.push(
+                `<span>${escapeHTML(getReadingTime(content))}</span>`
+            );
+
+
+            articleByline.innerHTML =
+                parts.join(
+                    `<span class="dot">·</span>`
+                );
+        }
+
+
+        /* =========================================================
+           FEATURE IMAGE
+           ========================================================= */
+
+        function renderFeatureImage(
+            entry,
+            image,
+            title
+        ) {
+
+            if (!image) {
+
+                articleFeature.innerHTML = `
+                    <div class="feature-placeholder">
+                        HED
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            articleFeature.innerHTML = `
+
+                <img
+                    src="${escapeHTML(image)}"
+                    alt="${escapeHTML(title)}"
+                >
+
+            `;
+        }
+
+
+        /* =========================================================
+           ARTICLE CONTENT
+           ========================================================= */
+
+        function renderArticleContent(
+            content
+        ) {
+
+            if (!content) {
+
+                articleContent.innerHTML = `
+
+                    <p>
+                        This entry does not have any
+                        published content yet.
+                    </p>
+
+                `;
+
+                return;
+            }
+
+
+            /*
+             * If your Supabase content already contains HTML,
+             * preserve it.
+             *
+             * If it is plain text, convert line breaks
+             * into paragraphs.
+             */
+
+            const looksLikeHTML =
+                /<[a-z][\s\S]*>/i.test(
+                    content
                 );
 
 
-                seeLess.onclick =
-                    function(){
+            if (looksLikeHTML) {
 
-                        descriptionElement.innerHTML =
-                            escapeHTML(
-                                shortDescription
-                            ) +
-                            "... ";
+                articleContent.innerHTML =
+                    content;
 
-
-                        const newSeeMore =
-                            document.createElement(
-                                "button"
-                            );
-
-                        newSeeMore.type =
-                            "button";
-
-                        newSeeMore.className =
-                            "book-description-more";
-
-                        newSeeMore.textContent =
-                            "See more";
+                return;
+            }
 
 
-                        descriptionElement.appendChild(
-                            newSeeMore
+            const paragraphs =
+                content
+                    .trim()
+                    .split(/\n\s*\n/);
+
+
+            articleContent.innerHTML =
+                paragraphs
+                    .map(
+                        function(paragraph) {
+
+                            const clean =
+                                paragraph
+                                    .trim();
+
+                            if (!clean) {
+                                return "";
+                            }
+
+                            return `
+                                <p>
+                                    ${escapeHTML(clean)
+                                        .replace(/\n/g, "<br>")}
+                                </p>
+                            `;
+
+                        }
+                    )
+                    .join("");
+        }
+
+
+        /* =========================================================
+           RELATED ENTRIES
+           ========================================================= */
+
+        function renderRelatedEntries(
+            current
+        ) {
+
+            relatedGrid.innerHTML = "";
+
+
+            const related =
+                journalEntries
+                    .filter(
+                        function(entry) {
+
+                            return String(entry.id) !==
+                                String(current.id);
+
+                        }
+                    )
+                    .slice(0, 3);
+
+
+            if (related.length === 0) {
+
+                relatedGrid.innerHTML = `
+                    <p
+                        style="
+                            font-family: var(--serif);
+                            color: var(--muted);
+                        "
+                    >
+                        More writing coming soon.
+                    </p>
+                `;
+
+                return;
+            }
+
+
+            related.forEach(
+                function(entry) {
+
+                    const card =
+                        document.createElement(
+                            "article"
                         );
 
-
-                        newSeeMore.onclick =
-                            seeMore.onclick;
-
-                    };
-
-            };
-
-    }else{
-
-        descriptionElement.textContent =
-            description;
-
-    }
+                    card.className =
+                        "related-card";
 
 
-    if(story.cover_url){
+                    const image =
+                        getImage(entry);
 
-        const image =
-            document.createElement(
-                "img"
+
+                    card.innerHTML = `
+
+                        <div class="related-image">
+
+                            ${
+                                image
+                                    ? `
+                                        <img
+                                            src="${escapeHTML(image)}"
+                                            alt="${escapeHTML(getTitle(entry))}"
+                                            loading="lazy"
+                                        >
+                                    `
+                                    : `
+                                        <div class="feature-placeholder">
+                                            HED
+                                        </div>
+                                    `
+                            }
+
+                        </div>
+
+                        <div class="related-category">
+                            ${escapeHTML(getCategory(entry))}
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(getTitle(entry))}
+                        </h3>
+
+                    `;
+
+
+                    card.addEventListener(
+                        "click",
+                        function() {
+
+                            openReader(
+                                entry,
+                                "journal"
+                            );
+
+                        }
+                    );
+
+
+                    relatedGrid.appendChild(
+                        card
+                    );
+
+                }
             );
-
-        image.src =
-            story.cover_url;
-
-        image.alt =
-            story.title ||
-            "Story cover";
+        }
 
 
-        image.onload =
-            function(){
+        /* =========================================================
+           BACK BUTTON
+           ========================================================= */
 
-                $("coverPlaceholder")
-                    .classList
-                    .add("hidden");
+        function updateBackButton(
+            source
+        ) {
 
-                $("coverWrap")
-                    .appendChild(
-                        image
-                    );
+            /*
+             * HED → Journal reader:
+             * reader back should return to HED.
+             *
+             * Journal index → reader:
+             * reader back should return to Journal.
+             */
 
-            };
+            if (source === "hed") {
 
+                readerBack.href =
+                    "hed.html";
 
-        image.onerror =
-            function(){
+                readerBack.innerHTML = `
 
-                image.remove();
+                    <span class="reader-back-arrow">
+                        ←
+                    </span>
 
-            };
+                    <span>
+                        HED
+                    </span>
 
-    }
+                `;
 
-}
+            } else {
 
+                readerBack.href =
+                    "journal.html";
 
-/* =========================================================
-   CHAPTER LIST
-========================================================= */
+                readerBack.innerHTML = `
 
-function renderChapterList(){
+                    <span class="reader-back-arrow">
+                        ←
+                    </span>
 
-    const list =
-        $("chapterList");
+                    <span>
+                        Journal
+                    </span>
 
-    list.innerHTML =
-        "";
+                `;
 
-
-    if(!chapters.length){
-
-        list.innerHTML =
-            '<div class="empty-message">' +
-            "This story doesn't have any chapters yet." +
-            "</div>";
-
-        return;
-
-    }
-
-
-    chapters.forEach(
-        function(chapter,index){
-
-            const button =
-                document.createElement(
-                    "button"
-                );
+            }
+        }
 
 
-            button.type =
-                "button";
+        readerBack.addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
 
 
-            button.className =
-                "chapter-button";
+                const source =
+                    getRequestedSource();
 
 
-            button.innerHTML =
-                '<span class="chapter-number">' +
-                    String(
-                        index + 1
-                    ).padStart(
-                        2,
-                        "0"
-                    ) +
-                "</span>" +
+                if (source === "hed") {
 
-                '<span class="chapter-title-small">' +
-                    escapeHTML(
-                        chapter.title ||
-                        "Untitled Chapter"
-                    ) +
-                "</span>";
+                    window.location.href =
+                        "hed.html";
+
+                } else {
+
+                    window.location.href =
+                        "journal.html";
+
+                }
+
+            }
+        );
 
 
-            button.onclick =
-                function(){
+        /* =========================================================
+           SHARE
+           ========================================================= */
 
-                    openChapter(
-                        index
-                    );
+        shareButton.addEventListener(
+            "click",
+            async function() {
 
-                    setChapterDrawer(
-                        false
-                    );
+                if (!currentEntry) {
+                    return;
+                }
+
+
+                const shareData = {
+
+                    title:
+                        getTitle(currentEntry),
+
+                    text:
+                        getExcerptSource(
+                            currentEntry
+                        ),
+
+                    url:
+                        window.location.href
 
                 };
 
 
-            list.appendChild(
-                button
-            );
+                try {
 
-        }
-    );
+                    if (
+                        navigator.share
+                    ) {
+
+                        await navigator.share(
+                            shareData
+                        );
+
+                        return;
+                    }
 
 
-    updateActiveChapterButton();
+                    if (
+                        navigator.clipboard
+                    ) {
 
-}
+                        await navigator.clipboard.writeText(
+                            window.location.href
+                        );
 
 
-/* =========================================================
-   ACTIVE CHAPTER
-========================================================= */
+                        showToast(
+                            "Link copied"
+                        );
 
-function updateActiveChapterButton(){
+                        return;
+                    }
 
-    document
-        .querySelectorAll(
-            ".chapter-button"
-        )
-        .forEach(
-            function(button,index){
 
-                button.classList.toggle(
-                    "active",
-                    index ===
-                    selectedChapterIndex
-                );
+                    showToast(
+                        "Copy this page URL to share"
+                    );
+
+                } catch (error) {
+
+                    /*
+                     * User cancelled native share.
+                     * No action needed.
+                     */
+
+                }
 
             }
         );
 
-}
+
+        /* =========================================================
+           TOAST
+           ========================================================= */
+
+        let toastTimer = null;
 
 
-/* =========================================================
-   OPEN CHAPTER
-========================================================= */
+        function showToast(
+            message
+        ) {
 
-function openChapter(index){
-
-    if(
-        index < 0 ||
-        index >= chapters.length
-    ){
-
-        return;
-
-    }
+            toast.textContent =
+                message;
 
 
-    selectedChapterIndex =
-        index;
-
-
-    const chapter =
-        chapters[index];
-
-
-    $("readerChapterLabel")
-        .textContent =
-            "CHAPTER " +
-            String(
-                index + 1
-            ).padStart(
-                2,
-                "0"
+            toast.classList.add(
+                "show"
             );
 
 
-    $("readerChapterTitle")
-        .textContent =
-            chapter.title ||
-            "Untitled Chapter";
-
-
-    const content =
-        chapter.content ||
-        "";
-
-
-    if(
-        /<\/?[a-z][\s\S]*>/i.test(
-            content
-        )
-    ){
-
-        $("readerStory")
-            .innerHTML =
-                content;
-
-    }else{
-
-        $("readerStory")
-            .textContent =
-                content;
-
-    }
-
-
-    applySavedReaderPreferences();
-
-    loadAnnotations();
-
-    updateChapterNavigation();
-
-    updateActiveChapterButton();
-
-    updateBookmarkButton();
-
-    renderNotes();
-
-
-    $("readerShell")
-        .classList
-        .add("open");
-
-
-    loadComments();
-
-}
-
-
-/* =========================================================
-   CHAPTER NAVIGATION
-========================================================= */
-
-function updateChapterNavigation(){
-
-    $("previousChapterButton")
-        .classList
-        .toggle(
-            "hidden",
-            selectedChapterIndex <= 0
-        );
-
-
-    $("nextChapterButton")
-        .classList
-        .toggle(
-            "hidden",
-            selectedChapterIndex >=
-            chapters.length - 1
-        );
-
-}
-
-
-$("previousChapterButton").onclick =
-    function(){
-
-        if(
-            selectedChapterIndex > 0
-        ){
-
-            openChapter(
-                selectedChapterIndex - 1
-            );
-
-            window.scrollTo({
-                top:0,
-                behavior:"smooth"
-            });
-
-        }
-
-    };
-
-
-$("nextChapterButton").onclick =
-    function(){
-
-        if(
-            selectedChapterIndex <
-            chapters.length - 1
-        ){
-
-            openChapter(
-                selectedChapterIndex + 1
-            );
-
-            window.scrollTo({
-                top:0,
-                behavior:"smooth"
-            });
-
-        }
-
-    };
-
-
-/* =========================================================
-   CHAPTER DRAWER
-========================================================= */
-
-function setChapterDrawer(open){
-
-    $("chapterDrawer")
-        .classList
-        .toggle(
-            "open",
-            open
-        );
-
-
-    $("readerLayout")
-        .classList
-        .toggle(
-            "chapter-closed",
-            !open
-        );
-
-}
-
-
-$("chapterToggleButton").onclick =
-    function(){
-
-        const open =
-            !$("chapterDrawer")
-                .classList
-                .contains(
-                    "open"
-                );
-
-        setChapterDrawer(
-            open
-        );
-
-    };
-
-
-$("closeChapterDrawer").onclick =
-    function(){
-
-        setChapterDrawer(
-            false
-        );
-
-    };
-
-
-/* =========================================================
-   PREFERENCES
-========================================================= */
-
-function setPreferencesOpen(open){
-
-    $("preferencesPanel")
-        .classList
-        .toggle(
-            "open",
-            open
-        );
-
-}
-
-
-$("preferencesToggleButton").onclick =
-    function(){
-
-        const open =
-            !$("preferencesPanel")
-                .classList
-                .contains(
-                    "open"
-                );
-
-        setPreferencesOpen(
-            open
-        );
-
-    };
-
-
-$("closePreferences").onclick =
-    function(){
-
-        setPreferencesOpen(
-            false
-        );
-
-    };
-
-
-/* =========================================================
-   NOTES PANEL
-========================================================= */
-
-function setNotesOpen(open){
-
-    $("notesPanel")
-        .classList
-        .toggle(
-            "open",
-            open
-        );
-
-}
-
-
-$("notesToggleButton").onclick =
-    function(){
-
-        const open =
-            !$("notesPanel")
-                .classList
-                .contains(
-                    "open"
-                );
-
-        setNotesOpen(
-            open
-        );
-
-    };
-
-
-$("closeNotes").onclick =
-    function(){
-
-        setNotesOpen(
-            false
-        );
-
-    };
-
-
-/* =========================================================
-   READER PREFERENCES
-========================================================= */
-
-function getReaderPreferences(){
-
-    try{
-
-        const saved =
-            JSON.parse(
-                localStorage.getItem(
-                    "hed_reader_preferences"
-                )
+            clearTimeout(
+                toastTimer
             );
 
 
-        return {
-            ...defaultReaderPreferences,
-            ...(saved || {})
-        };
-
-    }catch(error){
-
-        return {
-            ...defaultReaderPreferences
-        };
-
-    }
-
-}
-
-
-function saveReaderPreferences(
-    preferences
-){
-
-    localStorage.setItem(
-        "hed_reader_preferences",
-        JSON.stringify(
-            preferences
-        )
-    );
-
-}
-
-
-function applySavedReaderPreferences(){
-
-    const preferences =
-        getReaderPreferences();
-
-
-    applyFont(
-        preferences.fontFamily
-    );
-
-
-    applyFontSize(
-        preferences.fontSize
-    );
-
-
-    applyLineHeight(
-        preferences.lineHeight
-    );
-
-
-    applyReaderWidth(
-        preferences.width
-    );
-
-
-    applyTheme(
-        preferences.theme
-    );
-
-
-    $("fontFamily")
-        .value =
-            preferences.fontFamily;
-
-
-    $("fontSize")
-        .value =
-            preferences.fontSize;
-
-
-    $("fontSizeValue")
-        .textContent =
-            preferences.fontSize +
-            "px";
-
-
-    updatePreferenceButtons();
-
-}
-
-
-/* =========================================================
-   FONT
-========================================================= */
-
-function applyFont(font){
-
-    const fonts = {
-
-        serif:
-            'Georgia,"Times New Roman",serif',
-
-        sans:
-            'Arial,Helvetica,sans-serif',
-
-        clean:
-            '"Trebuchet MS",Arial,sans-serif',
-
-        mono:
-            '"Courier New",monospace'
-
-    };
-
-
-    $("readerStory")
-        .style
-        .setProperty(
-            "--reader-font",
-            fonts[font] ||
-            fonts.serif
-        );
-
-}
-
-
-$("fontFamily")
-    .addEventListener(
-        "change",
-        function(){
-
-            const preferences =
-                getReaderPreferences();
-
-
-            preferences.fontFamily =
-                this.value;
-
-
-            saveReaderPreferences(
-                preferences
-            );
-
-
-            applyFont(
-                this.value
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   FONT SIZE
-========================================================= */
-
-function applyFontSize(size){
-
-    $("readerStory")
-        .style
-        .fontSize =
-            size + "px";
-
-
-    $("fontSizeValue")
-        .textContent =
-            size + "px";
-
-}
-
-
-$("fontSize")
-    .addEventListener(
-        "input",
-        function(){
-
-            const size =
-                Number(
-                    this.value
-                );
-
-
-            const preferences =
-                getReaderPreferences();
-
-
-            preferences.fontSize =
-                size;
-
-
-            saveReaderPreferences(
-                preferences
-            );
-
-
-            applyFontSize(
-                size
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   LINE HEIGHT
-========================================================= */
-
-function applyLineHeight(value){
-
-    $("readerStory")
-        .style
-        .lineHeight =
-            value;
-
-}
-
-
-document
-    .querySelectorAll(
-        "[data-spacing]"
-    )
-    .forEach(
-        function(button){
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    const value =
-                        Number(
-                            this.dataset.spacing
+            toastTimer =
+                setTimeout(
+                    function() {
+
+                        toast.classList.remove(
+                            "show"
                         );
 
-
-                    const preferences =
-                        getReaderPreferences();
-
-
-                    preferences.lineHeight =
-                        value;
-
-
-                    saveReaderPreferences(
-                        preferences
-                    );
-
-
-                    applyLineHeight(
-                        value
-                    );
-
-
-                    updatePreferenceButtons();
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   READING WIDTH
-========================================================= */
-
-function applyReaderWidth(width){
-
-    document.documentElement
-        .style
-        .setProperty(
-            "--reader-width",
-            width
-        );
-
-}
-
-
-document
-    .querySelectorAll(
-        "[data-width]"
-    )
-    .forEach(
-        function(button){
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    const width =
-                        this.dataset.width;
-
-
-                    const preferences =
-                        getReaderPreferences();
-
-
-                    preferences.width =
-                        width;
-
-
-                    saveReaderPreferences(
-                        preferences
-                    );
-
-
-                    applyReaderWidth(
-                        width
-                    );
-
-
-                    updatePreferenceButtons();
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   PAGE THEME
-========================================================= */
-
-function applyTheme(theme){
-
-    const paper =
-        $("readerPaper");
-
-    const storyElement =
-        $("readerStory");
-
-
-    const themes = {
-
-        cream:{
-            background:"#fbf8f3",
-            color:"#342b26",
-            border:"#ddd2c5"
-        },
-
-        white:{
-            background:"#ffffff",
-            color:"#222222",
-            border:"#dddddd"
-        },
-
-        sepia:{
-            background:"#f1e4c9",
-            color:"#574936",
-            border:"#d7c7a8"
-        },
-
-        dark:{
-            background:"#20211f",
-            color:"#f5f5f5",
-            border:"#3b3c39"
-        },
-
-        black:{
-            background:"#000000",
-            color:"#f5f5f5",
-            border:"#333333"
-        },
-
-        night:{
-            background:"#111827",
-            color:"#f8fafc",
-            border:"#293449"
+                    },
+                    2200
+                );
         }
 
-    };
+
+        /* =========================================================
+           READING PROGRESS
+           ========================================================= */
+
+        function updateReadingProgress() {
+
+            if (
+                journalReader.style.display ===
+                "none"
+            ) {
+
+                readingProgress.style.width =
+                    "0%";
+
+                return;
+            }
 
 
-    const selected =
-        themes[theme] ||
-        themes.cream;
+            const scrollTop =
+                window.scrollY;
 
 
-    paper.style.background =
-        selected.background;
-
-    paper.style.borderColor =
-        selected.border;
-
-    storyElement.style.color =
-        selected.color;
-
-}
+            const documentHeight =
+                document.documentElement
+                    .scrollHeight -
+                window.innerHeight;
 
 
-document
-    .querySelectorAll(
-        "[data-theme]"
-    )
-    .forEach(
-        function(button){
+            if (documentHeight <= 0) {
 
-            button.addEventListener(
-                "click",
-                function(){
+                readingProgress.style.width =
+                    "0%";
 
-                    const theme =
-                        this.dataset.theme;
+                return;
+            }
 
 
-                    const preferences =
-                        getReaderPreferences();
-
-
-                    preferences.theme =
-                        theme;
-
-
-                    saveReaderPreferences(
-                        preferences
-                    );
-
-
-                    applyTheme(
-                        theme
-                    );
-
-
-                    updatePreferenceButtons();
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   PREFERENCE BUTTON STATES
-========================================================= */
-
-function updatePreferenceButtons(){
-
-    const preferences =
-        getReaderPreferences();
-
-
-    document
-        .querySelectorAll(
-            "[data-spacing]"
-        )
-        .forEach(
-            function(button){
-
-                button.classList.toggle(
-                    "active",
-                    Number(
-                        button.dataset.spacing
-                    ) ===
-                    Number(
-                        preferences.lineHeight
+            const progress =
+                Math.min(
+                    100,
+                    Math.max(
+                        0,
+                        (scrollTop /
+                            documentHeight) *
+                            100
                     )
                 );
 
-            }
-        );
 
-
-    document
-        .querySelectorAll(
-            "[data-width]"
-        )
-        .forEach(
-            function(button){
-
-                button.classList.toggle(
-                    "active",
-                    button.dataset.width ===
-                    preferences.width
-                );
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   TEXT POSITION HELPERS
-========================================================= */
-
-function getTextOffset(
-    root,
-    targetNode,
-    targetOffset
-){
-
-    let offset = 0;
-
-    const walker =
-        document.createTreeWalker(
-            root,
-            NodeFilter.SHOW_TEXT
-        );
-
-
-    let node;
-
-
-    while(
-        node =
-        walker.nextNode()
-    ){
-
-        if(node === targetNode){
-
-            return (
-                offset +
-                targetOffset
-            );
-
+            readingProgress.style.width =
+                progress + "%";
         }
 
 
-        offset +=
-            node.nodeValue.length;
-
-    }
-
-
-    return offset;
-
-}
-
-
-function getRangeOffsets(range){
-
-    const root =
-        $("readerStory");
-
-
-    return {
-
-        start:
-            getTextOffset(
-                root,
-                range.startContainer,
-                range.startOffset
-            ),
-
-        end:
-            getTextOffset(
-                root,
-                range.endContainer,
-                range.endOffset
-            )
-
-    };
-
-}
-
-
-/* =========================================================
-   RANGE FROM TEXT OFFSETS
-========================================================= */
-
-function createRangeFromOffsets(
-    start,
-    end
-){
-
-    const root =
-        $("readerStory");
-
-
-    const walker =
-        document.createTreeWalker(
-            root,
-            NodeFilter.SHOW_TEXT
-        );
-
-
-    let node;
-
-    let position = 0;
-
-    let startNode = null;
-    let endNode = null;
-
-    let startOffset = 0;
-    let endOffset = 0;
-
-
-    while(
-        node =
-        walker.nextNode()
-    ){
-
-        const nextPosition =
-            position +
-            node.nodeValue.length;
-
-
-        if(
-            startNode === null &&
-            start >= position &&
-            start <= nextPosition
-        ){
-
-            startNode =
-                node;
-
-            startOffset =
-                start - position;
-
-        }
-
-
-        if(
-            endNode === null &&
-            end >= position &&
-            end <= nextPosition
-        ){
-
-            endNode =
-                node;
-
-            endOffset =
-                end - position;
-
-            break;
-
-        }
-
-
-        position =
-            nextPosition;
-
-    }
-
-
-    if(
-        !startNode ||
-        !endNode
-    ){
-
-        return null;
-
-    }
-
-
-    const range =
-        document.createRange();
-
-
-    try{
-
-        range.setStart(
-            startNode,
-            startOffset
-        );
-
-        range.setEnd(
-            endNode,
-            endOffset
-        );
-
-        return range;
-
-    }catch(error){
-
-        return null;
-
-    }
-
-}
-
-
-/* =========================================================
-   WRAP RANGE
-========================================================= */
-
-function wrapRange(
-    range,
-    className
-){
-
-    if(
-        !range ||
-        range.collapsed
-    ){
-
-        return false;
-
-    }
-
-
-    const element =
-        document.createElement(
-            "span"
-        );
-
-
-    element.className =
-        className;
-
-
-    try{
-
-        range.surroundContents(
-            element
-        );
-
-        return true;
-
-    }catch(error){
-
-        try{
-
-            const fragment =
-                range.extractContents();
-
-
-            if(
-                !fragment.textContent.trim()
-            ){
-
-                return false;
-
-            }
-
-
-            element.appendChild(
-                fragment
-            );
-
-
-            range.insertNode(
-                element
-            );
-
-
-            return true;
-
-        }catch(innerError){
-
-            console.error(
-                innerError
-            );
-
-            return false;
-
-        }
-
-    }
-
-}
-
-
-/* =========================================================
-   LOAD ANNOTATIONS
-========================================================= */
-
-function loadAnnotations(){
-
-    const annotations =
-        getChapterAnnotations();
-
-
-    if(!annotations.length){
-
-        return;
-
-    }
-
-
-    /*
-       Work from the end of the text toward
-       the beginning so earlier offsets
-       remain stable while spans are added.
-    */
-
-    const sorted =
-        [...annotations].sort(
-            function(a,b){
-
-                return (
-                    b.start -
-                    a.start
-                );
-
+        window.addEventListener(
+            "scroll",
+            updateReadingProgress,
+            {
+                passive: true
             }
         );
 
 
-    sorted.forEach(
-        function(annotation){
+        /* =========================================================
+           POPSTATE
+           ========================================================= */
 
-            const range =
-                createRangeFromOffsets(
-                    annotation.start,
-                    annotation.end
-                );
+        window.addEventListener(
+            "popstate",
+            function() {
 
+                const requestedId =
+                    getRequestedId();
 
-            if(!range){
 
-                return;
+                if (!requestedId) {
 
-            }
+                    renderJournalIndex();
 
-
-            let className =
-                "";
-
-
-            if(
-                annotation.type ===
-                "highlight"
-            ){
-
-                className =
-                    "reader-highlight highlight-" +
-                    annotation.color +
-                    "-mark";
-
-            }
-
-
-            if(
-                annotation.type ===
-                "underline"
-            ){
-
-                className =
-                    "reader-underline";
-
-            }
-
-
-            if(!className){
-
-                return;
-
-            }
-
-
-            wrapRange(
-                range,
-                className
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   SAVE ANNOTATION
-========================================================= */
-
-function saveAnnotation(
-    type,
-    color,
-    note
-){
-
-    if(
-        !savedSelectionRange ||
-        savedSelectionRange.collapsed
-    ){
-
-        return;
-
-    }
-
-
-    const range =
-        savedSelectionRange;
-
-
-    if(
-        !selectionIsInsideReader(
-            range
-        )
-    ){
-
-        savedSelectionRange =
-            null;
-
-        return;
-
-    }
-
-
-    const offsets =
-        getRangeOffsets(
-            range
-        );
-
-
-    const selectedText =
-        range.toString();
-
-
-    if(
-        !selectedText.trim()
-    ){
-
-        savedSelectionRange =
-            null;
-
-        return;
-
-    }
-
-
-    const annotation = {
-
-        id:
-            "annotation_" +
-            Date.now() +
-            "_" +
-            Math.random()
-                .toString(36)
-                .slice(2),
-
-        type:
-            type,
-
-        color:
-            color || null,
-
-        note:
-            note || "",
-
-        text:
-            selectedText,
-
-        start:
-            offsets.start,
-
-        end:
-            offsets.end,
-
-        createdAt:
-            new Date().toISOString()
-
-    };
-
-
-    const annotations =
-        getChapterAnnotations();
-
-
-    annotations.push(
-        annotation
-    );
-
-
-    saveChapterAnnotations(
-        annotations
-    );
-
-
-    return annotation;
-
-}
-
-
-/* =========================================================
-   HIGHLIGHT
-========================================================= */
-
-function applyHighlight(
-    color
-){
-
-    if(!savedSelectionRange){
-
-        return;
-
-    }
-
-
-    const annotation =
-        saveAnnotation(
-            "highlight",
-            color,
-            ""
-        );
-
-
-    if(!annotation){
-
-        return;
-
-    }
-
-
-    const range =
-        createRangeFromOffsets(
-            annotation.start,
-            annotation.end
-        );
-
-
-    if(range){
-
-        wrapRange(
-            range,
-            "reader-highlight highlight-" +
-            color +
-            "-mark"
-        );
-
-    }
-
-
-    clearSelection();
-
-    renderNotes();
-
-}
-
-
-/* =========================================================
-   UNDERLINE
-========================================================= */
-
-function applyUnderline(){
-
-    if(!savedSelectionRange){
-
-        return;
-
-    }
-
-
-    const annotation =
-        saveAnnotation(
-            "underline",
-            null,
-            ""
-        );
-
-
-    if(!annotation){
-
-        return;
-
-    }
-
-
-    const range =
-        createRangeFromOffsets(
-            annotation.start,
-            annotation.end
-        );
-
-
-    if(range){
-
-        wrapRange(
-            range,
-            "reader-underline"
-        );
-
-    }
-
-
-    clearSelection();
-
-    renderNotes();
-
-}
-
-
-/* =========================================================
-   NOTE
-========================================================= */
-
-function applyNote(){
-
-    if(!savedSelectionRange){
-
-        return;
-
-    }
-
-
-    const text =
-        savedSelectionRange
-            .toString()
-            .trim();
-
-
-    if(!text){
-
-        return;
-
-    }
-
-
-    const note =
-        prompt(
-            "Write a note for this passage:"
-        );
-
-
-    if(
-        note === null
-    ){
-
-        return;
-
-    }
-
-
-    if(
-        !note.trim()
-    ){
-
-        return;
-
-    }
-
-
-    const annotation =
-        saveAnnotation(
-            "note",
-            null,
-            note.trim()
-        );
-
-
-    if(!annotation){
-
-        return;
-
-    }
-
-
-    clearSelection();
-
-    renderNotes();
-
-    setNotesOpen(
-        true
-    );
-
-}
-
-
-/* =========================================================
-   SELECTION MENU
-========================================================= */
-
-function selectionIsInsideReader(
-    range
-){
-
-    if(!range){
-
-        return false;
-
-    }
-
-
-    return $("readerStory")
-        .contains(
-            range.commonAncestorContainer
-        );
-
-}
-
-
-function clearSelection(){
-
-    const selection =
-        window.getSelection();
-
-
-    if(selection){
-
-        selection.removeAllRanges();
-
-    }
-
-
-    savedSelectionRange =
-        null;
-
-
-    $("selectionHighlightMenu")
-        .classList
-        .remove(
-            "open"
-        );
-
-}
-
-
-function hideSelectionMenu(){
-
-    $("selectionHighlightMenu")
-        .classList
-        .remove(
-            "open"
-        );
-
-}
-
-
-function showSelectionHighlightMenu(){
-
-    const selection =
-        window.getSelection();
-
-
-    if(
-        !selection ||
-        selection.rangeCount === 0 ||
-        selection.isCollapsed
-    ){
-
-        hideSelectionMenu();
-
-        return;
-
-    }
-
-
-    const range =
-        selection.getRangeAt(0);
-
-
-    if(
-        !selectionIsInsideReader(
-            range
-        )
-    ){
-
-        hideSelectionMenu();
-
-        return;
-
-    }
-
-
-    const text =
-        selection
-            .toString()
-            .trim();
-
-
-    if(!text){
-
-        hideSelectionMenu();
-
-        return;
-
-    }
-
-
-    savedSelectionRange =
-        range.cloneRange();
-
-
-    const menu =
-        $("selectionHighlightMenu");
-
-
-    menu.classList.add(
-        "open"
-    );
-
-
-    const rect =
-        range.getBoundingClientRect();
-
-
-    const menuWidth =
-        menu.offsetWidth || 330;
-
-
-    const menuHeight =
-        menu.offsetHeight || 45;
-
-
-    let left =
-        rect.left +
-        rect.width / 2 -
-        menuWidth / 2;
-
-
-    let top =
-        rect.top -
-        menuHeight -
-        8;
-
-
-    left =
-        Math.max(
-            8,
-            Math.min(
-                left,
-                window.innerWidth -
-                menuWidth -
-                8
-            )
-        );
-
-
-    if(top < 8){
-
-        top =
-            Math.min(
-                window.innerHeight -
-                menuHeight -
-                8,
-
-                rect.bottom +
-                8
-            );
-
-    }
-
-
-    menu.style.left =
-        left + "px";
-
-    menu.style.top =
-        top + "px";
-
-}
-
-
-document.addEventListener(
-    "selectionchange",
-    function(){
-
-        clearTimeout(
-            window.hedSelectionTimer
-        );
-
-
-        window.hedSelectionTimer =
-            setTimeout(
-                showSelectionHighlightMenu,
-                80
-            );
-
-    }
-);
-
-
-document.addEventListener(
-    "mousedown",
-    function(event){
-
-        const menu =
-            $("selectionHighlightMenu");
-
-
-        if(
-            menu.contains(
-                event.target
-            )
-        ){
-
-            return;
-
-        }
-
-
-        if(
-            !event.target.closest(
-                "#readerStory"
-            )
-        ){
-
-            hideSelectionMenu();
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "scroll",
-    function(){
-
-        const menu =
-            $("selectionHighlightMenu");
-
-
-        if(
-            menu.classList.contains(
-                "open"
-            )
-        ){
-
-            showSelectionHighlightMenu();
-
-        }
-
-    },
-    true
-);
-
-
-/* =========================================================
-   SELECTION BUTTONS
-========================================================= */
-
-$("selectionHighlight")
-    .onclick =
-    function(){
-
-        applyHighlight(
-            "yellow"
-        );
-
-    };
-
-
-$("selectionUnderline")
-    .onclick =
-    function(){
-
-        applyUnderline();
-
-    };
-
-
-$("selectionNote")
-    .onclick =
-    function(){
-
-        applyNote();
-
-    };
-
-
-document
-    .querySelectorAll(
-        "#selectionHighlightMenu [data-highlight]"
-    )
-    .forEach(
-        function(button){
-
-            button.addEventListener(
-                "mousedown",
-                function(event){
-
-                    event.preventDefault();
-
-                }
-            );
-
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    applyHighlight(
-                        this.dataset.highlight
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   NOTES
-========================================================= */
-
-function renderNotes(){
-
-    const list =
-        $("noteList");
-
-
-    list.innerHTML =
-        "";
-
-
-    const annotations =
-        getChapterAnnotations()
-            .filter(
-                function(annotation){
-
-                    return (
-                        annotation.type ===
-                        "note"
-                    );
-
-                }
-            );
-
-
-    if(!annotations.length){
-
-        list.innerHTML =
-            '<div class="empty-message">' +
-            "No notes in this chapter yet." +
-            "</div>";
-
-        return;
-
-    }
-
-
-    annotations.forEach(
-        function(annotation){
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "note-card";
-
-
-            card.innerHTML =
-
-                '<p class="note-card-quote">' +
-                    "“" +
-                    escapeHTML(
-                        annotation.text
-                    ) +
-                    "”" +
-                "</p>" +
-
-                '<p class="note-card-text">' +
-                    escapeHTML(
-                        annotation.note
-                    ) +
-                "</p>" +
-
-                '<div class="note-card-actions">' +
-
-                    '<button type="button" data-note-edit="' +
-                        escapeAttribute(
-                            annotation.id
-                        ) +
-                    '">' +
-                        "Edit" +
-                    "</button>" +
-
-                    '<button type="button" data-note-delete="' +
-                        escapeAttribute(
-                            annotation.id
-                        ) +
-                    '">' +
-                        "Delete" +
-                    "</button>" +
-
-                "</div>";
-
-
-            list.appendChild(
-                card
-            );
-
-        }
-    );
-
-
-    list
-        .querySelectorAll(
-            "[data-note-edit]"
-        )
-        .forEach(
-            function(button){
-
-                button.onclick =
-                    function(){
-
-                        editNote(
-                            this.dataset.noteEdit
-                        );
-
-                    };
-
-            }
-        );
-
-
-    list
-        .querySelectorAll(
-            "[data-note-delete]"
-        )
-        .forEach(
-            function(button){
-
-                button.onclick =
-                    function(){
-
-                        deleteNote(
-                            this.dataset.noteDelete
-                        );
-
-                    };
-
-            }
-        );
-
-}
-
-
-function editNote(id){
-
-    const annotations =
-        getChapterAnnotations();
-
-
-    const annotation =
-        annotations.find(
-            function(item){
-
-                return item.id === id;
-
-            }
-        );
-
-
-    if(!annotation){
-
-        return;
-
-    }
-
-
-    const newNote =
-        prompt(
-            "Edit your note:",
-            annotation.note
-        );
-
-
-    if(
-        newNote === null
-    ){
-
-        return;
-
-    }
-
-
-    if(
-        !newNote.trim()
-    ){
-
-        return;
-
-    }
-
-
-    annotation.note =
-        newNote.trim();
-
-
-    saveChapterAnnotations(
-        annotations
-    );
-
-
-    renderNotes();
-
-}
-
-
-function deleteNote(id){
-
-    if(
-        !confirm(
-            "Delete this note?"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    let annotations =
-        getChapterAnnotations();
-
-
-    annotations =
-        annotations.filter(
-            function(annotation){
-
-                return annotation.id !== id;
-
-            }
-        );
-
-
-    saveChapterAnnotations(
-        annotations
-    );
-
-
-    /*
-       Rebuild the chapter so the
-       saved annotation state is clean.
-    */
-
-    const chapter =
-        chapters[
-            selectedChapterIndex
-        ];
-
-
-    const content =
-        chapter.content ||
-        "";
-
-
-    if(
-        /<\/?[a-z][\s\S]*>/i.test(
-            content
-        )
-    ){
-
-        $("readerStory")
-            .innerHTML =
-                content;
-
-    }else{
-
-        $("readerStory")
-            .textContent =
-                content;
-
-    }
-
-
-    loadAnnotations();
-
-    renderNotes();
-
-}
-
-
-/* =========================================================
-   COMMENTS
-========================================================= */
-
-async function loadComments(){
-
-    if(
-        selectedChapterIndex < 0
-    ){
-
-        return;
-
-    }
-
-
-    const chapter =
-        chapters[
-            selectedChapterIndex
-        ];
-
-
-    const result =
-        await supabaseClient
-            .from("comments")
-            .select(
-                "id,name,content,created_at"
-            )
-            .eq(
-                "target_type",
-                "chapter"
-            )
-            .eq(
-                "target_id",
-                chapter.id
-            )
-            .order(
-                "created_at",
-                {
-                    ascending:true
-                }
-            );
-
-
-    if(result.error){
-
-        console.error(
-            result.error
-        );
-
-
-        $("commentsList")
-            .innerHTML =
-                '<div class="empty-message">' +
-                "Comments could not be loaded." +
-                "</div>";
-
-        return;
-
-    }
-
-
-    renderComments(
-        result.data || []
-    );
-
-}
-
-
-function renderComments(
-    comments
-){
-
-    const list =
-        $("commentsList");
-
-
-    list.innerHTML =
-        "";
-
-
-    if(!comments.length){
-
-        list.innerHTML =
-            '<div class="empty-message">' +
-            "No comments yet. Be the first." +
-            "</div>";
-
-        return;
-
-    }
-
-
-    comments.forEach(
-        function(comment){
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "comment-card";
-
-
-            const date =
-                comment.created_at
-                    ? new Date(
-                        comment.created_at
-                    ).toLocaleDateString(
-                        undefined,
-                        {
-                            year:"numeric",
-                            month:"short",
-                            day:"numeric"
-                        }
-                    )
-                    : "";
-
-
-            card.innerHTML =
-
-                '<div class="comment-head">' +
-
-                    '<div class="comment-author">' +
-                        escapeHTML(
-                            comment.name ||
-                            "Reader"
-                        ) +
-                    "</div>" +
-
-                    '<div class="comment-date">' +
-                        escapeHTML(
-                            date
-                        ) +
-                    "</div>" +
-
-                "</div>" +
-
-                '<p class="comment-text">' +
-                    escapeHTML(
-                        comment.content ||
-                        ""
-                    ) +
-                "</p>" +
-
-                '<div class="comment-actions">' +
-
-                    '<button ' +
-                        'class="comment-delete" ' +
-                        'type="button" ' +
-                        'data-comment-id="' +
-                            escapeAttribute(
-                                comment.id
-                            ) +
-                        '"' +
-                    '>' +
-                        "Delete" +
-                    "</button>" +
-
-                "</div>";
-
-
-            list.appendChild(
-                card
-            );
-
-        }
-    );
-
-
-    document
-        .querySelectorAll(
-            ".comment-delete"
-        )
-        .forEach(
-            function(button){
-
-                button.onclick =
-                    async function(){
-
-                        const id =
-                            this.dataset.commentId;
-
-
-                        if(
-                            !confirm(
-                                "Delete this comment?"
-                            )
-                        ){
-
-                            return;
-
-                        }
-
-
-                        const result =
-                            await supabaseClient
-                                .from("comments")
-                                .delete()
-                                .eq(
-                                    "id",
-                                    id
-                                );
-
-
-                        if(result.error){
-
-                            console.error(
-                                result.error
-                            );
-
-                            alert(
-                                "The comment could not be deleted."
-                            );
-
-                            return;
-
-                        }
-
-
-                        loadComments();
-
-                    };
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   COMMENT FORM
-========================================================= */
-
-$("commentForm")
-    .addEventListener(
-        "submit",
-        async function(event){
-
-            event.preventDefault();
-
-
-            const status =
-                $("commentStatus");
-
-
-            const name =
-                $("commentName")
-                    .value
-                    .trim();
-
-
-            const content =
-                $("commentContent")
-                    .value
-                    .trim();
-
-
-            if(!name){
-
-                status.textContent =
-                    "Your nickname is missing.";
-
-                return;
-
-            }
-
-
-            if(!content){
-
-                status.textContent =
-                    "Please write a comment.";
-
-                return;
-
-            }
-
-
-            if(
-                selectedChapterIndex < 0
-            ){
-
-                status.textContent =
-                    "No chapter is selected.";
-
-                return;
-
-            }
-
-
-            const chapter =
-                chapters[
-                    selectedChapterIndex
-                ];
-
-
-            if(
-                !chapter ||
-                !chapter.id
-            ){
-
-                status.textContent =
-                    "The chapter could not be found.";
-
-                return;
-
-            }
-
-
-            status.textContent =
-                "Posting…";
-
-
-            try{
-
-                const result =
-                    await supabaseClient
-                        .from("comments")
-                        .insert({
-
-                            target_type:
-                                "chapter",
-
-                            target_id:
-                                chapter.id,
-
-                            name:
-                                name,
-
-                            content:
-                                content
-
-                        });
-
-
-                if(result.error){
-
-                    console.error(
-                        "COMMENT ERROR:",
-                        result.error
-                    );
-
-                    status.textContent =
-                        "Could not post: " +
-                        result.error.message;
+                    document.title =
+                        "Journal — HED";
 
                     return;
-
                 }
 
 
-                $("commentContent")
-                    .value =
-                        "";
+                const entry =
+                    journalEntries.find(
+                        function(item) {
+
+                            return String(item.id) ===
+                                String(requestedId);
+
+                        }
+                    );
 
 
-                $("commentName")
-                    .value =
-                        window.readerNickname ||
-                        name;
+                if (entry) {
+
+                    const source =
+                        getRequestedSource() ||
+                        "journal";
+
+                    openReader(
+                        entry,
+                        source
+                    );
+
+                } else {
+
+                    renderJournalIndex();
+
+                }
+
+            }
+        );
 
 
-                status.textContent =
-                    "Comment posted.";
+        /* =========================================================
+           LOAD JOURNAL
+           ========================================================= */
+
+        async function loadJournal() {
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .from("journal_entries")
+                        .select("*")
+                        .order(
+                            "published_at",
+                            {
+                                ascending: false
+                            }
+                        );
 
 
-                await loadComments();
+                if (error) {
+
+                    console.error(
+                        "Journal loading error:",
+                        error
+                    );
 
 
-            }catch(error){
+                    journalList.innerHTML = `
+
+                        <div class="state-box">
+
+                            <h2>
+                                The journal couldn't load.
+                            </h2>
+
+                            <p>
+                                Please refresh the page
+                                and try again.
+                            </p>
+
+                        </div>
+
+                    `;
+
+                    return;
+                }
+
+
+                journalEntries =
+                    data || [];
+
+
+                /*
+                 * Always render the journal first.
+                 * Then check whether a specific article
+                 * was requested.
+                 */
+
+                renderJournalIndex();
+
+
+                const requestedId =
+                    getRequestedId();
+
+
+                if (!requestedId) {
+                    return;
+                }
+
+
+                const entry =
+                    journalEntries.find(
+                        function(item) {
+
+                            return String(item.id) ===
+                                String(requestedId);
+
+                        }
+                    );
+
+
+                /*
+                 * Important:
+                 *
+                 * If the ID does not exist, do NOT show
+                 * a fake "no story" reader.
+                 *
+                 * Simply return to the journal index.
+                 */
+
+                if (!entry) {
+
+                    console.warn(
+                        "Journal entry not found:",
+                        requestedId
+                    );
+
+                    window.history.replaceState(
+                        {},
+                        "",
+                        "journal.html"
+                    );
+
+                    document.title =
+                        "Journal — HED";
+
+                    return;
+                }
+
+
+                const source =
+                    getRequestedSource() ||
+                    "journal";
+
+
+                openReader(
+                    entry,
+                    source
+                );
+
+            } catch (error) {
 
                 console.error(
-                    "COMMENT ERROR:",
+                    "Unexpected journal error:",
                     error
                 );
 
 
-                status.textContent =
-                    "Could not post: " +
-                    (
-                        error.message ||
-                        "Unknown error"
-                    );
+                journalList.innerHTML = `
+
+                    <div class="state-box">
+
+                        <h2>
+                            Something went wrong.
+                        </h2>
+
+                        <p>
+                            The journal could not be
+                            loaded right now.
+                        </p>
+
+                    </div>
+
+                `;
 
             }
 
         }
-    );
 
 
-/* =========================================================
-   SAFE HTML
-========================================================= */
+        /* =========================================================
+           INITIALIZE
+           ========================================================= */
 
-function escapeHTML(value){
+        loadJournal();
 
-    const div =
-        document.createElement(
-            "div"
-        );
-
-
-    div.textContent =
-        value == null
-            ? ""
-            : String(value);
-
-
-    return div.innerHTML;
-
-}
-
-
-function escapeAttribute(value){
-
-    return escapeHTML(
-        value
-    ).replace(
-        /"/g,
-        "&quot;"
-    );
-
-}
-
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-function showError(message){
-
-    $("loadingMessage")
-        .classList
-        .add("hidden");
-
-
-    $("bookContent")
-        .classList
-        .add("hidden");
-
-
-    $("errorMessage")
-        .classList
-        .remove("hidden");
-
-
-    $("errorText")
-        .textContent =
-            message;
-
-}
-
-
-/* =========================================================
-   START
-========================================================= */
-
-window.readerAuthReady
-    .then(
-        function(){
-
-            const commentNameElement =
-                document.getElementById(
-                    "commentName"
-                );
-
-
-            if(
-                commentNameElement &&
-                window.readerNickname
-            ){
-
-                commentNameElement.value =
-                    window.readerNickname;
-
-            }
-
-
-            loadStory();
-
-        }
-    )
-    .catch(
-        function(error){
-
-            console.error(
-                error
-            );
-
-
-            showError(
-                "Something went wrong while opening this story."
-            );
-
-        }
-    );
-
-</script>
+    </script>
 
 </body>
 </html>
