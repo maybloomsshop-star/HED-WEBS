@@ -2746,6 +2746,62 @@ function storyMatches(story) {
     );
 
 }
+  async function deleteStory(id) {
+
+  if (
+    !confirm(
+      "Delete this story? This cannot be undone."
+    )
+  ) {
+    return;
+  }
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("stories")
+      .delete()
+      .eq(
+        "id",
+        id
+      )
+      .eq(
+        "owner_id",
+        currentUser.id
+      );
+
+  if (error) {
+
+    console.error(error);
+
+    toast(
+      error.message ||
+      "Could not delete story."
+    );
+
+    return;
+  }
+
+  stories =
+    stories.filter(
+      story =>
+        story.id !== id
+    );
+
+  renderStories();
+
+  renderStats();
+
+  renderRecent();
+
+  toast(
+    "Story deleted."
+  );
+}
+
+
+function renderStories() {
 
 
 function renderStories() {
