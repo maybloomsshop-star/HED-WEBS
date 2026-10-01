@@ -7,3305 +7,2745 @@
 
 <style>
 :root{
-  --brown:#4a352b;
-  --brown-dark:#382920;
-  --cream:#f5efe6;
-  --paper:#fbf8f3;
-  --green:#68745d;
-  --pink:#c58f91;
-  --text:#342b26;
-  --muted:#85786e;
-  --line:#d8cec2;
-  --white:#fffdf9;
-  --shadow:0 18px 50px rgba(56,41,32,.09);
+    --brown:#4a352b;
+    --brown-dark:#382920;
+    --cream:#f5efe6;
+    --paper:#fbf8f3;
+    --green:#68745d;
+    --pink:#c58f91;
+    --text:#342b26;
+    --muted:#85786e;
+    --line:#d8cec2;
+    --white:#fffdf9;
 }
 
-*{box-sizing:border-box}
-
-html{scroll-behavior:smooth}
+*{
+    box-sizing:border-box;
+}
 
 body{
-  margin:0;
-  background:var(--cream);
-  color:var(--text);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    margin:0;
+    background:var(--cream);
+    color:var(--text);
+    font-family:Inter,Arial,sans-serif;
 }
 
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-.muted{color:var(--muted)}
-.small{font-size:12px}
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
 
-/* =========================
-   LOGIN
-========================= */
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* LOGIN */
 
 .login-screen{
-  min-height:100vh;
-  display:grid;
-  place-items:center;
-  padding:24px;
-  background:var(--cream);
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    padding:24px;
 }
 
 .login-card{
-  width:min(430px,100%);
-  background:var(--paper);
-  border:1px solid var(--line);
-  padding:42px;
-  border-radius:24px;
-  box-shadow:var(--shadow);
+    width:min(430px,100%);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:42px;
+    box-shadow:0 18px 50px rgba(56,41,32,.09);
 }
 
 .login-mark{
-  font-family:Georgia,serif;
-  font-size:13px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:var(--green);
-  margin-bottom:35px;
+    font-family:Georgia,serif;
+    font-size:13px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--green);
+    margin-bottom:30px;
 }
 
 .login-card h1{
-  font:600 clamp(34px,6vw,52px)/1 Georgia,serif;
-  margin:0 0 12px;
-  color:var(--brown);
+    font:600 48px/1 Georgia,serif;
+    color:var(--brown);
+    margin:0 0 12px;
 }
 
 .login-card p{
-  color:var(--muted);
-  line-height:1.7;
-  margin:0 0 28px;
+    color:var(--muted);
+    line-height:1.7;
+    margin:0 0 28px;
 }
 
 .field{
-  display:grid;
-  gap:7px;
-  margin-bottom:14px;
+    display:grid;
+    gap:7px;
+    margin-bottom:15px;
 }
 
 .field label{
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--muted);
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--muted);
 }
 
 .field input,
 .field textarea,
 .field select{
-  width:100%;
-  border:1px solid var(--line);
-  background:var(--white);
-  border-radius:11px;
-  padding:12px 13px;
-  color:var(--text);
-  outline:none;
+    width:100%;
+    border:1px solid var(--line);
+    background:var(--white);
+    border-radius:10px;
+    padding:11px 13px;
+    outline:none;
+    color:var(--text);
 }
 
 .field input:focus,
 .field textarea:focus,
 .field select:focus{
-  border-color:var(--green);
-  box-shadow:0 0 0 3px rgba(104,116,93,.12);
+    border-color:var(--green);
 }
 
 .primary{
-  border:0;
-  background:var(--brown);
-  color:#fff;
-  padding:11px 16px;
-  border-radius:10px;
-  font-weight:700;
+    border:0;
+    background:var(--brown);
+    color:white;
+    padding:11px 16px;
+    border-radius:10px;
+    font-weight:700;
 }
 
 .primary:hover{
-  background:var(--brown-dark);
+    background:var(--brown-dark);
 }
 
 .secondary{
-  border:1px solid var(--line);
-  background:var(--paper);
-  color:var(--text);
-  padding:10px 14px;
-  border-radius:10px;
-  font-weight:650;
-}
-
-.secondary:hover{
-  background:#f0e9df;
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--text);
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:650;
 }
 
 .danger{
-  border:1px solid #dfb7b7;
-  background:#fff7f7;
-  color:#9a4d4d;
-  padding:9px 12px;
-  border-radius:9px;
+    border:1px solid #dfb7b7;
+    background:#fff7f7;
+    color:#9a4d4d;
+    padding:9px 12px;
+    border-radius:9px;
 }
 
 #loginMessage{
-  min-height:20px;
-  margin-top:12px;
-  color:#9a4d4d;
-  font-size:13px;
+    min-height:20px;
+    margin-top:12px;
+    color:#9a4d4d;
+    font-size:13px;
 }
 
-
-/* =========================
-   APP SHELL
-========================= */
+/* APP */
 
 .app{
-  min-height:100vh;
-  display:none;
+    min-height:100vh;
+    display:none;
 }
 
 .sidebar{
-  position:fixed;
-  z-index:20;
-  inset:0 auto 0 0;
-  width:245px;
-  background:var(--brown);
-  color:#fff;
-  padding:28px 18px;
-  display:flex;
-  flex-direction:column;
+    position:fixed;
+    inset:0 auto 0 0;
+    width:245px;
+    background:var(--brown);
+    color:white;
+    padding:28px 18px;
+    display:flex;
+    flex-direction:column;
+    z-index:20;
 }
 
 .brand{
-  font:600 28px/1 Georgia,serif;
-  margin:0 10px 7px;
+    font:600 28px Georgia,serif;
+    margin:0 10px 7px;
 }
 
 .brand-note{
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:#d9cec4;
-  margin:0 10px 30px;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#d9cec4;
+    margin:0 10px 30px;
 }
 
 .nav{
-  display:grid;
-  gap:5px;
+    display:grid;
+    gap:5px;
 }
 
 .nav button{
-  border:0;
-  background:transparent;
-  color:#d9cec4;
-  text-align:left;
-  padding:12px 13px;
-  border-radius:10px;
-  font-weight:650;
+    border:0;
+    background:transparent;
+    color:#d9cec4;
+    text-align:left;
+    padding:12px 13px;
+    border-radius:10px;
+    font-weight:650;
 }
 
 .nav button:hover,
 .nav button.active{
-  background:rgba(255,255,255,.09);
-  color:#fff;
+    background:rgba(255,255,255,.09);
+    color:white;
 }
 
 .sidebar-bottom{
-  margin-top:auto;
-  display:grid;
-  gap:9px;
+    margin-top:auto;
+    display:grid;
+    gap:9px;
 }
 
 .user-chip{
-  border-top:1px solid rgba(255,255,255,.12);
-  padding:18px 10px 4px;
-  color:#d9cec4;
-  font-size:12px;
-  line-height:1.5;
-  overflow:hidden;
-  text-overflow:ellipsis;
+    border-top:1px solid rgba(255,255,255,.12);
+    padding:18px 10px 4px;
+    color:#d9cec4;
+    font-size:12px;
 }
 
 .logout{
-  border:1px solid rgba(255,255,255,.15);
-  background:transparent;
-  color:#fff;
-  border-radius:10px;
-  padding:10px;
+    border:1px solid rgba(255,255,255,.15);
+    background:transparent;
+    color:white;
+    border-radius:10px;
+    padding:10px;
 }
 
 .main{
-  margin-left:245px;
-  min-height:100vh;
-  padding:34px clamp(20px,4vw,55px);
+    margin-left:245px;
+    min-height:100vh;
+    padding:34px clamp(20px,4vw,55px);
+}
+
+.panel{
+    display:none;
+}
+
+.panel.active{
+    display:block;
 }
 
 .topbar{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:20px;
-  margin-bottom:28px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:28px;
 }
 
 .eyebrow{
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.16em;
-  color:var(--green);
-  font-weight:800;
-  margin-bottom:8px;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    color:var(--green);
+    font-weight:800;
+    margin-bottom:8px;
 }
 
 .page-title{
-  font:600 clamp(32px,5vw,58px)/.98 Georgia,serif;
-  color:var(--brown);
-  margin:0;
+    font:600 clamp(32px,5vw,58px)/.98 Georgia,serif;
+    color:var(--brown);
+    margin:0;
 }
 
 .top-actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
-
-/* =========================
-   PANELS
-========================= */
-
-.panel{display:none}
-.panel.active{display:block}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin-bottom:24px;
-}
-
-.stat{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:17px;
-}
-
-.stat b{
-  display:block;
-  font:600 28px Georgia,serif;
-  color:var(--brown);
-}
-
-.stat span{
-  font-size:12px;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
-
-.panel-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  margin:30px 0 16px;
-}
-
-.panel-head h2{
-  font:600 28px Georgia,serif;
-  margin:0;
-  color:var(--brown);
-}
-
-.panel-head p{
-  margin:4px 0 0;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.search{
-  width:min(330px,100%);
-  border:1px solid var(--line);
-  background:var(--paper);
-  padding:11px 13px;
-  border-radius:10px;
-  outline:0;
-}
-
-.filter-row{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  margin-bottom:16px;
-}
-
-.filter{
-  border:1px solid var(--line);
-  background:transparent;
-  color:var(--muted);
-  padding:8px 12px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:700;
-}
-
-.filter.active{
-  background:var(--brown);
-  border-color:var(--brown);
-  color:#fff;
-}
-
-
-/* =========================
-   HOME
-========================= */
+/* HOME */
 
 .welcome{
-  background:var(--brown);
-  color:#fff;
-  border-radius:20px;
-  padding:30px;
-  position:relative;
-  overflow:hidden;
-}
-
-.welcome:after{
-  content:"";
-  position:absolute;
-  width:260px;
-  height:260px;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:50%;
-  right:-90px;
-  top:-120px;
+    background:var(--brown);
+    color:white;
+    border-radius:20px;
+    padding:30px;
 }
 
 .welcome h2{
-  font:600 38px Georgia,serif;
-  margin:0 0 8px;
+    font:600 38px Georgia,serif;
+    margin:0 0 8px;
 }
 
 .welcome p{
-  color:#dfd3ca;
-  max-width:650px;
-  line-height:1.7;
-  margin:0;
+    color:#dfd3ca;
+    max-width:650px;
+    line-height:1.7;
+    margin:0;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin:16px 0 24px;
+}
+
+.stat{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:17px;
+}
+
+.stat b{
+    display:block;
+    font:600 28px Georgia,serif;
+    color:var(--brown);
+}
+
+.stat span{
+    font-size:12px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.08em;
 }
 
 .quick{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:16px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:16px;
 }
 
 .quick button{
-  border:1px solid var(--line);
-  background:var(--paper);
-  padding:19px;
-  text-align:left;
-  border-radius:14px;
-  color:var(--text);
+    border:1px solid var(--line);
+    background:var(--paper);
+    padding:19px;
+    text-align:left;
+    border-radius:14px;
+    color:var(--text);
 }
 
 .quick strong{
-  display:block;
-  font:600 21px Georgia,serif;
-  color:var(--brown);
-  margin-bottom:5px;
+    display:block;
+    font:600 21px Georgia,serif;
+    color:var(--brown);
+    margin-bottom:5px;
 }
 
 .quick span{
-  font-size:12px;
-  color:var(--muted);
+    font-size:12px;
+    color:var(--muted);
 }
 
+/* HEADINGS */
 
-/* =========================
-   STORIES
-========================= */
+.panel-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:30px 0 16px;
+}
+
+.panel-head h2{
+    font:600 28px Georgia,serif;
+    margin:0;
+    color:var(--brown);
+}
+
+.panel-head p{
+    margin:4px 0 0;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.search{
+    width:min(330px,100%);
+    border:1px solid var(--line);
+    background:var(--paper);
+    padding:11px 13px;
+    border-radius:10px;
+    outline:0;
+}
+
+/* STORIES */
 
 .story-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(245px,1fr));
-  gap:16px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(245px,1fr));
+    gap:16px;
 }
 
 .story-card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:16px;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  min-height:360px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
 }
 
 .cover{
-  height:185px;
-  background:#e8dfd4;
-  position:relative;
-  overflow:hidden;
+    height:185px;
+    background:#e8dfd4;
+    overflow:hidden;
 }
 
 .cover img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .cover-placeholder{
-  height:100%;
-  display:grid;
-  place-items:center;
-  color:#a39487;
-  font:600 22px Georgia,serif;
+    height:100%;
+    display:grid;
+    place-items:center;
+    color:#a39487;
+    font:600 22px Georgia,serif;
 }
 
 .story-card-body{
-  padding:16px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  flex:1;
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    flex:1;
 }
 
 .badge{
-  display:inline-flex;
-  align-self:flex-start;
-  padding:5px 8px;
-  border-radius:999px;
-  background:#eee7df;
-  color:var(--green);
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.08em;
-  text-transform:uppercase;
+    align-self:flex-start;
+    padding:5px 8px;
+    border-radius:999px;
+    background:#eee7df;
+    color:var(--green);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.08em;
 }
 
 .story-card h3{
-  font:600 24px/1.05 Georgia,serif;
-  margin:0;
-  color:var(--brown);
+    font:600 24px/1.05 Georgia,serif;
+    margin:0;
+    color:var(--brown);
 }
 
-.story-card .author{
-  font-size:12px;
-  color:var(--muted);
+.story-card p{
+    margin:0;
 }
 
-.story-card .desc{
-  font-size:13px;
-  line-height:1.55;
-  color:#665a51;
-  display:-webkit-box;
-  -webkit-line-clamp:3;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
+.author{
+    font-size:12px;
+    color:var(--muted);
+}
+
+.desc{
+    font-size:13px;
+    line-height:1.55;
+    color:#665a51;
 }
 
 .card-actions{
-  display:flex;
-  gap:7px;
-  margin-top:auto;
-  padding-top:10px;
-}
-
-.card-actions button{
-  flex:1;
+    display:flex;
+    gap:7px;
+    margin-top:auto;
+    padding-top:10px;
 }
 
 .empty{
-  border:1px dashed var(--line);
-  padding:42px;
-  text-align:center;
-  color:var(--muted);
-  border-radius:15px;
-  background:rgba(251,248,243,.5);
+    border:1px dashed var(--line);
+    padding:42px;
+    text-align:center;
+    color:var(--muted);
+    border-radius:15px;
 }
 
-
-/* =========================
-   JOURNAL / OTHER
-========================= */
+/* FEEDS */
 
 .feed{
-  display:grid;
-  gap:12px;
+    display:grid;
+    gap:12px;
 }
 
 .feed-card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:19px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:15px;
+    padding:19px;
 }
 
 .feed-card-head{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  align-items:start;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
 }
 
 .feed-card h3{
-  font:600 24px Georgia,serif;
-  margin:0 0 5px;
-  color:var(--brown);
+    font:600 24px Georgia,serif;
+    margin:0 0 5px;
+    color:var(--brown);
 }
 
 .feed-date{
-  font-size:11px;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:.08em;
+    font-size:11px;
+    color:var(--muted);
 }
 
 .feed-excerpt{
-  margin:13px 0 0;
-  color:#665a51;
-  line-height:1.65;
-  font-size:14px;
+    margin:13px 0 0;
+    color:#665a51;
+    line-height:1.65;
+    font-size:14px;
 }
 
 .feed-actions{
-  display:flex;
-  gap:7px;
-  margin-top:15px;
+    display:flex;
+    gap:7px;
+    margin-top:15px;
 }
 
-
-/* =========================
-   MODALS
-========================= */
+/* MODAL */
 
 .modal{
-  position:fixed;
-  z-index:100;
-  inset:0;
-  background:rgba(52,43,38,.48);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+    position:fixed;
+    z-index:100;
+    inset:0;
+    background:rgba(52,43,38,.48);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 }
 
 .modal.show{
-  display:flex;
+    display:flex;
 }
 
 .modal-box{
-  width:min(650px,100%);
-  max-height:92vh;
-  overflow:auto;
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:20px;
-  box-shadow:0 30px 80px rgba(0,0,0,.2);
-  padding:25px;
-}
-
-.modal-box.wide{
-  width:min(1050px,100%);
+    width:min(650px,100%);
+    max-height:92vh;
+    overflow:auto;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:25px;
 }
 
 .modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:start;
-  gap:15px;
-  margin-bottom:18px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
 }
 
 .modal-head h2{
-  font:600 29px Georgia,serif;
-  margin:0;
-  color:var(--brown);
+    font:600 29px Georgia,serif;
+    margin:0;
+    color:var(--brown);
 }
 
 .close{
-  border:0;
-  background:#eee7df;
-  border-radius:9px;
-  width:34px;
-  height:34px;
-  color:var(--brown);
+    border:0;
+    background:#eee7df;
+    border-radius:9px;
+    width:34px;
+    height:34px;
+    color:var(--brown);
 }
 
 .modal-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:18px;
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    margin-top:18px;
 }
 
-.cover-preview{
-  width:100%;
-  height:170px;
-  border:1px dashed var(--line);
-  border-radius:12px;
-  overflow:hidden;
-  background:#f0e9df;
-  display:grid;
-  place-items:center;
-  color:var(--muted);
-  margin-top:8px;
-}
-
-.cover-preview img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-
-/* =========================
-   STORY STUDIO
-========================= */
+/* STORY STUDIO */
 
 .studio{
-  position:fixed;
-  z-index:80;
-  inset:0;
-  background:var(--cream);
-  display:none;
-  overflow:hidden;
+    position:fixed;
+    z-index:80;
+    inset:0;
+    background:var(--cream);
+    display:none;
+    overflow:hidden;
 }
 
 .studio.show{
-  display:grid;
-  grid-template-columns:260px 1fr;
+    display:grid;
+    grid-template-columns:260px 1fr;
 }
 
 .studio-sidebar{
-  background:var(--brown);
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-  min-width:0;
+    background:var(--brown);
+    color:white;
+    display:flex;
+    flex-direction:column;
 }
 
 .studio-top{
-  padding:17px;
-  border-bottom:1px solid rgba(255,255,255,.12);
+    padding:17px;
+    border-bottom:1px solid rgba(255,255,255,.12);
 }
 
 .studio-back{
-  border:0;
-  background:transparent;
-  color:#d9cec4;
-  padding:0;
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:14px;
+    border:0;
+    background:transparent;
+    color:#d9cec4;
+    padding:0;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:14px;
 }
 
 .studio-title{
-  font:600 24px Georgia,serif;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.studio-type{
-  font-size:10px;
-  color:#d9cec4;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  margin-top:5px;
+    font:600 24px Georgia,serif;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .chapter-list{
-  padding:10px;
-  overflow:auto;
-  flex:1;
+    padding:10px;
+    overflow:auto;
+    flex:1;
 }
 
 .chapter-item{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:5px;
-  align-items:center;
-  border-radius:9px;
-  margin-bottom:3px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:5px;
+    align-items:center;
+    margin-bottom:3px;
 }
 
 .chapter-item button:first-child{
-  background:transparent;
-  border:0;
-  color:#d9cec4;
-  text-align:left;
-  padding:10px;
-  border-radius:8px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+    background:transparent;
+    border:0;
+    color:#d9cec4;
+    text-align:left;
+    padding:10px;
+    border-radius:8px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 
-.chapter-item button:first-child:hover,
-.chapter-item.active button:first-child{
-  background:rgba(255,255,255,.1);
-  color:#fff;
+.chapter-item.active button:first-child,
+.chapter-item button:first-child:hover{
+    background:rgba(255,255,255,.1);
+    color:white;
 }
 
 .chapter-delete{
-  background:transparent;
-  border:0;
-  color:#a99084;
-  padding:7px;
+    background:transparent;
+    border:0;
+    color:#a99084;
+    padding:7px;
 }
 
 .studio-add{
-  margin:10px;
-  border:1px solid rgba(255,255,255,.16);
-  background:transparent;
-  color:#fff;
-  border-radius:9px;
-  padding:10px;
+    margin:10px;
+    border:1px solid rgba(255,255,255,.16);
+    background:transparent;
+    color:white;
+    border-radius:9px;
+    padding:10px;
 }
 
 .studio-main{
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
 }
 
 .studio-header{
-  background:var(--paper);
-  border-bottom:1px solid var(--line);
-  padding:12px 18px;
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  align-items:center;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    padding:12px 18px;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:center;
 }
 
 .studio-header-actions{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
 }
 
 .chapter-title{
-  border:0;
-  background:transparent;
-  font:600 22px Georgia,serif;
-  color:var(--brown);
-  outline:0;
-  min-width:0;
-  width:45%;
+    border:0;
+    background:transparent;
+    font:600 22px Georgia,serif;
+    color:var(--brown);
+    outline:0;
+    width:45%;
 }
 
 .editor-wrap{
-  flex:1;
-  overflow:auto;
-  padding:28px;
-  background:#eae2d8;
+    flex:1;
+    overflow:auto;
+    padding:28px;
+    background:#eae2d8;
 }
 
 .paper-editor{
-  width:min(900px,100%);
-  min-height:calc(100vh - 190px);
-  margin:0 auto;
-  background:var(--white);
-  box-shadow:0 10px 35px rgba(56,41,32,.08);
-  padding:60px 75px;
-  outline:0;
-  color:#302923;
-  font:17px/1.85 Georgia,serif;
+    width:min(900px,100%);
+    min-height:calc(100vh - 190px);
+    margin:0 auto;
+    background:var(--white);
+    box-shadow:0 10px 35px rgba(56,41,32,.08);
+    padding:60px 75px;
+    outline:0;
+    color:#302923;
+    font:17px/1.85 Georgia,serif;
 }
 
 .paper-editor:focus{
-  box-shadow:
-    0 10px 35px rgba(56,41,32,.08),
-    0 0 0 2px rgba(104,116,93,.25);
-}
-
-
-/* =========================
-   TOOLBAR
-========================= */
-
-.editor-shell{
-  display:flex;
-  flex-direction:column;
-  min-height:0;
+    box-shadow:
+        0 10px 35px rgba(56,41,32,.08),
+        0 0 0 2px rgba(104,116,93,.25);
 }
 
 .toolbar{
-  background:var(--paper);
-  border-bottom:1px solid var(--line);
-  padding:7px 10px;
-  display:flex;
-  gap:4px;
-  align-items:center;
-  flex-wrap:wrap;
-  position:sticky;
-  top:0;
-  z-index:5;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    padding:7px 10px;
+    display:flex;
+    gap:4px;
+    align-items:center;
+    flex-wrap:wrap;
 }
 
 .tool,
 .tool-select{
-  border:1px solid transparent;
-  background:transparent;
-  color:var(--text);
-  border-radius:7px;
-  min-height:32px;
-  padding:5px 8px;
+    border:1px solid transparent;
+    background:transparent;
+    color:var(--text);
+    border-radius:7px;
+    min-height:32px;
+    padding:5px 8px;
 }
 
-.tool:hover,
-.tool.active{
-  background:#eee7df;
-  border-color:var(--line);
-}
-
-.tool b{
-  font-weight:800;
+.tool:hover{
+    background:#eee7df;
+    border-color:var(--line);
 }
 
 .tool-select{
-  border-color:var(--line);
-  background:var(--white);
-  font-size:12px;
-}
-
-.divider{
-  height:22px;
-  width:1px;
-  background:var(--line);
-  margin:0 3px;
+    border-color:var(--line);
+    background:var(--white);
+    font-size:12px;
 }
 
 .wordbar{
-  display:flex;
-  justify-content:space-between;
-  padding:7px 15px;
-  border-top:1px solid var(--line);
-  background:var(--paper);
-  font-size:11px;
-  color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+    padding:7px 15px;
+    border-top:1px solid var(--line);
+    background:var(--paper);
+    font-size:11px;
+    color:var(--muted);
 }
 
+/* WRITING STUDIO */
 
-/* =========================
-   JOURNAL / OTHER COMPOSER
-========================= */
-
-.content-editor{
-  width:min(960px,100%);
-  margin:0 auto;
+.writer-studio{
+    position:fixed;
+    z-index:90;
+    inset:0;
+    background:var(--cream);
+    display:none;
+    overflow:auto;
 }
 
-.compose-card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:18px;
-  overflow:hidden;
+.writer-studio.show{
+    display:block;
 }
 
-.compose-title{
-  width:100%;
-  border:0;
-  background:transparent;
-  padding:25px 28px 5px;
-  font:600 38px Georgia,serif;
-  color:var(--brown);
-  outline:0;
+.writer-top{
+    position:sticky;
+    top:0;
+    z-index:5;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    padding:12px 18px;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
 }
 
-.compose-subtitle{
-  width:100%;
-  border:0;
-  background:transparent;
-  padding:7px 28px 18px;
-  font-size:15px;
-  color:var(--muted);
-  outline:0;
+.writer-top-actions{
+    display:flex;
+    gap:7px;
 }
 
-.compose-content{
-  min-height:430px;
-  padding:20px 28px 35px;
-  font:17px/1.8 Georgia,serif;
-  outline:0;
+.writer-paper{
+    width:min(950px,calc(100% - 30px));
+    margin:35px auto;
+    background:var(--white);
+    padding:55px;
+    box-shadow:0 10px 35px rgba(56,41,32,.08);
 }
 
-.compose-content img{
-  max-width:100%;
-  height:auto;
-  display:block;
-  margin:18px auto;
-  cursor:pointer;
+.writer-title{
+    width:100%;
+    border:0;
+    outline:0;
+    background:transparent;
+    font:600 46px/1.1 Georgia,serif;
+    color:var(--brown);
+    margin-bottom:12px;
 }
 
-.compose-content img.img-small{
-  width:35%;
+.writer-subrow{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:15px;
+    color:var(--muted);
+    font-size:12px;
 }
 
-.compose-content img.img-medium{
-  width:60%;
+.writer-subrow select,
+.writer-subrow input{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:7px;
+    background:var(--paper);
 }
 
-.compose-content img.img-large{
-  width:82%;
+.rich-editor{
+    min-height:60vh;
+    outline:0;
+    font:18px/1.9 Georgia,serif;
+    color:#342b26;
 }
 
-.compose-content img.img-full{
-  width:100%;
+.rich-editor:empty:before{
+    content:attr(data-placeholder);
+    color:#aaa;
 }
 
-
-/* =========================
-   IMAGE SIZE BAR
-========================= */
-
-.image-size-bar{
-  display:none;
-  align-items:center;
-  gap:5px;
-  padding:7px 10px;
-  border-top:1px solid var(--line);
-  background:#f3ece3;
+.writer-bottom{
+    border-top:1px solid var(--line);
+    margin-top:20px;
+    padding-top:10px;
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
+    font-size:11px;
 }
 
-.image-size-bar.show{
-  display:flex;
-}
-
-.image-size-bar span{
-  font-size:11px;
-  color:var(--muted);
-  margin-right:4px;
-}
-
-.size-btn{
-  border:1px solid var(--line);
-  background:var(--paper);
-  padding:5px 8px;
-  border-radius:7px;
-  font-size:11px;
-}
-
-.size-btn.active{
-  background:var(--brown);
-  color:#fff;
-  border-color:var(--brown);
-}
-
-
-/* =========================
-   IMAGE RESIZE HANDLE
-========================= */
-
-.resize-frame{
-  outline:2px solid var(--pink);
-  outline-offset:2px;
-  position:relative;
-  display:block!important;
-  margin-left:auto!important;
-  margin-right:auto!important;
-}
-
-.resize-handle{
-  position:absolute;
-  width:12px;
-  height:12px;
-  right:-7px;
-  bottom:-7px;
-  background:var(--pink);
-  border:2px solid #fff;
-  border-radius:50%;
-  cursor:nwse-resize;
-  z-index:30;
-}
-
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
-  position:fixed;
-  z-index:300;
-  right:20px;
-  bottom:20px;
-  background:var(--brown);
-  color:#fff;
-  padding:12px 15px;
-  border-radius:10px;
-  box-shadow:var(--shadow);
-  font-size:13px;
-  transform:translateY(15px);
-  opacity:0;
-  pointer-events:none;
-  transition:.2s;
-}
-
-.toast.show{
-  transform:none;
-  opacity:1;
-}
-
-
-/* =========================
-   PREVIEW
-========================= */
-
-.preview{
-  background:#e9e0d6;
-  padding:30px;
-  min-height:500px;
-}
-
-.preview-paper{
-  max-width:780px;
-  margin:auto;
-  background:var(--white);
-  min-height:500px;
-  padding:65px 75px;
-  box-shadow:var(--shadow);
-}
-
-.preview-cover{
-  width:190px;
-  height:270px;
-  object-fit:cover;
-  display:block;
-  margin:0 auto 30px;
-}
-
-.preview-paper h1{
-  font:600 44px/1.05 Georgia,serif;
-  color:var(--brown);
-  margin:0 0 8px;
-}
-
-.preview-meta{
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:35px;
-}
-
-.preview-content{
-  font:17px/1.85 Georgia,serif;
-}
-
-.preview-content img{
-  max-width:100%;
-  height:auto;
-}
-
-
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 
 @media(max-width:1000px){
+    .sidebar{
+        width:210px;
+    }
 
-  .sidebar{
-    width:210px;
-  }
+    .main{
+        margin-left:210px;
+    }
 
-  .main{
-    margin-left:210px;
-  }
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
+    .studio.show{
+        grid-template-columns:220px 1fr;
+    }
 
-  .studio.show{
-    grid-template-columns:220px 1fr;
-  }
-
-  .paper-editor{
-    padding:45px 45px;
-  }
-
+    .paper-editor{
+        padding:45px;
+    }
 }
 
 @media(max-width:720px){
+    .sidebar{
+        position:static;
+        width:auto;
+        padding:14px;
+        display:block;
+    }
 
-  .sidebar{
-    position:static;
-    width:auto;
-    height:auto;
-    padding:14px;
-    display:block;
-  }
+    .brand{
+        display:inline-block;
+    }
 
-  .brand{
-    display:inline-block;
-    margin-bottom:2px;
-  }
+    .brand-note{
+        display:none;
+    }
 
-  .brand-note{
-    display:none;
-  }
+    .nav{
+        display:flex;
+        overflow:auto;
+    }
 
-  .nav{
-    display:flex;
-    overflow:auto;
-  }
+    .nav button{
+        white-space:nowrap;
+    }
 
-  .nav button{
-    white-space:nowrap;
-  }
+    .sidebar-bottom{
+        margin-top:10px;
+        display:flex;
+    }
 
-  .sidebar-bottom{
-    margin-top:10px;
-    display:flex;
-    align-items:center;
-  }
+    .user-chip{
+        display:none;
+    }
 
-  .user-chip{
-    display:none;
-  }
+    .main{
+        margin-left:0;
+        padding:22px 14px;
+    }
 
-  .main{
-    margin-left:0;
-    padding:22px 14px;
-  }
+    .topbar{
+        align-items:flex-start;
+        flex-direction:column;
+    }
 
-  .topbar{
-    align-items:flex-start;
-    flex-direction:column;
-  }
+    .stats,
+    .quick{
+        grid-template-columns:1fr;
+    }
 
-  .stats,
-  .quick{
-    grid-template-columns:1fr;
-  }
+    .studio.show{
+        display:flex;
+        flex-direction:column;
+    }
 
-  .panel-head{
-    align-items:flex-start;
-    flex-direction:column;
-  }
+    .studio-sidebar{
+        height:220px;
+        flex:none;
+    }
 
-  .studio.show{
-    display:flex;
-    flex-direction:column;
-  }
+    .chapter-list{
+        display:flex;
+        gap:5px;
+    }
 
-  .studio-sidebar{
-    height:220px;
-    flex:none;
-  }
+    .chapter-item{
+        min-width:170px;
+    }
 
-  .chapter-list{
-    display:flex;
-    overflow:auto;
-    gap:5px;
-  }
+    .studio-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
 
-  .chapter-item{
-    min-width:170px;
-  }
+    .chapter-title{
+        width:100%;
+    }
 
-  .studio-add{
-    margin:8px;
-  }
+    .editor-wrap{
+        padding:12px;
+    }
 
-  .chapter-title{
-    width:100%;
-  }
+    .paper-editor{
+        padding:30px 22px;
+        min-height:700px;
+    }
 
-  .studio-header{
-    align-items:flex-start;
-    flex-direction:column;
-  }
+    .writer-paper{
+        padding:30px 22px;
+    }
 
-  .editor-wrap{
-    padding:12px;
-  }
-
-  .paper-editor{
-    padding:30px 22px;
-    min-height:700px;
-  }
-
-  .preview{
-    padding:12px;
-  }
-
-  .preview-paper{
-    padding:35px 25px;
-  }
-
-  .preview-paper h1{
-    font-size:35px;
-  }
-
-  .login-card{
-    padding:28px;
-  }
-
+    .writer-title{
+        font-size:36px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     LOGIN
-===================================================== -->
+<!-- LOGIN -->
 
 <div id="loginScreen" class="login-screen">
 
-  <form id="loginForm" class="login-card">
+    <form id="loginForm" class="login-card">
 
-    <div class="login-mark">
-      Private writing studio
-    </div>
+        <div class="login-mark">
+            Private writing studio
+        </div>
 
-    <h1>
-      Welcome back.
-    </h1>
+        <h1>
+            Welcome back.
+        </h1>
 
-    <p>
-      A quiet place for stories, journal entries,
-      drafts, and everything else you want to write.
-    </p>
+        <p>
+            A quiet place for stories, journal entries,
+            drafts, and everything else you want to write.
+        </p>
 
-    <div class="field">
-      <label>Email</label>
-      <input
-        id="loginEmail"
-        type="email"
-        autocomplete="email"
-        required
-      >
-    </div>
+        <div class="field">
+            <label>Email</label>
+            <input
+                id="loginEmail"
+                type="email"
+                autocomplete="email"
+                required
+            >
+        </div>
 
-    <div class="field">
-      <label>Password</label>
-      <input
-        id="loginPassword"
-        type="password"
-        autocomplete="current-password"
-        required
-      >
-    </div>
+        <div class="field">
+            <label>Password</label>
+            <input
+                id="loginPassword"
+                type="password"
+                autocomplete="current-password"
+                required
+            >
+        </div>
 
-    <button
-      class="primary"
-      style="width:100%;padding:13px"
-      type="submit"
-    >
-      Enter studio
-    </button>
+        <button
+            class="primary"
+            style="width:100%;padding:13px"
+            type="submit"
+        >
+            Enter studio
+        </button>
 
-    <div id="loginMessage"></div>
+        <div id="loginMessage"></div>
 
-  </form>
+    </form>
 
 </div>
 
 
-<!-- =====================================================
-     APP
-===================================================== -->
+<!-- APP -->
 
 <div id="app" class="app">
 
-  <aside class="sidebar">
+    <aside class="sidebar">
 
-    <div class="brand">
-      Writer's Studio
-    </div>
+        <div class="brand">
+            Writer's Studio
+        </div>
 
-    <div class="brand-note">
-      private workspace
-    </div>
+        <div class="brand-note">
+            private workspace
+        </div>
 
-    <nav class="nav">
+        <nav class="nav">
 
-      <button
-        class="active"
-        data-panel="home"
-      >
-        Home
-      </button>
+            <button
+                class="active"
+                data-panel="home"
+                type="button"
+            >
+                Home
+            </button>
 
-      <button data-panel="stories">
-        Stories
-      </button>
+            <button
+                data-panel="stories"
+                type="button"
+            >
+                Stories
+            </button>
 
-      <button data-panel="journal">
-        Journal
-      </button>
+            <button
+                data-panel="journal"
+                type="button"
+            >
+                Journal
+            </button>
 
-      <button data-panel="other">
-        Other Writings
-      </button>
+            <button
+                data-panel="other"
+                type="button"
+            >
+                Other Writings
+            </button>
 
-    </nav>
+        </nav>
 
-    <div class="sidebar-bottom">
+        <div class="sidebar-bottom">
 
-      <div
-        id="userChip"
-        class="user-chip"
-      ></div>
+            <div
+                id="userChip"
+                class="user-chip"
+            ></div>
 
-      <button
-        id="logoutBtn"
-        class="logout"
-      >
-        Log out
-      </button>
-
-    </div>
-
-  </aside>
-
-
-  <main class="main">
-
-    <!-- HOME -->
-
-    <section
-      id="homePanel"
-      class="panel active"
-    >
-
-      <div class="topbar">
-
-        <div>
-
-          <div class="eyebrow">
-            Your workspace
-          </div>
-
-          <h1 class="page-title">
-            Write things worth keeping.
-          </h1>
+            <button
+                id="logoutBtn"
+                class="logout"
+                type="button"
+            >
+                Log out
+            </button>
 
         </div>
 
-        <div class="top-actions">
-
-          <button
-            class="primary"
-            onclick="openCreateStory()"
-          >
-            + New story
-          </button>
-
-          <button
-            class="secondary"
-            onclick="openComposer('journal')"
-          >
-            + Journal
-          </button>
-
-        </div>
-
-      </div>
+    </aside>
 
 
-      <div class="welcome">
+    <main class="main">
 
-        <h2>
-          Make room for the words.
-        </h2>
+        <!-- HOME -->
 
-        <p>
-          Your stories, journal, drafts, fragments,
-          and other writing all live here —
-          organized, editable, and yours.
-        </p>
-
-      </div>
-
-
-      <div
-        id="stats"
-        class="stats"
-        style="margin-top:16px"
-      ></div>
-
-
-      <div class="panel-head">
-
-        <div>
-
-          <h2>
-            Continue writing
-          </h2>
-
-          <p>
-            Open the pieces you were working on.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div
-        id="recentWriting"
-        class="feed"
-      ></div>
-
-
-      <div class="quick">
-
-        <button onclick="openCreateStory()">
-
-          <strong>
-            New story
-          </strong>
-
-          <span>
-            Start a story or build a series.
-          </span>
-
-        </button>
-
-
-        <button onclick="openComposer('journal')">
-
-          <strong>
-            New journal entry
-          </strong>
-
-          <span>
-            Write something longer and more personal.
-          </span>
-
-        </button>
-
-
-        <button onclick="openComposer('other')">
-
-          <strong>
-            Other writing
-          </strong>
-
-          <span>
-            Posts, thoughts, poems, notes, fragments.
-          </span>
-
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- STORIES -->
-
-    <section
-      id="storiesPanel"
-      class="panel"
-    >
-
-      <div class="topbar">
-
-        <div>
-
-          <div class="eyebrow">
-            01 · Stories
-          </div>
-
-          <h1 class="page-title">
-            Stories
-          </h1>
-
-        </div>
-
-        <button
-          class="primary"
-          onclick="openCreateStory()"
-        >
-          + New story
-        </button>
-
-      </div>
-
-
-      <div class="filter-row">
-
-        <button
-          class="filter active"
-          data-story-filter="all"
-        >
-          All
-        </button>
-
-        <button
-          class="filter"
-          data-story-filter="story"
-        >
-          Stories
-        </button>
-
-        <button
-          class="filter"
-          data-story-filter="series"
-        >
-          Series
-        </button>
-
-      </div>
-
-
-      <div
-        style="
-          display:flex;
-          justify-content:flex-end;
-          margin-bottom:16px
-        "
-      >
-
-        <input
-          id="storySearch"
-          class="search"
-          placeholder="Search stories…"
+        <section
+            id="homePanel"
+            class="panel active"
         >
 
-      </div>
+            <div class="topbar">
+
+                <div>
+
+                    <div class="eyebrow">
+                        Your workspace
+                    </div>
+
+                    <h1 class="page-title">
+                        Write things worth keeping.
+                    </h1>
+
+                </div>
+
+                <div class="top-actions">
+
+                    <button
+                        class="primary"
+                        type="button"
+                        onclick="openCreateStory()"
+                    >
+                        + New story
+                    </button>
+
+                    <button
+                        class="secondary"
+                        type="button"
+                        onclick="openWriter('journal')"
+                    >
+                        + Journal
+                    </button>
+
+                </div>
+
+            </div>
 
 
-      <div
-        id="storyGrid"
-        class="story-grid"
-      ></div>
+            <div class="welcome">
 
-    </section>
+                <h2>
+                    Make room for the words.
+                </h2>
+
+                <p>
+                    Your stories, journal, drafts, fragments,
+                    and other writing all live here —
+                    organized, editable, and yours.
+                </p>
+
+            </div>
 
 
-    <!-- JOURNAL -->
+            <div
+                id="stats"
+                class="stats"
+            ></div>
 
-    <section
-      id="journalPanel"
-      class="panel"
-    >
 
-      <div class="topbar">
+            <div class="panel-head">
 
-        <div>
+                <div>
 
-          <div class="eyebrow">
-            02 · Journal
-          </div>
+                    <h2>
+                        Continue writing
+                    </h2>
 
-          <h1 class="page-title">
-            Journal
-          </h1>
+                    <p>
+                        Open the pieces you were working on.
+                    </p>
 
-        </div>
+                </div>
 
-        <button
-          class="primary"
-          onclick="openComposer('journal')"
+            </div>
+
+
+            <div
+                id="recentWriting"
+                class="feed"
+            ></div>
+
+
+            <div class="quick">
+
+                <button
+                    type="button"
+                    onclick="openCreateStory()"
+                >
+                    <strong>
+                        New story
+                    </strong>
+
+                    <span>
+                        Start a story or build a series.
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="openWriter('journal')"
+                >
+                    <strong>
+                        New journal entry
+                    </strong>
+
+                    <span>
+                        Write something longer and more personal.
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="openWriter('other')"
+                >
+                    <strong>
+                        Other writing
+                    </strong>
+
+                    <span>
+                        Posts, thoughts, poems, notes, fragments.
+                    </span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- STORIES -->
+
+        <section
+            id="storiesPanel"
+            class="panel"
         >
-          + New entry
-        </button>
 
-      </div>
+            <div class="topbar">
+
+                <div>
+
+                    <div class="eyebrow">
+                        01 · Stories
+                    </div>
+
+                    <h1 class="page-title">
+                        Stories
+                    </h1>
+
+                </div>
+
+                <button
+                    class="primary"
+                    type="button"
+                    onclick="openCreateStory()"
+                >
+                    + New story
+                </button>
+
+            </div>
 
 
-      <div
-        style="
-          display:flex;
-          justify-content:flex-end;
-          margin-bottom:16px
-        "
-      >
+            <div
+                style="
+                    display:flex;
+                    justify-content:flex-end;
+                    margin-bottom:16px
+                "
+            >
 
-        <input
-          id="journalSearch"
-          class="search"
-          placeholder="Search journal…"
+                <input
+                    id="storySearch"
+                    class="search"
+                    placeholder="Search stories…"
+                >
+
+            </div>
+
+
+            <div
+                id="storyGrid"
+                class="story-grid"
+            ></div>
+
+        </section>
+
+
+        <!-- JOURNAL -->
+
+        <section
+            id="journalPanel"
+            class="panel"
         >
 
-      </div>
+            <div class="topbar">
+
+                <div>
+
+                    <div class="eyebrow">
+                        02 · Journal
+                    </div>
+
+                    <h1 class="page-title">
+                        Journal
+                    </h1>
+
+                </div>
+
+                <button
+                    class="primary"
+                    type="button"
+                    onclick="openWriter('journal')"
+                >
+                    + New entry
+                </button>
+
+            </div>
 
 
-      <div
-        id="journalFeed"
-        class="feed"
-      ></div>
+            <div
+                style="
+                    display:flex;
+                    justify-content:flex-end;
+                    margin-bottom:16px
+                "
+            >
 
-    </section>
+                <input
+                    id="journalSearch"
+                    class="search"
+                    placeholder="Search journal…"
+                >
+
+            </div>
 
 
-    <!-- OTHER WRITINGS -->
+            <div
+                id="journalFeed"
+                class="feed"
+            ></div>
 
-    <section
-      id="otherPanel"
-      class="panel"
-    >
+        </section>
 
-      <div class="topbar">
 
-        <div>
+        <!-- OTHER WRITINGS -->
 
-          <div class="eyebrow">
-            03 · Other writings
-          </div>
-
-          <h1 class="page-title">
-            Other Writings
-          </h1>
-
-        </div>
-
-        <button
-          class="primary"
-          onclick="openComposer('other')"
+        <section
+            id="otherPanel"
+            class="panel"
         >
-          + New writing
-        </button>
 
-      </div>
+            <div class="topbar">
+
+                <div>
+
+                    <div class="eyebrow">
+                        03 · Other writings
+                    </div>
+
+                    <h1 class="page-title">
+                        Other Writings
+                    </h1>
+
+                </div>
+
+                <button
+                    class="primary"
+                    type="button"
+                    onclick="openWriter('other')"
+                >
+                    + New writing
+                </button>
+
+            </div>
 
 
-      <div
-        style="
-          display:flex;
-          justify-content:flex-end;
-          margin-bottom:16px
-        "
-      >
+            <div
+                style="
+                    display:flex;
+                    justify-content:flex-end;
+                    margin-bottom:16px
+                "
+            >
 
-        <input
-          id="otherSearch"
-          class="search"
-          placeholder="Search writings…"
-        >
+                <input
+                    id="otherSearch"
+                    class="search"
+                    placeholder="Search writings…"
+                >
 
-      </div>
+            </div>
 
 
-      <div
-        id="otherFeed"
-        class="feed"
-      ></div>
+            <div
+                id="otherFeed"
+                class="feed"
+            ></div>
 
-    </section>
+        </section>
 
-  </main>
+    </main>
 
 </div>
 
 
-<!-- =====================================================
-     STORY MODAL
-===================================================== -->
+<!-- STORY MODAL -->
 
 <div
-  id="storyModal"
-  class="modal"
+    id="storyModal"
+    class="modal"
 >
 
-  <div class="modal-box">
+    <div class="modal-box">
 
-    <div class="modal-head">
+        <div class="modal-head">
 
-      <div>
+            <div>
 
-        <div class="eyebrow">
-          Story details
+                <div class="eyebrow">
+                    Story details
+                </div>
+
+                <h2>
+                    New story
+                </h2>
+
+            </div>
+
+            <button
+                class="close"
+                type="button"
+                onclick="closeModal('storyModal')"
+            >
+                ×
+            </button>
+
         </div>
 
-        <h2 id="storyModalTitle">
-          New story
-        </h2>
-
-      </div>
-
-      <button
-        class="close"
-        onclick="closeModal('storyModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <input
-      type="hidden"
-      id="storyId"
-    >
-
-
-    <div class="field">
-
-      <label>
-        Title
-      </label>
-
-      <input
-        id="storyTitle"
-        placeholder="Your story title"
-      >
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        Author
-      </label>
-
-      <input
-        id="storyAuthor"
-        placeholder="Author name"
-      >
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        Type
-      </label>
-
-      <select id="storyType">
-
-        <option value="story">
-          Story
-        </option>
-
-        <option value="series">
-          Series
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div
-      id="seriesFields"
-      class="hidden"
-    >
-
-      <div class="field">
-
-        <label>
-          Series name
-        </label>
 
         <input
-          id="seriesName"
-          placeholder="Name shared by the connected stories"
+            id="storyId"
+            type="hidden"
         >
 
-      </div>
+
+        <div class="field">
+
+            <label>
+                Title
+            </label>
+
+            <input
+                id="storyTitle"
+                placeholder="Your story title"
+            >
+
+        </div>
 
 
-      <div class="field">
+        <div class="field">
 
-        <label>
-          Order in series
-        </label>
+            <label>
+                Author
+            </label>
 
-        <input
-          id="seriesOrder"
-          type="number"
-          min="1"
-          value="1"
-        >
+            <input
+                id="storyAuthor"
+                placeholder="Author name"
+            >
 
-      </div>
+        </div>
 
 
-      <p class="small muted">
-        Each story in a series is its own story
-        and can have its own chapters.
-        Give connected stories the same series name.
-      </p>
+        <div class="field">
 
-    </div>
+            <label>
+                Description
+            </label>
 
+            <textarea
+                id="storyDescription"
+                rows="4"
+                placeholder="What is this story about?"
+            ></textarea>
 
-    <div class="field">
-
-      <label>
-        Description
-      </label>
-
-      <textarea
-        id="storyDescription"
-        rows="4"
-        placeholder="What is this story about?"
-      ></textarea>
-
-    </div>
+        </div>
 
 
-    <div class="field">
+        <div class="field">
 
-      <label>
-        Cover image
-      </label>
+            <label>
+                Cover image
+            </label>
 
-      <input
-        id="storyCover"
-        type="file"
-        accept="image/*"
-      >
+            <input
+                id="storyCover"
+                type="file"
+                accept="image/*"
+            >
 
-      <div
-        id="coverPreview"
-        class="cover-preview"
-      >
-        No cover selected
-      </div>
-
-    </div>
+        </div>
 
 
-    <div class="modal-actions">
+        <div class="modal-actions">
 
-      <button
-        class="secondary"
-        onclick="closeModal('storyModal')"
-      >
-        Cancel
-      </button>
+            <button
+                class="secondary"
+                type="button"
+                onclick="closeModal('storyModal')"
+            >
+                Cancel
+            </button>
 
-      <button
-        id="saveStoryBtn"
-        class="primary"
-      >
-        Create story
-      </button>
+            <button
+                id="saveStoryBtn"
+                class="primary"
+                type="button"
+            >
+                Create story
+            </button>
+
+        </div>
 
     </div>
-
-  </div>
 
 </div>
 
 
-<!-- =====================================================
-     JOURNAL / OTHER COMPOSER
-===================================================== -->
+<!-- STORY STUDIO -->
 
 <div
-  id="composerModal"
-  class="modal"
+    id="storyStudio"
+    class="studio"
 >
 
-  <div class="modal-box wide">
+    <aside class="studio-sidebar">
 
-    <div class="modal-head">
+        <div class="studio-top">
 
-      <div>
+            <button
+                id="closeStoryStudio"
+                class="studio-back"
+                type="button"
+            >
+                ← Back to stories
+            </button>
+
+            <div
+                id="studioStoryTitle"
+                class="studio-title"
+            >
+                Story
+            </div>
+
+            <div class="studio-type">
+                STORY
+            </div>
+
+        </div>
+
 
         <div
-          id="composerEyebrow"
-          class="eyebrow"
-        >
-          Writing
-        </div>
-
-        <h2 id="composerHeading">
-          New writing
-        </h2>
-
-      </div>
-
-      <button
-        class="close"
-        onclick="closeComposer()"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <input
-      type="hidden"
-      id="composerId"
-    >
-
-    <input
-      type="hidden"
-      id="composerKind"
-    >
-
-
-    <div class="field">
-
-      <label>
-        Title
-      </label>
-
-      <input
-        id="composerTitle"
-        placeholder="Untitled"
-      >
-
-    </div>
-
-
-    <div
-      id="composerSubtitleWrap"
-      class="field"
-    >
-
-      <label id="composerSubtitleLabel">
-        Subtitle / excerpt
-      </label>
-
-      <input
-        id="composerSubtitle"
-        placeholder="A short line if you want one"
-      >
-
-    </div>
-
-
-    <div class="editor-shell">
-
-      <div
-        id="composeToolbar"
-        class="toolbar"
-      ></div>
-
-
-      <div
-        id="composeImageBar"
-        class="image-size-bar"
-      >
-
-        <span>
-          Selected image:
-        </span>
-
-        <button
-          class="size-btn"
-          data-img-size="small"
-        >
-          Small
-        </button>
-
-        <button
-          class="size-btn"
-          data-img-size="medium"
-        >
-          Medium
-        </button>
-
-        <button
-          class="size-btn"
-          data-img-size="large"
-        >
-          Large
-        </button>
-
-        <button
-          class="size-btn"
-          data-img-size="full"
-        >
-          Full
-        </button>
-
-      </div>
-
-
-      <div
-        id="composerContent"
-        class="compose-content"
-        contenteditable="true"
-        spellcheck="true"
-      ></div>
-
-    </div>
-
-
-    <div class="modal-actions">
-
-      <span
-        id="composerStatus"
-        class="muted small"
-        style="
-          margin-right:auto;
-          align-self:center
-        "
-      >
-        Draft
-      </span>
-
-      <button
-        class="secondary"
-        onclick="closeComposer()"
-      >
-        Cancel
-      </button>
-
-      <button
-        class="secondary"
-        id="saveDraftBtn"
-      >
-        Save draft
-      </button>
-
-      <button
-        class="primary"
-        id="publishComposerBtn"
-      >
-        Publish
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
-     STORY STUDIO
-===================================================== -->
-
-<div
-  id="storyStudio"
-  class="studio"
->
-
-  <aside class="studio-sidebar">
-
-    <div class="studio-top">
-
-      <button
-        class="studio-back"
-        onclick="closeStoryStudio()"
-      >
-        ← Back to stories
-      </button>
-
-      <div
-        id="studioStoryTitle"
-        class="studio-title"
-      >
-        Story
-      </div>
-
-      <div
-        id="studioStoryType"
-        class="studio-type"
-      >
-        Story
-      </div>
-
-    </div>
-
-
-    <div
-      id="chapterList"
-      class="chapter-list"
-    ></div>
-
-
-    <button
-      id="addChapterBtn"
-      class="studio-add"
-    >
-      + New chapter
-    </button>
-
-  </aside>
-
-
-  <section class="studio-main">
-
-    <div class="studio-header">
-
-      <input
-        id="chapterTitle"
-        class="chapter-title"
-        placeholder="Chapter title"
-      >
-
-
-      <div class="studio-header-actions">
-
-        <button
-          class="secondary"
-          onclick="editCurrentStory()"
-        >
-          Story details
-        </button>
-
-        <button
-          class="secondary"
-          onclick="previewStory()"
-        >
-          Preview
-        </button>
-
-        <button
-          class="primary"
-          id="saveChapterBtn"
-        >
-          Save chapter
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="editor-shell"
-      style="
-        flex:1;
-        min-height:0
-      "
-    >
-
-      <div
-        id="storyToolbar"
-        class="toolbar"
-      ></div>
-
-
-      <div
-        id="storyImageBar"
-        class="image-size-bar"
-      >
-
-        <span>
-          Selected image:
-        </span>
-
-        <button
-          class="size-btn"
-          data-img-size="small"
-        >
-          Small
-        </button>
-
-        <button
-          class="size-btn"
-          data-img-size="medium"
-        >
-          Medium
-        </button>
-
-        <button
-          class="size-btn"
-          data-img-size="large"
-        >
-          Large
-        </button>
-
-        <button
-          class="size-btn"
-          data-img-size="full"
-        >
-          Full
-        </button>
-
-      </div>
-
-
-      <div class="editor-wrap">
-
-        <div
-          id="chapterContent"
-          class="paper-editor"
-          contenteditable="true"
-          spellcheck="true"
+            id="chapterList"
+            class="chapter-list"
         ></div>
 
-      </div>
+
+        <button
+            id="addChapterButton"
+            class="studio-add"
+            type="button"
+        >
+            + Add chapter
+        </button>
+
+    </aside>
 
 
-      <div class="wordbar">
+    <main class="studio-main">
 
-        <span id="saveStatus">
-          Ready
-        </span>
+        <div class="studio-header">
 
-        <span id="wordCount">
-          0 words · 0 characters
-        </span>
-
-      </div>
-
-    </div>
-
-  </section>
-
-</div>
+            <input
+                id="chapterTitle"
+                class="chapter-title"
+                type="text"
+                placeholder="Untitled chapter"
+            >
 
 
-<!-- =====================================================
-     PREVIEW
-===================================================== -->
+            <div class="studio-header-actions">
 
-<div
-  id="previewModal"
-  class="modal"
->
+                <button
+                    id="deleteStoryButton"
+                    class="danger"
+                    type="button"
+                >
+                    Delete Book
+                </button>
 
-  <div class="modal-box wide">
+                <button
+                    id="deleteChapterButton"
+                    class="danger"
+                    type="button"
+                >
+                    Delete Chapter
+                </button>
 
-    <div class="modal-head">
+                <button
+                    id="saveChapterButton"
+                    class="primary"
+                    type="button"
+                >
+                    Save
+                </button>
 
-      <div>
+            </div>
 
-        <div class="eyebrow">
-          Reader preview
         </div>
 
-        <h2>
-          How it reads
-        </h2>
 
-      </div>
+        <div class="toolbar">
 
-      <button
-        class="close"
-        onclick="closeModal('previewModal')"
-      >
-        ×
-      </button>
+            <select
+                id="blockFormat"
+                class="tool-select"
+            >
 
-    </div>
+                <option value="p">
+                    Normal
+                </option>
+
+                <option value="h1">
+                    Title
+                </option>
+
+                <option value="h2">
+                    Heading 1
+                </option>
+
+                <option value="h3">
+                    Heading 2
+                </option>
+
+                <option value="blockquote">
+                    Quote
+                </option>
+
+            </select>
 
 
-    <div
-      id="previewArea"
-      class="preview"
-    ></div>
+            <select
+                id="fontFamily"
+                class="tool-select"
+            >
 
-  </div>
+                <option value="Georgia">
+                    Georgia
+                </option>
+
+                <option value="Arial">
+                    Arial
+                </option>
+
+                <option value="Times New Roman">
+                    Times
+                </option>
+
+                <option value="Courier New">
+                    Courier
+                </option>
+
+            </select>
+
+
+            <select
+                id="fontSize"
+                class="tool-select"
+            >
+
+                <option value="3">
+                    Normal
+                </option>
+
+                <option value="2">
+                    Small
+                </option>
+
+                <option value="4">
+                    Large
+                </option>
+
+                <option value="5">
+                    Huge
+                </option>
+
+            </select>
+
+
+            <button
+                class="tool"
+                type="button"
+                data-command="bold"
+            >
+                <b>B</b>
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-command="italic"
+            >
+                <i>I</i>
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-command="underline"
+            >
+                <u>U</u>
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-command="justifyLeft"
+            >
+                ☰
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-command="justifyCenter"
+            >
+                ≡
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-command="justifyRight"
+            >
+                ☷
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-command="insertUnorderedList"
+            >
+                • List
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-command="insertOrderedList"
+            >
+                1. List
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-command="undo"
+            >
+                ↶
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-command="redo"
+            >
+                ↷
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                id="clearFormatting"
+            >
+                Clear
+            </button>
+
+        </div>
+
+
+        <div class="editor-wrap">
+
+            <div
+                id="chapterContent"
+                class="paper-editor"
+                contenteditable="true"
+                data-placeholder="Start writing..."
+            ></div>
+
+        </div>
+
+
+        <div class="wordbar">
+
+            <span>
+                Story Studio
+            </span>
+
+            <span id="chapterWordCount">
+                0 words
+            </span>
+
+        </div>
+
+    </main>
 
 </div>
 
 
+<!-- JOURNAL STUDIO -->
+
 <div
-  id="toast"
-  class="toast"
-></div>
+    id="journalStudio"
+    class="writer-studio"
+>
+
+    <header class="writer-top">
+
+        <button
+            id="closeJournalButton"
+            class="secondary"
+            type="button"
+        >
+            ← Journal
+        </button>
+
+        <div class="writer-top-actions">
+
+            <button
+                id="deleteJournalButton"
+                class="danger hidden"
+                type="button"
+            >
+                Delete
+            </button>
+
+            <button
+                id="saveJournalButton"
+                class="primary"
+                type="button"
+            >
+                Save Article
+            </button>
+
+        </div>
+
+    </header>
 
 
-<!-- =====================================================
-     SUPABASE
-===================================================== -->
+    <article class="writer-paper">
+
+        <div class="eyebrow">
+            JOURNAL
+        </div>
+
+        <input
+            id="journalId"
+            type="hidden"
+        >
+
+        <input
+            id="journalTitle"
+            class="writer-title"
+            type="text"
+            placeholder="Article title"
+        >
+
+
+        <div class="writer-subrow">
+
+            <label>
+                Date
+                <input
+                    id="journalDate"
+                    type="date"
+                >
+            </label>
+
+            <span
+                id="journalWordCount"
+            >
+                0 words
+            </span>
+
+        </div>
+
+
+        <div class="toolbar">
+
+            <button
+                class="tool"
+                type="button"
+                data-journal-command="bold"
+            >
+                <b>B</b>
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-journal-command="italic"
+            >
+                <i>I</i>
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-journal-command="underline"
+            >
+                <u>U</u>
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-journal-command="formatBlock"
+                data-value="h2"
+            >
+                H
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-journal-command="formatBlock"
+                data-value="blockquote"
+            >
+                “ ”
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-journal-command="justifyLeft"
+            >
+                ☰
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-journal-command="justifyCenter"
+            >
+                ≡
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-journal-command="justifyRight"
+            >
+                ☷
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-journal-command="insertUnorderedList"
+            >
+                • List
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-journal-command="insertOrderedList"
+            >
+                1. List
+            </button>
+
+        </div>
+
+
+        <div
+            id="journalContent"
+            class="rich-editor"
+            contenteditable="true"
+            data-placeholder="Write your article here..."
+        ></div>
+
+
+        <div class="writer-bottom">
+
+            <span>
+                Your journal article.
+            </span>
+
+            <span id="journalBottomWords">
+                0 words
+            </span>
+
+        </div>
+
+    </article>
+
+</div>
+
+
+<!-- OTHER WRITINGS STUDIO -->
+
+<div
+    id="writingStudio"
+    class="writer-studio"
+>
+
+    <header class="writer-top">
+
+        <button
+            id="closeWritingButton"
+            class="secondary"
+            type="button"
+        >
+            ← Other Writings
+        </button>
+
+        <div class="writer-top-actions">
+
+            <button
+                id="deleteWritingButton"
+                class="danger hidden"
+                type="button"
+            >
+                Delete
+            </button>
+
+            <button
+                id="saveWritingButton"
+                class="primary"
+                type="button"
+            >
+                Save
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <article class="writer-paper">
+
+        <div class="eyebrow">
+            OTHER WRITING
+        </div>
+
+        <input
+            id="writingId"
+            type="hidden"
+        >
+
+        <input
+            id="writingTitle"
+            class="writer-title"
+            type="text"
+            placeholder="Give it a title"
+        >
+
+
+        <div class="writer-subrow">
+
+            <select id="writingType">
+
+                <option value="Thought">
+                    Thought
+                </option>
+
+                <option value="Poem">
+                    Poem
+                </option>
+
+                <option value="Fragment">
+                    Fragment
+                </option>
+
+                <option value="Scene">
+                    Scene
+                </option>
+
+                <option value="Letter">
+                    Letter
+                </option>
+
+                <option value="Dialogue">
+                    Dialogue
+                </option>
+
+                <option value="Unfinished">
+                    Unfinished
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+            <span id="writingWordCount">
+                0 words
+            </span>
+
+        </div>
+
+
+        <div class="toolbar">
+
+            <button
+                class="tool"
+                type="button"
+                data-writing-command="bold"
+            >
+                <b>B</b>
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-writing-command="italic"
+            >
+                <i>I</i>
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-writing-command="underline"
+            >
+                <u>U</u>
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-writing-command="formatBlock"
+                data-value="h2"
+            >
+                H
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-writing-command="formatBlock"
+                data-value="blockquote"
+            >
+                “ ”
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-writing-command="justifyLeft"
+            >
+                ☰
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-writing-command="justifyCenter"
+            >
+                ≡
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-writing-command="justifyRight"
+            >
+                ☷
+            </button>
+
+            <button
+                class="tool"
+                type="button"
+                data-writing-command="insertUnorderedList"
+            >
+                • List
+            </button>
+
+        </div>
+
+
+        <div
+            id="writingContent"
+            class="rich-editor"
+            contenteditable="true"
+            data-placeholder="Write whatever this thing wants to be..."
+        ></div>
+
+
+        <div class="writer-bottom">
+
+            <span>
+                Other writing.
+            </span>
+
+            <span id="writingBottomWords">
+                0 words
+            </span>
+
+        </div>
+
+    </article>
+
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 
-
 <script>
 
-/*
-==========================================================
-DATABASE NOTE
-==========================================================
+/* =====================================================
+   AUTHOR LOCK
+===================================================== */
 
-Your existing project already uses:
-
-- stories
-- chapters
-- journal_entries
-- other_writings
-
-For permanent Story / Series support, add these
-optional columns to your stories table:
-
-alter table stories
-add column if not exists story_type text
-not null default 'story';
-
-alter table stories
-add column if not exists series_name text;
-
-alter table stories
-add column if not exists series_order integer default 1;
-
-The dashboard will still work with the old stories table,
-but the type and series information cannot be permanently
-stored until those columns exist.
-*/
+const AUTHOR_UID =
+    "0eed4925-b275-419e-a3ec-97f10dd6c3a7";
 
 
-const $ = id => document.getElementById(id);
+/* =====================================================
+   STATE
+===================================================== */
 
 let currentUser = null;
 
 let stories = [];
+let chapters = [];
+let journalEntries = [];
+let otherWritings = [];
 
-let currentStory = null;
+let selectedStoryId = null;
+let selectedChapterId = null;
 
-let currentChapter = null;
-
-let storyFilter = "all";
-
-let selectedImage = null;
-
-let selectedImageFrame = null;
-
-let resizeState = null;
-
-let composerKind = null;
-
-let composerDirty = false;
+let editingJournalId = null;
+let editingWritingId = null;
 
 
-/* ========================================================
+/* =====================================================
    HELPERS
-======================================================== */
+===================================================== */
 
-function esc(value = "") {
+const $ = id =>
+    document.getElementById(id);
 
-  return String(value).replace(
-    /[&<>"']/g,
-    c => ({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#39;"
-    }[c])
-  );
 
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 }
 
 
-function toast(message) {
+function countWords(text){
 
-  const t = $("toast");
+    const clean =
+        String(text || "")
+            .replace(/<[^>]*>/g," ")
+            .replace(/\s+/g," ")
+            .trim();
 
-  t.textContent = message;
-
-  t.classList.add("show");
-
-  clearTimeout(toast.timer);
-
-  toast.timer = setTimeout(
-    () => t.classList.remove("show"),
-    2500
-  );
-
-}
-
-
-function showModal(id) {
-
-  $(id).classList.add("show");
-
-}
-
-
-function closeModal(id) {
-
-  $(id).classList.remove("show");
-
-}
-
-
-function fmtDate(value) {
-
-  if (!value) return "";
-
-  return new Date(value).toLocaleDateString(
-    "en-US",
-    {
-      month:"short",
-      day:"numeric",
-      year:"numeric"
+    if(!clean){
+        return 0;
     }
-  );
+
+    return clean.split(" ").length;
+}
+
+
+function closeModal(id){
+
+    $(id).classList.remove("show");
 
 }
 
 
-function wordStats(html) {
+function showApp(){
 
-  const div = document.createElement("div");
-
-  div.innerHTML = html || "";
-
-  const text =
-    (div.textContent || "")
-      .replace(/\s+/g," ")
-      .trim();
-
-  return {
-
-    words:
-      text
-        ? text.split(" ").length
-        : 0,
-
-    chars:
-      text.length
-
-  };
+    $("loginScreen").style.display = "none";
+    $("app").style.display = "block";
 
 }
 
 
-function setPanel(name) {
+function showLogin(){
 
-  document
-    .querySelectorAll(".panel")
-    .forEach(
-      panel =>
-        panel.classList.remove("active")
-    );
-
-  $(name + "Panel")
-    .classList.add("active");
-
-  document
-    .querySelectorAll(".nav button")
-    .forEach(
-      button =>
-        button.classList.toggle(
-          "active",
-          button.dataset.panel === name
-        )
-    );
-
-  window.scrollTo(0,0);
+    $("app").style.display = "none";
+    $("loginScreen").style.display = "grid";
 
 }
 
 
-/* ========================================================
+function setActivePanel(panel){
+
+    document
+        .querySelectorAll(".panel")
+        .forEach(function(item){
+
+            item.classList.remove("active");
+
+        });
+
+    const target =
+        $(panel + "Panel");
+
+    if(target){
+        target.classList.add("active");
+    }
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(function(button){
+
+            button.classList.toggle(
+                "active",
+                button.dataset.panel === panel
+            );
+
+        });
+
+}
+
+
+/* =====================================================
    AUTH
-======================================================== */
+===================================================== */
 
-async function checkSession() {
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient.auth.getSession();
-
-  if (error) {
-
-    $("loginMessage").textContent =
-      error.message;
-
-    return;
-
-  }
-
-  if (data.session) {
-
-    currentUser =
-      data.session.user;
-
-    showApp();
-
-  }
-
-  else {
-
-    showLogin();
-
-  }
-
-
-  supabaseClient.auth.onAuthStateChange(
-    (_event,session) => {
-
-      currentUser =
-        session?.user || null;
-
-      if (currentUser) {
-
-        showApp();
-
-      }
-
-      else {
-
-        showLogin();
-
-      }
-
-    }
-  );
-
-}
-
-
-function showLogin() {
-
-  $("loginScreen").style.display =
-    "grid";
-
-  $("app").style.display =
-    "none";
-
-}
-
-
-async function showApp() {
-
-  $("loginScreen").style.display =
-    "none";
-
-  $("app").style.display =
-    "block";
-
-  $("userChip").textContent =
-    currentUser?.email || "";
-
-
-  await Promise.all([
-    loadStories(),
-    loadJournal(),
-    loadOtherWritings()
-  ]);
-
-
-  renderStats();
-
-  renderRecent();
-
-}
-
-
-$("loginForm").addEventListener(
-  "submit",
-  async event => {
-
-    event.preventDefault();
+async function signIn(){
 
     $("loginMessage").textContent = "";
 
-    const {
-      error
-    } =
-      await supabaseClient.auth.signInWithPassword({
+    const email =
+        $("loginEmail").value.trim();
 
-        email:
-          $("loginEmail")
-            .value
-            .trim(),
+    const password =
+        $("loginPassword").value;
 
-        password:
-          $("loginPassword").value
+    const result =
+        await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+        });
 
-      });
+    if(result.error){
 
+        $("loginMessage").textContent =
+            result.error.message;
 
-    if (error) {
-
-      $("loginMessage").textContent =
-        error.message;
+        return;
 
     }
 
-  }
-);
-
-
-$("logoutBtn").onclick =
-  async () => {
-
-    await supabaseClient.auth.signOut();
-
-  };
-
-
-document
-  .querySelectorAll(".nav button")
-  .forEach(
-    button => {
-
-      button.onclick =
-        () =>
-          setPanel(
-            button.dataset.panel
-          );
-
-    }
-  );
-
-
-/* ========================================================
-   STORIES
-======================================================== */
-
-async function loadStories() {
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("stories")
-      .select("*")
-      .eq("owner_id",currentUser.id)
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if (error) {
-
-    console.error(error);
-
-    stories = [];
-
-    renderStories();
-
-    return;
-
-  }
-
-
-  stories = data || [];
-
-  renderStories();
-
-}
-
-
-function normalizeStory(story) {
-
-  return {
-
-    ...story,
-
-    story_type:
-      story.story_type === "series"
-        ? "series"
-        : "story",
-
-    series_order:
-      Number(
-        story.series_order || 1
-      )
-
-  };
-
-}
-
-
-function storyMatches(story) {
-
-  const s =
-    normalizeStory(story);
-
-  const query =
-    (
-      $("storySearch")?.value ||
-      ""
-    )
-      .toLowerCase()
-      .trim();
-
-
-  if (
-    storyFilter !== "all" &&
-    s.story_type !== storyFilter
-  ) {
-
-    return false;
-
-  }
-
-
-  if (!query) {
-
-    return true;
-
-  }
-
-
-  return [
-    s.title,
-    s.author,
-    s.description,
-    s.series_name
-  ]
-    .some(
-      value =>
-        String(value || "")
-          .toLowerCase()
-          .includes(query)
-    );
-
-}
-
-
-function renderStories() {
-
-  const grid =
-    $("storyGrid");
-
-  if (!grid) return;
-
-  grid.innerHTML = "";
-
-
-  const visible =
-    stories.filter(
-      storyMatches
-    );
-
-
-  if (!visible.length) {
-
-    grid.innerHTML = `
-      <div
-        class="empty"
-        style="grid-column:1/-1"
-      >
-        No stories here yet.<br>
-        <span class="small">
-          Start a story or create
-          the first story in a series.
-        </span>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  visible.forEach(
-    story => {
-
-      const s =
-        normalizeStory(story);
-
-      const card =
-        document.createElement("article");
-
-      card.className =
-        "story-card";
-
-
-      card.innerHTML = `
-
-        <div class="cover">
-
-          ${
-            s.cover_url
-
-              ? `
-                <img
-                  src="${esc(s.cover_url)}"
-                  alt=""
-                >
-              `
-
-              : `
-                <div class="cover-placeholder">
-                  Your cover
-                </div>
-              `
-          }
-
-        </div>
-
-
-        <div class="story-card-body">
-
-          <span class="badge">
-            ${
-              s.story_type === "series"
-                ? "Series"
-                : "Story"
-            }
-          </span>
-
-
-          <h3>
-            ${esc(s.title || "Untitled")}
-          </h3>
-
-
-          <div class="author">
-            ${esc(s.author || "")}
-          </div>
-
-
-          ${
-            s.series_name
-              ? `
-                <div class="small muted">
-                  Part ${s.series_order}
-                  ·
-                  ${esc(s.series_name)}
-                </div>
-              `
-              : ""
-          }
-
-
-          <div class="desc">
-            ${esc(
-              s.description ||
-              "No description yet."
-            )}
-          </div>
-
-
-          <div class="card-actions">
-
-            <button
-              class="secondary open-story"
-            >
-              Open
-            </button>
-
-            <button
-              class="secondary edit-story"
-            >
-              Edit
-            </button>
-
-          </div>
-
-        </div>
-
-      `;
-
-
-      card
-        .querySelector(".open-story")
-        .onclick =
-          () =>
-            openStoryStudio(s.id);
-
-
-      card
-        .querySelector(".edit-story")
-        .onclick =
-          () =>
-            editStory(s.id);
-
-
-      grid.appendChild(card);
-
-    }
-  );
-
-}
-
-
-$("storySearch").oninput =
-  renderStories;
-
-
-document
-  .querySelectorAll(
-    "[data-story-filter]"
-  )
-  .forEach(
-    button => {
-
-      button.onclick =
-        () => {
-
-          storyFilter =
-            button.dataset.storyFilter;
-
-
-          document
-            .querySelectorAll(
-              "[data-story-filter]"
-            )
-            .forEach(
-              b =>
-                b.classList.toggle(
-                  "active",
-                  b === button
-                )
-            );
-
-
-          renderStories();
-
-        };
-
-    }
-  );
-
-
-/* ========================================================
-   STORY MODAL
-======================================================== */
-
-function resetStoryForm() {
-
-  [
-    "storyId",
-    "storyTitle",
-    "storyAuthor",
-    "storyDescription",
-    "seriesName"
-  ]
-    .forEach(
-      id =>
-        $(id).value = ""
-    );
-
-
-  $("seriesOrder").value = "1";
-
-  $("storyType").value =
-    "story";
-
-  $("storyCover").value =
-    "";
-
-  $("coverPreview").innerHTML =
-    "No cover selected";
-
-  $("seriesFields")
-    .classList
-    .add("hidden");
-
-}
-
-
-$("storyType").onchange =
-  () => {
-
-    $("seriesFields")
-      .classList
-      .toggle(
-        "hidden",
-        $("storyType").value !== "series"
-      );
-
-  };
-
-
-$("storyCover").onchange =
-  () => {
-
-    const file =
-      $("storyCover").files?.[0];
-
-
-    if (!file) {
-
-      $("coverPreview").innerHTML =
-        "No cover selected";
-
-      return;
-
-    }
-
-
-    const url =
-      URL.createObjectURL(file);
-
-
-    $("coverPreview").innerHTML = `
-      <img
-        src="${url}"
-        alt="Cover preview"
-      >
-    `;
-
-  };
-
-
-function openCreateStory() {
-
-  resetStoryForm();
-
-  $("storyModalTitle").textContent =
-    "New story";
-
-  $("saveStoryBtn").textContent =
-    "Create story";
-
-  $("saveStoryBtn").onclick =
-    createStory;
-
-  showModal("storyModal");
-
-}
-
-
-async function editStory(id) {
-
-  const story =
-    stories.find(
-      item => item.id === id
-    );
-
-
-  if (!story) return;
-
-
-  const s =
-    normalizeStory(story);
-
-
-  $("storyId").value =
-    s.id;
-
-  $("storyTitle").value =
-    s.title || "";
-
-  $("storyAuthor").value =
-    s.author || "";
-
-  $("storyType").value =
-    s.story_type;
-
-  $("seriesName").value =
-    s.series_name || "";
-
-  $("seriesOrder").value =
-    s.series_order || 1;
-
-  $("storyDescription").value =
-    s.description || "";
-
-  $("storyCover").value =
-    "";
-
-
-  $("coverPreview").innerHTML =
-    s.cover_url
-
-      ? `
-        <img
-          src="${esc(s.cover_url)}"
-          alt="Cover"
-        >
-      `
-
-      : "No cover selected";
-
-
-  $("seriesFields")
-    .classList
-    .toggle(
-      "hidden",
-      s.story_type !== "series"
-    );
-
-
-  $("storyModalTitle").textContent =
-    "Edit story";
-
-  $("saveStoryBtn").textContent =
-    "Save changes";
-
-  $("saveStoryBtn").onclick =
-    saveStoryChanges;
-
-
-  showModal("storyModal");
-
-}
-
-
-/* ========================================================
-   FILE UPLOAD
-======================================================== */
-
-async function uploadFile(
-  file,
-  folder
-) {
-
-  if (!file) return null;
-
-
-  if (!file.type.startsWith("image/")) {
-
-    throw new Error(
-      "Please choose an image file."
-    );
-
-  }
-
-
-  if (file.size > 8 * 1024 * 1024) {
-
-    throw new Error(
-      "Images must be 8 MB or smaller."
-    );
-
-  }
-
-
-  const extension =
-    (
-      file.name
-        .split(".")
-        .pop() ||
-      "jpg"
-    )
-      .toLowerCase();
-
-
-  const path =
-    `${folder}/${currentUser.id}/${crypto.randomUUID()}.${extension}`;
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .storage
-      .from("hed-journal")
-      .upload(
-        path,
-        file,
-        {
-          upsert:false,
-          contentType:file.type
-        }
-      );
-
-
-  if (error) throw error;
-
-
-  const {
-    data
-  } =
-    supabaseClient
-      .storage
-      .from("hed-journal")
-      .getPublicUrl(path);
-
-
-  return data.publicUrl;
-
-}
-
-
-/* ========================================================
-   CREATE STORY
-======================================================== */
-
-async function createStory() {
-
-  const button =
-    $("saveStoryBtn");
-
-  button.disabled = true;
-
-  button.textContent =
-    "Creating…";
-
-
-  try {
-
-    const cover =
-      await uploadFile(
-        $("storyCover").files?.[0],
-        "covers"
-      );
-
-
-    const payload = {
-
-      owner_id:
-        currentUser.id,
-
-      title:
-        $("storyTitle")
-          .value
-          .trim() ||
-        "Untitled",
-
-      author:
-        $("storyAuthor")
-          .value
-          .trim() ||
-        "Author",
-
-      description:
-        $("storyDescription")
-          .value
-          .trim(),
-
-      cover_url:
-        cover,
-
-      story_type:
-        $("storyType").value,
-
-      series_name:
-        $("seriesName")
-          .value
-          .trim() ||
-        null,
-
-      series_order:
-        Number(
-          $("seriesOrder").value ||
-          1
-        )
-
-    };
-
-
-    let result =
-      await supabaseClient
-        .from("stories")
-        .insert(payload)
-        .select()
-        .single();
+    currentUser =
+        result.data.user;
 
 
     /*
-      Compatibility fallback for the
-      older stories table.
+       THIS IS THE IMPORTANT AUTHOR LOCK.
+       Only your Supabase UID can use this page.
     */
 
-    if (
-      result.error &&
-      /story_type|series_name|series_order/i
-        .test(result.error.message)
-    ) {
+    if(currentUser.id !== AUTHOR_UID){
 
-      delete payload.story_type;
-      delete payload.series_name;
-      delete payload.series_order;
+        await supabaseClient.auth.signOut();
 
+        currentUser = null;
 
-      result =
-        await supabaseClient
-          .from("stories")
-          .insert(payload)
-          .select()
-          .single();
+        $("loginMessage").textContent =
+            "This account is not authorized.";
 
-
-      toast(
-        "Story created. Add the optional story columns to keep type and series data."
-      );
+        return;
 
     }
 
 
-    if (result.error) {
+    $("userChip").textContent =
+        currentUser.email || "";
 
-      throw result.error;
+    showApp();
+
+    await loadEverything();
+
+}
+
+
+async function checkSession(){
+
+    const result =
+        await supabaseClient.auth.getSession();
+
+    if(!result.data.session){
+
+        showLogin();
+
+        return;
+
+    }
+
+
+    currentUser =
+        result.data.session.user;
+
+
+    if(currentUser.id !== AUTHOR_UID){
+
+        await supabaseClient.auth.signOut();
+
+        currentUser = null;
+
+        showLogin();
+
+        $("loginMessage").textContent =
+            "This account is not authorized.";
+
+        return;
+
+    }
+
+
+    $("userChip").textContent =
+        currentUser.email || "";
+
+    showApp();
+
+    await loadEverything();
+
+}
+
+
+async function logout(){
+
+    await supabaseClient.auth.signOut();
+
+    currentUser = null;
+
+    showLogin();
+
+}
+
+
+/* =====================================================
+   LOAD EVERYTHING
+===================================================== */
+
+async function loadEverything(){
+
+    await Promise.all([
+        loadStories(),
+        loadJournal(),
+        loadOtherWritings()
+    ]);
+
+    renderStats();
+    renderRecentWriting();
+
+}
+
+
+/* =====================================================
+   STORIES
+===================================================== */
+
+async function loadStories(){
+
+    const result =
+        await supabaseClient
+            .from("stories")
+            .select("*")
+            .order("created_at", {
+                ascending:false
+            });
+
+    if(result.error){
+
+        console.error(result.error);
+
+        return;
+
+    }
+
+    stories =
+        result.data || [];
+
+    renderStories();
+
+}
+
+
+function renderStories(){
+
+    const grid =
+        $("storyGrid");
+
+    if(!stories.length){
+
+        grid.innerHTML =
+            `<div class="empty">
+                No stories yet.
+             </div>`;
+
+        return;
+
+    }
+
+
+    const search =
+        ($("storySearch").value || "")
+            .toLowerCase()
+            .trim();
+
+
+    const filtered =
+        stories.filter(function(story){
+
+            return (
+                !search ||
+                String(story.title || "")
+                    .toLowerCase()
+                    .includes(search) ||
+                String(story.author || "")
+                    .toLowerCase()
+                    .includes(search)
+            );
+
+        });
+
+
+    if(!filtered.length){
+
+        grid.innerHTML =
+            `<div class="empty">
+                No stories found.
+             </div>`;
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        filtered.map(function(story){
+
+            return `
+                <article class="story-card">
+
+                    <div class="cover">
+
+                        ${
+                            story.cover_url
+                            ?
+                            `<img
+                                src="${escapeHTML(story.cover_url)}"
+                                alt=""
+                            >`
+                            :
+                            `<div class="cover-placeholder">
+                                HED
+                             </div>`
+                        }
+
+                    </div>
+
+                    <div class="story-card-body">
+
+                        <span class="badge">
+                            STORY
+                        </span>
+
+                        <h3>
+                            ${escapeHTML(story.title)}
+                        </h3>
+
+                        <p class="author">
+                            by ${escapeHTML(
+                                story.author || "Anonymous"
+                            )}
+                        </p>
+
+                        <p class="desc">
+                            ${escapeHTML(
+                                story.description || ""
+                            )}
+                        </p>
+
+                        <div class="card-actions">
+
+                            <button
+                                class="primary"
+                                type="button"
+                                onclick="openStory('${story.id}')"
+                            >
+                                Open Book →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+            `;
+
+        }).join("");
+
+}
+
+
+function openCreateStory(){
+
+    $("storyId").value = "";
+
+    $("storyTitle").value = "";
+
+    $("storyAuthor").value =
+        currentUser?.email
+        ? currentUser.email.split("@")[0]
+        : "";
+
+    $("storyDescription").value = "";
+
+    $("storyCover").value = "";
+
+    $("saveStoryBtn").textContent =
+        "Create story";
+
+    $("storyModal").classList.add("show");
+
+}
+
+
+async function saveStory(){
+
+    if(!currentUser){
+        return;
+    }
+
+    const title =
+        $("storyTitle").value.trim();
+
+    const author =
+        $("storyAuthor").value.trim();
+
+    const description =
+        $("storyDescription").value.trim();
+
+    if(!title){
+
+        alert("Please give the story a title.");
+
+        return;
+
+    }
+
+
+    const file =
+        $("storyCover").files[0];
+
+    let coverUrl = null;
+
+
+    if(file){
+
+        const extension =
+            file.name.split(".").pop();
+
+        const path =
+            "covers/" +
+            crypto.randomUUID() +
+            "." +
+            extension;
+
+        const upload =
+            await supabaseClient.storage
+                .from("hed-journal")
+                .upload(path,file,{
+                    upsert:false
+                });
+
+        if(upload.error){
+
+            alert(
+                "Could not upload cover: " +
+                upload.error.message
+            );
+
+            return;
+
+        }
+
+
+        const publicUrl =
+            supabaseClient.storage
+                .from("hed-journal")
+                .getPublicUrl(path);
+
+        coverUrl =
+            publicUrl.data.publicUrl;
+
+    }
+
+
+    const result =
+        await supabaseClient
+            .from("stories")
+            .insert({
+
+                owner_id:
+                    currentUser.id,
+
+                title,
+
+                author:
+                    author || "Anonymous",
+
+                description,
+
+                cover_url:
+                    coverUrl
+
+            })
+            .select()
+            .single();
+
+
+    if(result.error){
+
+        alert(
+            "Could not create story: " +
+            result.error.message
+        );
+
+        return;
 
     }
 
@@ -3316,2503 +2756,1154 @@ async function createStory() {
 
     renderStats();
 
-    renderRecent();
-
-    openStoryStudio(
-      result.data.id
-    );
-
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    toast(
-      error.message ||
-      "Could not create story."
-    );
-
-  }
-
-  finally {
-
-    button.disabled = false;
-
-    button.textContent =
-      "Create story";
-
-  }
-
 }
 
 
-/* ========================================================
-   EDIT STORY
-======================================================== */
+async function openStory(storyId){
 
-async function saveStoryChanges() {
+    selectedStoryId =
+        storyId;
 
-  const id =
-    $("storyId").value;
+    selectedChapterId =
+        null;
 
-  const button =
-    $("saveStoryBtn");
+    const story =
+        stories.find(function(item){
 
-  button.disabled = true;
+            return String(item.id) ===
+                String(storyId);
 
-  button.textContent =
-    "Saving…";
-
-
-  try {
-
-    const selectedFile =
-      $("storyCover").files?.[0];
+        });
 
 
-    const cover =
-      selectedFile
-        ? await uploadFile(
-            selectedFile,
-            "covers"
-          )
-        : undefined;
-
-
-    const basePayload = {
-
-      title:
-        $("storyTitle")
-          .value
-          .trim() ||
-        "Untitled",
-
-      author:
-        $("storyAuthor")
-          .value
-          .trim() ||
-        "Author",
-
-      description:
-        $("storyDescription")
-          .value
-          .trim()
-
-    };
-
-
-    if (cover) {
-
-      basePayload.cover_url =
-        cover;
-
+    if(!story){
+        return;
     }
 
 
-    const optionalPayload = {
+    $("studioStoryTitle").textContent =
+        story.title;
 
-      story_type:
-        $("storyType").value,
 
-      series_name:
-        $("seriesName")
-          .value
-          .trim() ||
-        null,
+    $("storyStudio")
+        .classList.add("show");
 
-      series_order:
-        Number(
-          $("seriesOrder").value ||
-          1
-        )
 
-    };
-
-
-    let result =
-      await supabaseClient
-        .from("stories")
-        .update({
-          ...basePayload,
-          ...optionalPayload
-        })
-        .eq("id",id)
-        .eq(
-          "owner_id",
-          currentUser.id
-        );
-
-
-    if (
-      result.error &&
-      /story_type|series_name|series_order/i
-        .test(result.error.message)
-    ) {
-
-      result =
-        await supabaseClient
-          .from("stories")
-          .update(basePayload)
-          .eq("id",id)
-          .eq(
-            "owner_id",
-            currentUser.id
-          );
-
-
-      toast(
-        "Saved. Add the optional story columns to keep type and series data."
-      );
-
-    }
-
-
-    if (result.error) {
-
-      throw result.error;
-
-    }
-
-
-    closeModal("storyModal");
-
-    await loadStories();
-
-
-    if (
-      currentStory?.id === id
-    ) {
-
-      const fresh =
-        stories.find(
-          story => story.id === id
-        );
-
-      currentStory =
-        fresh;
-
-      updateStudioHeader();
-
-    }
-
-
-    toast(
-      "Story details saved."
-    );
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    toast(
-      error.message ||
-      "Could not save story."
-    );
-
-  }
-
-  finally {
-
-    button.disabled = false;
-
-    button.textContent =
-      "Save changes";
-
-  }
-
-}
-
-
-/* ========================================================
-   STORY STUDIO
-======================================================== */
-
-async function openStoryStudio(id) {
-
-  const story =
-    stories.find(
-      item => item.id === id
-    );
-
-
-  if (!story) return;
-
-
-  currentStory =
-    story;
-
-  currentChapter =
-    null;
-
-
-  updateStudioHeader();
-
-
-  $("storyStudio")
-    .classList
-    .add("show");
-
-
-  await loadChapters();
-
-}
-
-
-function updateStudioHeader() {
-
-  if (!currentStory) return;
-
-
-  const story =
-    normalizeStory(
-      currentStory
-    );
-
-
-  $("studioStoryTitle")
-    .textContent =
-      story.title ||
-      "Untitled";
-
-
-  $("studioStoryType")
-    .textContent =
-      story.story_type === "series"
-
-        ? `Series · ${
-            story.series_name ||
-            "unnamed series"
-          }`
-
-        : "Story";
-
-}
-
-
-function closeStoryStudio() {
-
-  if (
-    currentChapter &&
-    chapterDirty()
-  ) {
-
-    if (
-      !confirm(
-        "You have unsaved chapter changes. Leave anyway?"
-      )
-    ) {
-
-      return;
-
-    }
-
-  }
-
-
-  $("storyStudio")
-    .classList
-    .remove("show");
-
-
-  currentStory =
-    null;
-
-  currentChapter =
-    null;
-
-
-  loadStories();
-
-}
-
-
-function chapterDirty() {
-
-  return (
-
-    $("chapterContent")
-      .dataset
-      .saved !==
-    $("chapterContent").innerHTML
-
-    ||
-
-    $("chapterTitle")
-      .dataset
-      .saved !==
-    $("chapterTitle").value
-
-  );
-
-}
-
-
-/* ========================================================
-   CHAPTERS
-======================================================== */
-
-async function loadChapters() {
-
-  if (!currentStory) return;
-
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("chapters")
-      .select("*")
-      .eq(
-        "story_id",
-        currentStory.id
-      )
-      .eq(
-        "owner_id",
-        currentUser.id
-      )
-      .order(
-        "chapter_order",
-        {
-          ascending:true
-        }
-      );
-
-
-  if (error) {
-
-    toast(error.message);
-
-    return;
-
-  }
-
-
-  const list =
-    $("chapterList");
-
-  list.innerHTML = "";
-
-
-  if (!data?.length) {
-
-    list.innerHTML = `
-      <div
-        class="small"
-        style="
-          padding:12px;
-          color:#cbbcb2
-        "
-      >
-        No chapters yet.
-      </div>
-    `;
-
-    clearChapterEditor();
-
-    return;
-
-  }
-
-
-  data.forEach(
-    (chapter,index) => {
-
-      const row =
-        document.createElement("div");
-
-      row.className =
-        "chapter-item" +
-        (
-          currentChapter?.id === chapter.id
-            ? " active"
-            : ""
-        );
-
-
-      row.innerHTML = `
-
-        <button>
-          ${
-            esc(
-              chapter.title ||
-              `Chapter ${index + 1}`
-            )
-          }
-        </button>
-
-        <button
-          class="chapter-delete"
-          title="Delete"
-        >
-          ×
-        </button>
-
-      `;
-
-
-      row.children[0].onclick =
-        () =>
-          selectChapter(
-            chapter.id
-          );
-
-
-      row.children[1].onclick =
-        () =>
-          deleteChapter(
-            chapter.id
-          );
-
-
-      list.appendChild(row);
-
-    }
-  );
-
-
-  if (currentChapter) {
-
-    const found =
-      data.find(
-        chapter =>
-          chapter.id ===
-          currentChapter.id
-      );
-
-
-    if (found) {
-
-      await selectChapter(
-        found.id
-      );
-
-    }
-
-    else {
-
-      await selectChapter(
-        data[0].id
-      );
-
-    }
-
-  }
-
-  else {
-
-    await selectChapter(
-      data[0].id
-    );
-
-  }
-
-}
-
-
-async function getNextChapterOrder() {
-
-  const {
-    data
-  } =
-    await supabaseClient
-      .from("chapters")
-      .select("chapter_order")
-      .eq(
-        "story_id",
-        currentStory.id
-      )
-      .eq(
-        "owner_id",
-        currentUser.id
-      )
-      .order(
-        "chapter_order",
-        {
-          ascending:false
-        }
-      )
-      .limit(1);
-
-
-  return (
-    data?.[0]?.chapter_order ||
-    0
-  ) + 1;
-
-}
-
-
-$("addChapterBtn").onclick =
-  async () => {
-
-    if (
-      chapterDirty() &&
-      !confirm(
-        "Save current chapter before creating another?"
-      )
-    ) {
-
-      return;
-
-    }
-
-
-    if (chapterDirty()) {
-
-      await saveChapter();
-
-    }
-
-
-    const order =
-      await getNextChapterOrder();
-
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("chapters")
-        .insert({
-
-          owner_id:
-            currentUser.id,
-
-          story_id:
-            currentStory.id,
-
-          title:
-            `Chapter ${order}`,
-
-          content:
-            "",
-
-          chapter_order:
-            order
-
-        })
-        .select()
-        .single();
-
-
-    if (error) {
-
-      toast(error.message);
-
-      return;
-
-    }
-
-
-    currentChapter =
-      data;
+    document.body.style.overflow =
+        "hidden";
 
 
     await loadChapters();
 
-  };
+
+    if(chapters.length){
+
+        selectChapter(chapters[0].id);
+
+    }else{
+
+        $("chapterTitle").value = "";
+
+        $("chapterContent").innerHTML = "";
+
+        updateChapterWordCount();
+
+    }
+
+}
 
 
-async function selectChapter(id) {
+async function loadChapters(){
 
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("chapters")
-      .select("*")
-      .eq("id",id)
-      .eq(
-        "owner_id",
-        currentUser.id
-      )
-      .single();
+    if(!selectedStoryId){
+        return;
+    }
 
 
-  if (error) {
-
-    toast(error.message);
-
-    return;
-
-  }
-
-
-  currentChapter =
-    data;
-
-
-  $("chapterTitle").value =
-    data.title || "";
-
-
-  $("chapterContent").innerHTML =
-    data.content || "";
-
-
-  $("chapterTitle")
-    .dataset
-    .saved =
-      $("chapterTitle").value;
-
-
-  $("chapterContent")
-    .dataset
-    .saved =
-      $("chapterContent").innerHTML;
-
-
-  attachEditorImages(
-    $("chapterContent"),
-    $("storyImageBar")
-  );
-
-
-  updateWordCount();
-
-
-  $("saveStatus").textContent =
-    "Saved";
-
-
-  document
-    .querySelectorAll(
-      ".chapter-item"
-    )
-    .forEach(
-      row =>
-        row.classList.toggle(
-          "active",
-          row.children[0].textContent ===
-            (
-              data.title ||
-              ""
+    const result =
+        await supabaseClient
+            .from("chapters")
+            .select("*")
+            .eq(
+                "story_id",
+                selectedStoryId
             )
-        )
-    );
-
-}
-
-
-function clearChapterEditor() {
-
-  currentChapter =
-    null;
+            .order(
+                "chapter_order",
+                {
+                    ascending:true
+                }
+            );
 
 
-  $("chapterTitle").value =
-    "";
+    if(result.error){
 
+        console.error(result.error);
 
-  $("chapterContent").innerHTML =
-    "<p><br></p>";
-
-
-  $("chapterTitle")
-    .dataset
-    .saved =
-      "";
-
-
-  $("chapterContent")
-    .dataset
-    .saved =
-      $("chapterContent").innerHTML;
-
-
-  updateWordCount();
-
-}
-
-
-$("saveChapterBtn").onclick =
-  saveChapter;
-
-
-async function saveChapter() {
-
-  if (!currentChapter) {
-
-    toast(
-      "Create a chapter first."
-    );
-
-    return;
-
-  }
-
-
-  const button =
-    $("saveChapterBtn");
-
-
-  button.disabled = true;
-
-  $("saveStatus").textContent =
-    "Saving…";
-
-
-  try {
-
-    const title =
-      $("chapterTitle")
-        .value
-        .trim() ||
-      "Untitled Chapter";
-
-
-    const content =
-      cleanEditorHtml(
-        $("chapterContent")
-          .innerHTML
-      );
-
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("chapters")
-        .update({
-
-          title,
-
-          content
-
-        })
-        .eq(
-          "id",
-          currentChapter.id
-        )
-        .eq(
-          "owner_id",
-          currentUser.id
-        );
-
-
-    if (error) {
-
-      throw error;
+        return;
 
     }
 
 
-    currentChapter.title =
-      title;
+    chapters =
+        result.data || [];
 
-    currentChapter.content =
-      content;
+
+    renderChapterList();
+
+}
+
+
+function renderChapterList(){
+
+    const list =
+        $("chapterList");
+
+
+    if(!chapters.length){
+
+        list.innerHTML =
+            `<div style="
+                padding:15px;
+                color:#d9cec4;
+                font-size:12px;
+            ">
+                No chapters yet.
+             </div>`;
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        chapters.map(function(chapter,index){
+
+            return `
+                <div
+                    class="chapter-item ${
+                        String(chapter.id) ===
+                        String(selectedChapterId)
+                        ? "active"
+                        : ""
+                    }"
+                >
+
+                    <button
+                        type="button"
+                        onclick="selectChapter('${chapter.id}')"
+                    >
+                        ${escapeHTML(
+                            chapter.title ||
+                            "Chapter " + (index + 1)
+                        )}
+                    </button>
+
+                    <button
+                        class="chapter-delete"
+                        type="button"
+                        onclick="deleteChapterById('${chapter.id}')"
+                    >
+                        ×
+                    </button>
+
+                </div>
+            `;
+
+        }).join("");
+
+}
+
+
+function selectChapter(chapterId){
+
+    selectedChapterId =
+        chapterId;
+
+
+    const chapter =
+        chapters.find(function(item){
+
+            return String(item.id) ===
+                String(chapterId);
+
+        });
+
+
+    if(!chapter){
+        return;
+    }
 
 
     $("chapterTitle").value =
-      title;
+        chapter.title || "";
+
 
     $("chapterContent").innerHTML =
-      content;
+        chapter.content || "";
 
 
-    $("chapterTitle")
-      .dataset
-      .saved =
-        title;
+    renderChapterList();
+
+    updateChapterWordCount();
+
+}
 
 
-    $("chapterContent")
-      .dataset
-      .saved =
-        content;
+async function addChapter(){
+
+    if(!selectedStoryId){
+        return;
+    }
 
 
-    $("saveStatus").textContent =
-      "Saved just now";
+    const nextOrder =
+        chapters.length
+        ? Math.max.apply(
+            null,
+            chapters.map(function(item){
+
+                return Number(
+                    item.chapter_order || 0
+                );
+
+            })
+        ) + 1
+        : 1;
+
+
+    const result =
+        await supabaseClient
+            .from("chapters")
+            .insert({
+
+                owner_id:
+                    currentUser.id,
+
+                story_id:
+                    selectedStoryId,
+
+                title:
+                    "Chapter " +
+                    nextOrder,
+
+                content:
+                    "",
+
+                chapter_order:
+                    nextOrder
+
+            })
+            .select()
+            .single();
+
+
+    if(result.error){
+
+        alert(
+            "Could not create chapter: " +
+            result.error.message
+        );
+
+        return;
+
+    }
 
 
     await loadChapters();
 
-    renderStats();
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    $("saveStatus").textContent =
-      "Save failed";
-
-
-    toast(
-      error.message ||
-      "Could not save chapter."
-    );
-
-  }
-
-  finally {
-
-    button.disabled = false;
-
-  }
+    selectChapter(result.data.id);
 
 }
 
 
-async function deleteChapter(id) {
+async function saveChapter(){
 
-  if (
-    !confirm(
-      "Delete this chapter? This cannot be undone."
-    )
-  ) {
+    if(!selectedChapterId){
 
-    return;
-
-  }
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("chapters")
-      .delete()
-      .eq("id",id)
-      .eq(
-        "owner_id",
-        currentUser.id
-      );
-
-
-  if (error) {
-
-    toast(error.message);
-
-    return;
-
-  }
-
-
-  currentChapter =
-    null;
-
-
-  await loadChapters();
-
-  toast(
-    "Chapter deleted."
-  );
-
-}
-
-
-function editCurrentStory() {
-
-  if (currentStory) {
-
-    editStory(
-      currentStory.id
-    );
-
-  }
-
-}
-
-
-function previewStory() {
-
-  if (!currentStory) return;
-
-
-  const story =
-    normalizeStory(
-      currentStory
-    );
-
-
-  $("previewArea").innerHTML = `
-
-    <div class="preview-paper">
-
-      ${
-        story.cover_url
-
-          ? `
-            <img
-              class="preview-cover"
-              src="${esc(story.cover_url)}"
-              alt=""
-            >
-          `
-
-          : ""
-      }
-
-
-      <h1>
-        ${esc(
-          story.title ||
-          "Untitled"
-        )}
-      </h1>
-
-
-      <div class="preview-meta">
-
-        ${esc(
-          story.author ||
-          "Author"
-        )}
-
-        ·
-
-        ${
-          story.story_type === "series"
-            ? "Series"
-            : "Story"
-        }
-
-      </div>
-
-
-      <div class="preview-content">
-
-        ${
-          $("chapterContent").innerHTML ||
-          "<p>No chapter content yet.</p>"
-        }
-
-      </div>
-
-    </div>
-
-  `;
-
-
-  showModal(
-    "previewModal"
-  );
-
-}
-
-
-/* ========================================================
-   WRITING TOOLBAR
-======================================================== */
-
-const toolbarDefs = [
-
-  [
-    "undo",
-    "↶",
-    "Undo"
-  ],
-
-  [
-    "redo",
-    "↷",
-    "Redo"
-  ],
-
-  ["sep"],
-
-  [
-    "formatBlock",
-    "P",
-    "Paragraph"
-  ],
-
-  [
-    "fontName",
-    "Font",
-    "Font"
-  ],
-
-  [
-    "fontSize",
-    "Size",
-    "Size"
-  ],
-
-  ["sep"],
-
-[
-  "bold",
-  "<strong>B</strong>",
-  "Bold"
-],
-
-[
-  "italic",
-  "<em>I</em>",
-  "Italic"
-],
-
-[
-  "underline",
-  "<u>U</u>",
-  "Underline"
-],
-
-[
-  "strikeThrough",
-  "<s>S</s>",
-  "Strikethrough"
-],
-
-  ["sep"],
-
-  [
-    "justifyLeft",
-    "L",
-    "Align left"
-  ],
-
-  [
-    "justifyCenter",
-    "C",
-    "Center"
-  ],
-
-  [
-    "justifyRight",
-    "R",
-    "Align right"
-  ],
-
-  [
-    "justifyFull",
-    "J",
-    "Justify"
-  ],
-
-  ["sep"],
-
-  [
-    "insertUnorderedList",
-    "•",
-    "Bulleted list"
-  ],
-
-  [
-    "insertOrderedList",
-    "1.",
-    "Numbered list"
-  ],
-
-  [
-    "outdent",
-    "←",
-    "Outdent"
-  ],
-
-  [
-    "indent",
-    "→",
-    "Indent"
-  ],
-
-  [
-    "formatBlockQuote",
-    "❝",
-    "Quote"
-  ],
-
-  ["sep"],
-
-  [
-    "createLink",
-    "↗",
-    "Link"
-  ],
-
-  [
-    "unlink",
-    "⌫",
-    "Remove link"
-  ],
-
-  [
-    "insertImage",
-    "▧",
-    "Image"
-  ],
-
-  [
-    "removeFormat",
-    "Tx",
-    "Clear"
-  ]
-
-];
-
-
-function buildToolbar(
-  id,
-  editor,
-  imageBar
-) {
-
-  const bar =
-    $(id);
-
-  bar.innerHTML = "";
-
-
-  toolbarDefs.forEach(
-    definition => {
-
-      if (
-        definition[0] ===
-        "sep"
-      ) {
-
-        const divider =
-          document.createElement(
-            "span"
-          );
-
-        divider.className =
-          "divider";
-
-        bar.appendChild(
-          divider
-        );
+        alert("Select a chapter first.");
 
         return;
 
-      }
-
-
-      if (
-        definition[0] ===
-          "fontName" ||
-
-        definition[0] ===
-          "fontSize" ||
-
-        definition[0] ===
-          "formatBlock"
-      ) {
-
-        const select =
-          document.createElement(
-            "select"
-          );
-
-
-        select.className =
-          "tool-select";
-
-
-        select.dataset.cmd =
-          definition[0];
-
-
-        if (
-          definition[0] ===
-          "fontName"
-        ) {
-
-          [
-            [
-              "Georgia",
-              "Georgia"
-            ],
-            [
-              "Arial",
-              "Arial"
-            ],
-            [
-              "Times New Roman",
-              "Times New Roman"
-            ],
-            [
-              "Verdana",
-              "Verdana"
-            ],
-            [
-              "Trebuchet MS",
-              "Trebuchet MS"
-            ],
-            [
-              "Courier New",
-              "Courier New"
-            ]
-          ]
-            .forEach(
-              item =>
-                select.add(
-                  new Option(
-                    item[0],
-                    item[1]
-                  )
-                )
-            );
-
-        }
-
-
-        else if (
-          definition[0] ===
-          "fontSize"
-        ) {
-
-          [
-            "Tiny",
-            "Small",
-            "Normal",
-            "Large",
-            "Larger",
-            "Huge",
-            "Extra huge"
-          ]
-            .forEach(
-              (label,index) =>
-                select.add(
-                  new Option(
-                    label,
-                    index + 1
-                  )
-                )
-            );
-
-        }
-
-
-        else {
-
-          [
-            [
-              "p",
-              "Paragraph"
-            ],
-            [
-              "h1",
-              "Title"
-            ],
-            [
-              "h2",
-              "Heading 1"
-            ],
-            [
-              "h3",
-              "Heading 2"
-            ],
-            [
-              "h4",
-              "Heading 3"
-            ]
-          ]
-            .forEach(
-              item =>
-                select.add(
-                  new Option(
-                    item[1],
-                    item[0]
-                  )
-                )
-            );
-
-        }
-
-
-        select.onchange =
-          () =>
-            execEditor(
-              editor,
-              definition[0],
-              select.value
-            );
-
-
-        bar.appendChild(
-          select
-        );
-
-
-        return;
-
-      }
-
-
-      const button =
-        document.createElement(
-          "button"
-        );
-
-
-      button.type =
-        "button";
-
-      button.className =
-        "tool";
-
-      button.dataset.cmd =
-        definition[0];
-
-      button.title =
-        definition[2];
-
-      button.innerHTML =
-        definition[1];
-
-
-      button.onclick =
-        () =>
-          execEditor(
-            editor,
-            definition[0]
-          );
-
-
-      bar.appendChild(
-        button
-      );
-
-    }
-  );
-
-
-  /*
-    Image upload button
-  */
-
-  if (imageBar) {
-
-    const upload =
-      document.createElement(
-        "input"
-      );
-
-    upload.type =
-      "file";
-
-    upload.accept =
-      "image/*";
-
-    upload.hidden =
-      true;
-
-    upload.id =
-      id +
-      "ImageInput";
-
-
-    const uploadButton =
-      document.createElement(
-        "button"
-      );
-
-    uploadButton.type =
-      "button";
-
-    uploadButton.className =
-      "tool";
-
-    uploadButton.textContent =
-      "Upload image";
-
-    uploadButton.title =
-      "Insert image";
-
-
-    uploadButton.onclick =
-      () =>
-        upload.click();
-
-
-    upload.onchange =
-      async () => {
-
-        const file =
-          upload.files?.[0];
-
-
-        if (!file) return;
-
-
-        try {
-
-          const url =
-            await uploadFile(
-              file,
-              "writing-images"
-            );
-
-
-          insertHtmlAtCursor(
-            editor,
-            `
-              <p>
-                <img
-                  class="img-medium"
-                  src="${esc(url)}"
-                  alt=""
-                >
-              </p>
-            `
-          );
-
-
-          attachEditorImages(
-            editor,
-            imageBar
-          );
-
-
-          toast(
-            "Image inserted."
-          );
-
-        }
-
-        catch (error) {
-
-          toast(
-            error.message
-          );
-
-        }
-
-
-        upload.value =
-          "";
-
-      };
-
-
-    bar.appendChild(
-      upload
-    );
-
-    bar.appendChild(
-      uploadButton
-    );
-
-  }
-
-}
-
-
-function execEditor(
-  editor,
-  command,
-  value
-) {
-
-  editor.focus();
-
-  saveSelection();
-
-
-  if (
-    command ===
-    "formatBlockQuote"
-  ) {
-
-    document.execCommand(
-      "formatBlock",
-      false,
-      "blockquote"
-    );
-
-  }
-
-  else if (
-    command ===
-    "createLink"
-  ) {
-
-    const url =
-      prompt(
-        "Paste the link:"
-      );
-
-
-    if (url) {
-
-      document.execCommand(
-        "createLink",
-        false,
-        url
-      );
-
-    }
-
-  }
-
-  else if (
-    command ===
-    "insertImage"
-  ) {
-
-    const input =
-      $(
-        editor.id ===
-          "chapterContent"
-
-          ? "storyToolbarImageInput"
-
-          : "composeToolbarImageInput"
-      );
-
-
-    if (input) {
-
-      input.click();
-
     }
 
 
-    return;
+    const title =
+        $("chapterTitle").value.trim();
 
-  }
-
-  else if (
-    command ===
-    "fontSize"
-  ) {
-
-    document.execCommand(
-      "fontSize",
-      false,
-      value
-    );
-
-  }
-
-  else if (
-    command ===
-    "formatBlock"
-  ) {
-
-    document.execCommand(
-      "formatBlock",
-      false,
-      value
-    );
-
-  }
-
-  else {
-
-    document.execCommand(
-      command,
-      false,
-      value || null
-    );
-
-  }
-
-
-  attachEditorImages(
-    editor,
-    editor.id === "chapterContent"
-      ? $("storyImageBar")
-      : $("composeImageBar")
-  );
-
-
-  updateWordCount();
-
-}
-
-
-let savedRange = null;
-
-
-function saveSelection() {
-
-  const selection =
-    window.getSelection();
-
-
-  if (
-    selection &&
-    selection.rangeCount
-  ) {
-
-    savedRange =
-      selection
-        .getRangeAt(0)
-        .cloneRange();
-
-  }
-
-}
-
-
-function restoreSelection() {
-
-  const selection =
-    window.getSelection();
-
-
-  if (savedRange) {
-
-    selection.removeAllRanges();
-
-    selection.addRange(
-      savedRange
-    );
-
-  }
-
-}
-
-
-function insertHtmlAtCursor(
-  editor,
-  html
-) {
-
-  editor.focus();
-
-  restoreSelection();
-
-
-  document.execCommand(
-    "insertHTML",
-    false,
-    html
-  );
-
-
-  attachEditorImages(
-    editor,
-    editor.id === "chapterContent"
-      ? $("storyImageBar")
-      : $("composeImageBar")
-  );
-
-}
-
-
-function cleanEditorHtml(
-  html
-) {
-
-  const box =
-    document.createElement(
-      "div"
-    );
-
-
-  box.innerHTML =
-    html;
-
-
-  /*
-    Remove temporary resize handles
-    before saving.
-  */
-
-  box
-    .querySelectorAll(
-      ".resize-handle"
-    )
-    .forEach(
-      element =>
-        element.remove()
-    );
-
-
-  /*
-    Remove temporary resize wrappers.
-  */
-
-  box
-    .querySelectorAll(
-      ".resize-frame"
-    )
-    .forEach(
-      frame => {
-
-        const image =
-          frame.querySelector(
-            "img"
-          );
-
-
-        if (image) {
-
-          frame.replaceWith(
-            image
-          );
-
-        }
-
-        else {
-
-          frame.remove();
-
-        }
-
-      }
-    );
-
-
-  box
-    .querySelectorAll(
-      "script,style,iframe,object,embed"
-    )
-    .forEach(
-      element =>
-        element.remove()
-    );
-
-
-  box
-    .querySelectorAll("*")
-    .forEach(
-      element => {
-
-        [
-          ...element.attributes
-        ]
-          .forEach(
-            attribute => {
-
-              if (
-                /^on/i.test(
-                  attribute.name
-                )
-              ) {
-
-                element.removeAttribute(
-                  attribute.name
-                );
-
-              }
-
-            }
-          );
-
-      }
-    );
-
-
-  return box.innerHTML;
-
-}
-
-
-function updateWordCount() {
-
-  const stats =
-    wordStats(
-      $("chapterContent")
-        .innerHTML
-    );
-
-
-  $("wordCount").textContent =
-    `${stats.words} words · ${stats.chars} characters`;
-
-}
-
-
-$("chapterContent")
-  .addEventListener(
-    "input",
-    () => {
-
-      updateWordCount();
-
-      $("saveStatus").textContent =
-        "Unsaved changes";
-
-    }
-  );
-
-
-$("chapterContent")
-  .addEventListener(
-    "keyup",
-    saveSelection
-  );
-
-
-$("chapterContent")
-  .addEventListener(
-    "mouseup",
-    saveSelection
-  );
-
-
-$("chapterTitle")
-  .addEventListener(
-    "input",
-    () =>
-      $("saveStatus").textContent =
-        "Unsaved changes"
-  );
-
-
-/* ========================================================
-   IMAGE RESIZING
-======================================================== */
-
-function attachEditorImages(
-  editor,
-  bar
-) {
-
-  editor
-    .querySelectorAll("img")
-    .forEach(
-      image => {
-
-        image.onclick =
-          event => {
-
-            event.stopPropagation();
-
-            selectImage(
-              image,
-              bar
-            );
-
-          };
-
-      }
-    );
-
-}
-
-
-function selectImage(
-  image,
-  bar
-) {
-
-  clearImageSelection();
-
-
-  selectedImage =
-    image;
-
-
-  selectedImageFrame =
-    document.createElement(
-      "span"
-    );
-
-
-  selectedImageFrame.className =
-    "resize-frame";
-
-
-  image.parentNode.insertBefore(
-    selectedImageFrame,
-    image
-  );
-
-
-  selectedImageFrame.appendChild(
-    image
-  );
-
-
-  const handle =
-    document.createElement(
-      "span"
-    );
-
-
-  handle.className =
-    "resize-handle";
-
-
-  selectedImageFrame.appendChild(
-    handle
-  );
-
-
-  handle.onmousedown =
-    event =>
-      startResize(
-        event,
-        image,
-        selectedImageFrame
-      );
-
-
-  bar.classList.add(
-    "show"
-  );
-
-
-  syncSizeButtons(
-    bar,
-    image
-  );
-
-}
-
-
-function clearImageSelection() {
-
-  if (selectedImageFrame) {
-
-    const image =
-      selectedImageFrame
-        .querySelector("img");
-
-
-    if (image) {
-
-      selectedImageFrame.replaceWith(
-        image
-      );
-
-    }
-
-  }
-
-
-  selectedImage =
-    null;
-
-  selectedImageFrame =
-    null;
-
-
-  document
-    .querySelectorAll(
-      ".image-size-bar"
-    )
-    .forEach(
-      bar =>
-        bar.classList.remove(
-          "show"
-        )
-    );
-
-}
-
-
-function syncSizeButtons(
-  bar,
-  image
-) {
-
-  bar
-    .querySelectorAll(
-      "[data-img-size]"
-    )
-    .forEach(
-      button =>
-        button.classList.toggle(
-          "active",
-          image.classList.contains(
-            "img-" +
-            button.dataset.imgSize
-          )
-        )
-    );
-
-}
-
-
-function startResize(
-  event,
-  image,
-  frame
-) {
-
-  event.preventDefault();
-
-
-  const startX =
-    event.clientX;
-
-
-  const startWidth =
-    image.getBoundingClientRect()
-      .width;
-
-
-  const parentWidth =
-    image.parentElement.parentElement
-      .getBoundingClientRect()
-      .width;
-
-
-  resizeState = {
-
-    image,
-
-    startX,
-
-    startWidth,
-
-    parentWidth
-
-  };
-
-
-  document.addEventListener(
-    "mousemove",
-    doResize
-  );
-
-
-  document.addEventListener(
-    "mouseup",
-    stopResize,
-    {
-      once:true
-    }
-  );
-
-}
-
-
-function doResize(event) {
-
-  if (!resizeState) return;
-
-
-  const state =
-    resizeState;
-
-
-  const width =
-    Math.max(
-      90,
-      Math.min(
-        state.parentWidth,
-        state.startWidth +
-          (
-            event.clientX -
-            state.startX
-          )
-      )
-    );
-
-
-  state.image.style.width =
-    width + "px";
-
-
-  state.image.classList.remove(
-    "img-small",
-    "img-medium",
-    "img-large",
-    "img-full"
-  );
-
-}
-
-
-function stopResize() {
-
-  document.removeEventListener(
-    "mousemove",
-    doResize
-  );
-
-
-  resizeState =
-    null;
-
-}
-
-
-function setImageSize(
-  size,
-  bar
-) {
-
-  if (!selectedImage)
-    return;
-
-
-  selectedImage.classList.remove(
-    "img-small",
-    "img-medium",
-    "img-large",
-    "img-full"
-  );
-
-
-  selectedImage.classList.add(
-    "img-" + size
-  );
-
-
-  selectedImage.style.width =
-    "";
-
-
-  syncSizeButtons(
-    bar,
-    selectedImage
-  );
-
-}
-
-
-document.addEventListener(
-  "click",
-  event => {
-
-    const sizeButton =
-      event.target.closest(
-        "[data-img-size]"
-      );
-
-
-    if (sizeButton) {
-
-      const bar =
-        sizeButton.closest(
-          ".image-size-bar"
-        );
-
-
-      setImageSize(
-        sizeButton.dataset.imgSize,
-        bar
-      );
-
-
-      return;
-
-    }
-
-
-    if (
-      !event.target.closest("img") &&
-      !event.target.closest(".resize-frame") &&
-      !event.target.closest(".image-size-bar")
-    ) {
-
-      clearImageSelection();
-
-    }
-
-  }
-);
-
-
-$("chapterContent")
-  .addEventListener(
-    "click",
-    () =>
-      attachEditorImages(
-        $("chapterContent"),
-        $("storyImageBar")
-      )
-  );
-
-
-/* ========================================================
-   JOURNAL / OTHER COMPOSER
-======================================================== */
-
-function buildComposeToolbar() {
-
-  buildToolbar(
-    "composeToolbar",
-    $("composerContent"),
-    $("composeImageBar")
-  );
-
-}
-
-
-function openComposer(
-  kind,
-  id = null
-) {
-
-  composerKind =
-    kind;
-
-
-  $("composerKind").value =
-    kind;
-
-
-  $("composerId").value =
-    id || "";
-
-
-  $("composerEyebrow").textContent =
-    kind === "journal"
-      ? "02 · Journal"
-      : "03 · Other writing";
-
-
-  $("composerHeading").textContent =
-    id
-
-      ? "Edit writing"
-
-      : (
-          kind === "journal"
-            ? "New journal entry"
-            : "New writing"
-        );
-
-
-  $("composerTitle").value =
-    "";
-
-  $("composerSubtitle").value =
-    "";
-
-
-  $("composerContent").innerHTML =
-    "<p><br></p>";
-
-
-  $("composerStatus").textContent =
-    "Draft";
-
-
-  composerDirty =
-    false;
-
-
-  buildComposeToolbar();
-
-
-  if (id) {
-
-    loadComposer(
-      id,
-      kind
-    );
-
-  }
-
-  else {
-
-    showModal(
-      "composerModal"
-    );
-
-  }
-
-}
-
-
-async function loadComposer(
-  id,
-  kind
-) {
-
-  const table =
-    kind === "journal"
-      ? "journal_entries"
-      : "other_writings";
-
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from(table)
-      .select("*")
-      .eq("id",id)
-      .eq(
-        "owner_id",
-        currentUser.id
-      )
-      .single();
-
-
-  if (error) {
-
-    toast(error.message);
-
-    return;
-
-  }
-
-
-  $("composerId").value =
-    id;
-
-
-  $("composerTitle").value =
-    data.title || "";
-
-
-  $("composerSubtitle").value =
-    kind === "journal"
-      ? ""
-      : (
-          data.writing_type ||
-          ""
-        );
-
-
-  $("composerContent").innerHTML =
-    data.content || "";
-
-
-  attachEditorImages(
-    $("composerContent"),
-    $("composeImageBar")
-  );
-
-
-  showModal(
-    "composerModal"
-  );
-
-}
-
-
-function closeComposer() {
-
-  if (
-    composerDirty &&
-    !confirm(
-      "You have unsaved changes. Close anyway?"
-    )
-  ) {
-
-    return;
-
-  }
-
-
-  closeModal(
-    "composerModal"
-  );
-
-}
-
-
-$("composerTitle")
-  .oninput =
-    () =>
-      composerDirty = true;
-
-
-$("composerContent")
-  .addEventListener(
-    "input",
-    () =>
-      composerDirty = true
-  );
-
-
-$("composerSubtitle")
-  .oninput =
-    () =>
-      composerDirty = true;
-
-
-$("saveDraftBtn").onclick =
-  () =>
-    saveComposer(
-      "draft"
-    );
-
-
-$("publishComposerBtn").onclick =
-  () =>
-    saveComposer(
-      "publish"
-    );
-
-
-async function saveComposer(
-  mode = "draft"
-) {
-
-  const kind =
-    $("composerKind").value;
-
-
-  const table =
-    kind === "journal"
-      ? "journal_entries"
-      : "other_writings";
-
-
-  const id =
-    $("composerId").value;
-
-
-  const button =
-    mode === "publish"
-      ? $("publishComposerBtn")
-      : $("saveDraftBtn");
-
-
-  button.disabled =
-    true;
-
-
-  button.textContent =
-    mode === "publish"
-      ? "Publishing…"
-      : "Saving…";
-
-
-  try {
 
     const content =
-      cleanEditorHtml(
-        $("composerContent")
-          .innerHTML
-      );
+        $("chapterContent").innerHTML;
 
 
-    const base = {
+    const result =
+        await supabaseClient
+            .from("chapters")
+            .update({
 
-      title:
-        $("composerTitle")
-          .value
-          .trim() ||
-        "Untitled",
+                title:
+                    title || "Untitled chapter",
 
-      content
+                content
 
-    };
-
-
-    if (
-      kind === "journal"
-    ) {
-
-      base.owner_id =
-        currentUser.id;
+            })
+            .eq(
+                "id",
+                selectedChapterId
+            )
+            .eq(
+                "owner_id",
+                currentUser.id
+            );
 
 
-      base.published_at =
-        mode === "publish"
-          ? new Date().toISOString()
-          : null;
+    if(result.error){
+
+        alert(
+            "Could not save chapter: " +
+            result.error.message
+        );
+
+        return;
 
     }
 
-    else {
 
-      base.owner_id =
-        currentUser.id;
+    await loadChapters();
+
+    selectChapter(selectedChapterId);
+
+}
 
 
-      base.writing_type =
-        $("composerSubtitle")
-          .value
-          .trim() ||
-        "Other";
+async function deleteChapterById(chapterId){
+
+    const chapter =
+        chapters.find(function(item){
+
+            return String(item.id) ===
+                String(chapterId);
+
+        });
+
+
+    if(!chapter){
+        return;
+    }
+
+
+    const okay =
+        confirm(
+            'Delete "' +
+            (chapter.title || "this chapter") +
+            '"?'
+        );
+
+
+    if(!okay){
+        return;
+    }
+
+
+    const result =
+        await supabaseClient
+            .from("chapters")
+            .delete()
+            .eq(
+                "id",
+                chapterId
+            )
+            .eq(
+                "owner_id",
+                currentUser.id
+            );
+
+
+    if(result.error){
+
+        alert(
+            "Could not delete chapter: " +
+            result.error.message
+        );
+
+        return;
+
+    }
+
+
+    selectedChapterId =
+        null;
+
+
+    await loadChapters();
+
+
+    if(chapters.length){
+
+        selectChapter(chapters[0].id);
+
+    }else{
+
+        $("chapterTitle").value = "";
+
+        $("chapterContent").innerHTML = "";
+
+        updateChapterWordCount();
+
+    }
+
+}
+
+
+async function deleteCurrentChapter(){
+
+    if(!selectedChapterId){
+        return;
+    }
+
+    await deleteChapterById(
+        selectedChapterId
+    );
+
+}
+
+
+/* =====================================================
+   DELETE BOOK
+===================================================== */
+
+async function deleteStory(){
+
+    if(!selectedStoryId){
+        return;
+    }
+
+
+    const story =
+        stories.find(function(item){
+
+            return String(item.id) ===
+                String(selectedStoryId);
+
+        });
+
+
+    if(!story){
+        return;
+    }
+
+
+    const okay =
+        confirm(
+            'Delete "' +
+            story.title +
+            '"?\n\n' +
+            'This will also delete all of its chapters.'
+        );
+
+
+    if(!okay){
+        return;
+    }
+
+
+    const result =
+        await supabaseClient
+            .from("stories")
+            .delete()
+            .eq(
+                "id",
+                selectedStoryId
+            )
+            .eq(
+                "owner_id",
+                currentUser.id
+            );
+
+
+    if(result.error){
+
+        alert(
+            "Could not delete story: " +
+            result.error.message
+        );
+
+        return;
+
+    }
+
+
+    selectedStoryId =
+        null;
+
+    selectedChapterId =
+        null;
+
+
+    $("storyStudio")
+        .classList.remove("show");
+
+    document.body.style.overflow =
+        "";
+
+
+    await loadStories();
+
+    renderStats();
+
+}
+
+
+/* =====================================================
+   JOURNAL
+===================================================== */
+
+async function loadJournal(){
+
+    const result =
+        await supabaseClient
+            .from("journal_entries")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            );
+
+
+    if(result.error){
+
+        console.error(result.error);
+
+        return;
+
+    }
+
+
+    journalEntries =
+        result.data || [];
+
+
+    renderJournal();
+
+}
+
+
+function renderJournal(){
+
+    const feed =
+        $("journalFeed");
+
+
+    const search =
+        ($("journalSearch").value || "")
+            .toLowerCase()
+            .trim();
+
+
+    const filtered =
+        journalEntries.filter(function(item){
+
+            return (
+                !search ||
+                String(item.title || "")
+                    .toLowerCase()
+                    .includes(search) ||
+                String(item.content || "")
+                    .toLowerCase()
+                    .includes(search)
+            );
+
+        });
+
+
+    if(!filtered.length){
+
+        feed.innerHTML =
+            `<div class="empty">
+                No journal entries yet.
+             </div>`;
+
+        return;
+
+    }
+
+
+    feed.innerHTML =
+        filtered.map(function(item){
+
+            const plain =
+                String(item.content || "")
+                    .replace(/<[^>]*>/g," ")
+                    .replace(/\s+/g," ")
+                    .trim();
+
+
+            return `
+                <article class="feed-card">
+
+                    <div class="feed-card-head">
+
+                        <div>
+
+                            <h3>
+                                ${escapeHTML(item.title)}
+                            </h3>
+
+                            <div class="feed-date">
+                                ${escapeHTML(
+                                    item.published_at ||
+                                    item.created_at ||
+                                    ""
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <p class="feed-excerpt">
+                        ${escapeHTML(
+                            plain.slice(0,280)
+                        )}
+                        ${plain.length > 280 ? "…" : ""}
+                    </p>
+
+                    <div class="feed-actions">
+
+                        <button
+                            class="secondary"
+                            type="button"
+                            onclick="openJournal('${item.id}')"
+                        >
+                            Edit
+                        </button>
+
+                    </div>
+
+                </article>
+            `;
+
+        }).join("");
+
+}
+
+
+function openJournal(id){
+
+    const item =
+        journalEntries.find(function(entry){
+
+            return String(entry.id) ===
+                String(id);
+
+        });
+
+
+    if(!item){
+        return;
+    }
+
+
+    editingJournalId =
+        item.id;
+
+
+    $("journalId").value =
+        item.id;
+
+
+    $("journalTitle").value =
+        item.title || "";
+
+
+    $("journalDate").value =
+        item.published_at
+        ? String(item.published_at).slice(0,10)
+        : "";
+
+
+    $("journalContent").innerHTML =
+        item.content || "";
+
+
+    $("deleteJournalButton")
+        .classList.remove("hidden");
+
+
+    updateJournalWordCount();
+
+
+    $("journalStudio")
+        .classList.add("show");
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+function openNewJournal(){
+
+    editingJournalId =
+        null;
+
+
+    $("journalId").value = "";
+
+    $("journalTitle").value = "";
+
+    $("journalDate").value =
+        new Date()
+            .toISOString()
+            .slice(0,10);
+
+    $("journalContent").innerHTML = "";
+
+
+    $("deleteJournalButton")
+        .classList.add("hidden");
+
+
+    updateJournalWordCount();
+
+
+    $("journalStudio")
+        .classList.add("show");
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* =====================================================
+   OTHER WRITINGS
+===================================================== */
+
+async function loadOtherWritings(){
+
+    const result =
+        await supabaseClient
+            .from("other_writings")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            );
+
+
+    if(result.error){
+
+        console.error(result.error);
+
+        return;
+
+    }
+
+
+    otherWritings =
+        result.data || [];
+
+
+    renderOtherWritings();
+
+}
+
+
+function renderOtherWritings(){
+
+    const feed =
+        $("otherFeed");
+
+
+    const search =
+        ($("otherSearch").value || "")
+            .toLowerCase()
+            .trim();
+
+
+    const filtered =
+        otherWritings.filter(function(item){
+
+            return (
+                !search ||
+                String(item.title || "")
+                    .toLowerCase()
+                    .includes(search) ||
+                String(item.content || "")
+                    .toLowerCase()
+                    .includes(search)
+            );
+
+        });
+
+
+    if(!filtered.length){
+
+        feed.innerHTML =
+            `<div class="empty">
+                No other writings yet.
+             </div>`;
+
+        return;
+
+    }
+
+
+    feed.innerHTML =
+        filtered.map(function(item){
+
+            const plain =
+                String(item.content || "")
+                    .replace(/<[^>]*>/g," ")
+                    .replace(/\s+/g," ")
+                    .trim();
+
+
+            return `
+                <article class="feed-card">
+
+                    <div class="feed-card-head">
+
+                        <div>
+
+                            <h3>
+                                ${escapeHTML(item.title)}
+                            </h3>
+
+                            <div class="feed-date">
+                                ${escapeHTML(
+                                    item.writing_type ||
+                                    "Writing"
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <p class="feed-excerpt">
+                        ${escapeHTML(
+                            plain.slice(0,280)
+                        )}
+                        ${plain.length > 280 ? "…" : ""}
+                    </p>
+
+                    <div class="feed-actions">
+
+                        <button
+                            class="secondary"
+                            type="button"
+                            onclick="openOtherWriting('${item.id}')"
+                        >
+                            Edit
+                        </button>
+
+                    </div>
+
+                </article>
+            `;
+
+        }).join("");
+
+}
+
+
+function openOtherWriting(id){
+
+    const item =
+        otherWritings.find(function(entry){
+
+            return String(entry.id) ===
+                String(id);
+
+        });
+
+
+    if(!item){
+        return;
+    }
+
+
+    editingWritingId =
+        item.id;
+
+
+    $("writingId").value =
+        item.id;
+
+
+    $("writingTitle").value =
+        item.title || "";
+
+
+    $("writingType").value =
+        item.writing_type || "Thought";
+
+
+    $("writingContent").innerHTML =
+        item.content || "";
+
+
+    $("deleteWritingButton")
+        .classList.remove("hidden");
+
+
+    updateWritingWordCount();
+
+
+    $("writingStudio")
+        .classList.add("show");
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+function openNewWriting(){
+
+    editingWritingId =
+        null;
+
+
+    $("writingId").value = "";
+
+    $("writingTitle").value = "";
+
+    $("writingType").value =
+        "Thought";
+
+    $("writingContent").innerHTML = "";
+
+
+    $("deleteWritingButton")
+        .classList.add("hidden");
+
+
+    updateWritingWordCount();
+
+
+    $("writingStudio")
+        .classList.add("show");
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+function openWriter(type){
+
+    if(type === "journal"){
+
+        openNewJournal();
+
+        return;
+
+    }
+
+
+    openNewWriting();
+
+}
+
+
+/* =====================================================
+   SAVE JOURNAL
+===================================================== */
+
+async function saveJournal(){
+
+    const title =
+        $("journalTitle").value.trim();
+
+    const content =
+        $("journalContent").innerHTML;
+
+
+    if(!title){
+
+        alert("Please add a title.");
+
+        return;
+
+    }
+
+
+    const date =
+        $("journalDate").value ||
+        new Date()
+            .toISOString()
+            .slice(0,10);
+
+
+    let result;
+
+
+    if(editingJournalId){
+
+        result =
+            await supabaseClient
+                .from("journal_entries")
+                .update({
+
+                    title,
+
+                    content,
+
+                    published_at:
+                        date
+
+                })
+                .eq(
+                    "id",
+                    editingJournalId
+                )
+                .eq(
+                    "owner_id",
+                    currentUser.id
+                );
+
+    }else{
+
+        result =
+            await supabaseClient
+                .from("journal_entries")
+                .insert({
+
+                    owner_id:
+                        currentUser.id,
+
+                    title,
+
+                    content,
+
+                    published_at:
+                        date
+
+                });
+
+    }
+
+
+    if(result.error){
+
+        alert(
+            "Could not save journal entry: " +
+            result.error.message
+        );
+
+        return;
+
+    }
+
+
+    closeJournal();
+
+    await loadJournal();
+
+    renderStats();
+
+}
+
+
+async function deleteJournal(){
+
+    if(!editingJournalId){
+        return;
+    }
+
+
+    const okay =
+        confirm(
+            "Delete this journal entry?"
+        );
+
+
+    if(!okay){
+        return;
+    }
+
+
+    const result =
+        await supabaseClient
+            .from("journal_entries")
+            .delete()
+            .eq(
+                "id",
+                editingJournalId
+            )
+            .eq(
+                "owner_id",
+                currentUser.id
+            );
+
+
+    if(result.error){
+
+        alert(
+            "Could not delete journal entry: " +
+            result.error.message
+        );
+
+        return;
+
+    }
+
+
+    closeJournal();
+
+    await loadJournal();
+
+    renderStats();
+
+}
+
+
+function closeJournal(){
+
+    $("journalStudio")
+        .classList.remove("show");
+
+    document.body.style.overflow =
+        "";
+
+    editingJournalId =
+        null;
+
+}
+
+
+/* =====================================================
+   SAVE OTHER WRITING
+===================================================== */
+
+async function saveOtherWriting(){
+
+    const title =
+        $("writingTitle").value.trim();
+
+    const content =
+        $("writingContent").innerHTML;
+
+    const type =
+        $("writingType").value;
+
+
+    if(!title){
+
+        alert("Please add a title.");
+
+        return;
 
     }
 
@@ -5820,940 +3911,714 @@ async function saveComposer(
     let result;
 
 
-    if (id) {
+    if(editingWritingId){
 
-      result =
-        await supabaseClient
-          .from(table)
-          .update(base)
-          .eq(
-            "id",
-            id
-          )
-          .eq(
-            "owner_id",
-            currentUser.id
-          );
+        result =
+            await supabaseClient
+                .from("other_writings")
+                .update({
 
-    }
+                    title,
 
-    else {
+                    writing_type:
+                        type,
 
-      result =
-        await supabaseClient
-          .from(table)
-          .insert(base);
+                    content
 
-    }
+                })
+                .eq(
+                    "id",
+                    editingWritingId
+                )
+                .eq(
+                    "owner_id",
+                    currentUser.id
+                );
 
+    }else{
 
-    if (result.error) {
+        result =
+            await supabaseClient
+                .from("other_writings")
+                .insert({
 
-      throw result.error;
+                    owner_id:
+                        currentUser.id,
 
-    }
+                    title,
 
+                    writing_type:
+                        type,
 
-    composerDirty =
-      false;
+                    content
 
-
-    closeModal(
-      "composerModal"
-    );
-
-
-    if (
-      kind === "journal"
-    ) {
-
-      await loadJournal();
-
-    }
-
-    else {
-
-      await loadOtherWritings();
+                });
 
     }
 
 
-    renderStats();
-
-    renderRecent();
-
-
-    toast(
-      mode === "publish"
-        ? "Published."
-        : "Draft saved."
-    );
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    toast(
-      error.message ||
-      "Could not save."
-    );
-
-  }
-
-  finally {
-
-    button.disabled =
-      false;
-
-
-    button.textContent =
-      mode === "publish"
-        ? "Publish"
-        : "Save draft";
-
-  }
-
-}
-
-
-/* ========================================================
-   JOURNAL
-======================================================== */
-
-async function loadJournal() {
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("journal_entries")
-      .select("*")
-      .eq(
-        "owner_id",
-        currentUser.id
-      )
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if (error) {
-
-    console.error(error);
-
-    return;
-
-  }
-
-
-  window.journalEntries =
-    data || [];
-
-
-  renderJournal();
-
-}
-
-
-function renderJournal() {
-
-  const query =
-    (
-      $("journalSearch")?.value ||
-      ""
-    )
-      .toLowerCase()
-      .trim();
-
-
-  const feed =
-    $("journalFeed");
-
-
-  const data =
-    (
-      window.journalEntries ||
-      []
-    )
-      .filter(
-        item =>
-          !query ||
-          [
-            item.title,
-            item.content
-          ]
-            .some(
-              value =>
-                String(value || "")
-                  .toLowerCase()
-                  .includes(query)
-            )
-      );
-
-
-  feed.innerHTML =
-    "";
-
-
-  if (!data.length) {
-
-    feed.innerHTML = `
-      <div class="empty">
-        No journal entries yet.<br>
-        <span class="small">
-          Write the first one whenever
-          you feel like it.
-        </span>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  data.forEach(
-    entry =>
-      feed.appendChild(
-        makeFeedCard(
-          entry,
-          "journal"
-        )
-      )
-  );
-
-}
-
-
-$("journalSearch")
-  .oninput =
-    renderJournal;
-
-
-/* ========================================================
-   OTHER WRITINGS
-======================================================== */
-
-async function loadOtherWritings() {
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("other_writings")
-      .select("*")
-      .eq(
-        "owner_id",
-        currentUser.id
-      )
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if (error) {
-
-    console.error(error);
-
-    return;
-
-  }
-
-
-  window.otherEntries =
-    data || [];
-
-
-  renderOther();
-
-}
-
-
-function renderOther() {
-
-  const query =
-    (
-      $("otherSearch")?.value ||
-      ""
-    )
-      .toLowerCase()
-      .trim();
-
-
-  const feed =
-    $("otherFeed");
-
-
-  const data =
-    (
-      window.otherEntries ||
-      []
-    )
-      .filter(
-        item =>
-          !query ||
-          [
-            item.title,
-            item.content,
-            item.writing_type
-          ]
-            .some(
-              value =>
-                String(value || "")
-                  .toLowerCase()
-                  .includes(query)
-            )
-      );
-
-
-  feed.innerHTML =
-    "";
-
-
-  if (!data.length) {
-
-    feed.innerHTML = `
-      <div class="empty">
-        Nothing here yet.<br>
-        <span class="small">
-          Fragments, poems, thoughts,
-          notes — put them here.
-        </span>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  data.forEach(
-    entry =>
-      feed.appendChild(
-        makeFeedCard(
-          entry,
-          "other"
-        )
-      )
-  );
-
-}
-
-
-$("otherSearch")
-  .oninput =
-    renderOther;
-
-
-/* ========================================================
-   FEED CARDS
-======================================================== */
-
-function stripHtml(
-  html
-) {
-
-  const div =
-    document.createElement(
-      "div"
-    );
-
-
-  div.innerHTML =
-    html || "";
-
-
-  return (
-    div.textContent ||
-    ""
-  )
-    .replace(
-      /\s+/g,
-      " "
-    )
-    .trim();
-
-}
-
-
-function makeFeedCard(
-  item,
-  kind
-) {
-
-  const article =
-    document.createElement(
-      "article"
-    );
-
-
-  article.className =
-    "feed-card";
-
-
-  const text =
-    stripHtml(
-      item.content
-    );
-
-
-  article.innerHTML = `
-
-    <div class="feed-card-head">
-
-      <div>
-
-        <div class="feed-date">
-
-          ${fmtDate(
-            item.created_at ||
-            item.published_at
-          )}
-
-        </div>
-
-        <h3>
-          ${esc(
-            item.title ||
-            "Untitled"
-          )}
-        </h3>
-
-      </div>
-
-
-      <span class="badge">
-
-        ${
-          kind === "journal"
-            ? "Journal"
-            : esc(
-                item.writing_type ||
-                "Writing"
-              )
-        }
-
-      </span>
-
-    </div>
-
-
-    <div class="feed-excerpt">
-
-      ${esc(
-        text.slice(
-          0,
-          300
-        )
-      )}
-
-      ${
-        text.length > 300
-          ? "…"
-          : ""
-      }
-
-    </div>
-
-
-    <div class="feed-actions">
-
-      <button
-        class="secondary edit-feed"
-      >
-        Edit
-      </button>
-
-      <button
-        class="danger delete-feed"
-      >
-        Delete
-      </button>
-
-    </div>
-
-  `;
-
-
-  article
-    .querySelector(
-      ".edit-feed"
-    )
-    .onclick =
-      () =>
-        openComposer(
-          kind,
-          item.id
+    if(result.error){
+
+        alert(
+            "Could not save writing: " +
+            result.error.message
         );
 
+        return;
 
-  article
-    .querySelector(
-      ".delete-feed"
-    )
-    .onclick =
-      () =>
-        deleteFeed(
-          item,
-          kind
-        );
+    }
 
 
-  return article;
-
-}
-
-
-async function deleteFeed(
-  item,
-  kind
-) {
-
-  if (
-    !confirm(
-      "Delete this writing? This cannot be undone."
-    )
-  ) {
-
-    return;
-
-  }
-
-
-  const table =
-    kind === "journal"
-      ? "journal_entries"
-      : "other_writings";
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from(table)
-      .delete()
-      .eq(
-        "id",
-        item.id
-      )
-      .eq(
-        "owner_id",
-        currentUser.id
-      );
-
-
-  if (error) {
-
-    toast(error.message);
-
-    return;
-
-  }
-
-
-  if (
-    kind === "journal"
-  ) {
-
-    await loadJournal();
-
-  }
-
-  else {
+    closeWriting();
 
     await loadOtherWritings();
 
-  }
-
-
-  renderStats();
-
-  renderRecent();
-
-
-  toast(
-    "Deleted."
-  );
+    renderStats();
 
 }
 
 
-/* ========================================================
-   HOME
-======================================================== */
+async function deleteOtherWriting(){
 
-function renderStats() {
-
-  const storyCount =
-    stories.length;
+    if(!editingWritingId){
+        return;
+    }
 
 
-  const chapterCount =
-    document
-      .querySelectorAll(
-        "#chapterList .chapter-item"
-      )
-      .length;
+    const okay =
+        confirm(
+            "Delete this writing?"
+        );
 
 
-  const journalCount =
-    (
-      window.journalEntries ||
-      []
-    ).length;
+    if(!okay){
+        return;
+    }
 
 
-  const otherCount =
-    (
-      window.otherEntries ||
-      []
-    ).length;
+    const result =
+        await supabaseClient
+            .from("other_writings")
+            .delete()
+            .eq(
+                "id",
+                editingWritingId
+            )
+            .eq(
+                "owner_id",
+                currentUser.id
+            );
 
 
-  $("stats").innerHTML = `
+    if(result.error){
 
-    <div class="stat">
+        alert(
+            "Could not delete writing: " +
+            result.error.message
+        );
 
-      <b>
-        ${storyCount}
-      </b>
+        return;
 
-      <span>
-        Stories
-      </span>
-
-    </div>
+    }
 
 
-    <div class="stat">
+    closeWriting();
 
-      <b>
-        ${chapterCount || "—"}
-      </b>
+    await loadOtherWritings();
 
-      <span>
-        Current chapters
-      </span>
-
-    </div>
-
-
-    <div class="stat">
-
-      <b>
-        ${journalCount}
-      </b>
-
-      <span>
-        Journal entries
-      </span>
-
-    </div>
-
-
-    <div class="stat">
-
-      <b>
-        ${otherCount}
-      </b>
-
-      <span>
-        Other writings
-      </span>
-
-    </div>
-
-  `;
+    renderStats();
 
 }
 
 
-function renderRecent() {
+function closeWriting(){
 
-  const feed =
-    $("recentWriting");
+    $("writingStudio")
+        .classList.remove("show");
+
+    document.body.style.overflow =
+        "";
+
+    editingWritingId =
+        null;
+
+}
 
 
-  const items = [
+/* =====================================================
+   STATS
+===================================================== */
 
-    ...(stories || [])
-      .map(
-        story => ({
-          kind:"story",
-          title:story.title,
-          date:story.created_at,
-          id:story.id
-        })
-      ),
+function renderStats(){
 
-    ...(
-      window.journalEntries ||
-      []
-    )
-      .map(
-        entry => ({
-          kind:"journal",
-          title:entry.title,
-          date:entry.created_at,
-          id:entry.id
-        })
-      ),
+    $("stats").innerHTML = `
 
-    ...(
-      window.otherEntries ||
-      []
-    )
-      .map(
-        entry => ({
-          kind:"other",
-          title:entry.title,
-          date:entry.created_at,
-          id:entry.id
-        })
-      )
+        <div class="stat">
+            <b>${stories.length}</b>
+            <span>Stories</span>
+        </div>
 
-  ]
-    .sort(
-      (a,b) =>
-        new Date(
-          b.date || 0
-        ) -
-        new Date(
-          a.date || 0
+        <div class="stat">
+            <b>${chapters.length}</b>
+            <span>Loaded chapters</span>
+        </div>
+
+        <div class="stat">
+            <b>${journalEntries.length}</b>
+            <span>Journal</span>
+        </div>
+
+        <div class="stat">
+            <b>${otherWritings.length}</b>
+            <span>Other writings</span>
+        </div>
+
+    `;
+
+}
+
+
+function renderRecentWriting(){
+
+    const container =
+        $("recentWriting");
+
+
+    const items = [];
+
+
+    journalEntries
+        .slice(0,3)
+        .forEach(function(item){
+
+            items.push({
+
+                title:
+                    item.title,
+
+                type:
+                    "Journal",
+
+                action:
+                    function(){
+                        openJournal(item.id);
+                    }
+
+            });
+
+        });
+
+
+    otherWritings
+        .slice(0,3)
+        .forEach(function(item){
+
+            items.push({
+
+                title:
+                    item.title,
+
+                type:
+                    "Other Writing",
+
+                action:
+                    function(){
+                        openOtherWriting(item.id);
+                    }
+
+            });
+
+        });
+
+
+    if(!items.length){
+
+        container.innerHTML =
+            `<div class="empty">
+                Nothing here yet.
+             </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        items.slice(0,6)
+            .map(function(item,index){
+
+                return `
+                    <article class="feed-card">
+
+                        <div class="feed-card-head">
+
+                            <div>
+
+                                <h3>
+                                    ${escapeHTML(
+                                        item.title
+                                    )}
+                                </h3>
+
+                                <div class="feed-date">
+                                    ${escapeHTML(
+                                        item.type
+                                    )}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="feed-actions">
+
+                            <button
+                                class="secondary"
+                                type="button"
+                                data-recent-index="${index}"
+                            >
+                                Continue →
+                            </button>
+
+                        </div>
+
+                    </article>
+                `;
+
+            })
+            .join("");
+
+
+    container
+        .querySelectorAll(
+            "[data-recent-index]"
         )
+        .forEach(function(button,index){
+
+            button.addEventListener(
+                "click",
+                items[index].action
+            );
+
+        });
+
+}
+
+
+/* =====================================================
+   WORD COUNTS
+===================================================== */
+
+function updateChapterWordCount(){
+
+    const count =
+        countWords(
+            $("chapterContent").innerText
+        );
+
+    $("chapterWordCount").textContent =
+        count + " words";
+
+}
+
+
+function updateJournalWordCount(){
+
+    const count =
+        countWords(
+            $("journalContent").innerText
+        );
+
+    $("journalWordCount").textContent =
+        count + " words";
+
+    $("journalBottomWords").textContent =
+        count + " words";
+
+}
+
+
+function updateWritingWordCount(){
+
+    const count =
+        countWords(
+            $("writingContent").innerText
+        );
+
+    $("writingWordCount").textContent =
+        count + " words";
+
+    $("writingBottomWords").textContent =
+        count + " words";
+
+}
+
+
+/* =====================================================
+   EDITOR COMMANDS
+===================================================== */
+
+function executeCommand(
+    command,
+    value
+){
+
+    document.execCommand(
+        command,
+        false,
+        value || null
+    );
+
+}
+
+
+document
+    .querySelectorAll(
+        "[data-command]"
     )
-    .slice(
-      0,
-      5
+    .forEach(function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                $("chapterContent").focus();
+
+                executeCommand(
+                    button.dataset.command,
+                    button.dataset.value
+                );
+
+                updateChapterWordCount();
+
+            }
+        );
+
+    });
+
+
+$("blockFormat")
+    .addEventListener(
+        "change",
+        function(){
+
+            $("chapterContent").focus();
+
+            executeCommand(
+                "formatBlock",
+                this.value
+            );
+
+        }
     );
 
 
-  feed.innerHTML =
-    "";
+$("fontFamily")
+    .addEventListener(
+        "change",
+        function(){
 
+            $("chapterContent").focus();
 
-  if (!items.length) {
-
-    feed.innerHTML = `
-      <div class="empty">
-        Your writing will appear here.
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  items.forEach(
-    item => {
-
-      const row =
-        document.createElement(
-          "article"
-        );
-
-
-      row.className =
-        "feed-card";
-
-
-      row.style.cursor =
-        "pointer";
-
-
-      row.innerHTML = `
-
-        <div class="feed-date">
-
-          ${fmtDate(
-            item.date
-          )}
-
-          ·
-
-          ${item.kind}
-
-        </div>
-
-
-        <h3>
-          ${esc(
-            item.title ||
-            "Untitled"
-          )}
-        </h3>
-
-      `;
-
-
-      row.onclick =
-        () => {
-
-          if (
-            item.kind ===
-            "story"
-          ) {
-
-            openStoryStudio(
-              item.id
+            executeCommand(
+                "fontName",
+                this.value
             );
 
-          }
+        }
+    );
 
-          else {
 
-            openComposer(
-              item.kind,
-              item.id
+$("fontSize")
+    .addEventListener(
+        "change",
+        function(){
+
+            $("chapterContent").focus();
+
+            executeCommand(
+                "fontSize",
+                this.value
             );
 
-          }
-
-        };
-
-
-      feed.appendChild(
-        row
-      );
-
-    }
-  );
-
-}
+        }
+    );
 
 
-/* ========================================================
-   MODAL BEHAVIOR
-======================================================== */
+$("clearFormatting")
+    .addEventListener(
+        "click",
+        function(){
 
-$("storyModal")
-  .addEventListener(
-    "click",
-    event => {
+            $("chapterContent").focus();
 
-      if (
-        event.target ===
-        $("storyModal")
-      ) {
+            executeCommand(
+                "removeFormat"
+            );
 
-        closeModal(
-          "storyModal"
+        }
+    );
+
+
+$("chapterContent")
+    .addEventListener(
+        "input",
+        updateChapterWordCount
+    );
+
+
+document
+    .querySelectorAll(
+        "[data-journal-command]"
+    )
+    .forEach(function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                $("journalContent").focus();
+
+                executeCommand(
+                    button.dataset.journalCommand,
+                    button.dataset.value
+                );
+
+                updateJournalWordCount();
+
+            }
         );
 
-      }
-
-    }
-  );
+    });
 
 
-$("composerModal")
-  .addEventListener(
-    "click",
-    event => {
-
-      if (
-        event.target ===
-        $("composerModal")
-      ) {
-
-        closeComposer();
-
-      }
-
-    }
-  );
+$("journalContent")
+    .addEventListener(
+        "input",
+        updateJournalWordCount
+    );
 
 
-$("previewModal")
-  .addEventListener(
-    "click",
-    event => {
+document
+    .querySelectorAll(
+        "[data-writing-command]"
+    )
+    .forEach(function(button){
 
-      if (
-        event.target ===
-        $("previewModal")
-      ) {
+        button.addEventListener(
+            "click",
+            function(){
 
-        closeModal(
-          "previewModal"
+                $("writingContent").focus();
+
+                executeCommand(
+                    button.dataset.writingCommand,
+                    button.dataset.value
+                );
+
+                updateWritingWordCount();
+
+            }
         );
 
-      }
-
-    }
-  );
+    });
 
 
-/* ========================================================
-   KEYBOARD SHORTCUT
-======================================================== */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if (
-      (event.ctrlKey ||
-       event.metaKey) &&
-      event.key.toLowerCase() ===
-        "s"
-    ) {
-
-      event.preventDefault();
+$("writingContent")
+    .addEventListener(
+        "input",
+        updateWritingWordCount
+    );
 
 
-      if (
-        $("storyStudio")
-          .classList
-          .contains("show")
-      ) {
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-        saveChapter();
+document
+    .querySelectorAll(
+        ".nav button"
+    )
+    .forEach(function(button){
 
-      }
+        button.addEventListener(
+            "click",
+            function(){
 
-      else if (
-        $("composerModal")
-          .classList
-          .contains("show")
-      ) {
+                setActivePanel(
+                    button.dataset.panel
+                );
 
-        saveComposer(
-          "draft"
+            }
         );
 
-      }
-
-    }
-
-  }
-);
+    });
 
 
-/* ========================================================
+$("storySearch")
+    .addEventListener(
+        "input",
+        renderStories
+    );
+
+
+$("journalSearch")
+    .addEventListener(
+        "input",
+        renderJournal
+    );
+
+
+$("otherSearch")
+    .addEventListener(
+        "input",
+        renderOtherWritings
+    );
+
+
+/* =====================================================
+   BUTTON EVENTS
+===================================================== */
+
+$("loginForm")
+    .addEventListener(
+        "submit",
+        function(event){
+
+            event.preventDefault();
+
+            signIn();
+
+        }
+    );
+
+
+$("logoutBtn")
+    .addEventListener(
+        "click",
+        logout
+    );
+
+
+$("saveStoryBtn")
+    .addEventListener(
+        "click",
+        saveStory
+    );
+
+
+$("addChapterButton")
+    .addEventListener(
+        "click",
+        addChapter
+    );
+
+
+$("saveChapterButton")
+    .addEventListener(
+        "click",
+        saveChapter
+    );
+
+
+$("deleteChapterButton")
+    .addEventListener(
+        "click",
+        deleteCurrentChapter
+    );
+
+
+$("deleteStoryButton")
+    .addEventListener(
+        "click",
+        deleteStory
+    );
+
+
+$("closeStoryStudio")
+    .addEventListener(
+        "click",
+        function(){
+
+            $("storyStudio")
+                .classList.remove("show");
+
+            document.body.style.overflow =
+                "";
+
+        }
+    );
+
+
+$("saveJournalButton")
+    .addEventListener(
+        "click",
+        saveJournal
+    );
+
+
+$("deleteJournalButton")
+    .addEventListener(
+        "click",
+        deleteJournal
+    );
+
+
+$("closeJournalButton")
+    .addEventListener(
+        "click",
+        closeJournal
+    );
+
+
+$("saveWritingButton")
+    .addEventListener(
+        "click",
+        saveOtherWriting
+    );
+
+
+$("deleteWritingButton")
+    .addEventListener(
+        "click",
+        deleteOtherWriting
+    );
+
+
+$("closeWritingButton")
+    .addEventListener(
+        "click",
+        closeWriting
+    );
+
+
+/* =====================================================
+   CLOSE MODALS BY CLICKING OUTSIDE
+===================================================== */
+
+document
+    .querySelectorAll(".modal")
+    .forEach(function(modal){
+
+        modal.addEventListener(
+            "click",
+            function(event){
+
+                if(event.target === modal){
+
+                    modal.classList.remove("show");
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* =====================================================
    INITIALIZE
-======================================================== */
-
-buildToolbar(
-  "storyToolbar",
-  $("chapterContent"),
-  $("storyImageBar")
-);
-
-
-buildComposeToolbar();
-
+===================================================== */
 
 checkSession();
 
