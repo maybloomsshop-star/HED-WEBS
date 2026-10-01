@@ -2520,15 +2520,14 @@
 
     function getRequestedId() {
 
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
+        const params = new URLSearchParams(window.location.search);
 
-        return params.get(
-            "id"
-        );
-    }
+const storyId = params.get("id");
+
+if (!storyId) {
+    document.getElementById("loading").textContent =
+        "Story not found.";
+}
 
 
     /* =========================================================
