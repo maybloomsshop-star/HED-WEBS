@@ -2907,7 +2907,9 @@ function renderStories() {
     );
 
   renderStories();
+
   renderStats();
+
   renderRecent();
 
   toast(
@@ -2925,10 +2927,12 @@ function renderStories() {
 
   grid.innerHTML = "";
 
+
   const visible =
     stories.filter(
       storyMatches
     );
+
 
   if (!visible.length) {
 
@@ -2948,6 +2952,7 @@ function renderStories() {
     return;
   }
 
+
   visible.forEach(
     story => {
 
@@ -2959,6 +2964,7 @@ function renderStories() {
 
       card.className =
         "story-card";
+
 
       card.innerHTML = `
 
@@ -3000,7 +3006,9 @@ function renderStories() {
           </h3>
 
           <div class="author">
-            ${esc(s.author || "")}
+            ${esc(
+              s.author || ""
+            )}
           </div>
 
           ${
@@ -3050,11 +3058,13 @@ function renderStories() {
         </div>
       `;
 
+
       card
         .querySelector(".open-story")
         .onclick =
           () =>
             openStoryStudio(s.id);
+
 
       card
         .querySelector(".edit-story")
@@ -3062,18 +3072,19 @@ function renderStories() {
           () =>
             editStory(s.id);
 
+
       card
         .querySelector(".delete-story")
         .onclick =
           () =>
             deleteStory(s.id);
 
+
       grid.appendChild(card);
 
     }
   );
 }
-
 /* ========================================================
    STORY MODAL
 ======================================================== */
