@@ -12,7 +12,6 @@
 
     <title>Journals · May Blooms</title>
 
-
     <style>
 
         * {
@@ -42,51 +41,28 @@
             font: inherit;
         }
 
-
-        /* =====================================================
-           PAGE
-        ===================================================== */
-
         .journal-page {
             min-height: 100vh;
             background: #f3efe9;
         }
 
-
-        /* =====================================================
-           READING PROGRESS
-        ===================================================== */
-
         .reading-progress {
             position: fixed;
             top: 0;
             left: 0;
-
             width: 0;
             height: 3px;
-
             background: #5f4a3f;
-
             z-index: 9999;
         }
 
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
         .journal-header {
             width: 100%;
-
             padding: 25px 5vw;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
-
-            border-bottom:
-                1px solid
-                rgba(73, 59, 51, 0.14);
+            border-bottom: 1px solid rgba(73, 59, 51, 0.14);
         }
 
         .brand {
@@ -96,34 +72,24 @@
         }
 
         .brand-name {
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
+            font-family: Georgia, "Times New Roman", serif;
             font-size: 18px;
             font-weight: 400;
-
             letter-spacing: 0.035em;
         }
 
         .brand-subtitle {
             font-size: 8px;
             letter-spacing: 0.18em;
-
             color: #8c7b70;
-
             text-transform: uppercase;
         }
 
         .back-link {
             font-size: 14px;
             font-weight: 700;
-
             letter-spacing: 0.08em;
-
             color: #75645a;
-
             text-transform: uppercase;
         }
 
@@ -131,132 +97,67 @@
             color: #29221e;
         }
 
-
-        /* =====================================================
-           INDEX
-        ===================================================== */
-
         .journal-index {
             width: 100%;
         }
 
         .journal-intro {
-            width:
-                min(
-                    calc(100% - 10vw),
-                    920px
-                );
-
+            width: min(calc(100% - 10vw), 920px);
             margin: 0 auto;
-
-            padding:
-                105px
-                0
-                88px;
+            padding: 105px 0 88px;
         }
 
         .journal-kicker {
             margin: 0 0 20px;
-
             font-size: 9px;
             font-weight: 700;
-
             letter-spacing: 0.20em;
-
             color: #8d7a6e;
-
             text-transform: uppercase;
         }
 
         .journal-title {
             margin: 0;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size:
-                clamp(
-                    58px,
-                    9vw,
-                    105px
-                );
-
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(58px, 9vw, 105px);
             line-height: 0.88;
-
             font-weight: 400;
-
             letter-spacing: -0.045em;
         }
 
         .journal-description {
             max-width: 540px;
-
             margin: 31px 0 0;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
+            font-family: Georgia, "Times New Roman", serif;
             font-size: 17px;
             line-height: 1.75;
-
             color: #776960;
         }
 
         .journal-mark {
             width: 46px;
             height: 1px;
-
             margin-top: 45px;
-
             background: #907c70;
         }
 
-
-        /* =====================================================
-           JOURNAL LIST
-        ===================================================== */
-
         .journal-list {
-            width:
-                min(
-                    calc(100% - 10vw),
-                    920px
-                );
-
-            margin:
-                0 auto
-                120px;
+            width: min(calc(100% - 10vw), 920px);
+            margin: 0 auto 120px;
         }
 
         .journal-preview {
             display: grid;
-
-            grid-template-columns:
-                145px
-                minmax(0, 1fr);
-
+            grid-template-columns: 145px minmax(0, 1fr);
             gap: 45px;
-
             width: 100%;
-
-            padding:
-                43px
-                0
-                48px;
-
-            border-top:
-                1px solid
-                rgba(73, 59, 51, 0.17);
+            padding: 43px 0 48px;
+            border-top: 1px solid rgba(73, 59, 51, 0.17);
+            transition: padding 0.2s ease;
         }
 
         .journal-preview:last-child {
-            border-bottom:
-                1px solid
-                rgba(73, 59, 51, 0.17);
+            border-bottom: 1px solid rgba(73, 59, 51, 0.17);
         }
 
         .journal-preview:hover {
@@ -270,113 +171,59 @@
 
         .preview-date {
             margin: 0;
-
             font-size: 8px;
             font-weight: 700;
-
             line-height: 1.5;
-
             letter-spacing: 0.15em;
-
             color: #927f73;
-
             text-transform: uppercase;
         }
 
         .preview-number {
             display: block;
-
             margin-top: 14px;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
+            font-family: Georgia, "Times New Roman", serif;
             font-size: 13px;
-
             color: #a6968b;
         }
 
         .preview-title {
             margin: 0;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size:
-                clamp(
-                    28px,
-                    4vw,
-                    43px
-                );
-
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(28px, 4vw, 43px);
             line-height: 1.10;
-
             font-weight: 400;
-
             letter-spacing: -0.025em;
         }
 
         .preview-excerpt {
             max-width: 670px;
-
             margin: 17px 0 0;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
+            font-family: Georgia, "Times New Roman", serif;
             font-size: 15px;
             line-height: 1.8;
-
             color: #756961;
         }
 
         .preview-read {
             display: inline-block;
-
             margin-top: 22px;
-
             font-size: 8px;
             font-weight: 700;
-
             letter-spacing: 0.15em;
-
             color: #78665b;
-
             text-transform: uppercase;
         }
 
         .journal-status {
             padding: 45px 0;
-
-            border-top:
-                1px solid
-                rgba(73,59,51,0.17);
-
-            border-bottom:
-                1px solid
-                rgba(73,59,51,0.17);
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
+            border-top: 1px solid rgba(73, 59, 51, 0.17);
+            border-bottom: 1px solid rgba(73, 59, 51, 0.17);
+            font-family: Georgia, "Times New Roman", serif;
             font-size: 15px;
             line-height: 1.7;
-
             color: #8c7d74;
         }
-
-
-        /* =====================================================
-           READER
-        ===================================================== */
 
         .reader {
             display: none;
@@ -387,95 +234,55 @@
         }
 
         .reader-shell {
-            width:
-                min(
-                    calc(100% - 10vw),
-                    920px
-                );
-
+            width: min(calc(100% - 10vw), 920px);
             margin: 0 auto;
-
-            padding:
-                75px
-                0
-                100px;
+            padding: 75px 0 100px;
         }
 
         .reader-top {
             width: 100%;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             margin-bottom: 80px;
         }
 
         .reader-back {
             font-size: 14px;
             font-weight: 700;
-
             letter-spacing: 0.08em;
-
             color: #847269;
-
             text-transform: uppercase;
         }
 
         .reader-label {
             font-size: 13px;
             font-weight: 700;
-
             letter-spacing: 0.10em;
-
             color: #9b897d;
-
             text-transform: uppercase;
         }
 
-
-        /* =====================================================
-           READER HEADER
-        ===================================================== */
-
         .reader-header {
             max-width: 850px;
-
             margin-bottom: 45px;
         }
 
         .reader-date {
             margin: 0 0 14px;
-
             font-size: 13px;
             font-weight: 700;
-
             letter-spacing: 0.12em;
-
             color: #907d71;
-
             text-transform: uppercase;
         }
 
         .reader-title {
             margin: 0;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size:
-                clamp(
-                    45px,
-                    7vw,
-                    82px
-                );
-
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(45px, 7vw, 82px);
             line-height: 1.02;
-
             font-weight: 400;
-
             letter-spacing: -0.042em;
         }
 
@@ -483,742 +290,224 @@
             display: flex;
             align-items: center;
             gap: 10px;
-
             margin-top: 18px;
-
             font-size: 14px;
-
             color: #756961;
         }
 
         .reader-rule {
             width: 38px;
             height: 1px;
-
             margin-top: 30px;
-
             background: #917d70;
         }
 
-
-        /* =====================================================
-           IMAGE
-        ===================================================== */
-
         .reader-image {
             display: block;
-
             width: 100%;
             max-height: 610px;
-
-            margin:
-                0
-                0
-                60px;
-
+            margin: 0 0 60px;
             object-fit: cover;
         }
 
-
-        /* =====================================================
-           READING PREFERENCES
-        ===================================================== */
-
-        .reading-preferences {
-            width: 100%;
-            max-width: 700px;
-
-            margin:
-                0
-                auto
-                40px;
-
-            padding:
-                14px
-                0;
-
-            border-top:
-                1px solid
-                rgba(73,59,51,0.12);
-
-            border-bottom:
-                1px solid
-                rgba(73,59,51,0.12);
-
-            display: flex;
-            align-items: center;
-            gap: 9px;
-
-            flex-wrap: wrap;
-        }
-
-        .reading-preferences-label {
-            margin-right: 5px;
-
-            font-size: 12px;
-            font-weight: 700;
-
-            letter-spacing: 0.08em;
-
-            color: #78665b;
-
-            text-transform: uppercase;
-        }
-
-        .reading-button {
-            min-width: 40px;
-            min-height: 32px;
-
-            padding:
-                6px
-                10px;
-
-            border:
-                1px solid
-                rgba(73,59,51,0.18);
-
-            background: transparent;
-
-            color: #5f5149;
-
-            cursor: pointer;
-
-            font-size: 12px;
-        }
-
-        .reading-button:hover,
-        .reading-button.active {
-            background: #e7ded5;
-            border-color: #9b897d;
-        }
-
-
-        /* =====================================================
-           ARTICLE
-        ===================================================== */
-
         .reader-content {
-            width: 100%;
-            max-width: 700px;
-
+            max-width: 780px;
             margin: 0 auto;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
+            font-family: Georgia, "Times New Roman", serif;
             font-size: 19px;
-
-            line-height: 1.92;
-
-            color: #403731;
-
-            overflow-wrap: break-word;
+            line-height: 1.95;
+            color: #342a25;
         }
 
         .reader-content.sans {
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         .reader-content p {
-            margin:
-                0
-                0
-                1.55em;
-        }
-
-        .reader-content div {
-            margin: 0;
+            margin: 0 0 1.6em;
         }
 
         .reader-content h1,
         .reader-content h2,
-        .reader-content h3,
-        .reader-content h4 {
-            color: #29221e;
-            line-height: 1.25;
-            font-weight: 400;
-        }
-
-        .reader-content h1 {
-            font-size: 36px;
-            margin: 1.8em 0 0.75em;
-        }
-
-        .reader-content h2 {
-            font-size: 31px;
-            margin: 1.8em 0 0.75em;
-        }
-
         .reader-content h3 {
-            font-size: 26px;
-            margin: 1.7em 0 0.7em;
-        }
-
-        .reader-content h4 {
-            font-size: 21px;
-            margin: 1.7em 0 0.7em;
-        }
-
-        .reader-content strong,
-        .reader-content b {
-            color: #29221e;
-        }
-
-        .reader-content blockquote {
-            margin: 2.2em 0;
-
-            padding:
-                5px
-                0
-                5px
-                27px;
-
-            border-left:
-                1px solid
-                #8f7b6e;
-
-            color: #71625a;
-        }
-
-        .reader-content ul,
-        .reader-content ol {
-            margin: 1.5em 0;
-            padding-left: 1.5em;
-        }
-
-        .reader-content li {
-            margin-bottom: 0.65em;
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            line-height: 1.2;
         }
 
         .reader-content img {
-            display: block;
-
-            width: auto;
             max-width: 100%;
             height: auto;
-
-            margin:
-                2.7em
-                auto;
         }
 
-        .reader-content a {
-            color: #6f5b50;
-
-            text-decoration: underline;
-
-            text-underline-offset: 3px;
-        }
-
-
-        /* =====================================================
-           END OF ENTRY
-        ===================================================== */
-
-        .end-of-entry {
-            width: 100%;
-            max-width: 700px;
-
-            margin:
-                65px
-                auto
-                0;
-
-            text-align: center;
-        }
-
-        .end-of-entry-line {
-            width: 34px;
-            height: 1px;
-
-            margin:
-                0
-                auto
-                18px;
-
-            background: #9b897d;
-        }
-
-        .end-of-entry-text {
-            margin: 0;
-
-            font-size: 13px;
-            font-weight: 700;
-
-            letter-spacing: 0.12em;
-
-            color: #927f73;
-
-            text-transform: uppercase;
-        }
-
-
-        /* =====================================================
-           NEWER ENTRY
-           THIS IS BEFORE COMMENTS
-        ===================================================== */
-
-        .reader-navigation {
-            width: 100%;
-            max-width: 700px;
-
-            margin:
-                45px
-                auto
-                0;
-
-            padding-top: 30px;
-
-            border-top:
-                1px solid
-                rgba(73,59,51,0.17);
-        }
-
-        .reader-nav-link {
+        .reader-controls {
             display: flex;
-            flex-direction: column;
-
-            gap: 8px;
-
-            width: 100%;
-
-            color: #5b4d45;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 7px;
+            margin: 0 0 55px;
         }
 
-        .reader-nav-link small {
-            font-size: 12px;
-            font-weight: 700;
-
-            letter-spacing: 0.12em;
-
-            color: #97867c;
-
-            text-transform: uppercase;
-        }
-
-        .reader-nav-link span {
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size: 18px;
-            line-height: 1.4;
-        }
-
-        .reader-nav-link:hover {
-            color: #29221e;
-        }
-async function prefillCommentName() {
-    if (!commentName) {
-        return;
-    }
-
-    try {
-        const { data } =
-            await supabaseClient.auth.getUser();
-
-        const user =
-            data?.user;
-
-        const metadata =
-            user?.user_metadata || {};
-
-        const nickname =
-            String(
-                metadata.nickname ||
-                metadata.display_name ||
-                metadata.name ||
-                ""
-            ).trim();
-
-        if (commentName.dataset.profileName) {
-    commentName.value =
-        commentName.dataset.profileName;
-} else {
-    commentName.value =
-        "";
-}
-
-commentContent.value =
-    "";
-
-    } catch (error) {
-        console.warn(
-            "Could not load the signed-in profile name:",
-            error
-        );
-    }
-}
-
-        /* =====================================================
-           COMMENTS
-        ===================================================== */
-
-        .comments-section {
-            width: 100%;
-            max-width: 700px;
-
-            margin:
-                60px
-                auto
-                0;
-
-            padding-top: 35px;
-
-            border-top:
-                1px solid
-                rgba(73,59,51,0.17);
-        }
-
-        .comments-heading {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-
-            margin:
-                0
-                0
-                35px;
-
-            font-size: 13px;
-            font-weight: 700;
-
-            letter-spacing: 0.10em;
-
-            color: #78665b;
-
-            text-transform: uppercase;
-        }
-
-        .comment-count {
-            color: #a6968b;
-        }
-
-        .comment-form {
-            margin-bottom: 55px;
-        }
-
-        .comment-input,
-        .comment-textarea {
-            display: block;
-
-            width: 100%;
-
-            padding: 14px 0;
-
-            border: none;
-
-            border-bottom:
-                1px solid
-                rgba(73,59,51,0.22);
-
-            outline: none;
-
+        .reader-control {
+            min-width: 35px;
+            height: 35px;
+            border: 1px solid rgba(73, 59, 51, 0.18);
             background: transparent;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size: 16px;
-
-            color: #403731;
-        }
-
-        .comment-input {
-            margin-bottom: 25px;
-        }
-
-        .comment-textarea {
-            min-height: 120px;
-
-            resize: vertical;
-
-            line-height: 1.7;
-        }
-
-        .comment-input::placeholder,
-        .comment-textarea::placeholder {
-            color: #a6968b;
-        }
-
-        .comment-input:focus,
-        .comment-textarea:focus {
-            border-bottom-color: #6f5b50;
-        }
-
-        .comment-submit {
-            margin-top: 25px;
-
-            padding: 8px 0;
-
-            border: none;
-
-            background: none;
-
+            color: #75645a;
             cursor: pointer;
-
-            font-size: 12px;
-            font-weight: 700;
-
-            letter-spacing: 0.12em;
-
-            color: #78665b;
-
-            text-transform: uppercase;
         }
 
-        .comment-submit:hover {
-            color: #29221e;
+        .reader-control:hover,
+        .reader-control.active {
+            background: #e7dfd7;
         }
-
-        .comment-status {
-            margin-top: 15px;
-
-            font-size: 12px;
-
-            color: #8c7d74;
-        }
-
-        .comment-list {
-            display: flex;
-            flex-direction: column;
-
-            gap: 38px;
-        }
-
-        .comment {
-            padding-top: 28px;
-
-            border-top:
-                1px solid
-                rgba(73,59,51,0.12);
-        }
-
-        .comment-meta {
-            display: flex;
-            align-items: baseline;
-
-            gap: 14px;
-
-            margin-bottom: 10px;
-        }
-
-        .comment-name {
-            margin: 0;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size: 17px;
-
-            color: #29221e;
-        }
-
-        .comment-date {
-            margin: 0;
-
-            font-size: 11px;
-            font-weight: 700;
-
-            letter-spacing: 0.08em;
-
-            color: #a6968b;
-
-            text-transform: uppercase;
-        }
-
-        .comment-body {
-            margin: 0;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size: 15px;
-
-            line-height: 1.75;
-
-            color: #756961;
-
-            white-space: pre-wrap;
-
-            overflow-wrap: break-word;
-        }
-
-
-        /* =====================================================
-           MORE FROM JOURNAL
-        ===================================================== */
 
         .more-journal {
-            width: 100%;
-            max-width: 920px;
-
-            margin:
-                100px
-                auto
-                0;
-
+            margin-top: 100px;
             padding-top: 45px;
-
-            border-top:
-                1px solid
-                rgba(73,59,51,0.17);
+            border-top: 1px solid rgba(73, 59, 51, 0.17);
         }
 
         .more-journal-title {
             margin: 0 0 30px;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size: 29px;
-
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 28px;
             font-weight: 400;
-
-            color: #29221e;
         }
 
         .more-journal-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(
-                    3,
-                    minmax(0, 1fr)
-                );
-
-            gap: 35px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
         }
 
-        .suggested-entry {
-            display: block;
-
-            padding-top: 20px;
-
-            border-top:
-                1px solid
-                rgba(73,59,51,0.14);
+        .more-journal-card {
+            padding: 25px;
+            border: 1px solid rgba(73, 59, 51, 0.15);
+            background: rgba(255,255,255,0.18);
         }
 
-        .suggested-date {
-            margin: 0 0 9px;
+        .more-journal-card:hover {
+            background: #ebe4dd;
+        }
 
-            font-size: 11px;
+        .more-journal-card-date {
+            margin-bottom: 10px;
+            font-size: 8px;
             font-weight: 700;
-
-            letter-spacing: 0.08em;
-
-            color: #9b897d;
-
+            letter-spacing: 0.15em;
+            color: #927f73;
             text-transform: uppercase;
         }
 
-        .suggested-title {
-            margin: 0;
+        .more-journal-card-title {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            line-height: 1.2;
+        }
 
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
+        .comments {
+            margin-top: 110px;
+            padding-top: 50px;
+            border-top: 1px solid rgba(73, 59, 51, 0.17);
+        }
 
-            font-size: 19px;
-
-            line-height: 1.35;
-
+        .comments-title {
+            margin: 0 0 35px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
             font-weight: 400;
-
-            color: #403731;
         }
 
-        .suggested-read {
-            display: block;
-
-            margin-top: 10px;
-
-            font-size: 12px;
-
-            color: #8c7d74;
+        .comment-form {
+            display: grid;
+            gap: 13px;
+            margin-bottom: 45px;
         }
 
-        .suggested-entry:hover .suggested-title {
+        .comment-input,
+        .comment-textarea {
+            width: 100%;
+            border: 1px solid rgba(73, 59, 51, 0.20);
+            border-radius: 0;
+            padding: 14px 15px;
+            outline: none;
+            background: rgba(255,255,255,0.35);
             color: #29221e;
         }
 
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        .site-footer {
-            width: 100%;
-
-            margin-top: 100px;
-
-            padding:
-                30px
-                5vw;
-
-            border-top:
-                1px solid
-                rgba(73,59,51,0.12);
+        .comment-input:focus,
+        .comment-textarea:focus {
+            border-color: #8f7b70;
         }
 
-        .site-footer p {
-            margin: 0;
+        .comment-textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
 
+        .comment-submit {
+            width: fit-content;
+            padding: 13px 22px;
+            border: 1px solid #5f4a3f;
+            background: #5f4a3f;
+            color: #fff;
+            cursor: pointer;
             font-size: 11px;
-
-            letter-spacing: 0.10em;
-
-            color: #978980;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
         }
 
+        .comment-submit:hover {
+            opacity: 0.88;
+        }
 
-        /* =====================================================
-           MOBILE
-        ===================================================== */
+        .comment-status {
+            min-height: 20px;
+            font-size: 13px;
+            color: #8a786e;
+        }
+
+        .comment-list {
+            display: grid;
+            gap: 25px;
+        }
+
+        .comment-item {
+            padding: 25px 0;
+            border-top: 1px solid rgba(73, 59, 51, 0.13);
+        }
+
+        .comment-author {
+            margin-bottom: 7px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .comment-date {
+            margin-bottom: 13px;
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            color: #a08f84;
+        }
+
+        .comment-body {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #5f534c;
+            white-space: pre-wrap;
+        }
 
         @media (max-width: 700px) {
 
             .journal-header {
-                padding:
-                    22px
-                    6vw;
-            }
-
-            .journal-intro,
-            .journal-list,
-            .reader-shell {
-                width: 88%;
+                padding: 20px 5vw;
             }
 
             .journal-intro {
-                padding:
-                    72px
-                    0
-                    62px;
-            }
-
-            .journal-title {
-                font-size: 58px;
-            }
-
-            .journal-description {
-                font-size: 16px;
+                padding: 75px 0 60px;
             }
 
             .journal-list {
@@ -1226,1403 +515,1076 @@ commentContent.value =
             }
 
             .journal-preview {
-                display: block;
-
-                padding:
-                    31px
-                    0
-                    36px;
-            }
-
-            .journal-preview:hover {
-                padding-left: 0;
-                padding-right: 0;
+                grid-template-columns: 1fr;
+                gap: 18px;
+                padding: 30px 0 35px;
             }
 
             .preview-meta {
-                padding: 0;
-                margin-bottom: 14px;
+                padding-top: 0;
             }
 
             .preview-number {
                 display: none;
             }
 
-            .preview-title {
-                font-size: 30px;
-            }
-
-            .preview-excerpt {
-                font-size: 15px;
-            }
-
             .reader-shell {
-                padding:
-                    58px
-                    0
-                    80px;
+                padding: 45px 0 75px;
             }
 
             .reader-top {
-                margin-bottom: 65px;
+                margin-bottom: 55px;
             }
 
-            .reader-title {
-                font-size: 45px;
-            }
-
-            .reader-header {
+            .reader-image {
                 margin-bottom: 40px;
-            }
-
-            .reader-content {
-                font-size: 17px;
-                line-height: 1.85;
-            }
-
-            .reading-preferences {
-                gap: 7px;
-            }
-
-            .reading-preferences-label {
-                width: 100%;
             }
 
             .more-journal-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
             }
 
-            .comments-section {
-                margin-top: 50px;
+            .comments {
+                margin-top: 75px;
             }
-
-            .comment-meta {
-                flex-direction: column;
-                gap: 4px;
-            }
-
         }
-        .welcome-strip {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 20px auto;
-    max-width: 1100px;
-    padding: 14px 20px;
-    border-radius: 12px;
-    background: #f8f3ed;
-    color: #4b4038;
-}
-
-.welcome-mark {
-    font-size: 24px;
-}
-
-.welcome-strip strong {
-    font-weight: 600;
-}
 
     </style>
 
 </head>
 
-
 <body>
 
-
-<div
-    class="reading-progress"
-    id="readingProgress"
-></div>
-
-
-<div class="journal-page">
-
-
-    <!-- =====================================================
-         HEADER
-    ===================================================== -->
-
-    <header class="journal-header">
-
-        <a
-            href="hed.html"
-            class="brand"
-        >
-
-            <span class="brand-name">
-                May Blooms
-            </span>
-
-            <span class="brand-subtitle">
-                Her Existential Drama
-            </span>
-
-        </a>
-
-
-        <a
-            href="hed.html"
-            class="back-link"
-        >
-            ← HED
-        </a>
-
-    </header>
-
-
-    <!-- =====================================================
-         JOURNAL INDEX
-    ===================================================== -->
-
-   <section
-    id="journalIndex"
-    class="journal-index"
->
-
-    <div class="welcome-strip">
-        <div class="welcome-mark">♡</div>
-        <div>
-            Welcome, <strong id="readerNickname">Reader</strong>.
-        </div>
-    </div>
-
-    <div class="journal-intro">
-
-            <p class="journal-kicker">
-                MAY BLOOMS
-            </p>
-
-            <h1 class="journal-title">
-                Journal
-            </h1>
-
-            <p class="journal-description">
-                Journals, because apparently I had things to say.
-            </p>
-
-            <div class="journal-mark"></div>
-
-        </div>
-
+    <div class="journal-page">
 
         <div
-            id="journalList"
-            class="journal-list"
-        >
+            id="readingProgress"
+            class="reading-progress"
+        ></div>
 
-            <div class="journal-status">
-                Loading journal...
-            </div>
+        <header class="journal-header">
 
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         READER
-    ===================================================== -->
-
-    <section
-        id="reader"
-        class="reader"
-    >
-
-        <article class="reader-shell">
-
-
-            <div class="reader-top">
-
-                <a
-                    href="#"
-                    id="readerBack"
-                    class="reader-back"
-                >
-                    ← Journal
-                </a>
-
-
-                <span class="reader-label">
+            <a
+                href="index.html"
+                class="brand"
+            >
+                <span class="brand-name">
                     May Blooms
                 </span>
 
-            </div>
-
-
-            <header class="reader-header">
-
-                <p
-                    id="readerDate"
-                    class="reader-date"
-                ></p>
-
-
-                <h1
-                    id="readerTitle"
-                    class="reader-title"
-                ></h1>
-
-
-                <div
-                    class="reader-meta"
-                    id="readerMeta"
-                ></div>
-
-
-                <div class="reader-rule"></div>
-
-            </header>
-
-
-            <img
-                id="readerImage"
-                class="reader-image"
-                style="display:none;"
-                alt=""
-            >
-
-
-            <!-- =================================================
-                 READING PREFERENCES
-            ================================================= -->
-
-            <div class="reading-preferences">
-
-                <span class="reading-preferences-label">
-                    Reading Preferences
+                <span class="brand-subtitle">
+                    A quiet corner of the internet
                 </span>
+            </a>
 
-                <button
-                    type="button"
-                    class="reading-button"
-                    id="fontDecrease"
-                >
-                    A−
-                </button>
+            <a
+                href="index.html"
+                class="back-link"
+            >
+                Home
+            </a>
 
-                <button
-                    type="button"
-                    class="reading-button"
-                    id="fontIncrease"
-                >
-                    A+
-                </button>
-
-                <button
-                    type="button"
-                    class="reading-button"
-                    id="fontSerif"
-                >
-                    Serif
-                </button>
-
-                <button
-                    type="button"
-                    class="reading-button"
-                    id="fontSans"
-                >
-                    Sans
-                </button>
-
-            </div>
+        </header>
 
 
-            <!-- =================================================
-                 ARTICLE
-            ================================================= -->
-
-            <div
-                id="readerContent"
-                class="reader-content"
-            ></div>
-
-
-            <!-- =================================================
-                 END OF ENTRY
-            ================================================= -->
-
-            <div class="end-of-entry">
-
-                <div class="end-of-entry-line"></div>
-
-                <p class="end-of-entry-text">
-                    End of entry
-                </p>
-
-            </div>
-
-
-            <!-- =================================================
-                 NEWER ENTRY
-                 ONLY BEFORE COMMENTS
-            ================================================= -->
-
-            <nav
-                id="readerNavigation"
-                class="reader-navigation"
-            ></nav>
-
-
-            <!-- =================================================
-                 COMMENTS
-            ================================================= -->
+        <main>
 
             <section
-                class="comments-section"
-                id="commentsSection"
+                id="journalIndex"
+                class="journal-index"
             >
 
-                <h2 class="comments-heading">
+                <div class="journal-intro">
 
-                    Comments
+                    <p class="journal-kicker">
+                        Personal writings
+                    </p>
 
-                    <span
-                        class="comment-count"
-                        id="commentCount"
-                    >
-                        0 comments
-                    </span>
+                    <h1 class="journal-title">
+                        Journals
+                    </h1>
 
-                </h2>
+                    <p class="journal-description">
+                        Small thoughts, quiet observations,
+                        and pieces of life worth keeping.
+                    </p>
 
+                    <div class="journal-mark"></div>
 
-                <form
-                    class="comment-form"
-                    id="commentForm"
-                >
-
-                    <input
-                        type="text"
-                        id="commentName"
-                        class="comment-input"
-                        placeholder="Your name"
-                        maxlength="80"
-                        required
-                    >
-
-
-                    <textarea
-                        id="commentContent"
-                        class="comment-textarea"
-                        placeholder="Write a comment..."
-                        maxlength="2000"
-                        required
-                    ></textarea>
-
-
-                    <button
-                        type="submit"
-                        class="comment-submit"
-                    >
-                        Post comment →
-                    </button>
-
-
-                    <div
-                        id="commentStatus"
-                        class="comment-status"
-                    ></div>
-
-                </form>
+                </div>
 
 
                 <div
-                    id="commentList"
-                    class="comment-list"
-                ></div>
+                    id="journalList"
+                    class="journal-list"
+                >
+
+                    <div class="journal-status">
+                        Loading journals...
+                    </div>
+
+                </div>
 
             </section>
 
 
-            <!-- =================================================
-                 MORE FROM JOURNAL
-            ================================================= -->
-
             <section
-                class="more-journal"
-                id="moreJournal"
+                id="reader"
+                class="reader"
             >
 
-                <h2 class="more-journal-title">
-                    More from the Journal
-                </h2>
+                <div class="reader-shell">
+
+                    <div class="reader-top">
+
+                        <a
+                            href="journal.html"
+                            id="readerBack"
+                            class="reader-back"
+                        >
+                            ← All journals
+                        </a>
+
+                        <div
+                            id="readerLabel"
+                            class="reader-label"
+                        >
+                            Journal
+                        </div>
+
+                    </div>
 
 
-                <div
-                    class="more-journal-grid"
-                    id="moreJournalGrid"
-                ></div>
+                    <header class="reader-header">
+
+                        <p
+                            id="readerDate"
+                            class="reader-date"
+                        ></p>
+
+                        <h1
+                            id="readerTitle"
+                            class="reader-title"
+                        ></h1>
+
+                        <div class="reader-meta">
+
+                            <span>
+                                Written by
+                            </span>
+
+                            <span
+                                id="readerNickname"
+                            ></span>
+
+                        </div>
+
+                        <div class="reader-rule"></div>
+
+                    </header>
+
+
+                    <img
+                        id="readerImage"
+                        class="reader-image"
+                        alt=""
+                    >
+
+
+                    <div class="reader-controls">
+
+                        <button
+                            id="fontDecrease"
+                            class="reader-control"
+                            type="button"
+                            aria-label="Decrease text size"
+                        >
+                            A-
+                        </button>
+
+                        <button
+                            id="fontIncrease"
+                            class="reader-control"
+                            type="button"
+                            aria-label="Increase text size"
+                        >
+                            A+
+                        </button>
+
+                        <button
+                            id="fontSerif"
+                            class="reader-control active"
+                            type="button"
+                        >
+                            Serif
+                        </button>
+
+                        <button
+                            id="fontSans"
+                            class="reader-control"
+                            type="button"
+                        >
+                            Sans
+                        </button>
+
+                    </div>
+
+
+                    <article
+                        id="readerContent"
+                        class="reader-content"
+                    ></article>
+
+
+                    <section
+                        id="moreJournal"
+                        class="more-journal"
+                    ></section>
+
+
+                    <section class="comments">
+
+                        <h2 class="comments-title">
+                            Comments
+                        </h2>
+
+                        <form
+                            id="commentForm"
+                            class="comment-form"
+                        >
+
+                            <input
+                                id="commentName"
+                                class="comment-input"
+                                type="text"
+                                placeholder="Your name"
+                                autocomplete="name"
+                                required
+                            >
+
+                            <textarea
+                                id="commentContent"
+                                class="comment-textarea"
+                                placeholder="Write a comment..."
+                                required
+                            ></textarea>
+
+                            <button
+                                class="comment-submit"
+                                type="submit"
+                            >
+                                Post comment
+                            </button>
+
+                            <div
+                                id="commentStatus"
+                                class="comment-status"
+                                aria-live="polite"
+                            ></div>
+
+                        </form>
+
+
+                        <div
+                            id="commentList"
+                            class="comment-list"
+                        ></div>
+
+                    </section>
+
+                </div>
 
             </section>
 
+        </main>
 
-        </article>
+    </div>
 
-    </section>
 
+    <!-- SUPABASE -->
 
-    <!-- =====================================================
-         FOOTER
-    ===================================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <footer class="site-footer">
 
-        <p>
-            © 2026 May Blooms · HED
-        </p>
+    <script>
 
-    </footer>
+        const SUPABASE_URL =
+            "https://YOUR-PROJECT.supabase.co";
 
+        const SUPABASE_ANON_KEY =
+            "YOUR-ANON-KEY";
 
-</div>
 
-
-<!-- =========================================================
-     SUPABASE
-========================================================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="supabase-config.js"></script>
-<script src="reader-auth.js"></script>
-
-
-<script>
-
-    /* =========================================================
-       ELEMENTS
-    ========================================================= */
-
-    const journalIndex =
-        document.getElementById(
-            "journalIndex"
-        );
-
-    const journalList =
-        document.getElementById(
-            "journalList"
-        );
-
-    const reader =
-        document.getElementById(
-            "reader"
-        );
-
-    const readerBack =
-        document.getElementById(
-            "readerBack"
-        );
-
-    const readerDate =
-        document.getElementById(
-            "readerDate"
-        );
-
-    const readerTitle =
-        document.getElementById(
-            "readerTitle"
-        );
-
-    const readerMeta =
-        document.getElementById(
-            "readerMeta"
-        );
-
-    const readerImage =
-        document.getElementById(
-            "readerImage"
-        );
-
-    const readerContent =
-        document.getElementById(
-            "readerContent"
-        );
-
-    const readerNavigation =
-        document.getElementById(
-            "readerNavigation"
-        );
-
-    const readingProgress =
-        document.getElementById(
-            "readingProgress"
-        );
-
-    const commentForm =
-        document.getElementById(
-            "commentForm"
-        );
-
-    const commentName =
-        document.getElementById(
-            "commentName"
-        );
-
-    const commentContent =
-        document.getElementById(
-            "commentContent"
-        );
-
-    const commentStatus =
-        document.getElementById(
-            "commentStatus"
-        );
-
-    const commentList =
-        document.getElementById(
-            "commentList"
-        );
-
-    const commentCount =
-        document.getElementById(
-            "commentCount"
-        );
-
-    const moreJournalGrid =
-        document.getElementById(
-            "moreJournalGrid"
-        );
-
-
-    /* =========================================================
-       DATA
-    ========================================================= */
-
-    let journalEntries = [];
-
-    let currentEntryId = null;
-
-
-    /* =========================================================
-       DATE
-    ========================================================= */
-
-    function formatDate(
-        dateString
-    ) {
-
-        if (!dateString) {
-            return "";
-        }
-
-        const date =
-            new Date(dateString);
-
-        return date.toLocaleDateString(
-            "en-US",
-            {
-                month: "long",
-                day: "numeric",
-                year: "numeric"
-            }
-        );
-    }
-
-
-    /* =========================================================
-       READING TIME
-    ========================================================= */
-
-    function calculateReadingTime(
-        html
-    ) {
-
-        if (!html) {
-            return 1;
-        }
-
-        const temporary =
-            document.createElement("div");
-
-        temporary.innerHTML =
-            html;
-
-        const text =
-            (
-                temporary.textContent ||
-                temporary.innerText ||
-                ""
-            )
-            .replace(/\s+/g, " ")
-            .trim();
-
-        const words =
-            text
-                ? text.split(" ").length
-                : 0;
-
-        return Math.max(
-            1,
-            Math.ceil(
-                words / 220
-            )
-        );
-    }
-
-
-    /* =========================================================
-       EXCERPT
-    ========================================================= */
-
-    function createExcerpt(
-        html
-    ) {
-
-        if (!html) {
-            return "";
-        }
-
-        const temporary =
-            document.createElement("div");
-
-        temporary.innerHTML =
-            html;
-
-        const text =
-            temporary.textContent ||
-            temporary.innerText ||
-            "";
-
-        const cleaned =
-            text
-                .replace(/\s+/g, " ")
-                .trim();
-
-        if (
-            cleaned.length <= 220
-        ) {
-            return cleaned;
-        }
-
-        return (
-            cleaned
-                .substring(0, 220)
-                .trim() +
-            "…"
-        );
-    }
-
-
-    /* =========================================================
-       RENDER INDEX
-    ========================================================= */
-
-    function renderJournalIndex() {
-
-        journalList.innerHTML =
-            "";
-
-        if (
-            !journalEntries ||
-            journalEntries.length === 0
-        ) {
-
-            const empty =
-                document.createElement(
-                    "div"
-                );
-
-            empty.className =
-                "journal-status";
-
-            empty.textContent =
-                "Nothing here yet.";
-
-            journalList.appendChild(
-                empty
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_ANON_KEY
             );
 
-            return;
+
+        const journalIndex =
+            document.getElementById(
+                "journalIndex"
+            );
+
+        const journalList =
+            document.getElementById(
+                "journalList"
+            );
+
+        const reader =
+            document.getElementById(
+                "reader"
+            );
+
+        const readerDate =
+            document.getElementById(
+                "readerDate"
+            );
+
+        const readerTitle =
+            document.getElementById(
+                "readerTitle"
+            );
+
+        const readerNickname =
+            document.getElementById(
+                "readerNickname"
+            );
+
+        const readerImage =
+            document.getElementById(
+                "readerImage"
+            );
+
+        const readerContent =
+            document.getElementById(
+                "readerContent"
+            );
+
+        const readerLabel =
+            document.getElementById(
+                "readerLabel"
+            );
+
+        const readerBack =
+            document.getElementById(
+                "readerBack"
+            );
+
+        const moreJournal =
+            document.getElementById(
+                "moreJournal"
+            );
+
+        const commentForm =
+            document.getElementById(
+                "commentForm"
+            );
+
+        const commentName =
+            document.getElementById(
+                "commentName"
+            );
+
+        const commentContent =
+            document.getElementById(
+                "commentContent"
+            );
+
+        const commentStatus =
+            document.getElementById(
+                "commentStatus"
+            );
+
+        const commentList =
+            document.getElementById(
+                "commentList"
+            );
+
+        const readingProgress =
+            document.getElementById(
+                "readingProgress"
+            );
+
+
+        let journalEntries = [];
+
+        let currentEntryId = null;
+
+
+        /* =========================================================
+           LOAD LOGGED-IN PROFILE NAME
+           ========================================================= */
+
+        async function prefillCommentName() {
+
+            if (!commentName) {
+                return;
+            }
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient.auth.getUser();
+
+
+                if (error) {
+
+                    console.warn(
+                        "Could not load the signed-in profile:",
+                        error
+                    );
+
+                    return;
+                }
+
+
+                const user =
+                    data?.user;
+
+
+                const nickname =
+                    String(
+                        user?.user_metadata?.nickname ||
+                        user?.user_metadata?.display_name ||
+                        user?.user_metadata?.name ||
+                        ""
+                    ).trim();
+
+
+                if (nickname) {
+
+                    commentName.value =
+                        nickname;
+
+                    commentName.dataset.profileName =
+                        nickname;
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "Could not load the signed-in profile name:",
+                    error
+                );
+
+            }
+
         }
 
 
-        journalEntries.forEach(
-            function(
-                entry,
-                index
+        /* =========================================================
+           FORMAT DATE
+           ========================================================= */
+
+        function formatDate(
+            value
+        ) {
+
+            if (!value) {
+                return "";
+            }
+
+            const date =
+                new Date(
+                    value
+                );
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+                return value;
+            }
+
+            return date.toLocaleDateString(
+                "en-US",
+                {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric"
+                }
+            );
+
+        }
+
+
+        /* =========================================================
+           READING TIME
+           ========================================================= */
+
+        function calculateReadingTime(
+            content
+        ) {
+
+            const text =
+                String(
+                    content || ""
+                )
+                    .replace(
+                        /<[^>]*>/g,
+                        " "
+                    )
+                    .replace(
+                        /\s+/g,
+                        " "
+                    )
+                    .trim();
+
+
+            const words =
+                text
+                    ? text.split(" ").length
+                    : 0;
+
+
+            const minutes =
+                Math.max(
+                    1,
+                    Math.ceil(
+                        words / 200
+                    )
+                );
+
+
+            return (
+                minutes === 1
+                    ? "1 minute read"
+                    : minutes + " minutes read"
+            );
+
+        }
+
+
+        /* =========================================================
+           RENDER JOURNAL INDEX
+           ========================================================= */
+
+        function renderJournalIndex() {
+
+            journalList.innerHTML =
+                "";
+
+
+            if (
+                !journalEntries.length
             ) {
 
-                const link =
-                    document.createElement(
-                        "a"
-                    );
-
-                link.className =
-                    "journal-preview";
-
-                link.href =
-                    "journal.html?id=" +
-                    encodeURIComponent(
-                        entry.id
-                    );
-
-
-                const meta =
+                const empty =
                     document.createElement(
                         "div"
                     );
 
-                meta.className =
-                    "preview-meta";
+                empty.className =
+                    "journal-status";
 
-
-                const date =
-                    document.createElement(
-                        "p"
-                    );
-
-                date.className =
-                    "preview-date";
-
-                date.textContent =
-                    formatDate(
-                        entry.published_at
-                    );
-
-                meta.appendChild(
-                    date
-                );
-
-
-                const number =
-                    document.createElement(
-                        "span"
-                    );
-
-                number.className =
-                    "preview-number";
-
-                number.textContent =
-                    String(
-                        index + 1
-                    ).padStart(
-                        2,
-                        "0"
-                    );
-
-                meta.appendChild(
-                    number
-                );
-
-
-                const body =
-                    document.createElement(
-                        "div"
-                    );
-
-                body.className =
-                    "preview-body";
-
-
-                const title =
-                    document.createElement(
-                        "h2"
-                    );
-
-                title.className =
-                    "preview-title";
-
-                title.textContent =
-                    entry.title ||
-                    "Untitled";
-
-
-                const excerpt =
-                    document.createElement(
-                        "p"
-                    );
-
-                excerpt.className =
-                    "preview-excerpt";
-
-                excerpt.textContent =
-                    createExcerpt(
-                        entry.content
-                    );
-
-
-                const read =
-                    document.createElement(
-                        "span"
-                    );
-
-                read.className =
-                    "preview-read";
-
-                read.textContent =
-                    "Read entry →";
-
-
-                body.appendChild(
-                    title
-                );
-
-                body.appendChild(
-                    excerpt
-                );
-
-                body.appendChild(
-                    read
-                );
-
-
-                link.appendChild(
-                    meta
-                );
-
-                link.appendChild(
-                    body
-                );
-
+                empty.textContent =
+                    "No journal entries yet.";
 
                 journalList.appendChild(
-                    link
+                    empty
                 );
 
+                return;
             }
-        );
-    }
 
 
-    /* =========================================================
-       NEWER ENTRY ONLY
-    ========================================================= */
+            journalEntries.forEach(
+                function(
+                    entry,
+                    index
+                ) {
 
-    function renderReaderNavigation(
-        index
-    ) {
-
-        readerNavigation.innerHTML =
-            "";
-
-
-        const newer =
-            journalEntries[
-                index - 1
-            ];
+                    const link =
+                        document.createElement(
+                            "a"
+                        );
 
 
-        if (!newer) {
-            return;
+                    link.href =
+                        "journal.html?id=" +
+                        encodeURIComponent(
+                            entry.id
+                        );
+
+
+                    link.className =
+                        "journal-preview";
+
+
+                    const meta =
+                        document.createElement(
+                            "div"
+                        );
+
+                    meta.className =
+                        "preview-meta";
+
+
+                    const date =
+                        document.createElement(
+                            "p"
+                        );
+
+                    date.className =
+                        "preview-date";
+
+                    date.textContent =
+                        formatDate(
+                            entry.published_at
+                        );
+
+
+                    const number =
+                        document.createElement(
+                            "span"
+                        );
+
+                    number.className =
+                        "preview-number";
+
+                    number.textContent =
+                        String(
+                            index + 1
+                        ).padStart(
+                            2,
+                            "0"
+                        );
+
+
+                    meta.appendChild(
+                        date
+                    );
+
+                    meta.appendChild(
+                        number
+                    );
+
+
+                    const body =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    const title =
+                        document.createElement(
+                            "h2"
+                        );
+
+                    title.className =
+                        "preview-title";
+
+                    title.textContent =
+                        entry.title ||
+                        "Untitled";
+
+
+                    const excerpt =
+                        document.createElement(
+                            "p"
+                        );
+
+                    excerpt.className =
+                        "preview-excerpt";
+
+
+                    const cleanContent =
+                        String(
+                            entry.content || ""
+                        )
+                            .replace(
+                                /<[^>]*>/g,
+                                " "
+                            )
+                            .replace(
+                                /\s+/g,
+                                " "
+                            )
+                            .trim();
+
+
+                    excerpt.textContent =
+                        cleanContent.length >
+                        180
+                            ? cleanContent.slice(
+                                0,
+                                180
+                            ) + "…"
+                            : cleanContent;
+
+
+                    const read =
+                        document.createElement(
+                            "span"
+                        );
+
+                    read.className =
+                        "preview-read";
+
+                    read.textContent =
+                        "Read journal →";
+
+
+                    body.appendChild(
+                        title
+                    );
+
+                    body.appendChild(
+                        excerpt
+                    );
+
+                    body.appendChild(
+                        read
+                    );
+
+
+                    link.appendChild(
+                        meta
+                    );
+
+                    link.appendChild(
+                        body
+                    );
+
+
+                    journalList.appendChild(
+                        link
+                    );
+
+                }
+            );
+
         }
 
 
-        const link =
-            document.createElement(
-                "a"
+        /* =========================================================
+           COMMENTS
+           ========================================================= */
+
+        async function loadComments(
+            entryId
+        ) {
+
+            commentList.innerHTML =
+                "";
+
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("comments")
+                    .select("*")
+                    .eq(
+                        "target_type",
+                        "journal"
+                    )
+                    .eq(
+                        "target_id",
+                        entryId
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending: true
+                        }
+                    );
+
+
+            if (error) {
+
+                console.error(
+                    "Could not load comments:",
+                    error
+                );
+
+                commentStatus.textContent =
+                    "Could not load comments.";
+
+                return;
+            }
+
+
+            commentStatus.textContent =
+                "";
+
+
+            if (
+                !data ||
+                !data.length
+            ) {
+
+                const empty =
+                    document.createElement(
+                        "div"
+                    );
+
+                empty.className =
+                    "comment-item";
+
+                empty.textContent =
+                    "No comments yet.";
+
+                commentList.appendChild(
+                    empty
+                );
+
+                return;
+            }
+
+
+            data.forEach(
+                function(
+                    comment
+                ) {
+
+                    const item =
+                        document.createElement(
+                            "article"
+                        );
+
+                    item.className =
+                        "comment-item";
+
+
+                    const author =
+                        document.createElement(
+                            "div"
+                        );
+
+                    author.className =
+                        "comment-author";
+
+                    author.textContent =
+                        comment.name ||
+                        "Anonymous";
+
+
+                    const date =
+                        document.createElement(
+                            "div"
+                        );
+
+                    date.className =
+                        "comment-date";
+
+                    date.textContent =
+                        comment.created_at
+                            ? formatDate(
+                                comment.created_at
+                            )
+                            : "";
+
+
+                    const body =
+                        document.createElement(
+                            "div"
+                        );
+
+                    body.className =
+                        "comment-body";
+
+                    body.textContent =
+                        comment.content ||
+                        "";
+
+
+                    item.appendChild(
+                        author
+                    );
+
+                    item.appendChild(
+                        date
+                    );
+
+                    item.appendChild(
+                        body
+                    );
+
+
+                    commentList.appendChild(
+                        item
+                    );
+
+                }
             );
 
-        link.className =
-            "reader-nav-link";
-
-        link.href =
-            "journal.html?id=" +
-            encodeURIComponent(
-                newer.id
-            );
+        }
 
 
-        const label =
-            document.createElement(
-                "small"
-            );
+        /* =========================================================
+           MORE JOURNAL
+           ========================================================= */
 
-        label.textContent =
-            "Newer entry";
+        function renderMoreJournal(
+            currentIndex
+        ) {
 
-
-        const title =
-            document.createElement(
-                "span"
-            );
-
-        title.textContent =
-            newer.title ||
-            "Untitled";
+            moreJournal.innerHTML =
+                "";
 
 
-        link.appendChild(
-            label
-        );
-
-        link.appendChild(
-            title
-        );
-
-
-        readerNavigation.appendChild(
-            link
-        );
-    }
-
-
-    /* =========================================================
-       MORE FROM JOURNAL
-    ========================================================= */
-
-    function renderMoreJournal(
-        currentIndex
-    ) {
-
-        moreJournalGrid.innerHTML =
-            "";
-
-
-        const suggestions =
-            journalEntries
-                .filter(
+            const others =
+                journalEntries.filter(
                     function(
-                        entry
+                        item
                     ) {
+
                         return String(
-                            entry.id
+                            item.id
                         ) !==
                         String(
                             journalEntries[
                                 currentIndex
                             ]?.id
                         );
+
                     }
-                )
-                .slice(
+                ).slice(
                     0,
-                    3
+                    4
                 );
 
 
-        suggestions.forEach(
-            function(
-                entry
-            ) {
-
-                const link =
-                    document.createElement(
-                        "a"
-                    );
-
-                link.className =
-                    "suggested-entry";
-
-                link.href =
-                    "journal.html?id=" +
-                    encodeURIComponent(
-                        entry.id
-                    );
-
-
-                const date =
-                    document.createElement(
-                        "p"
-                    );
-
-                date.className =
-                    "suggested-date";
-
-                date.textContent =
-                    formatDate(
-                        entry.published_at
-                    );
-
-
-                const title =
-                    document.createElement(
-                        "h3"
-                    );
-
-                title.className =
-                    "suggested-title";
-
-                title.textContent =
-                    entry.title ||
-                    "Untitled";
-
-
-                const read =
-                    document.createElement(
-                        "span"
-                    );
-
-                read.className =
-                    "suggested-read";
-
-                read.textContent =
-                    calculateReadingTime(
-                        entry.content
-                    ) +
-                    " minute read";
-
-
-                link.appendChild(
-                    date
-                );
-
-                link.appendChild(
-                    title
-                );
-
-                link.appendChild(
-                    read
-                );
-
-
-                moreJournalGrid.appendChild(
-                    link
-                );
-
+            if (!others.length) {
+                return;
             }
-        );
-    }
 
 
-    /* =========================================================
-       COMMENTS
-    ========================================================= */
-
-    async function loadComments(
-        entryId
-    ) {
-
-        commentList.innerHTML =
-            "";
-
-        commentCount.textContent =
-            "0 comments";
-
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("comments")
-                .select(
-                    "id,name,content,created_at"
-                )
-                .eq(
-                    "target_type",
-                    "journal"
-                )
-                .eq(
-                    "target_id",
-                    entryId
-                )
-                .order(
-                    "created_at",
-                    {
-                        ascending: true
-                    }
+            const heading =
+                document.createElement(
+                    "h2"
                 );
 
+            heading.className =
+                "more-journal-title";
 
-        if (error) {
-
-            console.error(
-                "Could not load comments:",
-                error
-            );
-
-            return;
-        }
+            heading.textContent =
+                "More journals";
 
 
-        const comments =
-            data || [];
-
-
-        commentCount.textContent =
-            comments.length +
-            (
-                comments.length === 1
-                    ? " comment"
-                    : " comments"
-            );
-
-
-        comments.forEach(
-            function(
-                comment
-            ) {
-
-                const article =
-                    document.createElement(
-                        "article"
-                    );
-
-                article.className =
-                    "comment";
-
-
-                const meta =
-                    document.createElement(
-                        "div"
-                    );
-
-                meta.className =
-                    "comment-meta";
-
-
-                const name =
-                    document.createElement(
-                        "p"
-                    );
-
-                name.className =
-                    "comment-name";
-
-                name.textContent =
-                    comment.name ||
-                    "Anonymous";
-
-
-                const date =
-                    document.createElement(
-                        "p"
-                    );
-
-                date.className =
-                    "comment-date";
-
-                date.textContent =
-                    formatDate(
-                        comment.created_at
-                    );
-
-
-                meta.appendChild(
-                    name
+            const grid =
+                document.createElement(
+                    "div"
                 );
 
-                meta.appendChild(
-                    date
-                );
+            grid.className =
+                "more-journal-grid";
 
 
-                const body =
-                    document.createElement(
-                        "p"
-                    );
-
-                body.className =
-                    "comment-body";
-
-                body.textContent =
-                    comment.content ||
-                    "";
-
-
-                article.appendChild(
-                    meta
-                );
-
-                article.appendChild(
-                    body
-                );
-
-
-                commentList.appendChild(
-                    article
-                );
-
-            }
-        );
-    }
-
-
-    /* =========================================================
-       OPEN READER
-    ========================================================= */
-
-    function openReader(
-        entry
-    ) {
-
-        const index =
-            journalEntries.findIndex(
+            others.forEach(
                 function(
-                    item
+                    entry
                 ) {
 
-                    return String(
-                        item.id
-                    ) ===
-                    String(
-                        entry.id
+                    const link =
+                        document.createElement(
+                            "a"
+                        );
+
+                    link.className =
+                        "more-journal-card";
+
+                    link.href =
+                        "journal.html?id=" +
+                        encodeURIComponent(
+                            entry.id
+                        );
+
+
+                    const date =
+                        document.createElement(
+                            "div"
+                        );
+
+                    date.className =
+                        "more-journal-card-date";
+
+                    date.textContent =
+                        formatDate(
+                            entry.published_at
+                        );
+
+
+                    const title =
+                        document.createElement(
+                            "div"
+                        );
+
+                    title.className =
+                        "more-journal-card-title";
+
+                    title.textContent =
+                        entry.title ||
+                        "Untitled";
+
+
+                    link.appendChild(
+                        date
+                    );
+
+                    link.appendChild(
+                        title
+                    );
+
+
+                    grid.appendChild(
+                        link
                     );
 
                 }
             );
 
 
-        currentEntryId =
-            entry.id;
-
-
-        journalIndex.style.display =
-            "none";
-
-        reader.classList.add(
-            "active"
-        );
-
-
-        readerDate.textContent =
-            formatDate(
-                entry.published_at
+            moreJournal.appendChild(
+                heading
             );
 
-
-        readerTitle.textContent =
-            entry.title ||
-            "Untitled";
-
-
-        const minutes =
-            calculateReadingTime(
-                entry.content
+            moreJournal.appendChild(
+                grid
             );
 
-
-        readerMeta.textContent =
-            minutes +
-            (
-                minutes === 1
-                    ? " minute read"
-                    : " minutes read"
-            );
-
-
-        if (entry.image_url) {
-
-            readerImage.src =
-                entry.image_url;
-
-            readerImage.alt =
-                entry.title ||
-                "Journal image";
-
-            readerImage.style.display =
-                "block";
-
-        } else {
-
-            readerImage.removeAttribute(
-                "src"
-            );
-
-            readerImage.style.display =
-                "none";
         }
 
 
-        readerContent.innerHTML =
-            entry.content ||
-            "";
+        /* =========================================================
+           NAVIGATION
+           ========================================================= */
 
-
-        renderReaderNavigation(
+        function renderReaderNavigation(
             index
-        );
+        ) {
 
-
-        renderMoreJournal(
-            index
-        );
-
-
-        loadComments(
-            entry.id
-        );
-
-
-        window.scrollTo(
-            0,
-            0
-        );
-
-    }
-
-
-    /* =========================================================
-       URL
-    ========================================================= */
-
-    function getRequestedId() {
-
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
-
-        return params.get(
-            "id"
-        );
-    }
-
-
-    /* =========================================================
-       LOAD JOURNAL
-    ========================================================= */
-
-    async function loadJournal() {
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("journal_entries")
-                .select("*")
-                .order(
-                    "published_at",
-                    {
-                        ascending: false
-                    }
+            readerLabel.textContent =
+                "Journal " +
+                String(
+                    index + 1
+                ).padStart(
+                    2,
+                    "0"
                 );
 
-
-        if (error) {
-
-            console.error(
-                "Error loading journal:",
-                error
-            );
-
-            journalList.innerHTML =
-                "";
-
-            const message =
-                document.createElement(
-                    "div"
-                );
-
-            message.className =
-                "journal-status";
-
-            message.textContent =
-                "Unable to load the journal.";
-
-            journalList.appendChild(
-                message
-            );
-
-            return;
         }
 
 
-        journalEntries =
-            data || [];
+        /* =========================================================
+           OPEN READER
+           ========================================================= */
 
+        function openReader(
+            entry
+        ) {
 
-        const requestedId =
-            getRequestedId();
-
-
-        if (requestedId) {
-
-            const entry =
-                journalEntries.find(
+            const index =
+                journalEntries.findIndex(
                     function(
                         item
                     ) {
@@ -2631,389 +1593,616 @@ commentContent.value =
                             item.id
                         ) ===
                         String(
-                            requestedId
+                            entry.id
                         );
 
                     }
                 );
 
 
-            if (entry) {
+            currentEntryId =
+                entry.id;
 
-                openReader(
-                    entry
+
+            journalIndex.style.display =
+                "none";
+
+            reader.classList.add(
+                "active"
+            );
+
+
+            readerDate.textContent =
+                formatDate(
+                    entry.published_at
                 );
 
-                return;
+
+            readerTitle.textContent =
+                entry.title ||
+                "Untitled";
+
+
+            readerNickname.textContent =
+                window.readerNickname ||
+                "May Blooms";
+
+
+            readerLabel.textContent =
+                calculateReadingTime(
+                    entry.content
+                );
+
+
+            if (entry.image_url) {
+
+                readerImage.src =
+                    entry.image_url;
+
+                readerImage.alt =
+                    entry.title ||
+                    "Journal image";
+
+                readerImage.style.display =
+                    "block";
+
+            } else {
+
+                readerImage.removeAttribute(
+                    "src"
+                );
+
+                readerImage.style.display =
+                    "none";
             }
+
+
+            readerContent.innerHTML =
+                entry.content ||
+                "";
+
+
+            renderReaderNavigation(
+                index
+            );
+
+
+            renderMoreJournal(
+                index
+            );
+
+
+            loadComments(
+                entry.id
+            );
+
+
+            window.scrollTo(
+                0,
+                0
+            );
+
         }
 
 
-        renderJournalIndex();
-    }
+        /* =========================================================
+           URL
+           ========================================================= */
 
+        function getRequestedId() {
 
-    /* =========================================================
-       BACK TO JOURNAL
-    ========================================================= */
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
 
-    readerBack.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            window.location.href =
-                "journal.html";
+            return params.get(
+                "id"
+            );
 
         }
-    );
 
 
-    /* =========================================================
-       COMMENTS SUBMIT
-    ========================================================= */
+        /* =========================================================
+           LOAD JOURNAL
+           ========================================================= */
 
-    commentForm.addEventListener(
-        "submit",
-        async function(event) {
-
-            event.preventDefault();
-
-
-            if (!currentEntryId) {
-                return;
-            }
-
-
-const profileName =
-    String(
-        commentName.dataset.profileName ||
-        ""
-    ).trim();
-
-const name =
-    profileName ||
-    commentName.value.trim();
-
-const content =
-    commentContent.value.trim();
-
-
-            if (!name || !content) {
-                return;
-            }
-
-
-            commentStatus.textContent =
-                "Posting...";
-
+        async function loadJournal() {
 
             const {
+                data,
                 error
             } =
                 await supabaseClient
-                    .from("comments")
-                    .insert({
-                        target_type:
-                            "journal",
-
-                        target_id:
-                            currentEntryId,
-
-                        name,
-
-                        content
-                    });
+                    .from("journal_entries")
+                    .select("*")
+                    .order(
+                        "published_at",
+                        {
+                            ascending: false
+                        }
+                    );
 
 
             if (error) {
 
                 console.error(
-                    "Could not post comment:",
+                    "Error loading journal:",
                     error
                 );
 
-                commentStatus.textContent =
-                    "Could not post comment.";
+                journalList.innerHTML =
+                    "";
+
+
+                const message =
+                    document.createElement(
+                        "div"
+                    );
+
+                message.className =
+                    "journal-status";
+
+                message.textContent =
+                    "Unable to load the journal.";
+
+
+                journalList.appendChild(
+                    message
+                );
 
                 return;
             }
 
 
-            commentName.value =
-                "";
-
-            commentContent.value =
-                "";
-
-            commentStatus.textContent =
-                "Comment posted.";
+            journalEntries =
+                data || [];
 
 
-            await loadComments(
-                currentEntryId
-            );
+            const requestedId =
+                getRequestedId();
+
+
+            if (requestedId) {
+
+                const entry =
+                    journalEntries.find(
+                        function(
+                            item
+                        ) {
+
+                            return String(
+                                item.id
+                            ) ===
+                            String(
+                                requestedId
+                            );
+
+                        }
+                    );
+
+
+                if (entry) {
+
+                    openReader(
+                        entry
+                    );
+
+                    return;
+                }
+
+            }
+
+
+            renderJournalIndex();
 
         }
-    );
 
 
-    /* =========================================================
-       READING PREFERENCES
-    ========================================================= */
+        /* =========================================================
+           BACK TO JOURNAL
+           ========================================================= */
 
-    const fontDecrease =
-        document.getElementById(
-            "fontDecrease"
-        );
+        readerBack.addEventListener(
+            "click",
+            function(event) {
 
-    const fontIncrease =
-        document.getElementById(
-            "fontIncrease"
-        );
+                event.preventDefault();
 
-    const fontSerif =
-        document.getElementById(
-            "fontSerif"
-        );
+                window.location.href =
+                    "journal.html";
 
-    const fontSans =
-        document.getElementById(
-            "fontSans"
+            }
         );
 
 
-    let savedFontSize =
-        parseInt(
-            localStorage.getItem(
-                "maybloomsJournalFontSize"
-            ),
-            10
+        /* =========================================================
+           COMMENTS SUBMIT
+           ========================================================= */
+
+        commentForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                if (!currentEntryId) {
+                    return;
+                }
+
+
+                const profileName =
+                    String(
+                        commentName.dataset.profileName ||
+                        ""
+                    ).trim();
+
+
+                const name =
+                    profileName ||
+                    commentName.value.trim();
+
+
+                const content =
+                    commentContent.value.trim();
+
+
+                if (
+                    !name ||
+                    !content
+                ) {
+                    return;
+                }
+
+
+                commentStatus.textContent =
+                    "Posting...";
+
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .from("comments")
+                        .insert({
+
+                            target_type:
+                                "journal",
+
+                            target_id:
+                                currentEntryId,
+
+                            name,
+
+                            content
+
+                        });
+
+
+                if (error) {
+
+                    console.error(
+                        "Could not post comment:",
+                        error
+                    );
+
+                    commentStatus.textContent =
+                        "Could not post comment.";
+
+                    return;
+                }
+
+
+                if (
+                    commentName.dataset.profileName
+                ) {
+
+                    commentName.value =
+                        commentName.dataset.profileName;
+
+                } else {
+
+                    commentName.value =
+                        "";
+
+                }
+
+
+                commentContent.value =
+                    "";
+
+
+                commentStatus.textContent =
+                    "Comment posted.";
+
+
+                await loadComments(
+                    currentEntryId
+                );
+
+            }
         );
 
 
-    if (
-        Number.isNaN(
-            savedFontSize
-        )
-    ) {
+        /* =========================================================
+           READING PREFERENCES
+           ========================================================= */
 
-        savedFontSize = 19;
+        const fontDecrease =
+            document.getElementById(
+                "fontDecrease"
+            );
 
-    }
+        const fontIncrease =
+            document.getElementById(
+                "fontIncrease"
+            );
 
+        const fontSerif =
+            document.getElementById(
+                "fontSerif"
+            );
 
-    savedFontSize =
-        Math.max(
-            16,
-            Math.min(
-                24,
-                savedFontSize
-            )
-        );
-
-
-    let savedFont =
-        localStorage.getItem(
-            "maybloomsJournalFont"
-        ) ||
-        "serif";
+        const fontSans =
+            document.getElementById(
+                "fontSans"
+            );
 
 
-    function updateReadingStyle() {
-
-        readerContent.style.fontSize =
-            savedFontSize +
-            "px";
+        let savedFontSize =
+            parseInt(
+                localStorage.getItem(
+                    "maybloomsJournalFontSize"
+                ),
+                10
+            );
 
 
         if (
-            savedFont ===
-            "sans"
+            Number.isNaN(
+                savedFontSize
+            )
         ) {
 
-            readerContent.classList.add(
-                "sans"
-            );
+            savedFontSize =
+                19;
 
-            fontSans.classList.add(
-                "active"
-            );
-
-            fontSerif.classList.remove(
-                "active"
-            );
-
-        } else {
-
-            readerContent.classList.remove(
-                "sans"
-            );
-
-            fontSerif.classList.add(
-                "active"
-            );
-
-            fontSans.classList.remove(
-                "active"
-            );
         }
 
 
-        localStorage.setItem(
-            "maybloomsJournalFontSize",
-            savedFontSize
-        );
-
-        localStorage.setItem(
-            "maybloomsJournalFont",
-            savedFont
-        );
-    }
-
-
-    fontDecrease.addEventListener(
-        "click",
-        function() {
-
-            savedFontSize =
-                Math.max(
-                    16,
-                    savedFontSize - 1
-                );
-
-            updateReadingStyle();
-
-        }
-    );
-
-
-    fontIncrease.addEventListener(
-        "click",
-        function() {
-
-            savedFontSize =
+        savedFontSize =
+            Math.max(
+                16,
                 Math.min(
                     24,
-                    savedFontSize + 1
-                );
-
-            updateReadingStyle();
-
-        }
-    );
-
-
-    fontSerif.addEventListener(
-        "click",
-        function() {
-
-            savedFont =
-                "serif";
-
-            updateReadingStyle();
-
-        }
-    );
-
-
-    fontSans.addEventListener(
-        "click",
-        function() {
-
-            savedFont =
-                "sans";
-
-            updateReadingStyle();
-
-        }
-    );
-
-
-    /* =========================================================
-       READING PROGRESS
-    ========================================================= */
-
-    window.addEventListener(
-        "scroll",
-        function() {
-
-            if (
-                !reader.classList.contains(
-                    "active"
+                    savedFontSize
                 )
-            ) {
-                readingProgress.style.width =
-                    "0%";
-
-                return;
-            }
+            );
 
 
-            const scrollTop =
-                window.scrollY ||
-                document.documentElement.scrollTop;
+        let savedFont =
+            localStorage.getItem(
+                "maybloomsJournalFont"
+            ) ||
+            "serif";
 
 
-            const documentHeight =
-                document.documentElement.scrollHeight -
-                window.innerHeight;
+        function updateReadingStyle() {
+
+            readerContent.style.fontSize =
+                savedFontSize +
+                "px";
 
 
             if (
-                documentHeight <= 0
+                savedFont ===
+                "sans"
             ) {
 
-                readingProgress.style.width =
-                    "100%";
+                readerContent.classList.add(
+                    "sans"
+                );
 
-                return;
+                fontSans.classList.add(
+                    "active"
+                );
+
+                fontSerif.classList.remove(
+                    "active"
+                );
+
+            } else {
+
+                readerContent.classList.remove(
+                    "sans"
+                );
+
+                fontSerif.classList.add(
+                    "active"
+                );
+
+                fontSans.classList.remove(
+                    "active"
+                );
+
             }
 
 
-            const progress =
-                Math.min(
-                    100,
-                    Math.max(
-                        0,
-                        (
-                            scrollTop /
-                            documentHeight
-                        ) *
-                        100
-                    )
-                );
+            localStorage.setItem(
+                "maybloomsJournalFontSize",
+                savedFontSize
+            );
 
 
-            readingProgress.style.width =
-                progress +
-                "%";
+            localStorage.setItem(
+                "maybloomsJournalFont",
+                savedFont
+            );
 
         }
-    );
 
 
-    /* =========================================================
-       START
-    ========================================================= */
+        fontDecrease.addEventListener(
+            "click",
+            function() {
 
-    updateReadingStyle();
+                savedFontSize =
+                    Math.max(
+                        16,
+                        savedFontSize - 1
+                    );
 
-    window.readerAuthReady.then(function () {
-    const nicknameElement =
-        document.getElementById("readerNickname");
+                updateReadingStyle();
 
-    if (nicknameElement && window.readerNickname) {
-        nicknameElement.textContent =
-            window.readerNickname;
-    }
+            }
+        );
 
-    loadJournal();
-});
 
-</script>
+        fontIncrease.addEventListener(
+            "click",
+            function() {
 
+                savedFontSize =
+                    Math.min(
+                        24,
+                        savedFontSize + 1
+                    );
+
+                updateReadingStyle();
+
+            }
+        );
+
+
+        fontSerif.addEventListener(
+            "click",
+            function() {
+
+                savedFont =
+                    "serif";
+
+                updateReadingStyle();
+
+            }
+        );
+
+
+        fontSans.addEventListener(
+            "click",
+            function() {
+
+                savedFont =
+                    "sans";
+
+                updateReadingStyle();
+
+            }
+        );
+
+
+        /* =========================================================
+           READING PROGRESS
+           ========================================================= */
+
+        window.addEventListener(
+            "scroll",
+            function() {
+
+                if (
+                    !reader.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    readingProgress.style.width =
+                        "0%";
+
+                    return;
+
+                }
+
+
+                const scrollTop =
+                    window.scrollY ||
+                    document.documentElement.scrollTop;
+
+
+                const documentHeight =
+                    document.documentElement.scrollHeight -
+                    window.innerHeight;
+
+
+                if (
+                    documentHeight <= 0
+                ) {
+
+                    readingProgress.style.width =
+                        "100%";
+
+                    return;
+
+                }
+
+
+                const progress =
+                    Math.min(
+                        100,
+                        Math.max(
+                            0,
+                            (
+                                scrollTop /
+                                documentHeight
+                            ) *
+                            100
+                        )
+                    );
+
+
+                readingProgress.style.width =
+                    progress +
+                    "%";
+
+            }
+        );
+
+
+        /* =========================================================
+           START
+           ========================================================= */
+
+        updateReadingStyle();
+
+
+        window.readerAuthReady.then(
+            async function() {
+
+                const nicknameElement =
+                    document.getElementById(
+                        "readerNickname"
+                    );
+
+
+                if (
+                    nicknameElement &&
+                    window.readerNickname
+                ) {
+
+                    nicknameElement.textContent =
+                        window.readerNickname;
+
+                }
+
+
+                await prefillCommentName();
+
+
+                loadJournal();
+
+            }
+        );
+
+    </script>
 
 </body>
 
