@@ -3689,7 +3689,17 @@
            START
         ================================== */
 
-        loadWritings();
+        window.readerAuthReady.then(function () {
+    const nicknameElement =
+        document.getElementById("readerNickname");
+
+    if (nicknameElement && window.readerNickname) {
+        nicknameElement.textContent =
+            window.readerNickname;
+    }
+
+    loadWritings();
+});
 
     </script>
 
