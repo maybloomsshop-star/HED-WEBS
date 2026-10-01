@@ -179,7 +179,7 @@ button{
 
 .cover-wrap{
     width:210px;
-    aspect-ratio:2 / 3;
+    height:270px;
 
     overflow:hidden;
 
@@ -640,95 +640,19 @@ button{
     border:1px solid var(--line);
     background:var(--paper);
 
-    color:var(--text);
+    color:var(--brown);
 
-    font-size:10px;
+    font-size:11px;
 }
 
-.pref-button.active,
 .pref-button:hover{
     border-color:var(--pink);
-    color:var(--pink-dark);
 }
 
-.width-buttons{
-    display:flex;
-    gap:5px;
-}
-
-.width-button{
-    min-height:30px;
-
-    padding:0 9px;
-
-    border:1px solid var(--line);
-    background:var(--paper);
-
-    color:var(--text);
-
-    font-size:10px;
-}
-
-.width-button.active,
-.width-button:hover{
+.pref-button.active{
     border-color:var(--pink);
-    color:var(--pink-dark);
-}
-
-
-/* =========================================================
-   THEMES
-========================================================= */
-
-.theme-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:5px;
-}
-
-.theme-button{
-    min-width:30px;
-    height:30px;
-
-    padding:0 8px;
-
-    border:1px solid var(--line);
-
-    font-size:10px;
-    font-weight:700;
-}
-
-.theme-cream{
-    background:#fbf8f3;
-    color:#342b26;
-}
-
-.theme-white{
-    background:#fff;
-    color:#111;
-}
-
-.theme-black{
-    background:#000;
-    color:#fff;
-    border-color:#000;
-}
-
-.theme-dark{
-    background:#20211f;
-    color:#fff;
-    border-color:#20211f;
-}
-
-.theme-sepia{
-    background:#f1e4c9;
-    color:#574936;
-}
-
-.theme-blue{
-    background:#111827;
-    color:#f8fafc;
-    border-color:#111827;
+    background:var(--pink);
+    color:white;
 }
 
 
@@ -741,210 +665,93 @@ button{
 
     margin:0 auto;
 
-    padding:34px 36px 35px;
+    padding:42px 48px 48px;
 
     border:1px solid var(--line);
 
     background:var(--paper);
 
     box-shadow:var(--shadow);
-
-    transition:
-        background .15s ease,
-        color .15s ease,
-        max-width .15s ease;
 }
 
+.reader-paper-head{
+    padding-bottom:18px;
+    margin-bottom:24px;
 
-/* =========================================================
-   CHAPTER TITLE
-========================================================= */
+    border-bottom:1px solid var(--line);
+}
 
 .reader-chapter-label{
-    margin:0 0 5px;
-
     color:var(--pink-dark);
 
-    font-size:10px;
+    font-size:9px;
     font-weight:700;
-    line-height:1.2;
-
-    letter-spacing:.08em;
+    letter-spacing:.18em;
     text-transform:uppercase;
 }
 
 .reader-paper h1{
-    margin:0 0 25px;
+    margin:7px 0 0;
 
     color:var(--brown);
 
     font-family:Georgia,"Times New Roman",serif;
-    font-size:28px;
-    line-height:1.25;
-    font-weight:600;
+    font-size:31px;
+    line-height:1.15;
 }
 
-
-/* =========================================================
-   STORY TEXT
-========================================================= */
-
 .reader-story{
-    --reader-font:Georgia,"Times New Roman",serif;
-
-    max-width:100%;
-
-    margin:0 auto;
-
     color:var(--text);
 
+    font-family:var(--reader-font,Georgia,"Times New Roman",serif);
     font-size:16px;
     line-height:1.7;
 
-    transition:
-        color .15s ease,
-        font-size .15s ease,
-        line-height .15s ease;
-}
-
-.reader-story,
-.reader-story *{
-    font-family:var(--reader-font) !important;
+    white-space:normal;
 }
 
 .reader-story p{
-    margin:0 0 .95em;
+    margin:0 0 1.1em;
 }
 
-.reader-story h1,
-.reader-story h2,
-.reader-story h3,
-.reader-story h4{
-    margin:1.2em 0 .5em;
-
-    color:var(--brown);
-
-    line-height:1.2;
+.reader-story p:last-child{
+    margin-bottom:0;
 }
 
-.reader-story img{
-    display:block;
+.reader-story mark{
+    padding:1px 2px;
 
-    max-width:100%;
-    height:auto;
-
-    margin:25px auto;
+    background:#f5df9b;
+    color:inherit;
 }
 
-.reader-story blockquote{
-    margin:1.2em 0;
-    padding:10px 18px;
-
-    border-left:3px solid var(--pink);
-
-    color:var(--brown);
-}
-
-
-/* =========================================================
-   HIGHLIGHTS
-========================================================= */
-
-.reader-highlight{
-    border-radius:2px;
-    padding:0 .04em;
-}
-
-.highlight-yellow-mark{
-    background:#fff0a6;
-}
-
-.highlight-pink-mark{
-    background:#f7b4cf;
-}
-
-.highlight-green-mark{
-    background:#b8dfb5;
-}
-
-.highlight-blue-mark{
-    background:#b7d5ee;
-}
-
-.highlight-orange-mark{
-    background:#f6c58b;
-}
-
-.highlight-purple-mark{
-    background:#d7b9e8;
-}
-
-.highlight-coral-mark{
-    background:#f5aaa0;
-}
-
-.highlight-lavender-mark{
-    background:#c8c7f2;
-}
-
-.highlight-mint-mark{
-    background:#aee1d2;
-}
-
-.highlight-gray-mark{
-    background:#d6d6d1;
-}
-
-
-/* =========================================================
-   UNDERLINE
-========================================================= */
-
-.reader-underline{
-    text-decoration-line:underline;
-    text-decoration-thickness:2px;
+.reader-story u{
+    text-decoration-thickness:1px;
     text-decoration-color:var(--pink-dark);
     text-underline-offset:3px;
 }
 
 
 /* =========================================================
-   SELECTION MENU
+   READER FOOTER
 ========================================================= */
 
-.selection-highlight-menu{
-    position:fixed;
-    z-index:1000;
+.reader-footer{
+    max-width:var(--reader-width);
 
-    display:none;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:5px;
+    margin:12px auto 0;
 
-    max-width:calc(100vw - 16px);
-
-    padding:7px;
-
-    border:1px solid var(--line);
-    border-radius:10px;
-
-    background:#fbf8f3;
-
-    box-shadow:0 8px 25px rgba(74,53,43,.18);
-}
-
-.selection-highlight-menu.open{
     display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:12px;
 }
 
-.selection-action{
-    min-height:28px;
-
-    padding:0 9px;
+.reader-nav-button{
+    padding:8px 11px;
 
     border:1px solid var(--line);
-    border-radius:7px;
-
     background:var(--paper);
 
     color:var(--brown);
@@ -952,70 +759,19 @@ button{
     font-size:10px;
 }
 
-.selection-action:hover{
+.reader-nav-button:hover{
     border-color:var(--pink);
     color:var(--pink-dark);
 }
 
-.highlight-button{
-    width:24px;
-    height:24px;
-
-    flex:0 0 auto;
-
-    padding:0;
-
-    border:1px solid #bcb4aa;
-    border-radius:50%;
-}
-
-.highlight-button:hover{
-    transform:scale(1.08);
-}
-
-.highlight-yellow{
-    background:#fff0a6;
-}
-
-.highlight-pink{
-    background:#f7b4cf;
-}
-
-.highlight-green{
-    background:#b8dfb5;
-}
-
-.highlight-blue{
-    background:#b7d5ee;
-}
-
-.highlight-orange{
-    background:#f6c58b;
-}
-
-.highlight-purple{
-    background:#d7b9e8;
-}
-
-.highlight-coral{
-    background:#f5aaa0;
-}
-
-.highlight-lavender{
-    background:#c8c7f2;
-}
-
-.highlight-mint{
-    background:#aee1d2;
-}
-
-.highlight-gray{
-    background:#d6d6d1;
+.reader-nav-button:disabled{
+    opacity:.45;
+    cursor:not-allowed;
 }
 
 
 /* =========================================================
-   NOTES PANEL
+   NOTES
 ========================================================= */
 
 .notes-panel{
@@ -1029,9 +785,9 @@ button{
 
     border:1px solid var(--line);
 
-    background:var(--paper);
+    background:rgba(251,248,243,.98);
 
-    box-shadow:var(--shadow);
+    box-shadow:0 8px 25px rgba(74,53,43,.08);
 }
 
 .notes-panel.open{
@@ -1040,48 +796,31 @@ button{
 
 .notes-head{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
 
     gap:10px;
 
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
 .notes-title{
-    margin:0;
-
     color:var(--brown);
 
     font-family:Georgia,"Times New Roman",serif;
-    font-size:18px;
+    font-size:16px;
 }
 
-.note-list{
-    display:grid;
-    gap:9px;
-}
+.notes-textarea{
+    width:100%;
+    min-height:110px;
 
-.note-card{
-    padding:11px 12px;
+    padding:10px;
+
+    resize:vertical;
 
     border:1px solid var(--line);
-
-    background:#fffdfa;
-}
-
-.note-card-quote{
-    margin:0 0 7px;
-
-    color:var(--muted);
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:11px;
-    line-height:1.45;
-}
-
-.note-card-text{
-    margin:0;
+    background:var(--paper);
 
     color:var(--text);
 
@@ -1089,66 +828,84 @@ button{
     font-size:13px;
     line-height:1.5;
 
-    white-space:pre-wrap;
+    outline:none;
 }
 
-.note-card-actions{
+.notes-textarea:focus{
+    border-color:var(--pink);
+}
+
+.notes-actions{
     display:flex;
     justify-content:flex-end;
-    gap:10px;
 
     margin-top:8px;
 }
 
-.note-card-actions button{
-    padding:3px 0;
+.notes-save{
+    padding:8px 12px;
 
     border:0;
-    background:none;
+    background:var(--pink);
 
-    color:var(--pink-dark);
+    color:white;
 
-    font-size:9px;
+    font-size:10px;
 }
 
-.note-card-actions button:hover{
-    text-decoration:underline;
+.notes-save:hover{
+    background:var(--pink-dark);
+}
+
+.notes-status{
+    min-height:13px;
+
+    margin-top:6px;
+
+    color:var(--muted);
+
+    font-size:10px;
 }
 
 
 /* =========================================================
-   CHAPTER NAVIGATION
+   SELECTION HIGHLIGHT MENU
 ========================================================= */
 
-.chapter-navigation{
-    max-width:100%;
+.selection-highlight-menu{
+    position:fixed;
 
-    margin:35px auto 0;
-    padding-top:16px;
+    z-index:100;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    display:none;
 
-    gap:10px;
+    padding:5px;
 
-    border-top:1px solid var(--line);
+    border:1px solid var(--line);
+
+    background:var(--paper);
+
+    box-shadow:0 8px 25px rgba(74,53,43,.15);
 }
 
-.nav-button{
-    padding:9px 12px;
+.selection-highlight-menu.open{
+    display:flex;
+    gap:4px;
+}
+
+.selection-highlight-menu button{
+    padding:6px 8px;
 
     border:1px solid var(--line);
     background:var(--paper);
 
     color:var(--brown);
 
-    font-size:11px;
+    font-size:10px;
 }
 
-.nav-button:hover{
+.selection-highlight-menu button:hover{
     border-color:var(--pink);
-    color:var(--pink-dark);
 }
 
 
@@ -1157,9 +914,10 @@ button{
 ========================================================= */
 
 .comments-section{
-    max-width:100%;
+    max-width:var(--reader-width);
 
-    margin:30px auto 0;
+    margin:25px auto 0;
+
     padding-top:20px;
 
     border-top:1px solid var(--line);
@@ -1172,7 +930,7 @@ button{
 
     gap:10px;
 
-    margin-bottom:11px;
+    margin-bottom:12px;
 }
 
 .comments-title{
@@ -1187,39 +945,36 @@ button{
 .comments-subtitle{
     color:var(--muted);
 
-    font-size:9px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
+    font-size:10px;
 }
 
 .comments-list{
     display:grid;
     gap:8px;
-
-    margin-bottom:15px;
 }
 
 .comment-card{
-    padding:10px 12px;
+    padding:12px;
 
     border:1px solid var(--line);
-    background:#fffdfa;
+
+    background:rgba(251,248,243,.8);
 }
 
 .comment-head{
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    align-items:baseline;
 
     gap:10px;
 
-    margin-bottom:4px;
+    margin-bottom:5px;
 }
 
 .comment-author{
     color:var(--brown);
 
-    font-size:12px;
+    font-size:11px;
     font-weight:700;
 }
 
@@ -1232,40 +987,39 @@ button{
 .comment-text{
     margin:0;
 
-    color:#5b544e;
+    color:var(--text);
 
     font-family:Georgia,"Times New Roman",serif;
-    font-size:14px;
-    line-height:1.48;
-
-    white-space:pre-wrap;
-    overflow-wrap:anywhere;
+    font-size:12px;
+    line-height:1.5;
 }
 
 .comment-actions{
     display:flex;
     justify-content:flex-end;
 
-    margin-top:5px;
+    margin-top:7px;
 }
 
 .comment-delete{
-    padding:3px 0;
+    padding:0;
 
     border:0;
-    background:transparent;
+    background:none;
 
-    color:#aa817f;
+    color:var(--muted);
 
     font-size:9px;
 }
 
 .comment-delete:hover{
-    color:var(--pink);
+    color:var(--pink-dark);
 }
 
 .comment-form{
-    padding:13px;
+    margin-top:12px;
+
+    padding:12px;
 
     border:1px solid var(--line);
     background:rgba(251,248,243,.8);
@@ -1389,6 +1143,7 @@ button{
 
     .cover-wrap{
         width:165px;
+        height:215px;
     }
 
     .book-info h1{
@@ -1433,7 +1188,8 @@ button{
         max-width:calc(100vw - 20px);
     }
 }
-   .favorite-button{
+
+.favorite-button{
     display:inline-flex;
     align-items:center;
     gap:6px;
@@ -1629,7 +1385,7 @@ button{
                     aria-label="Open notes"
                     title="Notes"
                 >
-                    ♡
+                    📝
                 </button>
 
                 <button
@@ -1639,7 +1395,7 @@ button{
                     aria-label="Bookmark chapter"
                     title="Bookmark chapter"
                 >
-                    ♧
+                    🔖
                 </button>
 
                 <button
@@ -1793,9 +1549,8 @@ button{
                                         class="pref-range"
                                         type="range"
                                         min="12"
-                                        max="26"
+                                        max="24"
                                         step="1"
-                                        value="16"
                                     >
 
                                     <span
@@ -1811,7 +1566,7 @@ button{
 
 
 
-                            <!-- SPACING -->
+                            <!-- LINE HEIGHT -->
 
                             <div class="preference-group">
 
@@ -1819,29 +1574,24 @@ button{
                                     Spacing
                                 </span>
 
-                                <button
-                                    class="pref-button"
-                                    data-spacing="1.45"
-                                    type="button"
+                                <select
+                                    id="lineHeight"
+                                    class="pref-select"
                                 >
-                                    Tight
-                                </button>
 
-                                <button
-                                    class="pref-button active"
-                                    data-spacing="1.7"
-                                    type="button"
-                                >
-                                    Normal
-                                </button>
+                                    <option value="1.4">
+                                        Compact
+                                    </option>
 
-                                <button
-                                    class="pref-button"
-                                    data-spacing="1.95"
-                                    type="button"
-                                >
-                                    Wide
-                                </button>
+                                    <option value="1.7">
+                                        Comfortable
+                                    </option>
+
+                                    <option value="2">
+                                        Relaxed
+                                    </option>
+
+                                </select>
 
                             </div>
 
@@ -1855,27 +1605,27 @@ button{
                                     Width
                                 </span>
 
-                                <div class="width-buttons">
+                                <div class="pref-button-group">
 
                                     <button
-                                        class="width-button"
-                                        data-width="680px"
+                                        id="widthNarrow"
+                                        class="pref-button"
                                         type="button"
                                     >
                                         Narrow
                                     </button>
 
                                     <button
-                                        class="width-button active"
-                                        data-width="780px"
+                                        id="widthNormal"
+                                        class="pref-button"
                                         type="button"
                                     >
                                         Normal
                                     </button>
 
                                     <button
-                                        class="width-button"
-                                        data-width="900px"
+                                        id="widthWide"
+                                        class="pref-button"
                                         type="button"
                                     >
                                         Wide
@@ -1887,62 +1637,38 @@ button{
 
 
 
-                            <!-- PAGE -->
+                            <!-- THEME -->
 
                             <div class="preference-group">
 
                                 <span class="preference-label">
-                                    Page
+                                    Theme
                                 </span>
 
-                                <div class="theme-buttons">
+                                <div class="pref-button-group">
 
                                     <button
-                                        class="theme-button theme-cream"
-                                        data-theme="cream"
+                                        id="themeCream"
+                                        class="pref-button"
                                         type="button"
                                     >
                                         Cream
                                     </button>
 
                                     <button
-                                        class="theme-button theme-white"
-                                        data-theme="white"
+                                        id="themeWhite"
+                                        class="pref-button"
                                         type="button"
                                     >
                                         White
                                     </button>
 
                                     <button
-                                        class="theme-button theme-sepia"
-                                        data-theme="sepia"
-                                        type="button"
-                                    >
-                                        Sepia
-                                    </button>
-
-                                    <button
-                                        class="theme-button theme-dark"
-                                        data-theme="dark"
+                                        id="themeDark"
+                                        class="pref-button"
                                         type="button"
                                     >
                                         Dark
-                                    </button>
-
-                                    <button
-                                        class="theme-button theme-black"
-                                        data-theme="black"
-                                        type="button"
-                                    >
-                                        Black
-                                    </button>
-
-                                    <button
-                                        class="theme-button theme-blue"
-                                        data-theme="night"
-                                        type="button"
-                                    >
-                                        Night
                                     </button>
 
                                 </div>
@@ -1950,41 +1676,6 @@ button{
                             </div>
 
                         </div>
-
-                    </section>
-
-
-
-                    <!-- =================================================
-                         NOTES
-                    ================================================== -->
-
-                    <section
-                        id="notesPanel"
-                        class="notes-panel"
-                    >
-
-                        <div class="notes-head">
-
-                            <h2 class="notes-title">
-                                Notes
-                            </h2>
-
-                            <button
-                                id="closeNotes"
-                                class="drawer-close"
-                                type="button"
-                                aria-label="Close notes"
-                            >
-                                ×
-                            </button>
-
-                        </div>
-
-                        <div
-                            id="noteList"
-                            class="note-list"
-                        ></div>
 
                     </section>
 
@@ -1999,121 +1690,179 @@ button{
                         id="readerPaper"
                     >
 
-                        <div
-                            id="readerChapterLabel"
-                            class="reader-chapter-label"
-                        >
-                            CHAPTER 01
-                        </div>
+                        <header class="reader-paper-head">
 
-                        <h1 id="readerChapterTitle">
-                            Chapter
-                        </h1>
+                            <div
+                                id="readerChapterLabel"
+                                class="reader-chapter-label"
+                            >
+                                CHAPTER
+                            </div>
+
+                            <h1
+                                id="readerChapterTitle"
+                            >
+                            </h1>
+
+                        </header>
+
 
                         <div
                             id="readerStory"
                             class="reader-story"
                         ></div>
 
+                    </article>
 
 
-                        <!-- =================================================
-                             CHAPTER NAVIGATION
-                        ================================================== -->
 
-                        <div class="chapter-navigation">
+                    <!-- =================================================
+                         READER FOOTER
+                    ================================================== -->
+
+                    <div class="reader-footer">
+
+                        <button
+                            id="previousChapterButton"
+                            class="reader-nav-button"
+                            type="button"
+                        >
+                            ← Previous
+                        </button>
+
+                        <button
+                            id="nextChapterButton"
+                            class="reader-nav-button"
+                            type="button"
+                        >
+                            Next →
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         NOTES PANEL
+                    ================================================== -->
+
+                    <section
+                        id="notesPanel"
+                        class="notes-panel"
+                    >
+
+                        <div class="notes-head">
+
+                            <div class="notes-title">
+                                Notes
+                            </div>
 
                             <button
-                                id="previousChapterButton"
-                                class="nav-button"
+                                id="closeNotes"
+                                class="drawer-close"
                                 type="button"
+                                aria-label="Close notes"
                             >
-                                ← Previous Chapter
-                            </button>
-
-                            <button
-                                id="nextChapterButton"
-                                class="nav-button"
-                                type="button"
-                            >
-                                Next Chapter →
+                                ×
                             </button>
 
                         </div>
 
+                        <textarea
+                            id="notesTextarea"
+                            class="notes-textarea"
+                            placeholder="Write a note about this chapter..."
+                        ></textarea>
+
+                        <div class="notes-actions">
+
+                            <button
+                                id="saveNotes"
+                                class="notes-save"
+                                type="button"
+                            >
+                                Save Notes
+                            </button>
+
+                        </div>
+
+                        <div
+                            id="notesStatus"
+                            class="notes-status"
+                        ></div>
+
+                    </section>
 
 
-                        <!-- =================================================
-                             COMMENTS
-                        ================================================== -->
 
-                        <section class="comments-section">
+                    <!-- =================================================
+                         COMMENTS
+                    ================================================== -->
 
-                            <div class="comments-title-row">
+                    <section class="comments-section">
 
-                                <h2 class="comments-title">
-                                    Comments
-                                </h2>
+                        <div class="comments-title-row">
 
-                                <div class="comments-subtitle">
-                                    Leave a thought
-                                </div>
+                            <h2 class="comments-title">
+                                Comments
+                            </h2>
+
+                            <div class="comments-subtitle">
+                                Leave a thought while you read.
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="commentsList"
+                            class="comments-list"
+                        ></div>
+
+
+                        <form
+                            id="commentForm"
+                            class="comment-form"
+                        >
+
+                            <div class="comment-form-grid">
+
+                                <input
+                                    id="commentName"
+                                    class="comment-input"
+                                    type="text"
+                                    maxlength="80"
+                                    placeholder="Nickname"
+                                >
+
+                                <textarea
+                                    id="commentContent"
+                                    class="comment-textarea"
+                                    maxlength="2000"
+                                    placeholder="Write a comment..."
+                                ></textarea>
+
+                            </div>
+
+                            <div class="comment-form-bottom">
+
+                                <button
+                                    class="comment-submit"
+                                    type="submit"
+                                >
+                                    Post Comment
+                                </button>
 
                             </div>
 
                             <div
-                                id="commentsList"
-                                class="comments-list"
+                                id="commentStatus"
+                                class="comment-status"
                             ></div>
 
-                            <form
-                                id="commentForm"
-                                class="comment-form"
-                            >
+                        </form>
 
-                                <div class="comment-form-grid">
-
-                                    <input
-                                        id="commentName"
-                                        class="comment-input"
-                                        type="text"
-                                        maxlength="80"
-                                        placeholder="Your name"
-                                        required
-                                        readonly
-                                    >
-
-                                    <textarea
-                                        id="commentContent"
-                                        class="comment-textarea"
-                                        maxlength="2000"
-                                        placeholder="Write a comment..."
-                                        required
-                                    ></textarea>
-
-                                </div>
-
-                                <div class="comment-form-bottom">
-
-                                    <button
-                                        class="comment-submit"
-                                        type="submit"
-                                    >
-                                        Post Comment
-                                    </button>
-
-                                </div>
-
-                                <div
-                                    id="commentStatus"
-                                    class="comment-status"
-                                ></div>
-
-                            </form>
-
-                        </section>
-
-                    </article>
+                    </section>
 
                 </main>
 
@@ -2126,9 +1875,8 @@ button{
 </main>
 
 
-
 <!-- =========================================================
-     TEXT SELECTION MENU
+     SELECTION MENU
 ========================================================= -->
 
 <div
@@ -2137,76 +1885,51 @@ button{
 >
 
     <button
-        id="selectionHighlight"
-        class="selection-action"
+        id="highlightSelectionButton"
         type="button"
     >
         Highlight
     </button>
 
     <button
-        id="selectionUnderline"
-        class="selection-action"
+        id="underlineSelectionButton"
         type="button"
     >
         Underline
     </button>
 
     <button
-        id="selectionNote"
-        class="selection-action"
+        id="noteSelectionButton"
         type="button"
     >
-        Add Note
+        Note
     </button>
 
-    <button
-        class="highlight-button highlight-yellow"
-        data-highlight="yellow"
-        type="button"
-        title="Yellow"
-    ></button>
-
-    <button
-        class="highlight-button highlight-pink"
-        data-highlight="pink"
-        type="button"
-        title="Pink"
-    ></button>
-
-    <button
-        class="highlight-button highlight-green"
-        data-highlight="green"
-        type="button"
-        title="Green"
-    ></button>
-
-    <button
-        class="highlight-button highlight-blue"
-        data-highlight="blue"
-        type="button"
-        title="Blue"
-    ></button>
-
-    <button
-        class="highlight-button highlight-orange"
-        data-highlight="orange"
-        type="button"
-        title="Orange"
-    ></button>
-
 </div>
-
 
 
 <script>
 
 /* =========================================================
-   BASIC HELPER
+   SUPABASE
+========================================================= */
+
+const supabaseClient =
+    window.supabaseClient ||
+    supabase.createClient(
+        window.SUPABASE_URL,
+        window.SUPABASE_ANON_KEY
+    );
+
+
+/* =========================================================
+   HELPERS
 ========================================================= */
 
 function $(id){
+
     return document.getElementById(id);
+
 }
 
 
@@ -2362,7 +2085,9 @@ function saveBookmarks(bookmarks){
 
     localStorage.setItem(
         "hed_bookmarks",
-        JSON.stringify(bookmarks)
+        JSON.stringify(
+            bookmarks
+        )
     );
 
 }
@@ -2400,9 +2125,7 @@ function updateBookmarkButton(){
     );
 
     button.textContent =
-        bookmarked
-            ? "♥"
-            : "♡";
+        "🔖";
 
     button.title =
         bookmarked
@@ -2587,13 +2310,16 @@ async function loadStory(){
 
         $("readerChapterTitle")
             .textContent =
-                "This story has no chapters yet.";
+                "There are no chapters yet.";
 
         $("readerStory")
             .innerHTML =
-                "<p>There is nothing to read here yet.</p>";
+                "<p>This story does not have any chapters yet.</p>";
 
     }
+
+
+    applySavedReaderPreferences();
 
 }
 
@@ -2606,8 +2332,7 @@ function renderStoryInfo(){
 
     $("storyTitle")
         .textContent =
-            story.title ||
-            "Untitled Story";
+            story.title || "Untitled Story";
 
 
     $("storyAuthor")
@@ -2619,115 +2344,12 @@ function renderStoryInfo(){
 
     const description =
         story.description ||
-        "No description yet.";
-
-    const descriptionElement =
-        $("storyDescription");
-
-    const words =
-        description.trim().split(/\s+/);
-
-    const DESCRIPTION_LIMIT =
-        118;
+        "";
 
 
-    if(words.length > DESCRIPTION_LIMIT){
-
-        const shortDescription =
-            words
-                .slice(
-                    0,
-                    DESCRIPTION_LIMIT
-                )
-                .join(" ");
-
-
-        descriptionElement.innerHTML =
-            escapeHTML(
-                shortDescription
-            ) +
-            "... " +
-            '<button type="button" class="book-description-more">See more</button>';
-
-
-        const seeMore =
-            descriptionElement.querySelector(
-                ".book-description-more"
-            );
-
-
-        seeMore.onclick =
-            function(){
-
-                descriptionElement.textContent =
-                    description;
-
-                const seeLess =
-                    document.createElement(
-                        "button"
-                    );
-
-                seeLess.type =
-                    "button";
-
-                seeLess.className =
-                    "book-description-more";
-
-                seeLess.textContent =
-                    "See less";
-
-                descriptionElement.appendChild(
-                    document.createTextNode(" ")
-                );
-
-                descriptionElement.appendChild(
-                    seeLess
-                );
-
-
-                seeLess.onclick =
-                    function(){
-
-                        descriptionElement.innerHTML =
-                            escapeHTML(
-                                shortDescription
-                            ) +
-                            "... ";
-
-
-                        const newSeeMore =
-                            document.createElement(
-                                "button"
-                            );
-
-                        newSeeMore.type =
-                            "button";
-
-                        newSeeMore.className =
-                            "book-description-more";
-
-                        newSeeMore.textContent =
-                            "See more";
-
-
-                        descriptionElement.appendChild(
-                            newSeeMore
-                        );
-
-
-                        newSeeMore.onclick =
-                            seeMore.onclick;
-
-                    };
-
-            };
-
-    }else{
-
-        descriptionElement.textContent =
+    $("storyDescription")
+        .textContent =
             description;
-
-    }
 
 
     if(story.cover_url){
@@ -2741,31 +2363,18 @@ function renderStoryInfo(){
             story.cover_url;
 
         image.alt =
-            story.title ||
-            "Story cover";
+            story.title
+                ? story.title + " cover"
+                : "Story cover";
 
+        $("coverWrap")
+            .innerHTML =
+                "";
 
-        image.onload =
-            function(){
-
-                $("coverPlaceholder")
-                    .classList
-                    .add("hidden");
-
-                $("coverWrap")
-                    .appendChild(
-                        image
-                    );
-
-            };
-
-
-        image.onerror =
-            function(){
-
-                image.remove();
-
-            };
+        $("coverWrap")
+            .appendChild(
+                image
+            );
 
     }
 
@@ -2785,18 +2394,6 @@ function renderChapterList(){
         "";
 
 
-    if(!chapters.length){
-
-        list.innerHTML =
-            '<div class="empty-message">' +
-            "This story doesn't have any chapters yet." +
-            "</div>";
-
-        return;
-
-    }
-
-
     chapters.forEach(
         function(chapter,index){
 
@@ -2805,23 +2402,16 @@ function renderChapterList(){
                     "button"
                 );
 
-
             button.type =
                 "button";
-
 
             button.className =
                 "chapter-button";
 
-
             button.innerHTML =
+
                 '<span class="chapter-number">' +
-                    String(
-                        index + 1
-                    ).padStart(
-                        2,
-                        "0"
-                    ) +
+                    String(index + 1).padStart(2,"0") +
                 "</span>" +
 
                 '<span class="chapter-title-small">' +
@@ -2839,7 +2429,7 @@ function renderChapterList(){
                         index
                     );
 
-                    setChapterDrawer(
+                    setChapterDrawerOpen(
                         false
                     );
 
@@ -2853,35 +2443,57 @@ function renderChapterList(){
         }
     );
 
-
-    updateActiveChapterButton();
-
 }
 
 
 /* =========================================================
-   ACTIVE CHAPTER
+   CHAPTER DRAWER
 ========================================================= */
 
-function updateActiveChapterButton(){
+function setChapterDrawerOpen(open){
 
-    document
-        .querySelectorAll(
-            ".chapter-button"
-        )
-        .forEach(
-            function(button,index){
+    $("chapterDrawer")
+        .classList
+        .toggle(
+            "open",
+            open
+        );
 
-                button.classList.toggle(
-                    "active",
-                    index ===
-                    selectedChapterIndex
-                );
-
-            }
+    $("readerLayout")
+        .classList
+        .toggle(
+            "chapter-closed",
+            !open
         );
 
 }
+
+
+$("chapterToggleButton").onclick =
+    function(){
+
+        const open =
+            !$("chapterDrawer")
+                .classList
+                .contains(
+                    "open"
+                );
+
+        setChapterDrawerOpen(
+            open
+        );
+
+    };
+
+
+$("closeChapterDrawer").onclick =
+    function(){
+
+        setChapterDrawerOpen(
+            false
+        );
+
+    };
 
 
 /* =========================================================
@@ -2908,15 +2520,15 @@ function openChapter(index){
         chapters[index];
 
 
+    $("readerShell")
+        .classList
+        .add("open");
+
+
     $("readerChapterLabel")
         .textContent =
             "CHAPTER " +
-            String(
-                index + 1
-            ).padStart(
-                2,
-                "0"
-            );
+            String(index + 1).padStart(2,"0");
 
 
     $("readerChapterTitle")
@@ -2925,74 +2537,62 @@ function openChapter(index){
             "Untitled Chapter";
 
 
-    const content =
-        chapter.content ||
-        "";
+    renderChapterContent(
+        chapter.content || ""
+    );
 
 
-    if(
-        /<\/?[a-z][\s\S]*>/i.test(
-            content
-        )
-    ){
+    updateChapterButtons();
 
-        $("readerStory")
-            .innerHTML =
-                content;
-
-    }else{
-
-        $("readerStory")
-            .textContent =
-                content;
-
-    }
-
-
-    applySavedReaderPreferences();
-
-    loadAnnotations();
-
-    updateChapterNavigation();
-
-    updateActiveChapterButton();
 
     updateBookmarkButton();
 
-    renderNotes();
 
-
-    $("readerShell")
-        .classList
-        .add("open");
+    loadChapterNotes();
 
 
     loadComments();
+
+
+    window.scrollTo({
+        top:$("readerShell").offsetTop - 80,
+        behavior:"smooth"
+    });
 
 }
 
 
 /* =========================================================
-   CHAPTER NAVIGATION
+   CHAPTER BUTTON STATES
 ========================================================= */
 
-function updateChapterNavigation(){
+function updateChapterButtons(){
+
+    document
+        .querySelectorAll(
+            ".chapter-button"
+        )
+        .forEach(
+            function(button,index){
+
+                button.classList.toggle(
+                    "active",
+                    index === selectedChapterIndex
+                );
+
+            }
+        );
+
 
     $("previousChapterButton")
-        .classList
-        .toggle(
-            "hidden",
-            selectedChapterIndex <= 0
-        );
+        .disabled =
+            selectedChapterIndex <= 0;
 
 
     $("nextChapterButton")
-        .classList
-        .toggle(
-            "hidden",
+        .disabled =
             selectedChapterIndex >=
-            chapters.length - 1
-        );
+            chapters.length - 1;
 
 }
 
@@ -3000,18 +2600,11 @@ function updateChapterNavigation(){
 $("previousChapterButton").onclick =
     function(){
 
-        if(
-            selectedChapterIndex > 0
-        ){
+        if(selectedChapterIndex > 0){
 
             openChapter(
                 selectedChapterIndex - 1
             );
-
-            window.scrollTo({
-                top:0,
-                behavior:"smooth"
-            });
 
         }
 
@@ -3030,108 +2623,258 @@ $("nextChapterButton").onclick =
                 selectedChapterIndex + 1
             );
 
-            window.scrollTo({
-                top:0,
-                behavior:"smooth"
-            });
-
         }
 
     };
 
 
 /* =========================================================
-   CHAPTER DRAWER
+   CHAPTER CONTENT
 ========================================================= */
 
-function setChapterDrawer(open){
+function renderChapterContent(content){
 
-    $("chapterDrawer")
-        .classList
-        .toggle(
-            "open",
-            open
+    const reader =
+        $("readerStory");
+
+
+    reader.innerHTML =
+        "";
+
+
+    const lines =
+        String(content)
+            .split(/\r?\n/);
+
+
+    let paragraph = [];
+
+
+    function flushParagraph(){
+
+        if(!paragraph.length){
+
+            return;
+
+        }
+
+        const p =
+            document.createElement(
+                "p"
+            );
+
+        p.innerHTML =
+            formatStoryText(
+                paragraph.join("\n")
+            );
+
+        reader.appendChild(
+            p
         );
 
+        paragraph = [];
 
-    $("readerLayout")
-        .classList
-        .toggle(
-            "chapter-closed",
-            !open
-        );
-
-}
+    }
 
 
-$("chapterToggleButton").onclick =
-    function(){
+    lines.forEach(
+        function(line){
 
-        const open =
-            !$("chapterDrawer")
-                .classList
-                .contains(
-                    "open"
+            if(line.trim() === ""){
+
+                flushParagraph();
+
+            }else{
+
+                paragraph.push(
+                    line
                 );
 
-        setChapterDrawer(
-            open
-        );
+            }
 
-    };
+        }
+    );
 
 
-$("closeChapterDrawer").onclick =
-    function(){
+    flushParagraph();
 
-        setChapterDrawer(
-            false
-        );
 
-    };
+    applyChapterAnnotations();
+
+}
 
 
 /* =========================================================
-   PREFERENCES
+   STORY TEXT FORMATTING
 ========================================================= */
 
-function setPreferencesOpen(open){
+function formatStoryText(text){
 
-    $("preferencesPanel")
-        .classList
-        .toggle(
-            "open",
-            open
-        );
+    return escapeHTML(
+        text
+    )
+    .replace(
+        /\*\*(.*?)\*\*/g,
+        "<strong>$1</strong>"
+    )
+    .replace(
+        /\*(.*?)\*/g,
+        "<em>$1</em>"
+    )
+    .replace(
+        /\n/g,
+        "<br>"
+    );
 
 }
 
 
-$("preferencesToggleButton").onclick =
-    function(){
+/* =========================================================
+   ANNOTATIONS
+========================================================= */
 
-        const open =
-            !$("preferencesPanel")
-                .classList
-                .contains(
-                    "open"
+function applyChapterAnnotations(){
+
+    const annotations =
+        getChapterAnnotations();
+
+
+    if(!annotations.length){
+
+        return;
+
+    }
+
+
+    const reader =
+        $("readerStory");
+
+
+    annotations.forEach(
+        function(annotation){
+
+            if(
+                !annotation ||
+                !annotation.text
+            ){
+
+                return;
+
+            }
+
+
+            const walker =
+                document.createTreeWalker(
+                    reader,
+                    NodeFilter.SHOW_TEXT
                 );
 
-        setPreferencesOpen(
-            open
-        );
 
-    };
+            let node;
 
 
-$("closePreferences").onclick =
-    function(){
+            while(
+                node =
+                    walker.nextNode()
+            ){
 
-        setPreferencesOpen(
-            false
-        );
+                const value =
+                    node.nodeValue;
 
-    };
+
+                const index =
+                    value.indexOf(
+                        annotation.text
+                    );
+
+
+                if(index === -1){
+
+                    continue;
+
+                }
+
+
+                const before =
+                    document.createTextNode(
+                        value.slice(
+                            0,
+                            index
+                        )
+                    );
+
+
+                const after =
+                    document.createTextNode(
+                        value.slice(
+                            index +
+                            annotation.text.length
+                        )
+                    );
+
+
+                let replacement;
+
+
+                if(
+                    annotation.type ===
+                    "underline"
+                ){
+
+                    replacement =
+                        document.createElement(
+                            "u"
+                        );
+
+                }else{
+
+                    replacement =
+                        document.createElement(
+                            "mark"
+                        );
+
+                }
+
+
+                replacement.textContent =
+                    annotation.text;
+
+
+                node.parentNode
+                    .insertBefore(
+                        before,
+                        node
+                    );
+
+
+                node.parentNode
+                    .insertBefore(
+                        replacement,
+                        node
+                    );
+
+
+                node.parentNode
+                    .insertBefore(
+                        after,
+                        node
+                    );
+
+
+                node.parentNode
+                    .removeChild(
+                        node
+                    );
+
+
+                break;
+
+            }
+
+        }
+    );
+
+}
 
 
 /* =========================================================
@@ -3173,6 +2916,92 @@ $("closeNotes").onclick =
         setNotesOpen(
             false
         );
+
+    };
+
+
+function getNotesKey(){
+
+    if(selectedChapterIndex < 0){
+
+        return null;
+
+    }
+
+
+    const chapter =
+        chapters[selectedChapterIndex];
+
+
+    if(!chapter){
+
+        return null;
+
+    }
+
+
+    return getStorageKey(
+        "notes",
+        chapter.id
+    );
+
+}
+
+
+function loadChapterNotes(){
+
+    const key =
+        getNotesKey();
+
+
+    if(!key){
+
+        $("notesTextarea")
+            .value =
+                "";
+
+        return;
+
+    }
+
+
+    $("notesTextarea")
+        .value =
+            localStorage.getItem(
+                key
+            ) || "";
+
+    $("notesStatus")
+        .textContent =
+            "";
+
+}
+
+
+$("saveNotes").onclick =
+    function(){
+
+        const key =
+            getNotesKey();
+
+
+        if(!key){
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            key,
+            $("notesTextarea")
+                .value
+        );
+
+
+        $("notesStatus")
+            .textContent =
+                "Notes saved.";
 
     };
 
@@ -3268,6 +3097,11 @@ function applySavedReaderPreferences(){
         .textContent =
             preferences.fontSize +
             "px";
+
+
+    $("lineHeight")
+        .value =
+            preferences.lineHeight;
 
 
     updatePreferenceButtons();
@@ -3390,54 +3224,40 @@ $("fontSize")
    LINE HEIGHT
 ========================================================= */
 
-function applyLineHeight(value){
+function applyLineHeight(lineHeight){
 
     $("readerStory")
         .style
         .lineHeight =
-            value;
+            lineHeight;
 
 }
 
 
-document
-    .querySelectorAll(
-        "[data-spacing]"
-    )
-    .forEach(
-        function(button){
+$("lineHeight")
+    .addEventListener(
+        "change",
+        function(){
 
-            button.addEventListener(
-                "click",
-                function(){
-
-                    const value =
-                        Number(
-                            this.dataset.spacing
-                        );
+            const preferences =
+                getReaderPreferences();
 
 
-                    const preferences =
-                        getReaderPreferences();
+            preferences.lineHeight =
+                Number(
+                    this.value
+                );
 
 
-                    preferences.lineHeight =
-                        value;
+            saveReaderPreferences(
+                preferences
+            );
 
 
-                    saveReaderPreferences(
-                        preferences
-                    );
-
-
-                    applyLineHeight(
-                        value
-                    );
-
-
-                    updatePreferenceButtons();
-
-                }
+            applyLineHeight(
+                Number(
+                    this.value
+                )
             );
 
         }
@@ -3445,7 +3265,7 @@ document
 
 
 /* =========================================================
-   READING WIDTH
+   READER WIDTH
 ========================================================= */
 
 function applyReaderWidth(width){
@@ -3460,165 +3280,6 @@ function applyReaderWidth(width){
 }
 
 
-document
-    .querySelectorAll(
-        "[data-width]"
-    )
-    .forEach(
-        function(button){
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    const width =
-                        this.dataset.width;
-
-
-                    const preferences =
-                        getReaderPreferences();
-
-
-                    preferences.width =
-                        width;
-
-
-                    saveReaderPreferences(
-                        preferences
-                    );
-
-
-                    applyReaderWidth(
-                        width
-                    );
-
-
-                    updatePreferenceButtons();
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   PAGE THEME
-========================================================= */
-
-function applyTheme(theme){
-
-    const paper =
-        $("readerPaper");
-
-    const storyElement =
-        $("readerStory");
-
-
-    const themes = {
-
-        cream:{
-            background:"#fbf8f3",
-            color:"#342b26",
-            border:"#ddd2c5"
-        },
-
-        white:{
-            background:"#ffffff",
-            color:"#222222",
-            border:"#dddddd"
-        },
-
-        sepia:{
-            background:"#f1e4c9",
-            color:"#574936",
-            border:"#d7c7a8"
-        },
-
-        dark:{
-            background:"#20211f",
-            color:"#f5f5f5",
-            border:"#3b3c39"
-        },
-
-        black:{
-            background:"#000000",
-            color:"#f5f5f5",
-            border:"#333333"
-        },
-
-        night:{
-            background:"#111827",
-            color:"#f8fafc",
-            border:"#293449"
-        }
-
-    };
-
-
-    const selected =
-        themes[theme] ||
-        themes.cream;
-
-
-    paper.style.background =
-        selected.background;
-
-    paper.style.borderColor =
-        selected.border;
-
-    storyElement.style.color =
-        selected.color;
-
-}
-
-
-document
-    .querySelectorAll(
-        "[data-theme]"
-    )
-    .forEach(
-        function(button){
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    const theme =
-                        this.dataset.theme;
-
-
-                    const preferences =
-                        getReaderPreferences();
-
-
-                    preferences.theme =
-                        theme;
-
-
-                    saveReaderPreferences(
-                        preferences
-                    );
-
-
-                    applyTheme(
-                        theme
-                    );
-
-
-                    updatePreferenceButtons();
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   PREFERENCE BUTTON STATES
-========================================================= */
-
 function updatePreferenceButtons(){
 
     const preferences =
@@ -3627,641 +3288,461 @@ function updatePreferenceButtons(){
 
     document
         .querySelectorAll(
-            "[data-spacing]"
+            "[id^='width']"
         )
         .forEach(
             function(button){
 
-                button.classList.toggle(
-                    "active",
-                    Number(
-                        button.dataset.spacing
-                    ) ===
-                    Number(
-                        preferences.lineHeight
-                    )
+                button.classList.remove(
+                    "active"
                 );
 
             }
         );
+
+
+    if(
+        preferences.width ===
+        "680px"
+    ){
+
+        $("widthNarrow")
+            .classList
+            .add("active");
+
+    }else if(
+        preferences.width ===
+        "880px"
+    ){
+
+        $("widthWide")
+            .classList
+            .add("active");
+
+    }else{
+
+        $("widthNormal")
+            .classList
+            .add("active");
+
+    }
 
 
     document
         .querySelectorAll(
-            "[data-width]"
+            "[id^='theme']"
         )
         .forEach(
             function(button){
 
-                button.classList.toggle(
-                    "active",
-                    button.dataset.width ===
-                    preferences.width
+                button.classList.remove(
+                    "active"
                 );
 
             }
         );
 
+
+    if(
+        preferences.theme ===
+        "white"
+    ){
+
+        $("themeWhite")
+            .classList
+            .add("active");
+
+    }else if(
+        preferences.theme ===
+        "dark"
+    ){
+
+        $("themeDark")
+            .classList
+            .add("active");
+
+    }else{
+
+        $("themeCream")
+            .classList
+            .add("active");
+
+    }
+
+}
+
+
+$("widthNarrow").onclick =
+    function(){
+
+        setReaderWidth(
+            "680px"
+        );
+
+    };
+
+
+$("widthNormal").onclick =
+    function(){
+
+        setReaderWidth(
+            "780px"
+        );
+
+    };
+
+
+$("widthWide").onclick =
+    function(){
+
+        setReaderWidth(
+            "880px"
+        );
+
+    };
+
+
+function setReaderWidth(width){
+
+    const preferences =
+        getReaderPreferences();
+
+
+    preferences.width =
+        width;
+
+
+    saveReaderPreferences(
+        preferences
+    );
+
+
+    applyReaderWidth(
+        width
+    );
+
+
+    updatePreferenceButtons();
+
 }
 
 
 /* =========================================================
-   TEXT POSITION HELPERS
+   THEME
 ========================================================= */
 
-function getTextOffset(
-    root,
-    targetNode,
-    targetOffset
-){
+function applyTheme(theme){
 
-    let offset = 0;
-
-    const walker =
-        document.createTreeWalker(
-            root,
-            NodeFilter.SHOW_TEXT
-        );
+    const paper =
+        $("readerPaper");
 
 
-    let node;
+    if(theme === "dark"){
 
+        paper.style.background =
+            "#302b28";
 
-    while(
-        node =
-        walker.nextNode()
-    ){
+        paper.style.color =
+            "#eee8df";
 
-        if(node === targetNode){
+        $("readerStory")
+            .style
+            .color =
+                "#eee8df";
 
-            return (
-                offset +
-                targetOffset
-            );
+        $("readerChapterTitle")
+            .style
+            .color =
+                "#f5eee5";
 
-        }
+    }else if(theme === "white"){
 
+        paper.style.background =
+            "#ffffff";
 
-        offset +=
-            node.nodeValue.length;
+        paper.style.color =
+            "#342b26";
+
+        $("readerStory")
+            .style
+            .color =
+                "#342b26";
+
+        $("readerChapterTitle")
+            .style
+            .color =
+                "var(--brown)";
+
+    }else{
+
+        paper.style.background =
+            "var(--paper)";
+
+        paper.style.color =
+            "var(--text)";
+
+        $("readerStory")
+            .style
+            .color =
+                "var(--text)";
+
+        $("readerChapterTitle")
+            .style
+            .color =
+                "var(--brown)";
 
     }
-
-
-    return offset;
 
 }
 
 
-function getRangeOffsets(range){
+$("themeCream").onclick =
+    function(){
 
-    const root =
-        $("readerStory");
+        setReaderTheme(
+            "cream"
+        );
+
+    };
 
 
-    return {
+$("themeWhite").onclick =
+    function(){
 
-        start:
-            getTextOffset(
-                root,
-                range.startContainer,
-                range.startOffset
-            ),
+        setReaderTheme(
+            "white"
+        );
 
-        end:
-            getTextOffset(
-                root,
-                range.endContainer,
-                range.endOffset
+    };
+
+
+$("themeDark").onclick =
+    function(){
+
+        setReaderTheme(
+            "dark"
+        );
+
+    };
+
+
+function setReaderTheme(theme){
+
+    const preferences =
+        getReaderPreferences();
+
+
+    preferences.theme =
+        theme;
+
+
+    saveReaderPreferences(
+        preferences
+    );
+
+
+    applyTheme(
+        theme
+    );
+
+
+    updatePreferenceButtons();
+
+}
+
+
+/* =========================================================
+   PREFERENCES PANEL
+========================================================= */
+
+function setPreferencesOpen(open){
+
+    $("preferencesPanel")
+        .classList
+        .toggle(
+            "open",
+            open
+        );
+
+}
+
+
+$("preferencesToggleButton").onclick =
+    function(){
+
+        const open =
+            !$("preferencesPanel")
+                .classList
+                .contains(
+                    "open"
+                );
+
+        setPreferencesOpen(
+            open
+        );
+
+    };
+
+
+$("closePreferences").onclick =
+    function(){
+
+        setPreferencesOpen(
+            false
+        );
+
+    };
+
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+function getSelectionText(){
+
+    const selection =
+        window.getSelection();
+
+
+    if(
+        !selection ||
+        selection.rangeCount === 0
+    ){
+
+        return "";
+
+    }
+
+
+    const text =
+        selection
+            .toString()
+            .trim();
+
+
+    return text;
+
+}
+
+
+function showSelectionMenu(){
+
+    const text =
+        getSelectionText();
+
+
+    if(!text){
+
+        hideSelectionMenu();
+
+        return;
+
+    }
+
+
+    const selection =
+        window.getSelection();
+
+
+    const range =
+        selection.getRangeAt(
+            0
+        );
+
+
+    const rect =
+        range.getBoundingClientRect();
+
+
+    const menu =
+        $("selectionHighlightMenu");
+
+
+    menu.style.left =
+        Math.max(
+            10,
+            Math.min(
+                rect.left,
+                window.innerWidth - 220
             )
+        ) + "px";
 
-    };
+
+    menu.style.top =
+        Math.max(
+            10,
+            rect.top - 48
+        ) + "px";
+
+
+    menu.classList
+        .add("open");
+
+
+    savedSelectionRange =
+        range.cloneRange();
 
 }
 
 
-/* =========================================================
-   RANGE FROM TEXT OFFSETS
-========================================================= */
+function hideSelectionMenu(){
 
-function createRangeFromOffsets(
-    start,
-    end
-){
+    $("selectionHighlightMenu")
+        .classList
+        .remove("open");
 
-    const root =
-        $("readerStory");
+}
 
 
-    const walker =
-        document.createTreeWalker(
-            root,
-            NodeFilter.SHOW_TEXT
-        );
-
-
-    let node;
-
-    let position = 0;
-
-    let startNode = null;
-    let endNode = null;
-
-    let startOffset = 0;
-    let endOffset = 0;
-
-
-    while(
-        node =
-        walker.nextNode()
-    ){
-
-        const nextPosition =
-            position +
-            node.nodeValue.length;
-
+document.addEventListener(
+    "mouseup",
+    function(event){
 
         if(
-            startNode === null &&
-            start >= position &&
-            start <= nextPosition
+            event.target.closest(
+                "#selectionHighlightMenu"
+            )
         ){
 
-            startNode =
-                node;
-
-            startOffset =
-                start - position;
+            return;
 
         }
 
+
+        setTimeout(
+            showSelectionMenu,
+            10
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "mousedown",
+    function(event){
 
         if(
-            endNode === null &&
-            end >= position &&
-            end <= nextPosition
+            !event.target.closest(
+                "#selectionHighlightMenu"
+            )
         ){
 
-            endNode =
-                node;
-
-            endOffset =
-                end - position;
-
-            break;
-
-        }
-
-
-        position =
-            nextPosition;
-
-    }
-
-
-    if(
-        !startNode ||
-        !endNode
-    ){
-
-        return null;
-
-    }
-
-
-    const range =
-        document.createRange();
-
-
-    try{
-
-        range.setStart(
-            startNode,
-            startOffset
-        );
-
-        range.setEnd(
-            endNode,
-            endOffset
-        );
-
-        return range;
-
-    }catch(error){
-
-        return null;
-
-    }
-
-}
-
-
-/* =========================================================
-   WRAP RANGE
-========================================================= */
-
-function wrapRange(
-    range,
-    className
-){
-
-    if(
-        !range ||
-        range.collapsed
-    ){
-
-        return false;
-
-    }
-
-
-    const element =
-        document.createElement(
-            "span"
-        );
-
-
-    element.className =
-        className;
-
-
-    try{
-
-        range.surroundContents(
-            element
-        );
-
-        return true;
-
-    }catch(error){
-
-        try{
-
-            const fragment =
-                range.extractContents();
-
-
-            if(
-                !fragment.textContent.trim()
-            ){
-
-                return false;
-
-            }
-
-
-            element.appendChild(
-                fragment
-            );
-
-
-            range.insertNode(
-                element
-            );
-
-
-            return true;
-
-        }catch(innerError){
-
-            console.error(
-                innerError
-            );
-
-            return false;
+            hideSelectionMenu();
 
         }
 
     }
-
-}
-
-
-/* =========================================================
-   LOAD ANNOTATIONS
-========================================================= */
-
-function loadAnnotations(){
-
-    const annotations =
-        getChapterAnnotations();
-
-
-    if(!annotations.length){
-
-        return;
-
-    }
-
-
-    /*
-       Work from the end of the text toward
-       the beginning so earlier offsets
-       remain stable while spans are added.
-    */
-
-    const sorted =
-        [...annotations].sort(
-            function(a,b){
-
-                return (
-                    b.start -
-                    a.start
-                );
-
-            }
-        );
-
-
-    sorted.forEach(
-        function(annotation){
-
-            const range =
-                createRangeFromOffsets(
-                    annotation.start,
-                    annotation.end
-                );
-
-
-            if(!range){
-
-                return;
-
-            }
-
-
-            let className =
-                "";
-
-
-            if(
-                annotation.type ===
-                "highlight"
-            ){
-
-                className =
-                    "reader-highlight highlight-" +
-                    annotation.color +
-                    "-mark";
-
-            }
-
-
-            if(
-                annotation.type ===
-                "underline"
-            ){
-
-                className =
-                    "reader-underline";
-
-            }
-
-
-            if(!className){
-
-                return;
-
-            }
-
-
-            wrapRange(
-                range,
-                className
-            );
-
-        }
-    );
-
-}
+);
 
 
 /* =========================================================
-   SAVE ANNOTATION
+   ADD ANNOTATION
 ========================================================= */
 
-function saveAnnotation(
-    type,
-    color,
-    note
+function addAnnotation(
+    type
 ){
-
-    if(
-        !savedSelectionRange ||
-        savedSelectionRange.collapsed
-    ){
-
-        return;
-
-    }
-
-
-    const range =
-        savedSelectionRange;
-
-
-    if(
-        !selectionIsInsideReader(
-            range
-        )
-    ){
-
-        savedSelectionRange =
-            null;
-
-        return;
-
-    }
-
-
-    const offsets =
-        getRangeOffsets(
-            range
-        );
-
-
-    const selectedText =
-        range.toString();
-
-
-    if(
-        !selectedText.trim()
-    ){
-
-        savedSelectionRange =
-            null;
-
-        return;
-
-    }
-
-
-    const annotation = {
-
-        id:
-            "annotation_" +
-            Date.now() +
-            "_" +
-            Math.random()
-                .toString(36)
-                .slice(2),
-
-        type:
-            type,
-
-        color:
-            color || null,
-
-        note:
-            note || "",
-
-        text:
-            selectedText,
-
-        start:
-            offsets.start,
-
-        end:
-            offsets.end,
-
-        createdAt:
-            new Date().toISOString()
-
-    };
-
-
-    const annotations =
-        getChapterAnnotations();
-
-
-    annotations.push(
-        annotation
-    );
-
-
-    saveChapterAnnotations(
-        annotations
-    );
-
-
-    return annotation;
-
-}
-
-
-/* =========================================================
-   HIGHLIGHT
-========================================================= */
-
-function applyHighlight(
-    color
-){
-
-    if(!savedSelectionRange){
-
-        return;
-
-    }
-
-
-    const annotation =
-        saveAnnotation(
-            "highlight",
-            color,
-            ""
-        );
-
-
-    if(!annotation){
-
-        return;
-
-    }
-
-
-    const range =
-        createRangeFromOffsets(
-            annotation.start,
-            annotation.end
-        );
-
-
-    if(range){
-
-        wrapRange(
-            range,
-            "reader-highlight highlight-" +
-            color +
-            "-mark"
-        );
-
-    }
-
-
-    clearSelection();
-
-    renderNotes();
-
-}
-
-
-/* =========================================================
-   UNDERLINE
-========================================================= */
-
-function applyUnderline(){
-
-    if(!savedSelectionRange){
-
-        return;
-
-    }
-
-
-    const annotation =
-        saveAnnotation(
-            "underline",
-            null,
-            ""
-        );
-
-
-    if(!annotation){
-
-        return;
-
-    }
-
-
-    const range =
-        createRangeFromOffsets(
-            annotation.start,
-            annotation.end
-        );
-
-
-    if(range){
-
-        wrapRange(
-            range,
-            "reader-underline"
-        );
-
-    }
-
-
-    clearSelection();
-
-    renderNotes();
-
-}
-
-
-/* =========================================================
-   NOTE
-========================================================= */
-
-function applyNote(){
 
     if(!savedSelectionRange){
 
@@ -4283,570 +3764,22 @@ function applyNote(){
     }
 
 
-    const note =
-        prompt(
-            "Write a note for this passage:"
-        );
-
-
-    if(
-        note === null
-    ){
-
-        return;
-
-    }
-
-
-    if(
-        !note.trim()
-    ){
-
-        return;
-
-    }
-
-
-    const annotation =
-        saveAnnotation(
-            "note",
-            null,
-            note.trim()
-        );
-
-
-    if(!annotation){
-
-        return;
-
-    }
-
-
-    clearSelection();
-
-    renderNotes();
-
-    setNotesOpen(
-        true
-    );
-
-}
-
-
-/* =========================================================
-   SELECTION MENU
-========================================================= */
-
-function selectionIsInsideReader(
-    range
-){
-
-    if(!range){
-
-        return false;
-
-    }
-
-
-    return $("readerStory")
-        .contains(
-            range.commonAncestorContainer
-        );
-
-}
-
-
-function clearSelection(){
-
-    const selection =
-        window.getSelection();
-
-
-    if(selection){
-
-        selection.removeAllRanges();
-
-    }
-
-
-    savedSelectionRange =
-        null;
-
-
-    $("selectionHighlightMenu")
-        .classList
-        .remove(
-            "open"
-        );
-
-}
-
-
-function hideSelectionMenu(){
-
-    $("selectionHighlightMenu")
-        .classList
-        .remove(
-            "open"
-        );
-
-}
-
-
-function showSelectionHighlightMenu(){
-
-    const selection =
-        window.getSelection();
-
-
-    if(
-        !selection ||
-        selection.rangeCount === 0 ||
-        selection.isCollapsed
-    ){
-
-        hideSelectionMenu();
-
-        return;
-
-    }
-
-
-    const range =
-        selection.getRangeAt(0);
-
-
-    if(
-        !selectionIsInsideReader(
-            range
-        )
-    ){
-
-        hideSelectionMenu();
-
-        return;
-
-    }
-
-
-    const text =
-        selection
-            .toString()
-            .trim();
-
-
-    if(!text){
-
-        hideSelectionMenu();
-
-        return;
-
-    }
-
-
-    savedSelectionRange =
-        range.cloneRange();
-
-
-    const menu =
-        $("selectionHighlightMenu");
-
-
-    menu.classList.add(
-        "open"
-    );
-
-
-    const rect =
-        range.getBoundingClientRect();
-
-
-    const menuWidth =
-        menu.offsetWidth || 330;
-
-
-    const menuHeight =
-        menu.offsetHeight || 45;
-
-
-    let left =
-        rect.left +
-        rect.width / 2 -
-        menuWidth / 2;
-
-
-    let top =
-        rect.top -
-        menuHeight -
-        8;
-
-
-    left =
-        Math.max(
-            8,
-            Math.min(
-                left,
-                window.innerWidth -
-                menuWidth -
-                8
-            )
-        );
-
-
-    if(top < 8){
-
-        top =
-            Math.min(
-                window.innerHeight -
-                menuHeight -
-                8,
-
-                rect.bottom +
-                8
-            );
-
-    }
-
-
-    menu.style.left =
-        left + "px";
-
-    menu.style.top =
-        top + "px";
-
-}
-
-
-document.addEventListener(
-    "selectionchange",
-    function(){
-
-        clearTimeout(
-            window.hedSelectionTimer
-        );
-
-
-        window.hedSelectionTimer =
-            setTimeout(
-                showSelectionHighlightMenu,
-                80
-            );
-
-    }
-);
-
-
-document.addEventListener(
-    "mousedown",
-    function(event){
-
-        const menu =
-            $("selectionHighlightMenu");
-
-
-        if(
-            menu.contains(
-                event.target
-            )
-        ){
-
-            return;
-
-        }
-
-
-        if(
-            !event.target.closest(
-                "#readerStory"
-            )
-        ){
-
-            hideSelectionMenu();
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "scroll",
-    function(){
-
-        const menu =
-            $("selectionHighlightMenu");
-
-
-        if(
-            menu.classList.contains(
-                "open"
-            )
-        ){
-
-            showSelectionHighlightMenu();
-
-        }
-
-    },
-    true
-);
-
-
-/* =========================================================
-   SELECTION BUTTONS
-========================================================= */
-
-$("selectionHighlight")
-    .onclick =
-    function(){
-
-        applyHighlight(
-            "yellow"
-        );
-
-    };
-
-
-$("selectionUnderline")
-    .onclick =
-    function(){
-
-        applyUnderline();
-
-    };
-
-
-$("selectionNote")
-    .onclick =
-    function(){
-
-        applyNote();
-
-    };
-
-
-document
-    .querySelectorAll(
-        "#selectionHighlightMenu [data-highlight]"
-    )
-    .forEach(
-        function(button){
-
-            button.addEventListener(
-                "mousedown",
-                function(event){
-
-                    event.preventDefault();
-
-                }
-            );
-
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    applyHighlight(
-                        this.dataset.highlight
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   NOTES
-========================================================= */
-
-function renderNotes(){
-
-    const list =
-        $("noteList");
-
-
-    list.innerHTML =
-        "";
-
-
-    const annotations =
-        getChapterAnnotations()
-            .filter(
-                function(annotation){
-
-                    return (
-                        annotation.type ===
-                        "note"
-                    );
-
-                }
-            );
-
-
-    if(!annotations.length){
-
-        list.innerHTML =
-            '<div class="empty-message">' +
-            "No notes in this chapter yet." +
-            "</div>";
-
-        return;
-
-    }
-
-
-    annotations.forEach(
-        function(annotation){
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "note-card";
-
-
-            card.innerHTML =
-
-                '<p class="note-card-quote">' +
-                    "“" +
-                    escapeHTML(
-                        annotation.text
-                    ) +
-                    "”" +
-                "</p>" +
-
-                '<p class="note-card-text">' +
-                    escapeHTML(
-                        annotation.note
-                    ) +
-                "</p>" +
-
-                '<div class="note-card-actions">' +
-
-                    '<button type="button" data-note-edit="' +
-                        escapeAttribute(
-                            annotation.id
-                        ) +
-                    '">' +
-                        "Edit" +
-                    "</button>" +
-
-                    '<button type="button" data-note-delete="' +
-                        escapeAttribute(
-                            annotation.id
-                        ) +
-                    '">' +
-                        "Delete" +
-                    "</button>" +
-
-                "</div>";
-
-
-            list.appendChild(
-                card
-            );
-
-        }
-    );
-
-
-    list
-        .querySelectorAll(
-            "[data-note-edit]"
-        )
-        .forEach(
-            function(button){
-
-                button.onclick =
-                    function(){
-
-                        editNote(
-                            this.dataset.noteEdit
-                        );
-
-                    };
-
-            }
-        );
-
-
-    list
-        .querySelectorAll(
-            "[data-note-delete]"
-        )
-        .forEach(
-            function(button){
-
-                button.onclick =
-                    function(){
-
-                        deleteNote(
-                            this.dataset.noteDelete
-                        );
-
-                    };
-
-            }
-        );
-
-}
-
-
-function editNote(id){
-
     const annotations =
         getChapterAnnotations();
 
 
-    const annotation =
-        annotations.find(
-            function(item){
+    annotations.push({
 
-                return item.id === id;
+        id:
+            Date.now().toString(),
 
-            }
-        );
+        text:
+            text,
 
+        type:
+            type
 
-    if(!annotation){
-
-        return;
-
-    }
-
-
-    const newNote =
-        prompt(
-            "Edit your note:",
-            annotation.note
-        );
-
-
-    if(
-        newNote === null
-    ){
-
-        return;
-
-    }
-
-
-    if(
-        !newNote.trim()
-    ){
-
-        return;
-
-    }
-
-
-    annotation.note =
-        newNote.trim();
+    });
 
 
     saveChapterAnnotations(
@@ -4854,83 +3787,52 @@ function editNote(id){
     );
 
 
-    renderNotes();
+    hideSelectionMenu();
 
-}
-
-
-function deleteNote(id){
-
-    if(
-        !confirm(
-            "Delete this note?"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    let annotations =
-        getChapterAnnotations();
-
-
-    annotations =
-        annotations.filter(
-            function(annotation){
-
-                return annotation.id !== id;
-
-            }
-        );
-
-
-    saveChapterAnnotations(
-        annotations
-    );
-
-
-    /*
-       Rebuild the chapter so the
-       saved annotation state is clean.
-    */
 
     const chapter =
-        chapters[
-            selectedChapterIndex
-        ];
+        chapters[selectedChapterIndex];
 
 
-    const content =
-        chapter.content ||
-        "";
-
-
-    if(
-        /<\/?[a-z][\s\S]*>/i.test(
-            content
-        )
-    ){
-
-        $("readerStory")
-            .innerHTML =
-                content;
-
-    }else{
-
-        $("readerStory")
-            .textContent =
-                content;
-
-    }
-
-
-    loadAnnotations();
-
-    renderNotes();
+    renderChapterContent(
+        chapter.content || ""
+    );
 
 }
+
+
+$("highlightSelectionButton").onclick =
+    function(){
+
+        addAnnotation(
+            "highlight"
+        );
+
+    };
+
+
+$("underlineSelectionButton").onclick =
+    function(){
+
+        addAnnotation(
+            "underline"
+        );
+
+    };
+
+
+$("noteSelectionButton").onclick =
+    function(){
+
+        addAnnotation(
+            "note"
+        );
+
+        setNotesOpen(
+            true
+        );
+
+    };
 
 
 /* =========================================================
@@ -4939,9 +3841,7 @@ function deleteNote(id){
 
 async function loadComments(){
 
-    if(
-        selectedChapterIndex < 0
-    ){
+    if(selectedChapterIndex < 0){
 
         return;
 
@@ -4954,11 +3854,21 @@ async function loadComments(){
         ];
 
 
+    if(
+        !chapter ||
+        !chapter.id
+    ){
+
+        return;
+
+    }
+
+
     const result =
         await supabaseClient
             .from("comments")
             .select(
-                "id,name,content,created_at"
+                "id,name,content,created_at,target_id,target_type"
             )
             .eq(
                 "target_type",
@@ -5430,53 +4340,92 @@ window.readerAuthReady
 
         }
     );
+
+
+/* =========================================================
+   FAVORITE
+========================================================= */
+
 function getFavoriteKey(){
+
     return "hed_favorite_" + storyId;
+
 }
+
 
 function applyFavoriteState(){
 
     const button =
-        document.getElementById("favoriteButton");
+        document.getElementById(
+            "favoriteButton"
+        );
 
-    if (!button) return;
+
+    if(!button){
+
+        return;
+
+    }
+
 
     const saved =
-        localStorage.getItem(getFavoriteKey()) === "true";
+        localStorage.getItem(
+            getFavoriteKey()
+        ) === "true";
 
-    button.classList.toggle("active", saved);
+
+    button.classList.toggle(
+        "active",
+        saved
+    );
+
 
     button.setAttribute(
         "aria-pressed",
         String(saved)
     );
 
+
     button.innerHTML =
         saved
             ? "♥ Favorited"
             : "♡ Favorite";
+
 }
+
 
 const favoriteButton =
-    document.getElementById("favoriteButton");
+    document.getElementById(
+        "favoriteButton"
+    );
 
-if (favoriteButton) {
 
-    favoriteButton.onclick = function(){
+if(favoriteButton){
 
-        const saved =
-            localStorage.getItem(
-                getFavoriteKey()
-            ) === "true";
+    favoriteButton.onclick =
+        function(){
 
-        localStorage.setItem(
-            getFavoriteKey(),
-            String(!saved)
-        );
+            const saved =
+                localStorage.getItem(
+                    getFavoriteKey()
+                ) === "true";
 
-        applyFavoriteState();
-    };
+
+            localStorage.setItem(
+                getFavoriteKey(),
+                String(!saved)
+            );
+
+
+            applyFavoriteState();
+
+        };
+
+
+    applyFavoriteState();
+
 }
+
 </script>
 
 </body>
