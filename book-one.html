@@ -1433,6 +1433,29 @@ button{
         max-width:calc(100vw - 20px);
     }
 }
+   .favorite-button{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:16px;
+    padding:7px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--brown);
+    font-size:11px;
+    cursor:pointer;
+}
+
+.favorite-button:hover{
+    border-color:var(--pink);
+    color:var(--pink-dark);
+}
+
+.favorite-button.active{
+    border-color:var(--pink);
+    color:var(--pink-dark);
+    background:#fff4f4;
+}
 
 </style>
 </head>
@@ -5407,7 +5430,53 @@ window.readerAuthReady
 
         }
     );
+function getFavoriteKey(){
+    return "hed_favorite_" + storyId;
+}
 
+function applyFavoriteState(){
+
+    const button =
+        document.getElementById("favoriteButton");
+
+    if (!button) return;
+
+    const saved =
+        localStorage.getItem(getFavoriteKey()) === "true";
+
+    button.classList.toggle("active", saved);
+
+    button.setAttribute(
+        "aria-pressed",
+        String(saved)
+    );
+
+    button.innerHTML =
+        saved
+            ? "♥ Favorited"
+            : "♡ Favorite";
+}
+
+const favoriteButton =
+    document.getElementById("favoriteButton");
+
+if (favoriteButton) {
+
+    favoriteButton.onclick = function(){
+
+        const saved =
+            localStorage.getItem(
+                getFavoriteKey()
+            ) === "true";
+
+        localStorage.setItem(
+            getFavoriteKey(),
+            String(!saved)
+        );
+
+        applyFavoriteState();
+    };
+}
 </script>
 
 </body>
