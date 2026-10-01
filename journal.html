@@ -1263,13 +1263,26 @@
             }
 
         }
-        /* Prevent visitors from selecting/copying text */
-body {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+
+        .welcome-strip {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px auto;
+            max-width: 1100px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            background: #f8f3ed;
+            color: #4b4038;
+        }
+
+        .welcome-mark {
+            font-size: 24px;
+        }
+
+        .welcome-strip strong {
+            font-weight: 600;
+        }
 
     </style>
 
@@ -1328,6 +1341,20 @@ body {
         id="journalIndex"
         class="journal-index"
     >
+
+        <div class="welcome-strip">
+
+            <div class="welcome-mark">
+                ♡
+            </div>
+
+            <div>
+                Welcome,
+                <strong id="readerNickname">Reader</strong>.
+            </div>
+
+        </div>
+
 
         <div class="journal-intro">
 
@@ -1541,6 +1568,7 @@ body {
                         placeholder="Your name"
                         maxlength="80"
                         required
+                        readonly
                     >
 
 
@@ -1627,6 +1655,8 @@ body {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="supabase-config.js"></script>
+
+<script src="reader-auth.js"></script>
 
 
 <script>
@@ -2675,6 +2705,7 @@ body {
 
 
             commentName.value =
+                window.readerNickname ||
                 "";
 
             commentContent.value =
@@ -2933,7 +2964,44 @@ body {
 
     updateReadingStyle();
 
-    loadJournal();
+    window.readerAuthReady.then(function () {
+
+        const nicknameElement =
+            document.getElementById(
+                "readerNickname"
+            );
+
+        const commentNameElement =
+            document.getElementById(
+                "commentName"
+            );
+
+
+        if (
+            nicknameElement &&
+            window.readerNickname
+        ) {
+
+            nicknameElement.textContent =
+                window.readerNickname;
+
+        }
+
+
+        if (
+            commentNameElement &&
+            window.readerNickname
+        ) {
+
+            commentNameElement.value =
+                window.readerNickname;
+
+        }
+
+
+        loadJournal();
+
+    });
 
 </script>
 
