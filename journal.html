@@ -837,13 +837,16 @@ async function prefillCommentName() {
                 ""
             ).trim();
 
-        if (nickname) {
-            commentName.value =
-                nickname;
+        if (commentName.dataset.profileName) {
+    commentName.value =
+        commentName.dataset.profileName;
+} else {
+    commentName.value =
+        "";
+}
 
-            commentName.dataset.profileName =
-                nickname;
-        }
+commentContent.value =
+    "";
 
     } catch (error) {
         console.warn(
