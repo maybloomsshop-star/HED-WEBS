@@ -3691,17 +3691,33 @@
         ================================== */
 
         window.readerAuthReady.then(function () {
+
     const nicknameElement =
         document.getElementById("readerNickname");
 
+    const replyNameElement =
+        document.getElementById("replyName");
+
+
     if (nicknameElement && window.readerNickname) {
+
         nicknameElement.textContent =
             window.readerNickname;
+
     }
 
-    loadWritings();
-});
 
+    if (replyNameElement && window.readerNickname) {
+
+        replyNameElement.value =
+            window.readerNickname;
+
+    }
+
+
+    loadWritings();
+
+});
     </script>
 
 </body>
