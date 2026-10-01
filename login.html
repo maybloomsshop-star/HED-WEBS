@@ -101,10 +101,6 @@
         #nicknameField {
             display: none;
         }
-
-        #signupTitle {
-            display: none;
-        }
     </style>
 </head>
 
@@ -121,16 +117,22 @@
     <form id="loginForm">
 
         <div id="nicknameField">
-            <label for="nickname">Name or nickname</label>
+
+            <label for="nickname">
+                Name or nickname
+            </label>
 
             <input
                 type="text"
                 id="nickname"
                 placeholder="What should we call you?"
             >
+
         </div>
 
-        <label for="email">Email</label>
+        <label for="email">
+            Email
+        </label>
 
         <input
             type="email"
@@ -138,7 +140,9 @@
             required
         >
 
-        <label for="password">Password</label>
+        <label for="password">
+            Password
+        </label>
 
         <input
             type="password"
@@ -153,7 +157,9 @@
     </form>
 
     <div class="switch">
-        <span id="switchText">Don't have an account?</span>
+        <span id="switchText">
+            Don't have an account?
+        </span>
 
         <a id="switchLink">
             Create one
@@ -167,6 +173,7 @@
     </a>
 
 </div>
+
 
 <script>
 
@@ -204,6 +211,7 @@
         document.getElementById("loginSubtitle");
 
     let signupMode = false;
+    let existingUserNeedsNickname = false;
 
 
     function getReturnPage() {
@@ -228,58 +236,106 @@
     }
 
 
-    switchLink.addEventListener("click", function() {
+    function showNicknameForExistingUser() {
 
-        signupMode = !signupMode;
+        existingUserNeedsNickname = true;
 
-        message.textContent = "";
+        signupMode = false;
 
-        if (signupMode) {
+        loginTitle.textContent =
+            "Welcome to HED";
 
-            loginTitle.textContent =
-                "Create your HED account";
+        loginSubtitle.textContent =
+            "Choose a name or nickname to continue.";
 
-            loginSubtitle.textContent =
-                "Choose a name and create your account.";
+        nicknameField.style.display =
+            "block";
 
-            nicknameField.style.display =
-                "block";
+        nickname.required = true;
 
-            nickname.required = true;
+        email.style.display =
+            "none";
 
-            submitButton.textContent =
-                "Create account";
+        password.style.display =
+            "none";
 
-            switchText.textContent =
-                "Already have an account?";
+        document.querySelector(
+            'label[for="email"]'
+        ).style.display = "none";
 
-            switchLink.textContent =
-                "Log in";
+        document.querySelector(
+            'label[for="password"]'
+        ).style.display = "none";
 
-        } else {
+        submitButton.textContent =
+            "Save nickname";
 
-            loginTitle.textContent =
-                "Welcome to HED";
+        switchText.style.display =
+            "none";
 
-            loginSubtitle.textContent =
-                "Log in to read.";
+        switchLink.style.display =
+            "none";
 
-            nicknameField.style.display =
-                "none";
+        email.required = false;
+        password.required = false;
+    }
 
-            nickname.required = false;
 
-            submitButton.textContent =
-                "Log in";
+    switchLink.addEventListener(
+        "click",
+        function() {
 
-            switchText.textContent =
-                "Don't have an account?";
+            signupMode = !signupMode;
 
-            switchLink.textContent =
-                "Create one";
+            message.textContent = "";
+
+            if (signupMode) {
+
+                loginTitle.textContent =
+                    "Create your HED account";
+
+                loginSubtitle.textContent =
+                    "Choose a name and create your account.";
+
+                nicknameField.style.display =
+                    "block";
+
+                nickname.required = true;
+
+                submitButton.textContent =
+                    "Create account";
+
+                switchText.textContent =
+                    "Already have an account?";
+
+                switchLink.textContent =
+                    "Log in";
+
+            } else {
+
+                loginTitle.textContent =
+                    "Welcome to HED";
+
+                loginSubtitle.textContent =
+                    "Log in to read.";
+
+                nicknameField.style.display =
+                    "none";
+
+                nickname.required = false;
+
+                submitButton.textContent =
+                    "Log in";
+
+                switchText.textContent =
+                    "Don't have an account?";
+
+                switchLink.textContent =
+                    "Create one";
+            }
+
         }
-
-    });
+    );
 
 
     loginForm.addEventListener(
@@ -288,11 +344,70 @@
 
             event.preventDefault();
 
-            message.textContent =
-                signupMode
-                    ? "Creating your account..."
-                    : "Logging in...";
+            /*
+             * EXISTING USER:
+             * Save nickname after logging in.
+             */
 
+            if (existingUserNeedsNickname) {
+
+                const name =
+                    nickname.value.trim();
+
+                if (!name) {
+
+                    message.textContent =
+                        "Please enter a name or nickname.";
+
+                    return;
+                }
+
+                message.textContent =
+                    "Saving your nickname...";
+
+                const {
+                    data: userData,
+                    error: userError
+                } =
+                await supabaseClient.auth.getUser();
+
+                if (userError) {
+
+                    message.textContent =
+                        userError.message;
+
+                    return;
+                }
+
+                const {
+                    error
+                } =
+                await supabaseClient.auth.updateUser({
+
+                    data: {
+                        nickname: name
+                    }
+
+                });
+
+                if (error) {
+
+                    message.textContent =
+                        error.message;
+
+                    return;
+                }
+
+                window.location.href =
+                    getReturnPage();
+
+                return;
+            }
+
+
+            /*
+             * CREATE NEW ACCOUNT
+             */
 
             if (signupMode) {
 
@@ -307,6 +422,8 @@
                     return;
                 }
 
+                message.textContent =
+                    "Creating your account...";
 
                 const {
                     data,
@@ -330,7 +447,6 @@
 
                 });
 
-
                 if (error) {
 
                     message.textContent =
@@ -338,7 +454,6 @@
 
                     return;
                 }
-
 
                 if (
                     data.user &&
@@ -351,7 +466,6 @@
                     return;
                 }
 
-
                 window.location.href =
                     getReturnPage();
 
@@ -359,7 +473,15 @@
             }
 
 
+            /*
+             * LOG IN
+             */
+
+            message.textContent =
+                "Logging in...";
+
             const {
+                data,
                 error
             } =
             await supabaseClient.auth.signInWithPassword({
@@ -372,7 +494,6 @@
 
             });
 
-
             if (error) {
 
                 message.textContent =
@@ -381,6 +502,30 @@
                 return;
             }
 
+
+            /*
+             * CHECK IF THIS OLD ACCOUNT
+             * ALREADY HAS A NICKNAME
+             */
+
+            const user =
+                data.user;
+
+            const savedNickname =
+                user.user_metadata?.nickname;
+
+
+            if (!savedNickname) {
+
+                showNicknameForExistingUser();
+
+                return;
+            }
+
+
+            /*
+             * NICKNAME ALREADY EXISTS
+             */
 
             window.location.href =
                 getReturnPage();
