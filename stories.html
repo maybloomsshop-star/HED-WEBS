@@ -1942,27 +1942,28 @@
 
 
 
-        /* =========================================================
+                /* =========================================================
            START
         ========================================================= */
-const nicknameElement =
-    document.getElementById("readerNickname");
 
-if (nicknameElement && window.readerNickname) {
-    nicknameElement.textContent =
-        window.readerNickname;
-}
-    window.readerAuthReady.then(function () {
-    const nicknameElement =
-        document.getElementById("readerNickname");
+        window.readerAuthReady.then(function () {
 
-    if (nicknameElement && window.readerNickname) {
-        nicknameElement.textContent =
-            window.readerNickname;
-    }
+            const nicknameElement =
+                document.getElementById("readerNickname");
 
-    loadStories();
-});
+            if (
+                nicknameElement &&
+                window.readerNickname
+            ) {
+
+                nicknameElement.textContent =
+                    window.readerNickname;
+
+            }
+
+            loadStories();
+
+        });
 
     </script>
 
