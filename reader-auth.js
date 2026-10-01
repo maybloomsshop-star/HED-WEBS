@@ -21,4 +21,4 @@ async function requireReaderLogin() {
     return true;
 }
 
-requireReaderLogin();
+window.readerAuthReady = requireReaderLogin();
