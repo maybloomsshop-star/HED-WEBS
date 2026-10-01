@@ -596,22 +596,6 @@
 
 
   <script>
-    /* =========================================================
-       SUPABASE
-    ========================================================= */
-
-    let db = null;
-
-    try {
-      if (typeof supabase !== "undefined" && window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
-        db = supabase.createClient(
-          window.SUPABASE_URL,
-          window.SUPABASE_ANON_KEY
-        );
-      }
-    } catch (error) {
-      console.error("Supabase initialization error:", error);
-    }
 
 
     /* =========================================================
