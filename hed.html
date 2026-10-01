@@ -1277,12 +1277,14 @@ article.addEventListener(
 
 
                 readMore.addEventListener(
-                    "click",
-                    function() {
+    "click",
+    function(event) {
 
-                        const isOpen =
-                            fullText.style.display ===
-                            "block";
+        event.stopPropagation();
+
+        const isOpen =
+            fullText.style.display ===
+            "block";
 
 
                         if (isOpen) {
