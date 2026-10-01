@@ -1924,7 +1924,13 @@
         /* =========================================================
            START
         ========================================================= */
+const nicknameElement =
+    document.getElementById("readerNickname");
 
+if (nicknameElement && window.readerNickname) {
+    nicknameElement.textContent =
+        window.readerNickname;
+}
         loadStories();
 
     </script>
