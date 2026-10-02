@@ -650,9 +650,97 @@ button{
     border-color:#111827;
 }
 
-.theme-button.active{
+
+/* =========================================================
+   HIGHLIGHT COLORS
+========================================================= */
+
+.highlight-button{
+    width:25px;
+    height:25px;
+
+    flex:0 0 auto;
+
+    padding:0;
+
+    border:1px solid #bcb4aa;
+    border-radius:50%;
+}
+
+.highlight-button:hover{
+    transform:scale(1.08);
+}
+
+.highlight-button.active{
     outline:2px solid var(--pink);
     outline-offset:1px;
+}
+
+.highlight-yellow{
+    background:#fff0a6;
+}
+
+.highlight-pink{
+    background:#f7b4cf;
+}
+
+.highlight-green{
+    background:#b8dfb5;
+}
+
+.highlight-blue{
+    background:#b7d5ee;
+}
+
+.highlight-orange{
+    background:#f6c58b;
+}
+
+.highlight-purple{
+    background:#d7b9e8;
+}
+
+.highlight-coral{
+    background:#f5aaa0;
+}
+
+.highlight-lavender{
+    background:#c8c7f2;
+}
+
+.highlight-mint{
+    background:#aee1d2;
+}
+
+.highlight-gray{
+    background:#d6d6d1;
+}
+
+
+/* =========================================================
+   FLOATING HIGHLIGHT MENU
+========================================================= */
+
+.selection-highlight-menu{
+    position:fixed;
+    z-index:100;
+
+    display:none;
+    align-items:center;
+    gap:5px;
+
+    max-width:calc(100vw - 16px);
+
+    padding:6px;
+
+    border:1px solid var(--line);
+    background:#fbf8f3;
+
+    box-shadow:0 8px 25px rgba(74,53,43,.18);
+}
+
+.selection-highlight-menu.open{
+    display:flex;
 }
 
 
@@ -661,9 +749,7 @@ button{
 ========================================================= */
 
 .reader-paper{
-    min-height:500px;
-
-    padding:clamp(25px,5vw,58px);
+    padding:28px 36px 30px;
 
     border:1px solid var(--line);
 
@@ -672,75 +758,75 @@ button{
     box-shadow:var(--shadow);
 
     transition:
-        background .2s ease,
-        color .2s ease,
-        border-color .2s ease;
+        background .15s ease,
+        color .15s ease;
 }
 
-.reader-paper.theme-black,
-.reader-paper.theme-dark,
-.reader-paper.theme-blue{
-    border-color:#333;
+
+/* SMALL CHAPTER LABEL */
+
+.reader-chapter-label{
+    margin:0 0 3px;
+
+    color:var(--pink-dark);
+
+    font-size:10px;
+    font-weight:700;
+    line-height:1.2;
+
+    letter-spacing:.08em;
+    text-transform:uppercase;
 }
+
+
+/* STORY TITLE */
+
+.reader-paper h1{
+    margin:0 0 10px;
+    color:var(--brown);
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:20px;
+    line-height:1.25;
+    font-weight:600;
+    font-style:normal;
+}
+
+
+/* =========================================================
+   STORY TEXT
+========================================================= */
 
 .reader-story{
     --reader-font:Georgia,"Times New Roman",serif;
-    --reader-line-height:1.65;
 
-    max-width:760px;
+    max-width:780px;
 
     margin:0 auto;
 
-    color:#342b26;
+    color:var(--text);
 
-    font-family:var(--reader-font);
     font-size:15px;
-    line-height:var(--reader-line-height);
+    line-height:1.65;
+}
 
-    transition:
-        color .2s ease,
-        font-size .15s ease,
-        line-height .15s ease;
+.reader-story,
+.reader-story *{
+    font-family:var(--reader-font) !important;
+}
+
+.reader-story p{
+    margin:0 0 .8em;
 }
 
 .reader-story h1,
 .reader-story h2,
-.reader-story h3{
-    color:inherit;
+.reader-story h3,
+.reader-story h4{
+    margin:1.1em 0 .4em;
 
-    font-family:var(--reader-font);
+    color:var(--brown);
 
     line-height:1.2;
-}
-
-.reader-story h1{
-    margin:0 0 28px;
-
-    font-size:clamp(28px,4vw,40px);
-
-    text-align:center;
-}
-
-.reader-story h2{
-    margin:38px 0 14px;
-
-    font-size:25px;
-}
-
-.reader-story h3{
-    margin:30px 0 12px;
-
-    font-size:20px;
-}
-
-.reader-story p{
-    margin:0 0 1.15em;
-
-    color:inherit;
-
-    font-family:var(--reader-font);
-    font-size:inherit;
-    line-height:inherit;
 }
 
 .reader-story img{
@@ -749,62 +835,102 @@ button{
     max-width:100%;
     height:auto;
 
-    margin:24px auto;
-
-    border:1px solid var(--line);
+    margin:20px auto;
 }
 
 .reader-story blockquote{
-    margin:25px 0;
-    padding:14px 20px;
+    margin:1em 0;
+    padding:8px 17px;
 
     border-left:3px solid var(--pink);
 
-    color:inherit;
-
-    font-style:italic;
+    color:var(--brown);
 }
 
-.reader-story ul,
-.reader-story ol{
-    margin:0 0 1.15em;
-    padding-left:25px;
-}
 
-.reader-story li{
-    margin-bottom:.45em;
-}
+/* =========================================================
+   SAVED HIGHLIGHTS
+========================================================= */
 
-.reader-story a{
-    color:var(--pink-dark);
-}
-
-.reader-story hr{
-    margin:35px 0;
-
-    border:0;
-    border-top:1px solid var(--line);
-}
-
-.reader-story .highlight{
-    border-radius:3px;
-    padding:0 2px;
+.highlight{
+    border-radius:2px;
+    padding:0 .05em;
 }
 
 .highlight-yellow-mark{
-    background:#f4e3a1;
+    background:#fff0a6;
 }
 
 .highlight-pink-mark{
-    background:#e8b8bc;
+    background:#f7b4cf;
 }
 
 .highlight-green-mark{
-    background:#cbd8bd;
+    background:#b8dfb5;
 }
 
 .highlight-blue-mark{
-    background:#bfd3e8;
+    background:#b7d5ee;
+}
+
+.highlight-orange-mark{
+    background:#f6c58b;
+}
+
+.highlight-purple-mark{
+    background:#d7b9e8;
+}
+
+.highlight-coral-mark{
+    background:#f5aaa0;
+}
+
+.highlight-lavender-mark{
+    background:#c8c7f2;
+}
+
+.highlight-mint-mark{
+    background:#aee1d2;
+}
+
+.highlight-gray-mark{
+    background:#d6d6d1;
+}
+
+
+/* =========================================================
+   CHAPTER NAVIGATION
+========================================================= */
+
+.chapter-navigation{
+    max-width:780px;
+
+    margin:21px auto 0;
+    padding-top:13px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    border-top:1px solid var(--line);
+}
+
+.nav-button{
+    padding:9px 12px;
+
+    border:1px solid var(--line);
+    background:var(--paper);
+
+    color:var(--brown);
+
+    font-size:11px;
+}
+
+.nav-button:hover{
+    border-color:var(--pink);
+    color:var(--pink-dark);
 }
 
 
@@ -812,14 +938,27 @@ button{
    COMMENTS
 ========================================================= */
 
-.comments{
-    max-width:760px;
+.comments-section{
+    max-width:780px;
 
-    margin:30px auto 0;
+    margin:20px auto 0;
+    padding-top:14px;
+
+    border-top:1px solid var(--line);
+}
+
+.comments-title-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:11px;
 }
 
 .comments-title{
-    margin:0 0 13px;
+    margin:0;
 
     color:var(--brown);
 
@@ -827,18 +966,105 @@ button{
     font-size:20px;
 }
 
-.comment-form{
+.comments-subtitle{
+    color:var(--muted);
+
+    font-size:9px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.comments-list{
     display:grid;
     gap:8px;
 
-    margin-bottom:20px;
+    margin-bottom:15px;
+}
+
+.comment-card{
+    padding:10px 12px;
+
+    border:1px solid var(--line);
+    background:#fffdfa;
+}
+
+.comment-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:4px;
+}
+
+.comment-author{
+    color:var(--brown);
+
+    font-size:12px;
+    font-weight:700;
+}
+
+.comment-date{
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+.comment-text{
+    margin:0;
+
+    color:#5b544e;
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:14px;
+    line-height:1.48;
+
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+}
+
+.comment-actions{
+    display:flex;
+    justify-content:flex-end;
+
+    margin-top:5px;
+}
+
+.comment-delete{
+    padding:3px 0;
+
+    border:0;
+    background:transparent;
+
+    color:#aa817f;
+
+    font-size:9px;
+}
+
+.comment-delete:hover{
+    color:var(--pink);
+}
+
+.comment-form{
+    padding:13px;
+
+    border:1px solid var(--line);
+    background:rgba(251,248,243,.8);
+}
+
+.comment-form-grid{
+    display:grid;
+    grid-template-columns:170px minmax(0,1fr);
+
+    gap:8px;
 }
 
 .comment-input,
 .comment-textarea{
     width:100%;
 
-    padding:10px 11px;
+    padding:9px 10px;
 
     border:1px solid var(--line);
     background:var(--paper);
@@ -846,6 +1072,8 @@ button{
     color:var(--text);
 
     outline:none;
+
+    font-size:12px;
 }
 
 .comment-input:focus,
@@ -854,18 +1082,26 @@ button{
 }
 
 .comment-textarea{
-    min-height:90px;
+    min-height:72px;
 
     resize:vertical;
+
+    font-family:Georgia,"Times New Roman",serif;
+    line-height:1.5;
+}
+
+.comment-form-bottom{
+    display:flex;
+    justify-content:flex-end;
+
+    margin-top:8px;
 }
 
 .comment-submit{
-    justify-self:start;
-
     padding:9px 14px;
 
-    border:1px solid var(--brown);
-    background:var(--brown);
+    border:0;
+    background:var(--pink);
 
     color:white;
 
@@ -873,108 +1109,17 @@ button{
 }
 
 .comment-submit:hover{
-    background:var(--brown-dark);
+    background:var(--pink-dark);
 }
 
 .comment-status{
-    min-height:16px;
+    min-height:13px;
+
+    margin-top:6px;
 
     color:var(--muted);
 
     font-size:10px;
-}
-
-.comment-list{
-    display:grid;
-    gap:10px;
-}
-
-.comment-card{
-    padding:12px 13px;
-
-    border:1px solid var(--line);
-    background:var(--paper);
-}
-
-.comment-name{
-    margin-bottom:4px;
-
-    color:var(--brown);
-
-    font-weight:700;
-    font-size:12px;
-}
-
-.comment-date{
-    margin-bottom:7px;
-
-    color:var(--muted);
-
-    font-size:9px;
-}
-
-.comment-content{
-    color:#665c54;
-
-    font-size:12px;
-    line-height:1.6;
-}
-
-
-/* =========================================================
-   SELECTION HIGHLIGHT MENU
-========================================================= */
-
-.selection-highlight-menu{
-    position:fixed;
-
-    z-index:100;
-
-    display:none;
-
-    align-items:center;
-
-    gap:4px;
-
-    padding:5px;
-
-    border:1px solid var(--line);
-    background:var(--paper);
-
-    box-shadow:0 8px 25px rgba(74,53,43,.15);
-}
-
-.selection-highlight-menu.open{
-    display:flex;
-}
-
-.selection-highlight-menu button{
-    width:26px;
-    height:26px;
-
-    padding:0;
-
-    border:1px solid var(--line);
-}
-
-.selection-highlight-menu button:hover{
-    transform:translateY(-1px);
-}
-
-.highlight-menu-yellow{
-    background:#f4e3a1;
-}
-
-.highlight-menu-pink{
-    background:#e8b8bc;
-}
-
-.highlight-menu-green{
-    background:#cbd8bd;
-}
-
-.highlight-menu-blue{
-    background:#bfd3e8;
 }
 
 
@@ -982,393 +1127,298 @@ button{
    RESPONSIVE
 ========================================================= */
 
-@media(max-width:800px){
-
-    .header-inner{
-        padding-left:18px;
-        padding-right:18px;
-    }
-
-    .book-page{
-        padding-left:18px;
-        padding-right:18px;
-    }
-
-    .book-intro{
-        grid-template-columns:130px minmax(0,1fr);
-        gap:20px;
-    }
-
-    .cover-wrap{
-        width:130px;
-    }
+@media(max-width:850px){
 
     .reader-layout{
-        grid-template-columns:minmax(0,1fr);
+        grid-template-columns:1fr;
     }
 
     .chapter-drawer{
         position:relative;
         top:auto;
 
-        max-height:none;
-    }
-
-    .reader-paper{
-        padding:25px 20px;
-    }
-
-}
-
-@media(max-width:560px){
-
-    .book-intro{
-        grid-template-columns:1fr;
-    }
-
-    .cover-wrap{
-        width:150px;
-    }
-
-    .reader-controls{
-        align-items:stretch;
+        max-height:280px;
     }
 
     .reader-position{
-        width:100%;
         margin-left:0;
     }
-
-    .preferences-grid{
-        display:grid;
-        grid-template-columns:1fr;
-    }
-
-    .preference-group{
-        align-items:flex-start;
-    }
-
 }
 
+@media(max-width:760px){
 
-/* =========================================================
-   EMPTY / STATUS
-========================================================= */
-
-.empty-message{
-    padding:30px 10px;
-
-    color:var(--muted);
-
-    text-align:center;
-
-    font-size:12px;
-}
-
-.chapter-loading{
-    padding:20px 0;
-
-    color:var(--muted);
-
-    font-size:12px;
-}
-
-
-/* =========================================================
-   MOBILE DRAWER
-========================================================= */
-
-@media(max-width:800px){
-
-    .reader-layout.chapter-open{
-        grid-template-columns:1fr;
-    }
-
-    .chapter-drawer.open{
-        display:block;
-    }
-
-}
-
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-@media print{
-
-    .site-header,
-    .reader-controls,
-    .preferences,
-    .chapter-drawer,
-    .comments,
-    .selection-highlight-menu{
-        display:none !important;
+    .header-inner{
+        padding:10px 17px;
     }
 
     .book-page{
-        max-width:none;
-        padding:0;
+        padding:28px 17px 50px;
     }
 
     .book-intro{
-        margin-bottom:20px;
+        grid-template-columns:1fr;
+        gap:20px;
     }
 
-    .reader-shell{
-        border:0;
+    .cover-wrap{
+        width:165px;
+    }
+
+    .book-info h1{
+        font-size:38px;
+    }
+
+    .book-description{
+        font-size:16px;
     }
 
     .reader-paper{
-        border:0;
-        box-shadow:none;
-        padding:0;
+        padding:23px 18px 25px;
     }
 
+    .reader-story{
+        font-size:15px;
+    }
+
+    .pref-range{
+        width:105px;
+    }
+
+    .preferences{
+        padding:11px;
+    }
+
+    .comment-form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .comments-title-row{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:3px;
+    }
+}
+.book-description-wrap {
+    margin-top: 10px;
 }
 
-
-/* =========================================================
-   EXTRA READER STYLES
-========================================================= */
-
-.reader-top-line{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    gap:10px;
-
-    margin-bottom:15px;
+.book-description-more {
+    display: none;
+    margin-left: 4px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--pink-dark);
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-.reader-chapter-label{
-    color:var(--pink-dark);
-
-    font-size:9px;
-    font-weight:700;
-    letter-spacing:.16em;
-    text-transform:uppercase;
+.book-description-more:hover {
+    text-decoration: underline;
 }
 
-.reader-chapter-title{
-    margin:3px 0 0;
-
-    color:var(--brown);
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:24px;
-}
-
-.reader-nav{
-    display:flex;
-    gap:6px;
-}
-
-.reader-nav button{
-    padding:7px 10px;
-
-    border:1px solid var(--line);
-    background:var(--paper);
-
-    color:var(--brown);
-
-    font-size:10px;
-}
-
-.reader-nav button:disabled{
-    opacity:.45;
-    cursor:not-allowed;
-}
-
-.reader-footer-nav{
-    display:flex;
-    justify-content:space-between;
-
-    gap:10px;
-
-    margin-top:30px;
-    padding-top:17px;
-
-    border-top:1px solid var(--line);
-}
-
-.reader-footer-nav button{
-    max-width:48%;
-
-    padding:9px 12px;
-
-    border:1px solid var(--line);
-    background:var(--paper);
-
-    color:var(--brown);
-
-    text-align:left;
-}
-
-.reader-footer-nav button:hover{
-    border-color:var(--pink);
-}
-
-.reader-footer-nav .next{
-    margin-left:auto;
-    text-align:right;
+.book-description.expanded .book-description-more {
+    display: inline;
 }
 
 </style>
 </head>
 
+
 <body>
 
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header class="site-header">
+
     <div class="header-inner">
 
         <a
-            href="index.html"
             class="brand"
+            href="hed.html"
         >
-            HED<span>.</span>
+            HED
         </a>
 
-        <a
-            href="index.html"
-            class="back-link"
-        >
-            ← Back to HED
-        </a>
+        <a href="stories.html" class="back-link">
+    ← Back to Stories
+</a>
 
     </div>
+
 </header>
+
 
 
 <main class="book-page">
 
-    <section
+
+    <!-- =====================================================
+         LOADING
+    ====================================================== -->
+
+    <div
         id="loadingMessage"
         class="page-message"
     >
-        <h2>Opening story…</h2>
-        <p>Please wait while the story loads.</p>
-    </section>
+        Loading story…
+    </div>
 
 
-    <section
+
+    <!-- =====================================================
+         ERROR
+    ====================================================== -->
+
+    <div
         id="errorMessage"
         class="page-message hidden"
     >
-        <h2>Story unavailable</h2>
-        <p id="errorText"></p>
-    </section>
 
+        <h2>Story unavailable</h2>
+
+        <p id="errorText">
+            Something went wrong while opening this story.
+        </p>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         STORY CONTENT
+    ====================================================== -->
 
     <section
         id="bookContent"
         class="hidden"
     >
 
-        <div class="book-intro">
 
-            <div class="cover-wrap">
+        <!-- =================================================
+             STORY INTRO
+        ================================================== -->
 
-                <img
-                    id="bookCover"
-                    class="hidden"
-                    alt=""
-                >
+        <section class="book-intro">
+
+
+            <div
+                class="cover-wrap"
+                id="coverWrap"
+            >
 
                 <div
                     id="coverPlaceholder"
                     class="cover-placeholder"
                 >
-                    Story
+                    Your story cover
                 </div>
 
             </div>
+
 
 
             <div class="book-info">
 
-                <div
-                    id="bookEyebrow"
-                    class="eyebrow"
-                >
-                    STORY
+                <div class="eyebrow">
+                    HED STORY
                 </div>
 
-                <h1 id="bookTitle">Untitled Story</h1>
+                <h1 id="storyTitle"></h1>
 
                 <div
-                    id="bookAuthor"
+                    id="storyAuthor"
                     class="book-author"
                 ></div>
 
                 <p
-                    id="bookDescription"
+                    id="storyDescription"
                     class="book-description"
                 ></p>
 
-                <div
-                    id="bookMeta"
-                    class="book-meta"
-                ></div>
+                <div class="book-meta">
+
+                    <span
+                        id="chapterCountPill"
+                        class="meta-pill"
+                    >
+                        0 chapters
+                    </span>
+
+                </div>
 
             </div>
 
-        </div>
+        </section>
 
+
+
+        <!-- =================================================
+             READER
+        ================================================== -->
 
         <section
             id="readerShell"
             class="reader-shell"
         >
 
+
+            <!-- =================================================
+                 THESE ARE ONLY BUTTONS WHEN PAGE OPENS
+            ================================================== -->
+
             <div class="reader-controls">
 
+
                 <button
-                    id="chapterToggle"
+                    id="chapterToggleButton"
                     class="reader-control-button"
                     type="button"
+                    aria-expanded="false"
                 >
                     ☰ Chapters
                 </button>
 
+
                 <button
-                    id="preferencesToggle"
+                    id="preferencesToggleButton"
                     class="reader-control-button"
                     type="button"
+                    aria-expanded="false"
                 >
                     ⚙ Reading Preferences
                 </button>
 
-                <button
-                    id="previousChapterTop"
-                    class="reader-control-button"
-                    type="button"
-                >
-                    ← Previous
-                </button>
 
-                <button
-                    id="nextChapterTop"
-                    class="reader-control-button"
-                    type="button"
-                >
-                    Next →
-                </button>
-
-                <div
-                    id="readerPosition"
-                    class="reader-position"
-                ></div>
+                <span
+                    id="readerChapterPosition"
+                    class="eyebrow reader-position"
+                ></span>
 
             </div>
 
 
-            <div class="reader-layout">
+
+            <div
+                class="reader-layout chapter-closed"
+                id="readerLayout"
+            >
+
+
+                <!-- =================================================
+                     CHAPTER DRAWER
+                     CLOSED BY DEFAULT
+                ================================================== -->
 
                 <aside
                     id="chapterDrawer"
                     class="chapter-drawer"
+                    aria-label="Chapter list"
                 >
 
                     <div class="chapter-drawer-head">
@@ -1376,15 +1426,18 @@ button{
                         <div>
 
                             <div class="eyebrow">
-                                CONTENTS
+                                READ
                             </div>
 
-                            <h2>Chapters</h2>
+                            <h2>
+                                Chapters
+                            </h2>
 
                         </div>
 
+
                         <button
-                            id="drawerClose"
+                            id="closeChapterDrawer"
                             class="drawer-close"
                             type="button"
                             aria-label="Close chapters"
@@ -1394,6 +1447,7 @@ button{
 
                     </div>
 
+
                     <div
                         id="chapterList"
                         class="chapter-list"
@@ -1402,10 +1456,21 @@ button{
                 </aside>
 
 
-                <div class="reader-column">
+
+                <!-- =================================================
+                     READER COLUMN
+                ================================================== -->
+
+                <main class="reader-column">
+
+
+                    <!-- =================================================
+                         READING PREFERENCES
+                         CLOSED BY DEFAULT
+                    ================================================== -->
 
                     <section
-                        id="preferences"
+                        id="preferencesPanel"
                         class="preferences"
                     >
 
@@ -1416,7 +1481,7 @@ button{
                             </div>
 
                             <button
-                                id="preferencesClose"
+                                id="closePreferences"
                                 class="drawer-close"
                                 type="button"
                                 aria-label="Close reading preferences"
@@ -1429,6 +1494,9 @@ button{
 
                         <div class="preferences-grid">
 
+
+                            <!-- FONT -->
+
                             <div class="preference-group">
 
                                 <span class="preference-label">
@@ -1439,6 +1507,7 @@ button{
                                     id="fontFamily"
                                     class="pref-select"
                                 >
+
                                     <option value="serif">
                                         Serif
                                     </option>
@@ -1454,10 +1523,14 @@ button{
                                     <option value="mono">
                                         Mono
                                     </option>
+
                                 </select>
 
                             </div>
 
+
+
+                            <!-- FONT SIZE -->
 
                             <div class="preference-group">
 
@@ -1471,8 +1544,8 @@ button{
                                         id="fontSize"
                                         class="pref-range"
                                         type="range"
-                                        min="12"
-                                        max="24"
+                                        min="10"
+                                        max="26"
                                         step="1"
                                         value="15"
                                     >
@@ -1489,6 +1562,9 @@ button{
                             </div>
 
 
+
+                            <!-- LINE SPACING -->
+
                             <div class="preference-group">
 
                                 <span class="preference-label">
@@ -1497,30 +1573,33 @@ button{
 
                                 <button
                                     class="pref-button"
-                                    type="button"
                                     data-spacing="1.45"
+                                    type="button"
                                 >
                                     Tight
                                 </button>
 
                                 <button
-                                    class="pref-button"
-                                    type="button"
+                                    class="pref-button active"
                                     data-spacing="1.65"
+                                    type="button"
                                 >
                                     Normal
                                 </button>
 
                                 <button
                                     class="pref-button"
-                                    type="button"
                                     data-spacing="1.9"
+                                    type="button"
                                 >
                                     Wide
                                 </button>
 
                             </div>
 
+
+
+                            <!-- TEXT COLOR -->
 
                             <div class="preference-group">
 
@@ -1529,25 +1608,25 @@ button{
                                 </span>
 
                                 <button
-                                    class="pref-button"
-                                    type="button"
+                                    class="pref-button active"
                                     data-text-color="#342b26"
+                                    type="button"
                                 >
                                     Brown
                                 </button>
 
                                 <button
                                     class="pref-button"
-                                    type="button"
                                     data-text-color="#222222"
+                                    type="button"
                                 >
                                     Black
                                 </button>
 
                                 <button
                                     class="pref-button"
-                                    type="button"
                                     data-text-color="#625b54"
+                                    type="button"
                                 >
                                     Soft
                                 </button>
@@ -1555,63 +1634,154 @@ button{
                             </div>
 
 
+
+                            <!-- PAGE THEME -->
+
                             <div class="preference-group">
 
                                 <span class="preference-label">
-                                    Theme
+                                    Page
                                 </span>
 
                                 <div class="theme-buttons">
 
                                     <button
                                         class="theme-button theme-cream"
-                                        type="button"
                                         data-theme="cream"
+                                        type="button"
                                     >
-                                        A
+                                        Cream
                                     </button>
 
                                     <button
                                         class="theme-button theme-white"
-                                        type="button"
                                         data-theme="white"
+                                        type="button"
                                     >
-                                        W
+                                        White
                                     </button>
 
                                     <button
                                         class="theme-button theme-black"
-                                        type="button"
                                         data-theme="black"
+                                        type="button"
                                     >
-                                        B
+                                        Black
                                     </button>
 
                                     <button
                                         class="theme-button theme-dark"
-                                        type="button"
                                         data-theme="dark"
+                                        type="button"
                                     >
-                                        D
+                                        Dark
                                     </button>
 
                                     <button
                                         class="theme-button theme-sepia"
-                                        type="button"
                                         data-theme="sepia"
+                                        type="button"
                                     >
-                                        S
+                                        Sepia
                                     </button>
 
                                     <button
                                         class="theme-button theme-blue"
+                                        data-theme="night"
                                         type="button"
-                                        data-theme="blue"
                                     >
-                                        N
+                                        Night
                                     </button>
 
                                 </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- HIGHLIGHT COLORS -->
+
+                        <div
+                            class="preference-group"
+                            style="margin-top:9px;"
+                        >
+
+                            <span class="preference-label">
+                                Highlight
+                            </span>
+
+                            <div class="highlight-buttons">
+
+                                <button
+                                    class="highlight-button highlight-yellow"
+                                    data-highlight="yellow"
+                                    type="button"
+                                    title="Yellow"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-pink"
+                                    data-highlight="pink"
+                                    type="button"
+                                    title="Pink"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-green"
+                                    data-highlight="green"
+                                    type="button"
+                                    title="Green"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-blue"
+                                    data-highlight="blue"
+                                    type="button"
+                                    title="Blue"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-orange"
+                                    data-highlight="orange"
+                                    type="button"
+                                    title="Orange"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-purple"
+                                    data-highlight="purple"
+                                    type="button"
+                                    title="Purple"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-coral"
+                                    data-highlight="coral"
+                                    type="button"
+                                    title="Coral"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-lavender"
+                                    data-highlight="lavender"
+                                    type="button"
+                                    title="Lavender"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-mint"
+                                    data-highlight="mint"
+                                    type="button"
+                                    title="Mint"
+                                ></button>
+
+                                <button
+                                    class="highlight-button highlight-gray"
+                                    data-highlight="gray"
+                                    type="button"
+                                    title="Gray"
+                                ></button>
 
                             </div>
 
@@ -1620,84 +1790,88 @@ button{
                     </section>
 
 
-                    <div
-                        id="readerPaper"
+
+                    <!-- =================================================
+                         READER PAPER
+                    ================================================== -->
+
+                    <article
                         class="reader-paper"
+                        id="readerPaper"
                     >
 
-                        <div class="reader-top-line">
 
-                            <div>
-
-                                <div
-                                    id="readerChapterLabel"
-                                    class="reader-chapter-label"
-                                >
-                                    CHAPTER
-                                </div>
-
-                                <div
-                                    id="readerChapterTitle"
-                                    class="reader-chapter-title"
-                                >
-                                    —
-                                </div>
-
-                            </div>
-
-
-                            <div class="reader-nav">
-
-                                <button
-                                    id="previousChapter"
-                                    type="button"
-                                >
-                                    ←
-                                </button>
-
-                                <button
-                                    id="nextChapter"
-                                    type="button"
-                                >
-                                    →
-                                </button>
-
-                            </div>
-
+                        <div
+                            id="readerChapterLabel"
+                            class="reader-chapter-label"
+                        >
+                            CHAPTER 01
                         </div>
 
 
-                        <article
+                        <h1 id="readerChapterTitle">
+                            Chapter
+                        </h1>
+
+
+                        <div
                             id="readerStory"
                             class="reader-story"
-                        ></article>
+                        ></div>
 
 
-                        <div class="reader-footer-nav">
+
+                        <!-- =================================================
+                             CHAPTER NAVIGATION
+                        ================================================== -->
+
+                        <div class="chapter-navigation">
 
                             <button
-                                id="previousChapterBottom"
+                                id="previousChapterButton"
+                                class="nav-button"
                                 type="button"
                             >
-                                ← Previous chapter
+                                ← Previous Chapter
                             </button>
 
+
                             <button
-                                id="nextChapterBottom"
-                                class="next"
+                                id="nextChapterButton"
+                                class="nav-button"
                                 type="button"
                             >
-                                Next chapter →
+                                Next Chapter →
                             </button>
 
                         </div>
 
 
-                        <section class="comments">
 
-                            <h2 class="comments-title">
-                                Comments
-                            </h2>
+                        <!-- =================================================
+                             COMMENTS
+                        ================================================== -->
+
+                        <section class="comments-section">
+
+
+                            <div class="comments-title-row">
+
+                                <h2 class="comments-title">
+                                    Comments
+                                </h2>
+
+                                <div class="comments-subtitle">
+                                    Leave a thought
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                id="commentsList"
+                                class="comments-list"
+                            ></div>
 
 
                             <form
@@ -1705,29 +1879,40 @@ button{
                                 class="comment-form"
                             >
 
-                                <input
-                                    id="commentName"
-                                    class="comment-input"
-                                    type="text"
-                                    maxlength="60"
-                                    placeholder="Your nickname"
-                                    required
-                                >
+                                <div class="comment-form-grid">
 
-                                <textarea
-                                    id="commentContent"
-                                    class="comment-textarea"
-                                    maxlength="1000"
-                                    placeholder="Write a comment..."
-                                    required
-                                ></textarea>
+                                    <input
+    id="commentName"
+    class="comment-input"
+    type="text"
+    maxlength="80"
+    placeholder="Your name"
+    required
+    readonly
+>
 
-                                <button
-                                    class="comment-submit"
-                                    type="submit"
-                                >
-                                    Post Comment
-                                </button>
+                                    <textarea
+                                        id="commentContent"
+                                        class="comment-textarea"
+                                        maxlength="2000"
+                                        placeholder="Write a comment..."
+                                        required
+                                    ></textarea>
+
+                                </div>
+
+
+                                <div class="comment-form-bottom">
+
+                                    <button
+                                        class="comment-submit"
+                                        type="submit"
+                                    >
+                                        Post Comment
+                                    </button>
+
+                                </div>
+
 
                                 <div
                                     id="commentStatus"
@@ -1736,17 +1921,11 @@ button{
 
                             </form>
 
-
-                            <div
-                                id="commentList"
-                                class="comment-list"
-                            ></div>
-
                         </section>
 
-                    </div>
+                    </article>
 
-                </div>
+                </main>
 
             </div>
 
@@ -1757,46 +1936,94 @@ button{
 </main>
 
 
+
+<!-- =========================================================
+     FLOATING HIGHLIGHT MENU
+========================================================= -->
+
 <div
     id="selectionHighlightMenu"
     class="selection-highlight-menu"
 >
 
     <button
-        type="button"
-        class="highlight-menu-yellow"
+        class="highlight-button highlight-yellow"
         data-highlight="yellow"
-        aria-label="Yellow highlight"
+        type="button"
+        title="Yellow"
     ></button>
 
     <button
-        type="button"
-        class="highlight-menu-pink"
+        class="highlight-button highlight-pink"
         data-highlight="pink"
-        aria-label="Pink highlight"
+        type="button"
+        title="Pink"
     ></button>
 
     <button
-        type="button"
-        class="highlight-menu-green"
+        class="highlight-button highlight-green"
         data-highlight="green"
-        aria-label="Green highlight"
+        type="button"
+        title="Green"
     ></button>
 
     <button
-        type="button"
-        class="highlight-menu-blue"
+        class="highlight-button highlight-blue"
         data-highlight="blue"
-        aria-label="Blue highlight"
+        type="button"
+        title="Blue"
+    ></button>
+
+    <button
+        class="highlight-button highlight-orange"
+        data-highlight="orange"
+        type="button"
+        title="Orange"
+    ></button>
+
+    <button
+        class="highlight-button highlight-purple"
+        data-highlight="purple"
+        type="button"
+        title="Purple"
+    ></button>
+
+    <button
+        class="highlight-button highlight-coral"
+        data-highlight="coral"
+        type="button"
+        title="Coral"
+    ></button>
+
+    <button
+        class="highlight-button highlight-lavender"
+        data-highlight="lavender"
+        type="button"
+        title="Lavender"
+    ></button>
+
+    <button
+        class="highlight-button highlight-mint"
+        data-highlight="mint"
+        type="button"
+        title="Mint"
+    ></button>
+
+    <button
+        class="highlight-button highlight-gray"
+        data-highlight="gray"
+        type="button"
+        title="Gray"
     ></button>
 
 </div>
 
 
+
 <script>
 
 /* =========================================================
-   HELPERS
+   BASIC HELPERS
 ========================================================= */
 
 function $(id){
@@ -1805,37 +2032,13 @@ function $(id){
 
 
 /* =========================================================
-   SUPABASE
-========================================================= */
-
-const supabaseClient =
-    window.supabaseClient ||
-    window.supabase?.createClient
-        ? (
-            window.supabaseClient ||
-            window.supabase.createClient(
-                window.SUPABASE_URL,
-                window.SUPABASE_ANON_KEY
-            )
-        )
-        : null;
-
-
-/* =========================================================
    STORY ID
 ========================================================= */
 
-const urlParams =
+const storyId =
     new URLSearchParams(
         window.location.search
-    );
-
-const storyId =
-    urlParams.get("id") ||
-    urlParams.get("story") ||
-    localStorage.getItem(
-        "hed_selected_story_id"
-    );
+    ).get("id");
 
 
 /* =========================================================
@@ -1889,24 +2092,24 @@ async function loadStory(){
     const storyResult =
         await supabaseClient
             .from("stories")
-            .select("*")
-            .eq("id", storyId)
+            .select(
+                "id,title,author,description,cover_url,created_at"
+            )
+            .eq("id",storyId)
             .single();
 
 
     if(storyResult.error){
 
         console.error(
-            "STORY ERROR:",
             storyResult.error
         );
 
         showError(
-            "We could not load this story."
+            "We couldn't find this story."
         );
 
         return;
-
     }
 
 
@@ -1914,30 +2117,63 @@ async function loadStory(){
         storyResult.data;
 
 
-    if(!story){
+    renderStoryInfo();
+
+
+    const chapterResult =
+        await supabaseClient
+            .from("chapters")
+            .select(
+                "id,story_id,title,content,chapter_order,created_at"
+            )
+            .eq(
+                "story_id",
+                storyId
+            )
+            .order(
+                "chapter_order",
+                {
+                    ascending:true
+                }
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:true
+                }
+            );
+
+
+    if(chapterResult.error){
+
+        console.error(
+            chapterResult.error
+        );
 
         showError(
-            "This story could not be found."
+            "The story opened, but its chapters could not be loaded."
         );
 
         return;
-
     }
 
 
-    renderStory();
+    chapters =
+        chapterResult.data || [];
 
 
-    await loadChapters();
-
-}
+    renderChapterList();
 
 
-/* =========================================================
-   RENDER STORY
-========================================================= */
+    $("chapterCountPill")
+        .textContent =
+            chapters.length +
+            (
+                chapters.length === 1
+                    ? " chapter"
+                    : " chapters"
+            );
 
-function renderStory(){
 
     $("loadingMessage")
         .classList
@@ -1949,181 +2185,178 @@ function renderStory(){
         .remove("hidden");
 
 
-    $("readerShell")
-        .classList
-        .add("open");
+    if(chapters.length){
 
+        openChapter(0);
 
-    const title =
-        story.title ||
-        "Untitled Story";
+    }else{
 
-
-    $("bookTitle")
-        .textContent =
-            title;
-
-
-    $("bookEyebrow")
-        .textContent =
-            story.genre ||
-            "STORY";
-
-
-    $("bookAuthor")
-        .textContent =
-            story.author_name
-                ? "by " + story.author_name
-                : "";
-
-
-    $("bookDescription")
-        .textContent =
-            story.description ||
-            story.synopsis ||
-            "";
-
-
-    const cover =
-        story.cover_url ||
-        story.cover_image ||
-        story.image_url;
-
-
-    if(cover){
-
-        $("bookCover")
-            .src =
-                cover;
-
-        $("bookCover")
-            .alt =
-                title;
-
-        $("bookCover")
+        $("readerShell")
             .classList
-            .remove("hidden");
+            .add("open");
 
-        $("coverPlaceholder")
-            .classList
-            .add("hidden");
+        $("readerChapterLabel")
+            .textContent =
+                "NO CHAPTERS";
 
-    }
+        $("readerChapterTitle")
+            .textContent =
+                "This story has no chapters yet.";
 
-
-    const meta =
-        $("bookMeta");
-
-
-    meta.innerHTML =
-        "";
-
-
-    if(story.genre){
-
-        const pill =
-            document.createElement(
-                "span"
-            );
-
-        pill.className =
-            "meta-pill";
-
-        pill.textContent =
-            story.genre;
-
-        meta.appendChild(
-            pill
-        );
+        $("readerStory")
+            .innerHTML =
+                "<p>There is nothing to read here yet.</p>";
 
     }
-
-
-    if(story.status){
-
-        const pill =
-            document.createElement(
-                "span"
-            );
-
-        pill.className =
-            "meta-pill";
-
-        pill.textContent =
-            story.status;
-
-        meta.appendChild(
-            pill
-        );
-
-    }
-
-
-    applySavedReaderPreferences();
 
 }
 
 
 /* =========================================================
-   LOAD CHAPTERS
+   STORY INFO
 ========================================================= */
 
-async function loadChapters(){
+function renderStoryInfo(){
 
-    const chapterList =
-        $("chapterList");
-
-
-    chapterList.innerHTML =
-        '<div class="chapter-loading">Loading chapters…</div>';
+    $("storyTitle")
+        .textContent =
+            story.title ||
+            "Untitled Story";
 
 
-    const result =
-        await supabaseClient
-            .from("chapters")
-            .select("*")
-            .eq("story_id", storyId)
-            .order("chapter_number", {
-                ascending:true
-            });
+    $("storyAuthor")
+        .textContent =
+            story.author
+                ? "by " + story.author
+                : "";
 
 
-    if(result.error){
+    const description =
+    story.description ||
+    "No description yet.";
 
-        console.error(
-            "CHAPTER ERROR:",
-            result.error
+const descriptionElement =
+    $("storyDescription");
+
+const words =
+    description.trim().split(/\s+/);
+
+const DESCRIPTION_LIMIT = 118;
+
+if (words.length > DESCRIPTION_LIMIT) {
+
+    const shortDescription =
+        words
+            .slice(0, DESCRIPTION_LIMIT)
+            .join(" ");
+
+    descriptionElement.innerHTML =
+        escapeHTML(shortDescription) +
+        "... " +
+        '<button type="button" class="book-description-more">See more</button>';
+
+    descriptionElement.classList.add(
+        "expanded"
+    );
+
+    const seeMoreButton =
+        descriptionElement.querySelector(
+            ".book-description-more"
         );
 
+    seeMoreButton.onclick =
+        function () {
 
-        chapterList.innerHTML =
-            '<div class="empty-message">Could not load chapters.</div>';
+            descriptionElement.textContent =
+                description;
 
-        return;
+            const seeLessButton =
+                document.createElement("button");
+
+            seeLessButton.type =
+                "button";
+
+            seeLessButton.className =
+                "book-description-more";
+
+            seeLessButton.textContent =
+                "See less";
+
+            descriptionElement.appendChild(
+                document.createTextNode(" ")
+            );
+
+            descriptionElement.appendChild(
+                seeLessButton
+            );
+
+            seeLessButton.onclick =
+                function () {
+
+                    descriptionElement.innerHTML =
+                        escapeHTML(shortDescription) +
+                        "... ";
+
+                    const newSeeMore =
+                        document.createElement("button");
+
+                    newSeeMore.type =
+                        "button";
+
+                    newSeeMore.className =
+                        "book-description-more";
+
+                    newSeeMore.textContent =
+                        "See more";
+
+                    descriptionElement.appendChild(
+                        newSeeMore
+                    );
+
+                    newSeeMore.onclick =
+                        seeMoreButton.onclick;
+                };
+        };
+
+} else {
+
+    descriptionElement.textContent =
+        description;
+}
+
+
+    if(story.cover_url){
+
+        const image =
+            document.createElement("img");
+
+        image.src =
+            story.cover_url;
+
+        image.alt =
+            story.title ||
+            "Story cover";
+
+        image.onload =
+            function(){
+
+                $("coverPlaceholder")
+                    .classList
+                    .add("hidden");
+
+                $("coverWrap")
+                    .appendChild(image);
+
+            };
+
+        image.onerror =
+            function(){
+
+                image.remove();
+
+            };
 
     }
-
-
-    chapters =
-        result.data || [];
-
-
-    if(!chapters.length){
-
-        chapterList.innerHTML =
-            '<div class="empty-message">No chapters yet.</div>';
-
-        return;
-
-    }
-
-
-    renderChapterList();
-
-
-    openChapter(
-        0
-    );
 
 }
 
@@ -2134,66 +2367,94 @@ async function loadChapters(){
 
 function renderChapterList(){
 
-    const chapterList =
+    const list =
         $("chapterList");
 
 
-    chapterList.innerHTML =
+    list.innerHTML =
         "";
+
+
+    if(!chapters.length){
+
+        list.innerHTML =
+            '<div class="empty-message">' +
+            "This story doesn't have any chapters yet." +
+            "</div>";
+
+        return;
+    }
 
 
     chapters.forEach(
         function(chapter,index){
 
             const button =
-                document.createElement(
-                    "button"
-                );
+                document.createElement("button");
 
 
             button.type =
                 "button";
+
 
             button.className =
                 "chapter-button";
 
 
             button.innerHTML =
-                `
-                    <span class="chapter-number">
-                        ${escapeHTML(
-                            chapter.chapter_number ||
-                            index + 1
-                        )}
-                    </span>
+                '<span class="chapter-number">' +
+                    String(index + 1)
+                        .padStart(2,"0") +
+                "</span>" +
 
-                    <span class="chapter-title-small">
-                        ${escapeHTML(
-                            chapter.title ||
-                            "Untitled Chapter"
-                        )}
-                    </span>
-                `;
+                '<span class="chapter-title-small">' +
+                    escapeHTML(
+                        chapter.title ||
+                        "Untitled Chapter"
+                    ) +
+                "</span>";
 
 
-            button.addEventListener(
-                "click",
+            button.onclick =
                 function(){
 
-                    openChapter(
-                        index
-                    );
+                    openChapter(index);
 
-                }
-            );
+                };
 
 
-            chapterList.appendChild(
-                button
-            );
+            list.appendChild(button);
 
         }
     );
+
+
+    updateActiveChapterButton();
+
+}
+
+
+/* =========================================================
+   ACTIVE CHAPTER
+========================================================= */
+
+function updateActiveChapterButton(){
+
+    document
+        .querySelectorAll(
+            ".chapter-button"
+        )
+        .forEach(
+            function(button,index){
+
+                button.classList.toggle(
+                    "active",
+                    index ===
+                    selectedChapterIndex
+                );
+
+            }
+        );
 
 }
 
@@ -2202,7 +2463,7 @@ function renderChapterList(){
    OPEN CHAPTER
 ========================================================= */
 
-async function openChapter(index){
+function openChapter(index){
 
     if(
         index < 0 ||
@@ -2225,10 +2486,8 @@ async function openChapter(index){
     $("readerChapterLabel")
         .textContent =
             "CHAPTER " +
-            (
-                chapter.chapter_number ||
-                index + 1
-            );
+            String(index + 1)
+                .padStart(2,"0");
 
 
     $("readerChapterTitle")
@@ -2237,231 +2496,141 @@ async function openChapter(index){
             "Untitled Chapter";
 
 
-    const storyElement =
-        $("readerStory");
-
-
-    storyElement.innerHTML =
-        "";
-
-
     const content =
         chapter.content ||
-        chapter.body ||
-        chapter.text ||
         "";
 
 
-    storyElement.innerHTML =
-        content;
+    if(
+        /<\/?[a-z][\s\S]*>/i.test(
+            content
+        )
+    ){
+
+        $("readerStory")
+            .innerHTML =
+                content;
+
+    }else{
+
+        $("readerStory")
+            .textContent =
+                content;
+
+    }
+
+
+    applySavedReaderPreferences();
 
 
     loadHighlights();
 
 
-    updateChapterButtons();
+    updateChapterNavigation();
 
 
-    updateChapterPosition();
+    updateActiveChapterButton();
 
 
-    renderChapterList();
-
-
-    window.scrollTo({
-        top:
-            document.querySelector(
-                ".reader-paper"
-            ).getBoundingClientRect().top +
-            window.scrollY -
-            90,
-
-        behavior:"smooth"
-    });
-
-
-    await loadComments();
-
-}
-
-
-/* =========================================================
-   CHAPTER BUTTON STATES
-========================================================= */
-
-function updateChapterButtons(){
-
-    const first =
-        selectedChapterIndex <= 0;
-
-
-    const last =
-        selectedChapterIndex >=
-        chapters.length - 1;
-
-
-    [
-        "previousChapterTop",
-        "previousChapter",
-        "previousChapterBottom"
-    ]
-    .forEach(
-        function(id){
-
-            const button =
-                $(id);
-
-            if(button){
-
-                button.disabled =
-                    first;
-
-            }
-
-        }
-    );
-
-
-    [
-        "nextChapterTop",
-        "nextChapter",
-        "nextChapterBottom"
-    ]
-    .forEach(
-        function(id){
-
-            const button =
-                $(id);
-
-            if(button){
-
-                button.disabled =
-                    last;
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   POSITION
-========================================================= */
-
-function updateChapterPosition(){
-
-    if(
-        selectedChapterIndex < 0
-    ){
-
-        $("readerPosition")
-            .textContent =
-                "";
-
-        return;
-
-    }
-
-
-    $("readerPosition")
+    $("readerChapterPosition")
         .textContent =
-            (
-                selectedChapterIndex + 1
-            ) +
+            (index + 1) +
             " / " +
             chapters.length;
 
+
+    $("readerShell")
+        .classList
+        .add("open");
+
+
+    loadComments();
+
 }
 
 
 /* =========================================================
-   NEXT / PREVIOUS
+   CHAPTER NAVIGATION
 ========================================================= */
 
-function goPreviousChapter(){
+function updateChapterNavigation(){
 
-    if(
-        selectedChapterIndex > 0
-    ){
+    const previous =
+        $("previousChapterButton");
 
-        openChapter(
-            selectedChapterIndex - 1
-        );
-
-    }
-
-}
+    const next =
+        $("nextChapterButton");
 
 
-function goNextChapter(){
+    previous.classList.toggle(
+        "hidden",
+        selectedChapterIndex <= 0
+    );
 
-    if(
-        selectedChapterIndex <
+
+    next.classList.toggle(
+        "hidden",
+        selectedChapterIndex >=
         chapters.length - 1
-    ){
-
-        openChapter(
-            selectedChapterIndex + 1
-        );
-
-    }
+    );
 
 }
 
 
-$("previousChapterTop")
-    .addEventListener(
-        "click",
-        goPreviousChapter
-    );
+$("previousChapterButton").onclick =
+    function(){
 
-$("previousChapter")
-    .addEventListener(
-    "click",
-    goPreviousChapter
-);
+        if(
+            selectedChapterIndex > 0
+        ){
 
-$("previousChapterBottom")
-    .addEventListener(
-        "click",
-        goPreviousChapter
-    );
+            openChapter(
+                selectedChapterIndex - 1
+            );
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        }
+
+    };
 
 
-$("nextChapterTop")
-    .addEventListener(
-        "click",
-        goNextChapter
-    );
+$("nextChapterButton").onclick =
+    function(){
 
-$("nextChapter")
-    .addEventListener(
-        "click",
-        goNextChapter
-    );
+        if(
+            selectedChapterIndex <
+            chapters.length - 1
+        ){
 
-$("nextChapterBottom")
-    .addEventListener(
-        "click",
-        goNextChapter
-    );
+            openChapter(
+                selectedChapterIndex + 1
+            );
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        }
+
+    };
 
 
 /* =========================================================
-   DRAWER
+   CHAPTER DRAWER
 ========================================================= */
 
-function setDrawerOpen(open){
+function setChapterDrawer(open){
 
     const drawer =
         $("chapterDrawer");
 
     const layout =
-        document.querySelector(
-            ".reader-layout"
-        );
+        $("readerLayout");
 
 
     drawer.classList.toggle(
@@ -2471,97 +2640,85 @@ function setDrawerOpen(open){
 
 
     layout.classList.toggle(
-        "chapter-open",
-        open
-    );
-
-
-    layout.classList.toggle(
         "chapter-closed",
         !open
     );
 
+
+    $("chapterToggleButton")
+        .setAttribute(
+            "aria-expanded",
+            String(open)
+        );
+
 }
 
 
-$("chapterToggle")
-    .addEventListener(
-        "click",
-        function(){
+$("chapterToggleButton").onclick =
+    function(){
 
-            const drawer =
-                $("chapterDrawer");
-
-
-            setDrawerOpen(
-                !drawer.classList.contains(
-                    "open"
-                )
-            );
-
-        }
-    );
+        const open =
+            !$("chapterDrawer")
+                .classList
+                .contains("open");
 
 
-$("drawerClose")
-    .addEventListener(
-        "click",
-        function(){
+        setChapterDrawer(open);
 
-            setDrawerOpen(
-                false
-            );
+    };
 
-        }
-    );
+
+$("closeChapterDrawer").onclick =
+    function(){
+
+        setChapterDrawer(false);
+
+    };
 
 
 /* =========================================================
-   PREFERENCES DRAWER
+   READING PREFERENCES
 ========================================================= */
 
 function setPreferencesOpen(open){
 
-    $("preferences")
+    $("preferencesPanel")
         .classList
         .toggle(
             "open",
             open
         );
 
+
+    $("preferencesToggleButton")
+        .setAttribute(
+            "aria-expanded",
+            String(open)
+        );
+
 }
 
 
-$("preferencesToggle")
-    .addEventListener(
-        "click",
-        function(){
+$("preferencesToggleButton").onclick =
+    function(){
 
-            const preferences =
-                $("preferences");
-
-
-            setPreferencesOpen(
-                !preferences.classList.contains(
-                    "open"
-                )
-            );
-
-        }
-    );
+        const open =
+            !$("preferencesPanel")
+                .classList
+                .contains("open");
 
 
-$("preferencesClose")
-    .addEventListener(
-        "click",
-        function(){
+        setPreferencesOpen(open);
 
-            setPreferencesOpen(
-                false
-            );
+    };
 
-        }
-    );
+
+$("closePreferences").onclick =
+    function(){
+
+        setPreferencesOpen(false);
+
+    };
 
 
 /* =========================================================
@@ -2596,14 +2753,11 @@ function getReaderPreferences(){
 }
 
 
-/*
-   FIX:
-   This function now accepts the preferences object that
-   was actually changed instead of reading the old value
-   again from localStorage.
-*/
+function saveReaderPreferences(){
 
-function saveReaderPreferences(preferences){
+    const preferences =
+        getReaderPreferences();
+
 
     localStorage.setItem(
         "hed_reader_preferences",
@@ -2713,8 +2867,11 @@ $("fontFamily").addEventListener(
             this.value;
 
 
-        saveReaderPreferences(
-            preferences
+        localStorage.setItem(
+            "hed_reader_preferences",
+            JSON.stringify(
+                preferences
+            )
         );
 
 
@@ -2761,14 +2918,15 @@ $("fontSize").addEventListener(
             size;
 
 
-        saveReaderPreferences(
-            preferences
+        localStorage.setItem(
+            "hed_reader_preferences",
+            JSON.stringify(
+                preferences
+            )
         );
 
 
-        applyFontSize(
-            size
-        );
+        applyFontSize(size);
 
     }
 );
@@ -2780,22 +2938,10 @@ $("fontSize").addEventListener(
 
 function applyLineHeight(value){
 
-    const numericValue =
-        Number(value);
-
-
-    $("readerStory")
-        .style
-        .setProperty(
-            "--reader-line-height",
-            numericValue
-        );
-
-
     $("readerStory")
         .style
         .lineHeight =
-            numericValue;
+            value;
 
 }
 
@@ -2825,14 +2971,11 @@ document
                         value;
 
 
-                    /*
-                       FIX:
-                       Save the newly changed
-                       preferences instead of
-                       saving the old preferences.
-                    */
-                    saveReaderPreferences(
-                        preferences
+                    localStorage.setItem(
+                        "hed_reader_preferences",
+                        JSON.stringify(
+                            preferences
+                        )
                     );
 
 
@@ -2861,19 +3004,6 @@ function applyTextColor(color){
         .color =
             color;
 
-
-    /*
-       Also update the CSS variable so that
-       inherited reader text continues using
-       the selected color.
-    */
-    $("readerStory")
-        .style
-        .setProperty(
-            "--reader-text-color",
-            color
-        );
-
 }
 
 
@@ -2900,13 +3030,11 @@ document
                         color;
 
 
-                    /*
-                       FIX:
-                       Save the newly selected
-                       text color.
-                    */
-                    saveReaderPreferences(
-                        preferences
+                    localStorage.setItem(
+                        "hed_reader_preferences",
+                        JSON.stringify(
+                            preferences
+                        )
                     );
 
 
@@ -2967,13 +3095,13 @@ function applyTheme(theme){
         sepia:{
             background:"#f1e4c9",
             color:"#574936",
-            border:"#d7c39b"
+            border:"#d7c7a8"
         },
 
-        blue:{
+        night:{
             background:"#111827",
             color:"#f8fafc",
-            border:"#263247"
+            border:"#293449"
         }
 
     };
@@ -2987,54 +3115,11 @@ function applyTheme(theme){
     paper.style.background =
         selected.background;
 
-
     paper.style.borderColor =
         selected.border;
 
-
-    /*
-       Theme controls the default text color,
-       but a user-selected text color should be
-       reapplied immediately afterward.
-    */
     story.style.color =
         selected.color;
-
-
-    document
-        .querySelectorAll(
-            "[data-theme]"
-        )
-        .forEach(
-            function(button){
-
-                button.classList.toggle(
-                    "active",
-                    button.dataset.theme ===
-                    theme
-                );
-
-            }
-        );
-
-
-    /*
-       Preserve the user's selected text color
-       instead of allowing a theme change to
-       permanently overwrite it.
-    */
-    const preferences =
-        getReaderPreferences();
-
-
-    if(
-        preferences.textColor
-    ){
-
-        story.style.color =
-            preferences.textColor;
-
-    }
 
 }
 
@@ -3062,14 +3147,18 @@ document
                         theme;
 
 
-                    saveReaderPreferences(
-                        preferences
+                    localStorage.setItem(
+                        "hed_reader_preferences",
+                        JSON.stringify(
+                            preferences
+                        )
                     );
 
 
-                    applyTheme(
-                        theme
-                    );
+                    applyTheme(theme);
+
+
+                    updatePreferenceButtons();
 
                 }
             );
@@ -3125,23 +3214,6 @@ function updatePreferenceButtons(){
             }
         );
 
-
-    document
-        .querySelectorAll(
-            "[data-theme]"
-        )
-        .forEach(
-            function(button){
-
-                button.classList.toggle(
-                    "active",
-                    button.dataset.theme ===
-                    preferences.theme
-                );
-
-            }
-        );
-
 }
 
 
@@ -3151,16 +3223,9 @@ function updatePreferenceButtons(){
 
 async function loadComments(){
 
-    const list =
-        $("commentList");
-
-
     if(
         selectedChapterIndex < 0
     ){
-
-        list.innerHTML =
-            "";
 
         return;
 
@@ -3173,24 +3238,12 @@ async function loadComments(){
         ];
 
 
-    if(
-        !chapter ||
-        !chapter.id
-    ){
-
-        return;
-
-    }
-
-
-    list.innerHTML =
-        '<div class="empty-message">Loading comments…</div>';
-
-
     const result =
         await supabaseClient
             .from("comments")
-            .select("*")
+            .select(
+                "id,name,content,created_at"
+            )
             .eq(
                 "target_type",
                 "chapter"
@@ -3202,7 +3255,7 @@ async function loadComments(){
             .order(
                 "created_at",
                 {
-                    ascending:false
+                    ascending:true
                 }
             );
 
@@ -3210,35 +3263,46 @@ async function loadComments(){
     if(result.error){
 
         console.error(
-            "COMMENTS ERROR:",
             result.error
         );
 
 
-        list.innerHTML =
-            '<div class="empty-message">Could not load comments.</div>';
+        $("commentsList")
+            .innerHTML =
+                '<div class="empty-message">' +
+                "Comments could not be loaded." +
+                "</div>";
 
         return;
-
     }
 
 
-    const comments =
-        result.data || [];
+    renderComments(
+        result.data || []
+    );
+
+}
+
+
+function renderComments(comments){
+
+    const list =
+        $("commentsList");
+
+
+    list.innerHTML =
+        "";
 
 
     if(!comments.length){
 
         list.innerHTML =
-            '<div class="empty-message">No comments yet.</div>';
+            '<div class="empty-message">' +
+            "No comments yet. Be the first." +
+            "</div>";
 
         return;
-
     }
-
-
-    list.innerHTML =
-        "";
 
 
     comments.forEach(
@@ -3246,7 +3310,7 @@ async function loadComments(){
 
             const card =
                 document.createElement(
-                    "div"
+                    "article"
                 );
 
 
@@ -3254,66 +3318,62 @@ async function loadComments(){
                 "comment-card";
 
 
-            const name =
-                document.createElement(
-                    "div"
-                );
-
-            name.className =
-                "comment-name";
-
-            name.textContent =
-                comment.name ||
-                "Anonymous";
-
-
             const date =
-                document.createElement(
-                    "div"
-                );
-
-            date.className =
-                "comment-date";
-
-
-            if(comment.created_at){
-
-                const dateValue =
-                    new Date(
+                comment.created_at
+                    ? new Date(
                         comment.created_at
-                    );
+                    ).toLocaleDateString(
+                        undefined,
+                        {
+                            year:"numeric",
+                            month:"short",
+                            day:"numeric"
+                        }
+                    )
+                    : "";
 
 
-                date.textContent =
-                    dateValue.toLocaleString();
+            card.innerHTML =
 
-            }
+                '<div class="comment-head">' +
 
+                    '<div class="comment-author">' +
+                        escapeHTML(
+                            comment.name ||
+                            "Reader"
+                        ) +
+                    "</div>" +
 
-            const content =
-                document.createElement(
-                    "div"
-                );
+                    '<div class="comment-date">' +
+                        escapeHTML(
+                            date
+                        ) +
+                    "</div>" +
 
-            content.className =
-                "comment-content";
+                "</div>" +
 
-            content.textContent =
-                comment.content ||
-                "";
+                '<p class="comment-text">' +
+                    escapeHTML(
+                        comment.content ||
+                        ""
+                    ) +
+                "</p>" +
 
+                '<div class="comment-actions">' +
 
-            card.appendChild(
-                name
-            );
+                    '<button ' +
+                        'class="comment-delete" ' +
+                        'type="button" ' +
+                        'data-comment-id="' +
+                            escapeAttribute(
+                                comment.id
+                            ) +
+                        '"' +
+                    '>' +
+                        "Delete" +
+                    "</button>" +
 
-            card.appendChild(
-                date
-            );
-
-            card.appendChild(
-                content
-            );
+                "</div>";
 
 
             list.appendChild(
@@ -3323,8 +3383,70 @@ async function loadComments(){
         }
     );
 
+
+    document
+        .querySelectorAll(
+            ".comment-delete"
+        )
+        .forEach(
+            function(button){
+
+                button.onclick =
+                    async function(){
+
+                        const id =
+                            this.dataset.commentId;
+
+
+                        if(
+                            !confirm(
+                                "Delete this comment?"
+                            )
+                        ){
+
+                            return;
+
+                        }
+
+
+                        const result =
+                            await supabaseClient
+                                .from("comments")
+                                .delete()
+                                .eq(
+                                    "id",
+                                    id
+                                );
+
+
+                        if(result.error){
+
+                            console.error(
+                                result.error
+                            );
+
+                            alert(
+                                "The comment could not be deleted."
+                            );
+
+                            return;
+
+                        }
+
+
+                        loadComments();
+
+                    };
+
+            }
+        );
+
 }
 
+
+/* =========================================================
+   COMMENT FORM
+========================================================= */
 
 $("commentForm").addEventListener(
     "submit",
@@ -3471,7 +3593,6 @@ $("commentForm").addEventListener(
 
     }
 );
-
 
 /* =========================================================
    TEXT SELECTION / HIGHLIGHTING
