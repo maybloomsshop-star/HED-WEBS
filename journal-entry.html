@@ -18,8 +18,8 @@
       --hed-muted: #85786e;
       --hed-line: #d8cec2;
 
-      /* DEFAULT READING SIZE */
-      --reader-size: 20px;
+      /* DEFAULT ARTICLE SIZE */
+      --reader-size: 22px;
     }
 
     * {
@@ -35,6 +35,37 @@
       background: var(--hed-paper);
       color: var(--hed-text);
       font-family: Georgia, "Times New Roman", serif;
+    }
+
+    /* ========================================
+       COPY PROTECTION
+    ======================================== */
+
+    body.copy-protected {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    /*
+      Keep form fields usable.
+    */
+
+    input,
+    textarea,
+    button {
+      user-select: auto;
+      -webkit-user-select: auto;
+    }
+
+    /*
+      Images cannot be dragged away.
+    */
+
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
     }
 
     /* ========================================
@@ -58,11 +89,13 @@
     header {
       height: 78px;
       padding: 0 6%;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
 
       border-bottom: 1px solid var(--hed-line);
+
       background: rgba(251, 248, 243, 0.96);
 
       position: sticky;
@@ -74,7 +107,9 @@
 
     .brand {
       text-decoration: none;
+
       color: var(--hed-brown-dark);
+
       font-size: 25px;
       font-weight: bold;
       letter-spacing: 4px;
@@ -88,6 +123,7 @@
 
     nav a {
       text-decoration: none;
+
       color: var(--hed-muted);
 
       font-family: Arial, Helvetica, sans-serif;
@@ -119,6 +155,7 @@
       gap: 8px;
 
       text-decoration: none;
+
       color: var(--hed-muted);
 
       font-family: Arial, Helvetica, sans-serif;
@@ -164,6 +201,7 @@
 
     .entry-subtitle {
       max-width: 720px;
+
       margin: 25px 0;
 
       color: var(--hed-muted);
@@ -196,6 +234,7 @@
       margin: 35px 0;
 
       color: var(--hed-pink);
+
       font-size: 17px;
       letter-spacing: 7px;
     }
@@ -238,6 +277,7 @@
 
     .reading-preferences {
       width: min(760px, 100%);
+
       margin: 0 auto 35px;
 
       padding: 14px 0;
@@ -281,7 +321,7 @@
     }
 
     /* ========================================
-       SIZE CONTROL
+       TEXT SIZE CONTROL
     ======================================== */
 
     .size-control {
@@ -292,9 +332,11 @@
 
     .size-label {
       color: var(--hed-muted);
+
       font-family: Arial, Helvetica, sans-serif;
       font-size: 13px;
       font-weight: bold;
+
       line-height: 1;
     }
 
@@ -304,12 +346,15 @@
 
     #textSizeSlider {
       width: 115px;
+
       accent-color: var(--hed-brown);
+
       cursor: pointer;
     }
 
     .size-value {
       min-width: 22px;
+
       text-align: center;
 
       color: var(--hed-muted);
@@ -325,11 +370,13 @@
 
     .preference-button {
       border: 1px solid transparent;
+
       background: transparent;
 
       color: var(--hed-muted);
 
       padding: 6px 9px;
+
       border-radius: 4px;
 
       cursor: pointer;
@@ -342,13 +389,17 @@
 
     .preference-button:hover {
       color: var(--hed-brown);
+
       background: var(--hed-cream);
     }
 
     .preference-button.active {
       color: var(--hed-brown-dark);
+
       border-color: var(--hed-line);
+
       background: var(--hed-cream);
+
       font-weight: bold;
     }
 
@@ -370,11 +421,13 @@
     }
 
     .article-content {
-      --reader-size: 20px;
+      --reader-size: 22px;
       --reader-font: Georgia, "Times New Roman", serif;
 
       font-family: var(--reader-font);
+
       font-size: var(--reader-size);
+
       line-height: 1.9;
 
       color: var(--hed-text);
@@ -385,9 +438,7 @@
     }
 
     /*
-      IMPORTANT:
-      Force the selected reading font onto
-      content coming from Supabase too.
+      Force reader font onto Supabase content.
     */
 
     #articleContent,
@@ -396,9 +447,7 @@
     }
 
     /*
-      The actual body text uses the reader size.
-      !important prevents stored HTML styles
-      from making the text tiny again.
+      Force actual text size.
     */
 
     #articleContent p,
@@ -447,6 +496,7 @@
 
     .article-content blockquote {
       margin: 45px 0;
+
       padding: 5px 0 5px 28px;
 
       border-left: 3px solid var(--hed-pink);
@@ -455,12 +505,14 @@
 
       font-size: 25px !important;
       line-height: 1.55;
+
       font-style: italic;
     }
 
     .article-content ul,
     .article-content ol {
       margin: 0 0 1.5em;
+
       padding-left: 30px;
     }
 
@@ -481,6 +533,7 @@
 
     .article-content hr {
       border: 0;
+
       border-top: 1px solid var(--hed-line);
 
       margin: 50px 0;
@@ -492,9 +545,11 @@
 
     .hed-note {
       margin-top: 65px;
+
       padding: 35px;
 
       background: var(--hed-cream);
+
       border: 1px solid var(--hed-line);
     }
 
@@ -514,7 +569,9 @@
       color: var(--hed-brown);
 
       font-family: var(--reader-font);
+
       font-size: var(--reader-size);
+
       line-height: 1.8;
     }
 
@@ -524,6 +581,7 @@
 
     .responses {
       width: min(760px, 100%);
+
       margin: 80px auto 0;
 
       padding-top: 40px;
@@ -549,6 +607,7 @@
       color: var(--hed-brown-dark);
 
       font-size: 32px;
+
       font-weight: normal;
     }
 
@@ -563,9 +622,11 @@
 
     .response-form {
       margin-top: 25px;
+
       padding: 20px;
 
       background: var(--hed-cream);
+
       border: 1px solid var(--hed-line);
     }
 
@@ -579,6 +640,7 @@
       color: var(--hed-text);
 
       padding: 11px 13px;
+
       margin-bottom: 10px;
 
       font-family: Georgia, "Times New Roman", serif;
@@ -589,6 +651,7 @@
 
     .response-form textarea {
       min-height: 100px;
+
       resize: vertical;
     }
 
@@ -601,6 +664,7 @@
       border: 0;
 
       background: var(--hed-brown);
+
       color: white;
 
       padding: 11px 18px;
@@ -628,7 +692,7 @@
     }
 
     /* ========================================
-       COMPACT COMMENTS
+       COMMENTS
     ======================================== */
 
     .comment-list {
@@ -643,6 +707,7 @@
 
     .comment-top {
       display: flex;
+
       justify-content: space-between;
       align-items: baseline;
 
@@ -655,7 +720,9 @@
       color: var(--hed-brown-dark);
 
       font-family: Arial, Helvetica, sans-serif;
+
       font-size: 12px;
+
       font-weight: bold;
     }
 
@@ -663,6 +730,7 @@
       color: var(--hed-muted);
 
       font-family: Arial, Helvetica, sans-serif;
+
       font-size: 9px;
     }
 
@@ -670,6 +738,7 @@
       color: var(--hed-text);
 
       font-size: 15px;
+
       line-height: 1.55;
 
       white-space: pre-wrap;
@@ -703,12 +772,15 @@
       padding: 28px;
 
       background: var(--hed-cream);
+
       border: 1px solid var(--hed-line);
 
       text-decoration: none;
 
       display: flex;
+
       flex-direction: column;
+
       justify-content: space-between;
 
       transition:
@@ -718,6 +790,7 @@
 
     .reading-card:hover {
       transform: translateY(-3px);
+
       background: #f1e9df;
     }
 
@@ -725,9 +798,13 @@
       color: var(--hed-green);
 
       font-family: Arial, Helvetica, sans-serif;
+
       font-size: 9px;
+
       font-weight: bold;
+
       letter-spacing: 1.8px;
+
       text-transform: uppercase;
     }
 
@@ -737,6 +814,7 @@
       color: var(--hed-brown-dark);
 
       font-size: 22px;
+
       line-height: 1.3;
     }
 
@@ -752,9 +830,13 @@
       text-decoration: none;
 
       font-family: Arial, Helvetica, sans-serif;
+
       font-size: 10px;
+
       font-weight: bold;
+
       letter-spacing: 1.5px;
+
       text-transform: uppercase;
     }
 
@@ -772,6 +854,7 @@
       padding: 55px 6%;
 
       background: var(--hed-brown-dark);
+
       color: var(--hed-cream);
 
       text-align: center;
@@ -779,7 +862,9 @@
 
     .footer-brand {
       font-size: 24px;
+
       letter-spacing: 4px;
+
       font-weight: bold;
     }
 
@@ -789,6 +874,7 @@
       color: #cfc3b8;
 
       font-size: 14px;
+
       font-style: italic;
     }
 
@@ -796,9 +882,11 @@
       margin-top: 25px;
 
       display: flex;
+
       justify-content: center;
 
       gap: 25px;
+
       flex-wrap: wrap;
     }
 
@@ -808,8 +896,11 @@
       text-decoration: none;
 
       font-family: Arial, Helvetica, sans-serif;
+
       font-size: 10px;
+
       letter-spacing: 1.5px;
+
       text-transform: uppercase;
     }
 
@@ -825,13 +916,17 @@
       min-height: 300px;
 
       display: flex;
+
       justify-content: center;
+
       align-items: center;
 
       color: var(--hed-muted);
 
       font-family: Arial, Helvetica, sans-serif;
+
       font-size: 12px;
+
       letter-spacing: 1px;
     }
 
@@ -845,12 +940,15 @@
 
     .image-lightbox {
       position: fixed;
+
       inset: 0;
 
       z-index: 10000;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       padding: 30px;
@@ -858,6 +956,7 @@
       background: rgba(40, 31, 26, 0.92);
 
       opacity: 0;
+
       visibility: hidden;
 
       transition:
@@ -867,25 +966,30 @@
 
     .image-lightbox.open {
       opacity: 1;
+
       visibility: visible;
     }
 
     .image-lightbox img {
       max-width: 95vw;
+
       max-height: 90vh;
 
       object-fit: contain;
 
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.3);
     }
 
     .lightbox-close {
       position: absolute;
 
       top: 18px;
+
       right: 24px;
 
       border: 0;
+
       background: transparent;
 
       color: white;
@@ -903,6 +1007,7 @@
 
       header {
         height: 68px;
+
         padding: 0 5%;
       }
 
@@ -916,11 +1021,13 @@
 
       nav a {
         font-size: 9px;
+
         letter-spacing: 1.3px;
       }
 
       main {
         width: 90%;
+
         padding-top: 45px;
       }
 
@@ -930,6 +1037,7 @@
 
       .entry-title {
         font-size: 36px;
+
         letter-spacing: -0.8px;
       }
 
@@ -961,8 +1069,13 @@
         width: 130px;
       }
 
+      /*
+        MOBILE DEFAULT:
+        21px
+      */
+
       .article-content {
-        --reader-size: 19px;
+        --reader-size: 21px;
       }
 
       #articleContent p,
@@ -980,6 +1093,7 @@
 
       .article-content blockquote {
         font-size: 21px !important;
+
         padding-left: 20px;
       }
 
@@ -1001,7 +1115,9 @@
 
       .comment-top {
         align-items: flex-start;
+
         flex-direction: column;
+
         gap: 3px;
       }
     }
@@ -1009,9 +1125,10 @@
 </head>
 
 
-<body>
+<body class="copy-protected">
 
   <!-- READING PROGRESS -->
+
   <div
     class="reading-progress"
     id="readingProgress"
@@ -1030,6 +1147,7 @@
     </a>
 
     <nav>
+
       <a href="journal.html">
         Journal
       </a>
@@ -1037,6 +1155,7 @@
       <a href="about.html">
         About
       </a>
+
     </nav>
 
   </header>
@@ -1067,14 +1186,10 @@
       </a>
 
 
-      <!-- JOURNAL LABEL -->
-
       <div class="journal-label">
         Journal
       </div>
 
-
-      <!-- TITLE -->
 
       <h1
         class="entry-title"
@@ -1082,15 +1197,11 @@
       ></h1>
 
 
-      <!-- SUBTITLE -->
-
       <div
         class="entry-subtitle hidden"
         id="entrySubtitle"
       ></div>
 
-
-      <!-- META -->
 
       <div class="entry-meta">
 
@@ -1118,7 +1229,7 @@
       </div>
 
 
-      <!-- HERO -->
+      <!-- HERO IMAGE -->
 
       <div
         class="hero-image-wrap hidden"
@@ -1139,7 +1250,7 @@
       </div>
 
 
-      <!-- READING PREFERENCES -->
+      <!-- READING CONTROLS -->
 
       <div class="reading-preferences">
 
@@ -1148,7 +1259,7 @@
         </div>
 
 
-        <!-- TEXT SIZE -->
+        <!-- SIZE -->
 
         <div class="preference-group">
 
@@ -1314,7 +1425,6 @@
           Keep Reading
         </div>
 
-
         <div class="reading-grid">
 
           <a
@@ -1447,11 +1557,6 @@
       );
 
 
-    /*
-      Supports several possible ways your
-      journal page may send the entry.
-    */
-
     const requestedEntry =
       urlParams.get("id") ||
       urlParams.get("entry") ||
@@ -1514,6 +1619,7 @@
       const parsed =
         new Date(date);
 
+
       if (
         Number.isNaN(
           parsed.getTime()
@@ -1521,6 +1627,7 @@
       ) {
         return "";
       }
+
 
       return parsed.toLocaleDateString(
         "en-US",
@@ -1534,7 +1641,9 @@
     }
 
 
-    function calculateReadTime(content) {
+    function calculateReadTime(
+      content
+    ) {
 
       if (!content) {
         return "1 min read";
@@ -1551,6 +1660,7 @@
           .filter(Boolean)
           .length;
 
+
       const minutes =
         Math.max(
           1,
@@ -1558,6 +1668,7 @@
             words / 220
           )
         );
+
 
       return `${minutes} min read`;
 
@@ -1614,31 +1725,26 @@
 
 
     /*
-      IMPORTANT:
+      DEFAULT:
 
-      Size is NOT saved to localStorage.
+      Desktop = 22px
+      Mobile = 21px
 
-      Every entry starts at:
-      0 = normal/default
-
-      Desktop default:
-      20px
-
-      Mobile default:
-      19px
+      Adjustment ALWAYS starts at 0.
+      Text size is NOT stored.
     */
 
-    const baseDesktopSize = 20;
-    const baseMobileSize = 19;
+    const baseDesktopSize = 22;
+
+    const baseMobileSize = 21;
 
 
     let currentAdjustment = 0;
 
 
     /*
-      Font can still be remembered because
-      the problem was specifically the text
-      size carrying over between entries.
+      Font may still remember the reader's
+      selected font.
     */
 
     let currentFont =
@@ -1659,11 +1765,14 @@
     function applyReadingPreferences() {
 
       const adjustment =
-        Number(currentAdjustment) || 0;
+        Number(
+          currentAdjustment
+        ) || 0;
 
 
       const actualSize =
-        getBaseSize() + adjustment;
+        getBaseSize() +
+        adjustment;
 
 
       let fontValue =
@@ -1681,7 +1790,7 @@
 
 
       /*
-        Set the actual size on the article.
+        Apply actual text size.
       */
 
       articleContent.style.setProperty(
@@ -1697,7 +1806,7 @@
 
 
       /*
-        Also update the HED note.
+        HED note follows same settings.
       */
 
       if (hedNoteContent) {
@@ -1716,7 +1825,7 @@
 
 
       /*
-        Update slider display.
+        Update slider.
       */
 
       sizeSlider.value =
@@ -1726,11 +1835,13 @@
       sizeNumber.textContent =
         currentAdjustment > 0
           ? `+${currentAdjustment}`
-          : String(currentAdjustment);
+          : String(
+              currentAdjustment
+            );
 
 
       /*
-        Update font button.
+        Update active font button.
       */
 
       document
@@ -1750,9 +1861,9 @@
     }
 
 
-    /*
-      SIZE SLIDER
-    */
+    /* ========================================
+       SIZE SLIDER
+    ======================================== */
 
     sizeSlider.addEventListener(
       "input",
@@ -1763,15 +1874,16 @@
             sizeSlider.value
           );
 
+
         applyReadingPreferences();
 
       }
     );
 
 
-    /*
-      FONT BUTTONS
-    */
+    /* ========================================
+       FONT BUTTONS
+    ======================================== */
 
     document
       .querySelectorAll(
@@ -1802,9 +1914,7 @@
 
 
     /*
-      If the browser window changes from
-      desktop to mobile or vice versa,
-      recalculate the default size.
+      Recalculate if screen size changes.
     */
 
     window.addEventListener(
@@ -1818,12 +1928,150 @@
 
 
     /*
-      Start at 0 EVERY TIME.
+      ALWAYS start at 0.
     */
 
     currentAdjustment = 0;
 
     applyReadingPreferences();
+
+
+    /* ========================================
+       COPY PROTECTION
+    ======================================== */
+
+    /*
+      Disable right click.
+    */
+
+    document.addEventListener(
+      "contextmenu",
+      event => {
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /*
+      Disable copy and cut.
+    */
+
+    document.addEventListener(
+      "copy",
+      event => {
+
+        /*
+          Allow copying from inputs/textareas
+          if the reader ever needs them.
+        */
+
+        const tag =
+          event.target.tagName;
+
+        if (
+          tag === "INPUT" ||
+          tag === "TEXTAREA"
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    document.addEventListener(
+      "cut",
+      event => {
+
+        const tag =
+          event.target.tagName;
+
+        if (
+          tag === "INPUT" ||
+          tag === "TEXTAREA"
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /*
+      Disable keyboard copy shortcuts.
+
+      Ctrl+C
+      Ctrl+X
+      Ctrl+A
+      Cmd+C
+      Cmd+X
+      Cmd+A
+    */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        const tag =
+          event.target.tagName;
+
+
+        if (
+          tag === "INPUT" ||
+          tag === "TEXTAREA"
+        ) {
+          return;
+        }
+
+
+        const modifier =
+          event.ctrlKey ||
+          event.metaKey;
+
+
+        if (
+          modifier &&
+          (
+            event.key.toLowerCase() === "c" ||
+            event.key.toLowerCase() === "x" ||
+            event.key.toLowerCase() === "a"
+          )
+        ) {
+
+          event.preventDefault();
+
+        }
+
+      }
+    );
+
+
+    /*
+      Prevent dragging article content.
+    */
+
+    document.addEventListener(
+      "dragstart",
+      event => {
+
+        if (
+          event.target.closest(
+            "#articleContent"
+          )
+        ) {
+
+          event.preventDefault();
+
+        }
+
+      }
+    );
 
 
     /* ========================================
@@ -1856,15 +2104,19 @@
         return;
       }
 
+
       lightboxImage.src =
         image.src;
+
 
       lightboxImage.alt =
         image.alt || "";
 
+
       imageLightbox.classList.add(
         "open"
       );
+
 
       document.body.style.overflow =
         "hidden";
@@ -1878,10 +2130,13 @@
         "open"
       );
 
+
       document.body.style.overflow =
         "";
 
-      lightboxImage.src = "";
+
+      lightboxImage.src =
+        "";
 
     }
 
@@ -1930,7 +2185,9 @@
     */
 
     document
-      .getElementById("heroImage")
+      .getElementById(
+        "heroImage"
+      )
       .addEventListener(
         "click",
         event => {
@@ -1945,9 +2202,6 @@
 
     /*
       Article images.
-
-      Event delegation means this also
-      works for images loaded from Supabase.
     */
 
     articleContent.addEventListener(
@@ -1959,11 +2213,15 @@
             "img"
           );
 
+
         if (!image) {
           return;
         }
 
-        openLightbox(image);
+
+        openLightbox(
+          image
+        );
 
       }
     );
@@ -1976,9 +2234,7 @@
     async function loadEntry() {
 
       /*
-        Reset size whenever an entry is opened.
-
-        This is intentional.
+        NEW ENTRY ALWAYS STARTS AT 0.
       */
 
       currentAdjustment = 0;
@@ -2019,6 +2275,7 @@
           error
         );
 
+
         document.getElementById(
           "loading"
         ).textContent =
@@ -2033,18 +2290,6 @@
         data || [];
 
 
-      /*
-        Find the requested entry.
-
-        Supports:
-        - UUID / id
-        - slug
-        - entry_slug
-        - entrySlug
-        - title
-        - title converted to slug
-      */
-
       const requested =
         String(
           requestedEntry
@@ -2056,6 +2301,16 @@
           requested
         );
 
+
+      /*
+        Find entry by:
+        ID
+        slug
+        entry_slug
+        entrySlug
+        title
+        title slug
+      */
 
       const currentIndex =
         entries.findIndex(
@@ -2069,31 +2324,41 @@
 
             const slugMatches =
               entry.slug &&
-              String(entry.slug).toLowerCase() ===
+              String(
+                entry.slug
+              ).toLowerCase() ===
                 requested.toLowerCase();
 
 
             const entrySlugMatches =
               entry.entry_slug &&
-              String(entry.entry_slug).toLowerCase() ===
+              String(
+                entry.entry_slug
+              ).toLowerCase() ===
                 requested.toLowerCase();
 
 
-            const entrySlugCamelMatches =
+            const camelSlugMatches =
               entry.entrySlug &&
-              String(entry.entrySlug).toLowerCase() ===
+              String(
+                entry.entrySlug
+              ).toLowerCase() ===
                 requested.toLowerCase();
 
 
             const titleMatches =
               entry.title &&
-              String(entry.title).toLowerCase() ===
+              String(
+                entry.title
+              ).toLowerCase() ===
                 requested.toLowerCase();
 
 
             const titleSlugMatches =
               entry.title &&
-              slugify(entry.title) ===
+              slugify(
+                entry.title
+              ) ===
                 requestedSlug;
 
 
@@ -2101,7 +2366,7 @@
               idMatches ||
               slugMatches ||
               entrySlugMatches ||
-              entrySlugCamelMatches ||
+              camelSlugMatches ||
               titleMatches ||
               titleSlugMatches
             );
@@ -2119,10 +2384,6 @@
           requestedEntry
         );
 
-        console.error(
-          "Available entries:",
-          entries
-        );
 
         document.getElementById(
           "loading"
@@ -2135,7 +2396,9 @@
 
 
       const entry =
-        entries[currentIndex];
+        entries[
+          currentIndex
+        ];
 
 
       currentEntryId =
@@ -2173,6 +2436,7 @@
 
         subtitleElement.textContent =
           subtitle;
+
 
         subtitleElement.classList.remove(
           "hidden"
@@ -2234,6 +2498,7 @@
         heroImage.src =
           entry.image_url;
 
+
         heroImage.alt =
           entry.title ||
           "Journal image";
@@ -2254,6 +2519,7 @@
           imageCaption.textContent =
             caption;
 
+
           imageCaption.classList.remove(
             "hidden"
           );
@@ -2272,6 +2538,7 @@
           "hidden"
         );
 
+
         heroImage.removeAttribute(
           "src"
         );
@@ -2289,7 +2556,7 @@
 
 
       /*
-        Re-apply font and size AFTER inserting
+        Reapply preferences after inserting
         Supabase HTML.
       */
 
@@ -2317,6 +2584,7 @@
           "hidden"
         );
 
+
         hedNoteContent.textContent =
           note;
 
@@ -2325,6 +2593,7 @@
         hedNote.classList.add(
           "hidden"
         );
+
 
         hedNoteContent.textContent =
           "";
@@ -2439,8 +2708,8 @@
 
 
       /*
-        Always begin a newly opened entry
-        at size 0.
+        Explicitly reset to 0 after
+        the entry has loaded.
       */
 
       currentAdjustment = 0;
@@ -2687,6 +2956,7 @@
               "Comment posting error:",
               error
             );
+
 
             message.textContent =
               "Something went wrong. Please try again.";
