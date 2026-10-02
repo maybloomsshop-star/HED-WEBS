@@ -2863,21 +2863,21 @@ function renderStories() {
           </div>
 
 
-          <div class="card-actions">
+        <div class="card-actions">
 
-            <button
-              class="secondary open-story"
-            >
-              Open
-            </button>
+  <button class="secondary open-story">
+    Open
+  </button>
 
-            <button
-              class="secondary edit-story"
-            >
-              Edit
-            </button>
+  <button class="secondary edit-story">
+    Edit
+  </button>
 
-          </div>
+  <button class="secondary delete-story">
+    Delete
+  </button>
+
+</div>
 
         </div>
 
@@ -3767,6 +3767,68 @@ async function loadChapters() {
           deleteChapter(
             chapter.id
           );
+      async function deleteStory(id) {
+
+  const story = stories.find(
+    item => item.id === id
+  );
+
+  if (!story) return;
+
+  if (
+    !confirm(
+      `Delete "${story.title || "Untitled"}"? This will also delete its chapters. This cannot be undone.`
+    )
+  ) {
+    return;
+  }
+
+  try {
+
+    const { error } =
+      await supabaseClient
+        .from("stories")
+        .delete()
+        .eq("id", id)
+        .eq("owner_id", currentUser.id);
+
+    if (error) {
+      throw error;
+    }
+
+    stories = stories.filter(
+      item => item.id !== id
+    );
+
+    if (currentStory?.id === id) {
+      $("storyStudio")
+        .classList
+        .remove("show");
+
+      currentStory = null;
+      currentChapter = null;
+    }
+
+    renderStories();
+    renderStats();
+    renderRecent();
+
+    toast("Story deleted.");
+
+  } catch (error) {
+
+    console.error(
+      "Story delete error:",
+      error
+    );
+
+    toast(
+      error.message ||
+      "Could not delete story."
+    );
+
+  }
+}
 
 
       list.appendChild(row);
