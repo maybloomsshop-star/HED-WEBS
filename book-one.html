@@ -3470,16 +3470,29 @@ $("commentForm").addEventListener(
         }
 
 
-        const name =
-            $("commentName")
-                .value
-                .trim();
+       const {
+  data: { user }
+} = await supabaseClient.auth.getUser();
 
+if (!user) {
+  const returnPage =
+    window.location.pathname.split("/").pop() +
+    window.location.search;
 
-        const content =
-            $("commentContent")
-                .value
-                .trim();
+  window.location.href =
+    "login.html?return=" +
+    encodeURIComponent(returnPage);
+
+  return;
+}
+
+const name =
+  user.user_metadata?.nickname?.trim() || "Reader";
+
+const content =
+  $("commentContent").value.trim();
+
+$("commentName").value = name;
 
 
         if(
