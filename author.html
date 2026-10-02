@@ -2863,46 +2863,42 @@ function renderStories() {
           </div>
 
 
-        <div class="card-actions">
+          <div class="card-actions">
 
-  <button class="secondary open-story">
-    Open
-  </button>
+            <button
+              class="secondary open-story"
+            >
+              Open
+            </button>
 
-  <button class="secondary edit-story">
-    Edit
-  </button>
+            <button
+              class="secondary edit-story"
+            >
+              Edit
+            </button>
 
-  <button class="secondary delete-story">
-    Delete
-  </button>
-
-</div>
+          </div>
 
         </div>
 
       `;
 
 
-     card
-  .querySelector(".open-story")
-  .onclick =
-    () =>
-      openStoryStudio(s.id);
+      card
+        .querySelector(".open-story")
+        .onclick =
+          () =>
+            openStoryStudio(s.id);
 
-card
-  .querySelector(".edit-story")
-  .onclick =
-    () =>
-      editStory(s.id);
 
-card
-  .querySelector(".delete-story")
-  .onclick =
-    () =>
-      deleteStory(s.id);
+      card
+        .querySelector(".edit-story")
+        .onclick =
+          () =>
+            editStory(s.id);
 
-grid.appendChild(card);
+
+      grid.appendChild(card);
 
     }
   );
@@ -3771,52 +3767,6 @@ async function loadChapters() {
           deleteChapter(
             chapter.id
           );
-      async function deleteStory(id) {
-
-  if (
-    !confirm(
-      "Delete this story? This cannot be undone."
-    )
-  ) {
-    return;
-  }
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("stories")
-      .delete()
-      .eq("id", id)
-      .eq("owner_id", currentUser.id);
-
-  if (error) {
-    toast(error.message);
-    return;
-  }
-
-  await loadStories();
-
-  renderStats();
-  renderRecent();
-
-  toast("Story deleted.");
-}
-
-  } catch (error) {
-
-    console.error(
-      "Story delete error:",
-      error
-    );
-
-    toast(
-      error.message ||
-      "Could not delete story."
-    );
-
-  }
-}
 
 
       list.appendChild(row);
