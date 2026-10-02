@@ -2884,21 +2884,25 @@ function renderStories() {
       `;
 
 
-      card
-        .querySelector(".open-story")
-        .onclick =
-          () =>
-            openStoryStudio(s.id);
+     card
+  .querySelector(".open-story")
+  .onclick =
+    () =>
+      openStoryStudio(s.id);
 
+card
+  .querySelector(".edit-story")
+  .onclick =
+    () =>
+      editStory(s.id);
 
-      card
-        .querySelector(".edit-story")
-        .onclick =
-          () =>
-            editStory(s.id);
+card
+  .querySelector(".delete-story")
+  .onclick =
+    () =>
+      deleteStory(s.id);
 
-
-      grid.appendChild(card);
+grid.appendChild(card);
 
     }
   );
