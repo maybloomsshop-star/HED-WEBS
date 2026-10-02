@@ -2863,7 +2863,7 @@ function renderStories() {
           </div>
 
 
-         <div class="card-actions">
+        <div class="card-actions">
 
   <button
     class="secondary open-story"
@@ -2878,7 +2878,7 @@ function renderStories() {
   </button>
 
   <button
-    class="danger delete-story"
+    class="secondary delete-story"
   >
     Delete
   </button>
@@ -2902,6 +2902,7 @@ function renderStories() {
         .onclick =
           () =>
             editStory(s.id);
+      
       card
   .querySelector(".delete-story")
   .onclick =
