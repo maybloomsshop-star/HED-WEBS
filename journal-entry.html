@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Journal — HED</title>
 
   <style>
-
     :root {
       --hed-brown: #4a352b;
       --hed-brown-dark: #382920;
@@ -20,6 +17,9 @@
       --hed-text: #342b26;
       --hed-muted: #85786e;
       --hed-line: #d8cec2;
+
+      --reader-size: 19px;
+      --reader-font: Georgia, "Times New Roman", serif;
     }
 
     * {
@@ -37,9 +37,22 @@
       font-family: Georgia, "Times New Roman", serif;
     }
 
-    /* ================================
+    /* =========================================================
+       COPY / TEXT PROTECTION
+       ========================================================= */
+
+    #articleContent,
+    #articleContent *,
+    .hed-note-content,
+    .hed-note-content * {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    /* =========================================================
        READING PROGRESS
-    ================================ */
+       ========================================================= */
 
     .reading-progress {
       position: fixed;
@@ -51,9 +64,9 @@
       z-index: 9999;
     }
 
-    /* ================================
+    /* =========================================================
        HEADER
-    ================================ */
+       ========================================================= */
 
     header {
       height: 78px;
@@ -105,9 +118,9 @@
       color: var(--hed-brown);
     }
 
-    /* ================================
+    /* =========================================================
        PAGE
-    ================================ */
+       ========================================================= */
 
     main {
       width: min(1080px, 90%);
@@ -136,9 +149,9 @@
       color: var(--hed-brown);
     }
 
-    /* ================================
+    /* =========================================================
        JOURNAL HEADER
-    ================================ */
+       ========================================================= */
 
     .journal-label {
       color: var(--hed-green);
@@ -168,18 +181,19 @@
     .entry-subtitle {
       max-width: 720px;
 
-      margin: 25px 0 25px;
+      margin: 25px 0;
 
       color: var(--hed-muted);
 
       font-size: 21px;
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
     .entry-meta {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+
       gap: 9px;
 
       margin-top: 25px;
@@ -205,9 +219,9 @@
       letter-spacing: 7px;
     }
 
-    /* ================================
+    /* =========================================================
        HERO IMAGE
-    ================================ */
+       ========================================================= */
 
     .hero-image-wrap {
       width: 100%;
@@ -219,6 +233,7 @@
       max-height: 650px;
 
       object-fit: cover;
+
       display: block;
 
       background: var(--hed-cream);
@@ -237,85 +252,68 @@
       line-height: 1.5;
     }
 
-    /* ================================
+    /* =========================================================
        READING CONTROLS
-    ================================ */
+       ========================================================= */
 
-    .reading-controls {
+    .reading-preferences {
       width: min(760px, 100%);
 
       margin: 0 auto 38px;
-
-      padding: 18px 0;
+      padding: 16px 0;
 
       border-top: 1px solid var(--hed-line);
       border-bottom: 1px solid var(--hed-line);
-    }
 
-    .controls-top {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 28px;
 
-      gap: 20px;
-
-      margin-bottom: 16px;
+      flex-wrap: wrap;
     }
 
-    .controls-label {
+    .preference-label {
       color: var(--hed-muted);
 
       font-family: Arial, Helvetica, sans-serif;
       font-size: 10px;
       font-weight: bold;
-      letter-spacing: 2px;
+      letter-spacing: 1.7px;
       text-transform: uppercase;
     }
 
-    .size-value {
-      color: var(--hed-brown);
-
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 11px;
-      font-weight: bold;
-    }
-
-    /* TEXT SIZE SLIDER */
-
     .size-control {
-      display: grid;
+      flex: 1 1 260px;
 
-      grid-template-columns: 18px 1fr 28px;
-
+      display: flex;
       align-items: center;
-
-      gap: 10px;
-
-      margin-bottom: 18px;
+      gap: 12px;
     }
 
-    .size-small,
-    .size-large {
+    .size-small-label,
+    .size-large-label {
       color: var(--hed-muted);
 
       font-family: Georgia, serif;
-      text-align: center;
+      line-height: 1;
     }
 
-    .size-small {
-      font-size: 12px;
+    .size-small-label {
+      font-size: 13px;
     }
 
-    .size-large {
-      font-size: 21px;
+    .size-large-label {
+      font-size: 23px;
     }
 
     #fontSizeSlider {
+      flex: 1;
+
       width: 100%;
+      height: 4px;
 
       appearance: none;
-
-      height: 4px;
+      -webkit-appearance: none;
 
       background: var(--hed-line);
 
@@ -328,123 +326,129 @@
 
     #fontSizeSlider::-webkit-slider-thumb {
       appearance: none;
+      -webkit-appearance: none;
 
-      width: 16px;
-      height: 16px;
+      width: 17px;
+      height: 17px;
 
       border-radius: 50%;
 
       background: var(--hed-brown);
 
-      cursor: pointer;
+      border: 3px solid var(--hed-paper);
 
-      border: 2px solid var(--hed-paper);
       box-shadow: 0 0 0 1px var(--hed-brown);
+
+      cursor: grab;
+    }
+
+    #fontSizeSlider::-webkit-slider-thumb:active {
+      cursor: grabbing;
     }
 
     #fontSizeSlider::-moz-range-thumb {
-      width: 16px;
-      height: 16px;
+      width: 13px;
+      height: 13px;
 
       border-radius: 50%;
 
       background: var(--hed-brown);
 
-      cursor: pointer;
-
       border: 2px solid var(--hed-paper);
+
+      box-shadow: 0 0 0 1px var(--hed-brown);
+
+      cursor: grab;
     }
 
-    /* FONT CHOICES */
+    .size-value {
+      min-width: 42px;
 
-    .font-row {
+      color: var(--hed-muted);
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+      font-weight: bold;
+
+      text-align: right;
+    }
+
+    .font-controls {
       display: flex;
-
       align-items: center;
-
-      gap: 7px;
+      gap: 4px;
 
       flex-wrap: wrap;
     }
 
-    .font-row-label {
+    .preference-group-title {
+      margin-right: 5px;
+
       color: var(--hed-muted);
 
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 9px;
-      font-weight: bold;
+      font-size: 10px;
 
-      letter-spacing: 1.5px;
       text-transform: uppercase;
-
-      margin-right: 5px;
+      letter-spacing: 1px;
     }
 
-    .font-choice {
-      border: 1px solid var(--hed-line);
+    .preference-button {
+      border: 1px solid transparent;
 
       background: transparent;
 
       color: var(--hed-muted);
 
-      padding: 7px 11px;
+      padding: 6px 8px;
 
-      border-radius: 3px;
+      border-radius: 4px;
 
       cursor: pointer;
 
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+
       transition:
-        background 0.15s ease,
-        color 0.15s ease,
-        border-color 0.15s ease;
+        color 0.2s ease,
+        background 0.2s ease,
+        border 0.2s ease;
     }
 
-    .font-choice:hover {
+    .preference-button:hover {
+      color: var(--hed-brown);
+
+      background: var(--hed-cream);
+    }
+
+    .preference-button.active {
+      color: var(--hed-brown-dark);
+
+      border-color: var(--hed-line);
+
       background: var(--hed-cream);
 
-      color: var(--hed-brown);
+      font-weight: bold;
     }
 
-    .font-choice.active {
-      background: var(--hed-brown);
-
-      border-color: var(--hed-brown);
-
-      color: white;
-    }
-
-    .font-choice[data-font="serif"] {
-      font-family: Georgia, "Times New Roman", serif;
-    }
-
-    .font-choice[data-font="garamond"] {
-      font-family: Garamond, "Times New Roman", serif;
-    }
-
-    .font-choice[data-font="palatino"] {
-      font-family: Palatino, "Book Antiqua", serif;
-    }
-
-    .font-choice[data-font="sans"] {
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .font-choice[data-font="verdana"] {
-      font-family: Verdana, Geneva, sans-serif;
-    }
-
-    .font-choice[data-font="mono"] {
-      font-family: "Courier New", monospace;
-    }
-
-    /* ================================
+    /* =========================================================
        ARTICLE
-    ================================ */
+       ========================================================= */
 
     .article-area {
       width: min(760px, 100%);
       margin: 0 auto;
     }
+
+    /*
+      IMPORTANT:
+
+      --reader-size controls the actual letters.
+
+      Line-height is intentionally fixed at 1.72,
+      so increasing the font size does NOT create
+      huge gaps between lines.
+    */
 
     .article-content {
       --reader-size: 19px;
@@ -452,52 +456,56 @@
 
       font-family: var(--reader-font) !important;
 
-      font-size: var(--reader-size);
+      font-size: var(--reader-size) !important;
 
-      line-height: 1.9;
+      line-height: 1.72 !important;
 
       color: var(--hed-text);
 
-      transition: font-size 0.12s ease;
+      transition:
+        font-size 0.12s ease,
+        font-family 0.15s ease;
     }
-
-    /*
-      Force generated Supabase HTML
-      to follow the reader font.
-    */
 
     .article-content,
     .article-content * {
       font-family: var(--reader-font) !important;
     }
 
-    .article-content p,
-    .article-content li {
-      font-size: var(--reader-size);
+    .article-content p {
+      margin: 0 0 1.15em;
+
+      font-size: var(--reader-size) !important;
+      line-height: 1.72 !important;
     }
 
-    .article-content p {
-      margin: 0 0 1.45em;
+    .article-content h1,
+    .article-content h2,
+    .article-content h3,
+    .article-content h4 {
+      color: var(--hed-brown-dark);
+
+      line-height: 1.2 !important;
+
+      font-weight: normal;
+    }
+
+    .article-content h1 {
+      font-size: calc(var(--reader-size) * 1.9) !important;
+
+      margin: 1.7em 0 0.7em;
     }
 
     .article-content h2 {
-      margin: 2.2em 0 0.8em;
+      font-size: calc(var(--reader-size) * 1.55) !important;
 
-      color: var(--hed-brown-dark);
-
-      font-size: 30px;
-      line-height: 1.25;
-      font-weight: normal;
+      margin: 1.9em 0 0.65em;
     }
 
     .article-content h3 {
-      margin: 2em 0 0.7em;
+      font-size: calc(var(--reader-size) * 1.3) !important;
 
-      color: var(--hed-brown-dark);
-
-      font-size: 23px;
-      line-height: 1.3;
-      font-weight: normal;
+      margin: 1.7em 0 0.55em;
     }
 
     .article-content strong {
@@ -516,30 +524,35 @@
     }
 
     .article-content blockquote {
-      margin: 45px 0;
+      margin: 32px 0;
 
-      padding: 5px 0 5px 28px;
+      padding: 3px 0 3px 25px;
 
       border-left: 3px solid var(--hed-pink);
 
       color: var(--hed-brown);
 
-      font-size: calc(var(--reader-size) * 1.25);
-
-      line-height: 1.55;
+      font-size: calc(var(--reader-size) * 1.12) !important;
+      line-height: 1.55 !important;
 
       font-style: italic;
     }
 
     .article-content ul,
     .article-content ol {
-      margin: 0 0 1.5em;
+      margin: 0 0 1.15em;
 
-      padding-left: 30px;
+      padding-left: 28px;
+
+      font-size: var(--reader-size) !important;
+      line-height: 1.72 !important;
     }
 
     .article-content li {
-      margin-bottom: 8px;
+      margin-bottom: 4px;
+
+      font-size: var(--reader-size) !important;
+      line-height: 1.72 !important;
     }
 
     .article-content img {
@@ -548,9 +561,12 @@
 
       display: block;
 
-      margin: 40px 0;
+      margin: 32px 0;
 
-      cursor: zoom-in;
+      -webkit-user-select: none;
+      user-select: none;
+
+      pointer-events: none;
     }
 
     .article-content hr {
@@ -558,17 +574,17 @@
 
       border-top: 1px solid var(--hed-line);
 
-      margin: 50px 0;
+      margin: 38px 0;
     }
 
-    /* ================================
+    /* =========================================================
        HED NOTE
-    ================================ */
+       ========================================================= */
 
     .hed-note {
-      margin-top: 60px;
+      margin-top: 50px;
 
-      padding: 28px;
+      padding: 25px 28px;
 
       background: var(--hed-cream);
 
@@ -591,16 +607,15 @@
     .hed-note-content {
       color: var(--hed-brown);
 
-      font-family: var(--reader-font, Georgia, serif) !important;
+      font-family: var(--reader-font) !important;
+      font-size: var(--reader-size) !important;
 
-      font-size: var(--reader-size, 19px);
-
-      line-height: 1.8;
+      line-height: 1.72 !important;
     }
 
-    /* ================================
+    /* =========================================================
        RESPONSES
-    ================================ */
+       ========================================================= */
 
     .responses {
       width: min(680px, 100%);
@@ -612,17 +627,17 @@
       border-top: 1px solid var(--hed-line);
     }
 
-    .responses .section-label {
-      margin-bottom: 5px;
-
+    .section-label {
       color: var(--hed-green);
 
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 9px;
+      font-size: 10px;
       font-weight: bold;
 
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
+
+      margin-bottom: 7px;
     }
 
     .section-title {
@@ -630,7 +645,7 @@
 
       color: var(--hed-brown-dark);
 
-      font-size: 28px;
+      font-size: 29px;
 
       line-height: 1.2;
 
@@ -638,18 +653,17 @@
     }
 
     .response-count {
-      margin-top: 4px;
+      margin-top: 6px;
 
       color: var(--hed-muted);
 
       font-family: Arial, Helvetica, sans-serif;
-
       font-size: 10px;
     }
 
-    /* ================================
-       COMMENT FORM
-    ================================ */
+    /*
+      COMPACT COMMENT FORM
+    */
 
     .response-form {
       margin-top: 18px;
@@ -663,8 +677,6 @@
 
     .response-form input,
     .response-form textarea {
-      display: block;
-
       width: 100%;
 
       border: 1px solid var(--hed-line);
@@ -675,26 +687,24 @@
 
       padding: 9px 11px;
 
-      margin: 0 0 7px;
+      margin-bottom: 8px;
 
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Georgia, serif;
 
       font-size: 14px;
 
       outline: none;
+    }
 
-      border-radius: 0;
+    .response-form textarea {
+      min-height: 85px;
+
+      resize: vertical;
     }
 
     .response-form input:focus,
     .response-form textarea:focus {
       border-color: var(--hed-green);
-    }
-
-    .response-form textarea {
-      min-height: 78px;
-
-      resize: vertical;
     }
 
     .response-form button {
@@ -711,7 +721,6 @@
       font-family: Arial, Helvetica, sans-serif;
 
       font-size: 9px;
-
       font-weight: bold;
 
       letter-spacing: 1.4px;
@@ -724,26 +733,24 @@
     }
 
     .response-message {
-      margin-top: 7px;
+      margin-top: 8px;
 
       color: var(--hed-muted);
 
       font-family: Arial, Helvetica, sans-serif;
 
-      font-size: 10px;
+      font-size: 11px;
     }
 
-    /* ================================
-       COMMENTS LIST
-    ================================ */
+    /*
+      VERY COMPACT COMMENTS
+    */
 
     .comment-list {
       margin-top: 15px;
     }
 
     .comment {
-      display: block;
-
       padding: 10px 0 11px;
 
       border-bottom: 1px solid var(--hed-line);
@@ -787,34 +794,32 @@
       font-family: Arial, Helvetica, sans-serif;
 
       font-size: 9px;
-
-      white-space: nowrap;
     }
 
     .comment-content {
       color: var(--hed-text);
 
+      font-family: Georgia, "Times New Roman", serif;
+
       font-size: 14px;
 
       line-height: 1.45;
 
-      white-space: pre-wrap;
-
-      overflow-wrap: anywhere;
-
       margin: 0;
+
+      white-space: pre-wrap;
     }
 
-    /* ================================
+    /* =========================================================
        KEEP READING
-    ================================ */
+       ========================================================= */
 
     .keep-reading {
       width: min(760px, 100%);
 
-      margin: 80px auto 0;
+      margin: 75px auto 0;
 
-      padding-top: 35px;
+      padding-top: 30px;
 
       border-top: 1px solid var(--hed-line);
     }
@@ -826,13 +831,13 @@
 
       gap: 15px;
 
-      margin-top: 20px;
+      margin-top: 18px;
     }
 
     .reading-card {
-      min-height: 150px;
+      min-height: 140px;
 
-      padding: 24px;
+      padding: 22px;
 
       background: var(--hed-cream);
 
@@ -852,7 +857,7 @@
     }
 
     .reading-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
 
       background: #f1e9df;
     }
@@ -872,11 +877,11 @@
     }
 
     .reading-title {
-      margin-top: 20px;
+      margin-top: 18px;
 
       color: var(--hed-brown-dark);
 
-      font-size: 21px;
+      font-size: 20px;
 
       line-height: 1.3;
     }
@@ -907,52 +912,14 @@
       color: var(--hed-green);
     }
 
-    /* ================================
-       LIGHTBOX
-    ================================ */
-
-    .image-lightbox {
-      position: fixed;
-
-      inset: 0;
-
-      background: rgba(35, 27, 23, 0.92);
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding: 30px;
-
-      z-index: 99999;
-
-      cursor: zoom-out;
-    }
-
-    .image-lightbox img {
-      max-width: 95vw;
-
-      max-height: 90vh;
-
-      object-fit: contain;
-
-      display: block;
-    }
-
-    .image-lightbox.hidden {
-      display: none;
-    }
-
-    /* ================================
+    /* =========================================================
        FOOTER
-    ================================ */
+       ========================================================= */
 
     footer {
-      margin-top: 100px;
+      margin-top: 80px;
 
-      padding: 55px 6%;
+      padding: 50px 6%;
 
       background: var(--hed-brown-dark);
 
@@ -970,7 +937,7 @@
     }
 
     .footer-tagline {
-      margin-top: 12px;
+      margin-top: 10px;
 
       color: #cfc3b8;
 
@@ -980,7 +947,7 @@
     }
 
     .footer-nav {
-      margin-top: 25px;
+      margin-top: 22px;
 
       display: flex;
 
@@ -1009,9 +976,9 @@
       color: white;
     }
 
-    /* ================================
-       LOADING / ERROR
-    ================================ */
+    /* =========================================================
+       STATUS
+       ========================================================= */
 
     .status {
       min-height: 300px;
@@ -1029,17 +996,48 @@
       font-size: 12px;
 
       letter-spacing: 1px;
-
-      text-align: center;
     }
 
     .hidden {
       display: none !important;
     }
 
-    /* ================================
+    /* =========================================================
+       IMAGE LIGHTBOX
+       ========================================================= */
+
+    .image-lightbox {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(35, 27, 22, 0.92);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 30px;
+
+      z-index: 10000;
+
+      cursor: zoom-out;
+    }
+
+    .image-lightbox img {
+      max-width: 95vw;
+      max-height: 90vh;
+
+      object-fit: contain;
+
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    /* =========================================================
        MOBILE
-    ================================ */
+       ========================================================= */
 
     @media (max-width: 700px) {
 
@@ -1084,77 +1082,39 @@
       }
 
       .entry-meta {
-        line-height: 1.7;
+        line-height: 1.6;
       }
 
       .hero-image-wrap {
         margin-bottom: 40px;
       }
 
-      .reading-controls {
-        padding: 15px 0;
+      .reading-preferences {
+        align-items: flex-start;
 
-        margin-bottom: 30px;
+        flex-direction: column;
+
+        gap: 15px;
       }
 
-      .controls-top {
-        margin-bottom: 13px;
+      .size-control {
+        width: 100%;
       }
 
-      .font-row {
-        gap: 5px;
-      }
-
-      .font-choice {
-        padding: 6px 8px;
-
-        font-size: 11px;
+      .font-controls {
+        width: 100%;
       }
 
       .article-content {
-        line-height: 1.8;
-      }
-
-      .article-content h2 {
-        font-size: 27px;
-      }
-
-      .article-content h3 {
-        font-size: 21px;
-      }
-
-      .article-content blockquote {
-        padding-left: 20px;
+        --reader-size: 18px;
       }
 
       .hed-note {
-        padding: 22px;
+        padding: 20px;
       }
 
       .responses {
-        width: 100%;
-
         margin-top: 55px;
-
-        padding-top: 25px;
-      }
-
-      .section-title {
-        font-size: 25px;
-      }
-
-      .response-form {
-        padding: 11px;
-      }
-
-      .comment {
-        padding: 9px 0 10px;
-      }
-
-      .comment-content {
-        font-size: 14px;
-
-        line-height: 1.45;
       }
 
       .reading-grid {
@@ -1162,28 +1122,31 @@
       }
 
       .reading-card {
-        min-height: 130px;
+        min-height: 125px;
       }
 
-      footer {
-        margin-top: 70px;
+      .comment-top {
+        gap: 7px;
       }
 
+      .comment-content {
+        font-size: 14px;
+      }
     }
-
   </style>
-
 </head>
 
-
 <body>
-
 
   <div
     class="reading-progress"
     id="readingProgress"
   ></div>
 
+
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
 
   <header>
 
@@ -1209,8 +1172,11 @@
   </header>
 
 
-  <main>
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
 
+  <main>
 
     <div
       id="loading"
@@ -1224,7 +1190,6 @@
       id="entryPage"
       class="hidden"
     >
-
 
       <a
         href="journal.html"
@@ -1277,6 +1242,8 @@
       </div>
 
 
+      <!-- HERO -->
+
       <div
         class="hero-image-wrap hidden"
         id="heroWrap"
@@ -1286,6 +1253,7 @@
           id="heroImage"
           class="hero-image"
           alt=""
+          draggable="false"
         >
 
         <div
@@ -1296,107 +1264,112 @@
       </div>
 
 
-      <!-- ================================
+      <!-- =====================================================
            READING CONTROLS
-      ================================= -->
+           ===================================================== -->
 
-      <div class="reading-controls">
+      <div class="reading-preferences">
 
-
-        <div class="controls-top">
-
-          <div class="controls-label">
-            Reading
-          </div>
-
-          <div
-            class="size-value"
-            id="sizeValue"
-          >
-            19px
-          </div>
-
+        <div class="preference-label">
+          Reading
         </div>
 
 
         <div class="size-control">
 
-          <span class="size-small">
+          <span class="size-small-label">
             A
           </span>
 
           <input
-            type="range"
             id="fontSizeSlider"
-            min="14"
+            type="range"
+            min="15"
             max="30"
             step="1"
             value="19"
             aria-label="Text size"
           >
 
-          <span class="size-large">
+          <span class="size-large-label">
             A
+          </span>
+
+          <span
+            id="sizeValue"
+            class="size-value"
+          >
+            19px
           </span>
 
         </div>
 
 
-        <div class="font-row">
+        <div class="font-controls">
 
-          <span class="font-row-label">
+          <span class="preference-group-title">
             Font
           </span>
 
-
           <button
             type="button"
-            class="font-choice"
+            class="preference-button"
             data-font="serif"
           >
             Serif
           </button>
 
-
           <button
             type="button"
-            class="font-choice"
+            class="preference-button"
             data-font="garamond"
           >
             Garamond
           </button>
 
-
           <button
             type="button"
-            class="font-choice"
+            class="preference-button"
             data-font="palatino"
           >
             Palatino
           </button>
 
+          <button
+            type="button"
+            class="preference-button"
+            data-font="baskerville"
+          >
+            Baskerville
+          </button>
 
           <button
             type="button"
-            class="font-choice"
+            class="preference-button"
+            data-font="times"
+          >
+            Times
+          </button>
+
+          <button
+            type="button"
+            class="preference-button"
             data-font="sans"
           >
             Sans
           </button>
 
-
           <button
             type="button"
-            class="font-choice"
+            class="preference-button"
             data-font="verdana"
           >
             Verdana
           </button>
 
-
           <button
             type="button"
-            class="font-choice"
+            class="preference-button"
             data-font="mono"
           >
             Mono
@@ -1407,9 +1380,9 @@
       </div>
 
 
-      <!-- ================================
-           ARTICLE
-      ================================= -->
+      <!-- =====================================================
+           ARTICLE CONTENT
+           ===================================================== -->
 
       <div class="article-area">
 
@@ -1419,7 +1392,7 @@
         ></div>
 
 
-        <!-- NOTE FROM HED -->
+        <!-- HED NOTE -->
 
         <div
           id="hedNote"
@@ -1440,22 +1413,19 @@
       </div>
 
 
-      <!-- ================================
+      <!-- =====================================================
            RESPONSES
-      ================================= -->
+           ===================================================== -->
 
       <section class="responses">
-
 
         <div class="section-label">
           Responses
         </div>
 
-
         <h2 class="section-title">
           Reader Responses
         </h2>
-
 
         <div
           class="response-count"
@@ -1470,7 +1440,6 @@
           class="response-form"
         >
 
-
           <input
             type="text"
             id="commentName"
@@ -1478,24 +1447,20 @@
             readonly
           >
 
-
           <textarea
             id="commentContent"
             placeholder="Leave a thought..."
             required
           ></textarea>
 
-
           <button type="submit">
             Post Response
           </button>
-
 
           <div
             id="responseMessage"
             class="response-message"
           ></div>
-
 
         </form>
 
@@ -1505,16 +1470,14 @@
           class="comment-list"
         ></div>
 
-
       </section>
 
 
-      <!-- ================================
+      <!-- =====================================================
            KEEP READING
-      ================================= -->
+           ===================================================== -->
 
       <section class="keep-reading">
-
 
         <div class="section-label">
           Keep Reading
@@ -1522,7 +1485,6 @@
 
 
         <div class="reading-grid">
-
 
           <a
             id="previousEntry"
@@ -1557,7 +1519,6 @@
 
           </a>
 
-
         </div>
 
 
@@ -1568,15 +1529,16 @@
           View All Journal Entries →
         </a>
 
-
       </section>
-
 
     </article>
 
-
   </main>
 
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
 
   <footer>
 
@@ -1603,7 +1565,9 @@
   </footer>
 
 
-  <!-- IMAGE LIGHTBOX -->
+  <!-- =======================================================
+       IMAGE LIGHTBOX
+       ======================================================= -->
 
   <div
     id="imageLightbox"
@@ -1618,7 +1582,9 @@
   </div>
 
 
-  <!-- SUPABASE -->
+  <!-- =======================================================
+       SUPABASE
+       ======================================================= -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -1629,19 +1595,55 @@
 
   <script>
 
+    /* ========================================================
+       SUPABASE
+       ======================================================== */
 
     const db = supabaseClient;
 
 
-    const entryId =
+    /* ========================================================
+       URL / ENTRY IDENTIFICATION
+       ======================================================== */
+
+    const urlParams =
       new URLSearchParams(
         window.location.search
-      ).get("id");
+      );
 
 
-    /* ================================
+    /*
+      Supports all of these:
+
+      journal-entry.html?id=123
+      journal-entry.html?entry=123
+      journal-entry.html?entry_id=123
+      journal-entry.html?entryId=123
+      journal-entry.html?slug=my-entry
+
+      Also supports:
+
+      journal-entry.html#my-entry
+    */
+
+    const requestedEntry =
+      urlParams.get("id") ||
+      urlParams.get("entry") ||
+      urlParams.get("entry_id") ||
+      urlParams.get("entryId") ||
+      urlParams.get("slug") ||
+      window.location.hash.replace(
+        /^#/,
+        ""
+      );
+
+
+    let currentEntryId = null;
+
+
+    /* ========================================================
        HELPERS
-    ================================= */
+       ======================================================== */
 
     function escapeHtml(value) {
 
@@ -1658,7 +1660,6 @@
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
     }
 
 
@@ -1668,16 +1669,25 @@
         return "";
       }
 
-      return new Date(date)
-        .toLocaleDateString(
-          "en-US",
-          {
-            month: "long",
-            day: "numeric",
-            year: "numeric"
-          }
-        );
+      const parsed =
+        new Date(date);
 
+      if (
+        Number.isNaN(
+          parsed.getTime()
+        )
+      ) {
+        return "";
+      }
+
+      return parsed.toLocaleDateString(
+        "en-US",
+        {
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        }
+      );
     }
 
 
@@ -1689,7 +1699,10 @@
 
       const words =
         String(content)
-          .replace(/<[^>]*>/g, " ")
+          .replace(
+            /<[^>]*>/g,
+            " "
+          )
           .trim()
           .split(/\s+/)
           .filter(Boolean)
@@ -1698,17 +1711,38 @@
       const minutes =
         Math.max(
           1,
-          Math.ceil(words / 220)
+          Math.ceil(
+            words / 220
+          )
         );
 
       return `${minutes} min read`;
-
     }
 
 
-    /* ================================
+    function slugify(value) {
+
+      return String(value || "")
+        .toLowerCase()
+        .trim()
+        .replace(
+          /[^\w\s-]/g,
+          ""
+        )
+        .replace(
+          /\s+/g,
+          "-"
+        )
+        .replace(
+          /-+/g,
+          "-"
+        );
+    }
+
+
+    /* ========================================================
        READING PREFERENCES
-    ================================= */
+       ======================================================== */
 
     const articleContent =
       document.getElementById(
@@ -1722,7 +1756,7 @@
       );
 
 
-    const slider =
+    const fontSizeSlider =
       document.getElementById(
         "fontSizeSlider"
       );
@@ -1732,57 +1766,6 @@
       document.getElementById(
         "sizeValue"
       );
-
-
-    /*
-      Backwards compatible with the
-      old small / normal / large values.
-    */
-
-    let storedSize =
-      localStorage.getItem(
-        "hedReadingSize"
-      );
-
-
-    let currentSize = 19;
-
-
-    if (storedSize === "small") {
-      currentSize = 16;
-    }
-
-    else if (storedSize === "normal") {
-      currentSize = 19;
-    }
-
-    else if (storedSize === "large") {
-      currentSize = 23;
-    }
-
-    else if (
-      storedSize &&
-      !isNaN(Number(storedSize))
-    ) {
-      currentSize =
-        Number(storedSize);
-    }
-
-
-    currentSize =
-      Math.min(
-        30,
-        Math.max(
-          14,
-          currentSize
-        )
-      );
-
-
-    let currentFont =
-      localStorage.getItem(
-        "hedReadingFont"
-      ) || "serif";
 
 
     const fontMap = {
@@ -1796,6 +1779,12 @@
       palatino:
         'Palatino, "Book Antiqua", serif',
 
+      baskerville:
+        'Baskerville, "Times New Roman", serif',
+
+      times:
+        '"Times New Roman", Times, serif',
+
       sans:
         'Arial, Helvetica, sans-serif',
 
@@ -1808,60 +1797,65 @@
     };
 
 
-    if (!fontMap[currentFont]) {
+    let currentSize =
+      Number(
+        localStorage.getItem(
+          "hedReadingSize"
+        ) || 19
+      );
+
+
+    let currentFont =
+      localStorage.getItem(
+        "hedReadingFont"
+      ) || "serif";
+
+
+    if (
+      currentSize < 15 ||
+      currentSize > 30 ||
+      Number.isNaN(currentSize)
+    ) {
+      currentSize = 19;
+    }
+
+
+    if (
+      !fontMap[currentFont]
+    ) {
       currentFont = "serif";
     }
 
 
-    function applyReaderSettings() {
-
-      const size =
-        `${currentSize}px`;
+    function forceArticleFont() {
 
       const font =
         fontMap[currentFont];
 
-
-      /*
-        CSS variables control the whole
-        reader, including generated HTML.
-      */
-
-      articleContent.style.setProperty(
-        "--reader-size",
-        size
-      );
-
       articleContent.style.setProperty(
         "--reader-font",
-        font
-      );
-
-
-      articleContent.style.setProperty(
-        "font-family",
         font,
         "important"
       );
 
-
       articleContent.style.setProperty(
-        "font-size",
-        size,
+        "--reader-size",
+        `${currentSize}px`,
         "important"
       );
 
 
       /*
-        Generated content can contain
-        inline styles, so force the
-        reader preference onto it.
+        Supabase content may contain its own
+        inline styles or generated HTML.
+
+        Reapply the reader font directly to
+        every element so the font controls
+        actually work.
       */
 
-      document
-        .querySelectorAll(
-          "#articleContent, #articleContent *"
-        )
+      articleContent
+        .querySelectorAll("*")
         .forEach(element => {
 
           element.style.setProperty(
@@ -1876,41 +1870,69 @@
       if (hedNoteContent) {
 
         hedNoteContent.style.setProperty(
-          "--reader-size",
-          size
-        );
-
-        hedNoteContent.style.setProperty(
           "--reader-font",
-          font
-        );
-
-        hedNoteContent.style.setProperty(
-          "font-family",
           font,
           "important"
         );
 
         hedNoteContent.style.setProperty(
-          "font-size",
-          size,
+          "--reader-size",
+          `${currentSize}px`,
+          "important"
+        );
+
+      }
+
+    }
+
+
+    function updateSize() {
+
+      fontSizeSlider.value =
+        currentSize;
+
+      sizeValue.textContent =
+        `${currentSize}px`;
+
+
+      document.documentElement.style
+        .setProperty(
+          "--reader-size",
+          `${currentSize}px`
+        );
+
+
+      articleContent.style.setProperty(
+        "--reader-size",
+        `${currentSize}px`,
+        "important"
+      );
+
+
+      if (hedNoteContent) {
+
+        hedNoteContent.style.setProperty(
+          "--reader-size",
+          `${currentSize}px`,
           "important"
         );
 
       }
 
 
-      slider.value =
-        currentSize;
+      localStorage.setItem(
+        "hedReadingSize",
+        String(currentSize)
+      );
+
+    }
 
 
-      sizeValue.textContent =
-        `${currentSize}px`;
-
+    function updateFontButtons() {
 
       document
         .querySelectorAll(
-          ".font-choice"
+          "[data-font]"
         )
         .forEach(button => {
 
@@ -1922,31 +1944,30 @@
 
         });
 
-
-      localStorage.setItem(
-        "hedReadingSize",
-        currentSize
-      );
+    }
 
 
-      localStorage.setItem(
-        "hedReadingFont",
-        currentFont
-      );
+    function applyReadingPreferences() {
+
+      updateSize();
+
+      updateFontButtons();
+
+      forceArticleFont();
 
     }
 
 
-    slider.addEventListener(
+    fontSizeSlider.addEventListener(
       "input",
-      () => {
+      event => {
 
         currentSize =
           Number(
-            slider.value
+            event.target.value
           );
 
-        applyReaderSettings();
+        updateSize();
 
       }
     );
@@ -1954,7 +1975,7 @@
 
     document
       .querySelectorAll(
-        ".font-choice"
+        "[data-font]"
       )
       .forEach(button => {
 
@@ -1965,7 +1986,14 @@
             currentFont =
               button.dataset.font;
 
-            applyReaderSettings();
+            localStorage.setItem(
+              "hedReadingFont",
+              currentFont
+            );
+
+            updateFontButtons();
+
+            forceArticleFont();
 
           }
         );
@@ -1973,116 +2001,20 @@
       });
 
 
-    applyReaderSettings();
+    applyReadingPreferences();
 
 
-    /* ================================
-       IMAGE LIGHTBOX
-    ================================= */
-
-    const imageLightbox =
-      document.getElementById(
-        "imageLightbox"
-      );
-
-
-    const lightboxImage =
-      document.getElementById(
-        "lightboxImage"
-      );
-
-
-    function openLightbox(src, alt) {
-
-      if (!src) {
-        return;
-      }
-
-      lightboxImage.src = src;
-
-      lightboxImage.alt =
-        alt || "";
-
-      imageLightbox.classList.remove(
-        "hidden"
-      );
-
-      document.body.style.overflow =
-        "hidden";
-
-    }
-
-
-    function closeLightbox() {
-
-      imageLightbox.classList.add(
-        "hidden"
-      );
-
-      lightboxImage.src = "";
-
-      document.body.style.overflow =
-        "";
-
-    }
-
-
-    imageLightbox.addEventListener(
-      "click",
-      closeLightbox
-    );
-
-
-    lightboxImage.addEventListener(
-      "click",
-      event => {
-        event.stopPropagation();
-      }
-    );
-
-
-    document.addEventListener(
-      "keydown",
-      event => {
-
-        if (
-          event.key === "Escape"
-        ) {
-          closeLightbox();
-        }
-
-      }
-    );
-
-
-    document
-      .getElementById(
-        "heroImage"
-      )
-      .addEventListener(
-        "click",
-        event => {
-
-          openLightbox(
-            event.currentTarget.src,
-            event.currentTarget.alt
-          );
-
-        }
-      );
-
-
-    /* ================================
+    /* ========================================================
        LOAD JOURNAL ENTRY
-    ================================= */
+       ======================================================== */
 
     async function loadEntry() {
 
-      if (!entryId) {
+      if (!requestedEntry) {
 
-        document
-          .getElementById("loading")
-          .textContent =
+        document.getElementById(
+          "loading"
+        ).textContent =
           "No journal entry was selected.";
 
         return;
@@ -2106,11 +2038,14 @@
 
       if (error) {
 
-        console.error(error);
+        console.error(
+          "Journal loading error:",
+          error
+        );
 
-        document
-          .getElementById("loading")
-          .textContent =
+        document.getElementById(
+          "loading"
+        ).textContent =
           "Unable to load this journal entry.";
 
         return;
@@ -2122,19 +2057,84 @@
         data || [];
 
 
-      const currentIndex =
+      /*
+        First try ID.
+      */
+
+      let currentIndex =
         entries.findIndex(
           entry =>
             String(entry.id) ===
-            String(entryId)
+            String(requestedEntry)
         );
 
 
-      if (currentIndex === -1) {
+      /*
+        Then try slug fields.
+      */
 
-        document
-          .getElementById("loading")
-          .textContent =
+      if (
+        currentIndex === -1
+      ) {
+
+        currentIndex =
+          entries.findIndex(
+            entry => {
+
+              const possibleSlugs = [
+
+                entry.slug,
+
+                entry.entry_slug,
+
+                entry.entrySlug
+
+              ]
+              .filter(Boolean)
+              .map(slugify);
+
+
+              return possibleSlugs.includes(
+                slugify(
+                  requestedEntry
+                )
+              );
+
+            }
+          );
+
+      }
+
+
+      /*
+        Finally try the title.
+      */
+
+      if (
+        currentIndex === -1
+      ) {
+
+        currentIndex =
+          entries.findIndex(
+            entry =>
+              slugify(
+                entry.title
+              ) ===
+              slugify(
+                requestedEntry
+              )
+          );
+
+      }
+
+
+      if (
+        currentIndex === -1
+      ) {
+
+        document.getElementById(
+          "loading"
+        ).textContent =
           "Journal entry unavailable.";
 
         return;
@@ -2146,18 +2146,32 @@
         entries[currentIndex];
 
 
-      /* TITLE */
+      /*
+        IMPORTANT:
 
-      document
-        .getElementById(
-          "entryTitle"
-        )
-        .textContent =
+        From this point forward,
+        comments use the actual
+        Supabase entry ID.
+      */
+
+      currentEntryId =
+        entry.id;
+
+
+      /* ======================================================
+         TITLE
+         ====================================================== */
+
+      document.getElementById(
+        "entryTitle"
+      ).textContent =
         entry.title ||
         "Untitled Journal Entry";
 
 
-      /* SUBTITLE */
+      /* ======================================================
+         SUBTITLE
+         ====================================================== */
 
       const subtitle =
         entry.subtitle ||
@@ -2182,29 +2196,29 @@
       }
 
 
-      /* META */
+      /* ======================================================
+         META
+         ====================================================== */
 
-      document
-        .getElementById(
-          "entryDate"
-        )
-        .textContent =
+      document.getElementById(
+        "entryDate"
+      ).textContent =
         formatDate(
           entry.published_at
         );
 
 
-      document
-        .getElementById(
-          "readTime"
-        )
-        .textContent =
+      document.getElementById(
+        "readTime"
+      ).textContent =
         calculateReadTime(
           entry.content
         );
 
 
-      /* IMAGE */
+      /* ======================================================
+         HERO IMAGE
+         ====================================================== */
 
       if (entry.image_url) {
 
@@ -2212,7 +2226,6 @@
           document.getElementById(
             "heroWrap"
           );
-
 
         const heroImage =
           document.getElementById(
@@ -2246,10 +2259,8 @@
               "imageCaption"
             );
 
-
           captionElement.textContent =
             caption;
-
 
           captionElement.classList.remove(
             "hidden"
@@ -2260,7 +2271,9 @@
       }
 
 
-      /* CONTENT */
+      /* ======================================================
+         ARTICLE CONTENT
+         ====================================================== */
 
       articleContent.innerHTML =
         entry.content ||
@@ -2268,35 +2281,16 @@
 
 
       /*
-        Reapply reader settings AFTER
-        Supabase content is inserted.
+        Apply the selected font AFTER
+        Supabase HTML has been inserted.
       */
 
-      applyReaderSettings();
+      forceArticleFont();
 
 
-      /* ARTICLE IMAGES */
-
-      articleContent
-        .querySelectorAll("img")
-        .forEach(image => {
-
-          image.addEventListener(
-            "click",
-            () => {
-
-              openLightbox(
-                image.src,
-                image.alt
-              );
-
-            }
-          );
-
-        });
-
-
-      /* NOTE */
+      /* ======================================================
+         HED NOTE
+         ====================================================== */
 
       const note =
         entry.author_reflection ||
@@ -2305,14 +2299,11 @@
 
       if (note) {
 
-        document
-          .getElementById(
-            "hedNote"
-          )
-          .classList.remove(
-            "hidden"
-          );
-
+        document.getElementById(
+          "hedNote"
+        ).classList.remove(
+          "hidden"
+        );
 
         hedNoteContent.textContent =
           note;
@@ -2320,7 +2311,9 @@
       }
 
 
-      /* PREVIOUS */
+      /* ======================================================
+         PREVIOUS ENTRY
+         ====================================================== */
 
       const previous =
         entries[
@@ -2337,14 +2330,14 @@
 
 
         previousCard.href =
-          `journal-entry.html?id=${previous.id}`;
+          `journal-entry.html?id=${encodeURIComponent(
+            previous.id
+          )}`;
 
 
-        document
-          .getElementById(
-            "previousTitle"
-          )
-          .textContent =
+        document.getElementById(
+          "previousTitle"
+        ).textContent =
           previous.title ||
           "Previous Entry";
 
@@ -2356,7 +2349,9 @@
       }
 
 
-      /* NEXT */
+      /* ======================================================
+         NEXT ENTRY
+         ====================================================== */
 
       const next =
         entries[
@@ -2373,14 +2368,14 @@
 
 
         nextCard.href =
-          `journal-entry.html?id=${next.id}`;
+          `journal-entry.html?id=${encodeURIComponent(
+            next.id
+          )}`;
 
 
-        document
-          .getElementById(
-            "nextTitle"
-          )
-          .textContent =
+        document.getElementById(
+          "nextTitle"
+        ).textContent =
           next.title ||
           "Next Entry";
 
@@ -2392,39 +2387,44 @@
       }
 
 
-      document
-        .getElementById(
-          "loading"
-        )
-        .classList.add(
-          "hidden"
-        );
+      /* ======================================================
+         SHOW PAGE
+         ====================================================== */
+
+      document.getElementById(
+        "loading"
+      ).classList.add(
+        "hidden"
+      );
 
 
-      document
-        .getElementById(
-          "entryPage"
-        )
-        .classList.remove(
-          "hidden"
-        );
+      document.getElementById(
+        "entryPage"
+      ).classList.remove(
+        "hidden"
+      );
 
 
-      applyReaderSettings();
+      applyReadingPreferences();
 
 
       loadComments(
-        entry.id
+        currentEntryId
       );
 
     }
 
 
-    /* ================================
+    /* ========================================================
        COMMENTS
-    ================================= */
+       ======================================================== */
 
     async function loadComments(id) {
+
+      if (!id) {
+        return;
+      }
+
 
       const {
         data,
@@ -2452,7 +2452,10 @@
 
       if (error) {
 
-        console.error(error);
+        console.error(
+          "Comment loading error:",
+          error
+        );
 
         return;
 
@@ -2463,13 +2466,9 @@
         data || [];
 
 
-      const responseCount =
-        document.getElementById(
-          "responseCount"
-        );
-
-
-      responseCount.textContent =
+      document.getElementById(
+        "responseCount"
+      ).textContent =
         `${comments.length} ${
           comments.length === 1
             ? "response"
@@ -2536,9 +2535,9 @@
     }
 
 
-    /* ================================
+    /* ========================================================
        COMMENT FORM
-    ================================= */
+       ======================================================== */
 
     const commentName =
       document.getElementById(
@@ -2553,9 +2552,7 @@
       commentName.value =
         window.readerNickname;
 
-    }
-
-    else {
+    } else {
 
       commentName.value =
         "Reader";
@@ -2602,6 +2599,16 @@
           }
 
 
+          if (!currentEntryId) {
+
+            message.textContent =
+              "This entry is not ready yet.";
+
+            return;
+
+          }
+
+
           message.textContent =
             "Posting...";
 
@@ -2616,7 +2623,7 @@
                 "journal",
 
               target_id:
-                entryId,
+                currentEntryId,
 
               name:
                 name ||
@@ -2631,6 +2638,7 @@
           if (error) {
 
             console.error(
+              "Comment posting error:",
               error
             );
 
@@ -2642,11 +2650,9 @@
           }
 
 
-          document
-            .getElementById(
-              "commentContent"
-            )
-            .value = "";
+          document.getElementById(
+            "commentContent"
+          ).value = "";
 
 
           message.textContent =
@@ -2654,61 +2660,270 @@
 
 
           loadComments(
-            entryId
+            currentEntryId
           );
 
         }
       );
 
 
-    /* ================================
+    /* ========================================================
        READING PROGRESS
-    ================================= */
+       ======================================================== */
+
+    function updateReadingProgress() {
+
+      const scrollTop =
+        window.scrollY;
+
+
+      const documentHeight =
+        document.documentElement
+          .scrollHeight -
+        window.innerHeight;
+
+
+      const progress =
+        documentHeight > 0
+          ? (
+              scrollTop /
+              documentHeight
+            ) * 100
+          : 0;
+
+
+      document.getElementById(
+        "readingProgress"
+      ).style.width =
+        `${progress}%`;
+
+    }
+
 
     window.addEventListener(
       "scroll",
-      () => {
-
-        const scrollTop =
-          window.scrollY;
-
-
-        const documentHeight =
-          document.documentElement
-            .scrollHeight -
-          window.innerHeight;
+      updateReadingProgress,
+      {
+        passive: true
+      }
+    );
 
 
-        const progress =
-          documentHeight > 0
-            ? (
-                scrollTop /
-                documentHeight
-              ) * 100
-            : 0;
+    /* ========================================================
+       COPY PROTECTION
+       ======================================================== */
+
+    const protectedArticle =
+      document.getElementById(
+        "articleContent"
+      );
 
 
-        document
-          .getElementById(
-            "readingProgress"
-          )
-          .style.width =
-          `${progress}%`;
+    /*
+      Prevent selecting text inside
+      the article.
+    */
+
+    protectedArticle.addEventListener(
+      "selectstart",
+      event => {
+
+        event.preventDefault();
 
       }
     );
 
 
-    /* ================================
+    /*
+      Prevent right-click inside
+      the article.
+    */
+
+    protectedArticle.addEventListener(
+      "contextmenu",
+      event => {
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /*
+      Prevent copying article text.
+    */
+
+    protectedArticle.addEventListener(
+      "copy",
+      event => {
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /*
+      Prevent keyboard shortcuts
+      commonly used for copying.
+    */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        const target =
+          event.target;
+
+
+        const insideArticle =
+          target.closest &&
+          target.closest(
+            "#articleContent"
+          );
+
+
+        if (!insideArticle) {
+          return;
+        }
+
+
+        const key =
+          event.key.toLowerCase();
+
+
+        if (
+          (event.ctrlKey ||
+            event.metaKey) &&
+          (
+            key === "c" ||
+            key === "a" ||
+            key === "x" ||
+            key === "s" ||
+            key === "u"
+          )
+        ) {
+
+          event.preventDefault();
+
+        }
+
+
+        if (
+          event.shiftKey &&
+          event.key === "F10"
+        ) {
+
+          event.preventDefault();
+
+        }
+
+      }
+    );
+
+
+    /*
+      Prevent dragging article images.
+    */
+
+    protectedArticle.addEventListener(
+      "dragstart",
+      event => {
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /* ========================================================
+       HERO IMAGE LIGHTBOX
+       ======================================================== */
+
+    const heroImage =
+      document.getElementById(
+        "heroImage"
+      );
+
+
+    const lightbox =
+      document.getElementById(
+        "imageLightbox"
+      );
+
+
+    const lightboxImage =
+      document.getElementById(
+        "lightboxImage"
+      );
+
+
+    heroImage.addEventListener(
+      "click",
+      () => {
+
+        if (!heroImage.src) {
+          return;
+        }
+
+
+        lightboxImage.src =
+          heroImage.src;
+
+
+        lightboxImage.alt =
+          heroImage.alt;
+
+
+        lightbox.classList.remove(
+          "hidden"
+        );
+
+      }
+    );
+
+
+    lightbox.addEventListener(
+      "click",
+      () => {
+
+        lightbox.classList.add(
+          "hidden"
+        );
+
+        lightboxImage.src = "";
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          lightbox.classList.add(
+            "hidden"
+          );
+
+          lightboxImage.src = "";
+
+        }
+
+      }
+    );
+
+
+    /* ========================================================
        START
-    ================================= */
+       ======================================================== */
 
     loadEntry();
 
-
   </script>
 
-
 </body>
-
 </html>
