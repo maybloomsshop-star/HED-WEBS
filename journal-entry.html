@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +7,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Lora:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
 
     <meta
         name="viewport"
@@ -30,9 +33,15 @@
 
         body {
             margin: 0;
+
             background: #f3efe9;
             color: #29221e;
-            font-family: Arial, Helvetica, sans-serif;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
             -webkit-font-smoothing: antialiased;
         }
 
@@ -64,6 +73,7 @@
 
         .reading-progress {
             position: fixed;
+
             top: 0;
             left: 0;
 
@@ -83,7 +93,7 @@
         .journal-header {
             width: 100%;
 
-            padding: 25px 5vw;
+            padding: 22px 5vw;
 
             display: flex;
             align-items: center;
@@ -114,6 +124,7 @@
 
         .brand-subtitle {
             font-size: 8px;
+
             letter-spacing: 0.18em;
 
             color: #8c7b70;
@@ -122,7 +133,7 @@
         }
 
         .back-link {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
 
             letter-spacing: 0.08em;
@@ -155,13 +166,13 @@
             margin: 0 auto;
 
             padding:
-                105px
+                82px
                 0
-                88px;
+                65px;
         }
 
         .journal-kicker {
-            margin: 0 0 20px;
+            margin: 0 0 16px;
 
             font-size: 9px;
             font-weight: 700;
@@ -183,22 +194,22 @@
 
             font-size:
                 clamp(
-                    58px,
-                    9vw,
-                    105px
+                    50px,
+                    8vw,
+                    88px
                 );
 
-            line-height: 0.88;
+            line-height: 0.92;
 
             font-weight: 400;
 
-            letter-spacing: -0.045em;
+            letter-spacing: -0.04em;
         }
 
         .journal-description {
             max-width: 540px;
 
-            margin: 31px 0 0;
+            margin: 25px 0 0;
 
             font-family:
                 Georgia,
@@ -206,16 +217,17 @@
                 serif;
 
             font-size: 17px;
-            line-height: 1.75;
+
+            line-height: 1.7;
 
             color: #776960;
         }
 
         .journal-mark {
-            width: 46px;
+            width: 42px;
             height: 1px;
 
-            margin-top: 45px;
+            margin-top: 35px;
 
             background: #907c70;
         }
@@ -234,28 +246,31 @@
 
             margin:
                 0 auto
-                120px;
+                90px;
         }
 
         .journal-preview {
             display: grid;
 
             grid-template-columns:
-                145px
+                125px
                 minmax(0, 1fr);
 
-            gap: 45px;
+            gap: 38px;
 
             width: 100%;
 
             padding:
-                43px
+                34px
                 0
-                48px;
+                38px;
 
             border-top:
                 1px solid
                 rgba(73, 59, 51, 0.17);
+
+            transition:
+                padding 0.2s ease;
         }
 
         .journal-preview:last-child {
@@ -265,12 +280,12 @@
         }
 
         .journal-preview:hover {
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 7px;
+            padding-right: 7px;
         }
 
         .preview-meta {
-            padding-top: 5px;
+            padding-top: 4px;
         }
 
         .preview-date {
@@ -291,7 +306,7 @@
         .preview-number {
             display: block;
 
-            margin-top: 14px;
+            margin-top: 12px;
 
             font-family:
                 Georgia,
@@ -313,22 +328,22 @@
 
             font-size:
                 clamp(
-                    28px,
-                    4vw,
-                    43px
+                    27px,
+                    3.5vw,
+                    39px
                 );
 
-            line-height: 1.10;
+            line-height: 1.12;
 
             font-weight: 400;
 
-            letter-spacing: -0.025em;
+            letter-spacing: -0.02em;
         }
 
         .preview-excerpt {
             max-width: 670px;
 
-            margin: 17px 0 0;
+            margin: 14px 0 0;
 
             font-family:
                 Georgia,
@@ -336,7 +351,8 @@
                 serif;
 
             font-size: 15px;
-            line-height: 1.8;
+
+            line-height: 1.75;
 
             color: #756961;
         }
@@ -344,7 +360,7 @@
         .preview-read {
             display: inline-block;
 
-            margin-top: 22px;
+            margin-top: 18px;
 
             font-size: 8px;
             font-weight: 700;
@@ -357,7 +373,7 @@
         }
 
         .journal-status {
-            padding: 45px 0;
+            padding: 38px 0;
 
             border-top:
                 1px solid
@@ -373,6 +389,7 @@
                 serif;
 
             font-size: 15px;
+
             line-height: 1.7;
 
             color: #8c7d74;
@@ -395,16 +412,21 @@
             width:
                 min(
                     calc(100% - 10vw),
-                    920px
+                    850px
                 );
 
             margin: 0 auto;
 
             padding:
-                75px
+                48px
                 0
-                100px;
+                70px;
         }
+
+
+        /* =====================================================
+           READER TOP
+        ===================================================== */
 
         .reader-top {
             width: 100%;
@@ -413,11 +435,11 @@
             align-items: center;
             justify-content: space-between;
 
-            margin-bottom: 80px;
+            margin-bottom: 45px;
         }
 
         .reader-back {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
 
             letter-spacing: 0.08em;
@@ -427,8 +449,12 @@
             text-transform: uppercase;
         }
 
+        .reader-back:hover {
+            color: #29221e;
+        }
+
         .reader-label {
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 700;
 
             letter-spacing: 0.10em;
@@ -444,15 +470,15 @@
         ===================================================== */
 
         .reader-header {
-            max-width: 850px;
+            max-width: 720px;
 
-            margin-bottom: 45px;
+            margin-bottom: 28px;
         }
 
         .reader-date {
-            margin: 0 0 14px;
+            margin: 0 0 10px;
 
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 700;
 
             letter-spacing: 0.12em;
@@ -472,16 +498,16 @@
 
             font-size:
                 clamp(
-                    34px,
-                    3.8vw,
-                    52px
+                    32px,
+                    4vw,
+                    42px
                 );
 
-            line-height: 1.02;
+            line-height: 1.08;
 
             font-weight: 400;
 
-            letter-spacing: -0.042em;
+            letter-spacing: -0.025em;
         }
 
         .reader-meta {
@@ -489,18 +515,18 @@
             align-items: center;
             gap: 10px;
 
-            margin-top: 18px;
+            margin-top: 13px;
 
-            font-size: 14px;
+            font-size: 13px;
 
             color: #756961;
         }
 
         .reader-rule {
-            width: 38px;
+            width: 32px;
             height: 1px;
 
-            margin-top: 30px;
+            margin-top: 20px;
 
             background: #917d70;
         }
@@ -518,9 +544,9 @@
             height: auto;
 
             margin:
-                50px
+                30px
                 auto
-                60px;
+                38px;
         }
 
 
@@ -534,15 +560,15 @@
             margin:
                 0
                 auto
-                38px;
+                28px;
 
             padding:
-                11px
-                13px;
+                8px
+                10px;
 
             display: flex;
             align-items: center;
-            gap: 9px;
+            gap: 7px;
 
             flex-wrap: wrap;
 
@@ -559,9 +585,9 @@
         }
 
         .reading-preferences-label {
-            margin-right: 5px;
+            margin-right: 4px;
 
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 700;
 
             letter-spacing: 0.08em;
@@ -572,12 +598,12 @@
         }
 
         .reading-button {
-            min-width: 40px;
-            min-height: 32px;
+            min-width: 38px;
+            min-height: 29px;
 
             padding:
-                6px
-                10px;
+                5px
+                9px;
 
             border:
                 1px solid
@@ -589,12 +615,17 @@
 
             cursor: pointer;
 
-            font-size: 12px;
+            font-size: 11px;
+
+            transition:
+                background 0.15s ease,
+                border-color 0.15s ease;
         }
 
         .reading-button:hover,
         .reading-button.active {
             background: #e7ded5;
+
             border-color: #9b897d;
         }
 
@@ -605,7 +636,7 @@
 
         .reader-content {
             width: 100%;
-            max-width: 720px;
+            max-width: 680px;
 
             margin: 0 auto;
 
@@ -614,42 +645,57 @@
                 "Times New Roman",
                 serif;
 
-            font-size: 21px;
+            font-size: 22px;
 
-            line-height: 1.9;
+            line-height: 1.82;
 
             color: #403731;
 
             overflow-wrap: break-word;
         }
 
-        .reader-content.serif {
+
+        /* IMPORTANT:
+           These apply the selected font to the actual
+           article elements too.
+        */
+
+        .reader-content.serif,
+        .reader-content.serif * {
             font-family:
                 Georgia,
                 "Times New Roman",
                 serif;
         }
 
-        .reader-content.sans {
+        .reader-content.sans,
+        .reader-content.sans * {
             font-family:
                 Arial,
                 Helvetica,
                 sans-serif;
         }
 
-        .reader-content.lora {
+        .reader-content.lora,
+        .reader-content.lora * {
             font-family:
                 "Lora",
                 Georgia,
                 serif;
         }
 
-        .reader-content.cormorant {
+        .reader-content.cormorant,
+        .reader-content.cormorant * {
             font-family:
                 "Cormorant Garamond",
                 Georgia,
                 serif;
         }
+
+
+        /* =====================================================
+           ARTICLE ELEMENTS
+        ===================================================== */
 
         .reader-content,
         .reader-content * {
@@ -661,7 +707,7 @@
             margin:
                 0
                 0
-                1.55em;
+                1.45em;
         }
 
         .reader-content div {
@@ -673,28 +719,46 @@
         .reader-content h3,
         .reader-content h4 {
             color: #29221e;
+
             line-height: 1.25;
+
             font-weight: 400;
         }
 
         .reader-content h1 {
-            font-size: 36px;
-            margin: 1.8em 0 0.75em;
+            font-size: 34px;
+
+            margin:
+                1.55em
+                0
+                0.65em;
         }
 
         .reader-content h2 {
-            font-size: 31px;
-            margin: 1.8em 0 0.75em;
+            font-size: 29px;
+
+            margin:
+                1.55em
+                0
+                0.65em;
         }
 
         .reader-content h3 {
-            font-size: 26px;
-            margin: 1.7em 0 0.7em;
+            font-size: 25px;
+
+            margin:
+                1.5em
+                0
+                0.6em;
         }
 
         .reader-content h4 {
             font-size: 21px;
-            margin: 1.7em 0 0.7em;
+
+            margin:
+                1.5em
+                0
+                0.6em;
         }
 
         .reader-content strong,
@@ -703,13 +767,15 @@
         }
 
         .reader-content blockquote {
-            margin: 2.2em 0;
+            margin:
+                1.9em
+                0;
 
             padding:
-                5px
+                4px
                 0
-                5px
-                27px;
+                4px
+                24px;
 
             border-left:
                 1px solid
@@ -720,12 +786,13 @@
 
         .reader-content ul,
         .reader-content ol {
-            margin: 1.5em 0;
-            padding-left: 1.5em;
+            margin: 1.4em 0;
+
+            padding-left: 1.45em;
         }
 
         .reader-content li {
-            margin-bottom: 0.65em;
+            margin-bottom: 0.6em;
         }
 
         .reader-content img {
@@ -736,13 +803,15 @@
             height: auto;
 
             margin:
-                2.7em
+                2.2em
                 auto;
         }
 
         .reader-content a {
             color: #6f5b50;
+
             text-decoration: underline;
+
             text-underline-offset: 3px;
         }
 
@@ -753,12 +822,12 @@
 
         .end-of-entry {
             width: 100%;
-            max-width: 720px;
+            max-width: 680px;
 
             margin:
-                70px
+                45px
                 auto
-                45px;
+                32px;
 
             text-align: center;
         }
@@ -767,7 +836,10 @@
             width: 42px;
             height: 1px;
 
-            margin: 0 auto 17px;
+            margin:
+                0
+                auto
+                15px;
 
             background: #a18e82;
         }
@@ -792,23 +864,25 @@
 
         .reader-navigation {
             width: 100%;
-            max-width: 720px;
+            max-width: 680px;
 
             margin:
                 0
                 auto
-                90px;
+                65px;
 
             display: flex;
+
             justify-content: space-between;
-            gap: 25px;
+
+            gap: 20px;
         }
 
         .reader-navigation a {
             flex: 1;
 
             padding:
-                22px
+                18px
                 0;
 
             border-top:
@@ -828,7 +902,7 @@
         .reader-nav-label {
             display: block;
 
-            margin-bottom: 8px;
+            margin-bottom: 7px;
 
             font-size: 8px;
             font-weight: 700;
@@ -846,7 +920,8 @@
                 "Times New Roman",
                 serif;
 
-            font-size: 19px;
+            font-size: 18px;
+
             line-height: 1.35;
         }
 
@@ -859,36 +934,41 @@
             width:
                 min(
                     calc(100% - 10vw),
-                    720px
+                    680px
                 );
 
             margin:
                 0
                 auto
-                110px;
+                80px;
         }
 
         .comments-heading {
-            margin: 0 0 30px;
+            margin:
+                0
+                0
+                25px;
 
             font-family:
                 Georgia,
                 "Times New Roman",
                 serif;
 
-            font-size: 30px;
+            font-size: 27px;
+
             font-weight: 400;
         }
 
         .comment-count {
-            margin-left: 8px;
+            margin-left: 7px;
 
             font-family:
                 Arial,
                 Helvetica,
                 sans-serif;
 
-            font-size: 10px;
+            font-size: 9px;
+
             font-weight: 700;
 
             letter-spacing: 0.08em;
@@ -902,7 +982,7 @@
             padding:
                 0
                 0
-                35px;
+                30px;
 
             border-bottom:
                 1px solid
@@ -936,7 +1016,7 @@
         }
 
         .comment-textarea {
-            min-height: 130px;
+            min-height: 125px;
 
             padding: 13px;
 
@@ -951,10 +1031,10 @@
         }
 
         .comment-submit {
-            margin-top: 13px;
+            margin-top: 12px;
 
             padding:
-                10px
+                9px
                 0;
 
             border: 0;
@@ -963,7 +1043,8 @@
 
             cursor: pointer;
 
-            font-size: 12px;
+            font-size: 11px;
+
             font-weight: 700;
 
             letter-spacing: 0.10em;
@@ -978,7 +1059,7 @@
         }
 
         .comment-status {
-            margin-top: 15px;
+            margin-top: 13px;
 
             font-size: 12px;
 
@@ -1001,6 +1082,7 @@
             cursor: pointer;
 
             font-size: 10px;
+
             font-weight: 700;
 
             letter-spacing: 0.08em;
@@ -1014,19 +1096,21 @@
 
         .comment-delete:disabled {
             opacity: .5;
+
             cursor: wait;
         }
 
         .comment-list {
             display: flex;
+
             flex-direction: column;
         }
 
         .comment {
             padding:
-                27px
+                24px
                 0
-                29px;
+                26px;
 
             border-bottom:
                 1px solid
@@ -1035,16 +1119,19 @@
 
         .comment-meta {
             display: flex;
+
             align-items: baseline;
+
             gap: 12px;
 
-            margin-bottom: 10px;
+            margin-bottom: 9px;
         }
 
         .comment-name {
             margin: 0;
 
             font-size: 13px;
+
             font-weight: 700;
 
             color: #4f4037;
@@ -1067,11 +1154,13 @@
                 serif;
 
             font-size: 16px;
+
             line-height: 1.75;
 
             color: #65574f;
 
             white-space: pre-wrap;
+
             overflow-wrap: break-word;
         }
 
@@ -1084,24 +1173,28 @@
             width:
                 min(
                     calc(100% - 10vw),
-                    920px
+                    850px
                 );
 
             margin:
                 0
                 auto
-                100px;
+                75px;
         }
 
         .more-journal-title {
-            margin: 0 0 25px;
+            margin:
+                0
+                0
+                22px;
 
             font-family:
                 Georgia,
                 "Times New Roman",
                 serif;
 
-            font-size: 28px;
+            font-size: 26px;
+
             font-weight: 400;
         }
 
@@ -1114,14 +1207,14 @@
                     minmax(0, 1fr)
                 );
 
-            gap: 20px;
+            gap: 18px;
         }
 
         .more-journal-card {
             padding:
-                24px
+                21px
                 0
-                28px;
+                25px;
 
             border-top:
                 1px solid
@@ -1130,17 +1223,24 @@
             border-bottom:
                 1px solid
                 rgba(73,59,51,0.17);
+
+            transition:
+                padding 0.2s ease;
         }
 
         .more-journal-card:hover {
-            padding-left: 7px;
-            padding-right: 7px;
+            padding-left: 6px;
+            padding-right: 6px;
         }
 
         .more-journal-card-date {
-            margin: 0 0 11px;
+            margin:
+                0
+                0
+                9px;
 
             font-size: 8px;
+
             font-weight: 700;
 
             letter-spacing: 0.14em;
@@ -1158,8 +1258,10 @@
                 "Times New Roman",
                 serif;
 
-            font-size: 21px;
+            font-size: 20px;
+
             line-height: 1.25;
+
             font-weight: 400;
         }
 
@@ -1172,9 +1274,9 @@
             width: 100%;
 
             padding:
-                30px
+                25px
                 5vw
-                40px;
+                35px;
 
             border-top:
                 1px solid
@@ -1187,6 +1289,7 @@
             margin: 0;
 
             font-size: 9px;
+
             font-weight: 700;
 
             letter-spacing: 0.14em;
@@ -1205,7 +1308,7 @@
 
             .journal-header {
                 padding:
-                    20px
+                    19px
                     5vw;
             }
 
@@ -1213,28 +1316,31 @@
                 font-size: 11px;
             }
 
+
+            /* INDEX */
+
             .journal-intro {
                 padding:
-                    70px
+                    60px
                     0
-                    60px;
+                    50px;
             }
 
             .journal-title {
-                font-size: 62px;
+                font-size: 55px;
             }
 
             .journal-list {
-                margin-bottom: 70px;
+                margin-bottom: 60px;
             }
 
             .journal-preview {
                 display: block;
 
                 padding:
-                    31px
+                    28px
                     0
-                    36px;
+                    33px;
             }
 
             .journal-preview:hover {
@@ -1244,7 +1350,8 @@
 
             .preview-meta {
                 padding: 0;
-                margin-bottom: 14px;
+
+                margin-bottom: 12px;
             }
 
             .preview-number {
@@ -1252,44 +1359,58 @@
             }
 
             .preview-title {
-                font-size: 30px;
+                font-size: 29px;
             }
 
             .preview-excerpt {
                 font-size: 15px;
             }
 
+
+            /* READER */
+
             .reader-shell {
                 padding:
-                    58px
+                    40px
                     0
-                    80px;
+                    60px;
             }
 
             .reader-top {
-                margin-bottom: 65px;
-            }
-
-            .reader-title {
-                font-size: 45px;
-            }
-
-            .reader-header {
                 margin-bottom: 40px;
             }
 
+            .reader-title {
+                font-size: 34px;
+            }
+
+            .reader-header {
+                margin-bottom: 24px;
+            }
+
             .reader-content {
-                font-size: 18px;
+                font-size: 19px;
+
                 line-height: 1.85;
             }
 
+
+            /* PREFERENCES */
+
             .reading-preferences {
-                gap: 7px;
+                gap: 6px;
+
+                margin-bottom: 24px;
             }
 
             .reading-preferences-label {
                 width: 100%;
+
+                margin-bottom: 2px;
             }
+
+
+            /* NAVIGATION */
 
             .reader-navigation {
                 display: block;
@@ -1298,13 +1419,19 @@
             .reader-navigation a {
                 display: block;
 
-                margin-bottom: 15px;
+                margin-bottom: 13px;
             }
+
+
+            /* COMMENTS */
 
             .comments-section {
                 width:
                     calc(100% - 10vw);
             }
+
+
+            /* MORE JOURNAL */
 
             .more-journal-grid {
                 grid-template-columns: 1fr;
@@ -1420,6 +1547,8 @@
         <article class="reader-shell">
 
 
+            <!-- READER TOP -->
+
             <div class="reader-top">
 
                 <a
@@ -1437,6 +1566,8 @@
 
             </div>
 
+
+            <!-- READER HEADER -->
 
             <header class="reader-header">
 
@@ -1463,6 +1594,8 @@
             </header>
 
 
+            <!-- IMAGE -->
+
             <img
                 id="readerImage"
                 class="reader-image"
@@ -1481,6 +1614,7 @@
                     Reading Preferences
                 </span>
 
+
                 <button
                     type="button"
                     class="reading-button"
@@ -1488,6 +1622,7 @@
                 >
                     A−
                 </button>
+
 
                 <button
                     type="button"
@@ -1497,6 +1632,7 @@
                     A
                 </button>
 
+
                 <button
                     type="button"
                     class="reading-button"
@@ -1504,6 +1640,7 @@
                 >
                     A+
                 </button>
+
 
                 <button
                     type="button"
@@ -1513,6 +1650,7 @@
                     Serif
                 </button>
 
+
                 <button
                     type="button"
                     class="reading-button"
@@ -1521,6 +1659,7 @@
                     Sans
                 </button>
 
+
                 <button
                     type="button"
                     class="reading-button"
@@ -1528,6 +1667,7 @@
                 >
                     Lora
                 </button>
+
 
                 <button
                     type="button"
@@ -1803,6 +1943,7 @@
 
     let currentUser = null;
 
+
     async function refreshCurrentUser() {
 
         const {
@@ -1814,6 +1955,7 @@
             data?.user || null;
 
         return currentUser;
+
     }
 
 
@@ -1827,6 +1969,7 @@
             return;
         }
 
+
         try {
 
             const {
@@ -1834,6 +1977,7 @@
                 error
             } =
                 await supabaseClient.auth.getUser();
+
 
             if (error) {
 
@@ -1843,10 +1987,13 @@
                 );
 
                 return;
+
             }
+
 
             const user =
                 data?.user;
+
 
             const nickname =
                 String(
@@ -1855,6 +2002,7 @@
                     user?.user_metadata?.name ||
                     ""
                 ).trim();
+
 
             if (nickname) {
 
@@ -1866,7 +2014,9 @@
 
                 commentName.readOnly =
                     true;
+
             }
+
 
         } catch (error) {
 
@@ -1901,18 +2051,23 @@
             return "";
         }
 
+
         const date =
             new Date(
                 dateString
             );
+
 
         if (
             Number.isNaN(
                 date.getTime()
             )
         ) {
+
             return "";
+
         }
+
 
         return date.toLocaleDateString(
             undefined,
@@ -1922,6 +2077,7 @@
                 day: "numeric"
             }
         );
+
     }
 
 
@@ -1938,13 +2094,16 @@
                 "div"
             );
 
+
         temporary.innerHTML =
             content || "";
+
 
         const text =
             temporary.textContent ||
             temporary.innerText ||
             "";
+
 
         const words =
             text
@@ -1953,12 +2112,14 @@
                 .filter(Boolean)
                 .length;
 
+
         return Math.max(
             1,
             Math.ceil(
                 words / 200
             )
         );
+
     }
 
 
@@ -1971,6 +2132,7 @@
         journalList.innerHTML =
             "";
 
+
         if (
             !journalEntries.length
         ) {
@@ -1980,17 +2142,22 @@
                     "div"
                 );
 
+
             empty.className =
                 "journal-status";
 
+
             empty.textContent =
                 "No journal entries yet.";
+
 
             journalList.appendChild(
                 empty
             );
 
+
             return;
+
         }
 
 
@@ -2005,11 +2172,14 @@
                         "a"
                     );
 
+
                 link.href =
                     "#";
 
+
                 link.className =
                     "journal-preview";
+
 
                 link.addEventListener(
                     "click",
@@ -2030,6 +2200,7 @@
                         "div"
                     );
 
+
                 meta.className =
                     "preview-meta";
 
@@ -2039,8 +2210,10 @@
                         "p"
                     );
 
+
                 date.className =
                     "preview-date";
+
 
                 date.textContent =
                     formatDate(
@@ -2053,8 +2226,10 @@
                         "span"
                     );
 
+
                 number.className =
                     "preview-number";
+
 
                 number.textContent =
                     String(
@@ -2083,8 +2258,10 @@
                         "h2"
                     );
 
+
                 title.className =
                     "preview-title";
+
 
                 title.textContent =
                     entry.title ||
@@ -2096,21 +2273,26 @@
                         "p"
                     );
 
+
                 excerpt.className =
                     "preview-excerpt";
+
 
                 const temporary =
                     document.createElement(
                         "div"
                     );
 
+
                 temporary.innerHTML =
                     entry.content || "";
+
 
                 const plainText =
                     temporary.textContent ||
                     temporary.innerText ||
                     "";
+
 
                 excerpt.textContent =
                     plainText
@@ -2130,8 +2312,10 @@
                         "span"
                     );
 
+
                 read.className =
                     "preview-read";
+
 
                 read.textContent =
                     "Read entry →";
@@ -2165,6 +2349,7 @@
 
             }
         );
+
     }
 
 
@@ -2179,10 +2364,12 @@
         readerNavigation.innerHTML =
             "";
 
+
         const older =
             journalEntries[
                 currentIndex + 1
             ];
+
 
         const newer =
             journalEntries[
@@ -2197,8 +2384,10 @@
                     "a"
                 );
 
+
             link.href =
                 "#";
+
 
             link.addEventListener(
                 "click",
@@ -2219,8 +2408,10 @@
                     "span"
                 );
 
+
             label.className =
                 "reader-nav-label";
+
 
             label.textContent =
                 "Newer entry";
@@ -2231,8 +2422,10 @@
                     "span"
                 );
 
+
             title.className =
                 "reader-nav-title";
+
 
             title.textContent =
                 newer.title ||
@@ -2247,9 +2440,11 @@
                 title
             );
 
+
             readerNavigation.appendChild(
                 link
             );
+
         }
 
 
@@ -2260,8 +2455,10 @@
                     "a"
                 );
 
+
             link.href =
                 "#";
+
 
             link.addEventListener(
                 "click",
@@ -2282,8 +2479,10 @@
                     "span"
                 );
 
+
             label.className =
                 "reader-nav-label";
+
 
             label.textContent =
                 "Older entry";
@@ -2294,8 +2493,10 @@
                     "span"
                 );
 
+
             title.className =
                 "reader-nav-title";
+
 
             title.textContent =
                 older.title ||
@@ -2310,9 +2511,11 @@
                 title
             );
 
+
             readerNavigation.appendChild(
                 link
             );
+
         }
 
     }
@@ -2328,6 +2531,7 @@
 
         moreJournalGrid.innerHTML =
             "";
+
 
         const others =
             journalEntries
@@ -2361,11 +2565,14 @@
                         "a"
                     );
 
+
                 link.href =
                     "#";
 
+
                 link.className =
                     "more-journal-card";
+
 
                 link.addEventListener(
                     "click",
@@ -2386,8 +2593,10 @@
                         "p"
                     );
 
+
                 date.className =
                     "more-journal-card-date";
+
 
                 date.textContent =
                     formatDate(
@@ -2400,8 +2609,10 @@
                         "h3"
                     );
 
+
                 title.className =
                     "more-journal-card-title";
+
 
                 title.textContent =
                     entry.title ||
@@ -2438,6 +2649,7 @@
         commentList.innerHTML =
             "";
 
+
         commentCount.textContent =
             "0 comments";
 
@@ -2473,6 +2685,7 @@
             );
 
             return;
+
         }
 
 
@@ -2499,6 +2712,7 @@
                         "article"
                     );
 
+
                 article.className =
                     "comment";
 
@@ -2507,6 +2721,7 @@
                     document.createElement(
                         "div"
                     );
+
 
                 meta.className =
                     "comment-meta";
@@ -2517,8 +2732,10 @@
                         "p"
                     );
 
+
                 name.className =
                     "comment-name";
+
 
                 name.textContent =
                     comment.name ||
@@ -2530,8 +2747,10 @@
                         "p"
                     );
 
+
                 date.className =
                     "comment-date";
+
 
                 date.textContent =
                     formatDate(
@@ -2553,8 +2772,10 @@
                         "p"
                     );
 
+
                 body.className =
                     "comment-body";
+
 
                 body.textContent =
                     comment.content ||
@@ -2592,6 +2813,7 @@
                             "div"
                         );
 
+
                     actions.className =
                         "comment-actions";
 
@@ -2601,11 +2823,14 @@
                             "button"
                         );
 
+
                     deleteButton.type =
                         "button";
 
+
                     deleteButton.className =
                         "comment-delete";
+
 
                     deleteButton.textContent =
                         "Delete";
@@ -2620,7 +2845,9 @@
                                     "Delete your comment?"
                                 )
                             ) {
+
                                 return;
+
                             }
 
 
@@ -2654,10 +2881,13 @@
                                     deleteError
                                 );
 
+
                                 deleteButton.disabled =
                                     false;
 
+
                                 return;
+
                             }
 
 
@@ -2672,6 +2902,7 @@
                     actions.appendChild(
                         deleteButton
                     );
+
 
                     article.appendChild(
                         actions
@@ -2722,6 +2953,7 @@
         journalIndex.style.display =
             "none";
 
+
         reader.classList.add(
             "active"
         );
@@ -2760,9 +2992,11 @@
             readerImage.src =
                 entry.image_url;
 
+
             readerImage.alt =
                 entry.title ||
                 "Journal image";
+
 
             readerImage.style.display =
                 "block";
@@ -2773,6 +3007,7 @@
                 "src"
             );
 
+
             readerImage.style.display =
                 "none";
 
@@ -2782,6 +3017,14 @@
         readerContent.innerHTML =
             entry.content ||
             "";
+
+
+        /*
+         * Re-apply the current reading preference
+         * after loading a new article.
+         */
+
+        updateReadingStyle();
 
 
         renderReaderNavigation(
@@ -2818,9 +3061,11 @@
                 window.location.search
             );
 
+
         return params.get(
             "id"
         );
+
     }
 
 
@@ -2862,8 +3107,10 @@
                     "div"
                 );
 
+
             message.className =
                 "journal-status";
+
 
             message.textContent =
                 "Unable to load the journal.";
@@ -2873,7 +3120,9 @@
                 message
             );
 
+
             return;
+
         }
 
 
@@ -2915,6 +3164,7 @@
                 );
 
                 return;
+
             }
 
         }
@@ -2956,7 +3206,9 @@
             if (
                 !currentEntryId
             ) {
+
                 return;
+
             }
 
 
@@ -2983,7 +3235,9 @@
                 !name ||
                 !content
             ) {
+
                 return;
+
             }
 
 
@@ -2992,6 +3246,7 @@
 
 
             const payload = {
+
                 target_type:
                     "journal",
 
@@ -3003,12 +3258,12 @@
 
                 content:
                     content
+
             };
 
 
             /*
              * Attach the authenticated user's ID.
-             * This is what determines comment ownership.
              */
 
             if (
@@ -3033,17 +3288,13 @@
              * Compatibility fallback:
              * if the existing comments table does not
              * yet have user_id, the comment can still post.
-             *
-             * Such comments simply cannot have an owner-only
-             * delete button until user_id exists in the table.
              */
 
             if (
                 result.error &&
                 currentUser &&
                 /user_id|column/i.test(
-                    result.error.message ||
-                    ""
+                    result.error.message || ""
                 )
             ) {
 
@@ -3051,6 +3302,7 @@
                     await supabaseClient
                         .from("comments")
                         .insert({
+
                             target_type:
                                 "journal",
 
@@ -3062,6 +3314,7 @@
 
                             content:
                                 content
+
                         });
 
             }
@@ -3076,10 +3329,13 @@
                     result.error
                 );
 
+
                 commentStatus.textContent =
                     "Could not post comment.";
 
+
                 return;
+
             }
 
 
@@ -3145,10 +3401,17 @@
         );
 
 
+    /*
+     * Normal article size.
+     *
+     * Desktop = 22px
+     * Mobile = 19px
+     */
+
     const normalFontSize =
         window.innerWidth <= 700
-            ? 18
-            : 21;
+            ? 19
+            : 22;
 
 
     let readerFontSize =
@@ -3161,10 +3424,19 @@
 
     function updateReadingStyle() {
 
+        /*
+         * Apply the size directly to the
+         * actual article container.
+         */
+
         readerContent.style.fontSize =
             readerFontSize +
             "px";
 
+
+        /*
+         * Remove all old font classes.
+         */
 
         readerContent.classList.remove(
             "serif",
@@ -3174,10 +3446,19 @@
         );
 
 
+        /*
+         * Add the selected font.
+         */
+
         readerContent.classList.add(
             readerFont
         );
 
+
+        /*
+         * Remove active state from
+         * every font button.
+         */
 
         [
             fontSerif,
@@ -3195,7 +3476,13 @@
         );
 
 
+        /*
+         * Find the currently selected
+         * font button.
+         */
+
         const activeFontButton = {
+
             serif:
                 fontSerif,
 
@@ -3224,28 +3511,36 @@
         }
 
 
+        /*
+         * Update size button states.
+         */
+
         fontDecrease.classList.toggle(
             "active",
             readerFontSize <
-                normalFontSize
+            normalFontSize
         );
 
 
         fontNormal.classList.toggle(
             "active",
             readerFontSize ===
-                normalFontSize
+            normalFontSize
         );
 
 
         fontIncrease.classList.toggle(
             "active",
             readerFontSize >
-                normalFontSize
+            normalFontSize
         );
 
     }
 
+
+    /* =========================================================
+       FONT SIZE — DECREASE
+    ========================================================= */
 
     fontDecrease.addEventListener(
         "click",
@@ -3253,15 +3548,20 @@
 
             readerFontSize =
                 Math.max(
-                    16,
-                    readerFontSize - 1
+                    17,
+                    readerFontSize - 2
                 );
+
 
             updateReadingStyle();
 
         }
     );
 
+
+    /* =========================================================
+       FONT SIZE — NORMAL
+    ========================================================= */
 
     fontNormal.addEventListener(
         "click",
@@ -3270,11 +3570,16 @@
             readerFontSize =
                 normalFontSize;
 
+
             updateReadingStyle();
 
         }
     );
 
+
+    /* =========================================================
+       FONT SIZE — INCREASE
+    ========================================================= */
 
     fontIncrease.addEventListener(
         "click",
@@ -3282,15 +3587,20 @@
 
             readerFontSize =
                 Math.min(
-                    27,
-                    readerFontSize + 1
+                    30,
+                    readerFontSize + 2
                 );
+
 
             updateReadingStyle();
 
         }
     );
 
+
+    /* =========================================================
+       FONT — SERIF
+    ========================================================= */
 
     fontSerif.addEventListener(
         "click",
@@ -3299,11 +3609,16 @@
             readerFont =
                 "serif";
 
+
             updateReadingStyle();
 
         }
     );
 
+
+    /* =========================================================
+       FONT — SANS
+    ========================================================= */
 
     fontSans.addEventListener(
         "click",
@@ -3312,11 +3627,16 @@
             readerFont =
                 "sans";
 
+
             updateReadingStyle();
 
         }
     );
 
+
+    /* =========================================================
+       FONT — LORA
+    ========================================================= */
 
     fontLora.addEventListener(
         "click",
@@ -3325,11 +3645,16 @@
             readerFont =
                 "lora";
 
+
             updateReadingStyle();
 
         }
     );
 
+
+    /* =========================================================
+       FONT — CORMORANT
+    ========================================================= */
 
     fontCormorant.addEventListener(
         "click",
@@ -3337,6 +3662,7 @@
 
             readerFont =
                 "cormorant";
+
 
             updateReadingStyle();
 
@@ -3384,7 +3710,9 @@
                     event.metaKey
                 )
             ) {
+
                 return;
+
             }
 
 
@@ -3397,7 +3725,9 @@
                     key
                 )
             ) {
+
                 return;
+
             }
 
 
@@ -3413,7 +3743,9 @@
             if (
                 !anchorNode
             ) {
+
                 return;
+
             }
 
 
@@ -3456,6 +3788,7 @@
                     "0%";
 
                 return;
+
             }
 
 
@@ -3477,6 +3810,7 @@
                     "100%";
 
                 return;
+
             }
 
 
@@ -3544,4 +3878,3 @@
 </body>
 
 </html>
-```
