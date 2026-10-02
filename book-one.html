@@ -807,7 +807,7 @@ button{
 
     color:var(--reader-text-color) !important;
 
-    font-size:25px !important;
+    font-size:20px !important;
     line-height:var(--reader-line-height) !important;
 }
 
@@ -1195,7 +1195,7 @@ button{
     }
 
     .reader-story{
-        font-size:25px !important;
+        font-size:20px !important;
     }
 
     .pref-range{
@@ -1565,7 +1565,7 @@ button{
                                         min="10"
                                         max="36"
                                         step="1"
-                                        value="25"
+                                        value="20"
                                     >
 
                                     <span
@@ -2080,7 +2080,7 @@ const defaultReaderPreferences = {
 
     fontFamily:"serif",
 
-    fontSize:25,
+    fontSize:20,
 
     lineHeight:1.65,
 
@@ -2788,11 +2788,10 @@ function applySavedReaderPreferences(){
     const preferences =
         getReaderPreferences();
 
-    // Normalize the old oversized setting once. After this, the user can freely choose a size.
-    if(!localStorage.getItem("hed_reader_font_size_normalized_v2")){
+    // Keep old oversized saved values from overriding the reader size.
+    if(Number(preferences.fontSize) > 20){
         preferences.fontSize = 20;
         saveReaderPreferences(preferences);
-        localStorage.setItem("hed_reader_font_size_normalized_v2", "1");
     }
 
 
