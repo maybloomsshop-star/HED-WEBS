@@ -8,6 +8,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
+<script src="reader-auth.js"></script>
 
 <style>
 
@@ -934,6 +935,195 @@ button{
 
 
 /* =========================================================
+   COMMENTS
+========================================================= */
+
+.comments-section{
+    max-width:780px;
+
+    margin:20px auto 0;
+    padding-top:14px;
+
+    border-top:1px solid var(--line);
+}
+
+.comments-title-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:11px;
+}
+
+.comments-title{
+    margin:0;
+
+    color:var(--brown);
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:20px;
+}
+
+.comments-subtitle{
+    color:var(--muted);
+
+    font-size:9px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.comments-list{
+    display:grid;
+    gap:8px;
+
+    margin-bottom:15px;
+}
+
+.comment-card{
+    padding:10px 12px;
+
+    border:1px solid var(--line);
+    background:#fffdfa;
+}
+
+.comment-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:4px;
+}
+
+.comment-author{
+    color:var(--brown);
+
+    font-size:12px;
+    font-weight:700;
+}
+
+.comment-date{
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+.comment-text{
+    margin:0;
+
+    color:#5b544e;
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:14px;
+    line-height:1.48;
+
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+}
+
+.comment-actions{
+    display:flex;
+    justify-content:flex-end;
+
+    margin-top:5px;
+}
+
+.comment-delete{
+    padding:3px 0;
+
+    border:0;
+    background:transparent;
+
+    color:#aa817f;
+
+    font-size:9px;
+}
+
+.comment-delete:hover{
+    color:var(--pink);
+}
+
+.comment-form{
+    padding:13px;
+
+    border:1px solid var(--line);
+    background:rgba(251,248,243,.8);
+}
+
+.comment-form-grid{
+    display:grid;
+    grid-template-columns:170px minmax(0,1fr);
+
+    gap:8px;
+}
+
+.comment-input,
+.comment-textarea{
+    width:100%;
+
+    padding:9px 10px;
+
+    border:1px solid var(--line);
+    background:var(--paper);
+
+    color:var(--text);
+
+    outline:none;
+
+    font-size:12px;
+}
+
+.comment-input:focus,
+.comment-textarea:focus{
+    border-color:var(--pink);
+}
+
+.comment-textarea{
+    min-height:72px;
+
+    resize:vertical;
+
+    font-family:Georgia,"Times New Roman",serif;
+    line-height:1.5;
+}
+
+.comment-form-bottom{
+    display:flex;
+    justify-content:flex-end;
+
+    margin-top:8px;
+}
+
+.comment-submit{
+    padding:9px 14px;
+
+    border:0;
+    background:var(--pink);
+
+    color:white;
+
+    font-size:11px;
+}
+
+.comment-submit:hover{
+    background:var(--pink-dark);
+}
+
+.comment-status{
+    min-height:13px;
+
+    margin-top:6px;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+
+/* =========================================================
    RESPONSIVE
 ========================================================= */
 
@@ -1031,13 +1221,6 @@ button{
 
 .book-description.expanded .book-description-more {
     display: inline;
-}
-/* Prevent visitors from selecting/copying text */
-body {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 </style>
@@ -1664,6 +1847,96 @@ body {
                         </div>
 
 
+
+                        <!-- =================================================
+                             COMMENTS
+                        ================================================== -->
+
+                        <section class="comments-section">
+
+
+                            <div class="comments-title-row">
+
+                                <h2 class="comments-title">
+                                    Comments
+                                </h2>
+
+                                <div class="comments-subtitle">
+                                    Leave a thought
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                id="commentsList"
+                                class="comments-list"
+                            ></div>
+
+
+                            <form
+                                id="commentForm"
+                                class="comment-form"
+                            >
+
+                                <div class="comment-form-grid">
+
+                                    <input
+    id="commentName"
+    class="comment-input"
+    type="text"
+    maxlength="80"
+    placeholder="Your name"
+    required
+    readonly
+>
+
+                                    <textarea
+                                        id="commentContent"
+                                        class="comment-textarea"
+                                        maxlength="2000"
+                                        placeholder="Write a comment..."
+                                        required
+                                    ></textarea>
+
+                                </div>
+
+
+                                <div class="comment-form-bottom">
+
+                                    <button
+                                        class="comment-submit"
+                                        type="submit"
+                                    >
+                                        Post Comment
+                                    </button>
+
+                                </div>
+
+
+                                <div
+                                    id="commentStatus"
+                                    class="comment-status"
+                                ></div>
+
+                            </form>
+
+                        </section>
+
+                    </article>
+
+                </main>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+
+
 <!-- =========================================================
      FLOATING HIGHLIGHT MENU
 ========================================================= -->
@@ -2269,6 +2542,9 @@ function openChapter(index){
     $("readerShell")
         .classList
         .add("open");
+
+
+    loadComments();
 
 }
 
@@ -2942,6 +3218,233 @@ function updatePreferenceButtons(){
 
 
 /* =========================================================
+   COMMENTS
+========================================================= */
+
+async function loadComments(){
+
+    if(
+        selectedChapterIndex < 0
+    ){
+
+        return;
+
+    }
+
+
+    const chapter =
+        chapters[
+            selectedChapterIndex
+        ];
+
+
+    const result =
+        await supabaseClient
+            .from("comments")
+            .select(
+                "id,name,content,created_at"
+            )
+            .eq(
+                "target_type",
+                "chapter"
+            )
+            .eq(
+                "target_id",
+                chapter.id
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:true
+                }
+            );
+
+
+    if(result.error){
+
+        console.error(
+            result.error
+        );
+
+
+        $("commentsList")
+            .innerHTML =
+                '<div class="empty-message">' +
+                "Comments could not be loaded." +
+                "</div>";
+
+        return;
+    }
+
+
+    renderComments(
+        result.data || []
+    );
+
+}
+
+
+function renderComments(comments){
+
+    const list =
+        $("commentsList");
+
+
+    list.innerHTML =
+        "";
+
+
+    if(!comments.length){
+
+        list.innerHTML =
+            '<div class="empty-message">' +
+            "No comments yet. Be the first." +
+            "</div>";
+
+        return;
+    }
+
+
+    comments.forEach(
+        function(comment){
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "comment-card";
+
+
+            const date =
+                comment.created_at
+                    ? new Date(
+                        comment.created_at
+                    ).toLocaleDateString(
+                        undefined,
+                        {
+                            year:"numeric",
+                            month:"short",
+                            day:"numeric"
+                        }
+                    )
+                    : "";
+
+
+            card.innerHTML =
+
+                '<div class="comment-head">' +
+
+                    '<div class="comment-author">' +
+                        escapeHTML(
+                            comment.name ||
+                            "Reader"
+                        ) +
+                    "</div>" +
+
+                    '<div class="comment-date">' +
+                        escapeHTML(
+                            date
+                        ) +
+                    "</div>" +
+
+                "</div>" +
+
+                '<p class="comment-text">' +
+                    escapeHTML(
+                        comment.content ||
+                        ""
+                    ) +
+                "</p>" +
+
+                '<div class="comment-actions">' +
+
+                    '<button ' +
+                        'class="comment-delete" ' +
+                        'type="button" ' +
+                        'data-comment-id="' +
+                            escapeAttribute(
+                                comment.id
+                            ) +
+                        '"' +
+                    '>' +
+                        "Delete" +
+                    "</button>" +
+
+                "</div>";
+
+
+            list.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    document
+        .querySelectorAll(
+            ".comment-delete"
+        )
+        .forEach(
+            function(button){
+
+                button.onclick =
+                    async function(){
+
+                        const id =
+                            this.dataset.commentId;
+
+
+                        if(
+                            !confirm(
+                                "Delete this comment?"
+                            )
+                        ){
+
+                            return;
+
+                        }
+
+
+                        const result =
+                            await supabaseClient
+                                .from("comments")
+                                .delete()
+                                .eq(
+                                    "id",
+                                    id
+                                );
+
+
+                        if(result.error){
+
+                            console.error(
+                                result.error
+                            );
+
+                            alert(
+                                "The comment could not be deleted."
+                            );
+
+                            return;
+
+                        }
+
+
+                        loadComments();
+
+                    };
+
+            }
+        );
+
+}
+
+
+/* =========================================================
    COMMENT FORM
 ========================================================= */
 
@@ -2951,45 +3454,44 @@ $("commentForm").addEventListener(
 
         event.preventDefault();
 
+        const status =
+            $("commentStatus");
 
-        if(
-            selectedChapterIndex < 0
-        ){
+        const name =
+            $("commentName")
+                .value
+                .trim();
+
+        const content =
+            $("commentContent")
+                .value
+                .trim();
+
+
+        if(!name){
+
+            status.textContent =
+                "Your nickname is missing.";
 
             return;
 
         }
 
 
-       const {
-  data: { user }
-} = await supabaseClient.auth.getUser();
+        if(!content){
 
-if (!user) {
-  const returnPage =
-    window.location.pathname.split("/").pop() +
-    window.location.search;
+            status.textContent =
+                "Please write a comment.";
 
-  window.location.href =
-    "login.html?return=" +
-    encodeURIComponent(returnPage);
+            return;
 
-  return;
-}
-
-const name =
-  user.user_metadata?.nickname?.trim() || "Reader";
-
-const content =
-  $("commentContent").value.trim();
-
-$("commentName").value = name;
+        }
 
 
-        if(
-            !name ||
-            !content
-        ){
+        if(selectedChapterIndex < 0){
+
+            status.textContent =
+                "No chapter is selected.";
 
             return;
 
@@ -3002,60 +3504,95 @@ $("commentName").value = name;
             ];
 
 
-        const status =
-            $("commentStatus");
-
-
-        status.textContent =
-            "Posting…";
-
-
-        const result =
-            await supabaseClient
-                .from("comments")
-                .insert({
-
-                    target_type:"chapter",
-
-                    target_id:
-                        chapter.id,
-
-                    name:name,
-
-                    content:content
-
-                });
-
-
-        if(result.error){
-
-            console.error(
-                result.error
-            );
-
+        if(!chapter || !chapter.id){
 
             status.textContent =
-                "The comment could not be posted.";
+                "The chapter could not be found.";
 
             return;
 
         }
 
 
-        $("commentContent")
-            .value =
-                "";
-
-
         status.textContent =
-            "Comment posted.";
+            "Posting…";
 
 
-        await loadComments();
+        try{
+
+            const result =
+                await supabaseClient
+                    .from("comments")
+                    .insert({
+
+                        target_type:
+                            "chapter",
+
+                        target_id:
+                            chapter.id,
+
+                        name:
+                            name,
+
+                        content:
+                            content
+
+                    });
+
+
+            if(result.error){
+
+                console.error(
+                    "COMMENT ERROR:",
+                    result.error
+                );
+
+                status.textContent =
+                    "Could not post: " +
+                    result.error.message;
+
+                return;
+
+            }
+
+
+            $("commentContent")
+                .value =
+                    "";
+
+
+            $("commentName")
+                .value =
+                    window.readerNickname ||
+                    name;
+
+
+            status.textContent =
+                "Comment posted.";
+
+
+            await loadComments();
+
+
+        }catch(error){
+
+            console.error(
+                "COMMENT ERROR:",
+                error
+            );
+
+
+            status.textContent =
+                "Could not post: " +
+                (
+                    error.message ||
+                    "Unknown error"
+                );
+
+        }
 
     }
 );
-
 
 /* =========================================================
    TEXT SELECTION / HIGHLIGHTING
@@ -3549,34 +4086,34 @@ function showError(message){
    START
 ========================================================= */
 
-(async function(){
+window.readerAuthReady.then(function () {
 
-    try{
+    const commentNameElement =
+        document.getElementById("commentName");
 
-        /*
-         * IMPORTANT:
-         * There is NO LOGIN CHECK here.
-         * book-one.html is a public reader.
-         */
+    if (
+        commentNameElement &&
+        window.readerNickname
+    ) {
 
-        await loadStory();
-
-    }catch(error){
-
-        console.error(
-            error
-        );
-
-
-        showError(
-            "Something went wrong while opening this story."
-        );
+        commentNameElement.value =
+            window.readerNickname;
 
     }
 
-})();
+    loadStory();
+
+}).catch(function (error) {
+
+    console.error(error);
+
+    showError(
+        "Something went wrong while opening this story."
+    );
+
+});
 
 </script>
-   <script src="disable-copy.js"></script>
+
 </body>
 </html>
