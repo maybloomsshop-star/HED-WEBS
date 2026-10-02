@@ -2586,28 +2586,44 @@ $("loginForm").addEventListener(
 
     event.preventDefault();
 
-    $("loginMessage").textContent = "";
+    const message = $("loginMessage");
+    const email = $("loginEmail").value.trim();
+    const password = $("loginPassword").value;
 
-    const {
-      error
-    } =
-      await supabaseClient.auth.signInWithPassword({
+    message.textContent = "Logging in...";
 
-        email:
-          $("loginEmail")
-            .value
-            .trim(),
+    try {
 
-        password:
-          $("loginPassword").value
-
+      const {
+        data,
+        error
+      } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
       });
 
+      if (error) {
+        message.textContent = error.message;
+        return;
+      }
 
-    if (error) {
+      if (!data || !data.session) {
+        message.textContent =
+          "Login did not complete. Please check your Supabase account.";
+        return;
+      }
 
-      $("loginMessage").textContent =
-        error.message;
+      currentUser = data.user;
+
+      showApp();
+
+    } catch (err) {
+
+      console.error("LOGIN ERROR:", err);
+
+      message.textContent =
+        err?.message ||
+        "Something went wrong while logging in.";
 
     }
 
