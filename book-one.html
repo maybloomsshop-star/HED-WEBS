@@ -406,7 +406,7 @@ button{
 
     color:var(--muted);
 
-    font-size:25px;
+    font-size:20px;
     line-height:1;
 }
 
@@ -785,7 +785,7 @@ button{
     margin:0 0 10px;
     color:var(--brown);
     font-family:Georgia,"Times New Roman",serif;
-    font-size:25px;
+    font-size:20px;
     line-height:1.25;
     font-weight:600;
     font-style:normal;
@@ -807,7 +807,7 @@ button{
 
     color:var(--reader-text-color) !important;
 
-    font-size:20px !important;
+    font-size:22px;
     line-height:var(--reader-line-height) !important;
 }
 
@@ -832,7 +832,6 @@ button{
 .reader-story i,
 .reader-story a{
     color:var(--reader-text-color) !important;
-    font-size:inherit !important;
     line-height:var(--reader-line-height) !important;
 }
 
@@ -981,7 +980,7 @@ button{
     color:var(--brown);
 
     font-family:Georgia,"Times New Roman",serif;
-    font-size:25px;
+    font-size:20px;
 }
 
 .comments-subtitle{
@@ -1195,7 +1194,7 @@ button{
     }
 
     .reader-story{
-        font-size:20px !important;
+        font-size:22px;
     }
 
     .pref-range{
@@ -1563,16 +1562,16 @@ button{
                                         class="pref-range"
                                         type="range"
                                         min="10"
-                                        max="36"
+                                        max="26"
                                         step="1"
-                                        value="20"
+                                        value="22"
                                     >
 
                                     <span
                                         id="fontSizeValue"
                                         class="pref-size-value"
                                     >
-                                        20px
+                                        22px
                                     </span>
 
                                 </div>
@@ -2080,7 +2079,7 @@ const defaultReaderPreferences = {
 
     fontFamily:"serif",
 
-    fontSize:20,
+    fontSize:22,
 
     lineHeight:1.65,
 
@@ -2787,12 +2786,6 @@ function applySavedReaderPreferences(){
 
     const preferences =
         getReaderPreferences();
-
-    // Keep old oversized saved values from overriding the reader size.
-    if(Number(preferences.fontSize) > 20){
-        preferences.fontSize = 20;
-        saveReaderPreferences(preferences);
-    }
 
 
     applyFont(
