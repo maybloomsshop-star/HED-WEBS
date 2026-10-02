@@ -799,16 +799,16 @@ button{
 .reader-story{
     --reader-font:Georgia,"Times New Roman",serif;
     --reader-line-height:1.65;
-    --reader-text-color:var(--text);
+    --reader-text-color:#342b26;
 
     max-width:780px;
 
     margin:0 auto;
 
-    color:var(--reader-text-color);
+    color:var(--reader-text-color) !important;
 
     font-size:15px;
-    line-height:var(--reader-line-height);
+    line-height:var(--reader-line-height) !important;
 }
 
 .reader-story,
@@ -816,48 +816,36 @@ button{
     font-family:var(--reader-font) !important;
 }
 
+.reader-story p,
+.reader-story li,
+.reader-story blockquote,
+.reader-story h1,
+.reader-story h2,
+.reader-story h3,
+.reader-story h4,
+.reader-story h5,
+.reader-story h6,
+.reader-story span,
+.reader-story strong,
+.reader-story em,
+.reader-story b,
+.reader-story i,
+.reader-story a{
+    color:var(--reader-text-color) !important;
+    line-height:var(--reader-line-height) !important;
+}
+
 .reader-story p{
     margin:0 0 .8em;
-
-    color:var(--reader-text-color) !important;
-
-    line-height:var(--reader-line-height) !important;
-}
-
-.reader-story li{
-    color:var(--reader-text-color) !important;
-
-    line-height:var(--reader-line-height) !important;
-}
-
-.reader-story blockquote{
-    margin:1em 0;
-    padding:8px 17px;
-
-    border-left:3px solid var(--pink);
-
-    color:var(--reader-text-color) !important;
-
-    line-height:var(--reader-line-height) !important;
 }
 
 .reader-story h1,
 .reader-story h2,
 .reader-story h3,
-.reader-story h4{
+.reader-story h4,
+.reader-story h5,
+.reader-story h6{
     margin:1.1em 0 .4em;
-
-    color:var(--reader-text-color) !important;
-
-    line-height:1.2;
-}
-
-.reader-story span,
-.reader-story strong,
-.reader-story em,
-.reader-story b,
-.reader-story i{
-    color:var(--reader-text-color) !important;
 }
 
 .reader-story img{
@@ -867,6 +855,13 @@ button{
     height:auto;
 
     margin:20px auto;
+}
+
+.reader-story blockquote{
+    margin:1em 0;
+    padding:8px 17px;
+
+    border-left:3px solid var(--pink);
 }
 
 
@@ -2758,6 +2753,7 @@ function getReaderPreferences(){
                 )
             );
 
+
         return {
             ...defaultReaderPreferences,
             ...(saved || {})
@@ -2774,9 +2770,7 @@ function getReaderPreferences(){
 }
 
 
-function saveReaderPreferences(
-    preferences
-){
+function saveReaderPreferences(preferences){
 
     localStorage.setItem(
         "hed_reader_preferences",
@@ -2886,8 +2880,11 @@ $("fontFamily").addEventListener(
             this.value;
 
 
-        saveReaderPreferences(
-            preferences
+        localStorage.setItem(
+            "hed_reader_preferences",
+            JSON.stringify(
+                preferences
+            )
         );
 
 
@@ -2923,9 +2920,7 @@ $("fontSize").addEventListener(
     function(){
 
         const size =
-            Number(
-                this.value
-            );
+            Number(this.value);
 
 
         const preferences =
@@ -2936,68 +2931,56 @@ $("fontSize").addEventListener(
             size;
 
 
-        saveReaderPreferences(
-            preferences
+        localStorage.setItem(
+            "hed_reader_preferences",
+            JSON.stringify(
+                preferences
+            )
         );
 
 
-        applyFontSize(
-            size
-        );
+        applyFontSize(size);
 
     }
 );
 
 
 /* =========================================================
-   LINE SPACING
+   LINE HEIGHT
 ========================================================= */
 
 function applyLineHeight(value){
 
-    const lineHeight =
-        Number(value) || 1.65;
-
-
-    const reader =
+    const storyElement =
         $("readerStory");
 
 
-    reader.style
-        .setProperty(
-            "--reader-line-height",
-            lineHeight
-        );
+    storyElement.style.setProperty(
+        "--reader-line-height",
+        String(value)
+    );
 
 
-    reader.style
-        .lineHeight =
-            lineHeight;
+    storyElement.style.setProperty(
+        "line-height",
+        String(value),
+        "important"
+    );
 
 
-    /*
-       Apply it directly to the actual text
-       elements too. This makes the setting
-       work even when the story HTML has its
-       own line-height.
-    */
-
-    reader
+    storyElement
         .querySelectorAll(
-            "p, li, blockquote"
+            "p,li,blockquote,h1,h2,h3,h4,h5,h6,span,strong,em,b,i,a"
         )
-        .forEach(
-            function(element){
+        .forEach(function(element){
 
-                element.style
-                    .setProperty(
-                        "line-height",
-                        lineHeight,
-                        "important"
-                    );
+            element.style.setProperty(
+                "line-height",
+                String(value),
+                "important"
+            );
 
-            }
-        );
+        });
 
 }
 
@@ -3052,51 +3035,36 @@ document
 
 function applyTextColor(color){
 
-    const reader =
+    const storyElement =
         $("readerStory");
 
 
-    /*
-       Store the color as a CSS variable.
-    */
-
-    reader.style
-        .setProperty(
-            "--reader-text-color",
-            color
-        );
+    storyElement.style.setProperty(
+        "--reader-text-color",
+        color
+    );
 
 
-    /*
-       Apply the color directly to all
-       readable story elements.
-
-       This fixes the problem where the
-       original h1/h2/h3/blockquotes had
-       their own brown color and ignored
-       the selected text color.
-    */
-
-    reader.style.color =
-        color;
+    storyElement.style.setProperty(
+        "color",
+        color,
+        "important"
+    );
 
 
-    reader
+    storyElement
         .querySelectorAll(
-            "p, li, blockquote, h1, h2, h3, h4, h5, h6, span, strong, em, b, i"
+            "p,li,blockquote,h1,h2,h3,h4,h5,h6,span,strong,em,b,i,a"
         )
-        .forEach(
-            function(element){
+        .forEach(function(element){
 
-                element.style
-                    .setProperty(
-                        "color",
-                        color,
-                        "important"
-                    );
+            element.style.setProperty(
+                "color",
+                color,
+                "important"
+            );
 
-            }
-        );
+        });
 
 }
 
@@ -3157,31 +3125,37 @@ function applyTheme(theme){
 
         cream:{
             background:"#fbf8f3",
+            color:"#342b26",
             border:"#ddd2c5"
         },
 
         white:{
             background:"#ffffff",
+            color:"#222222",
             border:"#dddddd"
         },
 
         black:{
             background:"#000000",
+            color:"#f5f5f5",
             border:"#333333"
         },
 
         dark:{
             background:"#20211f",
+            color:"#f5f5f5",
             border:"#3b3c39"
         },
 
         sepia:{
             background:"#f1e4c9",
+            color:"#574936",
             border:"#d7c7a8"
         },
 
         night:{
             background:"#111827",
+            color:"#f8fafc",
             border:"#293449"
         }
 
@@ -3196,16 +3170,11 @@ function applyTheme(theme){
     paper.style.background =
         selected.background;
 
-
     paper.style.borderColor =
         selected.border;
 
 }
 
-
-/* =========================================================
-   THEME BUTTONS
-========================================================= */
 
 document
     .querySelectorAll(
@@ -3230,27 +3199,15 @@ document
                         theme;
 
 
-                    saveReaderPreferences(
-                        preferences
+                    localStorage.setItem(
+                        "hed_reader_preferences",
+                        JSON.stringify(
+                            preferences
+                        )
                     );
 
 
-                    /*
-                       IMPORTANT:
-                       The old code had:
-
-                       applyTextColor(color);
-
-                       But "color" did not exist here.
-
-                       It should apply the selected
-                       THEME, then restore the user's
-                       selected TEXT COLOR.
-                    */
-
-                    applyTheme(
-                        theme
-                    );
+                    applyTheme(theme);
 
 
                     applyTextColor(
@@ -3297,24 +3254,6 @@ function updatePreferenceButtons(){
             }
         );
 
-
-    document
-        .querySelectorAll(
-            "[data-text-color]"
-        )
-        .forEach(
-            function(button){
-
-                button.classList.toggle(
-                    "active",
-                    button.dataset.textColor ===
-                    preferences.textColor
-                );
-
-            }
-        );
-
-}
 
     document
         .querySelectorAll(
