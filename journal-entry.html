@@ -4,135 +4,2505 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Journal — HED</title>
+
 <style>
-:root{--hed-brown:#4a352b;--hed-brown-dark:#382920;--hed-cream:#f5efe6;--hed-paper:#fbf8f3;--hed-green:#68745d;--hed-pink:#c58f91;--hed-text:#342b26;--hed-muted:#85786e;--hed-line:#d8cec2;--reader-size:22px;--reader-font:Georgia,"Times New Roman",serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--hed-paper);color:var(--hed-text);font-family:Georgia,"Times New Roman",serif}body.copy-protected{-webkit-user-select:none;user-select:none}input,textarea,button{user-select:auto}img{-webkit-user-drag:none;user-drag:none}.reading-progress{position:fixed;top:0;left:0;width:0;height:3px;background:var(--hed-brown);z-index:9999}
-header{height:78px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--hed-line);background:rgba(251,248,243,.96);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}.brand{text-decoration:none;color:var(--hed-brown-dark);font-size:25px;font-weight:bold;letter-spacing:4px}nav{display:flex;gap:30px;align-items:center}nav a{text-decoration:none;color:var(--hed-muted);font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase}nav a:hover{color:var(--hed-brown)}
-main{width:min(1080px,90%);margin:0 auto;padding:70px 0 100px}.back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--hed-muted);font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:45px}.back-link:hover{color:var(--hed-brown)}.journal-label{color:var(--hed-green);font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:bold;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px}.entry-title{max-width:850px;margin:0;color:var(--hed-brown-dark);font-size:clamp(28px,3.2vw,42px);line-height:1.06;font-weight:normal;letter-spacing:-1.5px}.entry-subtitle{max-width:720px;margin:25px 0;color:var(--hed-muted);font-size:21px;line-height:1.6}.entry-meta{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-top:25px;color:var(--hed-muted);font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:1.4px;text-transform:uppercase}.meta-dot{color:var(--hed-pink)}.ornament{margin:35px 0;color:var(--hed-pink);font-size:17px;letter-spacing:7px}
-.hero-image-wrap{width:100%;margin:30px 0 55px}.hero-image{width:100%;max-height:650px;object-fit:cover;display:block;background:var(--hed-cream);cursor:zoom-in}.image-caption{margin-top:12px;color:var(--hed-muted);font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:.8px;line-height:1.5}
-.reading-preferences{width:min(760px,100%);margin:0 auto 35px;padding:14px 0;border-top:1px solid var(--hed-line);border-bottom:1px solid var(--hed-line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}.preference-label,.preference-group-title{color:var(--hed-muted);font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:bold;letter-spacing:1.7px;text-transform:uppercase}.preference-group{display:flex;align-items:center;gap:5px}.preference-group-title{margin-right:7px;font-weight:normal;letter-spacing:1px}.preference-button{border:1px solid transparent;background:transparent;color:var(--hed-muted);padding:6px 9px;border-radius:4px;cursor:pointer;font-family:Arial,Helvetica,sans-serif;font-size:11px;transition:all .2s ease}.preference-button:hover,.preference-button.active{color:var(--hed-brown-dark);border-color:var(--hed-line);background:var(--hed-cream);font-weight:bold}.font-serif{font-family:Georgia,"Times New Roman",serif}.font-sans{font-family:Arial,Helvetica,sans-serif}
-.article-area{width:min(760px,100%);margin:0 auto}.article-content{--reader-size:22px;--reader-font:Georgia,"Times New Roman",serif;width:100%;font-family:var(--reader-font)!important;font-size:var(--reader-size)!important;line-height:1.75!important;color:var(--hed-text)!important;transition:font-size .15s ease,font-family .15s ease;overflow-wrap:break-word}.article-content,.article-content *{font-family:var(--reader-font)!important}.article-content p,.article-content li,.article-content blockquote{font-size:var(--reader-size)!important;line-height:1.75!important;color:var(--hed-text)!important}.article-content p{margin:0 0 1.45em}.article-content h1,.article-content h2,.article-content h3,.article-content h4,.article-content h5,.article-content h6{font-family:var(--reader-font)!important;color:var(--hed-brown-dark)!important;font-weight:normal;line-height:1.25!important}.article-content h1{font-size:calc(var(--reader-size) + 16px)!important;margin:1.8em 0 .75em}.article-content h2{font-size:calc(var(--reader-size) + 9px)!important;margin:2.2em 0 .8em}.article-content h3{font-size:calc(var(--reader-size) + 4px)!important;margin:2em 0 .7em}.article-content h4{font-size:calc(var(--reader-size) + 1px)!important;margin:1.7em 0 .7em}.article-content strong,.article-content b{color:var(--hed-brown-dark)!important}.article-content em,.article-content i{color:#574a42!important}.article-content a{color:var(--hed-green)!important;text-decoration-thickness:1px;text-underline-offset:3px}.article-content blockquote{margin:2em 0;padding:5px 0 5px 28px;border-left:3px solid var(--hed-pink);font-style:italic}.article-content ul,.article-content ol{margin:0 0 1.5em;padding-left:30px}.article-content li{margin-bottom:8px}.article-content img{width:100%;height:auto;display:block;margin:40px 0;cursor:zoom-in}.article-content hr{border:0;border-top:1px solid var(--hed-line);margin:50px 0}
-.hed-note{margin-top:55px;padding:28px;background:var(--hed-cream);border:1px solid var(--hed-line)}.hed-note-label{margin-bottom:10px;color:var(--hed-green);font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:bold;letter-spacing:2px;text-transform:uppercase}.hed-note-content{color:var(--hed-brown);font-family:var(--reader-font);font-size:var(--reader-size);line-height:1.75}
-.responses{width:min(760px,100%);margin:55px auto 0;padding-top:25px;border-top:1px solid var(--hed-line)}.section-label{color:var(--hed-green);font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:bold;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:7px}.section-title{margin:0;color:var(--hed-brown-dark);font-size:27px;font-weight:normal}.response-count{margin-top:5px;color:var(--hed-muted);font-family:Arial,Helvetica,sans-serif;font-size:11px}.response-form{margin-top:15px;padding:14px;background:var(--hed-cream);border:1px solid var(--hed-line)}.response-form input,.response-form textarea{width:100%;border:1px solid var(--hed-line);background:var(--hed-paper);color:var(--hed-text);padding:9px 11px;margin-bottom:7px;font-family:Georgia,"Times New Roman",serif;font-size:15px;outline:none}.response-form textarea{min-height:65px;resize:vertical}.response-form input:focus,.response-form textarea:focus{border-color:var(--hed-green)}.response-form button{border:0;background:var(--hed-brown);color:white;padding:9px 15px;cursor:pointer;font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:bold;letter-spacing:1.4px;text-transform:uppercase}.response-form button:hover{background:var(--hed-brown-dark)}.response-message{margin-top:7px;color:var(--hed-muted);font-family:Arial,Helvetica,sans-serif;font-size:11px}
-.comment-list{margin-top:12px;display:flex;flex-direction:column}.comment{padding:11px 0;border-bottom:1px solid var(--hed-line)}.comment-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:3px}.comment-name{color:var(--hed-brown-dark);font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:bold}.comment-date{color:var(--hed-muted);font-family:Arial,Helvetica,sans-serif;font-size:9px}.comment-content{color:var(--hed-text);font-size:14px;line-height:1.45;white-space:pre-wrap;overflow-wrap:break-word}.comment-actions{margin-top:5px}.comment-delete{padding:0;border:0;background:none;color:var(--hed-muted);cursor:pointer;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:bold;letter-spacing:1px;text-transform:uppercase}.comment-delete:hover{color:var(--hed-brown-dark)}.comment-delete:disabled{opacity:.5;cursor:wait}
-.keep-reading{margin:75px auto 0;padding-top:30px;border-top:1px solid var(--hed-line)}.reading-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:20px}.reading-card{min-height:140px;padding:23px;background:var(--hed-cream);border:1px solid var(--hed-line);text-decoration:none;display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s ease,background .2s ease}.reading-card:hover{transform:translateY(-2px);background:#f1e9df}.reading-direction{color:var(--hed-green);font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:bold;letter-spacing:1.8px;text-transform:uppercase}.reading-title{margin-top:18px;color:var(--hed-brown-dark);font-size:20px;line-height:1.3}.all-journal{display:block;width:fit-content;margin:25px auto 0;color:var(--hed-brown);text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase}.all-journal:hover{color:var(--hed-green)}
-footer{margin-top:80px;padding:50px 6%;background:var(--hed-brown-dark);color:var(--hed-cream);text-align:center}.footer-brand{font-size:24px;letter-spacing:4px;font-weight:bold}.footer-tagline{margin-top:10px;color:#cfc3b8;font-size:14px;font-style:italic}.footer-nav{margin-top:22px;display:flex;justify-content:center;gap:25px;flex-wrap:wrap}.footer-nav a{color:#cfc3b8;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase}.status{min-height:300px;display:flex;justify-content:center;align-items:center;color:var(--hed-muted);font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:1px}.hidden{display:none!important}
-.image-lightbox{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:30px;background:rgba(40,31,26,.92);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}.image-lightbox.open{opacity:1;visibility:visible}.image-lightbox img{max-width:95vw;max-height:90vh;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.3)}.lightbox-close{position:absolute;top:18px;right:24px;border:0;background:transparent;color:white;font-size:30px;cursor:pointer}
-@media(max-width:700px){header{height:68px;padding:0 5%}.brand{font-size:21px}nav{gap:16px}nav a{font-size:9px;letter-spacing:1.3px}main{width:90%;padding-top:45px}.back-link{margin-bottom:35px}.entry-title{font-size:28px;letter-spacing:-.6px}.entry-subtitle{font-size:18px}.hero-image-wrap{margin-bottom:40px}.reading-preferences{align-items:flex-start;flex-direction:column;gap:10px}.article-content{--reader-size:22px}.article-content h1{font-size:37px!important}.article-content h2{font-size:30px!important}.article-content h3{font-size:25px!important}.hed-note{padding:22px}.responses{margin-top:50px}.reading-grid{grid-template-columns:1fr}.reading-card{min-height:125px}.comment-top{align-items:flex-start}.comment-name{font-size:12px}.comment-content{font-size:14px}}
+:root{
+  --hed-brown:#4a352b;
+  --hed-brown-dark:#382920;
+  --hed-cream:#f5efe6;
+  --hed-paper:#fbf8f3;
+  --hed-green:#68745d;
+  --hed-pink:#c58f91;
+  --hed-text:#342b26;
+  --hed-muted:#85786e;
+  --hed-line:#d8cec2;
+
+  --reader-size:24px;
+  --reader-font:Georgia,"Times New Roman",serif;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--hed-paper);
+  color:var(--hed-text);
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+body.copy-protected{
+  -webkit-user-select:none;
+  user-select:none;
+}
+
+input,
+textarea,
+button{
+  user-select:auto;
+}
+
+img{
+  -webkit-user-drag:none;
+  user-drag:none;
+}
+
+.reading-progress{
+  position:fixed;
+  top:0;
+  left:0;
+  width:0;
+  height:3px;
+  background:var(--hed-brown);
+  z-index:9999;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  height:78px;
+  padding:0 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--hed-line);
+  background:rgba(251,248,243,.96);
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(8px);
+}
+
+.brand{
+  text-decoration:none;
+  color:var(--hed-brown-dark);
+  font-size:25px;
+  font-weight:bold;
+  letter-spacing:4px;
+}
+
+nav{
+  display:flex;
+  gap:30px;
+  align-items:center;
+}
+
+nav a{
+  text-decoration:none;
+  color:var(--hed-muted);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+nav a:hover{
+  color:var(--hed-brown);
+}
+
+/* =========================
+   PAGE HEADER
+========================= */
+
+main{
+  width:min(1080px,90%);
+  margin:0 auto;
+  padding:68px 0 100px;
+}
+
+.back-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  color:var(--hed-muted);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:46px;
+}
+
+.back-link:hover{
+  color:var(--hed-brown);
+}
+
+.journal-label{
+  color:var(--hed-green);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.entry-title{
+  max-width:760px;
+  margin:0;
+  color:var(--hed-brown-dark);
+  font-size:clamp(30px,3vw,36px);
+  line-height:1.12;
+  font-weight:normal;
+  letter-spacing:-1px;
+}
+
+.entry-subtitle{
+  max-width:700px;
+  margin:22px 0 0;
+  color:var(--hed-muted);
+  font-size:19px;
+  line-height:1.65;
+}
+
+.entry-meta{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:9px;
+  margin-top:24px;
+  color:var(--hed-muted);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+}
+
+.meta-dot{
+  color:var(--hed-pink);
+}
+
+.ornament{
+  margin:34px 0;
+  color:var(--hed-pink);
+  font-size:17px;
+  letter-spacing:7px;
+}
+
+/* =========================
+   HERO IMAGE
+========================= */
+
+.hero-image-wrap{
+  width:100%;
+  margin:30px 0 58px;
+}
+
+.hero-image{
+  width:100%;
+  max-height:650px;
+  object-fit:cover;
+  display:block;
+  background:var(--hed-cream);
+  cursor:zoom-in;
+}
+
+.image-caption{
+  margin-top:12px;
+  color:var(--hed-muted);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  letter-spacing:.8px;
+  line-height:1.5;
+}
+
+/* =========================
+   READING PREFERENCES
+========================= */
+
+.reading-preferences{
+  width:min(700px,100%);
+  margin:0 auto 42px;
+  padding:13px 0;
+  border-top:1px solid var(--hed-line);
+  border-bottom:1px solid var(--hed-line);
+
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:28px;
+  flex-wrap:wrap;
+}
+
+.preference-label,
+.preference-group-title{
+  color:var(--hed-muted);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:9px;
+  font-weight:bold;
+  letter-spacing:1.7px;
+  text-transform:uppercase;
+}
+
+.preference-label{
+  margin-right:auto;
+}
+
+.preference-group{
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.preference-group-title{
+  margin-right:6px;
+  font-weight:normal;
+  letter-spacing:1px;
+}
+
+.preference-button{
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--hed-muted);
+  padding:6px 9px;
+  border-radius:4px;
+  cursor:pointer;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;
+  transition:
+    color .2s ease,
+    border-color .2s ease,
+    background .2s ease;
+}
+
+.preference-button:hover,
+.preference-button.active{
+  color:var(--hed-brown-dark);
+  border-color:var(--hed-line);
+  background:var(--hed-cream);
+}
+
+.preference-button.active{
+  font-weight:bold;
+}
+
+.font-serif{
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+.font-sans{
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+/* =========================
+   ARTICLE
+========================= */
+
+.article-area{
+  width:min(700px,100%);
+  margin:0 auto;
+}
+
+.article-content{
+  --reader-size:24px;
+  --reader-font:Georgia,"Times New Roman",serif;
+
+  width:100%;
+  font-family:var(--reader-font)!important;
+  font-size:var(--reader-size)!important;
+  line-height:1.78!important;
+  color:var(--hed-text)!important;
+
+  transition:
+    font-size .15s ease,
+    font-family .15s ease;
+
+  overflow-wrap:break-word;
+}
+
+/*
+  The reader preference controls the entire article.
+  This is intentionally applied consistently to all
+  article elements so Serif/Sans actually changes
+  the whole reading experience.
+*/
+
+.article-content,
+.article-content *{
+  font-family:var(--reader-font)!important;
+}
+
+.article-content p,
+.article-content li{
+  font-size:var(--reader-size)!important;
+  line-height:1.78!important;
+  color:var(--hed-text)!important;
+}
+
+.article-content p{
+  margin:0 0 1.5em;
+}
+
+/* Headings */
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6{
+  font-family:var(--reader-font)!important;
+  color:var(--hed-brown-dark)!important;
+  font-weight:normal;
+  line-height:1.25!important;
+}
+
+.article-content h1{
+  font-size:calc(var(--reader-size) + 13px)!important;
+  margin:1.9em 0 .75em;
+}
+
+.article-content h2{
+  font-size:calc(var(--reader-size) + 7px)!important;
+  margin:2.2em 0 .8em;
+}
+
+.article-content h3{
+  font-size:calc(var(--reader-size) + 3px)!important;
+  margin:2em 0 .7em;
+}
+
+.article-content h4{
+  font-size:calc(var(--reader-size) + 1px)!important;
+  margin:1.7em 0 .7em;
+}
+
+.article-content h5,
+.article-content h6{
+  font-size:var(--reader-size)!important;
+  margin:1.5em 0 .6em;
+}
+
+/* Inline text */
+
+.article-content strong,
+.article-content b{
+  color:var(--hed-brown-dark)!important;
+}
+
+.article-content em,
+.article-content i{
+  color:#574a42!important;
+}
+
+.article-content a{
+  color:var(--hed-green)!important;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+
+/* Blockquotes */
+
+.article-content blockquote{
+  margin:2.2em 0;
+  padding:7px 0 7px 26px;
+
+  border-left:3px solid var(--hed-pink);
+
+  font-size:calc(var(--reader-size) + 2px)!important;
+  line-height:1.7!important;
+
+  color:var(--hed-text)!important;
+  font-style:italic;
+}
+
+/* Lists */
+
+.article-content ul,
+.article-content ol{
+  margin:0 0 1.6em;
+  padding-left:30px;
+}
+
+.article-content li{
+  margin-bottom:9px;
+}
+
+/* Images inside article */
+
+.article-content img{
+  width:100%;
+  height:auto;
+  display:block;
+  margin:42px 0;
+  cursor:zoom-in;
+}
+
+/* Dividers */
+
+.article-content hr{
+  border:0;
+  border-top:1px solid var(--hed-line);
+  margin:55px 0;
+}
+
+/* =========================
+   HED NOTE
+========================= */
+
+.hed-note{
+  margin-top:58px;
+  padding:28px;
+  background:var(--hed-cream);
+  border:1px solid var(--hed-line);
+}
+
+.hed-note-label{
+  margin-bottom:10px;
+  color:var(--hed-green);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  font-weight:bold;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.hed-note-content{
+  color:var(--hed-brown);
+  font-family:var(--reader-font);
+  font-size:var(--reader-size);
+  line-height:1.78;
+}
+
+/* =========================
+   RESPONSES
+========================= */
+
+.responses{
+  width:min(700px,100%);
+  margin:65px auto 0;
+  padding-top:28px;
+  border-top:1px solid var(--hed-line);
+}
+
+.section-label{
+  color:var(--hed-green);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  font-weight:bold;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.section-title{
+  margin:0;
+  color:var(--hed-brown-dark);
+  font-size:26px;
+  font-weight:normal;
+}
+
+.response-count{
+  margin-top:5px;
+  color:var(--hed-muted);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;
+}
+
+.response-form{
+  margin-top:16px;
+  padding:14px;
+  background:var(--hed-cream);
+  border:1px solid var(--hed-line);
+}
+
+.response-form input,
+.response-form textarea{
+  width:100%;
+  border:1px solid var(--hed-line);
+  background:var(--hed-paper);
+  color:var(--hed-text);
+  padding:9px 11px;
+  margin-bottom:7px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:15px;
+  outline:none;
+}
+
+.response-form textarea{
+  min-height:65px;
+  resize:vertical;
+}
+
+.response-form input:focus,
+.response-form textarea:focus{
+  border-color:var(--hed-green);
+}
+
+.response-form button{
+  border:0;
+  background:var(--hed-brown);
+  color:white;
+  padding:9px 15px;
+  cursor:pointer;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  font-weight:bold;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+}
+
+.response-form button:hover{
+  background:var(--hed-brown-dark);
+}
+
+.response-message{
+  margin-top:7px;
+  color:var(--hed-muted);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;
+}
+
+.comment-list{
+  margin-top:12px;
+  display:flex;
+  flex-direction:column;
+}
+
+.comment{
+  padding:11px 0;
+  border-bottom:1px solid var(--hed-line);
+}
+
+.comment-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:10px;
+  margin-bottom:3px;
+}
+
+.comment-name{
+  color:var(--hed-brown-dark);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.comment-date{
+  color:var(--hed-muted);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:9px;
+}
+
+.comment-content{
+  color:var(--hed-text);
+  font-size:14px;
+  line-height:1.45;
+  white-space:pre-wrap;
+  overflow-wrap:break-word;
+}
+
+.comment-actions{
+  margin-top:5px;
+}
+
+.comment-delete{
+  padding:0;
+  border:0;
+  background:none;
+  color:var(--hed-muted);
+  cursor:pointer;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:9px;
+  font-weight:bold;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.comment-delete:hover{
+  color:var(--hed-brown-dark);
+}
+
+.comment-delete:disabled{
+  opacity:.5;
+  cursor:wait;
+}
+
+/* =========================
+   KEEP READING
+========================= */
+
+.keep-reading{
+  margin:78px auto 0;
+  padding-top:30px;
+  border-top:1px solid var(--hed-line);
+}
+
+.reading-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-top:20px;
+}
+
+.reading-card{
+  min-height:140px;
+  padding:23px;
+  background:var(--hed-cream);
+  border:1px solid var(--hed-line);
+  text-decoration:none;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  transition:
+    transform .2s ease,
+    background .2s ease;
+}
+
+.reading-card:hover{
+  transform:translateY(-2px);
+  background:#f1e9df;
+}
+
+.reading-direction{
+  color:var(--hed-green);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:9px;
+  font-weight:bold;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+}
+
+.reading-title{
+  margin-top:18px;
+  color:var(--hed-brown-dark);
+  font-size:20px;
+  line-height:1.3;
+}
+
+.all-journal{
+  display:block;
+  width:fit-content;
+  margin:25px auto 0;
+  color:var(--hed-brown);
+  text-decoration:none;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  font-weight:bold;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.all-journal:hover{
+  color:var(--hed-green);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  margin-top:80px;
+  padding:50px 6%;
+  background:var(--hed-brown-dark);
+  color:var(--hed-cream);
+  text-align:center;
+}
+
+.footer-brand{
+  font-size:24px;
+  letter-spacing:4px;
+  font-weight:bold;
+}
+
+.footer-tagline{
+  margin-top:10px;
+  color:#cfc3b8;
+  font-size:14px;
+  font-style:italic;
+}
+
+.footer-nav{
+  margin-top:22px;
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  flex-wrap:wrap;
+}
+
+.footer-nav a{
+  color:#cfc3b8;
+  text-decoration:none;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+.status{
+  min-height:300px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:var(--hed-muted);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================
+   IMAGE LIGHTBOX
+========================= */
+
+.image-lightbox{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:30px;
+  background:rgba(40,31,26,.92);
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:
+    opacity .2s ease,
+    visibility .2s ease;
+}
+
+.image-lightbox.open{
+  opacity:1;
+  visibility:visible;
+}
+
+.image-lightbox img{
+  max-width:95vw;
+  max-height:90vh;
+  object-fit:contain;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+
+.lightbox-close{
+  position:absolute;
+  top:18px;
+  right:24px;
+  border:0;
+  background:transparent;
+  color:white;
+  font-size:30px;
+  cursor:pointer;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+  header{
+    height:68px;
+    padding:0 5%;
+  }
+
+  .brand{
+    font-size:21px;
+  }
+
+  nav{
+    gap:16px;
+  }
+
+  nav a{
+    font-size:9px;
+    letter-spacing:1.3px;
+  }
+
+  main{
+    width:90%;
+    padding-top:45px;
+  }
+
+  .back-link{
+    margin-bottom:35px;
+  }
+
+  .entry-title{
+    font-size:28px;
+    line-height:1.15;
+    letter-spacing:-.5px;
+  }
+
+  .entry-subtitle{
+    font-size:18px;
+    line-height:1.6;
+  }
+
+  .entry-meta{
+    line-height:1.7;
+  }
+
+  .hero-image-wrap{
+    margin-bottom:42px;
+  }
+
+  .reading-preferences{
+    width:100%;
+    align-items:flex-start;
+    flex-direction:column;
+    gap:9px;
+    margin-bottom:36px;
+  }
+
+  .preference-label{
+    margin-right:0;
+  }
+
+  .article-area{
+    width:100%;
+  }
+
+  .article-content{
+    --reader-size:21px;
+  }
+
+  .article-content p,
+  .article-content li{
+    line-height:1.75!important;
+  }
+
+  .article-content h1{
+    font-size:34px!important;
+  }
+
+  .article-content h2{
+    font-size:28px!important;
+  }
+
+  .article-content h3{
+    font-size:24px!important;
+  }
+
+  .article-content blockquote{
+    font-size:23px!important;
+    padding-left:20px;
+  }
+
+  .hed-note{
+    padding:22px;
+  }
+
+  .responses{
+    margin-top:55px;
+  }
+
+  .reading-grid{
+    grid-template-columns:1fr;
+  }
+
+  .reading-card{
+    min-height:125px;
+  }
+
+  .comment-top{
+    align-items:flex-start;
+  }
+
+  .comment-name{
+    font-size:12px;
+  }
+
+  .comment-content{
+    font-size:14px;
+  }
+}
 </style>
 </head>
+
 <body class="copy-protected">
+
 <div class="reading-progress" id="readingProgress"></div>
-<header><a href="hed.html" class="brand">HED</a><nav><a href="journal.html">Journal</a><a href="about.html">About</a></nav></header>
+
+<header>
+  <a href="hed.html" class="brand">HED</a>
+
+  <nav>
+    <a href="journal.html">Journal</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
 <main>
-<div id="loading" class="status">Loading journal entry...</div>
-<article id="entryPage" class="hidden">
-<a href="journal.html" class="back-link">← Back to Journal</a>
-<div class="journal-label">Journal</div>
-<h1 class="entry-title" id="entryTitle"></h1>
-<div class="entry-subtitle hidden" id="entrySubtitle"></div>
-<div class="entry-meta"><span id="entryDate"></span><span class="meta-dot">•</span><span id="readTime"></span><span class="meta-dot">•</span><span>Written by HED</span></div>
-<div class="ornament">✦</div>
-<div class="hero-image-wrap hidden" id="heroWrap"><img id="heroImage" class="hero-image" alt=""><div id="imageCaption" class="image-caption hidden"></div></div>
-<div class="reading-preferences">
-<div class="preference-label">Reading</div>
-<div class="preference-group"><span class="preference-group-title">Size</span><button type="button" class="preference-button" data-size="small" onclick="setReaderSize('small')">A−</button><button type="button" class="preference-button" data-size="normal" onclick="setReaderSize('normal')">A</button><button type="button" class="preference-button" data-size="large" onclick="setReaderSize('large')">A+</button></div>
-<div class="preference-group"><span class="preference-group-title">Font</span><button type="button" class="preference-button font-serif" data-font="serif" onclick="setReaderFont('serif')">Serif</button><button type="button" class="preference-button font-sans" data-font="sans" onclick="setReaderFont('sans')">Sans</button></div>
-</div>
-<div class="article-area"><div id="articleContent" class="article-content"></div><div id="hedNote" class="hed-note hidden"><div class="hed-note-label">A Note From HED</div><div id="hedNoteContent" class="hed-note-content"></div></div></div>
-<section class="responses">
-<div class="section-label">Responses</div><h2 class="section-title">Reader Responses</h2><div class="response-count" id="responseCount">0 responses</div>
-<form id="responseForm" class="response-form"><input type="text" id="commentName" placeholder="Your name" readonly><textarea id="commentContent" placeholder="Leave a thought..." required></textarea><button type="submit">Post Response</button><div id="responseMessage" class="response-message"></div></form>
-<div id="commentList" class="comment-list"></div>
-</section>
-<section class="keep-reading"><div class="section-label">Keep Reading</div><div class="reading-grid"><a id="previousEntry" class="reading-card hidden"><div class="reading-direction">← Previous Entry</div><div id="previousTitle" class="reading-title"></div></a><a id="nextEntry" class="reading-card hidden"><div class="reading-direction">Next Entry →</div><div id="nextTitle" class="reading-title"></div></a></div><a href="journal.html" class="all-journal">View All Journal Entries →</a></section>
-</article>
+
+  <div id="loading" class="status">
+    Loading journal entry...
+  </div>
+
+  <article id="entryPage" class="hidden">
+
+    <a href="journal.html" class="back-link">
+      ← Back to Journal
+    </a>
+
+    <div class="journal-label">
+      Journal
+    </div>
+
+    <h1 class="entry-title" id="entryTitle"></h1>
+
+    <div class="entry-subtitle hidden" id="entrySubtitle"></div>
+
+    <div class="entry-meta">
+      <span id="entryDate"></span>
+      <span class="meta-dot">•</span>
+      <span id="readTime"></span>
+      <span class="meta-dot">•</span>
+      <span>Written by HED</span>
+    </div>
+
+    <div class="ornament">
+      ✦
+    </div>
+
+    <div class="hero-image-wrap hidden" id="heroWrap">
+
+      <img
+        id="heroImage"
+        class="hero-image"
+        alt=""
+      >
+
+      <div
+        id="imageCaption"
+        class="image-caption hidden"
+      ></div>
+
+    </div>
+
+    <!-- READING CONTROLS -->
+
+    <div class="reading-preferences">
+
+      <div class="preference-label">
+        Reading
+      </div>
+
+      <div class="preference-group">
+
+        <span class="preference-group-title">
+          Size
+        </span>
+
+        <button
+          type="button"
+          class="preference-button"
+          data-size="small"
+          onclick="setReaderSize('small')"
+        >
+          A−
+        </button>
+
+        <button
+          type="button"
+          class="preference-button"
+          data-size="normal"
+          onclick="setReaderSize('normal')"
+        >
+          A
+        </button>
+
+        <button
+          type="button"
+          class="preference-button"
+          data-size="large"
+          onclick="setReaderSize('large')"
+        >
+          A+
+        </button>
+
+      </div>
+
+      <div class="preference-group">
+
+        <span class="preference-group-title">
+          Font
+        </span>
+
+        <button
+          type="button"
+          class="preference-button font-serif"
+          data-font="serif"
+          onclick="setReaderFont('serif')"
+        >
+          Serif
+        </button>
+
+        <button
+          type="button"
+          class="preference-button font-sans"
+          data-font="sans"
+          onclick="setReaderFont('sans')"
+        >
+          Sans
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- ARTICLE -->
+
+    <div class="article-area">
+
+      <div
+        id="articleContent"
+        class="article-content"
+      ></div>
+
+      <div
+        id="hedNote"
+        class="hed-note hidden"
+      >
+
+        <div class="hed-note-label">
+          A Note From HED
+        </div>
+
+        <div
+          id="hedNoteContent"
+          class="hed-note-content"
+        ></div>
+
+      </div>
+
+    </div>
+
+    <!-- RESPONSES -->
+
+    <section class="responses">
+
+      <div class="section-label">
+        Responses
+      </div>
+
+      <h2 class="section-title">
+        Reader Responses
+      </h2>
+
+      <div
+        class="response-count"
+        id="responseCount"
+      >
+        0 responses
+      </div>
+
+      <form
+        id="responseForm"
+        class="response-form"
+      >
+
+        <input
+          type="text"
+          id="commentName"
+          placeholder="Your name"
+          readonly
+        >
+
+        <textarea
+          id="commentContent"
+          placeholder="Leave a thought..."
+          required
+        ></textarea>
+
+        <button type="submit">
+          Post Response
+        </button>
+
+        <div
+          id="responseMessage"
+          class="response-message"
+        ></div>
+
+      </form>
+
+      <div
+        id="commentList"
+        class="comment-list"
+      ></div>
+
+    </section>
+
+    <!-- KEEP READING -->
+
+    <section class="keep-reading">
+
+      <div class="section-label">
+        Keep Reading
+      </div>
+
+      <div class="reading-grid">
+
+        <a
+          id="previousEntry"
+          class="reading-card hidden"
+        >
+          <div class="reading-direction">
+            ← Previous Entry
+          </div>
+
+          <div
+            id="previousTitle"
+            class="reading-title"
+          ></div>
+        </a>
+
+        <a
+          id="nextEntry"
+          class="reading-card hidden"
+        >
+          <div class="reading-direction">
+            Next Entry →
+          </div>
+
+          <div
+            id="nextTitle"
+            class="reading-title"
+          ></div>
+        </a>
+
+      </div>
+
+      <a
+        href="journal.html"
+        class="all-journal"
+      >
+        View All Journal Entries →
+      </a>
+
+    </section>
+
+  </article>
+
 </main>
-<footer><div class="footer-brand">HED</div><div class="footer-tagline">Her Existential Thoughts</div><div class="footer-nav"><a href="journal.html">Journal</a><a href="about.html">About</a></div></footer>
-<div id="imageLightbox" class="image-lightbox"><button type="button" id="lightboxClose" class="lightbox-close" aria-label="Close image">×</button><img id="lightboxImage" src="" alt=""></div>
+
+<footer>
+
+  <div class="footer-brand">
+    HED
+  </div>
+
+  <div class="footer-tagline">
+    Her Existential Thoughts
+  </div>
+
+  <div class="footer-nav">
+    <a href="journal.html">Journal</a>
+    <a href="about.html">About</a>
+  </div>
+
+</footer>
+
+<!-- IMAGE LIGHTBOX -->
+
+<div
+  id="imageLightbox"
+  class="image-lightbox"
+>
+
+  <button
+    type="button"
+    id="lightboxClose"
+    class="lightbox-close"
+    aria-label="Close image"
+  >
+    ×
+  </button>
+
+  <img
+    id="lightboxImage"
+    src=""
+    alt=""
+  >
+
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="reader-auth.js"></script>
+
 <script>
-const db=supabaseClient;
-const urlParams=new URLSearchParams(window.location.search);
-const requestedEntry=urlParams.get("id")||urlParams.get("entry")||urlParams.get("entry_id")||urlParams.get("entryId")||urlParams.get("slug")||window.location.hash.replace(/^#/,'');
-let currentEntryId=null;
-const articleContent=document.getElementById("articleContent"),hedNoteContent=document.getElementById("hedNoteContent"),commentList=document.getElementById("commentList"),responseCount=document.getElementById("responseCount"),commentName=document.getElementById("commentName"),responseMessage=document.getElementById("responseMessage");
-let currentSize="normal";
-let currentFont=localStorage.getItem("hedReadingFont")||"serif";
-function slugify(value){return String(value||"").toLowerCase().trim().replace(/[^a-z0-9\s-]/g,"").replace(/\s+/g,"-").replace(/-+/g,"-")}
-function formatDate(date){if(!date)return"";const d=new Date(date);return Number.isNaN(d.getTime())?"":d.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}
-function calculateReadTime(content){const words=String(content||"").replace(/<[^>]*>/g," ").trim().split(/\s+/).filter(Boolean).length;return `${Math.max(1,Math.ceil(words/220))} min read`}
-function getReaderSize(){if(currentSize==="small")return window.innerWidth<=700?19:20;if(currentSize==="large")return window.innerWidth<=700?24:25;return window.innerWidth<=700?21:22}
-function getReaderFont(){return currentFont==="sans"?"Arial, Helvetica, sans-serif":'Georgia, "Times New Roman", serif'}
-function applyReadingPreferences(){
-  const size=getReaderSize();
-  const font=getReaderFont();
 
-  articleContent.style.setProperty("font-size",`${size}px`,"important");
-  articleContent.style.setProperty("font-family",font,"important");
-  articleContent.style.setProperty("--reader-size",`${size}px`,"important");
-  articleContent.style.setProperty("--reader-font",font,"important");
+const db = supabaseClient;
 
-  hedNoteContent.style.setProperty("font-size",`${size}px`,"important");
-  hedNoteContent.style.setProperty("font-family",font,"important");
+const urlParams = new URLSearchParams(window.location.search);
 
-  articleContent.querySelectorAll("*").forEach(el=>{
-    el.style.setProperty("font-family",font,"important");
-    if(el.matches("h1")) el.style.setProperty("font-size",`${size+10}px`,"important");
-    else if(el.matches("h2")) el.style.setProperty("font-size",`${size+6}px`,"important");
-    else if(el.matches("h3")) el.style.setProperty("font-size",`${size+3}px`,"important");
-    else if(el.matches("h4,h5,h6")) el.style.setProperty("font-size",`${size+1}px`,"important");
-    else if(el.matches("blockquote")) el.style.setProperty("font-size",`${size+3}px`,"important");
-    else el.style.setProperty("font-size",`${size}px`,"important");
-    el.style.setProperty("line-height","1.75","important");
-  });
+const requestedEntry =
+  urlParams.get("id") ||
+  urlParams.get("entry") ||
+  urlParams.get("entry_id") ||
+  urlParams.get("entryId") ||
+  urlParams.get("slug") ||
+  window.location.hash.replace(/^#/,"");
 
-  document.querySelectorAll("[data-size]").forEach(button=>{
-    button.classList.toggle("active",button.dataset.size===currentSize);
-  });
-  document.querySelectorAll("[data-font]").forEach(button=>{
-    button.classList.toggle("active",button.dataset.font===currentFont);
-  });
+let currentEntryId = null;
+
+const articleContent =
+  document.getElementById("articleContent");
+
+const hedNoteContent =
+  document.getElementById("hedNoteContent");
+
+const commentList =
+  document.getElementById("commentList");
+
+const responseCount =
+  document.getElementById("responseCount");
+
+const commentName =
+  document.getElementById("commentName");
+
+const responseMessage =
+  document.getElementById("responseMessage");
+
+
+/* =========================
+   READING PREFERENCES
+========================= */
+
+let currentSize =
+  localStorage.getItem("hedReadingSize") || "normal";
+
+let currentFont =
+  localStorage.getItem("hedReadingFont") || "serif";
+
+
+function slugify(value){
+
+  return String(value || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g,"")
+    .replace(/\s+/g,"-")
+    .replace(/-+/g,"-");
+
 }
+
+
+function formatDate(date){
+
+  if(!date) return "";
+
+  const d = new Date(date);
+
+  return Number.isNaN(d.getTime())
+    ? ""
+    : d.toLocaleDateString(
+        "en-US",
+        {
+          month:"long",
+          day:"numeric",
+          year:"numeric"
+        }
+      );
+
+}
+
+
+function calculateReadTime(content){
+
+  const words =
+    String(content || "")
+      .replace(/<[^>]*>/g," ")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .length;
+
+  return `${Math.max(1,Math.ceil(words / 220))} min read`;
+
+}
+
+
+/*
+  Reader sizes:
+
+  Small  = 20px desktop / 19px mobile
+  Normal = 24px desktop / 21px mobile
+  Large  = 27px desktop / 24px mobile
+*/
+
+function getReaderSize(){
+
+  if(currentSize === "small"){
+    return window.innerWidth <= 700 ? 19 : 20;
+  }
+
+  if(currentSize === "large"){
+    return window.innerWidth <= 700 ? 24 : 27;
+  }
+
+  return window.innerWidth <= 700 ? 21 : 24;
+
+}
+
+
+function getReaderFont(){
+
+  return currentFont === "sans"
+    ? "Arial, Helvetica, sans-serif"
+    : 'Georgia, "Times New Roman", serif';
+
+}
+
+
+/*
+  Apply the reader preferences to the entire article.
+
+  Before applying the font, remove any font-family
+  declarations that may have been embedded in the
+  article HTML itself. This makes the Serif/Sans
+  controls actually work consistently.
+*/
+
+function applyReadingPreferences(){
+
+  const size = getReaderSize();
+  const font = getReaderFont();
+
+  articleContent.style.setProperty(
+    "--reader-size",
+    `${size}px`
+  );
+
+  articleContent.style.setProperty(
+    "--reader-font",
+    font
+  );
+
+  articleContent.style.setProperty(
+    "font-size",
+    `${size}px`,
+    "important"
+  );
+
+  articleContent.style.setProperty(
+    "font-family",
+    font,
+    "important"
+  );
+
+
+  /*
+    Remove embedded font choices from the
+    article content so the reader controls
+    remain in charge.
+  */
+
+  articleContent
+    .querySelectorAll("*")
+    .forEach(el => {
+
+      el.style.removeProperty("font-family");
+
+      el.style.removeProperty("font-size");
+
+      el.style.removeProperty("line-height");
+
+    });
+
+
+  /*
+    Re-apply the reader font and size.
+  */
+
+  articleContent
+    .querySelectorAll("*")
+    .forEach(el => {
+
+      el.style.setProperty(
+        "font-family",
+        font,
+        "important"
+      );
+
+      el.style.setProperty(
+        "line-height",
+        "1.78",
+        "important"
+      );
+
+
+      if(el.matches("h1")){
+
+        el.style.setProperty(
+          "font-size",
+          `${size + 13}px`,
+          "important"
+        );
+
+      }
+
+      else if(el.matches("h2")){
+
+        el.style.setProperty(
+          "font-size",
+          `${size + 7}px`,
+          "important"
+        );
+
+      }
+
+      else if(el.matches("h3")){
+
+        el.style.setProperty(
+          "font-size",
+          `${size + 3}px`,
+          "important"
+        );
+
+      }
+
+      else if(el.matches("h4,h5,h6")){
+
+        el.style.setProperty(
+          "font-size",
+          `${size + 1}px`,
+          "important"
+        );
+
+      }
+
+      else if(el.matches("blockquote")){
+
+        el.style.setProperty(
+          "font-size",
+          `${size + 2}px`,
+          "important"
+        );
+
+      }
+
+      else{
+
+        el.style.setProperty(
+          "font-size",
+          `${size}px`,
+          "important"
+        );
+
+      }
+
+    });
+
+
+  /*
+    HED note follows the same reader settings.
+  */
+
+  hedNoteContent.style.setProperty(
+    "font-size",
+    `${size}px`,
+    "important"
+  );
+
+  hedNoteContent.style.setProperty(
+    "font-family",
+    font,
+    "important"
+  );
+
+
+  /*
+    Remember preferences.
+  */
+
+  localStorage.setItem(
+    "hedReadingSize",
+    currentSize
+  );
+
+  localStorage.setItem(
+    "hedReadingFont",
+    currentFont
+  );
+
+
+  /*
+    Active buttons.
+  */
+
+  document
+    .querySelectorAll("[data-size]")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.size === currentSize
+      );
+
+    });
+
+
+  document
+    .querySelectorAll("[data-font]")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.font === currentFont
+      );
+
+    });
+
+}
+
 
 function setReaderSize(value){
-  currentSize=value;
+
+  currentSize = value;
+
   applyReadingPreferences();
+
 }
+
 
 function setReaderFont(value){
-  currentFont=value;
-  localStorage.setItem("hedReadingFont",currentFont);
+
+  currentFont = value;
+
+  localStorage.setItem(
+    "hedReadingFont",
+    currentFont
+  );
+
   applyReadingPreferences();
+
 }
 
-document.querySelectorAll("[data-size]").forEach(button=>{
-  button.addEventListener("click",function(event){
-    event.preventDefault();
-    setReaderSize(this.dataset.size);
-  });
-});
 
-document.querySelectorAll("[data-font]").forEach(button=>{
-  button.addEventListener("click",function(event){
-    event.preventDefault();
-    setReaderFont(this.dataset.font);
-  });
-});
+/*
+  Resize the reader naturally when the screen
+  changes between desktop and mobile.
+*/
 
-window.addEventListener("resize",applyReadingPreferences);
-document.addEventListener("contextmenu",e=>e.preventDefault());
-document.addEventListener("copy",e=>{if(!["INPUT","TEXTAREA"].includes(e.target.tagName))e.preventDefault()});
-document.addEventListener("cut",e=>{if(!["INPUT","TEXTAREA"].includes(e.target.tagName))e.preventDefault()});
-document.addEventListener("keydown",e=>{if(["INPUT","TEXTAREA"].includes(e.target.tagName))return;if((e.ctrlKey||e.metaKey)&&["c","x","a"].includes(e.key.toLowerCase()))e.preventDefault()});
-document.addEventListener("dragstart",e=>{if(e.target.closest("#articleContent"))e.preventDefault()});
-const imageLightbox=document.getElementById("imageLightbox"),lightboxImage=document.getElementById("lightboxImage");function openLightbox(image){if(!image)return;lightboxImage.src=image.src;lightboxImage.alt=image.alt||"";imageLightbox.classList.add("open");document.body.style.overflow="hidden"}function closeLightbox(){imageLightbox.classList.remove("open");document.body.style.overflow="";lightboxImage.src=""}document.getElementById("lightboxClose").addEventListener("click",closeLightbox);imageLightbox.addEventListener("click",e=>{if(e.target===imageLightbox)closeLightbox()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLightbox()});document.getElementById("heroImage").addEventListener("click",e=>openLightbox(e.currentTarget));articleContent.addEventListener("click",e=>{const img=e.target.closest("img");if(img)openLightbox(img)});
-async function loadEntry(){if(!requestedEntry){document.getElementById("loading").textContent="No journal entry was selected.";return}const {data,error}=await db.from("journal_entries").select("*").order("published_at",{ascending:false});if(error){console.error(error);document.getElementById("loading").textContent="Unable to load this journal entry.";return}const entries=data||[],requested=String(requestedEntry).trim(),requestedSlug=slugify(requested);const currentIndex=entries.findIndex(entry=>{const idMatch=entry.id!==undefined&&String(entry.id)===requested;const matches=(key)=>entry[key]&&String(entry[key]).toLowerCase()===requested.toLowerCase();const titleMatch=entry.title&&String(entry.title).toLowerCase()===requested.toLowerCase();const titleSlugMatch=entry.title&&slugify(entry.title)===requestedSlug;return idMatch||matches("slug")||matches("entry_slug")||matches("entrySlug")||titleMatch||titleSlugMatch});if(currentIndex===-1){document.getElementById("loading").textContent="Journal entry unavailable.";return}const entry=entries[currentIndex];currentEntryId=entry.id;document.getElementById("entryTitle").textContent=entry.title||"Untitled Journal Entry";const subtitle=entry.subtitle||entry.description||entry.dek,subtitleEl=document.getElementById("entrySubtitle");if(subtitle){subtitleEl.textContent=subtitle;subtitleEl.classList.remove("hidden")}else subtitleEl.classList.add("hidden");document.getElementById("entryDate").textContent=formatDate(entry.published_at);document.getElementById("readTime").textContent=calculateReadTime(entry.content);const heroWrap=document.getElementById("heroWrap"),heroImage=document.getElementById("heroImage"),captionEl=document.getElementById("imageCaption");if(entry.image_url){heroImage.src=entry.image_url;heroImage.alt=entry.title||"Journal image";heroWrap.classList.remove("hidden");const caption=entry.image_caption||entry.caption;if(caption){captionEl.textContent=caption;captionEl.classList.remove("hidden")}else captionEl.classList.add("hidden")}else{heroWrap.classList.add("hidden");heroImage.removeAttribute("src")}articleContent.innerHTML=entry.content||"<p>This entry has no content yet.</p>";applyReadingPreferences();const note=entry.author_reflection||entry.reflection,hedNote=document.getElementById("hedNote");if(note){hedNote.classList.remove("hidden");hedNoteContent.textContent=note}else{hedNote.classList.add("hidden");hedNoteContent.textContent=""}const previous=entries[currentIndex+1],next=entries[currentIndex-1],previousCard=document.getElementById("previousEntry"),nextCard=document.getElementById("nextEntry");if(previous){previousCard.href=`journal-entry.html?id=${encodeURIComponent(previous.id)}`;document.getElementById("previousTitle").textContent=previous.title||"Previous Entry";previousCard.classList.remove("hidden")}else previousCard.classList.add("hidden");if(next){nextCard.href=`journal-entry.html?id=${encodeURIComponent(next.id)}`;document.getElementById("nextTitle").textContent=next.title||"Next Entry";nextCard.classList.remove("hidden")}else nextCard.classList.add("hidden");document.getElementById("loading").classList.add("hidden");document.getElementById("entryPage").classList.remove("hidden");applyReadingPreferences();loadComments(currentEntryId)}
-async function loadComments(id){if(!id)return;commentList.innerHTML="";responseCount.textContent="0 responses";const {data,error}=await db.from("comments").select("id,name,content,created_at").eq("target_type","journal").eq("target_id",id).order("created_at",{ascending:true});if(error){console.error("Comments error:",error);return}const comments=data||[];responseCount.textContent=`${comments.length} ${comments.length===1?"response":"responses"}`;comments.forEach(comment=>{const item=document.createElement("div");item.className="comment";const top=document.createElement("div");top.className="comment-top";const name=document.createElement("div");name.className="comment-name";name.textContent=comment.name||"Reader";const date=document.createElement("div");date.className="comment-date";date.textContent=formatDate(comment.created_at);top.append(name,date);const body=document.createElement("div");body.className="comment-content";body.textContent=comment.content||"";const actions=document.createElement("div");actions.className="comment-actions";const del=document.createElement("button");del.type="button";del.className="comment-delete";del.textContent="Delete";del.addEventListener("click",async()=>{if(!confirm("Delete this comment?"))return;del.disabled=true;del.textContent="Deleting...";const {error:deleteError}=await db.from("comments").delete().eq("id",comment.id);if(deleteError){console.error("Delete comment error:",deleteError);del.disabled=false;del.textContent="Delete";responseMessage.textContent="Could not delete comment. Please check your Supabase delete policy.";return}await loadComments(currentEntryId)});actions.appendChild(del);item.append(top,body,actions);commentList.appendChild(item)})}
-commentName.value=window.readerNickname||"Reader";document.getElementById("responseForm").addEventListener("submit",async e=>{e.preventDefault();const name=commentName.value.trim(),content=document.getElementById("commentContent").value.trim();if(!content){responseMessage.textContent="Please write something first.";return}if(!currentEntryId){responseMessage.textContent="This entry is not ready yet.";return}responseMessage.textContent="Posting...";const {error}=await db.from("comments").insert({target_type:"journal",target_id:currentEntryId,name:name||"Reader",content});if(error){console.error(error);responseMessage.textContent="Something went wrong. Please try again.";return}document.getElementById("commentContent").value="";responseMessage.textContent="Your response has been posted.";await loadComments(currentEntryId)});
-function updateReadingProgress(){const max=document.documentElement.scrollHeight-window.innerHeight,progress=max>0?(window.scrollY/max)*100:0;document.getElementById("readingProgress").style.width=`${Math.min(100,Math.max(0,progress))}%`}window.addEventListener("scroll",updateReadingProgress,{passive:true});window.addEventListener("resize",updateReadingProgress);applyReadingPreferences();loadEntry();
+window.addEventListener(
+  "resize",
+  applyReadingPreferences
+);
+
+
+/* =========================
+   COPY PROTECTION
+========================= */
+
+document.addEventListener(
+  "contextmenu",
+  e => e.preventDefault()
+);
+
+document.addEventListener(
+  "copy",
+  e => {
+
+    if(
+      !["INPUT","TEXTAREA"]
+        .includes(e.target.tagName)
+    ){
+      e.preventDefault();
+    }
+
+  }
+);
+
+document.addEventListener(
+  "cut",
+  e => {
+
+    if(
+      !["INPUT","TEXTAREA"]
+        .includes(e.target.tagName)
+    ){
+      e.preventDefault();
+    }
+
+  }
+);
+
+document.addEventListener(
+  "keydown",
+  e => {
+
+    if(
+      ["INPUT","TEXTAREA"]
+        .includes(e.target.tagName)
+    ){
+      return;
+    }
+
+    if(
+      (e.ctrlKey || e.metaKey) &&
+      ["c","x","a"]
+        .includes(e.key.toLowerCase())
+    ){
+      e.preventDefault();
+    }
+
+  }
+);
+
+document.addEventListener(
+  "dragstart",
+  e => {
+
+    if(
+      e.target.closest("#articleContent")
+    ){
+      e.preventDefault();
+    }
+
+  }
+);
+
+
+/* =========================
+   IMAGE LIGHTBOX
+========================= */
+
+const imageLightbox =
+  document.getElementById("imageLightbox");
+
+const lightboxImage =
+  document.getElementById("lightboxImage");
+
+
+function openLightbox(image){
+
+  if(!image) return;
+
+  lightboxImage.src = image.src;
+
+  lightboxImage.alt =
+    image.alt || "";
+
+  imageLightbox.classList.add("open");
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+function closeLightbox(){
+
+  imageLightbox.classList.remove("open");
+
+  document.body.style.overflow = "";
+
+  lightboxImage.src = "";
+
+}
+
+
+document
+  .getElementById("lightboxClose")
+  .addEventListener(
+    "click",
+    closeLightbox
+  );
+
+
+imageLightbox.addEventListener(
+  "click",
+  e => {
+
+    if(e.target === imageLightbox){
+      closeLightbox();
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  e => {
+
+    if(e.key === "Escape"){
+      closeLightbox();
+    }
+
+  }
+);
+
+
+document
+  .getElementById("heroImage")
+  .addEventListener(
+    "click",
+    e => openLightbox(e.currentTarget)
+  );
+
+
+articleContent.addEventListener(
+  "click",
+  e => {
+
+    const img =
+      e.target.closest("img");
+
+    if(img){
+      openLightbox(img);
+    }
+
+  }
+);
+
+
+/* =========================
+   LOAD ENTRY
+========================= */
+
+async function loadEntry(){
+
+  if(!requestedEntry){
+
+    document
+      .getElementById("loading")
+      .textContent =
+      "No journal entry was selected.";
+
+    return;
+  }
+
+
+  const {
+    data,
+    error
+  } = await db
+    .from("journal_entries")
+    .select("*")
+    .order(
+      "published_at",
+      {
+        ascending:false
+      }
+    );
+
+
+  if(error){
+
+    console.error(error);
+
+    document
+      .getElementById("loading")
+      .textContent =
+      "Unable to load this journal entry.";
+
+    return;
+  }
+
+
+  const entries = data || [];
+
+  const requested =
+    String(requestedEntry).trim();
+
+  const requestedSlug =
+    slugify(requested);
+
+
+  const currentIndex =
+    entries.findIndex(entry => {
+
+      const idMatch =
+        entry.id !== undefined &&
+        String(entry.id) === requested;
+
+
+      const matches = key =>
+        entry[key] &&
+        String(entry[key]).toLowerCase() ===
+        requested.toLowerCase();
+
+
+      const titleMatch =
+        entry.title &&
+        String(entry.title).toLowerCase() ===
+        requested.toLowerCase();
+
+
+      const titleSlugMatch =
+        entry.title &&
+        slugify(entry.title) === requestedSlug;
+
+
+      return (
+        idMatch ||
+        matches("slug") ||
+        matches("entry_slug") ||
+        matches("entrySlug") ||
+        titleMatch ||
+        titleSlugMatch
+      );
+
+    });
+
+
+  if(currentIndex === -1){
+
+    document
+      .getElementById("loading")
+      .textContent =
+      "Journal entry unavailable.";
+
+    return;
+  }
+
+
+  const entry =
+    entries[currentIndex];
+
+  currentEntryId =
+    entry.id;
+
+
+  /* TITLE */
+
+  document
+    .getElementById("entryTitle")
+    .textContent =
+    entry.title ||
+    "Untitled Journal Entry";
+
+
+  /* SUBTITLE */
+
+  const subtitle =
+    entry.subtitle ||
+    entry.description ||
+    entry.dek;
+
+  const subtitleEl =
+    document.getElementById("entrySubtitle");
+
+
+  if(subtitle){
+
+    subtitleEl.textContent =
+      subtitle;
+
+    subtitleEl.classList.remove(
+      "hidden"
+    );
+
+  }
+
+  else{
+
+    subtitleEl.classList.add(
+      "hidden"
+    );
+
+  }
+
+
+  /* META */
+
+  document
+    .getElementById("entryDate")
+    .textContent =
+    formatDate(
+      entry.published_at
+    );
+
+
+  document
+    .getElementById("readTime")
+    .textContent =
+    calculateReadTime(
+      entry.content
+    );
+
+
+  /* HERO IMAGE */
+
+  const heroWrap =
+    document.getElementById("heroWrap");
+
+  const heroImage =
+    document.getElementById("heroImage");
+
+  const captionEl =
+    document.getElementById("imageCaption");
+
+
+  if(entry.image_url){
+
+    heroImage.src =
+      entry.image_url;
+
+    heroImage.alt =
+      entry.title ||
+      "Journal image";
+
+    heroWrap.classList.remove(
+      "hidden"
+    );
+
+
+    const caption =
+      entry.image_caption ||
+      entry.caption;
+
+
+    if(caption){
+
+      captionEl.textContent =
+        caption;
+
+      captionEl.classList.remove(
+        "hidden"
+      );
+
+    }
+
+    else{
+
+      captionEl.classList.add(
+        "hidden"
+      );
+
+    }
+
+  }
+
+  else{
+
+    heroWrap.classList.add(
+      "hidden"
+    );
+
+    heroImage.removeAttribute(
+      "src"
+    );
+
+  }
+
+
+  /* ARTICLE */
+
+  articleContent.innerHTML =
+    entry.content ||
+    "<p>This entry has no content yet.</p>";
+
+
+  applyReadingPreferences();
+
+
+  /* HED NOTE */
+
+  const note =
+    entry.author_reflection ||
+    entry.reflection;
+
+  const hedNote =
+    document.getElementById("hedNote");
+
+
+  if(note){
+
+    hedNote.classList.remove(
+      "hidden"
+    );
+
+    hedNoteContent.textContent =
+      note;
+
+  }
+
+  else{
+
+    hedNote.classList.add(
+      "hidden"
+    );
+
+    hedNoteContent.textContent =
+      "";
+
+  }
+
+
+  /* PREVIOUS / NEXT */
+
+  const previous =
+    entries[currentIndex + 1];
+
+  const next =
+    entries[currentIndex - 1];
+
+
+  const previousCard =
+    document.getElementById(
+      "previousEntry"
+    );
+
+  const nextCard =
+    document.getElementById(
+      "nextEntry"
+    );
+
+
+  if(previous){
+
+    previousCard.href =
+      `journal-entry.html?id=${encodeURIComponent(previous.id)}`;
+
+    document
+      .getElementById("previousTitle")
+      .textContent =
+      previous.title ||
+      "Previous Entry";
+
+    previousCard.classList.remove(
+      "hidden"
+    );
+
+  }
+
+  else{
+
+    previousCard.classList.add(
+      "hidden"
+    );
+
+  }
+
+
+  if(next){
+
+    nextCard.href =
+      `journal-entry.html?id=${encodeURIComponent(next.id)}`;
+
+    document
+      .getElementById("nextTitle")
+      .textContent =
+      next.title ||
+      "Next Entry";
+
+    nextCard.classList.remove(
+      "hidden"
+    );
+
+  }
+
+  else{
+
+    nextCard.classList.add(
+      "hidden"
+    );
+
+  }
+
+
+  /* SHOW PAGE */
+
+  document
+    .getElementById("loading")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("entryPage")
+    .classList.remove("hidden");
+
+
+  applyReadingPreferences();
+
+  loadComments(
+    currentEntryId
+  );
+
+}
+
+
+/* =========================
+   COMMENTS
+========================= */
+
+async function loadComments(id){
+
+  if(!id) return;
+
+
+  commentList.innerHTML = "";
+
+  responseCount.textContent =
+    "0 responses";
+
+
+  const {
+    data,
+    error
+  } = await db
+    .from("comments")
+    .select(
+      "id,name,content,created_at"
+    )
+    .eq(
+      "target_type",
+      "journal"
+    )
+    .eq(
+      "target_id",
+      id
+    )
+    .order(
+      "created_at",
+      {
+        ascending:true
+      }
+    );
+
+
+  if(error){
+
+    console.error(
+      "Comments error:",
+      error
+    );
+
+    return;
+  }
+
+
+  const comments =
+    data || [];
+
+
+  responseCount.textContent =
+    `${comments.length} ${
+      comments.length === 1
+        ? "response"
+        : "responses"
+    }`;
+
+
+  comments.forEach(comment => {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "comment";
+
+
+    const top =
+      document.createElement("div");
+
+    top.className =
+      "comment-top";
+
+
+    const name =
+      document.createElement("div");
+
+    name.className =
+      "comment-name";
+
+    name.textContent =
+      comment.name ||
+      "Reader";
+
+
+    const date =
+      document.createElement("div");
+
+    date.className =
+      "comment-date";
+
+    date.textContent =
+      formatDate(
+        comment.created_at
+      );
+
+
+    top.append(
+      name,
+      date
+    );
+
+
+    const body =
+      document.createElement("div");
+
+    body.className =
+      "comment-content";
+
+    body.textContent =
+      comment.content ||
+      "";
+
+
+    const actions =
+      document.createElement("div");
+
+    actions.className =
+      "comment-actions";
+
+
+    const del =
+      document.createElement("button");
+
+    del.type =
+      "button";
+
+    del.className =
+      "comment-delete";
+
+    del.textContent =
+      "Delete";
+
+
+    del.addEventListener(
+      "click",
+      async () => {
+
+        if(
+          !confirm(
+            "Delete this comment?"
+          )
+        ){
+          return;
+        }
+
+
+        del.disabled = true;
+
+        del.textContent =
+          "Deleting...";
+
+
+        const {
+          error:deleteError
+        } = await db
+          .from("comments")
+          .delete()
+          .eq(
+            "id",
+            comment.id
+          );
+
+
+        if(deleteError){
+
+          console.error(
+            "Delete comment error:",
+            deleteError
+          );
+
+          del.disabled =
+            false;
+
+          del.textContent =
+            "Delete";
+
+          responseMessage.textContent =
+            "Could not delete comment. Please check your Supabase delete policy.";
+
+          return;
+        }
+
+
+        await loadComments(
+          currentEntryId
+        );
+
+      }
+    );
+
+
+    actions.appendChild(
+      del
+    );
+
+
+    item.append(
+      top,
+      body,
+      actions
+    );
+
+
+    commentList.appendChild(
+      item
+    );
+
+  });
+
+}
+
+
+/* =========================
+   COMMENT FORM
+========================= */
+
+commentName.value =
+  window.readerNickname ||
+  "Reader";
+
+
+document
+  .getElementById("responseForm")
+  .addEventListener(
+    "submit",
+    async e => {
+
+      e.preventDefault();
+
+
+      const name =
+        commentName.value.trim();
+
+
+      const content =
+        document
+          .getElementById(
+            "commentContent"
+          )
+          .value
+          .trim();
+
+
+      if(!content){
+
+        responseMessage.textContent =
+          "Please write something first.";
+
+        return;
+      }
+
+
+      if(!currentEntryId){
+
+        responseMessage.textContent =
+          "This entry is not ready yet.";
+
+        return;
+      }
+
+
+      responseMessage.textContent =
+        "Posting...";
+
+
+      const {
+        error
+      } = await db
+        .from("comments")
+        .insert({
+          target_type:"journal",
+          target_id:currentEntryId,
+          name:name || "Reader",
+          content
+        });
+
+
+      if(error){
+
+        console.error(error);
+
+        responseMessage.textContent =
+          "Something went wrong. Please try again.";
+
+        return;
+      }
+
+
+      document
+        .getElementById(
+          "commentContent"
+        )
+        .value = "";
+
+
+      responseMessage.textContent =
+        "Your response has been posted.";
+
+
+      await loadComments(
+        currentEntryId
+      );
+
+    }
+  );
+
+
+/* =========================
+   READING PROGRESS
+========================= */
+
+function updateReadingProgress(){
+
+  const max =
+    document.documentElement.scrollHeight -
+    window.innerHeight;
+
+
+  const progress =
+    max > 0
+      ? (window.scrollY / max) * 100
+      : 0;
+
+
+  document
+    .getElementById(
+      "readingProgress"
+    )
+    .style.width =
+    `${Math.min(
+      100,
+      Math.max(0,progress)
+    )}%`;
+
+}
+
+
+window.addEventListener(
+  "scroll",
+  updateReadingProgress,
+  {
+    passive:true
+  }
+);
+
+
+window.addEventListener(
+  "resize",
+  updateReadingProgress
+);
+
+
+/* =========================
+   START
+========================= */
+
+applyReadingPreferences();
+
+loadEntry();
+
 </script>
+
 </body>
 </html>
