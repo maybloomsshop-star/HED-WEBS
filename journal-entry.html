@@ -18,8 +18,9 @@
       --hed-muted: #85786e;
       --hed-line: #d8cec2;
 
-      /* DEFAULT ARTICLE SIZE */
+      /* DEFAULT READER SIZE */
       --reader-size: 22px;
+      --reader-font: Georgia, "Times New Roman", serif;
     }
 
     * {
@@ -42,26 +43,16 @@
     ======================================== */
 
     body.copy-protected {
-      user-select: none;
       -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
+      user-select: none;
     }
-
-    /*
-      Keep form fields usable.
-    */
 
     input,
     textarea,
     button {
-      user-select: auto;
       -webkit-user-select: auto;
+      user-select: auto;
     }
-
-    /*
-      Images cannot be dragged away.
-    */
 
     img {
       -webkit-user-drag: none;
@@ -89,7 +80,6 @@
     header {
       height: 78px;
       padding: 0 6%;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -107,7 +97,6 @@
 
     .brand {
       text-decoration: none;
-
       color: var(--hed-brown-dark);
 
       font-size: 25px;
@@ -123,7 +112,6 @@
 
     nav a {
       text-decoration: none;
-
       color: var(--hed-muted);
 
       font-family: Arial, Helvetica, sans-serif;
@@ -131,8 +119,6 @@
       font-weight: bold;
       letter-spacing: 2px;
       text-transform: uppercase;
-
-      transition: color 0.2s ease;
     }
 
     nav a:hover {
@@ -155,7 +141,6 @@
       gap: 8px;
 
       text-decoration: none;
-
       color: var(--hed-muted);
 
       font-family: Arial, Helvetica, sans-serif;
@@ -277,7 +262,6 @@
 
     .reading-preferences {
       width: min(760px, 100%);
-
       margin: 0 auto 35px;
 
       padding: 14px 0;
@@ -306,11 +290,11 @@
     .preference-group {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 5px;
     }
 
     .preference-group-title {
-      margin-right: 5px;
+      margin-right: 7px;
 
       color: var(--hed-muted);
 
@@ -319,54 +303,6 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-
-    /* ========================================
-       TEXT SIZE CONTROL
-    ======================================== */
-
-    .size-control {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .size-label {
-      color: var(--hed-muted);
-
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 13px;
-      font-weight: bold;
-
-      line-height: 1;
-    }
-
-    .size-label.large {
-      font-size: 17px;
-    }
-
-    #textSizeSlider {
-      width: 115px;
-
-      accent-color: var(--hed-brown);
-
-      cursor: pointer;
-    }
-
-    .size-value {
-      min-width: 22px;
-
-      text-align: center;
-
-      color: var(--hed-muted);
-
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10px;
-      font-weight: bold;
-    }
-
-    /* ========================================
-       FONT BUTTONS
-    ======================================== */
 
     .preference-button {
       border: 1px solid transparent;
@@ -421,11 +357,7 @@
     }
 
     .article-content {
-      --reader-size: 22px;
-      --reader-font: Georgia, "Times New Roman", serif;
-
       font-family: var(--reader-font);
-
       font-size: var(--reader-size);
 
       line-height: 1.9;
@@ -438,7 +370,10 @@
     }
 
     /*
-      Force reader font onto Supabase content.
+      IMPORTANT:
+      These !important rules make the reader
+      controls override formatting saved inside
+      the Supabase article HTML.
     */
 
     #articleContent,
@@ -446,17 +381,17 @@
       font-family: var(--reader-font) !important;
     }
 
-    /*
-      Force actual text size.
-    */
-
     #articleContent p,
     #articleContent li {
       font-size: var(--reader-size) !important;
     }
 
+    #articleContent blockquote {
+      font-size: calc(var(--reader-size) + 3px) !important;
+    }
+
     .article-content p {
-      margin: 0 0 18px;
+      margin: 0 0 1.45em;
     }
 
     .article-content h2 {
@@ -466,6 +401,7 @@
 
       font-size: 30px !important;
       line-height: 1.25;
+
       font-weight: normal;
     }
 
@@ -476,6 +412,7 @@
 
       font-size: 23px !important;
       line-height: 1.3;
+
       font-weight: normal;
     }
 
@@ -503,7 +440,6 @@
 
       color: var(--hed-brown);
 
-      font-size: 25px !important;
       line-height: 1.55;
 
       font-style: italic;
@@ -582,7 +518,7 @@
     .responses {
       width: min(760px, 100%);
 
-      margin: 80px auto 0;
+      margin: 75px auto 0;
 
       padding-top: 40px;
 
@@ -621,9 +557,9 @@
     }
 
     .response-form {
-      margin-top: 25px;
+      margin-top: 22px;
 
-      padding: 20px;
+      padding: 18px;
 
       background: var(--hed-cream);
 
@@ -639,9 +575,9 @@
       background: var(--hed-paper);
       color: var(--hed-text);
 
-      padding: 11px 13px;
+      padding: 10px 12px;
 
-      margin-bottom: 10px;
+      margin-bottom: 9px;
 
       font-family: Georgia, "Times New Roman", serif;
       font-size: 15px;
@@ -650,7 +586,7 @@
     }
 
     .response-form textarea {
-      min-height: 100px;
+      min-height: 90px;
 
       resize: vertical;
     }
@@ -667,7 +603,7 @@
 
       color: white;
 
-      padding: 11px 18px;
+      padding: 10px 17px;
 
       cursor: pointer;
 
@@ -683,7 +619,7 @@
     }
 
     .response-message {
-      margin-top: 10px;
+      margin-top: 9px;
 
       color: var(--hed-muted);
 
@@ -696,11 +632,11 @@
     ======================================== */
 
     .comment-list {
-      margin-top: 25px;
+      margin-top: 20px;
     }
 
     .comment {
-      padding: 16px 0;
+      padding: 15px 0;
 
       border-bottom: 1px solid var(--hed-line);
     }
@@ -713,7 +649,7 @@
 
       gap: 15px;
 
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     .comment-name {
@@ -739,7 +675,7 @@
 
       font-size: 15px;
 
-      line-height: 1.55;
+      line-height: 1.5;
 
       white-space: pre-wrap;
     }
@@ -935,7 +871,7 @@
     }
 
     /* ========================================
-       IMAGE LIGHTBOX
+       LIGHTBOX
     ======================================== */
 
     .image-lightbox {
@@ -1007,7 +943,6 @@
 
       header {
         height: 68px;
-
         padding: 0 5%;
       }
 
@@ -1021,13 +956,11 @@
 
       nav a {
         font-size: 9px;
-
         letter-spacing: 1.3px;
       }
 
       main {
         width: 90%;
-
         padding-top: 45px;
       }
 
@@ -1037,7 +970,6 @@
 
       .entry-title {
         font-size: 36px;
-
         letter-spacing: -0.8px;
       }
 
@@ -1055,9 +987,7 @@
 
       .reading-preferences {
         align-items: flex-start;
-
         flex-direction: column;
-
         gap: 12px;
       }
 
@@ -1065,13 +995,8 @@
         flex-wrap: wrap;
       }
 
-      #textSizeSlider {
-        width: 130px;
-      }
-
       /*
-        MOBILE DEFAULT:
-        21px
+        MOBILE DEFAULT = 21px
       */
 
       .article-content {
@@ -1083,18 +1008,16 @@
         font-size: var(--reader-size) !important;
       }
 
+      #articleContent blockquote {
+        font-size: calc(var(--reader-size) + 2px) !important;
+      }
+
       .article-content h2 {
         font-size: 27px !important;
       }
 
       .article-content h3 {
         font-size: 21px !important;
-      }
-
-      .article-content blockquote {
-        font-size: 21px !important;
-
-        padding-left: 20px;
       }
 
       .hed-note {
@@ -1124,11 +1047,9 @@
   </style>
 </head>
 
-
 <body class="copy-protected">
 
   <!-- READING PROGRESS -->
-
   <div
     class="reading-progress"
     id="readingProgress"
@@ -1147,15 +1068,8 @@
     </a>
 
     <nav>
-
-      <a href="journal.html">
-        Journal
-      </a>
-
-      <a href="about.html">
-        About
-      </a>
-
+      <a href="journal.html">Journal</a>
+      <a href="about.html">About</a>
     </nav>
 
   </header>
@@ -1207,19 +1121,13 @@
 
         <span id="entryDate"></span>
 
-        <span class="meta-dot">
-          •
-        </span>
+        <span class="meta-dot">•</span>
 
         <span id="readTime"></span>
 
-        <span class="meta-dot">
-          •
-        </span>
+        <span class="meta-dot">•</span>
 
-        <span>
-          Written by HED
-        </span>
+        <span>Written by HED</span>
 
       </div>
 
@@ -1250,7 +1158,7 @@
       </div>
 
 
-      <!-- READING CONTROLS -->
+      <!-- READING PREFERENCES -->
 
       <div class="reading-preferences">
 
@@ -1259,47 +1167,38 @@
         </div>
 
 
-        <!-- SIZE -->
-
         <div class="preference-group">
 
           <span class="preference-group-title">
             Size
           </span>
 
-          <div class="size-control">
+          <button
+            type="button"
+            class="preference-button"
+            data-size="small"
+          >
+            A−
+          </button>
 
-            <span class="size-label">
-              A−
-            </span>
+          <button
+            type="button"
+            class="preference-button"
+            data-size="normal"
+          >
+            A
+          </button>
 
-            <input
-              id="textSizeSlider"
-              type="range"
-              min="-2"
-              max="6"
-              step="1"
-              value="0"
-              aria-label="Adjust text size"
-            >
-
-            <span class="size-label large">
-              A+
-            </span>
-
-            <span
-              id="sizeNumber"
-              class="size-value"
-            >
-              0
-            </span>
-
-          </div>
+          <button
+            type="button"
+            class="preference-button"
+            data-size="large"
+          >
+            A+
+          </button>
 
         </div>
 
-
-        <!-- FONT -->
 
         <div class="preference-group">
 
@@ -1532,9 +1431,7 @@
   <!-- SUPABASE -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <script src="supabase-config.js"></script>
-
   <script src="reader-auth.js"></script>
 
 
@@ -1548,7 +1445,7 @@
 
 
     /* ========================================
-       URL / ENTRY IDENTIFIER
+       ENTRY IDENTIFIER
     ======================================== */
 
     const urlParams =
@@ -1586,91 +1483,11 @@
       }
 
       return String(value)
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-        .replace(
-          /</g,
-          "&lt;"
-        )
-        .replace(
-          />/g,
-          "&gt;"
-        )
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-        .replace(
-          /'/g,
-          "&#039;"
-        );
-
-    }
-
-
-    function formatDate(date) {
-
-      if (!date) {
-        return "";
-      }
-
-      const parsed =
-        new Date(date);
-
-
-      if (
-        Number.isNaN(
-          parsed.getTime()
-        )
-      ) {
-        return "";
-      }
-
-
-      return parsed.toLocaleDateString(
-        "en-US",
-        {
-          month: "long",
-          day: "numeric",
-          year: "numeric"
-        }
-      );
-
-    }
-
-
-    function calculateReadTime(
-      content
-    ) {
-
-      if (!content) {
-        return "1 min read";
-      }
-
-      const words =
-        String(content)
-          .replace(
-            /<[^>]*>/g,
-            " "
-          )
-          .trim()
-          .split(/\s+/)
-          .filter(Boolean)
-          .length;
-
-
-      const minutes =
-        Math.max(
-          1,
-          Math.ceil(
-            words / 220
-          )
-        );
-
-
-      return `${minutes} min read`;
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
     }
 
@@ -1696,6 +1513,60 @@
     }
 
 
+    function formatDate(date) {
+
+      if (!date) {
+        return "";
+      }
+
+      const parsed =
+        new Date(date);
+
+      if (
+        Number.isNaN(
+          parsed.getTime()
+        )
+      ) {
+        return "";
+      }
+
+      return parsed.toLocaleDateString(
+        "en-US",
+        {
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        }
+      );
+
+    }
+
+
+    function calculateReadTime(content) {
+
+      if (!content) {
+        return "1 min read";
+      }
+
+      const words =
+        String(content)
+          .replace(
+            /<[^>]*>/g,
+            " "
+          )
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean)
+          .length;
+
+      return `${Math.max(
+        1,
+        Math.ceil(words / 220)
+      )} min read`;
+
+    }
+
+
     /* ========================================
        READING PREFERENCES
     ======================================== */
@@ -1712,39 +1583,20 @@
       );
 
 
-    const sizeSlider =
-      document.getElementById(
-        "textSizeSlider"
-      );
-
-
-    const sizeNumber =
-      document.getElementById(
-        "sizeNumber"
-      );
-
-
     /*
-      DEFAULT:
+      IMPORTANT:
 
-      Desktop = 22px
-      Mobile = 21px
+      Size is NOT saved.
 
-      Adjustment ALWAYS starts at 0.
-      Text size is NOT stored.
+      Every new journal entry starts
+      at the normal/default size.
     */
 
-    const baseDesktopSize = 22;
-
-    const baseMobileSize = 21;
-
-
-    let currentAdjustment = 0;
+    let currentSize = "normal";
 
 
     /*
-      Font may still remember the reader's
-      selected font.
+      Font can still be remembered.
     */
 
     let currentFont =
@@ -1753,95 +1605,172 @@
       ) || "serif";
 
 
-    function getBaseSize() {
+    function getReaderSize() {
+
+      if (
+        currentSize === "small"
+      ) {
+        return window.innerWidth <= 700
+          ? 19
+          : 20;
+      }
+
+      if (
+        currentSize === "large"
+      ) {
+        return window.innerWidth <= 700
+          ? 24
+          : 25;
+      }
 
       return window.innerWidth <= 700
-        ? baseMobileSize
-        : baseDesktopSize;
+        ? 21
+        : 22;
+
+    }
+
+
+    function getReaderFont() {
+
+      if (
+        currentFont === "sans"
+      ) {
+        return "Arial, Helvetica, sans-serif";
+      }
+
+      return 'Georgia, "Times New Roman", serif';
 
     }
 
 
     function applyReadingPreferences() {
 
-      const adjustment =
-        Number(
-          currentAdjustment
-        ) || 0;
+      const size =
+        getReaderSize();
 
 
-      const actualSize =
-        getBaseSize() +
-        adjustment;
-
-
-      let fontValue =
-        'Georgia, "Times New Roman", serif';
-
-
-      if (
-        currentFont === "sans"
-      ) {
-
-        fontValue =
-          "Arial, Helvetica, sans-serif";
-
-      }
+      const font =
+        getReaderFont();
 
 
       /*
-        Apply actual text size.
+        CSS variables on article.
       */
 
       articleContent.style.setProperty(
         "--reader-size",
-        `${actualSize}px`
+        `${size}px`
       );
 
 
       articleContent.style.setProperty(
         "--reader-font",
-        fontValue
+        font
       );
 
 
       /*
-        HED note follows same settings.
+        HED note.
       */
 
-      if (hedNoteContent) {
+      hedNoteContent.style.setProperty(
+        "--reader-size",
+        `${size}px`
+      );
 
-        hedNoteContent.style.setProperty(
-          "--reader-size",
-          `${actualSize}px`
-        );
 
-        hedNoteContent.style.setProperty(
-          "--reader-font",
-          fontValue
-        );
-
-      }
+      hedNoteContent.style.setProperty(
+        "--reader-font",
+        font
+      );
 
 
       /*
-        Update slider.
+        DIRECTLY apply the size and font
+        to the generated Supabase content.
+
+        This is the important part that
+        the previous version was missing.
       */
 
-      sizeSlider.value =
-        currentAdjustment;
+      articleContent
+        .querySelectorAll(
+          "p, li"
+        )
+        .forEach(element => {
+
+          element.style.setProperty(
+            "font-size",
+            `${size}px`,
+            "important"
+          );
+
+          element.style.setProperty(
+            "font-family",
+            font,
+            "important"
+          );
+
+        });
 
 
-      sizeNumber.textContent =
-        currentAdjustment > 0
-          ? `+${currentAdjustment}`
-          : String(
-              currentAdjustment
-            );
+      articleContent
+        .querySelectorAll(
+          "blockquote"
+        )
+        .forEach(element => {
+
+          element.style.setProperty(
+            "font-size",
+            `${size + 3}px`,
+            "important"
+          );
+
+          element.style.setProperty(
+            "font-family",
+            font,
+            "important"
+          );
+
+        });
+
+
+      articleContent
+        .querySelectorAll(
+          "h2, h3, strong, em, a"
+        )
+        .forEach(element => {
+
+          element.style.setProperty(
+            "font-family",
+            font,
+            "important"
+          );
+
+        });
 
 
       /*
-        Update active font button.
+        Active size button.
+      */
+
+      document
+        .querySelectorAll(
+          "[data-size]"
+        )
+        .forEach(button => {
+
+          button.classList.toggle(
+            "active",
+            button.dataset.size ===
+              currentSize
+          );
+
+        });
+
+
+      /*
+        Active font button.
       */
 
       document
@@ -1862,23 +1791,28 @@
 
 
     /* ========================================
-       SIZE SLIDER
+       SIZE BUTTONS
     ======================================== */
 
-    sizeSlider.addEventListener(
-      "input",
-      () => {
+    document
+      .querySelectorAll(
+        "[data-size]"
+      )
+      .forEach(button => {
 
-        currentAdjustment =
-          Number(
-            sizeSlider.value
-          );
+        button.addEventListener(
+          "click",
+          () => {
 
+            currentSize =
+              button.dataset.size;
 
-        applyReadingPreferences();
+            applyReadingPreferences();
 
-      }
-    );
+          }
+        );
+
+      });
 
 
     /* ========================================
@@ -1913,27 +1847,10 @@
       });
 
 
-    /*
-      Recalculate if screen size changes.
-    */
-
     window.addEventListener(
       "resize",
-      () => {
-
-        applyReadingPreferences();
-
-      }
+      applyReadingPreferences
     );
-
-
-    /*
-      ALWAYS start at 0.
-    */
-
-    currentAdjustment = 0;
-
-    applyReadingPreferences();
 
 
     /* ========================================
@@ -1941,7 +1858,7 @@
     ======================================== */
 
     /*
-      Disable right click.
+      Right click.
     */
 
     document.addEventListener(
@@ -1955,20 +1872,16 @@
 
 
     /*
-      Disable copy and cut.
+      Copy.
     */
 
     document.addEventListener(
       "copy",
       event => {
 
-        /*
-          Allow copying from inputs/textareas
-          if the reader ever needs them.
-        */
-
         const tag =
           event.target.tagName;
+
 
         if (
           tag === "INPUT" ||
@@ -1977,25 +1890,6 @@
           return;
         }
 
-        event.preventDefault();
-
-      }
-    );
-
-
-    document.addEventListener(
-      "cut",
-      event => {
-
-        const tag =
-          event.target.tagName;
-
-        if (
-          tag === "INPUT" ||
-          tag === "TEXTAREA"
-        ) {
-          return;
-        }
 
         event.preventDefault();
 
@@ -2004,14 +1898,33 @@
 
 
     /*
-      Disable keyboard copy shortcuts.
+      Cut.
+    */
 
-      Ctrl+C
-      Ctrl+X
-      Ctrl+A
-      Cmd+C
-      Cmd+X
-      Cmd+A
+    document.addEventListener(
+      "cut",
+      event => {
+
+        const tag =
+          event.target.tagName;
+
+
+        if (
+          tag === "INPUT" ||
+          tag === "TEXTAREA"
+        ) {
+          return;
+        }
+
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /*
+      Keyboard shortcuts.
     */
 
     document.addEventListener(
@@ -2037,10 +1950,12 @@
 
         if (
           modifier &&
-          (
-            event.key.toLowerCase() === "c" ||
-            event.key.toLowerCase() === "x" ||
-            event.key.toLowerCase() === "a"
+          [
+            "c",
+            "x",
+            "a"
+          ].includes(
+            event.key.toLowerCase()
           )
         ) {
 
@@ -2053,7 +1968,7 @@
 
 
     /*
-      Prevent dragging article content.
+      Prevent dragging article text/images.
     */
 
     document.addEventListener(
@@ -2096,27 +2011,21 @@
       );
 
 
-    function openLightbox(
-      image
-    ) {
+    function openLightbox(image) {
 
       if (!image) {
         return;
       }
 
-
       lightboxImage.src =
         image.src;
-
 
       lightboxImage.alt =
         image.alt || "";
 
-
       imageLightbox.classList.add(
         "open"
       );
-
 
       document.body.style.overflow =
         "hidden";
@@ -2130,10 +2039,8 @@
         "open"
       );
 
-
       document.body.style.overflow =
         "";
-
 
       lightboxImage.src =
         "";
@@ -2180,10 +2087,6 @@
     );
 
 
-    /*
-      Hero image.
-    */
-
     document
       .getElementById(
         "heroImage"
@@ -2199,10 +2102,6 @@
         }
       );
 
-
-    /*
-      Article images.
-    */
 
     articleContent.addEventListener(
       "click",
@@ -2228,18 +2127,17 @@
 
 
     /* ========================================
-       LOAD JOURNAL ENTRY
+       LOAD ENTRY
     ======================================== */
 
     async function loadEntry() {
 
       /*
-        NEW ENTRY ALWAYS STARTS AT 0.
+        Every new entry starts normal.
       */
 
-      currentAdjustment = 0;
-
-      applyReadingPreferences();
+      currentSize =
+        "normal";
 
 
       if (!requestedEntry) {
@@ -2303,72 +2201,60 @@
 
 
       /*
-        Find entry by:
-        ID
-        slug
-        entry_slug
-        entrySlug
-        title
-        title slug
+        Find by ID, slug, or title.
       */
 
       const currentIndex =
         entries.findIndex(
           entry => {
 
-            const idMatches =
+            const idMatch =
               entry.id !== undefined &&
               String(entry.id) ===
                 requested;
 
 
-            const slugMatches =
+            const slugMatch =
               entry.slug &&
-              String(
-                entry.slug
-              ).toLowerCase() ===
+              String(entry.slug)
+                .toLowerCase() ===
                 requested.toLowerCase();
 
 
-            const entrySlugMatches =
+            const entrySlugMatch =
               entry.entry_slug &&
-              String(
-                entry.entry_slug
-              ).toLowerCase() ===
+              String(entry.entry_slug)
+                .toLowerCase() ===
                 requested.toLowerCase();
 
 
-            const camelSlugMatches =
+            const camelSlugMatch =
               entry.entrySlug &&
-              String(
-                entry.entrySlug
-              ).toLowerCase() ===
+              String(entry.entrySlug)
+                .toLowerCase() ===
                 requested.toLowerCase();
 
 
-            const titleMatches =
+            const titleMatch =
               entry.title &&
-              String(
-                entry.title
-              ).toLowerCase() ===
+              String(entry.title)
+                .toLowerCase() ===
                 requested.toLowerCase();
 
 
-            const titleSlugMatches =
+            const titleSlugMatch =
               entry.title &&
-              slugify(
-                entry.title
-              ) ===
+              slugify(entry.title) ===
                 requestedSlug;
 
 
             return (
-              idMatches ||
-              slugMatches ||
-              entrySlugMatches ||
-              camelSlugMatches ||
-              titleMatches ||
-              titleSlugMatches
+              idMatch ||
+              slugMatch ||
+              entrySlugMatch ||
+              camelSlugMatch ||
+              titleMatch ||
+              titleSlugMatch
             );
 
           }
@@ -2380,7 +2266,7 @@
       ) {
 
         console.error(
-          "Requested entry:",
+          "Entry not found:",
           requestedEntry
         );
 
@@ -2396,9 +2282,7 @@
 
 
       const entry =
-        entries[
-          currentIndex
-        ];
+        entries[currentIndex];
 
 
       currentEntryId =
@@ -2436,7 +2320,6 @@
 
         subtitleElement.textContent =
           subtitle;
-
 
         subtitleElement.classList.remove(
           "hidden"
@@ -2498,7 +2381,6 @@
         heroImage.src =
           entry.image_url;
 
-
         heroImage.alt =
           entry.title ||
           "Journal image";
@@ -2519,7 +2401,6 @@
           imageCaption.textContent =
             caption;
 
-
           imageCaption.classList.remove(
             "hidden"
           );
@@ -2538,7 +2419,6 @@
           "hidden"
         );
 
-
         heroImage.removeAttribute(
           "src"
         );
@@ -2556,8 +2436,7 @@
 
 
       /*
-        Reapply preferences after inserting
-        Supabase HTML.
+        Apply AFTER inserting Supabase HTML.
       */
 
       applyReadingPreferences();
@@ -2584,7 +2463,6 @@
           "hidden"
         );
 
-
         hedNoteContent.textContent =
           note;
 
@@ -2594,7 +2472,6 @@
           "hidden"
         );
 
-
         hedNoteContent.textContent =
           "";
 
@@ -2602,7 +2479,7 @@
 
 
       /* ========================================
-         PREVIOUS ENTRY
+         PREVIOUS
       ======================================== */
 
       const previous =
@@ -2646,7 +2523,7 @@
 
 
       /* ========================================
-         NEXT ENTRY
+         NEXT
       ======================================== */
 
       const next =
@@ -2690,7 +2567,7 @@
 
 
       /* ========================================
-         SHOW ENTRY
+         SHOW PAGE
       ======================================== */
 
       document.getElementById(
@@ -2708,11 +2585,11 @@
 
 
       /*
-        Explicitly reset to 0 after
-        the entry has loaded.
+        Final preference application.
       */
 
-      currentAdjustment = 0;
+      currentSize =
+        "normal";
 
       applyReadingPreferences();
 
@@ -2732,9 +2609,7 @@
        COMMENTS
     ======================================== */
 
-    async function loadComments(
-      id
-    ) {
+    async function loadComments(id) {
 
       if (!id) {
         return;
@@ -2860,19 +2735,9 @@
       );
 
 
-    if (
-      window.readerNickname
-    ) {
-
-      commentName.value =
-        window.readerNickname;
-
-    } else {
-
-      commentName.value =
-        "Reader";
-
-    }
+    commentName.value =
+      window.readerNickname ||
+      "Reader";
 
 
     document
@@ -2953,7 +2818,7 @@
           if (error) {
 
             console.error(
-              "Comment posting error:",
+              "Comment error:",
               error
             );
 
@@ -2976,7 +2841,7 @@
             "Your response has been posted.";
 
 
-          await loadComments(
+          loadComments(
             currentEntryId
           );
 
@@ -3041,6 +2906,8 @@
     /* ========================================
        START
     ======================================== */
+
+    applyReadingPreferences();
 
     loadEntry();
 
