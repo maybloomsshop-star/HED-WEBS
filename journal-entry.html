@@ -1,1301 +1,1697 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Journal — HED</title>
-
-<!-- ARTICLE FONTS -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-
-:root{
-    --hed-brown:#4a352b;
-    --hed-brown-dark:#382920;
-    --hed-cream:#f5efe6;
-    --hed-paper:#fbf8f3;
-    --hed-green:#68745d;
-    --hed-pink:#c58f91;
-    --hed-text:#342b26;
-    --hed-muted:#85786e;
-    --hed-line:#d8cec2;
-}
-
-*{
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    margin:0;
-    background:var(--hed-paper);
-    color:var(--hed-text);
-    font-family:Georgia,"Times New Roman",serif;
-}
-
-/* =========================
-   COPY PROTECTION
-========================= */
-
-.article-content,
-.article-content *{
-    -webkit-user-select:none;
-    user-select:none;
-    -webkit-touch-callout:none;
-}
-
-img{
-    -webkit-user-drag:none;
-    user-drag:none;
-}
-
-/* =========================
-   PROGRESS
-========================= */
-
-.reading-progress{
-    position:fixed;
-    top:0;
-    left:0;
-    width:0;
-    height:3px;
-    background:var(--hed-brown);
-    z-index:9999;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-header{
-    height:78px;
-    padding:0 6%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid var(--hed-line);
-    background:rgba(251,248,243,.96);
-    position:sticky;
-    top:0;
-    z-index:100;
-    backdrop-filter:blur(8px);
-}
-
-.brand{
-    text-decoration:none;
-    color:var(--hed-brown-dark);
-    font-size:25px;
-    font-weight:bold;
-    letter-spacing:4px;
-}
-
-nav{
-    display:flex;
-    gap:30px;
-    align-items:center;
-}
-
-nav a{
-    text-decoration:none;
-    color:var(--hed-muted);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:11px;
-    font-weight:bold;
-    letter-spacing:2px;
-    text-transform:uppercase;
-}
-
-nav a:hover{
-    color:var(--hed-brown);
-}
-
-/* =========================
-   MAIN
-========================= */
-
-main{
-    width:min(1080px,90%);
-    margin:0 auto;
-    padding:70px 0 100px;
-}
-
-.back-link{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    text-decoration:none;
-    color:var(--hed-muted);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:11px;
-    font-weight:bold;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    margin-bottom:45px;
-}
-
-.back-link:hover{
-    color:var(--hed-brown);
-}
-
-.journal-label{
-    color:var(--hed-green);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:11px;
-    font-weight:bold;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    margin-bottom:18px;
-}
-
-.entry-title{
-    max-width:760px;
-    margin:0;
-    color:var(--hed-brown-dark);
-    font-size:clamp(30px,3vw,38px);
-    line-height:1.1;
-    font-weight:normal;
-    letter-spacing:-1px;
-}
-
-.entry-subtitle{
-    max-width:700px;
-    margin:22px 0;
-    color:var(--hed-muted);
-    font-size:19px;
-    line-height:1.6;
-}
-
-.entry-meta{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    gap:9px;
-    margin-top:22px;
-    color:var(--hed-muted);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:10px;
-    letter-spacing:1.4px;
-    text-transform:uppercase;
-}
-
-.meta-dot{
-    color:var(--hed-pink);
-}
-
-.ornament{
-    margin:35px 0;
-    color:var(--hed-pink);
-    font-size:17px;
-    letter-spacing:7px;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero-image-wrap{
-    width:100%;
-    margin:30px 0 55px;
-}
-
-.hero-image{
-    width:100%;
-    max-height:650px;
-    object-fit:cover;
-    display:block;
-    background:var(--hed-cream);
-    cursor:zoom-in;
-}
-
-.image-caption{
-    margin-top:12px;
-    color:var(--hed-muted);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:10px;
-    letter-spacing:.8px;
-    line-height:1.5;
-}
-
-/* =========================
-   READING PREFERENCES
-========================= */
-
-.reading-preferences{
-    width:min(700px,100%);
-    margin:0 auto 40px;
-    padding:14px 0;
-    border-top:1px solid var(--hed-line);
-    border-bottom:1px solid var(--hed-line);
-
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    gap:18px;
-    flex-wrap:wrap;
-}
-
-.preference-label,
-.preference-group-title{
-    color:var(--hed-muted);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:1.7px;
-    text-transform:uppercase;
-}
-
-.preference-group{
-    display:flex;
-    align-items:center;
-    gap:4px;
-}
-
-.preference-group-title{
-    margin-right:4px;
-    font-weight:normal;
-    letter-spacing:1px;
-}
-
-.preference-button{
-    border:1px solid transparent;
-    background:transparent;
-    color:var(--hed-muted);
-    padding:6px 9px;
-    border-radius:4px;
-    cursor:pointer;
-
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:11px;
-
-    transition:
-        color .15s ease,
-        border-color .15s ease,
-        background .15s ease;
-}
-
-.preference-button:hover,
-.preference-button.active{
-    color:var(--hed-brown-dark);
-    border-color:var(--hed-line);
-    background:var(--hed-cream);
-    font-weight:bold;
-}
-
-.font-serif{
-    font-family:Georgia,"Times New Roman",serif;
-}
-
-.font-sans{
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-.font-lora{
-    font-family:"Lora",Georgia,serif;
-}
-
-.font-cormorant{
-    font-family:"Cormorant Garamond",Georgia,serif;
-}
-
-/* =========================
-   ARTICLE
-========================= */
-
-.article-area{
-    width:min(700px,100%);
-    margin:0 auto;
-}
-
-.article-content{
-    width:100%;
-
-    --article-size:24px;
-    --article-font:Georgia,"Times New Roman",serif;
-
-    font-family:var(--article-font);
-    font-size:var(--article-size);
-    line-height:1.82;
-
-    color:var(--hed-text);
-
-    overflow-wrap:break-word;
-
-    transition:
-        font-size .15s ease,
-        font-family .15s ease;
-}
-
-/*
-   Everything inside the article inherits
-   the currently selected font.
-*/
-
-.article-content,
-.article-content p,
-.article-content li,
-.article-content blockquote,
-.article-content h1,
-.article-content h2,
-.article-content h3,
-.article-content h4,
-.article-content h5,
-.article-content h6,
-.article-content strong,
-.article-content b,
-.article-content em,
-.article-content i,
-.article-content a{
-    font-family:var(--article-font)!important;
-}
-
-.article-content p,
-.article-content li,
-.article-content blockquote{
-    font-size:var(--article-size)!important;
-    line-height:1.82!important;
-}
-
-.article-content p{
-    margin:0 0 1.5em;
-}
-
-.article-content h1,
-.article-content h2,
-.article-content h3,
-.article-content h4,
-.article-content h5,
-.article-content h6{
-    color:var(--hed-brown-dark)!important;
-    font-weight:500;
-    line-height:1.25!important;
-}
-
-.article-content h1{
-    font-size:calc(var(--article-size) + 12px)!important;
-    margin:1.8em 0 .8em;
-}
-
-.article-content h2{
-    font-size:calc(var(--article-size) + 7px)!important;
-    margin:2.1em 0 .8em;
-}
-
-.article-content h3{
-    font-size:calc(var(--article-size) + 3px)!important;
-    margin:2em 0 .7em;
-}
-
-.article-content h4,
-.article-content h5,
-.article-content h6{
-    font-size:calc(var(--article-size) + 1px)!important;
-    margin:1.7em 0 .7em;
-}
-
-.article-content strong,
-.article-content b{
-    color:var(--hed-brown-dark)!important;
-}
-
-.article-content em,
-.article-content i{
-    color:#574a42!important;
-}
-
-.article-content a{
-    color:var(--hed-green)!important;
-    text-decoration-thickness:1px;
-    text-underline-offset:3px;
-}
-
-.article-content blockquote{
-    margin:2em 0;
-    padding:7px 0 7px 28px;
-    border-left:3px solid var(--hed-pink);
-    font-style:italic;
-}
-
-.article-content ul,
-.article-content ol{
-    margin:0 0 1.5em;
-    padding-left:30px;
-}
-
-.article-content li{
-    margin-bottom:9px;
-}
-
-.article-content img{
-    width:100%;
-    height:auto;
-    display:block;
-    margin:40px 0;
-    cursor:zoom-in;
-}
-
-.article-content hr{
-    border:0;
-    border-top:1px solid var(--hed-line);
-    margin:50px 0;
-}
-
-/* =========================
-   HED NOTE
-========================= */
-
-.hed-note{
-    margin-top:55px;
-    padding:28px;
-    background:var(--hed-cream);
-    border:1px solid var(--hed-line);
-}
-
-.hed-note-label{
-    margin-bottom:10px;
-    color:var(--hed-green);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:2px;
-    text-transform:uppercase;
-}
-
-.hed-note-content{
-    color:var(--hed-brown);
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:24px;
-    line-height:1.82;
-}
-
-/* =========================
-   RESPONSES
-========================= */
-
-.responses{
-    width:min(700px,100%);
-    margin:60px auto 0;
-    padding-top:28px;
-    border-top:1px solid var(--hed-line);
-}
-
-.section-label{
-    color:var(--hed-green);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:2.5px;
-    text-transform:uppercase;
-    margin-bottom:7px;
-}
-
-.section-title{
-    margin:0;
-    color:var(--hed-brown-dark);
-    font-size:27px;
-    font-weight:normal;
-}
-
-.response-count{
-    margin-top:5px;
-    color:var(--hed-muted);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:11px;
-}
-
-.response-form{
-    margin-top:15px;
-    padding:14px;
-    background:var(--hed-cream);
-    border:1px solid var(--hed-line);
-}
-
-.response-form input,
-.response-form textarea{
-    width:100%;
-    border:1px solid var(--hed-line);
-    background:var(--hed-paper);
-    color:var(--hed-text);
-    padding:9px 11px;
-    margin-bottom:7px;
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:15px;
-    outline:none;
-}
-
-.response-form textarea{
-    min-height:65px;
-    resize:vertical;
-}
-
-.response-form input:focus,
-.response-form textarea:focus{
-    border-color:var(--hed-green);
-}
-
-.response-form button{
-    border:0;
-    background:var(--hed-brown);
-    color:white;
-    padding:9px 15px;
-    cursor:pointer;
-
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:1.4px;
-    text-transform:uppercase;
-}
-
-.response-form button:hover{
-    background:var(--hed-brown-dark);
-}
-
-.response-message{
-    margin-top:7px;
-    color:var(--hed-muted);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:11px;
-}
-
-/* =========================
-   COMMENTS
-========================= */
-
-.comment-list{
-    margin-top:12px;
-    display:flex;
-    flex-direction:column;
-}
-
-.comment{
-    padding:13px 0;
-    border-bottom:1px solid var(--hed-line);
-}
-
-.comment-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    gap:10px;
-    margin-bottom:4px;
-}
-
-.comment-name{
-    color:var(--hed-brown-dark);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.comment-date{
-    color:var(--hed-muted);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:9px;
-}
-
-.comment-content{
-    color:var(--hed-text);
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:14px;
-    line-height:1.5;
-    white-space:pre-wrap;
-    overflow-wrap:break-word;
-}
-
-.comment-actions{
-    margin-top:7px;
-}
-
-.comment-delete{
-    display:inline-block;
-    padding:0;
-    border:0;
-    background:none;
-    color:var(--hed-muted);
-    cursor:pointer;
-
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:9px;
-    font-weight:bold;
-    letter-spacing:1px;
-    text-transform:uppercase;
-}
-
-.comment-delete:hover{
-    color:var(--hed-brown-dark);
-    text-decoration:underline;
-}
-
-.comment-delete:disabled{
-    opacity:.5;
-    cursor:wait;
-}
-
-/* =========================
-   KEEP READING
-========================= */
-
-.keep-reading{
-    margin:75px auto 0;
-    padding-top:30px;
-    border-top:1px solid var(--hed-line);
-}
-
-.reading-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-    margin-top:20px;
-}
-
-.reading-card{
-    min-height:140px;
-    padding:23px;
-    background:var(--hed-cream);
-    border:1px solid var(--hed-line);
-    text-decoration:none;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-
-    transition:
-        transform .2s ease,
-        background .2s ease;
-}
-
-.reading-card:hover{
-    transform:translateY(-2px);
-    background:#f1e9df;
-}
-
-.reading-direction{
-    color:var(--hed-green);
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:9px;
-    font-weight:bold;
-    letter-spacing:1.8px;
-    text-transform:uppercase;
-}
-
-.reading-title{
-    margin-top:18px;
-    color:var(--hed-brown-dark);
-    font-size:20px;
-    line-height:1.3;
-}
-
-.all-journal{
-    display:block;
-    width:fit-content;
-    margin:25px auto 0;
-    color:var(--hed-brown);
-    text-decoration:none;
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-}
-
-.all-journal:hover{
-    color:var(--hed-green);
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    margin-top:80px;
-    padding:50px 6%;
-    background:var(--hed-brown-dark);
-    color:var(--hed-cream);
-    text-align:center;
-}
-
-.footer-brand{
-    font-size:24px;
-    letter-spacing:4px;
-    font-weight:bold;
-}
-
-.footer-tagline{
-    margin-top:10px;
-    color:#cfc3b8;
-    font-size:14px;
-    font-style:italic;
-}
-
-.footer-nav{
-    margin-top:22px;
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    flex-wrap:wrap;
-}
-
-.footer-nav a{
-    color:#cfc3b8;
-    text-decoration:none;
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:10px;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-}
-
-/* =========================
-   STATUS
-========================= */
-
-.status{
-    min-height:300px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    color:var(--hed-muted);
-
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:12px;
-    letter-spacing:1px;
-}
-
-.hidden{
-    display:none!important;
-}
-
-/* =========================
-   LIGHTBOX
-========================= */
-
-.image-lightbox{
-    position:fixed;
-    inset:0;
-    z-index:10000;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:30px;
-
-    background:rgba(40,31,26,.92);
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:
-        opacity .2s ease,
-        visibility .2s ease;
-}
-
-.image-lightbox.open{
-    opacity:1;
-    visibility:visible;
-}
-
-.image-lightbox img{
-    max-width:95vw;
-    max-height:90vh;
-    object-fit:contain;
-    box-shadow:0 20px 60px rgba(0,0,0,.3);
-}
-
-.lightbox-close{
-    position:absolute;
-    top:18px;
-    right:24px;
-
-    border:0;
-    background:transparent;
-    color:white;
-
-    font-size:30px;
-    cursor:pointer;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px){
-
-    header{
-        height:68px;
-        padding:0 5%;
-    }
-
-    .brand{
-        font-size:21px;
-    }
-
-    nav{
-        gap:16px;
-    }
-
-    nav a{
-        font-size:9px;
-        letter-spacing:1.3px;
-    }
-
-    main{
-        width:90%;
-        padding-top:45px;
-    }
-
-    .back-link{
-        margin-bottom:35px;
-    }
-
-    .entry-title{
-        font-size:28px;
-        letter-spacing:-.6px;
-    }
-
-    .entry-subtitle{
-        font-size:18px;
-    }
-
-    .hero-image-wrap{
-        margin-bottom:40px;
-    }
-
-    .reading-preferences{
-        align-items:flex-start;
-        flex-direction:column;
-        gap:10px;
-    }
-
-    .article-area{
-        width:100%;
-    }
-
-    .article-content{
-        --article-size:21px;
-        line-height:1.8;
-    }
-
-    .article-content p,
-    .article-content li,
-    .article-content blockquote{
-        line-height:1.8!important;
-    }
-
-    .article-content h1{
-        font-size:33px!important;
-    }
-
-    .article-content h2{
-        font-size:29px!important;
-    }
-
-    .article-content h3{
-        font-size:25px!important;
-    }
-
-    .hed-note{
-        padding:22px;
-    }
-
-    .responses{
-        margin-top:50px;
-    }
-
-    .reading-grid{
-        grid-template-columns:1fr;
-    }
-
-    .reading-card{
-        min-height:125px;
-    }
-
-    .comment-top{
-        align-items:flex-start;
-    }
-
-}
-
-</style>
+
+    <meta charset="UTF-8">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Journals · May Blooms</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #f3efe9;
+            color: #29221e;
+            font-family: Arial, Helvetica, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .journal-page {
+            min-height: 100vh;
+            background: #f3efe9;
+        }
+
+
+        /* =====================================================
+           READING PROGRESS
+        ===================================================== */
+
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 0;
+            height: 3px;
+
+            background: #5f4a3f;
+
+            z-index: 9999;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .journal-header {
+            width: 100%;
+
+            padding: 25px 5vw;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom:
+                1px solid
+                rgba(73, 59, 51, 0.14);
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .brand-name {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 18px;
+            font-weight: 400;
+
+            letter-spacing: 0.035em;
+        }
+
+        .brand-subtitle {
+            font-size: 8px;
+            letter-spacing: 0.18em;
+
+            color: #8c7b70;
+
+            text-transform: uppercase;
+        }
+
+        .back-link {
+            font-size: 14px;
+            font-weight: 700;
+
+            letter-spacing: 0.08em;
+
+            color: #75645a;
+
+            text-transform: uppercase;
+        }
+
+        .back-link:hover {
+            color: #29221e;
+        }
+
+
+        /* =====================================================
+           INDEX
+        ===================================================== */
+
+        .journal-index {
+            width: 100%;
+        }
+
+        .journal-intro {
+            width:
+                min(
+                    calc(100% - 10vw),
+                    920px
+                );
+
+            margin: 0 auto;
+
+            padding:
+                105px
+                0
+                88px;
+        }
+
+        .journal-kicker {
+            margin: 0 0 20px;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            letter-spacing: 0.20em;
+
+            color: #8d7a6e;
+
+            text-transform: uppercase;
+        }
+
+        .journal-title {
+            margin: 0;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(
+                    58px,
+                    9vw,
+                    105px
+                );
+
+            line-height: 0.88;
+
+            font-weight: 400;
+
+            letter-spacing: -0.045em;
+        }
+
+        .journal-description {
+            max-width: 540px;
+
+            margin: 31px 0 0;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 17px;
+            line-height: 1.75;
+
+            color: #776960;
+        }
+
+        .journal-mark {
+            width: 46px;
+            height: 1px;
+
+            margin-top: 45px;
+
+            background: #907c70;
+        }
+
+
+        /* =====================================================
+           JOURNAL LIST
+        ===================================================== */
+
+        .journal-list {
+            width:
+                min(
+                    calc(100% - 10vw),
+                    920px
+                );
+
+            margin:
+                0 auto
+                120px;
+        }
+
+        .journal-preview {
+            display: grid;
+
+            grid-template-columns:
+                145px
+                minmax(0, 1fr);
+
+            gap: 45px;
+
+            width: 100%;
+
+            padding:
+                43px
+                0
+                48px;
+
+            border-top:
+                1px solid
+                rgba(73, 59, 51, 0.17);
+        }
+
+        .journal-preview:last-child {
+            border-bottom:
+                1px solid
+                rgba(73, 59, 51, 0.17);
+        }
+
+        .journal-preview:hover {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .preview-meta {
+            padding-top: 5px;
+        }
+
+        .preview-date {
+            margin: 0;
+
+            font-size: 8px;
+            font-weight: 700;
+
+            line-height: 1.5;
+
+            letter-spacing: 0.15em;
+
+            color: #927f73;
+
+            text-transform: uppercase;
+        }
+
+        .preview-number {
+            display: block;
+
+            margin-top: 14px;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 13px;
+
+            color: #a6968b;
+        }
+
+        .preview-title {
+            margin: 0;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(
+                    28px,
+                    4vw,
+                    43px
+                );
+
+            line-height: 1.10;
+
+            font-weight: 400;
+
+            letter-spacing: -0.025em;
+        }
+
+        .preview-excerpt {
+            max-width: 670px;
+
+            margin: 17px 0 0;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 15px;
+            line-height: 1.8;
+
+            color: #756961;
+        }
+
+        .preview-read {
+            display: inline-block;
+
+            margin-top: 22px;
+
+            font-size: 8px;
+            font-weight: 700;
+
+            letter-spacing: 0.15em;
+
+            color: #78665b;
+
+            text-transform: uppercase;
+        }
+
+        .journal-status {
+            padding: 45px 0;
+
+            border-top:
+                1px solid
+                rgba(73,59,51,0.17);
+
+            border-bottom:
+                1px solid
+                rgba(73,59,51,0.17);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 15px;
+            line-height: 1.7;
+
+            color: #8c7d74;
+        }
+
+
+        /* =====================================================
+           READER
+        ===================================================== */
+
+        .reader {
+            display: none;
+        }
+
+        .reader.active {
+            display: block;
+        }
+
+        .reader-shell {
+            width:
+                min(
+                    calc(100% - 10vw),
+                    920px
+                );
+
+            margin: 0 auto;
+
+            padding:
+                75px
+                0
+                100px;
+        }
+
+        .reader-top {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 80px;
+        }
+
+        .reader-back {
+            font-size: 14px;
+            font-weight: 700;
+
+            letter-spacing: 0.08em;
+
+            color: #847269;
+
+            text-transform: uppercase;
+        }
+
+        .reader-label {
+            font-size: 13px;
+            font-weight: 700;
+
+            letter-spacing: 0.10em;
+
+            color: #9b897d;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           READER HEADER
+        ===================================================== */
+
+        .reader-header {
+            max-width: 850px;
+
+            margin-bottom: 45px;
+        }
+
+        .reader-date {
+            margin: 0 0 14px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            letter-spacing: 0.12em;
+
+            color: #907d71;
+
+            text-transform: uppercase;
+        }
+
+        .reader-title {
+            margin: 0;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(
+                    34px,
+                    3.8vw,
+                    52px
+                );
+
+            line-height: 1.02;
+
+            font-weight: 400;
+
+            letter-spacing: -0.042em;
+        }
+
+        .reader-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            margin-top: 18px;
+
+            font-size: 14px;
+
+            color: #756961;
+        }
+
+        .reader-rule {
+            width: 38px;
+            height: 1px;
+
+            margin-top: 30px;
+
+            background: #917d70;
+        }
+
+
+        /* =====================================================
+           IMAGE
+        ===================================================== */
+
+        .reader-image {
+            display: block;
+
+            width: auto;
+            max-width: 100%;
+            height: auto;
+
+            margin:
+                50px
+                auto
+                60px;
+        }
+
+
+        /* =====================================================
+           READING PREFERENCES
+        ===================================================== */
+
+        .reading-preferences {
+            width: 100%;
+
+            margin:
+                0
+                auto
+                38px;
+
+            padding:
+                11px
+                13px;
+
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            flex-wrap: wrap;
+
+            border:
+                1px solid
+                rgba(73,59,51,0.12);
+
+            background:
+                rgba(255,255,255,0.18);
+
+            box-shadow:
+                0 1px 4px
+                rgba(73,59,51,0.05);
+        }
+
+        .reading-preferences-label {
+            margin-right: 5px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: 0.08em;
+
+            color: #78665b;
+
+            text-transform: uppercase;
+        }
+
+        .reading-button {
+            min-width: 40px;
+            min-height: 32px;
+
+            padding:
+                6px
+                10px;
+
+            border:
+                1px solid
+                rgba(73,59,51,0.18);
+
+            background: transparent;
+
+            color: #5f5149;
+
+            cursor: pointer;
+
+            font-size: 12px;
+        }
+
+        .reading-button:hover,
+        .reading-button.active {
+            background: #e7ded5;
+            border-color: #9b897d;
+        }
+
+
+        /* =====================================================
+           ARTICLE
+        ===================================================== */
+
+        .reader-content {
+            width: 100%;
+            max-width: 720px;
+
+            margin: 0 auto;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 21px;
+
+            line-height: 1.9;
+
+            color: #403731;
+
+            overflow-wrap: break-word;
+        }
+
+        .reader-content.serif {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+        }
+
+        .reader-content.sans {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        .reader-content.lora {
+            font-family:
+                "Lora",
+                Georgia,
+                serif;
+        }
+
+        .reader-content.cormorant {
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+        }
+
+        .reader-content,
+        .reader-content * {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .reader-content p {
+            margin:
+                0
+                0
+                1.55em;
+        }
+
+        .reader-content div {
+            margin: 0;
+        }
+
+        .reader-content h1,
+        .reader-content h2,
+        .reader-content h3,
+        .reader-content h4 {
+            color: #29221e;
+            line-height: 1.25;
+            font-weight: 400;
+        }
+
+        .reader-content h1 {
+            font-size: 36px;
+            margin: 1.8em 0 0.75em;
+        }
+
+        .reader-content h2 {
+            font-size: 31px;
+            margin: 1.8em 0 0.75em;
+        }
+
+        .reader-content h3 {
+            font-size: 26px;
+            margin: 1.7em 0 0.7em;
+        }
+
+        .reader-content h4 {
+            font-size: 21px;
+            margin: 1.7em 0 0.7em;
+        }
+
+        .reader-content strong,
+        .reader-content b {
+            color: #29221e;
+        }
+
+        .reader-content blockquote {
+            margin: 2.2em 0;
+
+            padding:
+                5px
+                0
+                5px
+                27px;
+
+            border-left:
+                1px solid
+                #8f7b6e;
+
+            color: #71625a;
+        }
+
+        .reader-content ul,
+        .reader-content ol {
+            margin: 1.5em 0;
+            padding-left: 1.5em;
+        }
+
+        .reader-content li {
+            margin-bottom: 0.65em;
+        }
+
+        .reader-content img {
+            display: block;
+
+            width: auto;
+            max-width: 100%;
+            height: auto;
+
+            margin:
+                2.7em
+                auto;
+        }
+
+        .reader-content a {
+            color: #6f5b50;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+
+        /* =====================================================
+           END OF ENTRY
+        ===================================================== */
+
+        .end-of-entry {
+            width: 100%;
+            max-width: 720px;
+
+            margin:
+                70px
+                auto
+                45px;
+
+            text-align: center;
+        }
+
+        .end-of-entry-line {
+            width: 42px;
+            height: 1px;
+
+            margin: 0 auto 17px;
+
+            background: #a18e82;
+        }
+
+        .end-of-entry-text {
+            margin: 0;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            letter-spacing: 0.16em;
+
+            color: #a18e82;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .reader-navigation {
+            width: 100%;
+            max-width: 720px;
+
+            margin:
+                0
+                auto
+                90px;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .reader-navigation a {
+            flex: 1;
+
+            padding:
+                22px
+                0;
+
+            border-top:
+                1px solid
+                rgba(73,59,51,0.17);
+
+            border-bottom:
+                1px solid
+                rgba(73,59,51,0.17);
+        }
+
+        .reader-navigation a:hover {
+            background:
+                rgba(255,255,255,0.20);
+        }
+
+        .reader-nav-label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 8px;
+            font-weight: 700;
+
+            letter-spacing: 0.15em;
+
+            color: #9a887c;
+
+            text-transform: uppercase;
+        }
+
+        .reader-nav-title {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 19px;
+            line-height: 1.35;
+        }
+
+
+        /* =====================================================
+           COMMENTS
+        ===================================================== */
+
+        .comments-section {
+            width:
+                min(
+                    calc(100% - 10vw),
+                    720px
+                );
+
+            margin:
+                0
+                auto
+                110px;
+        }
+
+        .comments-heading {
+            margin: 0 0 30px;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 30px;
+            font-weight: 400;
+        }
+
+        .comment-count {
+            margin-left: 8px;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 0.08em;
+
+            color: #a18e82;
+
+            text-transform: uppercase;
+        }
+
+        .comment-form {
+            padding:
+                0
+                0
+                35px;
+
+            border-bottom:
+                1px solid
+                rgba(73,59,51,0.14);
+        }
+
+        .comment-input,
+        .comment-textarea {
+            width: 100%;
+
+            border:
+                1px solid
+                rgba(73,59,51,0.17);
+
+            background:
+                rgba(255,255,255,0.22);
+
+            color: #29221e;
+
+            outline: none;
+        }
+
+        .comment-input {
+            height: 43px;
+
+            padding:
+                0
+                13px;
+
+            margin-bottom: 12px;
+        }
+
+        .comment-textarea {
+            min-height: 130px;
+
+            padding: 13px;
+
+            resize: vertical;
+
+            line-height: 1.6;
+        }
+
+        .comment-input:focus,
+        .comment-textarea:focus {
+            border-color: #9b897d;
+        }
+
+        .comment-submit {
+            margin-top: 13px;
+
+            padding:
+                10px
+                0;
+
+            border: 0;
+
+            background: none;
+
+            cursor: pointer;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: 0.10em;
+
+            color: #78665b;
+
+            text-transform: uppercase;
+        }
+
+        .comment-submit:hover {
+            color: #29221e;
+        }
+
+        .comment-status {
+            margin-top: 15px;
+
+            font-size: 12px;
+
+            color: #8c7d74;
+        }
+
+        .comment-actions {
+            margin-top: 7px;
+        }
+
+        .comment-delete {
+            padding: 0;
+
+            border: 0;
+
+            background: none;
+
+            color: #a6968b;
+
+            cursor: pointer;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 0.08em;
+
+            text-transform: uppercase;
+        }
+
+        .comment-delete:hover {
+            color: #29221e;
+        }
+
+        .comment-delete:disabled {
+            opacity: .5;
+            cursor: wait;
+        }
+
+        .comment-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comment {
+            padding:
+                27px
+                0
+                29px;
+
+            border-bottom:
+                1px solid
+                rgba(73,59,51,0.12);
+        }
+
+        .comment-meta {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+
+            margin-bottom: 10px;
+        }
+
+        .comment-name {
+            margin: 0;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            color: #4f4037;
+        }
+
+        .comment-date {
+            margin: 0;
+
+            font-size: 10px;
+
+            color: #a18e82;
+        }
+
+        .comment-body {
+            margin: 0;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 16px;
+            line-height: 1.75;
+
+            color: #65574f;
+
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+        }
+
+
+        /* =====================================================
+           MORE JOURNAL
+        ===================================================== */
+
+        .more-journal {
+            width:
+                min(
+                    calc(100% - 10vw),
+                    920px
+                );
+
+            margin:
+                0
+                auto
+                100px;
+        }
+
+        .more-journal-title {
+            margin: 0 0 25px;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 28px;
+            font-weight: 400;
+        }
+
+        .more-journal-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    minmax(0, 1fr)
+                );
+
+            gap: 20px;
+        }
+
+        .more-journal-card {
+            padding:
+                24px
+                0
+                28px;
+
+            border-top:
+                1px solid
+                rgba(73,59,51,0.17);
+
+            border-bottom:
+                1px solid
+                rgba(73,59,51,0.17);
+        }
+
+        .more-journal-card:hover {
+            padding-left: 7px;
+            padding-right: 7px;
+        }
+
+        .more-journal-card-date {
+            margin: 0 0 11px;
+
+            font-size: 8px;
+            font-weight: 700;
+
+            letter-spacing: 0.14em;
+
+            color: #9a887c;
+
+            text-transform: uppercase;
+        }
+
+        .more-journal-card-title {
+            margin: 0;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 21px;
+            line-height: 1.25;
+            font-weight: 400;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .site-footer {
+            width: 100%;
+
+            padding:
+                30px
+                5vw
+                40px;
+
+            border-top:
+                1px solid
+                rgba(73,59,51,0.14);
+
+            text-align: center;
+        }
+
+        .site-footer p {
+            margin: 0;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            letter-spacing: 0.14em;
+
+            color: #9a887c;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .journal-header {
+                padding:
+                    20px
+                    5vw;
+            }
+
+            .back-link {
+                font-size: 11px;
+            }
+
+            .journal-intro {
+                padding:
+                    70px
+                    0
+                    60px;
+            }
+
+            .journal-title {
+                font-size: 62px;
+            }
+
+            .journal-list {
+                margin-bottom: 70px;
+            }
+
+            .journal-preview {
+                display: block;
+
+                padding:
+                    31px
+                    0
+                    36px;
+            }
+
+            .journal-preview:hover {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .preview-meta {
+                padding: 0;
+                margin-bottom: 14px;
+            }
+
+            .preview-number {
+                display: none;
+            }
+
+            .preview-title {
+                font-size: 30px;
+            }
+
+            .preview-excerpt {
+                font-size: 15px;
+            }
+
+            .reader-shell {
+                padding:
+                    58px
+                    0
+                    80px;
+            }
+
+            .reader-top {
+                margin-bottom: 65px;
+            }
+
+            .reader-title {
+                font-size: 45px;
+            }
+
+            .reader-header {
+                margin-bottom: 40px;
+            }
+
+            .reader-content {
+                font-size: 18px;
+                line-height: 1.85;
+            }
+
+            .reading-preferences {
+                gap: 7px;
+            }
+
+            .reading-preferences-label {
+                width: 100%;
+            }
+
+            .reader-navigation {
+                display: block;
+            }
+
+            .reader-navigation a {
+                display: block;
+
+                margin-bottom: 15px;
+            }
+
+            .comments-section {
+                width:
+                    calc(100% - 10vw);
+            }
+
+            .more-journal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .more-journal {
+                width:
+                    calc(100% - 10vw);
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<div class="reading-progress" id="readingProgress"></div>
-
-<header>
-
-    <a href="hed.html" class="brand">
-        HED
-    </a>
-
-    <nav>
-        <a href="journal.html">Journal</a>
-        <a href="about.html">About</a>
-    </nav>
-
-</header>
+<div class="journal-page">
 
 
-<main>
-
-<div id="loading" class="status">
-    Loading journal entry...
-</div>
-
-
-<article id="entryPage" class="hidden">
-
-<a href="journal.html" class="back-link">
-    ← Back to Journal
-</a>
-
-<div class="journal-label">
-    Journal
-</div>
-
-<h1 class="entry-title" id="entryTitle"></h1>
-
-<div
-    class="entry-subtitle hidden"
-    id="entrySubtitle"
-></div>
-
-<div class="entry-meta">
-
-    <span id="entryDate"></span>
-
-    <span class="meta-dot">•</span>
-
-    <span id="readTime"></span>
-
-    <span class="meta-dot">•</span>
-
-    <span>Written by HED</span>
-
-</div>
-
-<div class="ornament">
-    ✦
-</div>
-
-
-<div
-    class="hero-image-wrap hidden"
-    id="heroWrap"
->
-
-    <img
-        id="heroImage"
-        class="hero-image"
-        alt=""
-    >
+    <!-- =====================================================
+         READING PROGRESS
+    ===================================================== -->
 
     <div
-        id="imageCaption"
-        class="image-caption hidden"
-    ></div>
-
-</div>
-
-
-<!-- =========================
-     READING PREFERENCES
-========================= -->
-
-<div class="reading-preferences">
-
-    <div class="preference-label">
-        Reading
-    </div>
-
-
-    <div class="preference-group">
-
-        <span class="preference-group-title">
-            Size
-        </span>
-
-        <button
-            type="button"
-            class="preference-button"
-            data-size="small"
-        >
-            A−
-        </button>
-
-        <button
-            type="button"
-            class="preference-button"
-            data-size="normal"
-        >
-            A
-        </button>
-
-        <button
-            type="button"
-            class="preference-button"
-            data-size="large"
-        >
-            A+
-        </button>
-
-    </div>
-
-
-    <div class="preference-group">
-
-        <span class="preference-group-title">
-            Font
-        </span>
-
-        <button
-            type="button"
-            class="preference-button font-serif"
-            data-font="serif"
-        >
-            Serif
-        </button>
-
-        <button
-            type="button"
-            class="preference-button font-sans"
-            data-font="sans"
-        >
-            Sans
-        </button>
-
-        <button
-            type="button"
-            class="preference-button font-lora"
-            data-font="lora"
-        >
-            Lora
-        </button>
-
-        <button
-            type="button"
-            class="preference-button font-cormorant"
-            data-font="cormorant"
-        >
-            Cormorant
-        </button>
-
-    </div>
-
-</div>
-
-
-<div class="article-area">
-
-    <div
-        id="articleContent"
-        class="article-content"
+        id="readingProgress"
+        class="reading-progress"
     ></div>
 
 
-    <div
-        id="hedNote"
-        class="hed-note hidden"
-    >
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
 
-        <div class="hed-note-label">
-            A Note From HED
+    <header class="journal-header">
+
+        <div class="brand">
+
+            <div class="brand-name">
+                HED
+            </div>
+
+            <div class="brand-subtitle">
+                Her Existential Thoughts
+            </div>
+
         </div>
 
-        <div
-            id="hedNoteContent"
-            class="hed-note-content"
-        ></div>
 
-    </div>
+        <a
+            href="index.html"
+            class="back-link"
+        >
+            Home
+        </a>
+
+    </header>
+
+
+    <!-- =====================================================
+         JOURNAL INDEX
+    ===================================================== -->
+
+    <section
+        id="journalIndex"
+        class="journal-index"
+    >
+
+        <div class="journal-intro">
+
+            <p class="journal-kicker">
+                Journal
+            </p>
+
+            <h1 class="journal-title">
+                Things I wrote
+            </h1>
+
+            <p class="journal-description">
+                Journals, because apparently I had things to say.
+            </p>
+
+            <div class="journal-mark"></div>
+
+        </div>
+
+
+        <div
+            id="journalList"
+            class="journal-list"
+        >
+
+            <div class="journal-status">
+                Loading journal...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         READER
+    ===================================================== -->
+
+    <section
+        id="reader"
+        class="reader"
+    >
+
+        <article class="reader-shell">
+
+
+            <div class="reader-top">
+
+                <a
+                    href="#"
+                    id="readerBack"
+                    class="reader-back"
+                >
+                    ← Journal
+                </a>
+
+
+                <span class="reader-label">
+                    May Blooms
+                </span>
+
+            </div>
+
+
+            <header class="reader-header">
+
+                <p
+                    id="readerDate"
+                    class="reader-date"
+                ></p>
+
+
+                <h1
+                    id="readerTitle"
+                    class="reader-title"
+                ></h1>
+
+
+                <div
+                    class="reader-meta"
+                    id="readerMeta"
+                ></div>
+
+
+                <div class="reader-rule"></div>
+
+            </header>
+
+
+            <img
+                id="readerImage"
+                class="reader-image"
+                style="display:none;"
+                alt=""
+            >
+
+
+            <!-- =================================================
+                 READING PREFERENCES
+            ================================================= -->
+
+            <div class="reading-preferences">
+
+                <span class="reading-preferences-label">
+                    Reading Preferences
+                </span>
+
+                <button
+                    type="button"
+                    class="reading-button"
+                    id="fontDecrease"
+                >
+                    A−
+                </button>
+
+                <button
+                    type="button"
+                    class="reading-button"
+                    id="fontNormal"
+                >
+                    A
+                </button>
+
+                <button
+                    type="button"
+                    class="reading-button"
+                    id="fontIncrease"
+                >
+                    A+
+                </button>
+
+                <button
+                    type="button"
+                    class="reading-button"
+                    id="fontSerif"
+                >
+                    Serif
+                </button>
+
+                <button
+                    type="button"
+                    class="reading-button"
+                    id="fontSans"
+                >
+                    Sans
+                </button>
+
+                <button
+                    type="button"
+                    class="reading-button"
+                    id="fontLora"
+                >
+                    Lora
+                </button>
+
+                <button
+                    type="button"
+                    class="reading-button"
+                    id="fontCormorant"
+                >
+                    Cormorant
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 ARTICLE
+            ================================================= -->
+
+            <div
+                id="readerContent"
+                class="reader-content"
+            ></div>
+
+
+            <!-- =================================================
+                 END OF ENTRY
+            ================================================= -->
+
+            <div class="end-of-entry">
+
+                <div class="end-of-entry-line"></div>
+
+                <p class="end-of-entry-text">
+                    End of entry
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 NEWER / OLDER ENTRY NAVIGATION
+            ================================================= -->
+
+            <nav
+                id="readerNavigation"
+                class="reader-navigation"
+            ></nav>
+
+
+            <!-- =================================================
+                 COMMENTS
+            ================================================= -->
+
+            <section
+                class="comments-section"
+                id="commentsSection"
+            >
+
+                <h2 class="comments-heading">
+
+                    Comments
+
+                    <span
+                        class="comment-count"
+                        id="commentCount"
+                    >
+                        0 comments
+                    </span>
+
+                </h2>
+
+
+                <form
+                    class="comment-form"
+                    id="commentForm"
+                >
+
+                    <input
+                        type="text"
+                        id="commentName"
+                        class="comment-input"
+                        placeholder="Your name"
+                        maxlength="80"
+                        required
+                    >
+
+
+                    <textarea
+                        id="commentContent"
+                        class="comment-textarea"
+                        placeholder="Write a comment..."
+                        maxlength="2000"
+                        required
+                    ></textarea>
+
+
+                    <button
+                        type="submit"
+                        class="comment-submit"
+                    >
+                        Post comment →
+                    </button>
+
+
+                    <div
+                        id="commentStatus"
+                        class="comment-status"
+                    ></div>
+
+                </form>
+
+
+                <div
+                    id="commentList"
+                    class="comment-list"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MORE FROM JOURNAL
+            ================================================= -->
+
+            <section
+                class="more-journal"
+                id="moreJournal"
+            >
+
+                <h2 class="more-journal-title">
+                    More from the Journal
+                </h2>
+
+
+                <div
+                    class="more-journal-grid"
+                    id="moreJournalGrid"
+                ></div>
+
+            </section>
+
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="site-footer">
+
+        <p>
+            © 2026 May Blooms · HED
+        </p>
+
+    </footer>
+
 
 </div>
 
 
-<!-- =========================
-     RESPONSES
-========================= -->
-
-<section class="responses">
-
-    <div class="section-label">
-        Responses
-    </div>
-
-    <h2 class="section-title">
-        Reader Responses
-    </h2>
-
-    <div
-        class="response-count"
-        id="responseCount"
-    >
-        0 responses
-    </div>
-
-
-    <form
-        id="responseForm"
-        class="response-form"
-    >
-
-        <input
-            type="text"
-            id="commentName"
-            placeholder="Your name"
-            readonly
-        >
-
-        <textarea
-            id="commentContent"
-            placeholder="Leave a thought..."
-            required
-        ></textarea>
-
-        <button type="submit">
-            Post Response
-        </button>
-
-        <div
-            id="responseMessage"
-            class="response-message"
-        ></div>
-
-    </form>
-
-
-    <div
-        id="commentList"
-        class="comment-list"
-    ></div>
-
-</section>
-
-
-<!-- =========================
-     KEEP READING
-========================= -->
-
-<section class="keep-reading">
-
-    <div class="section-label">
-        Keep Reading
-    </div>
-
-
-    <div class="reading-grid">
-
-        <a
-            id="previousEntry"
-            class="reading-card hidden"
-        >
-
-            <div class="reading-direction">
-                ← Previous Entry
-            </div>
-
-            <div
-                id="previousTitle"
-                class="reading-title"
-            ></div>
-
-        </a>
-
-
-        <a
-            id="nextEntry"
-            class="reading-card hidden"
-        >
-
-            <div class="reading-direction">
-                Next Entry →
-            </div>
-
-            <div
-                id="nextTitle"
-                class="reading-title"
-            ></div>
-
-        </a>
-
-    </div>
-
-
-    <a
-        href="journal.html"
-        class="all-journal"
-    >
-        View All Journal Entries →
-    </a>
-
-</section>
-
-
-</article>
-
-</main>
-
-
-<footer>
-
-    <div class="footer-brand">
-        HED
-    </div>
-
-    <div class="footer-tagline">
-        Her Existential Thoughts
-    </div>
-
-    <div class="footer-nav">
-
-        <a href="journal.html">
-            Journal
-        </a>
-
-        <a href="about.html">
-            About
-        </a>
-
-    </div>
-
-</footer>
-
-
-<!-- =========================
-     LIGHTBOX
-========================= -->
-
-<div
-    id="imageLightbox"
-    class="image-lightbox"
->
-
-    <button
-        type="button"
-        id="lightboxClose"
-        class="lightbox-close"
-        aria-label="Close image"
-    >
-        ×
-    </button>
-
-    <img
-        id="lightboxImage"
-        src=""
-        alt=""
-    >
-
-</div>
-
+<!-- =========================================================
+     SUPABASE
+========================================================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -1306,1742 +1702,1398 @@ footer{
 
 <script>
 
-/* =========================================================
-   SUPABASE
-========================================================= */
+    /* =========================================================
+       ELEMENTS
+    ========================================================= */
 
-const db = supabaseClient;
-
-
-/* =========================================================
-   URL
-========================================================= */
-
-const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
-
-const requestedEntry =
-    urlParams.get("id") ||
-    urlParams.get("entry") ||
-    urlParams.get("entry_id") ||
-    urlParams.get("entryId") ||
-    urlParams.get("slug") ||
-    window.location.hash.replace(/^#/,"");
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let currentEntryId = null;
-
-let currentSize = "normal";
-
-let currentFont = "serif";
-
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const articleContent =
-    document.getElementById(
-        "articleContent"
-    );
-
-const hedNoteContent =
-    document.getElementById(
-        "hedNoteContent"
-    );
-
-const commentList =
-    document.getElementById(
-        "commentList"
-    );
-
-const responseCount =
-    document.getElementById(
-        "responseCount"
-    );
-
-const commentName =
-    document.getElementById(
-        "commentName"
-    );
-
-const responseMessage =
-    document.getElementById(
-        "responseMessage"
-    );
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function slugify(value){
-
-    return String(value || "")
-        .toLowerCase()
-        .trim()
-        .replace(
-            /[^a-z0-9\s-]/g,
-            ""
-        )
-        .replace(
-            /\s+/g,
-            "-"
-        )
-        .replace(
-            /-+/g,
-            "-"
+    const journalIndex =
+        document.getElementById(
+            "journalIndex"
         );
 
-}
-
-
-function formatDate(date){
-
-    if(!date){
-        return "";
-    }
-
-    const d =
-        new Date(date);
-
-    if(
-        Number.isNaN(
-            d.getTime()
-        )
-    ){
-        return "";
-    }
-
-    return d.toLocaleDateString(
-        "en-US",
-        {
-            month:"long",
-            day:"numeric",
-            year:"numeric"
-        }
-    );
-
-}
-
-
-function calculateReadTime(content){
-
-    const words =
-        String(content || "")
-            .replace(
-                /<[^>]*>/g,
-                " "
-            )
-            .trim()
-            .split(/\s+/)
-            .filter(Boolean)
-            .length;
-
-    return `${Math.max(
-        1,
-        Math.ceil(words / 220)
-    )} min read`;
-
-}
-
-
-/* =========================================================
-   READING SIZE
-========================================================= */
-
-function getReaderSize(){
-
-    if(currentSize === "small"){
-
-        return window.innerWidth <= 700
-            ? 19
-            : 21;
-
-    }
-
-    if(currentSize === "large"){
-
-        return window.innerWidth <= 700
-            ? 25
-            : 28;
-
-    }
-
-    return window.innerWidth <= 700
-        ? 22
-        : 24;
-
-}
-
-
-/* =========================================================
-   READING FONT
-========================================================= */
-
-function getReaderFont(){
-
-    if(currentFont === "sans"){
-
-        return "Arial, Helvetica, sans-serif";
-
-    }
-
-    if(currentFont === "lora"){
-
-        return '"Lora", Georgia, serif';
-
-    }
-
-    if(currentFont === "cormorant"){
-
-        return '"Cormorant Garamond", Georgia, serif';
-
-    }
-
-    return 'Georgia, "Times New Roman", serif';
-
-}
-
-
-/* =========================================================
-   APPLY READING PREFERENCES
-========================================================= */
-
-function applyReadingPreferences(){
-
-    const size =
-        getReaderSize();
-
-    const font =
-        getReaderFont();
-
-
-    /*
-       IMPORTANT:
-       We directly change the article container
-       and every article child.
-
-       No localStorage.
-       No saved setting.
-       No page reload.
-    */
-
-    articleContent.style.setProperty(
-        "--article-size",
-        `${size}px`
-    );
-
-    articleContent.style.setProperty(
-        "--article-font",
-        font
-    );
-
-    articleContent.style.setProperty(
-        "font-size",
-        `${size}px`,
-        "important"
-    );
-
-    articleContent.style.setProperty(
-        "font-family",
-        font,
-        "important"
-    );
-
-
-    articleContent
-        .querySelectorAll("*")
-        .forEach(function(el){
-
-            el.style.setProperty(
-                "font-family",
-                font,
-                "important"
-            );
-
-            if(
-                el.matches(
-                    "h1"
-                )
-            ){
-
-                el.style.setProperty(
-                    "font-size",
-                    `${size + 12}px`,
-                    "important"
-                );
-
-            }
-
-            else if(
-                el.matches(
-                    "h2"
-                )
-            ){
-
-                el.style.setProperty(
-                    "font-size",
-                    `${size + 7}px`,
-                    "important"
-                );
-
-            }
-
-            else if(
-                el.matches(
-                    "h3"
-                )
-            ){
-
-                el.style.setProperty(
-                    "font-size",
-                    `${size + 3}px`,
-                    "important"
-                );
-
-            }
-
-            else if(
-                el.matches(
-                    "h4,h5,h6"
-                )
-            ){
-
-                el.style.setProperty(
-                    "font-size",
-                    `${size + 1}px`,
-                    "important"
-                );
-
-            }
-
-            else{
-
-                el.style.setProperty(
-                    "font-size",
-                    `${size}px`,
-                    "important"
-                );
-
-            }
-
-            el.style.setProperty(
-                "line-height",
-                "1.82",
-                "important"
-            );
-
-        });
-
-
-    /*
-       HED note follows the same font/size.
-    */
-
-    hedNoteContent.style.setProperty(
-        "font-family",
-        font,
-        "important"
-    );
-
-    hedNoteContent.style.setProperty(
-        "font-size",
-        `${size}px`,
-        "important"
-    );
-
-
-    /*
-       Active button.
-    */
-
-    document
-        .querySelectorAll(
-            "[data-size]"
-        )
-        .forEach(function(button){
-
-            button.classList.toggle(
-                "active",
-                button.dataset.size ===
-                currentSize
-            );
-
-        });
-
-
-    document
-        .querySelectorAll(
-            "[data-font]"
-        )
-        .forEach(function(button){
-
-            button.classList.toggle(
-                "active",
-                button.dataset.font ===
-                currentFont
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   SIZE BUTTONS
-========================================================= */
-
-function setReaderSize(value){
-
-    currentSize =
-        value;
-
-    applyReadingPreferences();
-
-}
-
-
-/* =========================================================
-   FONT BUTTONS
-========================================================= */
-
-function setReaderFont(value){
-
-    currentFont =
-        value;
-
-    /*
-       NO localStorage.
-       It changes immediately only.
-    */
-
-    applyReadingPreferences();
-
-}
-
-
-/* =========================================================
-   BUTTON EVENTS
-========================================================= */
-
-document
-    .querySelectorAll(
-        "[data-size]"
-    )
-    .forEach(function(button){
-
-        button.addEventListener(
-            "click",
-            function(){
-
-                setReaderSize(
-                    this.dataset.size
-                );
-
-            }
+    const journalList =
+        document.getElementById(
+            "journalList"
         );
 
-    });
-
-
-document
-    .querySelectorAll(
-        "[data-font]"
-    )
-    .forEach(function(button){
-
-        button.addEventListener(
-            "click",
-            function(){
-
-                setReaderFont(
-                    this.dataset.font
-                );
-
-            }
+    const reader =
+        document.getElementById(
+            "reader"
         );
 
-    });
+    const readerBack =
+        document.getElementById(
+            "readerBack"
+        );
+
+    const readerDate =
+        document.getElementById(
+            "readerDate"
+        );
+
+    const readerTitle =
+        document.getElementById(
+            "readerTitle"
+        );
+
+    const readerMeta =
+        document.getElementById(
+            "readerMeta"
+        );
+
+    const readerImage =
+        document.getElementById(
+            "readerImage"
+        );
+
+    const readerContent =
+        document.getElementById(
+            "readerContent"
+        );
+
+    const readerNavigation =
+        document.getElementById(
+            "readerNavigation"
+        );
+
+    const readingProgress =
+        document.getElementById(
+            "readingProgress"
+        );
+
+    const commentForm =
+        document.getElementById(
+            "commentForm"
+        );
+
+    const commentName =
+        document.getElementById(
+            "commentName"
+        );
+
+    const commentContent =
+        document.getElementById(
+            "commentContent"
+        );
+
+    const commentStatus =
+        document.getElementById(
+            "commentStatus"
+        );
+
+    const commentList =
+        document.getElementById(
+            "commentList"
+        );
+
+    const commentCount =
+        document.getElementById(
+            "commentCount"
+        );
+
+    const moreJournalGrid =
+        document.getElementById(
+            "moreJournalGrid"
+        );
 
 
-window.addEventListener(
-    "resize",
-    function(){
+    /* =========================================================
+       CURRENT USER
+    ========================================================= */
 
-        applyReadingPreferences();
+    let currentUser = null;
 
-        updateReadingProgress();
+    async function refreshCurrentUser() {
 
+        const {
+            data
+        } =
+            await supabaseClient.auth.getUser();
+
+        currentUser =
+            data?.user || null;
+
+        return currentUser;
     }
-);
 
 
-/* =========================================================
-   COPY PROTECTION
-========================================================= */
+    /* =========================================================
+       COMMENT NAME
+    ========================================================= */
 
-/*
-   This blocks normal copying/selection on the article.
-   Screenshots are not blocked.
-*/
+    async function prefillCommentName() {
 
-document.addEventListener(
-    "contextmenu",
-    function(event){
+        if (!commentName) {
+            return;
+        }
 
-        if(
-            event.target.closest(
-                "#articleContent"
-            )
-        ){
+        try {
 
-            event.preventDefault();
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth.getUser();
+
+            if (error) {
+
+                console.warn(
+                    "Could not load the signed-in profile:",
+                    error
+                );
+
+                return;
+            }
+
+            const user =
+                data?.user;
+
+            const nickname =
+                String(
+                    user?.user_metadata?.nickname ||
+                    user?.user_metadata?.display_name ||
+                    user?.user_metadata?.name ||
+                    ""
+                ).trim();
+
+            if (nickname) {
+
+                commentName.value =
+                    nickname;
+
+                commentName.dataset.profileName =
+                    nickname;
+
+                commentName.readOnly =
+                    true;
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Could not load the signed-in profile name:",
+                error
+            );
 
         }
 
     }
-);
 
 
-document.addEventListener(
-    "copy",
-    function(event){
+    /* =========================================================
+       DATA
+    ========================================================= */
 
-        if(
-            event.target.closest(
-                "#articleContent"
-            )
-        ){
+    let journalEntries = [];
 
-            event.preventDefault();
+    let currentEntryId = null;
 
+
+    /* =========================================================
+       DATE
+    ========================================================= */
+
+    function formatDate(
+        dateString
+    ) {
+
+        if (!dateString) {
+            return "";
         }
 
-    }
-);
+        const date =
+            new Date(
+                dateString
+            );
 
-
-document.addEventListener(
-    "cut",
-    function(event){
-
-        if(
-            event.target.closest(
-                "#articleContent"
+        if (
+            Number.isNaN(
+                date.getTime()
             )
-        ){
-
-            event.preventDefault();
-
+        ) {
+            return "";
         }
 
+        return date.toLocaleDateString(
+            undefined,
+            {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
+        );
     }
-);
 
 
-document.addEventListener(
-    "keydown",
-    function(event){
+    /* =========================================================
+       READING TIME
+    ========================================================= */
 
-        if(
-            !event.target.closest(
-                "#articleContent"
+    function calculateReadingTime(
+        content
+    ) {
+
+        const temporary =
+            document.createElement(
+                "div"
+            );
+
+        temporary.innerHTML =
+            content || "";
+
+        const text =
+            temporary.textContent ||
+            temporary.innerText ||
+            "";
+
+        const words =
+            text
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean)
+                .length;
+
+        return Math.max(
+            1,
+            Math.ceil(
+                words / 200
             )
-        ){
+        );
+    }
+
+
+    /* =========================================================
+       JOURNAL INDEX
+    ========================================================= */
+
+    function renderJournalIndex() {
+
+        journalList.innerHTML =
+            "";
+
+        if (
+            !journalEntries.length
+        ) {
+
+            const empty =
+                document.createElement(
+                    "div"
+                );
+
+            empty.className =
+                "journal-status";
+
+            empty.textContent =
+                "No journal entries yet.";
+
+            journalList.appendChild(
+                empty
+            );
 
             return;
-
         }
 
-        const key =
-            event.key.toLowerCase();
 
-        if(
-            (event.ctrlKey ||
-             event.metaKey) &&
-            (
-                key === "c" ||
-                key === "x" ||
-                key === "a"
-            )
-        ){
+        journalEntries.forEach(
+            function(
+                entry,
+                index
+            ) {
 
-            event.preventDefault();
+                const link =
+                    document.createElement(
+                        "a"
+                    );
 
-        }
+                link.href =
+                    "#";
 
-    }
-);
+                link.className =
+                    "journal-preview";
 
+                link.addEventListener(
+                    "click",
+                    function(event) {
 
-document.addEventListener(
-    "dragstart",
-    function(event){
+                        event.preventDefault();
 
-        if(
-            event.target.closest(
-                "#articleContent"
-            )
-        ){
+                        openReader(
+                            entry
+                        );
 
-            event.preventDefault();
-
-        }
-
-    }
-);
+                    }
+                );
 
 
-/* =========================================================
-   LIGHTBOX
-========================================================= */
+                const meta =
+                    document.createElement(
+                        "div"
+                    );
 
-const imageLightbox =
-    document.getElementById(
-        "imageLightbox"
-    );
-
-const lightboxImage =
-    document.getElementById(
-        "lightboxImage"
-    );
+                meta.className =
+                    "preview-meta";
 
 
-function openLightbox(image){
+                const date =
+                    document.createElement(
+                        "p"
+                    );
 
-    if(!image){
-        return;
-    }
+                date.className =
+                    "preview-date";
 
-    lightboxImage.src =
-        image.src;
-
-    lightboxImage.alt =
-        image.alt || "";
-
-    imageLightbox.classList.add(
-        "open"
-    );
-
-    document.body.style.overflow =
-        "hidden";
-
-}
+                date.textContent =
+                    formatDate(
+                        entry.published_at
+                    );
 
 
-function closeLightbox(){
+                const number =
+                    document.createElement(
+                        "span"
+                    );
 
-    imageLightbox.classList.remove(
-        "open"
-    );
+                number.className =
+                    "preview-number";
 
-    document.body.style.overflow =
-        "";
-
-    lightboxImage.src =
-        "";
-
-}
-
-
-document
-    .getElementById(
-        "lightboxClose"
-    )
-    .addEventListener(
-        "click",
-        closeLightbox
-    );
+                number.textContent =
+                    String(
+                        journalEntries.length -
+                        index
+                    );
 
 
-imageLightbox.addEventListener(
-    "click",
-    function(event){
+                meta.appendChild(
+                    date
+                );
 
-        if(
-            event.target ===
-            imageLightbox
-        ){
-
-            closeLightbox();
-
-        }
-
-    }
-);
+                meta.appendChild(
+                    number
+                );
 
 
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.key === "Escape"
-        ){
-
-            closeLightbox();
-
-        }
-
-    }
-);
+                const content =
+                    document.createElement(
+                        "div"
+                    );
 
 
-document
-    .getElementById(
-        "heroImage"
-    )
-    .addEventListener(
-        "click",
-        function(event){
+                const title =
+                    document.createElement(
+                        "h2"
+                    );
 
-            openLightbox(
-                event.currentTarget
-            );
+                title.className =
+                    "preview-title";
 
-        }
-    );
+                title.textContent =
+                    entry.title ||
+                    "Untitled";
 
 
-articleContent.addEventListener(
-    "click",
-    function(event){
+                const excerpt =
+                    document.createElement(
+                        "p"
+                    );
 
-        const img =
-            event.target.closest(
-                "img"
-            );
+                excerpt.className =
+                    "preview-excerpt";
 
-        if(img){
+                const temporary =
+                    document.createElement(
+                        "div"
+                    );
 
-            openLightbox(
-                img
-            );
+                temporary.innerHTML =
+                    entry.content || "";
 
-        }
+                const plainText =
+                    temporary.textContent ||
+                    temporary.innerText ||
+                    "";
 
-    }
-);
+                excerpt.textContent =
+                    plainText
+                        .replace(
+                            /\s+/g,
+                            " "
+                        )
+                        .trim()
+                        .slice(
+                            0,
+                            220
+                        );
 
 
-/* =========================================================
-   LOAD ENTRY
-========================================================= */
+                const read =
+                    document.createElement(
+                        "span"
+                    );
 
-async function loadEntry(){
+                read.className =
+                    "preview-read";
 
-    if(!requestedEntry){
+                read.textContent =
+                    "Read entry →";
 
-        document.getElementById(
-            "loading"
-        ).textContent =
-            "No journal entry was selected.";
 
-        return;
+                content.appendChild(
+                    title
+                );
 
+                content.appendChild(
+                    excerpt
+                );
+
+                content.appendChild(
+                    read
+                );
+
+
+                link.appendChild(
+                    meta
+                );
+
+                link.appendChild(
+                    content
+                );
+
+
+                journalList.appendChild(
+                    link
+                );
+
+            }
+        );
     }
 
 
-    const {
-        data,
-        error
-    } =
-        await db
-            .from(
-                "journal_entries"
-            )
-            .select("*")
-            .order(
-                "published_at",
-                {
-                    ascending:false
+    /* =========================================================
+       READER NAVIGATION
+    ========================================================= */
+
+    function renderReaderNavigation(
+        currentIndex
+    ) {
+
+        readerNavigation.innerHTML =
+            "";
+
+        const older =
+            journalEntries[
+                currentIndex + 1
+            ];
+
+        const newer =
+            journalEntries[
+                currentIndex - 1
+            ];
+
+
+        if (newer) {
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+            link.href =
+                "#";
+
+            link.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    openReader(
+                        newer
+                    );
+
                 }
             );
 
 
-    if(error){
+            const label =
+                document.createElement(
+                    "span"
+                );
 
-        console.error(
-            error
-        );
+            label.className =
+                "reader-nav-label";
 
-        document.getElementById(
-            "loading"
-        ).textContent =
-            "Unable to load this journal entry.";
+            label.textContent =
+                "Newer entry";
 
-        return;
+
+            const title =
+                document.createElement(
+                    "span"
+                );
+
+            title.className =
+                "reader-nav-title";
+
+            title.textContent =
+                newer.title ||
+                "Untitled";
+
+
+            link.appendChild(
+                label
+            );
+
+            link.appendChild(
+                title
+            );
+
+            readerNavigation.appendChild(
+                link
+            );
+        }
+
+
+        if (older) {
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+            link.href =
+                "#";
+
+            link.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    openReader(
+                        older
+                    );
+
+                }
+            );
+
+
+            const label =
+                document.createElement(
+                    "span"
+                );
+
+            label.className =
+                "reader-nav-label";
+
+            label.textContent =
+                "Older entry";
+
+
+            const title =
+                document.createElement(
+                    "span"
+                );
+
+            title.className =
+                "reader-nav-title";
+
+            title.textContent =
+                older.title ||
+                "Untitled";
+
+
+            link.appendChild(
+                label
+            );
+
+            link.appendChild(
+                title
+            );
+
+            readerNavigation.appendChild(
+                link
+            );
+        }
 
     }
 
 
-    const entries =
-        data || [];
+    /* =========================================================
+       MORE JOURNAL
+    ========================================================= */
 
-    const requested =
-        String(
-            requestedEntry
-        ).trim();
+    function renderMoreJournal(
+        currentIndex
+    ) {
 
-    const requestedSlug =
-        slugify(
-            requested
-        );
+        moreJournalGrid.innerHTML =
+            "";
 
+        const others =
+            journalEntries
+                .filter(
+                    function(
+                        entry
+                    ) {
 
-    const currentIndex =
-        entries.findIndex(
-            function(entry){
-
-                const idMatch =
-                    entry.id !== undefined &&
-                    String(entry.id) ===
-                    requested;
-
-                const matches =
-                    function(key){
-
-                        return (
-                            entry[key] &&
-                            String(entry[key])
-                                .toLowerCase() ===
-                            requested.toLowerCase()
+                        return String(
+                            entry.id
+                        ) !==
+                        String(
+                            currentEntryId
                         );
 
-                    };
+                    }
+                )
+                .slice(
+                    0,
+                    3
+                );
 
 
-                const titleMatch =
-                    entry.title &&
-                    String(entry.title)
-                        .toLowerCase() ===
-                    requested.toLowerCase();
+        others.forEach(
+            function(
+                entry
+            ) {
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+                link.href =
+                    "#";
+
+                link.className =
+                    "more-journal-card";
+
+                link.addEventListener(
+                    "click",
+                    function(event) {
+
+                        event.preventDefault();
+
+                        openReader(
+                            entry
+                        );
+
+                    }
+                );
 
 
-                const titleSlugMatch =
-                    entry.title &&
-                    slugify(
-                        entry.title
-                    ) ===
-                    requestedSlug;
+                const date =
+                    document.createElement(
+                        "p"
+                    );
+
+                date.className =
+                    "more-journal-card-date";
+
+                date.textContent =
+                    formatDate(
+                        entry.published_at
+                    );
 
 
-                return (
-                    idMatch ||
-                    matches("slug") ||
-                    matches("entry_slug") ||
-                    matches("entrySlug") ||
-                    titleMatch ||
-                    titleSlugMatch
+                const title =
+                    document.createElement(
+                        "h3"
+                    );
+
+                title.className =
+                    "more-journal-card-title";
+
+                title.textContent =
+                    entry.title ||
+                    "Untitled";
+
+
+                link.appendChild(
+                    date
+                );
+
+                link.appendChild(
+                    title
+                );
+
+
+                moreJournalGrid.appendChild(
+                    link
                 );
 
             }
         );
 
-
-    if(currentIndex === -1){
-
-        document.getElementById(
-            "loading"
-        ).textContent =
-            "Journal entry unavailable.";
-
-        return;
-
     }
 
 
-    const entry =
-        entries[currentIndex];
-
-    currentEntryId =
-        entry.id;
-
-
-    /*
-       Header.
-    */
-
-    document.getElementById(
-        "entryTitle"
-    ).textContent =
-        entry.title ||
-        "Untitled Journal Entry";
-
-
-    const subtitle =
-        entry.subtitle ||
-        entry.description ||
-        entry.dek;
-
-
-    const subtitleEl =
-        document.getElementById(
-            "entrySubtitle"
-        );
-
-
-    if(subtitle){
-
-        subtitleEl.textContent =
-            subtitle;
-
-        subtitleEl.classList.remove(
-            "hidden"
-        );
-
-    }
-
-    else{
-
-        subtitleEl.classList.add(
-            "hidden"
-        );
-
-    }
-
-
-    document.getElementById(
-        "entryDate"
-    ).textContent =
-        formatDate(
-            entry.published_at
-        );
-
-
-    document.getElementById(
-        "readTime"
-    ).textContent =
-        calculateReadTime(
-            entry.content
-        );
-
-
-    /*
-       Hero.
-    */
-
-    const heroWrap =
-        document.getElementById(
-            "heroWrap"
-        );
-
-    const heroImage =
-        document.getElementById(
-            "heroImage"
-        );
-
-    const captionEl =
-        document.getElementById(
-            "imageCaption"
-        );
-
-
-    if(entry.image_url){
-
-        heroImage.src =
-            entry.image_url;
-
-        heroImage.alt =
-            entry.title ||
-            "Journal image";
-
-        heroWrap.classList.remove(
-            "hidden"
-        );
-
-
-        const caption =
-            entry.image_caption ||
-            entry.caption;
-
-
-        if(caption){
-
-            captionEl.textContent =
-                caption;
-
-            captionEl.classList.remove(
-                "hidden"
-            );
-
-        }
-
-        else{
-
-            captionEl.classList.add(
-                "hidden"
-            );
-
-        }
-
-    }
-
-    else{
-
-        heroWrap.classList.add(
-            "hidden"
-        );
-
-        heroImage.removeAttribute(
-            "src"
-        );
-
-    }
-
-
-    /*
-       Article.
-    */
-
-    articleContent.innerHTML =
-        entry.content ||
-        "<p>This entry has no content yet.</p>";
-
-
-    /*
-       Apply current settings AFTER
-       inserting the article HTML.
-    */
-
-    applyReadingPreferences();
-
-
-    /*
-       HED note.
-    */
-
-    const note =
-        entry.author_reflection ||
-        entry.reflection;
-
-
-    const hedNote =
-        document.getElementById(
-            "hedNote"
-        );
-
-
-    if(note){
-
-        hedNote.classList.remove(
-            "hidden"
-        );
-
-        hedNoteContent.textContent =
-            note;
-
-    }
-
-    else{
-
-        hedNote.classList.add(
-            "hidden"
-        );
-
-        hedNoteContent.textContent =
+    /* =========================================================
+       COMMENTS
+    ========================================================= */
+
+    async function loadComments(
+        entryId
+    ) {
+
+        commentList.innerHTML =
             "";
 
-    }
+        commentCount.textContent =
+            "0 comments";
 
-
-    /*
-       Previous / next.
-    */
-
-    const previous =
-        entries[currentIndex + 1];
-
-    const next =
-        entries[currentIndex - 1];
-
-
-    const previousCard =
-        document.getElementById(
-            "previousEntry"
-        );
-
-    const nextCard =
-        document.getElementById(
-            "nextEntry"
-        );
-
-
-    if(previous){
-
-        previousCard.href =
-            `journal-entry.html?id=${encodeURIComponent(
-                previous.id
-            )}`;
-
-        document.getElementById(
-            "previousTitle"
-        ).textContent =
-            previous.title ||
-            "Previous Entry";
-
-        previousCard.classList.remove(
-            "hidden"
-        );
-
-    }
-
-    else{
-
-        previousCard.classList.add(
-            "hidden"
-        );
-
-    }
-
-
-    if(next){
-
-        nextCard.href =
-            `journal-entry.html?id=${encodeURIComponent(
-                next.id
-            )}`;
-
-        document.getElementById(
-            "nextTitle"
-        ).textContent =
-            next.title ||
-            "Next Entry";
-
-        nextCard.classList.remove(
-            "hidden"
-        );
-
-    }
-
-    else{
-
-        nextCard.classList.add(
-            "hidden"
-        );
-
-    }
-
-
-    document.getElementById(
-        "loading"
-    ).classList.add(
-        "hidden"
-    );
-
-
-    document.getElementById(
-        "entryPage"
-    ).classList.remove(
-        "hidden"
-    );
-
-
-    applyReadingPreferences();
-
-
-    await loadComments(
-        currentEntryId
-    );
-
-}
-
-
-/* =========================================================
-   AUTH USER
-========================================================= */
-
-async function getCurrentUser(){
-
-    try{
 
         const {
             data,
             error
         } =
-            await db.auth.getUser();
-
-
-        if(error){
-
-            console.warn(
-                "Could not get current user:",
-                error
-            );
-
-            return null;
-
-        }
-
-        return data?.user || null;
-
-    }
-
-    catch(error){
-
-        console.warn(
-            "Auth lookup failed:",
-            error
-        );
-
-        return null;
-
-    }
-
-}
-
-
-/* =========================================================
-   COMMENT NAME
-========================================================= */
-
-async function setCommentName(){
-
-    const nickname =
-        window.readerNickname;
-
-
-    if(
-        nickname &&
-        String(nickname).trim()
-    ){
-
-        commentName.value =
-            String(
-                nickname
-            ).trim();
-
-        return;
-
-    }
-
-
-    try{
-
-        const user =
-            await getCurrentUser();
-
-
-        const metadata =
-            user?.user_metadata || {};
-
-
-        const fallback =
-            metadata.nickname ||
-            metadata.display_name ||
-            metadata.name ||
-            "";
-
-
-        if(
-            String(fallback).trim()
-        ){
-
-            commentName.value =
-                String(
-                    fallback
-                ).trim();
-
-        }
-
-        else{
-
-            commentName.value =
-                "Reader";
-
-        }
-
-    }
-
-    catch(error){
-
-        commentName.value =
-            "Reader";
-
-    }
-
-}
-
-
-/* =========================================================
-   COMMENTS
-========================================================= */
-
-async function loadComments(id){
-
-    if(!id){
-        return;
-    }
-
-
-    commentList.innerHTML =
-        "";
-
-    responseCount.textContent =
-        "0 responses";
-
-
-    /*
-       First try loading user_id too.
-
-       If the column doesn't exist in the current
-       table, fall back to the existing comment structure
-       so the comments themselves do not stop working.
-    */
-
-    let result =
-        await db
-            .from("comments")
-            .select(
-                "id,name,content,created_at,user_id"
-            )
-            .eq(
-                "target_type",
-                "journal"
-            )
-            .eq(
-                "target_id",
-                id
-            )
-            .order(
-                "created_at",
-                {
-                    ascending:true
-                }
-            );
-
-
-    let hasUserIdColumn =
-        !result.error;
-
-
-    if(result.error){
-
-        console.warn(
-            "user_id was not available on comments; loading legacy comments instead.",
-            result.error
-        );
-
-
-        result =
-            await db
+            await supabaseClient
                 .from("comments")
-                .select(
-                    "id,name,content,created_at"
-                )
+                .select("*")
                 .eq(
                     "target_type",
                     "journal"
                 )
                 .eq(
                     "target_id",
-                    id
+                    entryId
                 )
                 .order(
                     "created_at",
                     {
-                        ascending:true
+                        ascending: true
                     }
                 );
 
-    }
+
+        if (error) {
+
+            console.error(
+                "Could not load comments:",
+                error
+            );
+
+            return;
+        }
 
 
-    if(result.error){
-
-        console.error(
-            "Comments error:",
-            result.error
-        );
-
-        responseMessage.textContent =
-            "Could not load responses.";
-
-        return;
-
-    }
+        const comments =
+            data || [];
 
 
-    const comments =
-        result.data || [];
-
-
-    responseCount.textContent =
-        `${comments.length} ${
-            comments.length === 1
-                ? "response"
-                : "responses"
-        }`;
-
-
-    const currentUser =
-        await getCurrentUser();
-
-
-    const currentUserId =
-        currentUser?.id || null;
-
-
-    comments.forEach(
-        function(comment){
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-            item.className =
-                "comment";
-
-
-            const top =
-                document.createElement(
-                    "div"
-                );
-
-            top.className =
-                "comment-top";
-
-
-            const name =
-                document.createElement(
-                    "div"
-                );
-
-            name.className =
-                "comment-name";
-
-            name.textContent =
-                comment.name ||
-                "Reader";
-
-
-            const date =
-                document.createElement(
-                    "div"
-                );
-
-            date.className =
-                "comment-date";
-
-            date.textContent =
-                formatDate(
-                    comment.created_at
-                );
-
-
-            top.append(
-                name,
-                date
+        commentCount.textContent =
+            comments.length +
+            (
+                comments.length === 1
+                    ? " comment"
+                    : " comments"
             );
 
 
-            const body =
-                document.createElement(
-                    "div"
-                );
+        comments.forEach(
+            function(
+                comment
+            ) {
 
-            body.className =
-                "comment-content";
+                const article =
+                    document.createElement(
+                        "article"
+                    );
 
-            body.textContent =
-                comment.content ||
-                "";
-
-
-            item.append(
-                top,
-                body
-            );
+                article.className =
+                    "comment";
 
 
-            /*
-               ONLY show Delete when there is a real
-               authenticated owner ID and it matches
-               the current user.
-
-               We deliberately do NOT compare nicknames.
-            */
-
-            const ownsComment =
-                hasUserIdColumn &&
-                currentUserId &&
-                comment.user_id &&
-                String(
-                    comment.user_id
-                ) === String(
-                    currentUserId
-                );
-
-
-            if(ownsComment){
-
-                const actions =
+                const meta =
                     document.createElement(
                         "div"
                     );
 
-                actions.className =
-                    "comment-actions";
+                meta.className =
+                    "comment-meta";
 
 
-                const deleteButton =
+                const name =
                     document.createElement(
-                        "button"
+                        "p"
                     );
 
-                deleteButton.type =
-                    "button";
+                name.className =
+                    "comment-name";
 
-                deleteButton.className =
-                    "comment-delete";
-
-                deleteButton.textContent =
-                    "Delete";
+                name.textContent =
+                    comment.name ||
+                    "Anonymous";
 
 
-                deleteButton.addEventListener(
-                    "click",
-                    async function(){
+                const date =
+                    document.createElement(
+                        "p"
+                    );
 
-                        const confirmed =
-                            confirm(
-                                "Delete this comment?"
-                            );
+                date.className =
+                    "comment-date";
 
-
-                        if(!confirmed){
-                            return;
-                        }
-
-
-                        deleteButton.disabled =
-                            true;
-
-                        deleteButton.textContent =
-                            "Deleting...";
+                date.textContent =
+                    formatDate(
+                        comment.created_at
+                    );
 
 
-                        /*
-                           The DELETE query includes BOTH
-                           the comment ID and the current
-                           authenticated user ID.
-                        */
+                meta.appendChild(
+                    name
+                );
 
-                        const {
-                            error:deleteError
-                        } =
-                            await db
-                                .from("comments")
-                                .delete()
-                                .eq(
-                                    "id",
-                                    comment.id
+                meta.appendChild(
+                    date
+                );
+
+
+                const body =
+                    document.createElement(
+                        "p"
+                    );
+
+                body.className =
+                    "comment-body";
+
+                body.textContent =
+                    comment.content ||
+                    "";
+
+
+                article.appendChild(
+                    meta
+                );
+
+                article.appendChild(
+                    body
+                );
+
+
+                /*
+                 * DELETE IS SHOWN ONLY WHEN
+                 * THIS COMMENT BELONGS TO
+                 * THE CURRENT AUTHENTICATED USER.
+                 */
+
+                if (
+                    currentUser &&
+                    comment.user_id &&
+                    String(
+                        comment.user_id
+                    ) ===
+                    String(
+                        currentUser.id
+                    )
+                ) {
+
+                    const actions =
+                        document.createElement(
+                            "div"
+                        );
+
+                    actions.className =
+                        "comment-actions";
+
+
+                    const deleteButton =
+                        document.createElement(
+                            "button"
+                        );
+
+                    deleteButton.type =
+                        "button";
+
+                    deleteButton.className =
+                        "comment-delete";
+
+                    deleteButton.textContent =
+                        "Delete";
+
+
+                    deleteButton.addEventListener(
+                        "click",
+                        async function() {
+
+                            if (
+                                !confirm(
+                                    "Delete your comment?"
                                 )
-                                .eq(
-                                    "user_id",
-                                    currentUserId
-                                );
+                            ) {
+                                return;
+                            }
 
-
-                        if(deleteError){
-
-                            console.error(
-                                "Delete comment error:",
-                                deleteError
-                            );
 
                             deleteButton.disabled =
-                                false;
+                                true;
 
-                            deleteButton.textContent =
-                                "Delete";
 
-                            responseMessage.textContent =
-                                "Could not delete this comment. Check the Supabase delete policy.";
+                            const {
+                                error:
+                                    deleteError
+                            } =
+                                await supabaseClient
+                                    .from("comments")
+                                    .delete()
+                                    .eq(
+                                        "id",
+                                        comment.id
+                                    )
+                                    .eq(
+                                        "user_id",
+                                        currentUser.id
+                                    );
 
-                            return;
+
+                            if (
+                                deleteError
+                            ) {
+
+                                console.error(
+                                    "Could not delete comment:",
+                                    deleteError
+                                );
+
+                                deleteButton.disabled =
+                                    false;
+
+                                return;
+                            }
+
+
+                            await loadComments(
+                                entryId
+                            );
 
                         }
+                    );
 
 
-                        responseMessage.textContent =
-                            "Comment deleted.";
+                    actions.appendChild(
+                        deleteButton
+                    );
 
-                        await loadComments(
-                            currentEntryId
+                    article.appendChild(
+                        actions
+                    );
+
+                }
+
+
+                commentList.appendChild(
+                    article
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       OPEN READER
+    ========================================================= */
+
+    function openReader(
+        entry
+    ) {
+
+        const index =
+            journalEntries.findIndex(
+                function(
+                    item
+                ) {
+
+                    return String(
+                        item.id
+                    ) ===
+                    String(
+                        entry.id
+                    );
+
+                }
+            );
+
+
+        currentEntryId =
+            entry.id;
+
+
+        journalIndex.style.display =
+            "none";
+
+        reader.classList.add(
+            "active"
+        );
+
+
+        readerDate.textContent =
+            formatDate(
+                entry.published_at
+            );
+
+
+        readerTitle.textContent =
+            entry.title ||
+            "Untitled";
+
+
+        const minutes =
+            calculateReadingTime(
+                entry.content
+            );
+
+
+        readerMeta.textContent =
+            minutes +
+            (
+                minutes === 1
+                    ? " minute read"
+                    : " minutes read"
+            );
+
+
+        if (
+            entry.image_url
+        ) {
+
+            readerImage.src =
+                entry.image_url;
+
+            readerImage.alt =
+                entry.title ||
+                "Journal image";
+
+            readerImage.style.display =
+                "block";
+
+        } else {
+
+            readerImage.removeAttribute(
+                "src"
+            );
+
+            readerImage.style.display =
+                "none";
+
+        }
+
+
+        readerContent.innerHTML =
+            entry.content ||
+            "";
+
+
+        renderReaderNavigation(
+            index
+        );
+
+
+        renderMoreJournal(
+            index
+        );
+
+
+        loadComments(
+            entry.id
+        );
+
+
+        window.scrollTo(
+            0,
+            0
+        );
+
+    }
+
+
+    /* =========================================================
+       URL
+    ========================================================= */
+
+    function getRequestedId() {
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        return params.get(
+            "id"
+        );
+    }
+
+
+    /* =========================================================
+       LOAD JOURNAL
+    ========================================================= */
+
+    async function loadJournal() {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("journal_entries")
+                .select("*")
+                .order(
+                    "published_at",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        if (error) {
+
+            console.error(
+                "Error loading journal:",
+                error
+            );
+
+
+            journalList.innerHTML =
+                "";
+
+
+            const message =
+                document.createElement(
+                    "div"
+                );
+
+            message.className =
+                "journal-status";
+
+            message.textContent =
+                "Unable to load the journal.";
+
+
+            journalList.appendChild(
+                message
+            );
+
+            return;
+        }
+
+
+        journalEntries =
+            data || [];
+
+
+        const requestedId =
+            getRequestedId();
+
+
+        if (
+            requestedId
+        ) {
+
+            const entry =
+                journalEntries.find(
+                    function(
+                        item
+                    ) {
+
+                        return String(
+                            item.id
+                        ) ===
+                        String(
+                            requestedId
                         );
 
                     }
                 );
 
 
-                actions.appendChild(
-                    deleteButton
+            if (
+                entry
+            ) {
+
+                openReader(
+                    entry
                 );
 
-                item.appendChild(
-                    actions
-                );
-
+                return;
             }
 
+        }
 
-            commentList.appendChild(
-                item
-            );
+
+        renderJournalIndex();
+
+    }
+
+
+    /* =========================================================
+       BACK TO JOURNAL
+    ========================================================= */
+
+    readerBack.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "journal.html";
 
         }
     );
 
-}
 
+    /* =========================================================
+       COMMENTS SUBMIT
+    ========================================================= */
 
-/* =========================================================
-   POST COMMENT
-========================================================= */
-
-document
-    .getElementById(
-        "responseForm"
-    )
-    .addEventListener(
+    commentForm.addEventListener(
         "submit",
-        async function(event){
+        async function(event) {
 
             event.preventDefault();
 
 
+            if (
+                !currentEntryId
+            ) {
+                return;
+            }
+
+
+            await refreshCurrentUser();
+
+
+            const profileName =
+                String(
+                    commentName.dataset.profileName ||
+                    ""
+                ).trim();
+
+
             const name =
+                profileName ||
                 commentName.value.trim();
 
+
             const content =
-                document
-                    .getElementById(
-                        "commentContent"
-                    )
-                    .value
-                    .trim();
+                commentContent.value.trim();
 
 
-            if(!content){
-
-                responseMessage.textContent =
-                    "Please write something first.";
-
+            if (
+                !name ||
+                !content
+            ) {
                 return;
-
             }
 
 
-            if(!currentEntryId){
-
-                responseMessage.textContent =
-                    "This entry is not ready yet.";
-
-                return;
-
-            }
-
-
-            responseMessage.textContent =
+            commentStatus.textContent =
                 "Posting...";
 
 
-            const currentUser =
-                await getCurrentUser();
+            const payload = {
+                target_type:
+                    "journal",
+
+                target_id:
+                    currentEntryId,
+
+                name:
+                    name,
+
+                content:
+                    content
+            };
 
 
             /*
-               New comments try to save the authenticated
-               user's ID.
+             * Attach the authenticated user's ID.
+             * This is what determines comment ownership.
+             */
 
-               This is what makes ownership possible.
-            */
+            if (
+                currentUser
+            ) {
 
-            let insertResult;
-
-
-            if(currentUser?.id){
-
-                insertResult =
-                    await db
-                        .from("comments")
-                        .insert({
-
-                            target_type:"journal",
-
-                            target_id:currentEntryId,
-
-                            name:name || "Reader",
-
-                            content,
-
-                            user_id:currentUser.id
-
-                        });
-
-            }
-
-            else{
-
-                insertResult =
-                    await db
-                        .from("comments")
-                        .insert({
-
-                            target_type:"journal",
-
-                            target_id:currentEntryId,
-
-                            name:name || "Reader",
-
-                            content
-
-                        });
+                payload.user_id =
+                    currentUser.id;
 
             }
 
 
-            /*
-               If the existing table doesn't have user_id,
-               tell the user exactly what's missing instead
-               of silently pretending ownership works.
-            */
+            let result =
+                await supabaseClient
+                    .from("comments")
+                    .insert(
+                        payload
+                    );
 
-            if(insertResult.error){
+
+            /*
+             * Compatibility fallback:
+             * if the existing comments table does not
+             * yet have user_id, the comment can still post.
+             *
+             * Such comments simply cannot have an owner-only
+             * delete button until user_id exists in the table.
+             */
+
+            if (
+                result.error &&
+                currentUser &&
+                /user_id|column/i.test(
+                    result.error.message ||
+                    ""
+                )
+            ) {
+
+                result =
+                    await supabaseClient
+                        .from("comments")
+                        .insert({
+                            target_type:
+                                "journal",
+
+                            target_id:
+                                currentEntryId,
+
+                            name:
+                                name,
+
+                            content:
+                                content
+                        });
+
+            }
+
+
+            if (
+                result.error
+            ) {
 
                 console.error(
-                    "Comment insert error:",
-                    insertResult.error
+                    "Could not post comment:",
+                    result.error
                 );
 
-
-                responseMessage.textContent =
-                    "Could not post the response. Your comments table needs a user_id column for comment ownership.";
+                commentStatus.textContent =
+                    "Could not post comment.";
 
                 return;
-
             }
 
 
-            document
-                .getElementById(
-                    "commentContent"
-                )
-                .value =
+            commentName.value =
+                commentName.dataset.profileName ||
                 "";
 
 
-            responseMessage.textContent =
-                "Your response has been posted.";
+            commentContent.value =
+                "";
+
+
+            commentStatus.textContent =
+                "Comment posted.";
 
 
             await loadComments(
@@ -3052,62 +3104,444 @@ document
     );
 
 
-/* =========================================================
-   READING PROGRESS
-========================================================= */
+    /* =========================================================
+       READING PREFERENCES
+       SESSION ONLY — NO LOCALSTORAGE
+    ========================================================= */
 
-function updateReadingProgress(){
+    const fontDecrease =
+        document.getElementById(
+            "fontDecrease"
+        );
 
-    const max =
-        document.documentElement.scrollHeight -
-        window.innerHeight;
+    const fontNormal =
+        document.getElementById(
+            "fontNormal"
+        );
+
+    const fontIncrease =
+        document.getElementById(
+            "fontIncrease"
+        );
+
+    const fontSerif =
+        document.getElementById(
+            "fontSerif"
+        );
+
+    const fontSans =
+        document.getElementById(
+            "fontSans"
+        );
+
+    const fontLora =
+        document.getElementById(
+            "fontLora"
+        );
+
+    const fontCormorant =
+        document.getElementById(
+            "fontCormorant"
+        );
 
 
-    const progress =
-        max > 0
-            ? (
-                window.scrollY /
-                max
-            ) * 100
-            : 0;
+    const normalFontSize =
+        window.innerWidth <= 700
+            ? 18
+            : 21;
 
 
-    document.getElementById(
-        "readingProgress"
-    ).style.width =
-        `${Math.min(
-            100,
-            Math.max(
-                0,
-                progress
-            )
-        )}%`;
-
-}
+    let readerFontSize =
+        normalFontSize;
 
 
-window.addEventListener(
-    "scroll",
-    updateReadingProgress,
-    {
-        passive:true
+    let readerFont =
+        "serif";
+
+
+    function updateReadingStyle() {
+
+        readerContent.style.fontSize =
+            readerFontSize +
+            "px";
+
+
+        readerContent.classList.remove(
+            "serif",
+            "sans",
+            "lora",
+            "cormorant"
+        );
+
+
+        readerContent.classList.add(
+            readerFont
+        );
+
+
+        [
+            fontSerif,
+            fontSans,
+            fontLora,
+            fontCormorant
+        ].forEach(
+            function(button) {
+
+                button.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+        const activeFontButton = {
+            serif:
+                fontSerif,
+
+            sans:
+                fontSans,
+
+            lora:
+                fontLora,
+
+            cormorant:
+                fontCormorant
+
+        }[
+            readerFont
+        ];
+
+
+        if (
+            activeFontButton
+        ) {
+
+            activeFontButton.classList.add(
+                "active"
+            );
+
+        }
+
+
+        fontDecrease.classList.toggle(
+            "active",
+            readerFontSize <
+                normalFontSize
+        );
+
+
+        fontNormal.classList.toggle(
+            "active",
+            readerFontSize ===
+                normalFontSize
+        );
+
+
+        fontIncrease.classList.toggle(
+            "active",
+            readerFontSize >
+                normalFontSize
+        );
+
     }
-);
 
 
-/* =========================================================
-   START
-========================================================= */
+    fontDecrease.addEventListener(
+        "click",
+        function() {
 
-setCommentName();
+            readerFontSize =
+                Math.max(
+                    16,
+                    readerFontSize - 1
+                );
 
-applyReadingPreferences();
+            updateReadingStyle();
 
-loadEntry();
+        }
+    );
 
-updateReadingProgress();
+
+    fontNormal.addEventListener(
+        "click",
+        function() {
+
+            readerFontSize =
+                normalFontSize;
+
+            updateReadingStyle();
+
+        }
+    );
+
+
+    fontIncrease.addEventListener(
+        "click",
+        function() {
+
+            readerFontSize =
+                Math.min(
+                    27,
+                    readerFontSize + 1
+                );
+
+            updateReadingStyle();
+
+        }
+    );
+
+
+    fontSerif.addEventListener(
+        "click",
+        function() {
+
+            readerFont =
+                "serif";
+
+            updateReadingStyle();
+
+        }
+    );
+
+
+    fontSans.addEventListener(
+        "click",
+        function() {
+
+            readerFont =
+                "sans";
+
+            updateReadingStyle();
+
+        }
+    );
+
+
+    fontLora.addEventListener(
+        "click",
+        function() {
+
+            readerFont =
+                "lora";
+
+            updateReadingStyle();
+
+        }
+    );
+
+
+    fontCormorant.addEventListener(
+        "click",
+        function() {
+
+            readerFont =
+                "cormorant";
+
+            updateReadingStyle();
+
+        }
+    );
+
+
+    /* =========================================================
+       COPY PROTECTION — ARTICLE ONLY
+    ========================================================= */
+
+    [
+        "contextmenu",
+        "copy",
+        "cut",
+        "selectstart",
+        "dragstart"
+    ].forEach(
+        function(eventName) {
+
+            readerContent.addEventListener(
+                eventName,
+                function(event) {
+
+                    event.preventDefault();
+
+                }
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            const key =
+                event.key.toLowerCase();
+
+
+            if (
+                !(
+                    event.ctrlKey ||
+                    event.metaKey
+                )
+            ) {
+                return;
+            }
+
+
+            if (
+                ![
+                    "c",
+                    "x",
+                    "a"
+                ].includes(
+                    key
+                )
+            ) {
+                return;
+            }
+
+
+            const selection =
+                window.getSelection();
+
+
+            const anchorNode =
+                selection &&
+                selection.anchorNode;
+
+
+            if (
+                !anchorNode
+            ) {
+                return;
+            }
+
+
+            const node =
+                anchorNode.nodeType ===
+                Node.TEXT_NODE
+                    ? anchorNode.parentNode
+                    : anchorNode;
+
+
+            if (
+                readerContent.contains(
+                    node
+                )
+            ) {
+
+                event.preventDefault();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       READING PROGRESS
+    ========================================================= */
+
+    window.addEventListener(
+        "scroll",
+        function() {
+
+            if (
+                !reader.classList.contains(
+                    "active"
+                )
+            ) {
+
+                readingProgress.style.width =
+                    "0%";
+
+                return;
+            }
+
+
+            const scrollTop =
+                window.scrollY ||
+                document.documentElement.scrollTop;
+
+
+            const documentHeight =
+                document.documentElement.scrollHeight -
+                window.innerHeight;
+
+
+            if (
+                documentHeight <= 0
+            ) {
+
+                readingProgress.style.width =
+                    "100%";
+
+                return;
+            }
+
+
+            const progress =
+                Math.min(
+                    100,
+                    Math.max(
+                        0,
+                        (
+                            scrollTop /
+                            documentHeight
+                        ) *
+                        100
+                    )
+                );
+
+
+            readingProgress.style.width =
+                progress +
+                "%";
+
+        }
+    );
+
+
+    /* =========================================================
+       START
+    ========================================================= */
+
+    updateReadingStyle();
+
+
+    window.readerAuthReady.then(
+        async function() {
+
+            const nicknameElement =
+                document.getElementById(
+                    "readerNickname"
+                );
+
+
+            if (
+                nicknameElement &&
+                window.readerNickname
+            ) {
+
+                nicknameElement.textContent =
+                    window.readerNickname;
+
+            }
+
+
+            await refreshCurrentUser();
+
+            await prefillCommentName();
+
+            loadJournal();
+
+        }
+    );
 
 </script>
 
+
 </body>
+
 </html>
+```
