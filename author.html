@@ -4233,46 +4233,63 @@ function editCurrentStory() {
     );
 
   }
- async function deleteStory(id) {
-  const story = stories.find(item => item.id === id);
+ async function deleteChapter(id) {
 
-  if (!story) {
-    toast("Story not found.");
+  if (
+    !confirm(
+      "Delete this chapter? This cannot be undone."
+    )
+  ) {
+
     return;
+
   }
 
-  if (!confirm(`Delete "${story.title || "Untitled"}"? This will also delete its chapters. This cannot be undone.`)) {
-    return;
-  }
 
-  try {
-    // Delete the story itself
-    const { error } = await supabaseClient
-      .from("stories")
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("chapters")
       .delete()
-      .eq("id", id)
-      .eq("owner_id", currentUser.id);
+      .eq("id",id)
+      .eq(
+        "owner_id",
+        currentUser.id
+      );
 
-    if (error) {
-      console.error("DELETE STORY ERROR:", error);
-      toast(error.message);
-      return;
-    }
 
-    // Remove it from the page immediately
-    stories = stories.filter(item => item.id !== id);
+  if (error) {
 
-    renderStories();
-    renderStats();
-    renderRecent();
+    toast(error.message);
 
-    toast("Story deleted.");
+    return;
 
-  } catch (error) {
-    console.error("DELETE STORY ERROR:", error);
-    toast(error.message || "Could not delete story.");
   }
+
+
+  currentChapter =
+    null;
+
+
+  await loadChapters();
+
+  toast(
+    "Chapter deleted."
+  );
+
 }
+
+
+function editCurrentStory() {
+
+  if (currentStory) {
+
+    editStory(
+      currentStory.id
+    );
+
+  }
 
 }
 
