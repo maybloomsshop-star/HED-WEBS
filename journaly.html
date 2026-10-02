@@ -1,0 +1,3394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HED — Journal</title>
+
+  <style>
+    /* =========================================================
+       HED JOURNAL READER
+       ========================================================= */
+
+    :root {
+      --bg: #f8f4ed;
+      --surface: #fffdf9;
+      --text: #2e2924;
+      --muted: #81776d;
+      --line: #ddd5ca;
+      --accent: #52634d;
+      --accent-soft: #e9eee6;
+      --pink: #c98686;
+
+      --reader-size: 19px;
+      --reader-line: 1.85;
+      --reader-width: 720px;
+      --reader-font: Georgia, "Times New Roman", serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      transition:
+        background-color .25s ease,
+        color .25s ease;
+    }
+
+    body.dark {
+      --bg: #20201d;
+      --surface: #292925;
+      --text: #eee9e0;
+      --muted: #aaa49a;
+      --line: #44423c;
+      --accent: #aebda6;
+      --accent-soft: #343b31;
+      --pink: #d39a9a;
+    }
+
+    body.sepia {
+      --bg: #eee4d2;
+      --surface: #f8efdf;
+      --text: #3e352b;
+      --muted: #807264;
+      --line: #d4c5ae;
+      --accent: #667158;
+      --accent-soft: #e2e1d3;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================================================
+       PROGRESS
+       ========================================================= */
+
+    #progressBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 9999;
+      transition: width .08s linear;
+    }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 18px 5vw;
+
+      background: color-mix(
+        in srgb,
+        var(--bg) 94%,
+        transparent
+      );
+
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .brand-sub {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+
+      min-width: 38px;
+      height: 38px;
+      padding: 0 11px;
+
+      border-radius: 999px;
+
+      transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .15s ease;
+    }
+
+    .header-button:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    .header-button:active {
+      transform: scale(.96);
+    }
+
+    /* =========================================================
+       MAIN
+       ========================================================= */
+
+    main {
+      width: 100%;
+    }
+
+    .page {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+      padding: 70px 0 100px;
+    }
+
+    /* =========================================================
+       LOADING / ERROR
+       ========================================================= */
+
+    #loading {
+      min-height: 60vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .error-box {
+      max-width: 520px;
+      margin: 100px auto;
+      padding: 35px;
+
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+
+      text-align: center;
+    }
+
+    .error-box h2 {
+      margin-top: 0;
+    }
+
+    .retry-button {
+      margin-top: 20px;
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 20px;
+      background: var(--accent);
+      color: white;
+    }
+
+    /* =========================================================
+       ARTICLE HEADER
+       ========================================================= */
+
+    .article-header {
+      max-width: 900px;
+      margin: 0 auto 50px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .article-title {
+      margin: 0;
+
+      font-family: var(--reader-font);
+      font-size: clamp(42px, 7vw, 76px);
+      font-weight: 500;
+      line-height: 1.03;
+      letter-spacing: -2px;
+    }
+
+    .article-subtitle {
+      margin: 22px 0 0;
+
+      max-width: 750px;
+
+      color: var(--muted);
+      font-family: var(--reader-font);
+      font-size: 21px;
+      line-height: 1.55;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+
+      margin-top: 25px;
+
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .meta-dot::before {
+      content: "·";
+      margin-right: 18px;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero-wrap {
+      max-width: 1100px;
+      margin: 0 auto 55px;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-height: 650px;
+      display: block;
+
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .image-caption {
+      margin-top: 10px;
+      text-align: center;
+
+      color: var(--muted);
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    /* =========================================================
+       READING TOOLBAR
+       ========================================================= */
+
+    .reader-tools {
+      position: sticky;
+      top: 74px;
+      z-index: 100;
+
+      max-width: 900px;
+      margin: 0 auto 45px;
+
+      padding: 10px;
+
+      background: color-mix(
+        in srgb,
+        var(--surface) 94%,
+        transparent
+      );
+
+      backdrop-filter: blur(14px);
+
+      border: 1px solid var(--line);
+      border-radius: 14px;
+
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .tool-group {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .tool-label {
+      margin: 0 5px 0 8px;
+
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .tool-button {
+      min-width: 34px;
+      height: 34px;
+
+      padding: 0 9px;
+
+      border: 1px solid transparent;
+      border-radius: 8px;
+
+      background: transparent;
+      color: var(--text);
+
+      transition:
+        background .2s ease,
+        border .2s ease;
+    }
+
+    .tool-button:hover {
+      background: var(--accent-soft);
+    }
+
+    .tool-button.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .tool-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--line);
+      margin: 0 5px;
+    }
+
+    .tool-spacer {
+      flex: 1;
+    }
+
+    /* =========================================================
+       ARTICLE BODY
+       ========================================================= */
+
+    .article-area {
+      width: 100%;
+    }
+
+    .article-content {
+      width: min(var(--reader-width), 100%);
+      margin: 0 auto;
+
+      color: var(--text);
+
+      font-family: var(--reader-font);
+      font-size: var(--reader-size);
+      line-height: var(--reader-line);
+
+      transition:
+        font-size .2s ease,
+        line-height .2s ease,
+        max-width .2s ease;
+    }
+
+    .article-content p {
+      margin: 0 0 1.45em;
+    }
+
+    .article-content h2 {
+      margin: 2.2em 0 .65em;
+
+      font-family: var(--reader-font);
+      font-size: 1.65em;
+      line-height: 1.25;
+
+      scroll-margin-top: 140px;
+    }
+
+    .article-content h3 {
+      margin: 1.8em 0 .6em;
+
+      font-family: var(--reader-font);
+      font-size: 1.3em;
+      line-height: 1.3;
+
+      scroll-margin-top: 140px;
+    }
+
+    .article-content strong {
+      font-weight: 700;
+    }
+
+    .article-content em {
+      font-style: italic;
+    }
+
+    .article-content blockquote {
+      margin: 2em 0;
+      padding: 5px 0 5px 25px;
+
+      border-left: 3px solid var(--accent);
+
+      color: var(--muted);
+      font-size: 1.05em;
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin: 1.4em 0;
+      padding-left: 1.4em;
+    }
+
+    .article-content li {
+      margin-bottom: .55em;
+    }
+
+    .article-content a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .article-content hr {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 3em 0;
+    }
+
+    /* =========================================================
+       ARTICLE IMAGES
+       ========================================================= */
+
+    .article-content img {
+      width: 100%;
+      height: auto;
+
+      display: block;
+
+      margin: 42px auto;
+
+      border-radius: 3px;
+
+      cursor: zoom-in;
+
+      transition:
+        width .2s ease,
+        max-width .2s ease;
+    }
+
+    .article-content figure {
+      margin: 42px 0;
+    }
+
+    .article-content figure img {
+      margin: 0 auto 10px;
+    }
+
+    .article-content figcaption {
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* Image classes author.html can output */
+
+    .article-content img.image-small,
+    .article-content img[data-layout="small"] {
+      width: 65%;
+    }
+
+    .article-content img.image-square,
+    .article-content img[data-layout="square"] {
+      width: min(520px, 80%);
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .article-content img.image-wide,
+    .article-content img[data-layout="wide"] {
+      width: min(1000px, 140%);
+      max-width: 100vw;
+
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .article-content img.image-full,
+    .article-content img[data-layout="full"] {
+      width: 100vw;
+      max-width: 100vw;
+
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .article-content .image-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+
+      width: min(1000px, 140%);
+      margin: 45px auto;
+    }
+
+    .article-content .image-row img {
+      width: 100%;
+      margin: 0;
+    }
+
+    /* =========================================================
+       IMAGE LIGHTBOX
+       ========================================================= */
+
+    #imageLightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+
+      background: rgba(0, 0, 0, .88);
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      padding: 30px;
+    }
+
+    #imageLightbox.open {
+      display: flex;
+    }
+
+    #lightboxImage {
+      max-width: 95vw;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    #closeLightbox {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+
+      width: 42px;
+      height: 42px;
+
+      border: 1px solid rgba(255,255,255,.4);
+      border-radius: 50%;
+
+      background: rgba(0,0,0,.3);
+      color: white;
+
+      font-size: 22px;
+    }
+
+    /* =========================================================
+       TABLE OF CONTENTS
+       ========================================================= */
+
+    .toc {
+      width: min(var(--reader-width), 100%);
+      margin: 0 auto 45px;
+
+      border: 1px solid var(--line);
+      border-radius: 14px;
+
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .toc-toggle {
+      width: 100%;
+
+      padding: 15px 18px;
+
+      border: 0;
+      background: transparent;
+      color: var(--text);
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .toc-content {
+      border-top: 1px solid var(--line);
+      padding: 10px 18px 16px;
+    }
+
+    .toc-link {
+      display: block;
+      padding: 7px 0;
+
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+    }
+
+    .toc-link:hover {
+      color: var(--accent);
+    }
+
+    .toc-link.level-3 {
+      padding-left: 18px;
+      font-size: 12px;
+    }
+
+    /* =========================================================
+       HED NOTE
+       ========================================================= */
+
+    .hed-note {
+      width: min(var(--reader-width), 100%);
+
+      margin: 65px auto 0;
+      padding: 28px;
+
+      border-radius: 15px;
+      background: var(--accent-soft);
+
+      transition: max-width .2s ease;
+    }
+
+    .hed-note-label {
+      margin-bottom: 10px;
+
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .hed-note-content {
+      font-family: var(--reader-font);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* =========================================================
+       ARTICLE ACTIONS
+       ========================================================= */
+
+    .article-actions {
+      width: min(var(--reader-width), 100%);
+      margin: 50px auto 90px;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .action-button {
+      padding: 10px 15px;
+
+      border: 1px solid var(--line);
+      border-radius: 999px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      font-size: 13px;
+    }
+
+    .action-button:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .action-button.saved {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    /* =========================================================
+       TOAST
+       ========================================================= */
+
+    #toast {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+
+      transform: translate(-50%, 20px);
+
+      padding: 11px 17px;
+
+      border-radius: 999px;
+
+      background: var(--text);
+      color: var(--bg);
+
+      font-size: 13px;
+
+      opacity: 0;
+      pointer-events: none;
+
+      transition:
+        opacity .2s ease,
+        transform .2s ease;
+
+      z-index: 99999;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* =========================================================
+       RESPONSES
+       ========================================================= */
+
+    .responses {
+      width: min(850px, 100%);
+      margin: 0 auto 100px;
+
+      padding-top: 55px;
+
+      border-top: 1px solid var(--line);
+    }
+
+    .section-label {
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 8px 0 5px;
+
+      font-family: var(--reader-font);
+      font-size: 32px;
+      font-weight: 500;
+    }
+
+    .response-count {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 25px;
+    }
+
+    .response-form {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 35px;
+    }
+
+    .response-form input,
+    .response-form textarea {
+      width: 100%;
+
+      border: 1px solid var(--line);
+      border-radius: 10px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      padding: 13px 14px;
+
+      outline: none;
+    }
+
+    .response-form input:focus,
+    .response-form textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .response-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .response-form button {
+      width: fit-content;
+
+      border: 0;
+      border-radius: 999px;
+
+      padding: 11px 18px;
+
+      background: var(--accent);
+      color: white;
+    }
+
+    .response-form button:disabled {
+      opacity: .5;
+      cursor: wait;
+    }
+
+    .response-message {
+      min-height: 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .comment-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .comment {
+      padding: 20px;
+
+      border: 1px solid var(--line);
+      border-radius: 13px;
+
+      background: var(--surface);
+    }
+
+    .comment-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+
+      margin-bottom: 9px;
+    }
+
+    .comment-name {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .comment-date {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .comment-content {
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    /* =========================================================
+       KEEP READING
+       ========================================================= */
+
+    .keep-reading {
+      width: min(1000px, 100%);
+      margin: 0 auto;
+    }
+
+    .reading-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+
+      margin-top: 20px;
+    }
+
+    .reading-card {
+      padding: 25px;
+
+      border: 1px solid var(--line);
+      border-radius: 14px;
+
+      background: var(--surface);
+
+      transition:
+        border-color .2s ease,
+        transform .2s ease;
+    }
+
+    .reading-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .reading-direction {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .reading-title {
+      font-family: var(--reader-font);
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .all-journal {
+      display: block;
+      margin-top: 25px;
+
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    footer {
+      padding: 60px 5vw;
+
+      border-top: 1px solid var(--line);
+
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .footer-tagline {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+
+      margin-top: 25px;
+
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-nav a:hover {
+      color: var(--accent);
+    }
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 14px 4vw;
+      }
+
+      .brand {
+        font-size: 19px;
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      .header-button {
+        min-width: 35px;
+        height: 35px;
+      }
+
+      .page {
+        width: 92%;
+        padding-top: 45px;
+      }
+
+      .article-title {
+        font-size: 43px;
+        letter-spacing: -1.3px;
+      }
+
+      .article-subtitle {
+        font-size: 18px;
+      }
+
+      .article-meta {
+        line-height: 1.6;
+      }
+
+      .meta-dot::before {
+        display: none;
+      }
+
+      .reader-tools {
+        top: 63px;
+        padding: 7px;
+        gap: 3px;
+      }
+
+      .tool-label {
+        display: none;
+      }
+
+      .tool-divider {
+        margin: 0 2px;
+      }
+
+      .tool-button {
+        min-width: 32px;
+        padding: 0 7px;
+      }
+
+      .article-content {
+        font-size: var(--reader-size);
+      }
+
+      .article-content img.image-wide,
+      .article-content img.image-full {
+        width: 100%;
+        max-width: 100%;
+        position: static;
+        transform: none;
+      }
+
+      .article-content img.image-small,
+      .article-content img[data-layout="small"] {
+        width: 85%;
+      }
+
+      .article-content .image-row {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .reading-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comment-top {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .hed-note {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="progressBar"></div>
+
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
+
+  <header>
+
+    <a href="journal.html">
+      <div class="brand">HED</div>
+      <div class="brand-sub">Her Existential Thoughts</div>
+    </a>
+
+    <div class="header-right">
+
+      <button
+        class="header-button"
+        id="bookmarkTop"
+        type="button"
+        title="Save article"
+        aria-label="Save article"
+      >
+        ♡
+      </button>
+
+      <button
+        class="header-button"
+        id="shareTop"
+        type="button"
+        title="Share article"
+        aria-label="Share article"
+      >
+        ↗
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
+
+  <main>
+
+    <div id="loading">
+      Loading journal entry...
+    </div>
+
+
+    <div
+      id="entryPage"
+      class="page hidden"
+    >
+
+      <!-- ===================================================
+           ARTICLE HEADER
+           =================================================== -->
+
+      <section class="article-header">
+
+        <div class="eyebrow">
+          Journal
+        </div>
+
+        <h1
+          id="entryTitle"
+          class="article-title"
+        >
+          Untitled Journal Entry
+        </h1>
+
+        <p
+          id="entrySubtitle"
+          class="article-subtitle hidden"
+        ></p>
+
+        <div class="article-meta">
+
+          <span id="entryDate"></span>
+
+          <span
+            id="metaReadTime"
+            class="meta-dot"
+          ></span>
+
+          <span
+            id="progressText"
+            class="meta-dot"
+          >
+            0% read
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           HERO
+           =================================================== -->
+
+      <div
+        id="heroWrap"
+        class="hero-wrap hidden"
+      >
+
+        <img
+          id="heroImage"
+          class="hero-image"
+          src=""
+          alt=""
+        >
+
+        <div
+          id="imageCaption"
+          class="image-caption hidden"
+        ></div>
+
+      </div>
+
+
+      <!-- ===================================================
+           READING CONTROLS
+           =================================================== -->
+
+      <div class="reader-tools">
+
+        <span class="tool-label">
+          Size
+        </span>
+
+        <div class="tool-group">
+
+          <button
+            class="tool-button"
+            data-size="small"
+            type="button"
+          >
+            A−
+          </button>
+
+          <button
+            class="tool-button"
+            data-size="normal"
+            type="button"
+          >
+            A
+          </button>
+
+          <button
+            class="tool-button"
+            data-size="large"
+            type="button"
+          >
+            A+
+          </button>
+
+        </div>
+
+
+        <div class="tool-divider"></div>
+
+
+        <span class="tool-label">
+          Font
+        </span>
+
+        <div class="tool-group">
+
+          <button
+            class="tool-button"
+            data-font="serif"
+            type="button"
+          >
+            Serif
+          </button>
+
+          <button
+            class="tool-button"
+            data-font="sans"
+            type="button"
+          >
+            Sans
+          </button>
+
+        </div>
+
+
+        <div class="tool-divider"></div>
+
+
+        <span class="tool-label">
+          Width
+        </span>
+
+        <div class="tool-group">
+
+          <button
+            class="tool-button"
+            data-width="narrow"
+            type="button"
+          >
+            Narrow
+          </button>
+
+          <button
+            class="tool-button"
+            data-width="normal"
+            type="button"
+          >
+            Normal
+          </button>
+
+          <button
+            class="tool-button"
+            data-width="wide"
+            type="button"
+          >
+            Wide
+          </button>
+
+        </div>
+
+
+        <div class="tool-spacer"></div>
+
+
+        <div class="tool-group">
+
+          <button
+            class="tool-button"
+            data-theme="light"
+            type="button"
+            title="Light mode"
+          >
+            ☼
+          </button>
+
+          <button
+            class="tool-button"
+            data-theme="sepia"
+            type="button"
+            title="Sepia mode"
+          >
+            ◐
+          </button>
+
+          <button
+            class="tool-button"
+            data-theme="dark"
+            type="button"
+            title="Dark mode"
+          >
+            ◑
+          </button>
+
+          <button
+            class="tool-button"
+            id="resetReader"
+            type="button"
+            title="Reset reading settings"
+          >
+            ↺
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           TABLE OF CONTENTS
+           =================================================== -->
+
+      <div
+        id="toc"
+        class="toc hidden"
+      >
+
+        <button
+          id="tocToggle"
+          class="toc-toggle"
+          type="button"
+        >
+          <span>In this entry</span>
+          <span id="tocArrow">+</span>
+        </button>
+
+        <div
+          id="tocContent"
+          class="toc-content hidden"
+        ></div>
+
+      </div>
+
+
+      <!-- ===================================================
+           ARTICLE
+           =================================================== -->
+
+      <article class="article-area">
+
+        <div
+          id="articleContent"
+          class="article-content"
+        ></div>
+
+
+        <!-- HED NOTE -->
+
+        <div
+          id="hedNote"
+          class="hed-note hidden"
+        >
+
+          <div class="hed-note-label">
+            A Note From HED
+          </div>
+
+          <div
+            id="hedNoteContent"
+            class="hed-note-content"
+          ></div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="article-actions">
+
+          <button
+            id="bookmarkButton"
+            class="action-button"
+            type="button"
+          >
+            ♡ Save this entry
+          </button>
+
+          <button
+            id="shareButton"
+            class="action-button"
+            type="button"
+          >
+            ↗ Share
+          </button>
+
+          <button
+            id="copyButton"
+            class="action-button"
+            type="button"
+          >
+            Copy link
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- ===================================================
+           RESPONSES
+           =================================================== -->
+
+      <section class="responses">
+
+        <div class="section-label">
+          Responses
+        </div>
+
+        <h2 class="section-title">
+          Reader Responses
+        </h2>
+
+        <div
+          id="responseCount"
+          class="response-count"
+        >
+          0 responses
+        </div>
+
+
+        <form
+          id="responseForm"
+          class="response-form"
+        >
+
+          <input
+            type="text"
+            id="commentName"
+            placeholder="Your name"
+            readonly
+          >
+
+          <textarea
+            id="commentContent"
+            placeholder="Leave a thought..."
+            required
+          ></textarea>
+
+          <button
+            id="commentSubmit"
+            type="submit"
+          >
+            Post Response
+          </button>
+
+          <div
+            id="responseMessage"
+            class="response-message"
+          ></div>
+
+        </form>
+
+
+        <div
+          id="commentList"
+          class="comment-list"
+        ></div>
+
+      </section>
+
+
+      <!-- ===================================================
+           KEEP READING
+           =================================================== -->
+
+      <section class="keep-reading">
+
+        <div class="section-label">
+          Keep Reading
+        </div>
+
+        <div class="reading-grid">
+
+          <a
+            id="previousEntry"
+            class="reading-card hidden"
+          >
+
+            <div class="reading-direction">
+              ← Previous Entry
+            </div>
+
+            <div
+              id="previousTitle"
+              class="reading-title"
+            ></div>
+
+          </a>
+
+
+          <a
+            id="nextEntry"
+            class="reading-card hidden"
+          >
+
+            <div class="reading-direction">
+              Next Entry →
+            </div>
+
+            <div
+              id="nextTitle"
+              class="reading-title"
+            ></div>
+
+          </a>
+
+        </div>
+
+
+        <a
+          href="journal.html"
+          class="all-journal"
+        >
+          View All Journal Entries →
+        </a>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+  <footer>
+
+    <div class="footer-brand">
+      HED
+    </div>
+
+    <div class="footer-tagline">
+      Her Existential Thoughts
+    </div>
+
+    <div class="footer-nav">
+      <a href="journal.html">Journal</a>
+      <a href="about.html">About</a>
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       IMAGE LIGHTBOX
+       ======================================================= -->
+
+  <div id="imageLightbox">
+
+    <button
+      id="closeLightbox"
+      type="button"
+      aria-label="Close image"
+    >
+      ×
+    </button>
+
+    <img
+      id="lightboxImage"
+      src=""
+      alt=""
+    >
+
+  </div>
+
+
+  <!-- =======================================================
+       TOAST
+       ======================================================= -->
+
+  <div id="toast"></div>
+
+
+  <!-- =======================================================
+       SUPABASE
+       ======================================================= -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="reader-auth.js"></script>
+
+
+  <script>
+    /* =========================================================
+       HED JOURNAL READER JAVASCRIPT
+       ========================================================= */
+
+    const db = supabaseClient;
+
+    const entryId =
+      new URLSearchParams(window.location.search).get("id");
+
+
+    /* =========================================================
+       ELEMENTS
+       ========================================================= */
+
+    const articleContent =
+      document.getElementById("articleContent");
+
+    const loading =
+      document.getElementById("loading");
+
+    const entryPage =
+      document.getElementById("entryPage");
+
+
+    /* =========================================================
+       HELPERS
+       ========================================================= */
+
+    function escapeHtml(value) {
+
+      if (
+        value === null ||
+        value === undefined
+      ) {
+        return "";
+      }
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+
+    function formatDate(date) {
+
+      if (!date) {
+        return "";
+      }
+
+      const parsed =
+        new Date(date);
+
+      if (Number.isNaN(parsed.getTime())) {
+        return "";
+      }
+
+      return parsed.toLocaleDateString(
+        "en-US",
+        {
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        }
+      );
+    }
+
+
+    function calculateReadTime(content) {
+
+      if (!content) {
+        return 1;
+      }
+
+      const text =
+        String(content)
+          .replace(/<[^>]*>/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+
+      const words =
+        text
+          ? text.split(" ").length
+          : 0;
+
+      return Math.max(
+        1,
+        Math.ceil(words / 220)
+      );
+    }
+
+
+    function showToast(message) {
+
+      const toast =
+        document.getElementById("toast");
+
+      toast.textContent =
+        message;
+
+      toast.classList.add("show");
+
+      clearTimeout(
+        window.hedToastTimer
+      );
+
+      window.hedToastTimer =
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2200);
+    }
+
+
+    /* =========================================================
+       READING PREFERENCES
+       ========================================================= */
+
+    let readingSettings = {
+
+      size:
+        localStorage.getItem(
+          "hedReadingSize"
+        ) || "normal",
+
+      font:
+        localStorage.getItem(
+          "hedReadingFont"
+        ) || "serif",
+
+      width:
+        localStorage.getItem(
+          "hedReadingWidth"
+        ) || "normal",
+
+      theme:
+        localStorage.getItem(
+          "hedReadingTheme"
+        ) || "light"
+
+    };
+
+
+    function applyReadingSettings() {
+
+      /* -------------------------
+         SIZE
+         ------------------------- */
+
+      const sizes = {
+
+        small: {
+          size: "17px",
+          line: "1.8"
+        },
+
+        normal: {
+          size: "19px",
+          line: "1.85"
+        },
+
+        large: {
+          size: "22px",
+          line: "1.9"
+        }
+
+      };
+
+      const selectedSize =
+        sizes[
+          readingSettings.size
+        ] || sizes.normal;
+
+
+      document.documentElement.style
+        .setProperty(
+          "--reader-size",
+          selectedSize.size
+        );
+
+      document.documentElement.style
+        .setProperty(
+          "--reader-line",
+          selectedSize.line
+        );
+
+
+      /* -------------------------
+         FONT
+         ------------------------- */
+
+      const fonts = {
+
+        serif:
+          'Georgia, "Times New Roman", serif',
+
+        sans:
+          'Arial, Helvetica, sans-serif'
+
+      };
+
+      document.documentElement.style
+        .setProperty(
+          "--reader-font",
+          fonts[
+            readingSettings.font
+          ] || fonts.serif
+        );
+
+
+      /* -------------------------
+         WIDTH
+         ------------------------- */
+
+      const widths = {
+
+        narrow: "620px",
+
+        normal: "720px",
+
+        wide: "900px"
+
+      };
+
+      document.documentElement.style
+        .setProperty(
+          "--reader-width",
+          widths[
+            readingSettings.width
+          ] || widths.normal
+        );
+
+
+      /* -------------------------
+         THEME
+         ------------------------- */
+
+      document.body.classList.remove(
+        "dark",
+        "sepia"
+      );
+
+      if (
+        readingSettings.theme === "dark"
+      ) {
+        document.body.classList.add(
+          "dark"
+        );
+      }
+
+      if (
+        readingSettings.theme === "sepia"
+      ) {
+        document.body.classList.add(
+          "sepia"
+        );
+      }
+
+
+      /* -------------------------
+         SAVE
+         ------------------------- */
+
+      localStorage.setItem(
+        "hedReadingSize",
+        readingSettings.size
+      );
+
+      localStorage.setItem(
+        "hedReadingFont",
+        readingSettings.font
+      );
+
+      localStorage.setItem(
+        "hedReadingWidth",
+        readingSettings.width
+      );
+
+      localStorage.setItem(
+        "hedReadingTheme",
+        readingSettings.theme
+      );
+
+
+      /* -------------------------
+         ACTIVE BUTTONS
+         ------------------------- */
+
+      document
+        .querySelectorAll("[data-size]")
+        .forEach(button => {
+
+          button.classList.toggle(
+            "active",
+            button.dataset.size ===
+            readingSettings.size
+          );
+
+        });
+
+
+      document
+        .querySelectorAll("[data-font]")
+        .forEach(button => {
+
+          button.classList.toggle(
+            "active",
+            button.dataset.font ===
+            readingSettings.font
+          );
+
+        });
+
+
+      document
+        .querySelectorAll("[data-width]")
+        .forEach(button => {
+
+          button.classList.toggle(
+            "active",
+            button.dataset.width ===
+            readingSettings.width
+          );
+
+        });
+
+
+      document
+        .querySelectorAll("[data-theme]")
+        .forEach(button => {
+
+          button.classList.toggle(
+            "active",
+            button.dataset.theme ===
+            readingSettings.theme
+          );
+
+        });
+
+    }
+
+
+    /* =========================================================
+       READING BUTTON EVENTS
+       ========================================================= */
+
+    document
+      .querySelectorAll("[data-size]")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            readingSettings.size =
+              button.dataset.size;
+
+            applyReadingSettings();
+
+          }
+        );
+
+      });
+
+
+    document
+      .querySelectorAll("[data-font]")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            readingSettings.font =
+              button.dataset.font;
+
+            applyReadingSettings();
+
+          }
+        );
+
+      });
+
+
+    document
+      .querySelectorAll("[data-width]")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            readingSettings.width =
+              button.dataset.width;
+
+            applyReadingSettings();
+
+          }
+        );
+
+      });
+
+
+    document
+      .querySelectorAll("[data-theme]")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            readingSettings.theme =
+              button.dataset.theme;
+
+            applyReadingSettings();
+
+          }
+        );
+
+      });
+
+
+    document
+      .getElementById("resetReader")
+      .addEventListener(
+        "click",
+        () => {
+
+          readingSettings = {
+
+            size: "normal",
+
+            font: "serif",
+
+            width: "normal",
+
+            theme: "light"
+
+          };
+
+          applyReadingSettings();
+
+          showToast(
+            "Reading settings reset"
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       BOOKMARKS
+       ========================================================= */
+
+    function getSavedEntries() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(
+            "hedSavedEntries"
+          ) || "[]"
+        );
+
+      } catch {
+
+        return [];
+
+      }
+
+    }
+
+
+    function isSaved(id) {
+
+      return getSavedEntries()
+        .map(String)
+        .includes(
+          String(id)
+        );
+
+    }
+
+
+    function updateBookmarkUI() {
+
+      const saved =
+        isSaved(entryId);
+
+      const buttons = [
+
+        document.getElementById(
+          "bookmarkButton"
+        ),
+
+        document.getElementById(
+          "bookmarkTop"
+        )
+
+      ];
+
+
+      buttons.forEach(button => {
+
+        if (!button) {
+          return;
+        }
+
+        button.classList.toggle(
+          "saved",
+          saved
+        );
+
+        if (
+          button.id ===
+          "bookmarkButton"
+        ) {
+
+          button.textContent =
+            saved
+              ? "♥ Saved"
+              : "♡ Save this entry";
+
+        } else {
+
+          button.textContent =
+            saved
+              ? "♥"
+              : "♡";
+
+        }
+
+      });
+
+    }
+
+
+    function toggleBookmark() {
+
+      let saved =
+        getSavedEntries();
+
+      const index =
+        saved.findIndex(
+          id =>
+            String(id) ===
+            String(entryId)
+        );
+
+
+      if (index >= 0) {
+
+        saved.splice(index, 1);
+
+        showToast(
+          "Removed from saved entries"
+        );
+
+      } else {
+
+        saved.push(entryId);
+
+        showToast(
+          "Saved to your entries"
+        );
+
+      }
+
+
+      localStorage.setItem(
+        "hedSavedEntries",
+        JSON.stringify(saved)
+      );
+
+
+      updateBookmarkUI();
+
+    }
+
+
+    document
+      .getElementById("bookmarkButton")
+      .addEventListener(
+        "click",
+        toggleBookmark
+      );
+
+
+    document
+      .getElementById("bookmarkTop")
+      .addEventListener(
+        "click",
+        toggleBookmark
+      );
+
+
+    /* =========================================================
+       SHARE
+       ========================================================= */
+
+    async function shareArticle() {
+
+      const title =
+        document.getElementById(
+          "entryTitle"
+        ).textContent.trim();
+
+      const url =
+        window.location.href;
+
+
+      if (
+        navigator.share
+      ) {
+
+        try {
+
+          await navigator.share({
+            title: title,
+            url: url
+          });
+
+          return;
+
+        } catch (error) {
+
+          /*
+            User cancelled native sharing.
+            Do nothing.
+          */
+
+          if (
+            error &&
+            error.name ===
+            "AbortError"
+          ) {
+            return;
+          }
+
+        }
+
+      }
+
+
+      await copyCurrentUrl();
+
+    }
+
+
+    async function copyCurrentUrl() {
+
+      try {
+
+        await navigator.clipboard.writeText(
+          window.location.href
+        );
+
+        showToast(
+          "Link copied"
+        );
+
+      } catch {
+
+        const temporary =
+          document.createElement(
+            "textarea"
+          );
+
+        temporary.value =
+          window.location.href;
+
+        document.body.appendChild(
+          temporary
+        );
+
+        temporary.select();
+
+        document.execCommand(
+          "copy"
+        );
+
+        temporary.remove();
+
+        showToast(
+          "Link copied"
+        );
+
+      }
+
+    }
+
+
+    document
+      .getElementById("shareButton")
+      .addEventListener(
+        "click",
+        shareArticle
+      );
+
+
+    document
+      .getElementById("shareTop")
+      .addEventListener(
+        "click",
+        shareArticle
+      );
+
+
+    document
+      .getElementById("copyButton")
+      .addEventListener(
+        "click",
+        copyCurrentUrl
+      );
+
+
+    /* =========================================================
+       TABLE OF CONTENTS
+       ========================================================= */
+
+    function createTableOfContents() {
+
+      const headings =
+        articleContent.querySelectorAll(
+          "h2, h3"
+        );
+
+      const toc =
+        document.getElementById("toc");
+
+      const tocContent =
+        document.getElementById(
+          "tocContent"
+        );
+
+
+      if (
+        headings.length < 2
+      ) {
+
+        toc.classList.add(
+          "hidden"
+        );
+
+        return;
+
+      }
+
+
+      tocContent.innerHTML =
+        "";
+
+
+      headings.forEach(
+        (heading, index) => {
+
+          if (!heading.id) {
+
+            heading.id =
+              "section-" +
+              (index + 1);
+
+          }
+
+
+          const link =
+            document.createElement(
+              "a"
+            );
+
+          link.href =
+            "#" + heading.id;
+
+          link.className =
+            "toc-link " +
+            (
+              heading.tagName ===
+              "H3"
+                ? "level-3"
+                : ""
+            );
+
+          link.textContent =
+            heading.textContent.trim();
+
+
+          link.addEventListener(
+            "click",
+            () => {
+
+              setTimeout(() => {
+
+                document
+                  .getElementById(
+                    "tocContent"
+                  )
+                  .classList.add(
+                    "hidden"
+                  );
+
+                document
+                  .getElementById(
+                    "tocArrow"
+                  )
+                  .textContent = "+";
+
+              }, 100);
+
+            }
+          );
+
+
+          tocContent.appendChild(
+            link
+          );
+
+        }
+      );
+
+
+      toc.classList.remove(
+        "hidden"
+      );
+
+    }
+
+
+    document
+      .getElementById("tocToggle")
+      .addEventListener(
+        "click",
+        () => {
+
+          const content =
+            document.getElementById(
+              "tocContent"
+            );
+
+          const arrow =
+            document.getElementById(
+              "tocArrow"
+            );
+
+          const isHidden =
+            content.classList.contains(
+              "hidden"
+            );
+
+
+          content.classList.toggle(
+            "hidden",
+            !isHidden
+          );
+
+          arrow.textContent =
+            isHidden
+              ? "−"
+              : "+";
+
+        }
+      );
+
+
+    /* =========================================================
+       IMAGE LIGHTBOX
+       ========================================================= */
+
+    function setupImageLightbox() {
+
+      const images =
+        articleContent.querySelectorAll(
+          "img"
+        );
+
+      const lightbox =
+        document.getElementById(
+          "imageLightbox"
+        );
+
+      const lightboxImage =
+        document.getElementById(
+          "lightboxImage"
+        );
+
+
+      images.forEach(image => {
+
+        image.addEventListener(
+          "click",
+          () => {
+
+            lightboxImage.src =
+              image.src;
+
+            lightboxImage.alt =
+              image.alt || "";
+
+            lightbox.classList.add(
+              "open"
+            );
+
+          }
+        );
+
+      });
+
+    }
+
+
+    function closeLightbox() {
+
+      document
+        .getElementById(
+          "imageLightbox"
+        )
+        .classList.remove(
+          "open"
+        );
+
+    }
+
+
+    document
+      .getElementById("closeLightbox")
+      .addEventListener(
+        "click",
+        closeLightbox
+      );
+
+
+    document
+      .getElementById("imageLightbox")
+      .addEventListener(
+        "click",
+        event => {
+
+          if (
+            event.target.id ===
+            "imageLightbox"
+          ) {
+
+            closeLightbox();
+
+          }
+
+        }
+      );
+
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeLightbox();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       READING PROGRESS
+       ========================================================= */
+
+    function updateReadingProgress() {
+
+      const scrollTop =
+        window.scrollY;
+
+      const documentHeight =
+        document.documentElement
+          .scrollHeight;
+
+      const viewportHeight =
+        window.innerHeight;
+
+      const scrollable =
+        documentHeight -
+        viewportHeight;
+
+
+      if (
+        scrollable <= 0
+      ) {
+
+        return;
+
+      }
+
+
+      const percentage =
+        Math.min(
+          100,
+          Math.max(
+            0,
+            (
+              scrollTop /
+              scrollable
+            ) * 100
+          )
+        );
+
+
+      document
+        .getElementById(
+          "progressBar"
+        )
+        .style.width =
+        percentage + "%";
+
+
+      document
+        .getElementById(
+          "progressText"
+        )
+        .textContent =
+        Math.round(
+          percentage
+        ) + "% read";
+
+    }
+
+
+    window.addEventListener(
+      "scroll",
+      updateReadingProgress,
+      {
+        passive: true
+      }
+    );
+
+
+    /* =========================================================
+       LOAD JOURNAL ENTRY
+       ========================================================= */
+
+    async function loadEntry() {
+
+      if (!entryId) {
+
+        loading.innerHTML = `
+          <div class="error-box">
+            <h2>No journal entry selected.</h2>
+            <p>Please return to the journal.</p>
+            <a
+              class="retry-button"
+              href="journal.html"
+            >
+              Back to Journal
+            </a>
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      try {
+
+        const {
+          data,
+          error
+        } = await db
+          .from("journal_entries")
+          .select("*")
+          .order(
+            "published_at",
+            {
+              ascending: false
+            }
+          );
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        const entries =
+          data || [];
+
+
+        const currentIndex =
+          entries.findIndex(
+            entry =>
+              String(entry.id) ===
+              String(entryId)
+          );
+
+
+        if (
+          currentIndex === -1
+        ) {
+
+          loading.innerHTML = `
+            <div class="error-box">
+              <h2>Entry unavailable.</h2>
+              <p>
+                This journal entry may have been
+                deleted or is no longer available.
+              </p>
+              <a
+                class="retry-button"
+                href="journal.html"
+              >
+                Back to Journal
+              </a>
+            </div>
+          `;
+
+          return;
+
+        }
+
+
+        const entry =
+          entries[currentIndex];
+
+
+        /* -------------------------
+           TITLE
+           ------------------------- */
+
+        document
+          .getElementById(
+            "entryTitle"
+          )
+          .textContent =
+          entry.title ||
+          "Untitled Journal Entry";
+
+
+        /* -------------------------
+           SUBTITLE
+           ------------------------- */
+
+        const subtitle =
+          entry.subtitle ||
+          entry.description ||
+          entry.dek;
+
+
+        if (subtitle) {
+
+          const element =
+            document.getElementById(
+              "entrySubtitle"
+            );
+
+          element.textContent =
+            subtitle;
+
+          element.classList.remove(
+            "hidden"
+          );
+
+        }
+
+
+        /* -------------------------
+           DATE
+           ------------------------- */
+
+        document
+          .getElementById(
+            "entryDate"
+          )
+          .textContent =
+          formatDate(
+            entry.published_at
+          );
+
+
+        /* -------------------------
+           READ TIME
+           ------------------------- */
+
+        const minutes =
+          calculateReadTime(
+            entry.content
+          );
+
+
+        document
+          .getElementById(
+            "metaReadTime"
+          )
+          .textContent =
+          `${minutes} min read`;
+
+
+        /* -------------------------
+           HERO IMAGE
+           ------------------------- */
+
+        if (
+          entry.image_url
+        ) {
+
+          const heroWrap =
+            document.getElementById(
+              "heroWrap"
+            );
+
+          const heroImage =
+            document.getElementById(
+              "heroImage"
+            );
+
+          heroImage.src =
+            entry.image_url;
+
+          heroImage.alt =
+            entry.title ||
+            "Journal image";
+
+
+          heroWrap.classList.remove(
+            "hidden"
+          );
+
+
+          const caption =
+            entry.image_caption ||
+            entry.caption;
+
+
+          if (caption) {
+
+            const captionElement =
+              document.getElementById(
+                "imageCaption"
+              );
+
+            captionElement.textContent =
+              caption;
+
+            captionElement.classList.remove(
+              "hidden"
+            );
+
+          }
+
+        }
+
+
+        /* -------------------------
+           ARTICLE CONTENT
+           ------------------------- */
+
+        articleContent.innerHTML =
+          entry.content ||
+          "<p>This entry has no content yet.</p>";
+
+
+        /* -------------------------
+           HED NOTE
+           ------------------------- */
+
+        const note =
+          entry.author_reflection ||
+          entry.reflection;
+
+
+        if (note) {
+
+          document
+            .getElementById(
+              "hedNote"
+            )
+            .classList.remove(
+              "hidden"
+            );
+
+          document
+            .getElementById(
+              "hedNoteContent"
+            )
+            .textContent =
+            note;
+
+        }
+
+
+        /* -------------------------
+           PREVIOUS
+           ------------------------- */
+
+        const previous =
+          entries[
+            currentIndex + 1
+          ];
+
+
+        if (previous) {
+
+          const card =
+            document.getElementById(
+              "previousEntry"
+            );
+
+          card.href =
+            `journal-entry.html?id=${previous.id}`;
+
+          document
+            .getElementById(
+              "previousTitle"
+            )
+            .textContent =
+            previous.title ||
+            "Previous Entry";
+
+          card.classList.remove(
+            "hidden"
+          );
+
+        }
+
+
+        /* -------------------------
+           NEXT
+           ------------------------- */
+
+        const next =
+          entries[
+            currentIndex - 1
+          ];
+
+
+        if (next) {
+
+          const card =
+            document.getElementById(
+              "nextEntry"
+            );
+
+          card.href =
+            `journal-entry.html?id=${next.id}`;
+
+          document
+            .getElementById(
+              "nextTitle"
+            )
+            .textContent =
+            next.title ||
+            "Next Entry";
+
+          card.classList.remove(
+            "hidden"
+          );
+
+        }
+
+
+        /* -------------------------
+           SHOW PAGE
+           ------------------------- */
+
+        loading.classList.add(
+          "hidden"
+        );
+
+        entryPage.classList.remove(
+          "hidden"
+        );
+
+
+        /* -------------------------
+           FEATURES
+           ------------------------- */
+
+        applyReadingSettings();
+
+        updateBookmarkUI();
+
+        createTableOfContents();
+
+        setupImageLightbox();
+
+        updateReadingProgress();
+
+        loadComments(
+          entry.id
+        );
+
+      } catch (error) {
+
+        console.error(
+          "HED journal error:",
+          error
+        );
+
+
+        loading.innerHTML = `
+          <div class="error-box">
+            <h2>Unable to load this entry.</h2>
+            <p>
+              Please refresh the page and try again.
+            </p>
+
+            <button
+              class="retry-button"
+              onclick="location.reload()"
+            >
+              Try Again
+            </button>
+          </div>
+        `;
+
+      }
+
+    }
+
+
+    /* =========================================================
+       COMMENTS
+       ========================================================= */
+
+    async function loadComments(id) {
+
+      const list =
+        document.getElementById(
+          "commentList"
+        );
+
+      const count =
+        document.getElementById(
+          "responseCount"
+        );
+
+
+      list.innerHTML =
+        `<div style="color:var(--muted);font-size:12px;">
+          Loading responses...
+        </div>`;
+
+
+      try {
+
+        const {
+          data,
+          error
+        } = await db
+          .from("comments")
+          .select(
+            "id,name,content,created_at"
+          )
+          .eq(
+            "target_type",
+            "journal"
+          )
+          .eq(
+            "target_id",
+            id
+          )
+          .order(
+            "created_at",
+            {
+              ascending: true
+            }
+          );
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        const comments =
+          data || [];
+
+
+        count.textContent =
+          `${comments.length} ${
+            comments.length === 1
+              ? "response"
+              : "responses"
+          }`;
+
+
+        list.innerHTML =
+          "";
+
+
+        if (
+          comments.length === 0
+        ) {
+
+          list.innerHTML = `
+            <div
+              style="
+                color:var(--muted);
+                font-size:13px;
+                padding:20px 0;
+              "
+            >
+              No responses yet. Be the first
+              to leave a thought.
+            </div>
+          `;
+
+          return;
+
+        }
+
+
+        comments.forEach(
+          comment => {
+
+            const item =
+              document.createElement(
+                "div"
+              );
+
+            item.className =
+              "comment";
+
+
+            item.innerHTML = `
+
+              <div class="comment-top">
+
+                <div class="comment-name">
+                  ${escapeHtml(
+                    comment.name ||
+                    "Reader"
+                  )}
+                </div>
+
+                <div class="comment-date">
+                  ${formatDate(
+                    comment.created_at
+                  )}
+                </div>
+
+              </div>
+
+              <div class="comment-content">
+                ${escapeHtml(
+                  comment.content
+                )}
+              </div>
+
+            `;
+
+
+            list.appendChild(
+              item
+            );
+
+          }
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Comments error:",
+          error
+        );
+
+
+        count.textContent =
+          "Responses";
+
+
+        list.innerHTML = `
+          <div
+            style="
+              color:var(--muted);
+              font-size:13px;
+            "
+          >
+            Responses could not be loaded.
+          </div>
+        `;
+
+      }
+
+    }
+
+
+    /* =========================================================
+       COMMENT FORM
+       ========================================================= */
+
+    const commentName =
+      document.getElementById(
+        "commentName"
+      );
+
+    const commentContent =
+      document.getElementById(
+        "commentContent"
+      );
+
+    const commentSubmit =
+      document.getElementById(
+        "commentSubmit"
+      );
+
+    const responseMessage =
+      document.getElementById(
+        "responseMessage"
+      );
+
+
+    if (
+      window.readerNickname
+    ) {
+
+      commentName.value =
+        window.readerNickname;
+
+    } else {
+
+      commentName.value =
+        "Reader";
+
+    }
+
+
+    document
+      .getElementById(
+        "responseForm"
+      )
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+
+          const name =
+            commentName.value.trim();
+
+
+          const content =
+            commentContent.value.trim();
+
+
+          if (!content) {
+
+            responseMessage.textContent =
+              "Please write something first.";
+
+            return;
+
+          }
+
+
+          commentSubmit.disabled =
+            true;
+
+          responseMessage.textContent =
+            "Posting...";
+
+
+          try {
+
+            const {
+              error
+            } = await db
+              .from("comments")
+              .insert({
+
+                target_type:
+                  "journal",
+
+                target_id:
+                  entryId,
+
+                name:
+                  name || "Reader",
+
+                content:
+                  content
+
+              });
+
+
+            if (error) {
+              throw error;
+            }
+
+
+            commentContent.value =
+              "";
+
+
+            responseMessage.textContent =
+              "Your response has been posted.";
+
+
+            await loadComments(
+              entryId
+            );
+
+
+            showToast(
+              "Response posted"
+            );
+
+
+          } catch (error) {
+
+            console.error(
+              "Comment submit error:",
+              error
+            );
+
+
+            responseMessage.textContent =
+              "Something went wrong. Please try again.";
+
+          } finally {
+
+            commentSubmit.disabled =
+              false;
+
+          }
+
+        }
+      );
+
+
+    /* =========================================================
+       INITIALIZE
+       ========================================================= */
+
+    applyReadingSettings();
+
+    loadEntry();
+
+  </script>
+
+</body>
+</html>
