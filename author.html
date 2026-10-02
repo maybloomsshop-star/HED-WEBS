@@ -2863,27 +2863,21 @@ function renderStories() {
           </div>
 
 
-        <div class="card-actions">
+          <div class="card-actions">
 
-  <button
-    class="secondary open-story"
-  >
-    Open
-  </button>
+            <button
+              class="secondary open-story"
+            >
+              Open
+            </button>
 
-  <button
-    class="secondary edit-story"
-  >
-    Edit
-  </button>
+            <button
+              class="secondary edit-story"
+            >
+              Edit
+            </button>
 
-  <button
-    class="secondary delete-story"
-  >
-    Delete
-  </button>
-
-</div>
+          </div>
 
         </div>
 
@@ -2902,12 +2896,6 @@ function renderStories() {
         .onclick =
           () =>
             editStory(s.id);
-      
-      card
-  .querySelector(".delete-story")
-  .onclick =
-    () =>
-      deleteStory(s.id);
 
 
       grid.appendChild(card);
@@ -4233,65 +4221,6 @@ function editCurrentStory() {
     );
 
   }
- async function deleteChapter(id) {
-
-  if (
-    !confirm(
-      "Delete this chapter? This cannot be undone."
-    )
-  ) {
-
-    return;
-
-  }
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("chapters")
-      .delete()
-      .eq("id",id)
-      .eq(
-        "owner_id",
-        currentUser.id
-      );
-
-
-  if (error) {
-
-    toast(error.message);
-
-    return;
-
-  }
-
-
-  currentChapter =
-    null;
-
-
-  await loadChapters();
-
-  toast(
-    "Chapter deleted."
-  );
-
-}
-
-
-function editCurrentStory() {
-
-  if (currentStory) {
-
-    editStory(
-      currentStory.id
-    );
-
-  }
-
-}
 
 }
 
