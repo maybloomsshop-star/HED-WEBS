@@ -3,63 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Journal — HED</title>
 
-<style>
-:root{
-  --hed-brown:#4a352b;
-  --hed-brown-dark:#382920;
-  --hed-cream:#f5efe6;
-  --hed-paper:#fbf8f3;
-  --hed-green:#68745d;
-  --hed-pink:#c58f91;
-  --hed-text:#342b26;
-  --hed-muted:#85786e;
-  --hed-line:#d8cec2;
+<!-- ARTICLE FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  --reader-size:24px;
-  --reader-font:Georgia,"Times New Roman",serif;
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --hed-brown:#4a352b;
+    --hed-brown-dark:#382920;
+    --hed-cream:#f5efe6;
+    --hed-paper:#fbf8f3;
+    --hed-green:#68745d;
+    --hed-pink:#c58f91;
+    --hed-text:#342b26;
+    --hed-muted:#85786e;
+    --hed-line:#d8cec2;
 }
 
 *{
-  box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  margin:0;
-  background:var(--hed-paper);
-  color:var(--hed-text);
-  font-family:Georgia,"Times New Roman",serif;
+    margin:0;
+    background:var(--hed-paper);
+    color:var(--hed-text);
+    font-family:Georgia,"Times New Roman",serif;
 }
 
-body.copy-protected{
-  -webkit-user-select:none;
-  user-select:none;
-}
+/* =========================
+   COPY PROTECTION
+========================= */
 
-input,
-textarea,
-button{
-  user-select:auto;
+.article-content,
+.article-content *{
+    -webkit-user-select:none;
+    user-select:none;
+    -webkit-touch-callout:none;
 }
 
 img{
-  -webkit-user-drag:none;
-  user-drag:none;
+    -webkit-user-drag:none;
+    user-drag:none;
 }
 
+/* =========================
+   PROGRESS
+========================= */
+
 .reading-progress{
-  position:fixed;
-  top:0;
-  left:0;
-  width:0;
-  height:3px;
-  background:var(--hed-brown);
-  z-index:9999;
+    position:fixed;
+    top:0;
+    left:0;
+    width:0;
+    height:3px;
+    background:var(--hed-brown);
+    z-index:9999;
 }
 
 /* =========================
@@ -67,152 +76,152 @@ img{
 ========================= */
 
 header{
-  height:78px;
-  padding:0 6%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--hed-line);
-  background:rgba(251,248,243,.96);
-  position:sticky;
-  top:0;
-  z-index:100;
-  backdrop-filter:blur(8px);
+    height:78px;
+    padding:0 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--hed-line);
+    background:rgba(251,248,243,.96);
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(8px);
 }
 
 .brand{
-  text-decoration:none;
-  color:var(--hed-brown-dark);
-  font-size:25px;
-  font-weight:bold;
-  letter-spacing:4px;
+    text-decoration:none;
+    color:var(--hed-brown-dark);
+    font-size:25px;
+    font-weight:bold;
+    letter-spacing:4px;
 }
 
 nav{
-  display:flex;
-  gap:30px;
-  align-items:center;
+    display:flex;
+    gap:30px;
+    align-items:center;
 }
 
 nav a{
-  text-decoration:none;
-  color:var(--hed-muted);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:11px;
-  font-weight:bold;
-  letter-spacing:2px;
-  text-transform:uppercase;
+    text-decoration:none;
+    color:var(--hed-muted);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
 
 nav a:hover{
-  color:var(--hed-brown);
+    color:var(--hed-brown);
 }
 
 /* =========================
-   PAGE HEADER
+   MAIN
 ========================= */
 
 main{
-  width:min(1080px,90%);
-  margin:0 auto;
-  padding:68px 0 100px;
+    width:min(1080px,90%);
+    margin:0 auto;
+    padding:70px 0 100px;
 }
 
 .back-link{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  text-decoration:none;
-  color:var(--hed-muted);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:11px;
-  font-weight:bold;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:46px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+    color:var(--hed-muted);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:45px;
 }
 
 .back-link:hover{
-  color:var(--hed-brown);
+    color:var(--hed-brown);
 }
 
 .journal-label{
-  color:var(--hed-green);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:11px;
-  font-weight:bold;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-bottom:18px;
+    color:var(--hed-green);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:18px;
 }
 
 .entry-title{
-  max-width:760px;
-  margin:0;
-  color:var(--hed-brown-dark);
-  font-size:clamp(30px,3vw,36px);
-  line-height:1.12;
-  font-weight:normal;
-  letter-spacing:-1px;
+    max-width:760px;
+    margin:0;
+    color:var(--hed-brown-dark);
+    font-size:clamp(30px,3vw,38px);
+    line-height:1.1;
+    font-weight:normal;
+    letter-spacing:-1px;
 }
 
 .entry-subtitle{
-  max-width:700px;
-  margin:22px 0 0;
-  color:var(--hed-muted);
-  font-size:19px;
-  line-height:1.65;
+    max-width:700px;
+    margin:22px 0;
+    color:var(--hed-muted);
+    font-size:19px;
+    line-height:1.6;
 }
 
 .entry-meta{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:9px;
-  margin-top:24px;
-  color:var(--hed-muted);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  letter-spacing:1.4px;
-  text-transform:uppercase;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:9px;
+    margin-top:22px;
+    color:var(--hed-muted);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:10px;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
 }
 
 .meta-dot{
-  color:var(--hed-pink);
+    color:var(--hed-pink);
 }
 
 .ornament{
-  margin:34px 0;
-  color:var(--hed-pink);
-  font-size:17px;
-  letter-spacing:7px;
+    margin:35px 0;
+    color:var(--hed-pink);
+    font-size:17px;
+    letter-spacing:7px;
 }
 
 /* =========================
-   HERO IMAGE
+   HERO
 ========================= */
 
 .hero-image-wrap{
-  width:100%;
-  margin:30px 0 58px;
+    width:100%;
+    margin:30px 0 55px;
 }
 
 .hero-image{
-  width:100%;
-  max-height:650px;
-  object-fit:cover;
-  display:block;
-  background:var(--hed-cream);
-  cursor:zoom-in;
+    width:100%;
+    max-height:650px;
+    object-fit:cover;
+    display:block;
+    background:var(--hed-cream);
+    cursor:zoom-in;
 }
 
 .image-caption{
-  margin-top:12px;
-  color:var(--hed-muted);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  letter-spacing:.8px;
-  line-height:1.5;
+    margin-top:12px;
+    color:var(--hed-muted);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:10px;
+    letter-spacing:.8px;
+    line-height:1.5;
 }
 
 /* =========================
@@ -220,77 +229,80 @@ main{
 ========================= */
 
 .reading-preferences{
-  width:min(700px,100%);
-  margin:0 auto 42px;
-  padding:13px 0;
-  border-top:1px solid var(--hed-line);
-  border-bottom:1px solid var(--hed-line);
+    width:min(700px,100%);
+    margin:0 auto 40px;
+    padding:14px 0;
+    border-top:1px solid var(--hed-line);
+    border-bottom:1px solid var(--hed-line);
 
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:28px;
-  flex-wrap:wrap;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:18px;
+    flex-wrap:wrap;
 }
 
 .preference-label,
 .preference-group-title{
-  color:var(--hed-muted);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:9px;
-  font-weight:bold;
-  letter-spacing:1.7px;
-  text-transform:uppercase;
-}
-
-.preference-label{
-  margin-right:auto;
+    color:var(--hed-muted);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:1.7px;
+    text-transform:uppercase;
 }
 
 .preference-group{
-  display:flex;
-  align-items:center;
-  gap:4px;
+    display:flex;
+    align-items:center;
+    gap:4px;
 }
 
 .preference-group-title{
-  margin-right:6px;
-  font-weight:normal;
-  letter-spacing:1px;
+    margin-right:4px;
+    font-weight:normal;
+    letter-spacing:1px;
 }
 
 .preference-button{
-  border:1px solid transparent;
-  background:transparent;
-  color:var(--hed-muted);
-  padding:6px 9px;
-  border-radius:4px;
-  cursor:pointer;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:11px;
-  transition:
-    color .2s ease,
-    border-color .2s ease,
-    background .2s ease;
+    border:1px solid transparent;
+    background:transparent;
+    color:var(--hed-muted);
+    padding:6px 9px;
+    border-radius:4px;
+    cursor:pointer;
+
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:11px;
+
+    transition:
+        color .15s ease,
+        border-color .15s ease,
+        background .15s ease;
 }
 
 .preference-button:hover,
 .preference-button.active{
-  color:var(--hed-brown-dark);
-  border-color:var(--hed-line);
-  background:var(--hed-cream);
-}
-
-.preference-button.active{
-  font-weight:bold;
+    color:var(--hed-brown-dark);
+    border-color:var(--hed-line);
+    background:var(--hed-cream);
+    font-weight:bold;
 }
 
 .font-serif{
-  font-family:Georgia,"Times New Roman",serif;
+    font-family:Georgia,"Times New Roman",serif;
 }
 
 .font-sans{
-  font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.font-lora{
+    font-family:"Lora",Georgia,serif;
+}
+
+.font-cormorant{
+    font-family:"Cormorant Garamond",Georgia,serif;
 }
 
 /* =========================
@@ -298,51 +310,62 @@ main{
 ========================= */
 
 .article-area{
-  width:min(700px,100%);
-  margin:0 auto;
+    width:min(700px,100%);
+    margin:0 auto;
 }
 
 .article-content{
-  --reader-size:24px;
-  --reader-font:Georgia,"Times New Roman",serif;
+    width:100%;
 
-  width:100%;
-  font-family:var(--reader-font)!important;
-  font-size:var(--reader-size)!important;
-  line-height:1.78!important;
-  color:var(--hed-text)!important;
+    --article-size:24px;
+    --article-font:Georgia,"Times New Roman",serif;
 
-  transition:
-    font-size .15s ease,
-    font-family .15s ease;
+    font-family:var(--article-font);
+    font-size:var(--article-size);
+    line-height:1.82;
 
-  overflow-wrap:break-word;
+    color:var(--hed-text);
+
+    overflow-wrap:break-word;
+
+    transition:
+        font-size .15s ease,
+        font-family .15s ease;
 }
 
 /*
-  The reader preference controls the entire article.
-  This is intentionally applied consistently to all
-  article elements so Serif/Sans actually changes
-  the whole reading experience.
+   Everything inside the article inherits
+   the currently selected font.
 */
 
 .article-content,
-.article-content *{
-  font-family:var(--reader-font)!important;
+.article-content p,
+.article-content li,
+.article-content blockquote,
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6,
+.article-content strong,
+.article-content b,
+.article-content em,
+.article-content i,
+.article-content a{
+    font-family:var(--article-font)!important;
 }
 
 .article-content p,
-.article-content li{
-  font-size:var(--reader-size)!important;
-  line-height:1.78!important;
-  color:var(--hed-text)!important;
+.article-content li,
+.article-content blockquote{
+    font-size:var(--article-size)!important;
+    line-height:1.82!important;
 }
 
 .article-content p{
-  margin:0 0 1.5em;
+    margin:0 0 1.5em;
 }
-
-/* Headings */
 
 .article-content h1,
 .article-content h2,
@@ -350,99 +373,78 @@ main{
 .article-content h4,
 .article-content h5,
 .article-content h6{
-  font-family:var(--reader-font)!important;
-  color:var(--hed-brown-dark)!important;
-  font-weight:normal;
-  line-height:1.25!important;
+    color:var(--hed-brown-dark)!important;
+    font-weight:500;
+    line-height:1.25!important;
 }
 
 .article-content h1{
-  font-size:calc(var(--reader-size) + 13px)!important;
-  margin:1.9em 0 .75em;
+    font-size:calc(var(--article-size) + 12px)!important;
+    margin:1.8em 0 .8em;
 }
 
 .article-content h2{
-  font-size:calc(var(--reader-size) + 7px)!important;
-  margin:2.2em 0 .8em;
+    font-size:calc(var(--article-size) + 7px)!important;
+    margin:2.1em 0 .8em;
 }
 
 .article-content h3{
-  font-size:calc(var(--reader-size) + 3px)!important;
-  margin:2em 0 .7em;
+    font-size:calc(var(--article-size) + 3px)!important;
+    margin:2em 0 .7em;
 }
 
-.article-content h4{
-  font-size:calc(var(--reader-size) + 1px)!important;
-  margin:1.7em 0 .7em;
-}
-
+.article-content h4,
 .article-content h5,
 .article-content h6{
-  font-size:var(--reader-size)!important;
-  margin:1.5em 0 .6em;
+    font-size:calc(var(--article-size) + 1px)!important;
+    margin:1.7em 0 .7em;
 }
-
-/* Inline text */
 
 .article-content strong,
 .article-content b{
-  color:var(--hed-brown-dark)!important;
+    color:var(--hed-brown-dark)!important;
 }
 
 .article-content em,
 .article-content i{
-  color:#574a42!important;
+    color:#574a42!important;
 }
 
 .article-content a{
-  color:var(--hed-green)!important;
-  text-decoration-thickness:1px;
-  text-underline-offset:3px;
+    color:var(--hed-green)!important;
+    text-decoration-thickness:1px;
+    text-underline-offset:3px;
 }
-
-/* Blockquotes */
 
 .article-content blockquote{
-  margin:2.2em 0;
-  padding:7px 0 7px 26px;
-
-  border-left:3px solid var(--hed-pink);
-
-  font-size:calc(var(--reader-size) + 2px)!important;
-  line-height:1.7!important;
-
-  color:var(--hed-text)!important;
-  font-style:italic;
+    margin:2em 0;
+    padding:7px 0 7px 28px;
+    border-left:3px solid var(--hed-pink);
+    font-style:italic;
 }
-
-/* Lists */
 
 .article-content ul,
 .article-content ol{
-  margin:0 0 1.6em;
-  padding-left:30px;
+    margin:0 0 1.5em;
+    padding-left:30px;
 }
 
 .article-content li{
-  margin-bottom:9px;
+    margin-bottom:9px;
 }
-
-/* Images inside article */
 
 .article-content img{
-  width:100%;
-  height:auto;
-  display:block;
-  margin:42px 0;
-  cursor:zoom-in;
+    width:100%;
+    height:auto;
+    display:block;
+    margin:40px 0;
+    cursor:zoom-in;
 }
 
-/* Dividers */
-
 .article-content hr{
-  border:0;
-  border-top:1px solid var(--hed-line);
-  margin:55px 0;
+    border:0;
+    border-top:1px solid var(--hed-line);
+    margin:50px 0;
 }
 
 /* =========================
@@ -450,27 +452,27 @@ main{
 ========================= */
 
 .hed-note{
-  margin-top:58px;
-  padding:28px;
-  background:var(--hed-cream);
-  border:1px solid var(--hed-line);
+    margin-top:55px;
+    padding:28px;
+    background:var(--hed-cream);
+    border:1px solid var(--hed-line);
 }
 
 .hed-note-label{
-  margin-bottom:10px;
-  color:var(--hed-green);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:2px;
-  text-transform:uppercase;
+    margin-bottom:10px;
+    color:var(--hed-green);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
 
 .hed-note-content{
-  color:var(--hed-brown);
-  font-family:var(--reader-font);
-  font-size:var(--reader-size);
-  line-height:1.78;
+    color:var(--hed-brown);
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:24px;
+    line-height:1.82;
 }
 
 /* =========================
@@ -478,154 +480,163 @@ main{
 ========================= */
 
 .responses{
-  width:min(700px,100%);
-  margin:65px auto 0;
-  padding-top:28px;
-  border-top:1px solid var(--hed-line);
+    width:min(700px,100%);
+    margin:60px auto 0;
+    padding-top:28px;
+    border-top:1px solid var(--hed-line);
 }
 
 .section-label{
-  color:var(--hed-green);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:2.5px;
-  text-transform:uppercase;
-  margin-bottom:7px;
+    color:var(--hed-green);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    margin-bottom:7px;
 }
 
 .section-title{
-  margin:0;
-  color:var(--hed-brown-dark);
-  font-size:26px;
-  font-weight:normal;
+    margin:0;
+    color:var(--hed-brown-dark);
+    font-size:27px;
+    font-weight:normal;
 }
 
 .response-count{
-  margin-top:5px;
-  color:var(--hed-muted);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:11px;
+    margin-top:5px;
+    color:var(--hed-muted);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:11px;
 }
 
 .response-form{
-  margin-top:16px;
-  padding:14px;
-  background:var(--hed-cream);
-  border:1px solid var(--hed-line);
+    margin-top:15px;
+    padding:14px;
+    background:var(--hed-cream);
+    border:1px solid var(--hed-line);
 }
 
 .response-form input,
 .response-form textarea{
-  width:100%;
-  border:1px solid var(--hed-line);
-  background:var(--hed-paper);
-  color:var(--hed-text);
-  padding:9px 11px;
-  margin-bottom:7px;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:15px;
-  outline:none;
+    width:100%;
+    border:1px solid var(--hed-line);
+    background:var(--hed-paper);
+    color:var(--hed-text);
+    padding:9px 11px;
+    margin-bottom:7px;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:15px;
+    outline:none;
 }
 
 .response-form textarea{
-  min-height:65px;
-  resize:vertical;
+    min-height:65px;
+    resize:vertical;
 }
 
 .response-form input:focus,
 .response-form textarea:focus{
-  border-color:var(--hed-green);
+    border-color:var(--hed-green);
 }
 
 .response-form button{
-  border:0;
-  background:var(--hed-brown);
-  color:white;
-  padding:9px 15px;
-  cursor:pointer;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:1.4px;
-  text-transform:uppercase;
+    border:0;
+    background:var(--hed-brown);
+    color:white;
+    padding:9px 15px;
+    cursor:pointer;
+
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
 }
 
 .response-form button:hover{
-  background:var(--hed-brown-dark);
+    background:var(--hed-brown-dark);
 }
 
 .response-message{
-  margin-top:7px;
-  color:var(--hed-muted);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:11px;
+    margin-top:7px;
+    color:var(--hed-muted);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:11px;
 }
 
+/* =========================
+   COMMENTS
+========================= */
+
 .comment-list{
-  margin-top:12px;
-  display:flex;
-  flex-direction:column;
+    margin-top:12px;
+    display:flex;
+    flex-direction:column;
 }
 
 .comment{
-  padding:11px 0;
-  border-bottom:1px solid var(--hed-line);
+    padding:13px 0;
+    border-bottom:1px solid var(--hed-line);
 }
 
 .comment-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  gap:10px;
-  margin-bottom:3px;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:4px;
 }
 
 .comment-name{
-  color:var(--hed-brown-dark);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:12px;
-  font-weight:bold;
+    color:var(--hed-brown-dark);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:12px;
+    font-weight:bold;
 }
 
 .comment-date{
-  color:var(--hed-muted);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:9px;
+    color:var(--hed-muted);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:9px;
 }
 
 .comment-content{
-  color:var(--hed-text);
-  font-size:14px;
-  line-height:1.45;
-  white-space:pre-wrap;
-  overflow-wrap:break-word;
+    color:var(--hed-text);
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:14px;
+    line-height:1.5;
+    white-space:pre-wrap;
+    overflow-wrap:break-word;
 }
 
 .comment-actions{
-  margin-top:5px;
+    margin-top:7px;
 }
 
 .comment-delete{
-  padding:0;
-  border:0;
-  background:none;
-  color:var(--hed-muted);
-  cursor:pointer;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:9px;
-  font-weight:bold;
-  letter-spacing:1px;
-  text-transform:uppercase;
+    display:inline-block;
+    padding:0;
+    border:0;
+    background:none;
+    color:var(--hed-muted);
+    cursor:pointer;
+
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:9px;
+    font-weight:bold;
+    letter-spacing:1px;
+    text-transform:uppercase;
 }
 
 .comment-delete:hover{
-  color:var(--hed-brown-dark);
+    color:var(--hed-brown-dark);
+    text-decoration:underline;
 }
 
 .comment-delete:disabled{
-  opacity:.5;
-  cursor:wait;
+    opacity:.5;
+    cursor:wait;
 }
 
 /* =========================
@@ -633,70 +644,70 @@ main{
 ========================= */
 
 .keep-reading{
-  margin:78px auto 0;
-  padding-top:30px;
-  border-top:1px solid var(--hed-line);
+    margin:75px auto 0;
+    padding-top:30px;
+    border-top:1px solid var(--hed-line);
 }
 
 .reading-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-  margin-top:20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:20px;
 }
 
 .reading-card{
-  min-height:140px;
-  padding:23px;
-  background:var(--hed-cream);
-  border:1px solid var(--hed-line);
-  text-decoration:none;
+    min-height:140px;
+    padding:23px;
+    background:var(--hed-cream);
+    border:1px solid var(--hed-line);
+    text-decoration:none;
 
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 
-  transition:
-    transform .2s ease,
-    background .2s ease;
+    transition:
+        transform .2s ease,
+        background .2s ease;
 }
 
 .reading-card:hover{
-  transform:translateY(-2px);
-  background:#f1e9df;
+    transform:translateY(-2px);
+    background:#f1e9df;
 }
 
 .reading-direction{
-  color:var(--hed-green);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:9px;
-  font-weight:bold;
-  letter-spacing:1.8px;
-  text-transform:uppercase;
+    color:var(--hed-green);
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:9px;
+    font-weight:bold;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
 }
 
 .reading-title{
-  margin-top:18px;
-  color:var(--hed-brown-dark);
-  font-size:20px;
-  line-height:1.3;
+    margin-top:18px;
+    color:var(--hed-brown-dark);
+    font-size:20px;
+    line-height:1.3;
 }
 
 .all-journal{
-  display:block;
-  width:fit-content;
-  margin:25px auto 0;
-  color:var(--hed-brown);
-  text-decoration:none;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
+    display:block;
+    width:fit-content;
+    margin:25px auto 0;
+    color:var(--hed-brown);
+    text-decoration:none;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
 }
 
 .all-journal:hover{
-  color:var(--hed-green);
+    color:var(--hed-green);
 }
 
 /* =========================
@@ -704,107 +715,112 @@ main{
 ========================= */
 
 footer{
-  margin-top:80px;
-  padding:50px 6%;
-  background:var(--hed-brown-dark);
-  color:var(--hed-cream);
-  text-align:center;
+    margin-top:80px;
+    padding:50px 6%;
+    background:var(--hed-brown-dark);
+    color:var(--hed-cream);
+    text-align:center;
 }
 
 .footer-brand{
-  font-size:24px;
-  letter-spacing:4px;
-  font-weight:bold;
+    font-size:24px;
+    letter-spacing:4px;
+    font-weight:bold;
 }
 
 .footer-tagline{
-  margin-top:10px;
-  color:#cfc3b8;
-  font-size:14px;
-  font-style:italic;
+    margin-top:10px;
+    color:#cfc3b8;
+    font-size:14px;
+    font-style:italic;
 }
 
 .footer-nav{
-  margin-top:22px;
-  display:flex;
-  justify-content:center;
-  gap:25px;
-  flex-wrap:wrap;
+    margin-top:22px;
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
 }
 
 .footer-nav a{
-  color:#cfc3b8;
-  text-decoration:none;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
+    color:#cfc3b8;
+    text-decoration:none;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
 }
 
 /* =========================
-   GENERAL
+   STATUS
 ========================= */
 
 .status{
-  min-height:300px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:var(--hed-muted);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:12px;
-  letter-spacing:1px;
+    min-height:300px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:var(--hed-muted);
+
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:12px;
+    letter-spacing:1px;
 }
 
 .hidden{
-  display:none!important;
+    display:none!important;
 }
 
 /* =========================
-   IMAGE LIGHTBOX
+   LIGHTBOX
 ========================= */
 
 .image-lightbox{
-  position:fixed;
-  inset:0;
-  z-index:10000;
+    position:fixed;
+    inset:0;
+    z-index:10000;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-  padding:30px;
-  background:rgba(40,31,26,.92);
+    padding:30px;
 
-  opacity:0;
-  visibility:hidden;
+    background:rgba(40,31,26,.92);
 
-  transition:
-    opacity .2s ease,
-    visibility .2s ease;
+    opacity:0;
+    visibility:hidden;
+
+    transition:
+        opacity .2s ease,
+        visibility .2s ease;
 }
 
 .image-lightbox.open{
-  opacity:1;
-  visibility:visible;
+    opacity:1;
+    visibility:visible;
 }
 
 .image-lightbox img{
-  max-width:95vw;
-  max-height:90vh;
-  object-fit:contain;
-  box-shadow:0 20px 60px rgba(0,0,0,.3);
+    max-width:95vw;
+    max-height:90vh;
+    object-fit:contain;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
 }
 
 .lightbox-close{
-  position:absolute;
-  top:18px;
-  right:24px;
-  border:0;
-  background:transparent;
-  color:white;
-  font-size:30px;
-  cursor:pointer;
+    position:absolute;
+    top:18px;
+    right:24px;
+
+    border:0;
+    background:transparent;
+    color:white;
+
+    font-size:30px;
+    cursor:pointer;
 }
 
 /* =========================
@@ -813,1694 +829,2283 @@ footer{
 
 @media(max-width:700px){
 
-  header{
-    height:68px;
-    padding:0 5%;
-  }
+    header{
+        height:68px;
+        padding:0 5%;
+    }
 
-  .brand{
-    font-size:21px;
-  }
+    .brand{
+        font-size:21px;
+    }
 
-  nav{
-    gap:16px;
-  }
+    nav{
+        gap:16px;
+    }
 
-  nav a{
-    font-size:9px;
-    letter-spacing:1.3px;
-  }
+    nav a{
+        font-size:9px;
+        letter-spacing:1.3px;
+    }
 
-  main{
-    width:90%;
-    padding-top:45px;
-  }
+    main{
+        width:90%;
+        padding-top:45px;
+    }
 
-  .back-link{
-    margin-bottom:35px;
-  }
+    .back-link{
+        margin-bottom:35px;
+    }
 
-  .entry-title{
-    font-size:28px;
-    line-height:1.15;
-    letter-spacing:-.5px;
-  }
+    .entry-title{
+        font-size:28px;
+        letter-spacing:-.6px;
+    }
 
-  .entry-subtitle{
-    font-size:18px;
-    line-height:1.6;
-  }
+    .entry-subtitle{
+        font-size:18px;
+    }
 
-  .entry-meta{
-    line-height:1.7;
-  }
+    .hero-image-wrap{
+        margin-bottom:40px;
+    }
 
-  .hero-image-wrap{
-    margin-bottom:42px;
-  }
+    .reading-preferences{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:10px;
+    }
 
-  .reading-preferences{
-    width:100%;
-    align-items:flex-start;
-    flex-direction:column;
-    gap:9px;
-    margin-bottom:36px;
-  }
+    .article-area{
+        width:100%;
+    }
 
-  .preference-label{
-    margin-right:0;
-  }
+    .article-content{
+        --article-size:21px;
+        line-height:1.8;
+    }
 
-  .article-area{
-    width:100%;
-  }
+    .article-content p,
+    .article-content li,
+    .article-content blockquote{
+        line-height:1.8!important;
+    }
 
-  .article-content{
-    --reader-size:21px;
-  }
+    .article-content h1{
+        font-size:33px!important;
+    }
 
-  .article-content p,
-  .article-content li{
-    line-height:1.75!important;
-  }
+    .article-content h2{
+        font-size:29px!important;
+    }
 
-  .article-content h1{
-    font-size:34px!important;
-  }
+    .article-content h3{
+        font-size:25px!important;
+    }
 
-  .article-content h2{
-    font-size:28px!important;
-  }
+    .hed-note{
+        padding:22px;
+    }
 
-  .article-content h3{
-    font-size:24px!important;
-  }
+    .responses{
+        margin-top:50px;
+    }
 
-  .article-content blockquote{
-    font-size:23px!important;
-    padding-left:20px;
-  }
+    .reading-grid{
+        grid-template-columns:1fr;
+    }
 
-  .hed-note{
-    padding:22px;
-  }
+    .reading-card{
+        min-height:125px;
+    }
 
-  .responses{
-    margin-top:55px;
-  }
+    .comment-top{
+        align-items:flex-start;
+    }
 
-  .reading-grid{
-    grid-template-columns:1fr;
-  }
-
-  .reading-card{
-    min-height:125px;
-  }
-
-  .comment-top{
-    align-items:flex-start;
-  }
-
-  .comment-name{
-    font-size:12px;
-  }
-
-  .comment-content{
-    font-size:14px;
-  }
 }
+
 </style>
 </head>
 
-<body class="copy-protected">
+<body>
 
 <div class="reading-progress" id="readingProgress"></div>
 
 <header>
-  <a href="hed.html" class="brand">HED</a>
 
-  <nav>
-    <a href="journal.html">Journal</a>
-    <a href="about.html">About</a>
-  </nav>
+    <a href="hed.html" class="brand">
+        HED
+    </a>
+
+    <nav>
+        <a href="journal.html">Journal</a>
+        <a href="about.html">About</a>
+    </nav>
+
 </header>
+
 
 <main>
 
-  <div id="loading" class="status">
+<div id="loading" class="status">
     Loading journal entry...
-  </div>
+</div>
 
-  <article id="entryPage" class="hidden">
 
-    <a href="journal.html" class="back-link">
-      ← Back to Journal
-    </a>
+<article id="entryPage" class="hidden">
 
-    <div class="journal-label">
-      Journal
-    </div>
+<a href="journal.html" class="back-link">
+    ← Back to Journal
+</a>
 
-    <h1 class="entry-title" id="entryTitle"></h1>
+<div class="journal-label">
+    Journal
+</div>
 
-    <div class="entry-subtitle hidden" id="entrySubtitle"></div>
-
-    <div class="entry-meta">
-      <span id="entryDate"></span>
-      <span class="meta-dot">•</span>
-      <span id="readTime"></span>
-      <span class="meta-dot">•</span>
-      <span>Written by HED</span>
-    </div>
-
-    <div class="ornament">
-      ✦
-    </div>
-
-    <div class="hero-image-wrap hidden" id="heroWrap">
-
-      <img
-        id="heroImage"
-        class="hero-image"
-        alt=""
-      >
-
-      <div
-        id="imageCaption"
-        class="image-caption hidden"
-      ></div>
-
-    </div>
-
-    <!-- READING CONTROLS -->
-
-    <div class="reading-preferences">
-
-      <div class="preference-label">
-        Reading
-      </div>
-
-      <div class="preference-group">
-
-        <span class="preference-group-title">
-          Size
-        </span>
-
-        <button
-          type="button"
-          class="preference-button"
-          data-size="small"
-          onclick="setReaderSize('small')"
-        >
-          A−
-        </button>
-
-        <button
-          type="button"
-          class="preference-button"
-          data-size="normal"
-          onclick="setReaderSize('normal')"
-        >
-          A
-        </button>
-
-        <button
-          type="button"
-          class="preference-button"
-          data-size="large"
-          onclick="setReaderSize('large')"
-        >
-          A+
-        </button>
-
-      </div>
-
-      <div class="preference-group">
-
-        <span class="preference-group-title">
-          Font
-        </span>
-
-        <button
-          type="button"
-          class="preference-button font-serif"
-          data-font="serif"
-          onclick="setReaderFont('serif')"
-        >
-          Serif
-        </button>
-
-        <button
-          type="button"
-          class="preference-button font-sans"
-          data-font="sans"
-          onclick="setReaderFont('sans')"
-        >
-          Sans
-        </button>
-
-      </div>
-
-    </div>
-
-    <!-- ARTICLE -->
-
-    <div class="article-area">
-
-      <div
-        id="articleContent"
-        class="article-content"
-      ></div>
-
-      <div
-        id="hedNote"
-        class="hed-note hidden"
-      >
-
-        <div class="hed-note-label">
-          A Note From HED
-        </div>
-
-        <div
-          id="hedNoteContent"
-          class="hed-note-content"
-        ></div>
-
-      </div>
-
-    </div>
-
-    <!-- RESPONSES -->
-
-    <section class="responses">
-
-      <div class="section-label">
-        Responses
-      </div>
-
-      <h2 class="section-title">
-        Reader Responses
-      </h2>
-
-      <div
-        class="response-count"
-        id="responseCount"
-      >
-        0 responses
-      </div>
-
-      <form
-        id="responseForm"
-        class="response-form"
-      >
-
-        <input
-          type="text"
-          id="commentName"
-          placeholder="Your name"
-          readonly
-        >
-
-        <textarea
-          id="commentContent"
-          placeholder="Leave a thought..."
-          required
-        ></textarea>
-
-        <button type="submit">
-          Post Response
-        </button>
-
-        <div
-          id="responseMessage"
-          class="response-message"
-        ></div>
-
-      </form>
-
-      <div
-        id="commentList"
-        class="comment-list"
-      ></div>
-
-    </section>
-
-    <!-- KEEP READING -->
-
-    <section class="keep-reading">
-
-      <div class="section-label">
-        Keep Reading
-      </div>
-
-      <div class="reading-grid">
-
-        <a
-          id="previousEntry"
-          class="reading-card hidden"
-        >
-          <div class="reading-direction">
-            ← Previous Entry
-          </div>
-
-          <div
-            id="previousTitle"
-            class="reading-title"
-          ></div>
-        </a>
-
-        <a
-          id="nextEntry"
-          class="reading-card hidden"
-        >
-          <div class="reading-direction">
-            Next Entry →
-          </div>
-
-          <div
-            id="nextTitle"
-            class="reading-title"
-          ></div>
-        </a>
-
-      </div>
-
-      <a
-        href="journal.html"
-        class="all-journal"
-      >
-        View All Journal Entries →
-      </a>
-
-    </section>
-
-  </article>
-
-</main>
-
-<footer>
-
-  <div class="footer-brand">
-    HED
-  </div>
-
-  <div class="footer-tagline">
-    Her Existential Thoughts
-  </div>
-
-  <div class="footer-nav">
-    <a href="journal.html">Journal</a>
-    <a href="about.html">About</a>
-  </div>
-
-</footer>
-
-<!-- IMAGE LIGHTBOX -->
+<h1 class="entry-title" id="entryTitle"></h1>
 
 <div
-  id="imageLightbox"
-  class="image-lightbox"
->
+    class="entry-subtitle hidden"
+    id="entrySubtitle"
+></div>
 
-  <button
-    type="button"
-    id="lightboxClose"
-    class="lightbox-close"
-    aria-label="Close image"
-  >
-    ×
-  </button>
+<div class="entry-meta">
 
-  <img
-    id="lightboxImage"
-    src=""
-    alt=""
-  >
+    <span id="entryDate"></span>
+
+    <span class="meta-dot">•</span>
+
+    <span id="readTime"></span>
+
+    <span class="meta-dot">•</span>
+
+    <span>Written by HED</span>
 
 </div>
 
+<div class="ornament">
+    ✦
+</div>
+
+
+<div
+    class="hero-image-wrap hidden"
+    id="heroWrap"
+>
+
+    <img
+        id="heroImage"
+        class="hero-image"
+        alt=""
+    >
+
+    <div
+        id="imageCaption"
+        class="image-caption hidden"
+    ></div>
+
+</div>
+
+
+<!-- =========================
+     READING PREFERENCES
+========================= -->
+
+<div class="reading-preferences">
+
+    <div class="preference-label">
+        Reading
+    </div>
+
+
+    <div class="preference-group">
+
+        <span class="preference-group-title">
+            Size
+        </span>
+
+        <button
+            type="button"
+            class="preference-button"
+            data-size="small"
+        >
+            A−
+        </button>
+
+        <button
+            type="button"
+            class="preference-button"
+            data-size="normal"
+        >
+            A
+        </button>
+
+        <button
+            type="button"
+            class="preference-button"
+            data-size="large"
+        >
+            A+
+        </button>
+
+    </div>
+
+
+    <div class="preference-group">
+
+        <span class="preference-group-title">
+            Font
+        </span>
+
+        <button
+            type="button"
+            class="preference-button font-serif"
+            data-font="serif"
+        >
+            Serif
+        </button>
+
+        <button
+            type="button"
+            class="preference-button font-sans"
+            data-font="sans"
+        >
+            Sans
+        </button>
+
+        <button
+            type="button"
+            class="preference-button font-lora"
+            data-font="lora"
+        >
+            Lora
+        </button>
+
+        <button
+            type="button"
+            class="preference-button font-cormorant"
+            data-font="cormorant"
+        >
+            Cormorant
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="article-area">
+
+    <div
+        id="articleContent"
+        class="article-content"
+    ></div>
+
+
+    <div
+        id="hedNote"
+        class="hed-note hidden"
+    >
+
+        <div class="hed-note-label">
+            A Note From HED
+        </div>
+
+        <div
+            id="hedNoteContent"
+            class="hed-note-content"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     RESPONSES
+========================= -->
+
+<section class="responses">
+
+    <div class="section-label">
+        Responses
+    </div>
+
+    <h2 class="section-title">
+        Reader Responses
+    </h2>
+
+    <div
+        class="response-count"
+        id="responseCount"
+    >
+        0 responses
+    </div>
+
+
+    <form
+        id="responseForm"
+        class="response-form"
+    >
+
+        <input
+            type="text"
+            id="commentName"
+            placeholder="Your name"
+            readonly
+        >
+
+        <textarea
+            id="commentContent"
+            placeholder="Leave a thought..."
+            required
+        ></textarea>
+
+        <button type="submit">
+            Post Response
+        </button>
+
+        <div
+            id="responseMessage"
+            class="response-message"
+        ></div>
+
+    </form>
+
+
+    <div
+        id="commentList"
+        class="comment-list"
+    ></div>
+
+</section>
+
+
+<!-- =========================
+     KEEP READING
+========================= -->
+
+<section class="keep-reading">
+
+    <div class="section-label">
+        Keep Reading
+    </div>
+
+
+    <div class="reading-grid">
+
+        <a
+            id="previousEntry"
+            class="reading-card hidden"
+        >
+
+            <div class="reading-direction">
+                ← Previous Entry
+            </div>
+
+            <div
+                id="previousTitle"
+                class="reading-title"
+            ></div>
+
+        </a>
+
+
+        <a
+            id="nextEntry"
+            class="reading-card hidden"
+        >
+
+            <div class="reading-direction">
+                Next Entry →
+            </div>
+
+            <div
+                id="nextTitle"
+                class="reading-title"
+            ></div>
+
+        </a>
+
+    </div>
+
+
+    <a
+        href="journal.html"
+        class="all-journal"
+    >
+        View All Journal Entries →
+    </a>
+
+</section>
+
+
+</article>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-brand">
+        HED
+    </div>
+
+    <div class="footer-tagline">
+        Her Existential Thoughts
+    </div>
+
+    <div class="footer-nav">
+
+        <a href="journal.html">
+            Journal
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
+<div
+    id="imageLightbox"
+    class="image-lightbox"
+>
+
+    <button
+        type="button"
+        id="lightboxClose"
+        class="lightbox-close"
+        aria-label="Close image"
+    >
+        ×
+    </button>
+
+    <img
+        id="lightboxImage"
+        src=""
+        alt=""
+    >
+
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="supabase-config.js"></script>
+
 <script src="reader-auth.js"></script>
+
 
 <script>
 
+/* =========================================================
+   SUPABASE
+========================================================= */
+
 const db = supabaseClient;
 
-const urlParams = new URLSearchParams(window.location.search);
+
+/* =========================================================
+   URL
+========================================================= */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
 
 const requestedEntry =
-  urlParams.get("id") ||
-  urlParams.get("entry") ||
-  urlParams.get("entry_id") ||
-  urlParams.get("entryId") ||
-  urlParams.get("slug") ||
-  window.location.hash.replace(/^#/,"");
+    urlParams.get("id") ||
+    urlParams.get("entry") ||
+    urlParams.get("entry_id") ||
+    urlParams.get("entryId") ||
+    urlParams.get("slug") ||
+    window.location.hash.replace(/^#/,"");
+
+
+/* =========================================================
+   STATE
+========================================================= */
 
 let currentEntryId = null;
 
+let currentSize = "normal";
+
+let currentFont = "serif";
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
 const articleContent =
-  document.getElementById("articleContent");
+    document.getElementById(
+        "articleContent"
+    );
 
 const hedNoteContent =
-  document.getElementById("hedNoteContent");
+    document.getElementById(
+        "hedNoteContent"
+    );
 
 const commentList =
-  document.getElementById("commentList");
+    document.getElementById(
+        "commentList"
+    );
 
 const responseCount =
-  document.getElementById("responseCount");
+    document.getElementById(
+        "responseCount"
+    );
 
 const commentName =
-  document.getElementById("commentName");
+    document.getElementById(
+        "commentName"
+    );
 
 const responseMessage =
-  document.getElementById("responseMessage");
+    document.getElementById(
+        "responseMessage"
+    );
 
 
-/* =========================
-   READING PREFERENCES
-========================= */
-
-let currentSize =
-  localStorage.getItem("hedReadingSize") || "normal";
-
-let currentFont =
-  localStorage.getItem("hedReadingFont") || "serif";
-
+/* =========================================================
+   HELPERS
+========================================================= */
 
 function slugify(value){
 
-  return String(value || "")
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g,"")
-    .replace(/\s+/g,"-")
-    .replace(/-+/g,"-");
+    return String(value || "")
+        .toLowerCase()
+        .trim()
+        .replace(
+            /[^a-z0-9\s-]/g,
+            ""
+        )
+        .replace(
+            /\s+/g,
+            "-"
+        )
+        .replace(
+            /-+/g,
+            "-"
+        );
 
 }
 
 
 function formatDate(date){
 
-  if(!date) return "";
+    if(!date){
+        return "";
+    }
 
-  const d = new Date(date);
+    const d =
+        new Date(date);
 
-  return Number.isNaN(d.getTime())
-    ? ""
-    : d.toLocaleDateString(
+    if(
+        Number.isNaN(
+            d.getTime()
+        )
+    ){
+        return "";
+    }
+
+    return d.toLocaleDateString(
         "en-US",
         {
-          month:"long",
-          day:"numeric",
-          year:"numeric"
+            month:"long",
+            day:"numeric",
+            year:"numeric"
         }
-      );
+    );
 
 }
 
 
 function calculateReadTime(content){
 
-  const words =
-    String(content || "")
-      .replace(/<[^>]*>/g," ")
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean)
-      .length;
+    const words =
+        String(content || "")
+            .replace(
+                /<[^>]*>/g,
+                " "
+            )
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean)
+            .length;
 
-  return `${Math.max(1,Math.ceil(words / 220))} min read`;
+    return `${Math.max(
+        1,
+        Math.ceil(words / 220)
+    )} min read`;
 
 }
 
 
-/*
-  Reader sizes:
-
-  Small  = 20px desktop / 19px mobile
-  Normal = 24px desktop / 21px mobile
-  Large  = 27px desktop / 24px mobile
-*/
+/* =========================================================
+   READING SIZE
+========================================================= */
 
 function getReaderSize(){
 
-  if(currentSize === "small"){
-    return window.innerWidth <= 700 ? 19 : 20;
-  }
+    if(currentSize === "small"){
 
-  if(currentSize === "large"){
-    return window.innerWidth <= 700 ? 24 : 27;
-  }
+        return window.innerWidth <= 700
+            ? 19
+            : 21;
 
-  return window.innerWidth <= 700 ? 21 : 24;
+    }
+
+    if(currentSize === "large"){
+
+        return window.innerWidth <= 700
+            ? 25
+            : 28;
+
+    }
+
+    return window.innerWidth <= 700
+        ? 22
+        : 24;
 
 }
 
+
+/* =========================================================
+   READING FONT
+========================================================= */
 
 function getReaderFont(){
 
-  return currentFont === "sans"
-    ? "Arial, Helvetica, sans-serif"
-    : 'Georgia, "Times New Roman", serif';
+    if(currentFont === "sans"){
+
+        return "Arial, Helvetica, sans-serif";
+
+    }
+
+    if(currentFont === "lora"){
+
+        return '"Lora", Georgia, serif';
+
+    }
+
+    if(currentFont === "cormorant"){
+
+        return '"Cormorant Garamond", Georgia, serif';
+
+    }
+
+    return 'Georgia, "Times New Roman", serif';
 
 }
 
 
-/*
-  Apply the reader preferences to the entire article.
-
-  Before applying the font, remove any font-family
-  declarations that may have been embedded in the
-  article HTML itself. This makes the Serif/Sans
-  controls actually work consistently.
-*/
+/* =========================================================
+   APPLY READING PREFERENCES
+========================================================= */
 
 function applyReadingPreferences(){
 
-  const size = getReaderSize();
-  const font = getReaderFont();
+    const size =
+        getReaderSize();
 
-  articleContent.style.setProperty(
-    "--reader-size",
-    `${size}px`
-  );
-
-  articleContent.style.setProperty(
-    "--reader-font",
-    font
-  );
-
-  articleContent.style.setProperty(
-    "font-size",
-    `${size}px`,
-    "important"
-  );
-
-  articleContent.style.setProperty(
-    "font-family",
-    font,
-    "important"
-  );
+    const font =
+        getReaderFont();
 
 
-  /*
-    Remove embedded font choices from the
-    article content so the reader controls
-    remain in charge.
-  */
+    /*
+       IMPORTANT:
+       We directly change the article container
+       and every article child.
 
-  articleContent
-    .querySelectorAll("*")
-    .forEach(el => {
+       No localStorage.
+       No saved setting.
+       No page reload.
+    */
 
-      el.style.removeProperty("font-family");
+    articleContent.style.setProperty(
+        "--article-size",
+        `${size}px`
+    );
 
-      el.style.removeProperty("font-size");
+    articleContent.style.setProperty(
+        "--article-font",
+        font
+    );
 
-      el.style.removeProperty("line-height");
+    articleContent.style.setProperty(
+        "font-size",
+        `${size}px`,
+        "important"
+    );
 
-    });
-
-
-  /*
-    Re-apply the reader font and size.
-  */
-
-  articleContent
-    .querySelectorAll("*")
-    .forEach(el => {
-
-      el.style.setProperty(
+    articleContent.style.setProperty(
         "font-family",
         font,
         "important"
-      );
+    );
 
-      el.style.setProperty(
-        "line-height",
-        "1.78",
+
+    articleContent
+        .querySelectorAll("*")
+        .forEach(function(el){
+
+            el.style.setProperty(
+                "font-family",
+                font,
+                "important"
+            );
+
+            if(
+                el.matches(
+                    "h1"
+                )
+            ){
+
+                el.style.setProperty(
+                    "font-size",
+                    `${size + 12}px`,
+                    "important"
+                );
+
+            }
+
+            else if(
+                el.matches(
+                    "h2"
+                )
+            ){
+
+                el.style.setProperty(
+                    "font-size",
+                    `${size + 7}px`,
+                    "important"
+                );
+
+            }
+
+            else if(
+                el.matches(
+                    "h3"
+                )
+            ){
+
+                el.style.setProperty(
+                    "font-size",
+                    `${size + 3}px`,
+                    "important"
+                );
+
+            }
+
+            else if(
+                el.matches(
+                    "h4,h5,h6"
+                )
+            ){
+
+                el.style.setProperty(
+                    "font-size",
+                    `${size + 1}px`,
+                    "important"
+                );
+
+            }
+
+            else{
+
+                el.style.setProperty(
+                    "font-size",
+                    `${size}px`,
+                    "important"
+                );
+
+            }
+
+            el.style.setProperty(
+                "line-height",
+                "1.82",
+                "important"
+            );
+
+        });
+
+
+    /*
+       HED note follows the same font/size.
+    */
+
+    hedNoteContent.style.setProperty(
+        "font-family",
+        font,
         "important"
-      );
+    );
+
+    hedNoteContent.style.setProperty(
+        "font-size",
+        `${size}px`,
+        "important"
+    );
 
 
-      if(el.matches("h1")){
+    /*
+       Active button.
+    */
 
-        el.style.setProperty(
-          "font-size",
-          `${size + 13}px`,
-          "important"
-        );
+    document
+        .querySelectorAll(
+            "[data-size]"
+        )
+        .forEach(function(button){
 
-      }
+            button.classList.toggle(
+                "active",
+                button.dataset.size ===
+                currentSize
+            );
 
-      else if(el.matches("h2")){
-
-        el.style.setProperty(
-          "font-size",
-          `${size + 7}px`,
-          "important"
-        );
-
-      }
-
-      else if(el.matches("h3")){
-
-        el.style.setProperty(
-          "font-size",
-          `${size + 3}px`,
-          "important"
-        );
-
-      }
-
-      else if(el.matches("h4,h5,h6")){
-
-        el.style.setProperty(
-          "font-size",
-          `${size + 1}px`,
-          "important"
-        );
-
-      }
-
-      else if(el.matches("blockquote")){
-
-        el.style.setProperty(
-          "font-size",
-          `${size + 2}px`,
-          "important"
-        );
-
-      }
-
-      else{
-
-        el.style.setProperty(
-          "font-size",
-          `${size}px`,
-          "important"
-        );
-
-      }
-
-    });
+        });
 
 
-  /*
-    HED note follows the same reader settings.
-  */
+    document
+        .querySelectorAll(
+            "[data-font]"
+        )
+        .forEach(function(button){
 
-  hedNoteContent.style.setProperty(
-    "font-size",
-    `${size}px`,
-    "important"
-  );
+            button.classList.toggle(
+                "active",
+                button.dataset.font ===
+                currentFont
+            );
 
-  hedNoteContent.style.setProperty(
-    "font-family",
-    font,
-    "important"
-  );
-
-
-  /*
-    Remember preferences.
-  */
-
-  localStorage.setItem(
-    "hedReadingSize",
-    currentSize
-  );
-
-  localStorage.setItem(
-    "hedReadingFont",
-    currentFont
-  );
-
-
-  /*
-    Active buttons.
-  */
-
-  document
-    .querySelectorAll("[data-size]")
-    .forEach(button => {
-
-      button.classList.toggle(
-        "active",
-        button.dataset.size === currentSize
-      );
-
-    });
-
-
-  document
-    .querySelectorAll("[data-font]")
-    .forEach(button => {
-
-      button.classList.toggle(
-        "active",
-        button.dataset.font === currentFont
-      );
-
-    });
+        });
 
 }
 
+
+/* =========================================================
+   SIZE BUTTONS
+========================================================= */
 
 function setReaderSize(value){
 
-  currentSize = value;
+    currentSize =
+        value;
 
-  applyReadingPreferences();
+    applyReadingPreferences();
 
 }
 
+
+/* =========================================================
+   FONT BUTTONS
+========================================================= */
 
 function setReaderFont(value){
 
-  currentFont = value;
+    currentFont =
+        value;
 
-  localStorage.setItem(
-    "hedReadingFont",
-    currentFont
-  );
+    /*
+       NO localStorage.
+       It changes immediately only.
+    */
 
-  applyReadingPreferences();
+    applyReadingPreferences();
 
 }
 
 
-/*
-  Resize the reader naturally when the screen
-  changes between desktop and mobile.
-*/
+/* =========================================================
+   BUTTON EVENTS
+========================================================= */
+
+document
+    .querySelectorAll(
+        "[data-size]"
+    )
+    .forEach(function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                setReaderSize(
+                    this.dataset.size
+                );
+
+            }
+        );
+
+    });
+
+
+document
+    .querySelectorAll(
+        "[data-font]"
+    )
+    .forEach(function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                setReaderFont(
+                    this.dataset.font
+                );
+
+            }
+        );
+
+    });
+
 
 window.addEventListener(
-  "resize",
-  applyReadingPreferences
+    "resize",
+    function(){
+
+        applyReadingPreferences();
+
+        updateReadingProgress();
+
+    }
 );
 
 
-/* =========================
+/* =========================================================
    COPY PROTECTION
-========================= */
+========================================================= */
+
+/*
+   This blocks normal copying/selection on the article.
+   Screenshots are not blocked.
+*/
 
 document.addEventListener(
-  "contextmenu",
-  e => e.preventDefault()
-);
+    "contextmenu",
+    function(event){
 
-document.addEventListener(
-  "copy",
-  e => {
+        if(
+            event.target.closest(
+                "#articleContent"
+            )
+        ){
 
-    if(
-      !["INPUT","TEXTAREA"]
-        .includes(e.target.tagName)
-    ){
-      e.preventDefault();
+            event.preventDefault();
+
+        }
+
     }
-
-  }
-);
-
-document.addEventListener(
-  "cut",
-  e => {
-
-    if(
-      !["INPUT","TEXTAREA"]
-        .includes(e.target.tagName)
-    ){
-      e.preventDefault();
-    }
-
-  }
-);
-
-document.addEventListener(
-  "keydown",
-  e => {
-
-    if(
-      ["INPUT","TEXTAREA"]
-        .includes(e.target.tagName)
-    ){
-      return;
-    }
-
-    if(
-      (e.ctrlKey || e.metaKey) &&
-      ["c","x","a"]
-        .includes(e.key.toLowerCase())
-    ){
-      e.preventDefault();
-    }
-
-  }
-);
-
-document.addEventListener(
-  "dragstart",
-  e => {
-
-    if(
-      e.target.closest("#articleContent")
-    ){
-      e.preventDefault();
-    }
-
-  }
 );
 
 
-/* =========================
-   IMAGE LIGHTBOX
-========================= */
+document.addEventListener(
+    "copy",
+    function(event){
+
+        if(
+            event.target.closest(
+                "#articleContent"
+            )
+        ){
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "cut",
+    function(event){
+
+        if(
+            event.target.closest(
+                "#articleContent"
+            )
+        ){
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            !event.target.closest(
+                "#articleContent"
+            )
+        ){
+
+            return;
+
+        }
+
+        const key =
+            event.key.toLowerCase();
+
+        if(
+            (event.ctrlKey ||
+             event.metaKey) &&
+            (
+                key === "c" ||
+                key === "x" ||
+                key === "a"
+            )
+        ){
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "dragstart",
+    function(event){
+
+        if(
+            event.target.closest(
+                "#articleContent"
+            )
+        ){
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
 
 const imageLightbox =
-  document.getElementById("imageLightbox");
+    document.getElementById(
+        "imageLightbox"
+    );
 
 const lightboxImage =
-  document.getElementById("lightboxImage");
+    document.getElementById(
+        "lightboxImage"
+    );
 
 
 function openLightbox(image){
 
-  if(!image) return;
+    if(!image){
+        return;
+    }
 
-  lightboxImage.src = image.src;
+    lightboxImage.src =
+        image.src;
 
-  lightboxImage.alt =
-    image.alt || "";
+    lightboxImage.alt =
+        image.alt || "";
 
-  imageLightbox.classList.add("open");
+    imageLightbox.classList.add(
+        "open"
+    );
 
-  document.body.style.overflow = "hidden";
+    document.body.style.overflow =
+        "hidden";
 
 }
 
 
 function closeLightbox(){
 
-  imageLightbox.classList.remove("open");
+    imageLightbox.classList.remove(
+        "open"
+    );
 
-  document.body.style.overflow = "";
+    document.body.style.overflow =
+        "";
 
-  lightboxImage.src = "";
+    lightboxImage.src =
+        "";
 
 }
 
 
 document
-  .getElementById("lightboxClose")
-  .addEventListener(
-    "click",
-    closeLightbox
-  );
+    .getElementById(
+        "lightboxClose"
+    )
+    .addEventListener(
+        "click",
+        closeLightbox
+    );
 
 
 imageLightbox.addEventListener(
-  "click",
-  e => {
+    "click",
+    function(event){
 
-    if(e.target === imageLightbox){
-      closeLightbox();
+        if(
+            event.target ===
+            imageLightbox
+        ){
+
+            closeLightbox();
+
+        }
+
     }
-
-  }
 );
 
 
 document.addEventListener(
-  "keydown",
-  e => {
+    "keydown",
+    function(event){
 
-    if(e.key === "Escape"){
-      closeLightbox();
+        if(
+            event.key === "Escape"
+        ){
+
+            closeLightbox();
+
+        }
+
     }
-
-  }
 );
 
 
 document
-  .getElementById("heroImage")
-  .addEventListener(
-    "click",
-    e => openLightbox(e.currentTarget)
-  );
+    .getElementById(
+        "heroImage"
+    )
+    .addEventListener(
+        "click",
+        function(event){
+
+            openLightbox(
+                event.currentTarget
+            );
+
+        }
+    );
 
 
 articleContent.addEventListener(
-  "click",
-  e => {
+    "click",
+    function(event){
 
-    const img =
-      e.target.closest("img");
+        const img =
+            event.target.closest(
+                "img"
+            );
 
-    if(img){
-      openLightbox(img);
+        if(img){
+
+            openLightbox(
+                img
+            );
+
+        }
+
     }
-
-  }
 );
 
 
-/* =========================
+/* =========================================================
    LOAD ENTRY
-========================= */
+========================================================= */
 
 async function loadEntry(){
 
-  if(!requestedEntry){
+    if(!requestedEntry){
 
-    document
-      .getElementById("loading")
-      .textContent =
-      "No journal entry was selected.";
+        document.getElementById(
+            "loading"
+        ).textContent =
+            "No journal entry was selected.";
 
-    return;
-  }
+        return;
 
+    }
 
-  const {
-    data,
-    error
-  } = await db
-    .from("journal_entries")
-    .select("*")
-    .order(
-      "published_at",
-      {
-        ascending:false
-      }
-    );
 
+    const {
+        data,
+        error
+    } =
+        await db
+            .from(
+                "journal_entries"
+            )
+            .select("*")
+            .order(
+                "published_at",
+                {
+                    ascending:false
+                }
+            );
 
-  if(error){
 
-    console.error(error);
+    if(error){
 
-    document
-      .getElementById("loading")
-      .textContent =
-      "Unable to load this journal entry.";
+        console.error(
+            error
+        );
 
-    return;
-  }
+        document.getElementById(
+            "loading"
+        ).textContent =
+            "Unable to load this journal entry.";
 
+        return;
 
-  const entries = data || [];
+    }
 
-  const requested =
-    String(requestedEntry).trim();
 
-  const requestedSlug =
-    slugify(requested);
+    const entries =
+        data || [];
 
+    const requested =
+        String(
+            requestedEntry
+        ).trim();
 
-  const currentIndex =
-    entries.findIndex(entry => {
+    const requestedSlug =
+        slugify(
+            requested
+        );
 
-      const idMatch =
-        entry.id !== undefined &&
-        String(entry.id) === requested;
 
+    const currentIndex =
+        entries.findIndex(
+            function(entry){
 
-      const matches = key =>
-        entry[key] &&
-        String(entry[key]).toLowerCase() ===
-        requested.toLowerCase();
+                const idMatch =
+                    entry.id !== undefined &&
+                    String(entry.id) ===
+                    requested;
 
+                const matches =
+                    function(key){
 
-      const titleMatch =
-        entry.title &&
-        String(entry.title).toLowerCase() ===
-        requested.toLowerCase();
+                        return (
+                            entry[key] &&
+                            String(entry[key])
+                                .toLowerCase() ===
+                            requested.toLowerCase()
+                        );
 
+                    };
 
-      const titleSlugMatch =
-        entry.title &&
-        slugify(entry.title) === requestedSlug;
 
+                const titleMatch =
+                    entry.title &&
+                    String(entry.title)
+                        .toLowerCase() ===
+                    requested.toLowerCase();
 
-      return (
-        idMatch ||
-        matches("slug") ||
-        matches("entry_slug") ||
-        matches("entrySlug") ||
-        titleMatch ||
-        titleSlugMatch
-      );
 
-    });
+                const titleSlugMatch =
+                    entry.title &&
+                    slugify(
+                        entry.title
+                    ) ===
+                    requestedSlug;
 
 
-  if(currentIndex === -1){
+                return (
+                    idMatch ||
+                    matches("slug") ||
+                    matches("entry_slug") ||
+                    matches("entrySlug") ||
+                    titleMatch ||
+                    titleSlugMatch
+                );
 
-    document
-      .getElementById("loading")
-      .textContent =
-      "Journal entry unavailable.";
+            }
+        );
 
-    return;
-  }
 
+    if(currentIndex === -1){
 
-  const entry =
-    entries[currentIndex];
+        document.getElementById(
+            "loading"
+        ).textContent =
+            "Journal entry unavailable.";
 
-  currentEntryId =
-    entry.id;
+        return;
 
+    }
 
-  /* TITLE */
 
-  document
-    .getElementById("entryTitle")
-    .textContent =
-    entry.title ||
-    "Untitled Journal Entry";
+    const entry =
+        entries[currentIndex];
 
+    currentEntryId =
+        entry.id;
 
-  /* SUBTITLE */
 
-  const subtitle =
-    entry.subtitle ||
-    entry.description ||
-    entry.dek;
+    /*
+       Header.
+    */
 
-  const subtitleEl =
-    document.getElementById("entrySubtitle");
+    document.getElementById(
+        "entryTitle"
+    ).textContent =
+        entry.title ||
+        "Untitled Journal Entry";
 
 
-  if(subtitle){
+    const subtitle =
+        entry.subtitle ||
+        entry.description ||
+        entry.dek;
 
-    subtitleEl.textContent =
-      subtitle;
 
-    subtitleEl.classList.remove(
-      "hidden"
-    );
+    const subtitleEl =
+        document.getElementById(
+            "entrySubtitle"
+        );
 
-  }
 
-  else{
+    if(subtitle){
 
-    subtitleEl.classList.add(
-      "hidden"
-    );
+        subtitleEl.textContent =
+            subtitle;
 
-  }
-
-
-  /* META */
-
-  document
-    .getElementById("entryDate")
-    .textContent =
-    formatDate(
-      entry.published_at
-    );
-
-
-  document
-    .getElementById("readTime")
-    .textContent =
-    calculateReadTime(
-      entry.content
-    );
-
-
-  /* HERO IMAGE */
-
-  const heroWrap =
-    document.getElementById("heroWrap");
-
-  const heroImage =
-    document.getElementById("heroImage");
-
-  const captionEl =
-    document.getElementById("imageCaption");
-
-
-  if(entry.image_url){
-
-    heroImage.src =
-      entry.image_url;
-
-    heroImage.alt =
-      entry.title ||
-      "Journal image";
-
-    heroWrap.classList.remove(
-      "hidden"
-    );
-
-
-    const caption =
-      entry.image_caption ||
-      entry.caption;
-
-
-    if(caption){
-
-      captionEl.textContent =
-        caption;
-
-      captionEl.classList.remove(
-        "hidden"
-      );
+        subtitleEl.classList.remove(
+            "hidden"
+        );
 
     }
 
     else{
 
-      captionEl.classList.add(
-        "hidden"
-      );
+        subtitleEl.classList.add(
+            "hidden"
+        );
 
     }
 
-  }
 
-  else{
-
-    heroWrap.classList.add(
-      "hidden"
-    );
-
-    heroImage.removeAttribute(
-      "src"
-    );
-
-  }
-
-
-  /* ARTICLE */
-
-  articleContent.innerHTML =
-    entry.content ||
-    "<p>This entry has no content yet.</p>";
-
-
-  applyReadingPreferences();
-
-
-  /* HED NOTE */
-
-  const note =
-    entry.author_reflection ||
-    entry.reflection;
-
-  const hedNote =
-    document.getElementById("hedNote");
-
-
-  if(note){
-
-    hedNote.classList.remove(
-      "hidden"
-    );
-
-    hedNoteContent.textContent =
-      note;
-
-  }
-
-  else{
-
-    hedNote.classList.add(
-      "hidden"
-    );
-
-    hedNoteContent.textContent =
-      "";
-
-  }
-
-
-  /* PREVIOUS / NEXT */
-
-  const previous =
-    entries[currentIndex + 1];
-
-  const next =
-    entries[currentIndex - 1];
-
-
-  const previousCard =
     document.getElementById(
-      "previousEntry"
-    );
+        "entryDate"
+    ).textContent =
+        formatDate(
+            entry.published_at
+        );
 
-  const nextCard =
+
     document.getElementById(
-      "nextEntry"
+        "readTime"
+    ).textContent =
+        calculateReadTime(
+            entry.content
+        );
+
+
+    /*
+       Hero.
+    */
+
+    const heroWrap =
+        document.getElementById(
+            "heroWrap"
+        );
+
+    const heroImage =
+        document.getElementById(
+            "heroImage"
+        );
+
+    const captionEl =
+        document.getElementById(
+            "imageCaption"
+        );
+
+
+    if(entry.image_url){
+
+        heroImage.src =
+            entry.image_url;
+
+        heroImage.alt =
+            entry.title ||
+            "Journal image";
+
+        heroWrap.classList.remove(
+            "hidden"
+        );
+
+
+        const caption =
+            entry.image_caption ||
+            entry.caption;
+
+
+        if(caption){
+
+            captionEl.textContent =
+                caption;
+
+            captionEl.classList.remove(
+                "hidden"
+            );
+
+        }
+
+        else{
+
+            captionEl.classList.add(
+                "hidden"
+            );
+
+        }
+
+    }
+
+    else{
+
+        heroWrap.classList.add(
+            "hidden"
+        );
+
+        heroImage.removeAttribute(
+            "src"
+        );
+
+    }
+
+
+    /*
+       Article.
+    */
+
+    articleContent.innerHTML =
+        entry.content ||
+        "<p>This entry has no content yet.</p>";
+
+
+    /*
+       Apply current settings AFTER
+       inserting the article HTML.
+    */
+
+    applyReadingPreferences();
+
+
+    /*
+       HED note.
+    */
+
+    const note =
+        entry.author_reflection ||
+        entry.reflection;
+
+
+    const hedNote =
+        document.getElementById(
+            "hedNote"
+        );
+
+
+    if(note){
+
+        hedNote.classList.remove(
+            "hidden"
+        );
+
+        hedNoteContent.textContent =
+            note;
+
+    }
+
+    else{
+
+        hedNote.classList.add(
+            "hidden"
+        );
+
+        hedNoteContent.textContent =
+            "";
+
+    }
+
+
+    /*
+       Previous / next.
+    */
+
+    const previous =
+        entries[currentIndex + 1];
+
+    const next =
+        entries[currentIndex - 1];
+
+
+    const previousCard =
+        document.getElementById(
+            "previousEntry"
+        );
+
+    const nextCard =
+        document.getElementById(
+            "nextEntry"
+        );
+
+
+    if(previous){
+
+        previousCard.href =
+            `journal-entry.html?id=${encodeURIComponent(
+                previous.id
+            )}`;
+
+        document.getElementById(
+            "previousTitle"
+        ).textContent =
+            previous.title ||
+            "Previous Entry";
+
+        previousCard.classList.remove(
+            "hidden"
+        );
+
+    }
+
+    else{
+
+        previousCard.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    if(next){
+
+        nextCard.href =
+            `journal-entry.html?id=${encodeURIComponent(
+                next.id
+            )}`;
+
+        document.getElementById(
+            "nextTitle"
+        ).textContent =
+            next.title ||
+            "Next Entry";
+
+        nextCard.classList.remove(
+            "hidden"
+        );
+
+    }
+
+    else{
+
+        nextCard.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    document.getElementById(
+        "loading"
+    ).classList.add(
+        "hidden"
     );
 
 
-  if(previous){
-
-    previousCard.href =
-      `journal-entry.html?id=${encodeURIComponent(previous.id)}`;
-
-    document
-      .getElementById("previousTitle")
-      .textContent =
-      previous.title ||
-      "Previous Entry";
-
-    previousCard.classList.remove(
-      "hidden"
+    document.getElementById(
+        "entryPage"
+    ).classList.remove(
+        "hidden"
     );
 
-  }
 
-  else{
+    applyReadingPreferences();
 
-    previousCard.classList.add(
-      "hidden"
+
+    await loadComments(
+        currentEntryId
     );
-
-  }
-
-
-  if(next){
-
-    nextCard.href =
-      `journal-entry.html?id=${encodeURIComponent(next.id)}`;
-
-    document
-      .getElementById("nextTitle")
-      .textContent =
-      next.title ||
-      "Next Entry";
-
-    nextCard.classList.remove(
-      "hidden"
-    );
-
-  }
-
-  else{
-
-    nextCard.classList.add(
-      "hidden"
-    );
-
-  }
-
-
-  /* SHOW PAGE */
-
-  document
-    .getElementById("loading")
-    .classList.add("hidden");
-
-
-  document
-    .getElementById("entryPage")
-    .classList.remove("hidden");
-
-
-  applyReadingPreferences();
-
-  loadComments(
-    currentEntryId
-  );
 
 }
 
 
-/* =========================
+/* =========================================================
+   AUTH USER
+========================================================= */
+
+async function getCurrentUser(){
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+            await db.auth.getUser();
+
+
+        if(error){
+
+            console.warn(
+                "Could not get current user:",
+                error
+            );
+
+            return null;
+
+        }
+
+        return data?.user || null;
+
+    }
+
+    catch(error){
+
+        console.warn(
+            "Auth lookup failed:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =========================================================
+   COMMENT NAME
+========================================================= */
+
+async function setCommentName(){
+
+    const nickname =
+        window.readerNickname;
+
+
+    if(
+        nickname &&
+        String(nickname).trim()
+    ){
+
+        commentName.value =
+            String(
+                nickname
+            ).trim();
+
+        return;
+
+    }
+
+
+    try{
+
+        const user =
+            await getCurrentUser();
+
+
+        const metadata =
+            user?.user_metadata || {};
+
+
+        const fallback =
+            metadata.nickname ||
+            metadata.display_name ||
+            metadata.name ||
+            "";
+
+
+        if(
+            String(fallback).trim()
+        ){
+
+            commentName.value =
+                String(
+                    fallback
+                ).trim();
+
+        }
+
+        else{
+
+            commentName.value =
+                "Reader";
+
+        }
+
+    }
+
+    catch(error){
+
+        commentName.value =
+            "Reader";
+
+    }
+
+}
+
+
+/* =========================================================
    COMMENTS
-========================= */
+========================================================= */
 
 async function loadComments(id){
 
-  if(!id) return;
+    if(!id){
+        return;
+    }
 
 
-  commentList.innerHTML = "";
+    commentList.innerHTML =
+        "";
 
-  responseCount.textContent =
-    "0 responses";
-
-
-  const {
-    data,
-    error
-  } = await db
-    .from("comments")
-    .select(
-      "id,name,content,created_at"
-    )
-    .eq(
-      "target_type",
-      "journal"
-    )
-    .eq(
-      "target_id",
-      id
-    )
-    .order(
-      "created_at",
-      {
-        ascending:true
-      }
-    );
+    responseCount.textContent =
+        "0 responses";
 
 
-  if(error){
+    /*
+       First try loading user_id too.
 
-    console.error(
-      "Comments error:",
-      error
-    );
+       If the column doesn't exist in the current
+       table, fall back to the existing comment structure
+       so the comments themselves do not stop working.
+    */
 
-    return;
-  }
-
-
-  const comments =
-    data || [];
-
-
-  responseCount.textContent =
-    `${comments.length} ${
-      comments.length === 1
-        ? "response"
-        : "responses"
-    }`;
-
-
-  comments.forEach(comment => {
-
-    const item =
-      document.createElement("div");
-
-    item.className =
-      "comment";
+    let result =
+        await db
+            .from("comments")
+            .select(
+                "id,name,content,created_at,user_id"
+            )
+            .eq(
+                "target_type",
+                "journal"
+            )
+            .eq(
+                "target_id",
+                id
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:true
+                }
+            );
 
 
-    const top =
-      document.createElement("div");
-
-    top.className =
-      "comment-top";
+    let hasUserIdColumn =
+        !result.error;
 
 
-    const name =
-      document.createElement("div");
+    if(result.error){
 
-    name.className =
-      "comment-name";
-
-    name.textContent =
-      comment.name ||
-      "Reader";
-
-
-    const date =
-      document.createElement("div");
-
-    date.className =
-      "comment-date";
-
-    date.textContent =
-      formatDate(
-        comment.created_at
-      );
-
-
-    top.append(
-      name,
-      date
-    );
-
-
-    const body =
-      document.createElement("div");
-
-    body.className =
-      "comment-content";
-
-    body.textContent =
-      comment.content ||
-      "";
-
-
-    const actions =
-      document.createElement("div");
-
-    actions.className =
-      "comment-actions";
-
-
-    const del =
-      document.createElement("button");
-
-    del.type =
-      "button";
-
-    del.className =
-      "comment-delete";
-
-    del.textContent =
-      "Delete";
-
-
-    del.addEventListener(
-      "click",
-      async () => {
-
-        if(
-          !confirm(
-            "Delete this comment?"
-          )
-        ){
-          return;
-        }
-
-
-        del.disabled = true;
-
-        del.textContent =
-          "Deleting...";
-
-
-        const {
-          error:deleteError
-        } = await db
-          .from("comments")
-          .delete()
-          .eq(
-            "id",
-            comment.id
-          );
-
-
-        if(deleteError){
-
-          console.error(
-            "Delete comment error:",
-            deleteError
-          );
-
-          del.disabled =
-            false;
-
-          del.textContent =
-            "Delete";
-
-          responseMessage.textContent =
-            "Could not delete comment. Please check your Supabase delete policy.";
-
-          return;
-        }
-
-
-        await loadComments(
-          currentEntryId
+        console.warn(
+            "user_id was not available on comments; loading legacy comments instead.",
+            result.error
         );
 
-      }
+
+        result =
+            await db
+                .from("comments")
+                .select(
+                    "id,name,content,created_at"
+                )
+                .eq(
+                    "target_type",
+                    "journal"
+                )
+                .eq(
+                    "target_id",
+                    id
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending:true
+                    }
+                );
+
+    }
+
+
+    if(result.error){
+
+        console.error(
+            "Comments error:",
+            result.error
+        );
+
+        responseMessage.textContent =
+            "Could not load responses.";
+
+        return;
+
+    }
+
+
+    const comments =
+        result.data || [];
+
+
+    responseCount.textContent =
+        `${comments.length} ${
+            comments.length === 1
+                ? "response"
+                : "responses"
+        }`;
+
+
+    const currentUser =
+        await getCurrentUser();
+
+
+    const currentUserId =
+        currentUser?.id || null;
+
+
+    comments.forEach(
+        function(comment){
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "comment";
+
+
+            const top =
+                document.createElement(
+                    "div"
+                );
+
+            top.className =
+                "comment-top";
+
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+            name.className =
+                "comment-name";
+
+            name.textContent =
+                comment.name ||
+                "Reader";
+
+
+            const date =
+                document.createElement(
+                    "div"
+                );
+
+            date.className =
+                "comment-date";
+
+            date.textContent =
+                formatDate(
+                    comment.created_at
+                );
+
+
+            top.append(
+                name,
+                date
+            );
+
+
+            const body =
+                document.createElement(
+                    "div"
+                );
+
+            body.className =
+                "comment-content";
+
+            body.textContent =
+                comment.content ||
+                "";
+
+
+            item.append(
+                top,
+                body
+            );
+
+
+            /*
+               ONLY show Delete when there is a real
+               authenticated owner ID and it matches
+               the current user.
+
+               We deliberately do NOT compare nicknames.
+            */
+
+            const ownsComment =
+                hasUserIdColumn &&
+                currentUserId &&
+                comment.user_id &&
+                String(
+                    comment.user_id
+                ) === String(
+                    currentUserId
+                );
+
+
+            if(ownsComment){
+
+                const actions =
+                    document.createElement(
+                        "div"
+                    );
+
+                actions.className =
+                    "comment-actions";
+
+
+                const deleteButton =
+                    document.createElement(
+                        "button"
+                    );
+
+                deleteButton.type =
+                    "button";
+
+                deleteButton.className =
+                    "comment-delete";
+
+                deleteButton.textContent =
+                    "Delete";
+
+
+                deleteButton.addEventListener(
+                    "click",
+                    async function(){
+
+                        const confirmed =
+                            confirm(
+                                "Delete this comment?"
+                            );
+
+
+                        if(!confirmed){
+                            return;
+                        }
+
+
+                        deleteButton.disabled =
+                            true;
+
+                        deleteButton.textContent =
+                            "Deleting...";
+
+
+                        /*
+                           The DELETE query includes BOTH
+                           the comment ID and the current
+                           authenticated user ID.
+                        */
+
+                        const {
+                            error:deleteError
+                        } =
+                            await db
+                                .from("comments")
+                                .delete()
+                                .eq(
+                                    "id",
+                                    comment.id
+                                )
+                                .eq(
+                                    "user_id",
+                                    currentUserId
+                                );
+
+
+                        if(deleteError){
+
+                            console.error(
+                                "Delete comment error:",
+                                deleteError
+                            );
+
+                            deleteButton.disabled =
+                                false;
+
+                            deleteButton.textContent =
+                                "Delete";
+
+                            responseMessage.textContent =
+                                "Could not delete this comment. Check the Supabase delete policy.";
+
+                            return;
+
+                        }
+
+
+                        responseMessage.textContent =
+                            "Comment deleted.";
+
+                        await loadComments(
+                            currentEntryId
+                        );
+
+                    }
+                );
+
+
+                actions.appendChild(
+                    deleteButton
+                );
+
+                item.appendChild(
+                    actions
+                );
+
+            }
+
+
+            commentList.appendChild(
+                item
+            );
+
+        }
     );
-
-
-    actions.appendChild(
-      del
-    );
-
-
-    item.append(
-      top,
-      body,
-      actions
-    );
-
-
-    commentList.appendChild(
-      item
-    );
-
-  });
 
 }
 
 
-/* =========================
-   COMMENT FORM
-========================= */
-
-commentName.value =
-  window.readerNickname ||
-  "Reader";
-
+/* =========================================================
+   POST COMMENT
+========================================================= */
 
 document
-  .getElementById("responseForm")
-  .addEventListener(
-    "submit",
-    async e => {
+    .getElementById(
+        "responseForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event){
 
-      e.preventDefault();
-
-
-      const name =
-        commentName.value.trim();
+            event.preventDefault();
 
 
-      const content =
-        document
-          .getElementById(
-            "commentContent"
-          )
-          .value
-          .trim();
+            const name =
+                commentName.value.trim();
+
+            const content =
+                document
+                    .getElementById(
+                        "commentContent"
+                    )
+                    .value
+                    .trim();
 
 
-      if(!content){
+            if(!content){
 
-        responseMessage.textContent =
-          "Please write something first.";
+                responseMessage.textContent =
+                    "Please write something first.";
 
-        return;
-      }
+                return;
 
-
-      if(!currentEntryId){
-
-        responseMessage.textContent =
-          "This entry is not ready yet.";
-
-        return;
-      }
+            }
 
 
-      responseMessage.textContent =
-        "Posting...";
+            if(!currentEntryId){
+
+                responseMessage.textContent =
+                    "This entry is not ready yet.";
+
+                return;
+
+            }
 
 
-      const {
-        error
-      } = await db
-        .from("comments")
-        .insert({
-          target_type:"journal",
-          target_id:currentEntryId,
-          name:name || "Reader",
-          content
-        });
+            responseMessage.textContent =
+                "Posting...";
 
 
-      if(error){
-
-        console.error(error);
-
-        responseMessage.textContent =
-          "Something went wrong. Please try again.";
-
-        return;
-      }
+            const currentUser =
+                await getCurrentUser();
 
 
-      document
-        .getElementById(
-          "commentContent"
-        )
-        .value = "";
+            /*
+               New comments try to save the authenticated
+               user's ID.
+
+               This is what makes ownership possible.
+            */
+
+            let insertResult;
 
 
-      responseMessage.textContent =
-        "Your response has been posted.";
+            if(currentUser?.id){
+
+                insertResult =
+                    await db
+                        .from("comments")
+                        .insert({
+
+                            target_type:"journal",
+
+                            target_id:currentEntryId,
+
+                            name:name || "Reader",
+
+                            content,
+
+                            user_id:currentUser.id
+
+                        });
+
+            }
+
+            else{
+
+                insertResult =
+                    await db
+                        .from("comments")
+                        .insert({
+
+                            target_type:"journal",
+
+                            target_id:currentEntryId,
+
+                            name:name || "Reader",
+
+                            content
+
+                        });
+
+            }
 
 
-      await loadComments(
-        currentEntryId
-      );
+            /*
+               If the existing table doesn't have user_id,
+               tell the user exactly what's missing instead
+               of silently pretending ownership works.
+            */
 
-    }
-  );
+            if(insertResult.error){
+
+                console.error(
+                    "Comment insert error:",
+                    insertResult.error
+                );
 
 
-/* =========================
+                responseMessage.textContent =
+                    "Could not post the response. Your comments table needs a user_id column for comment ownership.";
+
+                return;
+
+            }
+
+
+            document
+                .getElementById(
+                    "commentContent"
+                )
+                .value =
+                "";
+
+
+            responseMessage.textContent =
+                "Your response has been posted.";
+
+
+            await loadComments(
+                currentEntryId
+            );
+
+        }
+    );
+
+
+/* =========================================================
    READING PROGRESS
-========================= */
+========================================================= */
 
 function updateReadingProgress(){
 
-  const max =
-    document.documentElement.scrollHeight -
-    window.innerHeight;
+    const max =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
 
 
-  const progress =
-    max > 0
-      ? (window.scrollY / max) * 100
-      : 0;
+    const progress =
+        max > 0
+            ? (
+                window.scrollY /
+                max
+            ) * 100
+            : 0;
 
 
-  document
-    .getElementById(
-      "readingProgress"
-    )
-    .style.width =
-    `${Math.min(
-      100,
-      Math.max(0,progress)
-    )}%`;
+    document.getElementById(
+        "readingProgress"
+    ).style.width =
+        `${Math.min(
+            100,
+            Math.max(
+                0,
+                progress
+            )
+        )}%`;
 
 }
 
 
 window.addEventListener(
-  "scroll",
-  updateReadingProgress,
-  {
-    passive:true
-  }
+    "scroll",
+    updateReadingProgress,
+    {
+        passive:true
+    }
 );
 
 
-window.addEventListener(
-  "resize",
-  updateReadingProgress
-);
-
-
-/* =========================
+/* =========================================================
    START
-========================= */
+========================================================= */
+
+setCommentName();
 
 applyReadingPreferences();
 
 loadEntry();
+
+updateReadingProgress();
 
 </script>
 
