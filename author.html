@@ -2586,44 +2586,28 @@ $("loginForm").addEventListener(
 
     event.preventDefault();
 
-    const message = $("loginMessage");
-    const email = $("loginEmail").value.trim();
-    const password = $("loginPassword").value;
+    $("loginMessage").textContent = "";
 
-    message.textContent = "Logging in...";
+    const {
+      error
+    } =
+      await supabaseClient.auth.signInWithPassword({
 
-    try {
+        email:
+          $("loginEmail")
+            .value
+            .trim(),
 
-      const {
-        data,
-        error
-      } = await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
+        password:
+          $("loginPassword").value
+
       });
 
-      if (error) {
-        message.textContent = error.message;
-        return;
-      }
 
-      if (!data || !data.session) {
-        message.textContent =
-          "Login did not complete. Please check your Supabase account.";
-        return;
-      }
+    if (error) {
 
-      currentUser = data.user;
-
-      showApp();
-
-    } catch (err) {
-
-      console.error("LOGIN ERROR:", err);
-
-      message.textContent =
-        err?.message ||
-        "Something went wrong while logging in.";
+      $("loginMessage").textContent =
+        error.message;
 
     }
 
@@ -2762,176 +2746,6 @@ function storyMatches(story) {
     );
 
 }
-  async function deleteStory(id) {
-
-  if (
-    !confirm(
-      "Delete this story? This cannot be undone."
-    )
-  ) {
-    return;
-  }
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("stories")
-      .delete()
-      .eq(
-        "id",
-        id
-      )
-      .eq(
-        "owner_id",
-        currentUser.id
-      );
-
-  if (error) {
-
-    console.error(error);
-
-    toast(
-      error.message ||
-      "Could not delete story."
-    );
-
-    return;
-  }
-
-  stories =
-    stories.filter(
-      story =>
-        story.id !== id
-    );
-
-  renderStories();
-
-  renderStats();
-
-  renderRecent();
-
-  toast(
-    "Story deleted."
-  );
-}
-
-function renderStories() {
-
-  const grid =
-    $("storyGrid");
-
-  if (!grid) return;
-
-  grid.innerHTML = "";
-
-
-  const visible =
-    stories.filter(
-      storyMatches
-    );
-
-
-  if (!visible.length) {
-
-    grid.innerHTML = `
-      <div
-        class="empty"
-        style="grid-column:1/-1"
-      >
-        No stories here yet.<br>
-        <span class="small">
-          Start a story or create
-          the first story in a series.
-        </span>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  visible.forEach(
-    story => {
-
-      const s =
-        normalizeStory(story);
-
-      const card =
-        document.createElement("article");
-
-      card.className =
-        "story-card";
-
-
-      card.innerHTML = `
-
-        <div class="cover">
-
-          ${
-            s.cover_url
-
-              ? `
-                <img
-                  src="${esc(s.cover_url)}"
-                  alt=""
-                >
-              `
-
-              : `
-                <div class="cover-placeholder">
-                  Your cover
-                </div>
-              `
-          }
-      async function deleteStory(id) {
-
-  if (
-    !confirm(
-      "Delete this story? This cannot be undone."
-    )
-  ) {
-    return;
-  }
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("stories")
-      .delete()
-      .eq("id", id)
-      .eq("owner_id", currentUser.id);
-
-  if (error) {
-
-    console.error(error);
-
-    toast(
-      error.message ||
-      "Could not delete story."
-    );
-
-    return;
-  }
-
-  stories =
-    stories.filter(
-      story =>
-        story.id !== id
-    );
-
-  renderStories();
-
-  renderStats();
-
-  renderRecent();
-
-  toast(
-    "Story deleted."
-  );
-}
 
 
 function renderStories() {
@@ -2966,6 +2780,7 @@ function renderStories() {
     `;
 
     return;
+
   }
 
 
@@ -3005,6 +2820,7 @@ function renderStories() {
 
         </div>
 
+
         <div class="story-card-body">
 
           <span class="badge">
@@ -3015,17 +2831,16 @@ function renderStories() {
             }
           </span>
 
+
           <h3>
-            ${esc(
-              s.title || "Untitled"
-            )}
+            ${esc(s.title || "Untitled")}
           </h3>
 
+
           <div class="author">
-            ${esc(
-              s.author || ""
-            )}
+            ${esc(s.author || "")}
           </div>
+
 
           ${
             s.series_name
@@ -3039,6 +2854,7 @@ function renderStories() {
               : ""
           }
 
+
           <div class="desc">
             ${esc(
               s.description ||
@@ -3046,32 +2862,25 @@ function renderStories() {
             )}
           </div>
 
+
           <div class="card-actions">
 
             <button
               class="secondary open-story"
-              type="button"
             >
               Open
             </button>
 
             <button
               class="secondary edit-story"
-              type="button"
             >
               Edit
-            </button>
-
-            <button
-              class="danger delete-story"
-              type="button"
-            >
-              Delete
             </button>
 
           </div>
 
         </div>
+
       `;
 
 
@@ -3089,18 +2898,53 @@ function renderStories() {
             editStory(s.id);
 
 
-      card
-        .querySelector(".delete-story")
-        .onclick =
-          () =>
-            deleteStory(s.id);
-
-
       grid.appendChild(card);
 
     }
   );
+
 }
+
+
+$("storySearch").oninput =
+  renderStories;
+
+
+document
+  .querySelectorAll(
+    "[data-story-filter]"
+  )
+  .forEach(
+    button => {
+
+      button.onclick =
+        () => {
+
+          storyFilter =
+            button.dataset.storyFilter;
+
+
+          document
+            .querySelectorAll(
+              "[data-story-filter]"
+            )
+            .forEach(
+              b =>
+                b.classList.toggle(
+                  "active",
+                  b === button
+                )
+            );
+
+
+          renderStories();
+
+        };
+
+    }
+  );
+
+
 /* ========================================================
    STORY MODAL
 ======================================================== */
@@ -4498,29 +4342,29 @@ const toolbarDefs = [
 
   ["sep"],
 
- [
-  "bold",
-  "<strong>B</strong>",
-  "Bold"
-],
+  [
+    "bold",
+    "B",
+    "Bold"
+  ],
 
-[
-  "italic",
-  "<em>I</em>",
-  "Italic"
-],
+  [
+    "italic",
+    "I",
+    "Italic"
+  ],
 
-[
-  "underline",
-  "<u>U</u>",
-  "Underline"
-],
+  [
+    "underline",
+    "U",
+    "Underline"
+  ],
 
-[
-  "strikeThrough",
-  "<s>S</s>",
-  "Strikethrough"
-],
+  [
+    "strikeThrough",
+    "S",
+    "Strikethrough"
+  ],
 
   ["sep"],
 
