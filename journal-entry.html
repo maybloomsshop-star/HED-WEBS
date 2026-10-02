@@ -166,13 +166,13 @@
             margin: 0 auto;
 
             padding:
-                70px
+                82px
                 0
-                55px;
+                65px;
         }
 
         .journal-kicker {
-            margin: 0 0 14px;
+            margin: 0 0 16px;
 
             font-size: 9px;
             font-weight: 700;
@@ -209,7 +209,7 @@
         .journal-description {
             max-width: 540px;
 
-            margin: 22px 0 0;
+            margin: 25px 0 0;
 
             font-family:
                 Georgia,
@@ -227,7 +227,7 @@
             width: 42px;
             height: 1px;
 
-            margin-top: 30px;
+            margin-top: 35px;
 
             background: #907c70;
         }
@@ -246,7 +246,7 @@
 
             margin:
                 0 auto
-                70px;
+                90px;
         }
 
         .journal-preview {
@@ -261,9 +261,9 @@
             width: 100%;
 
             padding:
-                30px
+                34px
                 0
-                34px;
+                38px;
 
             border-top:
                 1px solid
@@ -343,7 +343,7 @@
         .preview-excerpt {
             max-width: 670px;
 
-            margin: 12px 0 0;
+            margin: 14px 0 0;
 
             font-family:
                 Georgia,
@@ -352,7 +352,7 @@
 
             font-size: 15px;
 
-            line-height: 1.7;
+            line-height: 1.75;
 
             color: #756961;
         }
@@ -360,7 +360,7 @@
         .preview-read {
             display: inline-block;
 
-            margin-top: 15px;
+            margin-top: 18px;
 
             font-size: 8px;
             font-weight: 700;
@@ -373,7 +373,7 @@
         }
 
         .journal-status {
-            padding: 35px 0;
+            padding: 38px 0;
 
             border-top:
                 1px solid
@@ -418,9 +418,9 @@
             margin: 0 auto;
 
             padding:
-                38px
+                48px
                 0
-                60px;
+                70px;
         }
 
 
@@ -435,7 +435,7 @@
             align-items: center;
             justify-content: space-between;
 
-            margin-bottom: 34px;
+            margin-bottom: 45px;
         }
 
         .reader-back {
@@ -472,11 +472,11 @@
         .reader-header {
             max-width: 720px;
 
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
         .reader-date {
-            margin: 0 0 8px;
+            margin: 0 0 10px;
 
             font-size: 11px;
             font-weight: 700;
@@ -498,12 +498,12 @@
 
             font-size:
                 clamp(
-                    29px,
-                    3.2vw,
-                    38px
+                    32px,
+                    4vw,
+                    42px
                 );
 
-            line-height: 1.1;
+            line-height: 1.08;
 
             font-weight: 400;
 
@@ -515,7 +515,7 @@
             align-items: center;
             gap: 10px;
 
-            margin-top: 11px;
+            margin-top: 13px;
 
             font-size: 13px;
 
@@ -526,7 +526,7 @@
             width: 32px;
             height: 1px;
 
-            margin-top: 17px;
+            margin-top: 20px;
 
             background: #917d70;
         }
@@ -544,9 +544,9 @@
             height: auto;
 
             margin:
-                25px
+                30px
                 auto
-                30px;
+                38px;
         }
 
 
@@ -560,15 +560,15 @@
             margin:
                 0
                 auto
-                24px;
+                28px;
 
             padding:
-                7px
-                9px;
+                8px
+                10px;
 
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 7px;
 
             flex-wrap: wrap;
 
@@ -585,7 +585,7 @@
         }
 
         .reading-preferences-label {
-            margin-right: 3px;
+            margin-right: 4px;
 
             font-size: 10px;
             font-weight: 700;
@@ -640,25 +640,14 @@
 
             margin: 0 auto;
 
-            /*
-             * These two variables are controlled by
-             * the reading preference buttons.
-             */
-
-            --reader-font-size: 22px;
-
-            --reader-font-family:
+            font-family:
                 Georgia,
                 "Times New Roman",
                 serif;
 
-            font-family:
-                var(--reader-font-family) !important;
+            font-size: 22px;
 
-            font-size:
-                var(--reader-font-size) !important;
-
-            line-height: 1.75;
+            line-height: 1.82;
 
             color: #403731;
 
@@ -666,47 +655,41 @@
         }
 
 
-        /*
-         * FORCE THE SELECTED FONT ON ALL
-         * ACTUAL ARTICLE ELEMENTS.
-         *
-         * This prevents formatting stored inside
-         * the Supabase article content from
-         * overriding the reader preference.
-         */
+        /* IMPORTANT:
+           These apply the selected font to the actual
+           article elements too.
+        */
 
-        .reader-content,
-        .reader-content *,
-        .reader-content p,
-        .reader-content span,
-        .reader-content div,
-        .reader-content li,
-        .reader-content blockquote,
-        .reader-content strong,
-        .reader-content b,
-        .reader-content em,
-        .reader-content i,
-        .reader-content h1,
-        .reader-content h2,
-        .reader-content h3,
-        .reader-content h4 {
+        .reader-content.serif,
+        .reader-content.serif * {
             font-family:
-                var(--reader-font-family) !important;
+                Georgia,
+                "Times New Roman",
+                serif;
         }
 
+        .reader-content.sans,
+        .reader-content.sans * {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
 
-        /*
-         * NORMAL ARTICLE TEXT
-         *
-         * Using 1em means the article follows
-         * the A− / A / A+ size.
-         */
+        .reader-content.lora,
+        .reader-content.lora * {
+            font-family:
+                "Lora",
+                Georgia,
+                serif;
+        }
 
-        .reader-content p,
-        .reader-content li,
-        .reader-content blockquote {
-            font-size:
-                1em !important;
+        .reader-content.cormorant,
+        .reader-content.cormorant * {
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
         }
 
 
@@ -724,7 +707,7 @@
             margin:
                 0
                 0
-                1.25em;
+                1.45em;
         }
 
         .reader-content div {
@@ -742,50 +725,40 @@
             font-weight: 400;
         }
 
-
-        /*
-         * EM makes headings scale together
-         * with the article font size.
-         */
-
         .reader-content h1 {
-            font-size:
-                1.55em !important;
+            font-size: 34px;
 
             margin:
-                1.3em
+                1.55em
                 0
-                0.55em;
+                0.65em;
         }
 
         .reader-content h2 {
-            font-size:
-                1.35em !important;
+            font-size: 29px;
 
             margin:
-                1.25em
+                1.55em
                 0
-                0.55em;
+                0.65em;
         }
 
         .reader-content h3 {
-            font-size:
-                1.18em !important;
+            font-size: 25px;
 
             margin:
-                1.2em
+                1.5em
                 0
-                0.5em;
+                0.6em;
         }
 
         .reader-content h4 {
-            font-size:
-                1em !important;
+            font-size: 21px;
 
             margin:
-                1.15em
+                1.5em
                 0
-                0.5em;
+                0.6em;
         }
 
         .reader-content strong,
@@ -795,14 +768,14 @@
 
         .reader-content blockquote {
             margin:
-                1.4em
+                1.9em
                 0;
 
             padding:
-                3px
+                4px
                 0
-                3px
-                20px;
+                4px
+                24px;
 
             border-left:
                 1px solid
@@ -813,15 +786,13 @@
 
         .reader-content ul,
         .reader-content ol {
-            margin:
-                1.15em
-                0;
+            margin: 1.4em 0;
 
-            padding-left: 1.4em;
+            padding-left: 1.45em;
         }
 
         .reader-content li {
-            margin-bottom: 0.45em;
+            margin-bottom: 0.6em;
         }
 
         .reader-content img {
@@ -832,7 +803,7 @@
             height: auto;
 
             margin:
-                1.8em
+                2.2em
                 auto;
         }
 
@@ -854,9 +825,9 @@
             max-width: 680px;
 
             margin:
-                38px
+                45px
                 auto
-                28px;
+                32px;
 
             text-align: center;
         }
@@ -868,7 +839,7 @@
             margin:
                 0
                 auto
-                13px;
+                15px;
 
             background: #a18e82;
         }
@@ -898,7 +869,7 @@
             margin:
                 0
                 auto
-                55px;
+                65px;
 
             display: flex;
 
@@ -911,7 +882,7 @@
             flex: 1;
 
             padding:
-                16px
+                18px
                 0;
 
             border-top:
@@ -931,7 +902,7 @@
         .reader-nav-label {
             display: block;
 
-            margin-bottom: 6px;
+            margin-bottom: 7px;
 
             font-size: 8px;
             font-weight: 700;
@@ -969,14 +940,14 @@
             margin:
                 0
                 auto
-                70px;
+                80px;
         }
 
         .comments-heading {
             margin:
                 0
                 0
-                22px;
+                25px;
 
             font-family:
                 Georgia,
@@ -1011,7 +982,7 @@
             padding:
                 0
                 0
-                28px;
+                30px;
 
             border-bottom:
                 1px solid
@@ -1137,9 +1108,9 @@
 
         .comment {
             padding:
-                22px
+                24px
                 0
-                24px;
+                26px;
 
             border-bottom:
                 1px solid
@@ -1153,7 +1124,7 @@
 
             gap: 12px;
 
-            margin-bottom: 8px;
+            margin-bottom: 9px;
         }
 
         .comment-name {
@@ -1208,14 +1179,14 @@
             margin:
                 0
                 auto
-                65px;
+                75px;
         }
 
         .more-journal-title {
             margin:
                 0
                 0
-                20px;
+                22px;
 
             font-family:
                 Georgia,
@@ -1241,9 +1212,9 @@
 
         .more-journal-card {
             padding:
-                20px
+                21px
                 0
-                23px;
+                25px;
 
             border-top:
                 1px solid
@@ -1266,7 +1237,7 @@
             margin:
                 0
                 0
-                8px;
+                9px;
 
             font-size: 8px;
 
@@ -1350,9 +1321,9 @@
 
             .journal-intro {
                 padding:
-                    55px
+                    60px
                     0
-                    45px;
+                    50px;
             }
 
             .journal-title {
@@ -1360,16 +1331,16 @@
             }
 
             .journal-list {
-                margin-bottom: 55px;
+                margin-bottom: 60px;
             }
 
             .journal-preview {
                 display: block;
 
                 padding:
-                    26px
+                    28px
                     0
-                    30px;
+                    33px;
             }
 
             .journal-preview:hover {
@@ -1380,7 +1351,7 @@
             .preview-meta {
                 padding: 0;
 
-                margin-bottom: 11px;
+                margin-bottom: 12px;
             }
 
             .preview-number {
@@ -1400,27 +1371,27 @@
 
             .reader-shell {
                 padding:
-                    32px
+                    40px
                     0
-                    50px;
+                    60px;
             }
 
             .reader-top {
-                margin-bottom: 30px;
+                margin-bottom: 40px;
             }
 
             .reader-title {
-                font-size: 32px;
+                font-size: 34px;
             }
 
             .reader-header {
-                margin-bottom: 20px;
+                margin-bottom: 24px;
             }
 
             .reader-content {
-                --reader-font-size: 19px;
+                font-size: 19px;
 
-                line-height: 1.78;
+                line-height: 1.85;
             }
 
 
@@ -1429,7 +1400,7 @@
             .reading-preferences {
                 gap: 6px;
 
-                margin-bottom: 21px;
+                margin-bottom: 24px;
             }
 
             .reading-preferences-label {
@@ -1448,7 +1419,7 @@
             .reader-navigation a {
                 display: block;
 
-                margin-bottom: 12px;
+                margin-bottom: 13px;
             }
 
 
@@ -3050,7 +3021,7 @@
 
         /*
          * Re-apply the current reading preference
-         * AFTER loading the new article.
+         * after loading a new article.
          */
 
         updateReadingStyle();
@@ -3451,50 +3422,20 @@
         "serif";
 
 
-    /* =========================================================
-       APPLY READING STYLE
-    ========================================================= */
-
     function updateReadingStyle() {
 
-        const fontFamilies = {
-
-            serif:
-                'Georgia, "Times New Roman", serif',
-
-            sans:
-                'Arial, Helvetica, sans-serif',
-
-            lora:
-                '"Lora", Georgia, serif',
-
-            cormorant:
-                '"Cormorant Garamond", Georgia, serif'
-
-        };
-
-
         /*
-         * THIS is what actually controls
-         * the article text.
+         * Apply the size directly to the
+         * actual article container.
          */
 
-        readerContent.style.setProperty(
-            "--reader-font-size",
-            readerFontSize + "px"
-        );
-
-
-        readerContent.style.setProperty(
-            "--reader-font-family",
-            fontFamilies[
-                readerFont
-            ]
-        );
+        readerContent.style.fontSize =
+            readerFontSize +
+            "px";
 
 
         /*
-         * Keep the classes for compatibility.
+         * Remove all old font classes.
          */
 
         readerContent.classList.remove(
@@ -3505,6 +3446,10 @@
         );
 
 
+        /*
+         * Add the selected font.
+         */
+
         readerContent.classList.add(
             readerFont
         );
@@ -3512,7 +3457,7 @@
 
         /*
          * Remove active state from
-         * all font buttons.
+         * every font button.
          */
 
         [
@@ -3532,7 +3477,8 @@
 
 
         /*
-         * Activate selected font.
+         * Find the currently selected
+         * font button.
          */
 
         const activeFontButton = {
@@ -3566,7 +3512,7 @@
 
 
         /*
-         * SIZE BUTTON STATES
+         * Update size button states.
          */
 
         fontDecrease.classList.toggle(
@@ -3602,7 +3548,7 @@
 
             readerFontSize =
                 Math.max(
-                    16,
+                    17,
                     readerFontSize - 2
                 );
 
