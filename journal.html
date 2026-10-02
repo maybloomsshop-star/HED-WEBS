@@ -1,31 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>HED · Journal</title>
-
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-config.js"></script>
+  <title>Journal — HED</title>
 
   <style>
     :root {
-      --brown: #4a352b;
-      --brown-dark: #382920;
+      --hed-brown: #4a352b;
+      --hed-brown-dark: #382920;
+      --hed-cream: #f5efe6;
+      --hed-paper: #fbf8f3;
+      --hed-green: #68745d;
+      --hed-pink: #c58f91;
+      --hed-text: #342b26;
+      --hed-muted: #85786e;
+      --hed-line: #d8cec2;
 
-      --cream: #f5efe6;
-      --paper: #fbf8f3;
-
-      --green: #68745d;
-      --pink: #c58f91;
-
-      --text: #342b26;
-      --muted: #85786e;
-      --line: #d8cec2;
-
-      --max-width: 1180px;
+      --reader-size: 19px;
+      --reader-font: Georgia, "Times New Roman", serif;
     }
 
     * {
@@ -38,491 +32,1105 @@
 
     body {
       margin: 0;
-      background: var(--cream);
-      color: var(--text);
+      background: var(--hed-paper);
+      color: var(--hed-text);
       font-family: Georgia, "Times New Roman", serif;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    /* =========================================================
+       COPY / TEXT PROTECTION
+       ========================================================= */
+
+    #articleContent,
+    #articleContent *,
+    .hed-note-content,
+    .hed-note-content * {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
     }
 
-    /* =========================
+    /* =========================================================
+       READING PROGRESS
+       ========================================================= */
+
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--hed-brown);
+      z-index: 9999;
+    }
+
+    /* =========================================================
        HEADER
-    ========================= */
+       ========================================================= */
 
-    .site-header {
-      height: 72px;
-      background: var(--brown);
-      color: #fffaf4;
-
+    header {
+      height: 78px;
+      padding: 0 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      padding: 0 6vw;
+      border-bottom: 1px solid var(--hed-line);
+
+      background: rgba(251, 248, 243, 0.96);
 
       position: sticky;
       top: 0;
       z-index: 100;
+
+      backdrop-filter: blur(8px);
     }
 
     .brand {
-      font-size: 29px;
-      letter-spacing: 0.08em;
-      font-weight: normal;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 42px;
-
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.14em;
-    }
-
-    .nav a {
-      opacity: 0.9;
-      position: relative;
-      padding: 25px 0;
-    }
-
-    .nav a:hover {
-      opacity: 1;
-    }
-
-    .nav .active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 17px;
-
-      height: 1px;
-      background: #fffaf4;
-    }
-
-    .star {
-      font-size: 22px;
-      margin-left: 4px;
-    }
-
-    /* =========================
-       MAIN
-    ========================= */
-
-    main {
-      width: min(var(--max-width), 88%);
-      margin: 0 auto;
-      padding-bottom: 100px;
-    }
-
-    /* =========================
-       JOURNAL HERO
-    ========================= */
-
-    .journal-hero {
-      text-align: center;
-      padding: 75px 20px 62px;
-    }
-
-    .journal-hero h1 {
-      margin: 0;
-
-      font-size: clamp(58px, 8vw, 92px);
-      font-weight: normal;
-      line-height: 0.95;
-      letter-spacing: -0.035em;
-
-      color: var(--brown-dark);
-    }
-
-    .journal-subtitle {
-      margin: 20px 0 0;
+      text-decoration: none;
+      color: var(--hed-brown-dark);
 
       font-size: 25px;
-      font-style: italic;
-      color: var(--brown);
+      font-weight: bold;
+      letter-spacing: 4px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--hed-muted);
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--hed-brown);
+    }
+
+    /* =========================================================
+       PAGE
+       ========================================================= */
+
+    main {
+      width: min(1080px, 90%);
+      margin: 0 auto;
+      padding: 70px 0 100px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      text-decoration: none;
+      color: var(--hed-muted);
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+
+      margin-bottom: 45px;
+    }
+
+    .back-link:hover {
+      color: var(--hed-brown);
+    }
+
+    /* =========================================================
+       JOURNAL HEADER
+       ========================================================= */
+
+    .journal-label {
+      color: var(--hed-green);
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+
+      margin-bottom: 18px;
+    }
+
+    .entry-title {
+      max-width: 850px;
+
+      margin: 0;
+
+      color: var(--hed-brown-dark);
+
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 1.06;
+      font-weight: normal;
+      letter-spacing: -1.5px;
+    }
+
+    .entry-subtitle {
+      max-width: 720px;
+
+      margin: 25px 0;
+
+      color: var(--hed-muted);
+
+      font-size: 21px;
+      line-height: 1.5;
+    }
+
+    .entry-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      gap: 9px;
+
+      margin-top: 25px;
+
+      color: var(--hed-muted);
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .meta-dot {
+      color: var(--hed-pink);
     }
 
     .ornament {
-      width: 290px;
-      margin: 27px auto 28px;
+      margin: 35px 0;
+
+      color: var(--hed-pink);
+
+      font-size: 17px;
+      letter-spacing: 7px;
+    }
+
+    /* =========================================================
+       HERO IMAGE
+       ========================================================= */
+
+    .hero-image-wrap {
+      width: 100%;
+      margin: 30px 0 55px;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-height: 650px;
+
+      object-fit: cover;
+
+      display: block;
+
+      background: var(--hed-cream);
+
+      cursor: zoom-in;
+    }
+
+    .image-caption {
+      margin-top: 12px;
+
+      color: var(--hed-muted);
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.8px;
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       READING CONTROLS
+       ========================================================= */
+
+    .reading-preferences {
+      width: min(760px, 100%);
+
+      margin: 0 auto 38px;
+      padding: 16px 0;
+
+      border-top: 1px solid var(--hed-line);
+      border-bottom: 1px solid var(--hed-line);
+
+      display: flex;
+      align-items: center;
+      gap: 28px;
+
+      flex-wrap: wrap;
+    }
+
+    .preference-label {
+      color: var(--hed-muted);
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+
+    .size-control {
+      flex: 1 1 260px;
 
       display: flex;
       align-items: center;
       gap: 12px;
-
-      color: var(--brown);
     }
 
-    .ornament::before,
-    .ornament::after {
-      content: "";
-      height: 1px;
+    .size-small-label,
+    .size-large-label {
+      color: var(--hed-muted);
+
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .size-small-label {
+      font-size: 13px;
+    }
+
+    .size-large-label {
+      font-size: 23px;
+    }
+
+    #fontSizeSlider {
       flex: 1;
-      background: #b9aa9b;
+
+      width: 100%;
+      height: 4px;
+
+      appearance: none;
+      -webkit-appearance: none;
+
+      background: var(--hed-line);
+
+      border-radius: 10px;
+
+      outline: none;
+
+      cursor: pointer;
     }
 
-    .ornament span {
-      font-size: 18px;
-      transform: rotate(45deg);
-      display: inline-block;
+    #fontSizeSlider::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+
+      width: 17px;
+      height: 17px;
+
+      border-radius: 50%;
+
+      background: var(--hed-brown);
+
+      border: 3px solid var(--hed-paper);
+
+      box-shadow: 0 0 0 1px var(--hed-brown);
+
+      cursor: grab;
     }
 
-    .journal-description {
-      margin: 0;
+    #fontSizeSlider::-webkit-slider-thumb:active {
+      cursor: grabbing;
+    }
 
-      font-size: 18px;
+    #fontSizeSlider::-moz-range-thumb {
+      width: 13px;
+      height: 13px;
+
+      border-radius: 50%;
+
+      background: var(--hed-brown);
+
+      border: 2px solid var(--hed-paper);
+
+      box-shadow: 0 0 0 1px var(--hed-brown);
+
+      cursor: grab;
+    }
+
+    .size-value {
+      min-width: 42px;
+
+      color: var(--hed-muted);
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+      font-weight: bold;
+
+      text-align: right;
+    }
+
+    .font-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      flex-wrap: wrap;
+    }
+
+    .preference-group-title {
+      margin-right: 5px;
+
+      color: var(--hed-muted);
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .preference-button {
+      border: 1px solid transparent;
+
+      background: transparent;
+
+      color: var(--hed-muted);
+
+      padding: 6px 8px;
+
+      border-radius: 4px;
+
+      cursor: pointer;
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+
+      transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border 0.2s ease;
+    }
+
+    .preference-button:hover {
+      color: var(--hed-brown);
+
+      background: var(--hed-cream);
+    }
+
+    .preference-button.active {
+      color: var(--hed-brown-dark);
+
+      border-color: var(--hed-line);
+
+      background: var(--hed-cream);
+
+      font-weight: bold;
+    }
+
+    /* =========================================================
+       ARTICLE
+       ========================================================= */
+
+    .article-area {
+      width: min(760px, 100%);
+      margin: 0 auto;
+    }
+
+    /*
+      IMPORTANT:
+
+      --reader-size controls the actual letters.
+
+      Line-height is intentionally fixed at 1.72,
+      so increasing the font size does NOT create
+      huge gaps between lines.
+    */
+
+    .article-content {
+      --reader-size: 19px;
+      --reader-font: Georgia, "Times New Roman", serif;
+
+      font-family: var(--reader-font) !important;
+
+      font-size: var(--reader-size) !important;
+
+      line-height: 1.72 !important;
+
+      color: var(--hed-text);
+
+      transition:
+        font-size 0.12s ease,
+        font-family 0.15s ease;
+    }
+
+    .article-content,
+    .article-content * {
+      font-family: var(--reader-font) !important;
+    }
+
+    .article-content p {
+      margin: 0 0 1.15em;
+
+      font-size: var(--reader-size) !important;
+      line-height: 1.72 !important;
+    }
+
+    .article-content h1,
+    .article-content h2,
+    .article-content h3,
+    .article-content h4 {
+      color: var(--hed-brown-dark);
+
+      line-height: 1.2 !important;
+
+      font-weight: normal;
+    }
+
+    .article-content h1 {
+      font-size: calc(var(--reader-size) * 1.9) !important;
+
+      margin: 1.7em 0 0.7em;
+    }
+
+    .article-content h2 {
+      font-size: calc(var(--reader-size) * 1.55) !important;
+
+      margin: 1.9em 0 0.65em;
+    }
+
+    .article-content h3 {
+      font-size: calc(var(--reader-size) * 1.3) !important;
+
+      margin: 1.7em 0 0.55em;
+    }
+
+    .article-content strong {
+      color: var(--hed-brown-dark);
+    }
+
+    .article-content em {
+      color: #574a42;
+    }
+
+    .article-content a {
+      color: var(--hed-green);
+
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .article-content blockquote {
+      margin: 32px 0;
+
+      padding: 3px 0 3px 25px;
+
+      border-left: 3px solid var(--hed-pink);
+
+      color: var(--hed-brown);
+
+      font-size: calc(var(--reader-size) * 1.12) !important;
+      line-height: 1.55 !important;
+
       font-style: italic;
-      color: var(--muted);
     }
 
-    /* =========================
-       SECTION LABEL
-    ========================= */
+    .article-content ul,
+    .article-content ol {
+      margin: 0 0 1.15em;
+
+      padding-left: 28px;
+
+      font-size: var(--reader-size) !important;
+      line-height: 1.72 !important;
+    }
+
+    .article-content li {
+      margin-bottom: 4px;
+
+      font-size: var(--reader-size) !important;
+      line-height: 1.72 !important;
+    }
+
+    .article-content img {
+      width: 100%;
+      height: auto;
+
+      display: block;
+
+      margin: 32px 0;
+
+      -webkit-user-select: none;
+      user-select: none;
+
+      pointer-events: none;
+    }
+
+    .article-content hr {
+      border: 0;
+
+      border-top: 1px solid var(--hed-line);
+
+      margin: 38px 0;
+    }
+
+    /* =========================================================
+       HED NOTE
+       ========================================================= */
+
+    .hed-note {
+      margin-top: 50px;
+
+      padding: 25px 28px;
+
+      background: var(--hed-cream);
+
+      border: 1px solid var(--hed-line);
+    }
+
+    .hed-note-label {
+      margin-bottom: 10px;
+
+      color: var(--hed-green);
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+      font-weight: bold;
+
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .hed-note-content {
+      color: var(--hed-brown);
+
+      font-family: var(--reader-font) !important;
+      font-size: var(--reader-size) !important;
+
+      line-height: 1.72 !important;
+    }
+
+    /* =========================================================
+       RESPONSES
+       ========================================================= */
+
+    .responses {
+      width: min(680px, 100%);
+
+      margin: 65px auto 0;
+
+      padding-top: 30px;
+
+      border-top: 1px solid var(--hed-line);
+    }
 
     .section-label {
-      margin-bottom: 20px;
+      color: var(--hed-green);
 
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.22em;
-      color: var(--brown);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+      font-weight: bold;
 
+      letter-spacing: 2.5px;
       text-transform: uppercase;
+
+      margin-bottom: 7px;
     }
 
-    /* =========================
-       LATEST ENTRY
-    ========================= */
-
-    .latest-entry {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 54px;
-
-      align-items: center;
-
-      padding-bottom: 62px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .latest-image {
-      width: 100%;
-      aspect-ratio: 1.48 / 1;
-
-      background: #e4d9cc;
-      overflow: hidden;
-    }
-
-    .latest-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-
-      transition: transform 0.6s ease;
-    }
-
-    .latest-entry:hover .latest-image img {
-      transform: scale(1.025);
-    }
-
-    .latest-info {
-      padding-right: 25px;
-    }
-
-    .entry-date {
-      margin-bottom: 17px;
-
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .latest-title {
-      margin: 0 0 20px;
-
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: normal;
-      line-height: 1.08;
-
-      color: var(--brown-dark);
-    }
-
-    .entry-preview {
+    .section-title {
       margin: 0;
 
-      font-size: 18px;
-      line-height: 1.75;
-      font-style: italic;
+      color: var(--hed-brown-dark);
 
-      color: #665950;
-    }
+      font-size: 29px;
 
-    .read-entry {
-      display: inline-block;
+      line-height: 1.2;
 
-      margin-top: 27px;
-
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-
-      color: var(--brown);
-
-      border-bottom: 1px solid var(--brown);
-      padding-bottom: 5px;
-
-      transition: 0.2s ease;
-    }
-
-    .read-entry:hover {
-      color: var(--pink);
-      border-color: var(--pink);
-      transform: translateX(3px);
-    }
-
-    /* =========================
-       ARCHIVE
-    ========================= */
-
-    .archive {
-      padding-top: 38px;
-    }
-
-    .archive-list {
-      border-top: 1px solid var(--line);
-    }
-
-    .archive-entry {
-      display: grid;
-      grid-template-columns: 145px 1fr 35px;
-      gap: 28px;
-
-      align-items: center;
-
-      padding: 24px 0;
-
-      border-bottom: 1px solid var(--line);
-
-      transition: background 0.2s ease;
-    }
-
-    .archive-entry:hover {
-      background: rgba(255,255,255,0.28);
-    }
-
-    .archive-image {
-      width: 145px;
-      height: 125px;
-
-      background: #e4d9cc;
-      overflow: hidden;
-    }
-
-    .archive-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-
-      display: block;
-
-      transition: transform 0.5s ease;
-    }
-
-    .archive-entry:hover .archive-image img {
-      transform: scale(1.04);
-    }
-
-    .archive-content {
-      padding-right: 15px;
-    }
-
-    .archive-title {
-      margin: 7px 0 8px;
-
-      font-size: 25px;
       font-weight: normal;
-
-      color: var(--brown-dark);
     }
 
-    .archive-preview {
-      margin: 0;
+    .response-count {
+      margin-top: 6px;
 
-      max-width: 680px;
+      color: var(--hed-muted);
 
-      font-size: 16px;
-      line-height: 1.6;
-      font-style: italic;
-
-      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
     }
 
-    .archive-arrow {
-      font-size: 24px;
-      color: var(--brown);
+    /*
+      COMPACT COMMENT FORM
+    */
 
-      transition: transform 0.2s ease;
+    .response-form {
+      margin-top: 18px;
+
+      padding: 14px;
+
+      background: var(--hed-cream);
+
+      border: 1px solid var(--hed-line);
     }
 
-    .archive-entry:hover .archive-arrow {
-      transform: translateX(5px);
-    }
+    .response-form input,
+    .response-form textarea {
+      width: 100%;
 
-    /* =========================
-       EMPTY / LOADING
-    ========================= */
+      border: 1px solid var(--hed-line);
 
-    .loading,
-    .empty {
-      padding: 70px 20px;
+      background: var(--hed-paper);
 
-      text-align: center;
+      color: var(--hed-text);
 
-      color: var(--muted);
-      font-style: italic;
-      font-size: 18px;
-    }
+      padding: 9px 11px;
 
-    .error {
-      padding: 60px 20px;
+      margin-bottom: 8px;
 
-      text-align: center;
+      font-family: Georgia, serif;
 
-      color: var(--pink);
-      font-family: Arial, sans-serif;
       font-size: 14px;
+
+      outline: none;
     }
 
-    /* =========================
+    .response-form textarea {
+      min-height: 85px;
+
+      resize: vertical;
+    }
+
+    .response-form input:focus,
+    .response-form textarea:focus {
+      border-color: var(--hed-green);
+    }
+
+    .response-form button {
+      border: 0;
+
+      background: var(--hed-brown);
+
+      color: white;
+
+      padding: 9px 15px;
+
+      cursor: pointer;
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      font-size: 9px;
+      font-weight: bold;
+
+      letter-spacing: 1.4px;
+
+      text-transform: uppercase;
+    }
+
+    .response-form button:hover {
+      background: var(--hed-brown-dark);
+    }
+
+    .response-message {
+      margin-top: 8px;
+
+      color: var(--hed-muted);
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      font-size: 11px;
+    }
+
+    /*
+      VERY COMPACT COMMENTS
+    */
+
+    .comment-list {
+      margin-top: 15px;
+    }
+
+    .comment {
+      padding: 10px 0 11px;
+
+      border-bottom: 1px solid var(--hed-line);
+    }
+
+    .comment:first-child {
+      padding-top: 2px;
+    }
+
+    .comment:last-child {
+      border-bottom: 0;
+
+      padding-bottom: 2px;
+    }
+
+    .comment-top {
+      display: flex;
+
+      align-items: baseline;
+
+      justify-content: flex-start;
+
+      gap: 9px;
+
+      margin: 0 0 2px;
+    }
+
+    .comment-name {
+      color: var(--hed-brown-dark);
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      font-size: 11px;
+
+      font-weight: bold;
+    }
+
+    .comment-date {
+      color: var(--hed-muted);
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      font-size: 9px;
+    }
+
+    .comment-content {
+      color: var(--hed-text);
+
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: 14px;
+
+      line-height: 1.45;
+
+      margin: 0;
+
+      white-space: pre-wrap;
+    }
+
+    /* =========================================================
+       KEEP READING
+       ========================================================= */
+
+    .keep-reading {
+      width: min(760px, 100%);
+
+      margin: 75px auto 0;
+
+      padding-top: 30px;
+
+      border-top: 1px solid var(--hed-line);
+    }
+
+    .reading-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 15px;
+
+      margin-top: 18px;
+    }
+
+    .reading-card {
+      min-height: 140px;
+
+      padding: 22px;
+
+      background: var(--hed-cream);
+
+      border: 1px solid var(--hed-line);
+
+      text-decoration: none;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .reading-card:hover {
+      transform: translateY(-2px);
+
+      background: #f1e9df;
+    }
+
+    .reading-direction {
+      color: var(--hed-green);
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      font-size: 9px;
+
+      font-weight: bold;
+
+      letter-spacing: 1.8px;
+
+      text-transform: uppercase;
+    }
+
+    .reading-title {
+      margin-top: 18px;
+
+      color: var(--hed-brown-dark);
+
+      font-size: 20px;
+
+      line-height: 1.3;
+    }
+
+    .all-journal {
+      display: block;
+
+      width: fit-content;
+
+      margin: 28px auto 0;
+
+      color: var(--hed-brown);
+
+      text-decoration: none;
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      font-size: 10px;
+
+      font-weight: bold;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+    }
+
+    .all-journal:hover {
+      color: var(--hed-green);
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    footer {
+      margin-top: 80px;
+
+      padding: 50px 6%;
+
+      background: var(--hed-brown-dark);
+
+      color: var(--hed-cream);
+
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-size: 24px;
+
+      letter-spacing: 4px;
+
+      font-weight: bold;
+    }
+
+    .footer-tagline {
+      margin-top: 10px;
+
+      color: #cfc3b8;
+
+      font-size: 14px;
+
+      font-style: italic;
+    }
+
+    .footer-nav {
+      margin-top: 22px;
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 25px;
+
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      color: #cfc3b8;
+
+      text-decoration: none;
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      font-size: 10px;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+    }
+
+    .footer-nav a:hover {
+      color: white;
+    }
+
+    /* =========================================================
+       STATUS
+       ========================================================= */
+
+    .status {
+      min-height: 300px;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      color: var(--hed-muted);
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      font-size: 12px;
+
+      letter-spacing: 1px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================================================
+       IMAGE LIGHTBOX
+       ========================================================= */
+
+    .image-lightbox {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(35, 27, 22, 0.92);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 30px;
+
+      z-index: 10000;
+
+      cursor: zoom-out;
+    }
+
+    .image-lightbox img {
+      max-width: 95vw;
+      max-height: 90vh;
+
+      object-fit: contain;
+
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    /* =========================================================
        MOBILE
-    ========================= */
+       ========================================================= */
 
-    @media (max-width: 800px) {
+    @media (max-width: 700px) {
 
-      .site-header {
-        padding: 0 22px;
+      header {
+        height: 68px;
+
+        padding: 0 5%;
       }
 
-      .nav {
-        gap: 18px;
-        font-size: 10px;
+      .brand {
+        font-size: 21px;
       }
 
-      .star {
-        display: none;
+      nav {
+        gap: 16px;
+      }
+
+      nav a {
+        font-size: 9px;
+
+        letter-spacing: 1.3px;
       }
 
       main {
         width: 90%;
+
+        padding-top: 45px;
       }
 
-      .journal-hero {
-        padding: 58px 10px 48px;
+      .back-link {
+        margin-bottom: 35px;
       }
 
-      .journal-hero h1 {
-        font-size: 58px;
-      }
-
-      .journal-subtitle {
-        font-size: 21px;
-      }
-
-      .journal-description {
-        font-size: 16px;
-      }
-
-      .latest-entry {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .latest-info {
-        padding-right: 0;
-      }
-
-      .latest-title {
+      .entry-title {
         font-size: 36px;
+
+        letter-spacing: -0.8px;
       }
 
-      .archive-entry {
-        grid-template-columns: 95px 1fr 20px;
-        gap: 17px;
+      .entry-subtitle {
+        font-size: 18px;
       }
 
-      .archive-image {
-        width: 95px;
-        height: 95px;
+      .entry-meta {
+        line-height: 1.6;
       }
 
-      .archive-title {
-        font-size: 20px;
+      .hero-image-wrap {
+        margin-bottom: 40px;
       }
 
-      .archive-preview {
+      .reading-preferences {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+      }
+
+      .size-control {
+        width: 100%;
+      }
+
+      .font-controls {
+        width: 100%;
+      }
+
+      .article-content {
+        --reader-size: 18px;
+      }
+
+      .hed-note {
+        padding: 20px;
+      }
+
+      .responses {
+        margin-top: 55px;
+      }
+
+      .reading-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .reading-card {
+        min-height: 125px;
+      }
+
+      .comment-top {
+        gap: 7px;
+      }
+
+      .comment-content {
         font-size: 14px;
-      }
-
-      .archive-arrow {
-        font-size: 19px;
-      }
-    }
-
-    @media (max-width: 520px) {
-
-      .site-header {
-        height: 62px;
-      }
-
-      .brand {
-        font-size: 24px;
-      }
-
-      .nav {
-        gap: 13px;
-      }
-
-      .nav a {
-        padding: 20px 0;
-      }
-
-      .nav .active::after {
-        bottom: 13px;
-      }
-
-      .journal-hero h1 {
-        font-size: 48px;
-      }
-
-      .ornament {
-        width: 220px;
-      }
-
-      .latest-image {
-        aspect-ratio: 1.2 / 1;
-      }
-
-      .archive-entry {
-        grid-template-columns: 1fr 20px;
-      }
-
-      .archive-image {
-        display: none;
-      }
-
-      .archive-content {
-        padding-left: 3px;
       }
     }
   </style>
@@ -530,80 +1138,521 @@
 
 <body>
 
-  <!-- =========================
+  <div
+    class="reading-progress"
+    id="readingProgress"
+  ></div>
+
+
+  <!-- =======================================================
        HEADER
-  ========================= -->
+       ======================================================= -->
 
-  <header class="site-header">
+  <header>
 
-    <a href="hed.html" class="brand">HED</a>
+    <a
+      href="hed.html"
+      class="brand"
+    >
+      HED
+    </a>
 
-    <nav class="nav">
-      <a href="hed.html">HOME</a>
-      <a href="journal.html" class="active">JOURNAL</a>
-      <a href="about.html">ABOUT</a>
-      <span class="star">✦</span>
+    <nav>
+
+      <a href="journal.html">
+        Journal
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
     </nav>
 
   </header>
 
 
-  <!-- =========================
-       JOURNAL
-  ========================= -->
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
 
   <main>
 
-    <section class="journal-hero">
+    <div
+      id="loading"
+      class="status"
+    >
+      Loading journal entry...
+    </div>
 
-      <h1>JOURNAL</h1>
 
-      <div class="journal-subtitle">
-        Her Existential Thoughts
+    <article
+      id="entryPage"
+      class="hidden"
+    >
+
+      <a
+        href="journal.html"
+        class="back-link"
+      >
+        ← Back to Journal
+      </a>
+
+
+      <div class="journal-label">
+        Journal
       </div>
+
+
+      <h1
+        class="entry-title"
+        id="entryTitle"
+      ></h1>
+
+
+      <div
+        class="entry-subtitle hidden"
+        id="entrySubtitle"
+      ></div>
+
+
+      <div class="entry-meta">
+
+        <span id="entryDate"></span>
+
+        <span class="meta-dot">
+          •
+        </span>
+
+        <span id="readTime"></span>
+
+        <span class="meta-dot">
+          •
+        </span>
+
+        <span>
+          Written by HED
+        </span>
+
+      </div>
+
 
       <div class="ornament">
-        <span>✦</span>
+        ✦
       </div>
 
-      <p class="journal-description">
-        a collection of thoughts, moments, and things I write
-      </p>
 
-    </section>
+      <!-- HERO -->
 
+      <div
+        class="hero-image-wrap hidden"
+        id="heroWrap"
+      >
 
-    <!-- Latest entry will be inserted here -->
-    <section id="latestSection"></section>
+        <img
+          id="heroImage"
+          class="hero-image"
+          alt=""
+          draggable="false"
+        >
 
+        <div
+          id="imageCaption"
+          class="image-caption hidden"
+        ></div>
 
-    <!-- Archive -->
-    <section class="archive">
-
-      <div class="section-label">
-        Archive
       </div>
 
-      <div id="archiveList" class="archive-list">
-        <div class="loading">
-          Loading journal entries...
+
+      <!-- =====================================================
+           READING CONTROLS
+           ===================================================== -->
+
+      <div class="reading-preferences">
+
+        <div class="preference-label">
+          Reading
         </div>
+
+
+        <div class="size-control">
+
+          <span class="size-small-label">
+            A
+          </span>
+
+          <input
+            id="fontSizeSlider"
+            type="range"
+            min="15"
+            max="30"
+            step="1"
+            value="19"
+            aria-label="Text size"
+          >
+
+          <span class="size-large-label">
+            A
+          </span>
+
+          <span
+            id="sizeValue"
+            class="size-value"
+          >
+            19px
+          </span>
+
+        </div>
+
+
+        <div class="font-controls">
+
+          <span class="preference-group-title">
+            Font
+          </span>
+
+          <button
+            type="button"
+            class="preference-button"
+            data-font="serif"
+          >
+            Serif
+          </button>
+
+          <button
+            type="button"
+            class="preference-button"
+            data-font="garamond"
+          >
+            Garamond
+          </button>
+
+          <button
+            type="button"
+            class="preference-button"
+            data-font="palatino"
+          >
+            Palatino
+          </button>
+
+          <button
+            type="button"
+            class="preference-button"
+            data-font="baskerville"
+          >
+            Baskerville
+          </button>
+
+          <button
+            type="button"
+            class="preference-button"
+            data-font="times"
+          >
+            Times
+          </button>
+
+          <button
+            type="button"
+            class="preference-button"
+            data-font="sans"
+          >
+            Sans
+          </button>
+
+          <button
+            type="button"
+            class="preference-button"
+            data-font="verdana"
+          >
+            Verdana
+          </button>
+
+          <button
+            type="button"
+            class="preference-button"
+            data-font="mono"
+          >
+            Mono
+          </button>
+
+        </div>
+
       </div>
 
-    </section>
+
+      <!-- =====================================================
+           ARTICLE CONTENT
+           ===================================================== -->
+
+      <div class="article-area">
+
+        <div
+          id="articleContent"
+          class="article-content"
+        ></div>
+
+
+        <!-- HED NOTE -->
+
+        <div
+          id="hedNote"
+          class="hed-note hidden"
+        >
+
+          <div class="hed-note-label">
+            A Note From HED
+          </div>
+
+          <div
+            id="hedNoteContent"
+            class="hed-note-content"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================================
+           RESPONSES
+           ===================================================== -->
+
+      <section class="responses">
+
+        <div class="section-label">
+          Responses
+        </div>
+
+        <h2 class="section-title">
+          Reader Responses
+        </h2>
+
+        <div
+          class="response-count"
+          id="responseCount"
+        >
+          0 responses
+        </div>
+
+
+        <form
+          id="responseForm"
+          class="response-form"
+        >
+
+          <input
+            type="text"
+            id="commentName"
+            placeholder="Your name"
+            readonly
+          >
+
+          <textarea
+            id="commentContent"
+            placeholder="Leave a thought..."
+            required
+          ></textarea>
+
+          <button type="submit">
+            Post Response
+          </button>
+
+          <div
+            id="responseMessage"
+            class="response-message"
+          ></div>
+
+        </form>
+
+
+        <div
+          id="commentList"
+          class="comment-list"
+        ></div>
+
+      </section>
+
+
+      <!-- =====================================================
+           KEEP READING
+           ===================================================== -->
+
+      <section class="keep-reading">
+
+        <div class="section-label">
+          Keep Reading
+        </div>
+
+
+        <div class="reading-grid">
+
+          <a
+            id="previousEntry"
+            class="reading-card hidden"
+          >
+
+            <div class="reading-direction">
+              ← Previous Entry
+            </div>
+
+            <div
+              id="previousTitle"
+              class="reading-title"
+            ></div>
+
+          </a>
+
+
+          <a
+            id="nextEntry"
+            class="reading-card hidden"
+          >
+
+            <div class="reading-direction">
+              Next Entry →
+            </div>
+
+            <div
+              id="nextTitle"
+              class="reading-title"
+            ></div>
+
+          </a>
+
+        </div>
+
+
+        <a
+          href="journal.html"
+          class="all-journal"
+        >
+          View All Journal Entries →
+        </a>
+
+      </section>
+
+    </article>
 
   </main>
 
 
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+  <footer>
+
+    <div class="footer-brand">
+      HED
+    </div>
+
+    <div class="footer-tagline">
+      Her Existential Thoughts
+    </div>
+
+    <div class="footer-nav">
+
+      <a href="journal.html">
+        Journal
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       IMAGE LIGHTBOX
+       ======================================================= -->
+
+  <div
+    id="imageLightbox"
+    class="image-lightbox hidden"
+  >
+
+    <img
+      id="lightboxImage"
+      alt=""
+    >
+
+  </div>
+
+
+  <!-- =======================================================
+       SUPABASE
+       ======================================================= -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="supabase-config.js"></script>
+
+  <script src="reader-auth.js"></script>
+
+
   <script>
 
+    /* ========================================================
+       SUPABASE
+       ======================================================== */
 
-    /* =========================================================
+    const db = supabaseClient;
+
+
+    /* ========================================================
+       URL / ENTRY IDENTIFICATION
+       ======================================================== */
+
+    const urlParams =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    /*
+      Supports all of these:
+
+      journal-entry.html?id=123
+      journal-entry.html?entry=123
+      journal-entry.html?entry_id=123
+      journal-entry.html?entryId=123
+      journal-entry.html?slug=my-entry
+
+      Also supports:
+
+      journal-entry.html#my-entry
+    */
+
+    const requestedEntry =
+      urlParams.get("id") ||
+      urlParams.get("entry") ||
+      urlParams.get("entry_id") ||
+      urlParams.get("entryId") ||
+      urlParams.get("slug") ||
+      window.location.hash.replace(
+        /^#/,
+        ""
+      );
+
+
+    let currentEntryId = null;
+
+
+    /* ========================================================
        HELPERS
-    ========================================================= */
+       ======================================================== */
 
-    function escapeHTML(value) {
-      if (value === null || value === undefined) return "";
+    function escapeHtml(value) {
+
+      if (
+        value === null ||
+        value === undefined
+      ) {
+        return "";
+      }
 
       return String(value)
         .replace(/&/g, "&amp;")
@@ -614,316 +1663,1265 @@
     }
 
 
-    function getText(entry) {
+    function formatDate(date) {
 
-      const text =
-        entry.author_reflection ||
-        entry.reflection ||
-        entry.content ||
-        "";
+      if (!date) {
+        return "";
+      }
+
+      const parsed =
+        new Date(date);
+
+      if (
+        Number.isNaN(
+          parsed.getTime()
+        )
+      ) {
+        return "";
+      }
+
+      return parsed.toLocaleDateString(
+        "en-US",
+        {
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        }
+      );
+    }
+
+
+    function calculateReadTime(content) {
+
+      if (!content) {
+        return "1 min read";
+      }
+
+      const words =
+        String(content)
+          .replace(
+            /<[^>]*>/g,
+            " "
+          )
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean)
+          .length;
+
+      const minutes =
+        Math.max(
+          1,
+          Math.ceil(
+            words / 220
+          )
+        );
+
+      return `${minutes} min read`;
+    }
+
+
+    function slugify(value) {
+
+      return String(value || "")
+        .toLowerCase()
+        .trim()
+        .replace(
+          /[^\w\s-]/g,
+          ""
+        )
+        .replace(
+          /\s+/g,
+          "-"
+        )
+        .replace(
+          /-+/g,
+          "-"
+        );
+    }
+
+
+    /* ========================================================
+       READING PREFERENCES
+       ======================================================== */
+
+    const articleContent =
+      document.getElementById(
+        "articleContent"
+      );
+
+
+    const hedNoteContent =
+      document.getElementById(
+        "hedNoteContent"
+      );
+
+
+    const fontSizeSlider =
+      document.getElementById(
+        "fontSizeSlider"
+      );
+
+
+    const sizeValue =
+      document.getElementById(
+        "sizeValue"
+      );
+
+
+    const fontMap = {
+
+      serif:
+        'Georgia, "Times New Roman", serif',
+
+      garamond:
+        'Garamond, "Times New Roman", serif',
+
+      palatino:
+        'Palatino, "Book Antiqua", serif',
+
+      baskerville:
+        'Baskerville, "Times New Roman", serif',
+
+      times:
+        '"Times New Roman", Times, serif',
+
+      sans:
+        'Arial, Helvetica, sans-serif',
+
+      verdana:
+        'Verdana, Geneva, sans-serif',
+
+      mono:
+        '"Courier New", Courier, monospace'
+
+    };
+
+
+    let currentSize =
+      Number(
+        localStorage.getItem(
+          "hedReadingSize"
+        ) || 19
+      );
+
+
+    let currentFont =
+      localStorage.getItem(
+        "hedReadingFont"
+      ) || "serif";
+
+
+    if (
+      currentSize < 15 ||
+      currentSize > 30 ||
+      Number.isNaN(currentSize)
+    ) {
+      currentSize = 19;
+    }
+
+
+    if (
+      !fontMap[currentFont]
+    ) {
+      currentFont = "serif";
+    }
+
+
+    function forceArticleFont() {
+
+      const font =
+        fontMap[currentFont];
+
+      articleContent.style.setProperty(
+        "--reader-font",
+        font,
+        "important"
+      );
+
+      articleContent.style.setProperty(
+        "--reader-size",
+        `${currentSize}px`,
+        "important"
+      );
+
 
       /*
-        Remove HTML if the journal content is stored as HTML.
+        Supabase content may contain its own
+        inline styles or generated HTML.
+
+        Reapply the reader font directly to
+        every element so the font controls
+        actually work.
       */
 
-      const temp = document.createElement("div");
-      temp.innerHTML = text;
+      articleContent
+        .querySelectorAll("*")
+        .forEach(element => {
 
-      return temp.textContent
-        .replace(/\s+/g, " ")
-        .trim();
+          element.style.setProperty(
+            "font-family",
+            font,
+            "important"
+          );
+
+        });
+
+
+      if (hedNoteContent) {
+
+        hedNoteContent.style.setProperty(
+          "--reader-font",
+          font,
+          "important"
+        );
+
+        hedNoteContent.style.setProperty(
+          "--reader-size",
+          `${currentSize}px`,
+          "important"
+        );
+
+      }
+
     }
 
 
-    function getPreview(entry, length = 190) {
+    function updateSize() {
 
-      const text = getText(entry);
+      fontSizeSlider.value =
+        currentSize;
 
-      if (!text) {
-        return "A journal entry waiting to be read...";
+      sizeValue.textContent =
+        `${currentSize}px`;
+
+
+      document.documentElement.style
+        .setProperty(
+          "--reader-size",
+          `${currentSize}px`
+        );
+
+
+      articleContent.style.setProperty(
+        "--reader-size",
+        `${currentSize}px`,
+        "important"
+      );
+
+
+      if (hedNoteContent) {
+
+        hedNoteContent.style.setProperty(
+          "--reader-size",
+          `${currentSize}px`,
+          "important"
+        );
+
       }
 
-      if (text.length <= length) {
-        return text;
-      }
 
-      return text.substring(0, length).trim() + "...";
+      localStorage.setItem(
+        "hedReadingSize",
+        String(currentSize)
+      );
+
     }
 
 
-    function formatDate(dateValue) {
+    function updateFontButtons() {
 
-      if (!dateValue) {
-        return "";
+      document
+        .querySelectorAll(
+          "[data-font]"
+        )
+        .forEach(button => {
+
+          button.classList.toggle(
+            "active",
+            button.dataset.font ===
+              currentFont
+          );
+
+        });
+
+    }
+
+
+    function applyReadingPreferences() {
+
+      updateSize();
+
+      updateFontButtons();
+
+      forceArticleFont();
+
+    }
+
+
+    fontSizeSlider.addEventListener(
+      "input",
+      event => {
+
+        currentSize =
+          Number(
+            event.target.value
+          );
+
+        updateSize();
+
       }
+    );
 
-      const date = new Date(dateValue);
 
-      if (Number.isNaN(date.getTime())) {
-        return "";
-      }
+    document
+      .querySelectorAll(
+        "[data-font]"
+      )
+      .forEach(button => {
 
-      return date.toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric"
+        button.addEventListener(
+          "click",
+          () => {
+
+            currentFont =
+              button.dataset.font;
+
+            localStorage.setItem(
+              "hedReadingFont",
+              currentFont
+            );
+
+            updateFontButtons();
+
+            forceArticleFont();
+
+          }
+        );
+
       });
-    }
 
 
-    function getImage(entry) {
+    applyReadingPreferences();
+
+
+    /* ========================================================
+       LOAD JOURNAL ENTRY
+       ======================================================== */
+
+    async function loadEntry() {
+
+      if (!requestedEntry) {
+
+        document.getElementById(
+          "loading"
+        ).textContent =
+          "No journal entry was selected.";
+
+        return;
+
+      }
+
+
+      const {
+        data,
+        error
+      } = await db
+        .from("journal_entries")
+        .select("*")
+        .order(
+          "published_at",
+          {
+            ascending: false
+          }
+        );
+
+
+      if (error) {
+
+        console.error(
+          "Journal loading error:",
+          error
+        );
+
+        document.getElementById(
+          "loading"
+        ).textContent =
+          "Unable to load this journal entry.";
+
+        return;
+
+      }
+
+
+      const entries =
+        data || [];
+
+
+      /*
+        First try ID.
+      */
+
+      let currentIndex =
+        entries.findIndex(
+          entry =>
+            String(entry.id) ===
+            String(requestedEntry)
+        );
+
+
+      /*
+        Then try slug fields.
+      */
+
+      if (
+        currentIndex === -1
+      ) {
+
+        currentIndex =
+          entries.findIndex(
+            entry => {
+
+              const possibleSlugs = [
+
+                entry.slug,
+
+                entry.entry_slug,
+
+                entry.entrySlug
+
+              ]
+              .filter(Boolean)
+              .map(slugify);
+
+
+              return possibleSlugs.includes(
+                slugify(
+                  requestedEntry
+                )
+              );
+
+            }
+          );
+
+      }
+
+
+      /*
+        Finally try the title.
+      */
+
+      if (
+        currentIndex === -1
+      ) {
+
+        currentIndex =
+          entries.findIndex(
+            entry =>
+              slugify(
+                entry.title
+              ) ===
+              slugify(
+                requestedEntry
+              )
+          );
+
+      }
+
+
+      if (
+        currentIndex === -1
+      ) {
+
+        document.getElementById(
+          "loading"
+        ).textContent =
+          "Journal entry unavailable.";
+
+        return;
+
+      }
+
+
+      const entry =
+        entries[currentIndex];
+
+
+      /*
+        IMPORTANT:
+
+        From this point forward,
+        comments use the actual
+        Supabase entry ID.
+      */
+
+      currentEntryId =
+        entry.id;
+
+
+      /* ======================================================
+         TITLE
+         ====================================================== */
+
+      document.getElementById(
+        "entryTitle"
+      ).textContent =
+        entry.title ||
+        "Untitled Journal Entry";
+
+
+      /* ======================================================
+         SUBTITLE
+         ====================================================== */
+
+      const subtitle =
+        entry.subtitle ||
+        entry.description ||
+        entry.dek;
+
+
+      if (subtitle) {
+
+        const subtitleElement =
+          document.getElementById(
+            "entrySubtitle"
+          );
+
+        subtitleElement.textContent =
+          subtitle;
+
+        subtitleElement.classList.remove(
+          "hidden"
+        );
+
+      }
+
+
+      /* ======================================================
+         META
+         ====================================================== */
+
+      document.getElementById(
+        "entryDate"
+      ).textContent =
+        formatDate(
+          entry.published_at
+        );
+
+
+      document.getElementById(
+        "readTime"
+      ).textContent =
+        calculateReadTime(
+          entry.content
+        );
+
+
+      /* ======================================================
+         HERO IMAGE
+         ====================================================== */
 
       if (entry.image_url) {
-        return entry.image_url;
+
+        const heroWrap =
+          document.getElementById(
+            "heroWrap"
+          );
+
+        const heroImage =
+          document.getElementById(
+            "heroImage"
+          );
+
+
+        heroImage.src =
+          entry.image_url;
+
+
+        heroImage.alt =
+          entry.title ||
+          "Journal image";
+
+
+        heroWrap.classList.remove(
+          "hidden"
+        );
+
+
+        const caption =
+          entry.image_caption ||
+          entry.caption;
+
+
+        if (caption) {
+
+          const captionElement =
+            document.getElementById(
+              "imageCaption"
+            );
+
+          captionElement.textContent =
+            caption;
+
+          captionElement.classList.remove(
+            "hidden"
+          );
+
+        }
+
       }
+
+
+      /* ======================================================
+         ARTICLE CONTENT
+         ====================================================== */
+
+      articleContent.innerHTML =
+        entry.content ||
+        "<p>This entry has no content yet.</p>";
+
 
       /*
-        Soft fallback image.
-        This keeps the dashboard visually balanced
-        even when an entry has no image.
+        Apply the selected font AFTER
+        Supabase HTML has been inserted.
       */
 
-      return "";
-    }
+      forceArticleFont();
 
 
-    /* =========================================================
-       IMAGE HTML
-    ========================================================= */
+      /* ======================================================
+         HED NOTE
+         ====================================================== */
 
-    function imageHTML(entry, className) {
+      const note =
+        entry.author_reflection ||
+        entry.reflection;
 
-      const image = getImage(entry);
 
-      if (!image) {
+      if (note) {
 
-        return `
-          <div class="${className}"
-               style="
-                 background:
-                 linear-gradient(
-                   135deg,
-                   #d9cbbd,
-                   #eee5da
-                 );
-               ">
-          </div>
-        `;
+        document.getElementById(
+          "hedNote"
+        ).classList.remove(
+          "hidden"
+        );
+
+        hedNoteContent.textContent =
+          note;
+
       }
 
-      return `
-        <div class="${className}">
-          <img
-            src="${escapeHTML(image)}"
-            alt="${escapeHTML(entry.title || "Journal entry")}"
-            loading="lazy"
-          >
-        </div>
-      `;
+
+      /* ======================================================
+         PREVIOUS ENTRY
+         ====================================================== */
+
+      const previous =
+        entries[
+          currentIndex + 1
+        ];
+
+
+      if (previous) {
+
+        const previousCard =
+          document.getElementById(
+            "previousEntry"
+          );
+
+
+        previousCard.href =
+          `journal-entry.html?id=${encodeURIComponent(
+            previous.id
+          )}`;
+
+
+        document.getElementById(
+          "previousTitle"
+        ).textContent =
+          previous.title ||
+          "Previous Entry";
+
+
+        previousCard.classList.remove(
+          "hidden"
+        );
+
+      }
+
+
+      /* ======================================================
+         NEXT ENTRY
+         ====================================================== */
+
+      const next =
+        entries[
+          currentIndex - 1
+        ];
+
+
+      if (next) {
+
+        const nextCard =
+          document.getElementById(
+            "nextEntry"
+          );
+
+
+        nextCard.href =
+          `journal-entry.html?id=${encodeURIComponent(
+            next.id
+          )}`;
+
+
+        document.getElementById(
+          "nextTitle"
+        ).textContent =
+          next.title ||
+          "Next Entry";
+
+
+        nextCard.classList.remove(
+          "hidden"
+        );
+
+      }
+
+
+      /* ======================================================
+         SHOW PAGE
+         ====================================================== */
+
+      document.getElementById(
+        "loading"
+      ).classList.add(
+        "hidden"
+      );
+
+
+      document.getElementById(
+        "entryPage"
+      ).classList.remove(
+        "hidden"
+      );
+
+
+      applyReadingPreferences();
+
+
+      loadComments(
+        currentEntryId
+      );
+
     }
 
 
-    /* =========================================================
-       LATEST ENTRY
-    ========================================================= */
+    /* ========================================================
+       COMMENTS
+       ======================================================== */
 
-    function renderLatest(entry) {
+    async function loadComments(id) {
 
-      const latestSection = document.getElementById("latestSection");
-
-      latestSection.innerHTML = `
-
-        <div class="section-label">
-          Latest Entry
-        </div>
-
-        <a
-          class="latest-entry"
-          href="journal-entry.html?id=${encodeURIComponent(entry.id)}"
-        >
-
-          ${imageHTML(entry, "latest-image")}
-
-          <div class="latest-info">
-
-            <div class="entry-date">
-              ${escapeHTML(formatDate(entry.published_at))}
-            </div>
-
-            <h2 class="latest-title">
-              ${escapeHTML(entry.title || "Untitled Journal Entry")}
-            </h2>
-
-            <p class="entry-preview">
-              ${escapeHTML(getPreview(entry, 230))}
-            </p>
-
-            <span class="read-entry">
-              Read Entry →
-            </span>
-
-          </div>
-
-        </a>
-      `;
-    }
-
-
-    /* =========================================================
-       ARCHIVE
-    ========================================================= */
-
-    function renderArchive(entries) {
-
-      const archiveList = document.getElementById("archiveList");
-
-      if (!entries.length) {
-
-        archiveList.innerHTML = `
-          <div class="empty">
-            No journal entries yet.
-          </div>
-        `;
-
+      if (!id) {
         return;
       }
 
-      archiveList.innerHTML = entries.map(entry => {
 
-        return `
-
-          <a
-            class="archive-entry"
-            href="journal-entry.html?id=${encodeURIComponent(entry.id)}"
-          >
-
-            ${imageHTML(entry, "archive-image")}
-
-            <div class="archive-content">
-
-              <div class="entry-date">
-                ${escapeHTML(formatDate(entry.published_at))}
-              </div>
-
-              <h3 class="archive-title">
-                ${escapeHTML(entry.title || "Untitled Journal Entry")}
-              </h3>
-
-              <p class="archive-preview">
-                ${escapeHTML(getPreview(entry, 170))}
-              </p>
-
-            </div>
-
-            <div class="archive-arrow">
-              →
-            </div>
-
-          </a>
-
-        `;
-
-      }).join("");
-    }
+      const {
+        data,
+        error
+      } = await db
+        .from("comments")
+        .select(
+          "id,name,content,created_at"
+        )
+        .eq(
+          "target_type",
+          "journal"
+        )
+        .eq(
+          "target_id",
+          id
+        )
+        .order(
+          "created_at",
+          {
+            ascending: true
+          }
+        );
 
 
-    /* =========================================================
-       LOAD JOURNAL ENTRIES
-    ========================================================= */
-
-    const db = supabaseClient;
-    async function loadJournal() {
-
-      const latestSection = document.getElementById("latestSection");
-      const archiveList = document.getElementById("archiveList");
-
-      if (!db) {
-
-        latestSection.innerHTML = `
-          <div class="error">
-            Journal could not be loaded.
-          </div>
-        `;
-
-        archiveList.innerHTML = "";
+      if (error) {
 
         console.error(
-          "Supabase is not initialized. Check supabase-config.js."
+          "Comment loading error:",
+          error
         );
 
         return;
+
       }
 
 
-      try {
-
-        const { data, error } = await db
-          .from("journal_entries")
-          .select("*")
-          .order("published_at", {
-            ascending: false
-          });
+      const comments =
+        data || [];
 
 
-        if (error) {
-          throw error;
-        }
+      document.getElementById(
+        "responseCount"
+      ).textContent =
+        `${comments.length} ${
+          comments.length === 1
+            ? "response"
+            : "responses"
+        }`;
 
 
-        const entries = data || [];
+      const list =
+        document.getElementById(
+          "commentList"
+        );
 
 
-        if (!entries.length) {
+      list.innerHTML = "";
 
-          latestSection.innerHTML = `
-            <div class="empty">
-              No journal entries yet.
+
+      comments.forEach(
+        comment => {
+
+          const item =
+            document.createElement(
+              "div"
+            );
+
+
+          item.className =
+            "comment";
+
+
+          item.innerHTML = `
+
+            <div class="comment-top">
+
+              <div class="comment-name">
+                ${escapeHtml(
+                  comment.name
+                )}
+              </div>
+
+              <div class="comment-date">
+                ${formatDate(
+                  comment.created_at
+                )}
+              </div>
+
             </div>
+
+            <div class="comment-content">
+              ${escapeHtml(
+                comment.content
+              )}
+            </div>
+
           `;
 
-          archiveList.innerHTML = "";
 
+          list.appendChild(
+            item
+          );
+
+        }
+      );
+
+    }
+
+
+    /* ========================================================
+       COMMENT FORM
+       ======================================================== */
+
+    const commentName =
+      document.getElementById(
+        "commentName"
+      );
+
+
+    if (
+      window.readerNickname
+    ) {
+
+      commentName.value =
+        window.readerNickname;
+
+    } else {
+
+      commentName.value =
+        "Reader";
+
+    }
+
+
+    document
+      .getElementById(
+        "responseForm"
+      )
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+
+          const name =
+            commentName.value.trim();
+
+
+          const content =
+            document
+              .getElementById(
+                "commentContent"
+              )
+              .value.trim();
+
+
+          const message =
+            document.getElementById(
+              "responseMessage"
+            );
+
+
+          if (!content) {
+
+            message.textContent =
+              "Please write something first.";
+
+            return;
+
+          }
+
+
+          if (!currentEntryId) {
+
+            message.textContent =
+              "This entry is not ready yet.";
+
+            return;
+
+          }
+
+
+          message.textContent =
+            "Posting...";
+
+
+          const {
+            error
+          } = await db
+            .from("comments")
+            .insert({
+
+              target_type:
+                "journal",
+
+              target_id:
+                currentEntryId,
+
+              name:
+                name ||
+                "Reader",
+
+              content:
+                content
+
+            });
+
+
+          if (error) {
+
+            console.error(
+              "Comment posting error:",
+              error
+            );
+
+            message.textContent =
+              "Something went wrong. Please try again.";
+
+            return;
+
+          }
+
+
+          document.getElementById(
+            "commentContent"
+          ).value = "";
+
+
+          message.textContent =
+            "Your response has been posted.";
+
+
+          loadComments(
+            currentEntryId
+          );
+
+        }
+      );
+
+
+    /* ========================================================
+       READING PROGRESS
+       ======================================================== */
+
+    function updateReadingProgress() {
+
+      const scrollTop =
+        window.scrollY;
+
+
+      const documentHeight =
+        document.documentElement
+          .scrollHeight -
+        window.innerHeight;
+
+
+      const progress =
+        documentHeight > 0
+          ? (
+              scrollTop /
+              documentHeight
+            ) * 100
+          : 0;
+
+
+      document.getElementById(
+        "readingProgress"
+      ).style.width =
+        `${progress}%`;
+
+    }
+
+
+    window.addEventListener(
+      "scroll",
+      updateReadingProgress,
+      {
+        passive: true
+      }
+    );
+
+
+    /* ========================================================
+       COPY PROTECTION
+       ======================================================== */
+
+    const protectedArticle =
+      document.getElementById(
+        "articleContent"
+      );
+
+
+    /*
+      Prevent selecting text inside
+      the article.
+    */
+
+    protectedArticle.addEventListener(
+      "selectstart",
+      event => {
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /*
+      Prevent right-click inside
+      the article.
+    */
+
+    protectedArticle.addEventListener(
+      "contextmenu",
+      event => {
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /*
+      Prevent copying article text.
+    */
+
+    protectedArticle.addEventListener(
+      "copy",
+      event => {
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /*
+      Prevent keyboard shortcuts
+      commonly used for copying.
+    */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        const target =
+          event.target;
+
+
+        const insideArticle =
+          target.closest &&
+          target.closest(
+            "#articleContent"
+          );
+
+
+        if (!insideArticle) {
           return;
         }
 
 
-        /*
-          First entry = featured/latest.
-          Remaining entries = archive.
-        */
-
-        const latest = entries[0];
-        const archive = entries.slice(1);
+        const key =
+          event.key.toLowerCase();
 
 
-        renderLatest(latest);
-        renderArchive(archive);
+        if (
+          (event.ctrlKey ||
+            event.metaKey) &&
+          (
+            key === "c" ||
+            key === "a" ||
+            key === "x" ||
+            key === "s" ||
+            key === "u"
+          )
+        ) {
+
+          event.preventDefault();
+
+        }
 
 
-      } catch (error) {
+        if (
+          event.shiftKey &&
+          event.key === "F10"
+        ) {
 
-        console.error("Journal loading error:", error);
+          event.preventDefault();
 
-        latestSection.innerHTML = `
-          <div class="error">
-            Something went wrong while loading the journal.
-          </div>
-        `;
-
-        archiveList.innerHTML = "";
+        }
 
       }
-    }
+    );
 
 
-    /* =========================================================
-       START
-    ========================================================= */
+    /*
+      Prevent dragging article images.
+    */
+
+    protectedArticle.addEventListener(
+      "dragstart",
+      event => {
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /* ========================================================
+       HERO IMAGE LIGHTBOX
+       ======================================================== */
+
+    const heroImage =
+      document.getElementById(
+        "heroImage"
+      );
+
+
+    const lightbox =
+      document.getElementById(
+        "imageLightbox"
+      );
+
+
+    const lightboxImage =
+      document.getElementById(
+        "lightboxImage"
+      );
+
+
+    heroImage.addEventListener(
+      "click",
+      () => {
+
+        if (!heroImage.src) {
+          return;
+        }
+
+
+        lightboxImage.src =
+          heroImage.src;
+
+
+        lightboxImage.alt =
+          heroImage.alt;
+
+
+        lightbox.classList.remove(
+          "hidden"
+        );
+
+      }
+    );
+
+
+    lightbox.addEventListener(
+      "click",
+      () => {
+
+        lightbox.classList.add(
+          "hidden"
+        );
+
+        lightboxImage.src = "";
+
+      }
+    );
+
 
     document.addEventListener(
-      "DOMContentLoaded",
-      loadJournal
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          lightbox.classList.add(
+            "hidden"
+          );
+
+          lightboxImage.src = "";
+
+        }
+
+      }
     );
+
+
+    /* ========================================================
+       START
+       ======================================================== */
+
+    loadEntry();
 
   </script>
 
