@@ -2863,21 +2863,27 @@ function renderStories() {
           </div>
 
 
-          <div class="card-actions">
+         <div class="card-actions">
 
-            <button
-              class="secondary open-story"
-            >
-              Open
-            </button>
+  <button
+    class="secondary open-story"
+  >
+    Open
+  </button>
 
-            <button
-              class="secondary edit-story"
-            >
-              Edit
-            </button>
+  <button
+    class="secondary edit-story"
+  >
+    Edit
+  </button>
 
-          </div>
+  <button
+    class="danger delete-story"
+  >
+    Delete
+  </button>
+
+</div>
 
         </div>
 
@@ -2896,6 +2902,11 @@ function renderStories() {
         .onclick =
           () =>
             editStory(s.id);
+      card
+  .querySelector(".delete-story")
+  .onclick =
+    () =>
+      deleteStory(s.id);
 
 
       grid.appendChild(card);
@@ -4221,6 +4232,115 @@ function editCurrentStory() {
     );
 
   }
+  async function deleteStory(id) {
+
+  const story =
+    stories.find(
+      item => item.id === id
+    );
+
+  if (!story) return;
+
+  if (
+    !confirm(
+      `Delete "${story.title || "Untitled"}"? This will also delete its chapters. This cannot be undone.`
+    )
+  ) {
+    return;
+  }
+
+  try {
+
+    /*
+      Delete the chapters first.
+      This prevents the story delete from
+      failing if chapters reference the story.
+    */
+
+    const {
+      error: chapterError
+    } =
+      await supabaseClient
+        .from("chapters")
+        .delete()
+        .eq(
+          "story_id",
+          id
+        )
+        .eq(
+          "owner_id",
+          currentUser.id
+        );
+
+    if (chapterError) {
+      throw chapterError;
+    }
+
+
+    /*
+      Now delete the story itself.
+    */
+
+    const {
+      error: storyError
+    } =
+      await supabaseClient
+        .from("stories")
+        .delete()
+        .eq(
+          "id",
+          id
+        )
+        .eq(
+          "owner_id",
+          currentUser.id
+        );
+
+    if (storyError) {
+      throw storyError;
+    }
+
+
+    /*
+      If the deleted story was open,
+      close the Story Studio.
+    */
+
+    if (
+      currentStory?.id === id
+    ) {
+
+      $("storyStudio")
+        .classList
+        .remove("show");
+
+      currentStory = null;
+      currentChapter = null;
+
+    }
+
+
+    await loadStories();
+
+    renderStats();
+    renderRecent();
+
+    toast("Story deleted.");
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    toast(
+      error.message ||
+      "Could not delete story."
+    );
+
+  }
+
+}
 
 }
 
