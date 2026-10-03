@@ -2303,7 +2303,7 @@ button{cursor:pointer}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
-
+<script src="delete-story.js"></script>
 
 <script>
 
@@ -2865,19 +2865,25 @@ function renderStories() {
 
           <div class="card-actions">
 
-            <button
-              class="secondary open-story"
-            >
-              Open
-            </button>
+  <button
+    class="secondary open-story"
+  >
+    Open
+  </button>
 
-            <button
-              class="secondary edit-story"
-            >
-              Edit
-            </button>
+  <button
+    class="secondary edit-story"
+  >
+    Edit
+  </button>
 
-          </div>
+  <button
+    class="danger delete-story"
+  >
+    Delete
+  </button>
+
+</div>
 
         </div>
 
@@ -2896,7 +2902,11 @@ function renderStories() {
         .onclick =
           () =>
             editStory(s.id);
-
+      card
+        .querySelector(".delete-story")
+        .onclick =
+          () =>
+            deleteStory(s.id);
 
       grid.appendChild(card);
 
